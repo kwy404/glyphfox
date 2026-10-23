@@ -1,5 +1,5 @@
-// Studio router: tabs with hash links (#editor, #foxify, #fusion=cloud&lock,
-// #brand, #3d, #collection) and the collection view.
+// Studio router: tabs with hash links (#editor, #foxify, #sketch,
+// #fusion=cloud&lock, #brand, #3d, #collection) and the collection view.
 
 import { $, $$, download, gf, loadIcons, t, toast } from './app.js';
 import * as collection from './collection.js';
@@ -64,6 +64,7 @@ async function show(tool, payload) {
     }
     if (payload) loadSpec(payload);
   }
+  if (tool === 'sketch' && !ready.sketch) ready.sketch = import('./labs/sketch-ui.js').then((m) => m.initSketch(data, { openInEditor }));
   if (tool === 'brand' && !ready.brand) {
     const { initBrand } = await import('./brand.js');
     initBrand(data);
@@ -78,7 +79,7 @@ async function show(tool, payload) {
 function route() {
   const raw = decodeURIComponent(location.hash.slice(1));
   const [tool, ...rest] = raw.split('=');
-  const known = ['editor', 'foxify', 'fusion', 'brand', '3d', 'collection'];
+  const known = ['editor', 'foxify', 'sketch', 'fusion', 'brand', '3d', 'collection'];
   show(known.includes(tool) ? tool : 'editor', rest.join('=') || '');
 }
 

@@ -48,7 +48,10 @@ describe('studio site', () => {
         for (const pair of m[1].split(';')) expect(dict.en[pair.split(':')[1]], `${page}: ${pair}`).toBeDefined();
       }
     }
-    const js = readdirSync(join(docs, 'assets', 'js')).map((f) => read(join(docs, 'assets', 'js', f)));
+    const jsDir = join(docs, 'assets', 'js');
+    const js = readdirSync(jsDir, { recursive: true })
+      .filter((f) => f.endsWith('.js'))
+      .map((f) => read(join(jsDir, f)));
     for (const src of js) {
       for (const m of src.matchAll(/\bt\('([a-zA-Z0-9.]+)'/g)) expect(dict.en[m[1]], m[1]).toBeDefined();
       for (const m of src.matchAll(/\bt\(`([a-zA-Z0-9.]+)\.\$\{/g)) expect(Object.keys(dict.en).some((k) => k.startsWith(m[1] + '.')), m[1]).toBe(true);

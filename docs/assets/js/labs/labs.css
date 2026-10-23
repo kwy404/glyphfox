@@ -1,0 +1,110 @@
+/* Studio labs: the sketch search tool. */
+
+.tool-sketch {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.sk-input {
+  display: grid;
+  gap: 14px;
+}
+.sk-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  border: 1px dashed var(--line-3);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) center / 25% 25%,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) center / 25% 25%,
+    var(--icon-bg);
+  color: var(--accent);
+  touch-action: none;
+  cursor: crosshair;
+}
+.sk-out {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  min-height: 420px;
+}
+.sk-status {
+  margin: 0;
+  min-height: 1.4em;
+  font: 500 12.5px var(--mono);
+  color: var(--text-3);
+}
+.sk-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+.sk-hit {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 8px;
+  min-width: 0;
+  aspect-ratio: 1;
+  padding: 10px 6px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--icon-bg);
+  color: var(--text);
+  font: 500 11px var(--mono);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.sk-hit span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-3);
+}
+.sk-hit:hover {
+  border-color: var(--line-3);
+}
+.sk-hit.best {
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.sk-hit[aria-pressed='true'] {
+  border-color: var(--accent);
+}
+.sk-empty {
+  grid-column: 1 / -1;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 28px 0;
+  text-align: center;
+}
+.sk-empty p {
+  margin: 0;
+}
+.sk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.sk-actions[hidden] {
+  display: none;
+}
+.sk-actions b {
+  margin-right: auto;
+  font: 600 13px var(--mono);
+}
+
+@media (max-width: 860px) {
+  .tool-sketch {
+    grid-template-columns: 1fr;
+  }
+  .sk-canvas {
+    max-width: 360px;
+  }
+}

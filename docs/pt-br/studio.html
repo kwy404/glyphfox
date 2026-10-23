@@ -26,6 +26,7 @@
 <meta property="og:title" content="glyphfox studio">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/studio.html">
 <link rel="stylesheet" href="../assets/studio.css">
+<link rel="stylesheet" href="../assets/js/labs/labs.css">
 <link rel="modulepreload" href="../vendor/glyphfox.js">
 <link rel="preload" href="../data/icons.json" as="fetch" crossorigin>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"}}</script>
@@ -61,6 +62,7 @@
       <div class="tabs studio-tabs" role="tablist" aria-label="Studio tools" data-studio-tabs>
         <button type="button" role="tab" id="tab-editor" aria-controls="panel-editor" data-tool="editor" aria-selected="true"><!--gf:pencil:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-pencil" aria-hidden="true"><path d="M15 4l5 5L9 20H4v-5Z"/><path d="M12 7l5 5"/></svg><!--/gf--><span data-i18n="tool.editor">Editor</span></button>
         <button type="button" role="tab" id="tab-foxify" aria-controls="panel-foxify" data-tool="foxify" aria-selected="false"><!--gf:sparkles:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><!--/gf--><span>Fox-ify</span></button>
+        <button type="button" role="tab" id="tab-sketch" aria-controls="panel-sketch" data-tool="sketch" aria-selected="false"><!--gf:search:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M7.62 10.09A3.5 3.5 0 0 1 10.09 7.62"/></svg><!--/gf--><span data-i18n="tool.sketch">Busca por desenho</span></button>
         <button type="button" role="tab" id="tab-fusion" aria-controls="panel-fusion" data-tool="fusion" aria-selected="false"><!--gf:layers:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-layers" aria-hidden="true"><path d="M12 2.5l9 5-9 5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg><!--/gf--><span data-i18n="tool.fusion">Fusão</span></button>
         <button type="button" role="tab" id="tab-brand" aria-controls="panel-brand" data-tool="brand" aria-selected="false"><!--gf:palette:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-palette" aria-hidden="true"><path d="M12 2a10 10 0 1 0 1.5 19.89c1.18-.18 1.66-1.6 .95-2.55-.95-1.27-.05-3.09 1.54-3.09H19a3 3 0 0 0 3-3C22 7.03 17.52 2 12 2Z"/><path d="M6.1 11.1a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M10.5 7a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M15.6 10.1a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><!--/gf--><span data-i18n="tool.brand">Kit de marca</span></button>
         <button type="button" role="tab" id="tab-3d" aria-controls="panel-3d" data-tool="3d" aria-selected="false"><!--gf:cube:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cube" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7Z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v10"/></svg><!--/gf--><span>3D</span></button>
@@ -140,6 +142,31 @@
           <button class="btn small primary" type="button" data-fox="save" data-i18n="editor.save">Salvar na coleção</button>
           <button class="btn small" type="button" data-fox="edit" data-i18n="icons.openEditor">Abrir no editor</button>
           <button class="btn small" type="button" data-fox="download" data-i18n="editor.download">Baixar SVG</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool" id="panel-sketch" role="tabpanel" aria-labelledby="tab-sketch" data-panel="sketch" hidden>
+    <div class="wrap tool-sketch">
+      <div class="card pad sk-input">
+        <h2 class="subtitle" data-i18n="tool.sketch">Busca por desenho</h2>
+        <p class="muted" data-i18n="sketch.lead">Desenhe uma forma aproximada. Os 24 ícones mais parecidos aparecem enquanto você desenha, ordenados na própria página com um índice de formas do conjunto todo.</p>
+        <canvas class="sk-canvas" data-sk-canvas aria-label="Área de desenho da busca por desenho" data-i18n-attr="aria-label:icons.sketch.area"></canvas>
+        <div class="hero-actions">
+          <button class="btn small" type="button" data-sk="undo" data-i18n="icons.sketch.undo">Desfazer traço</button>
+          <button class="btn small" type="button" data-sk="clear" data-i18n="icons.sketch.clear">Limpar</button>
+        </div>
+        <p class="faint small-note" data-i18n="sketch.note">Os seus traços ficam neste aparelho: nada é enviado, o desenho é comparado com um índice pré-calculado de todos os ícones.</p>
+      </div>
+      <div class="card pad sk-out">
+        <p class="sk-status" data-sk-status aria-live="polite"></p>
+        <div class="sk-results" data-sk-results></div>
+        <div class="sk-actions" data-sk-actions hidden>
+          <b data-sk-name></b>
+          <button class="btn small primary" type="button" data-sk="copy" data-i18n="editor.copy">Copiar SVG</button>
+          <button class="btn small" type="button" data-sk="edit" data-i18n="icons.openEditor">Abrir no editor</button>
+          <a class="btn small" href="icons.html" data-sk-view data-i18n="sketch.view">Abrir em Ícones</a>
         </div>
       </div>
     </div>

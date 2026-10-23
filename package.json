@@ -9,11 +9,12 @@
     "packages/glyphfox-angular"
   ],
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/build.mjs && node scripts/labs/sketch-index.mjs",
+    "build:labs": "node scripts/labs/sketch-index.mjs",
     "build:angular": "node scripts/build-angular.mjs",
     "lint:icons": "node tools/icons/lint.mjs",
     "check:text": "node scripts/check-text.mjs",
-    "check:docs": "node scripts/build.mjs --check",
+    "check:docs": "node scripts/build.mjs --check && node scripts/labs/sketch-index.mjs --check",
     "art": "node scripts/art.mjs",
     "test": "vitest run",
     "serve": "node scripts/serve.mjs",
