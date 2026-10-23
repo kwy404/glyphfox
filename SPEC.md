@@ -33,3 +33,21 @@ glyphfox is an open source icon library and icon studio by Alexandre Kohler (kwy
 - No emoji, no U+2013 or U+2014 dashes, never mention AI or any AI product anywhere (code, docs, site, commits, npm).
 - Commits as `git -c user.name=kwy404 -c user.email=thekaway404@gmail.com commit`, no trailers.
 - Tests for the build, the lint, every framework package and the CLI; CI on GitHub Actions.
+
+## Pillars (what makes glyphfox more than an icon set)
+
+1. Variable icons. Every icon renders along continuous axes: weight (stroke 1 to 3, with optical compensation at small sizes), corners (round or sharp joins and caps) and style (outline, duotone, and a solid style generated at build time where the shape is closed). One prop or attribute per axis in every package (`weight`, `corners`, `variant`), and sliders in the studio.
+2. Morph anything. A small morph engine (normalize paths, resample, match points, interpolate) animates any icon into any other, with hand tuned pairs: menu to close, play to pause, plus to check, sun to moon, eye to eye-off, bell to bell-ring, heart to heart filled, copy to check, lock to unlock, wifi to wifi-off. React `useMorph`, Vue and Svelte equivalents, the web component `morph` attribute, and a CSS only fallback.
+3. Fusion. `fuse(names, { layout, gap, scale, offsets })` combines 2 to 10 icons into one new icon that passes the same lint (padding, weight axis, no transforms). Layouts: overlap, side, stack, grid (2x2, 3x3 and a 10 slot layout), orbit, badge and inside. Parts are scaled and snapped to the grid; where parts overlap, the back part is trimmed around the front part by an automatic knockout gap, so lines never collide. Available as `<Fusion icons={["cloud", "lock"]} layout="overlap" />` (React, Vue, Svelte, Angular), `<glyph-fox name="cloud&lock" layout="overlap">`, Tailwind `gf-cloud&lock` or `gf-[cloud&lock:side]`, the CLI `glyphfox fuse cloud lock --layout overlap` and the CDN. The studio has a Fusion tool and a curated gallery.
+4. Living states. Animation presets that understand the icon: draw (stroke-dashoffset in drawing order), pop, wiggle, spin, pulse, bounce and shake, triggered on hover, click, mount or a state prop, always respecting prefers-reduced-motion. The studio exports animated SVG, GIF and WebM.
+5. Modifiers. Any icon takes a modifier badge (plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot) in any corner, with an automatic knockout gap: `<FileIcon modifier="check" />`, Tailwind `gf-file+check`, CLI and CDN `file+check` (corner suffix `@tl`, `@tr`, `@bl`, `@br`).
+6. Fox-ify. Paste or drop any SVG in the studio and it is converted to the glyphfox style (24 grid, stroke 2, round joins, padding, lint fixes) with a before and after view, then saved to the collection.
+7. Sketch search. Draw a rough shape in the studio and get the closest icons (rasterized shape features compared in the browser, no network, no models).
+8. Brand kit. Pick a seed color, weight, corners and style and export the whole set themed as a package, a sprite, CSS, a favicon and app icons.
+9. Hero 3D. Render any icon extruded in 3D in the studio (three.js SVGLoader and ExtrudeGeometry from jsDelivr) with lighting and material presets, and export PNG.
+
+Name syntax shared by the CDN, the web component, Tailwind and the CLI: `name`, `name+modifier@corner`, `a&b&c:layout`.
+
+## Site
+
+Dark first, precise grid, generous whitespace, sharp typography, subtle borders and gradients. Only original art: the glyphfox icons, Fenn and illustrations built from the icon geometry. Cinematic scroll scenes (icons that assemble, morph and draw themselves, a weight axis that sweeps with the scroll, modifiers that snap in, icons that fly together and fuse), a hero where hundreds of icons flow into the glyphfox mark, spring easing and parallax depth, all with CSS, requestAnimationFrame or the Web Animations API, lazy offscreen work and a still, complete layout under prefers-reduced-motion. Lighthouse performance and accessibility at 95 or more.
