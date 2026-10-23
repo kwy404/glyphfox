@@ -788,8 +788,14 @@
   border-color: var(--accent);
   background: var(--accent);
 }
+.mo-controls,
+.mo-stage-card,
+.mo-out {
+  min-width: 0;
+}
 .mo-out {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
 }
 .mo-out pre {
