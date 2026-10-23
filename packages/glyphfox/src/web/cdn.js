@@ -5,11 +5,13 @@ import * as api from '../api.js';
 import { icons } from '../registry.js';
 import { registerIcons } from '../core/lookup.js';
 import { GlyphFoxElement, defineGlyphFox } from './element.js';
+import * as smartElements from '../smart/web.js'; // smart icons hook (src/smart)
 
 registerIcons(icons);
 defineGlyphFox();
+smartElements.defineSmartElements();
 
-const glyphfox = { ...api, GlyphFoxElement, defineGlyphFox };
+const glyphfox = { ...api, GlyphFoxElement, defineGlyphFox, ...smartElements };
 if (typeof window !== 'undefined') {
   window.glyphfox = glyphfox;
   const run = () => api.replaceGlyphs(document, { observe: true });

@@ -56,6 +56,7 @@ export const write = (file, text) => {
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist, { recursive: true });
 cpSync(join(src, 'core'), join(dist, 'core'), { recursive: true });
+cpSync(join(src, 'smart'), join(dist, 'smart'), { recursive: true }); // smart icons hook (src/smart)
 write(join(dist, 'core', 'index.d.ts'), readFileSync(join(src, 'types', 'core.d.ts'), 'utf8'));
 write(join(dist, 'api.js'), readFileSync(join(src, 'api.js'), 'utf8'));
 

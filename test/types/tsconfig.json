@@ -10,5 +10,5 @@
     "types": [],
     "jsx": "react-jsx"
   },
-  "files": ["check.ts"]
+  "files": ["check.ts", "smart.ts"]
 }

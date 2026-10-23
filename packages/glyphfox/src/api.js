@@ -135,3 +135,9 @@ export {
   toDataUri,
   withModifier,
 };
+
+// smart icons hook (src/smart): data icons, locale aware icons, StatusIcon and
+// IconGroup. The bound functions resolve names from the full icon set.
+import { createSmart } from './smart/index.js';
+export * from './smart/index.js';
+export const { smartIcon, smartNode, smartSvg, groupSvg } = createSmart(getIcon);

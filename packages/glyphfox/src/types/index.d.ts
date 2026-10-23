@@ -168,4 +168,7 @@ export declare function analyzeSolid(nodes: IconNode[]): { fill: number[]; knock
 export declare function frameState(spec: { animate: AnimationName; duration?: number; delay?: number; loop?: boolean | number; count?: number }, t: number): unknown;
 export declare function animationLength(spec: { animate: AnimationName; duration?: number; delay?: number; loop?: boolean | number }): number;
 
+// smart icons hook (src/smart): data icons, locale aware icons, StatusIcon and IconGroup.
+export * from './smart/index.js';
+
 /*ICON_EXPORTS*/

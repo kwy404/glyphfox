@@ -26,7 +26,7 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
     }
     write(
       join(dir, 'index.js'),
-      `export * from './runtime.js';\n${icons.map((ic) => `export { ${componentName(ic.name)} } from './icons/${ic.name}.js';`).join('\n')}\n`,
+      `export * from './runtime.js';\nexport * from '../smart/${fw}.js'; // smart icons hook (src/smart)\n${icons.map((ic) => `export { ${componentName(ic.name)} } from './icons/${ic.name}.js';`).join('\n')}\n`,
     );
     const t = fw === 'react' ? 'GlyphIconComponent' : 'GlyphComponent';
     const d = types(`${fw}.d.ts`, icons.map((ic) => `export declare const ${componentName(ic.name)}: ${t};`).join('\n'));
@@ -53,6 +53,7 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
         "export { default as Fusion } from './Fusion.svelte';",
         "export { default as MorphIcon } from './MorphIcon.svelte';",
         "export { morphStore, registerIcons } from './glyph.js';",
+        "export * from '../smart/svelte/index.js'; // smart icons hook (src/smart)",
         ...icons.map((ic) => `export { default as ${componentName(ic.name)} } from './icons/${ic.name}.svelte';`),
         '',
       ].join('\n'),
@@ -67,9 +68,9 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
     write(join(dir, 'element.d.ts'), read(join('types', 'web.d.ts')));
     write(
       join(dir, 'index.js'),
-      "import { icons } from '../registry.js';\nimport { registerIcons } from '../core/lookup.js';\nimport { GlyphFoxElement, defineGlyphFox } from './element.js';\n\nregisterIcons(icons);\ndefineGlyphFox();\n\nexport { GlyphFoxElement, defineGlyphFox };\n",
+      "import { icons } from '../registry.js';\nimport { registerIcons } from '../core/lookup.js';\nimport { GlyphFoxElement, defineGlyphFox } from './element.js';\nimport { defineSmartElements } from '../smart/web.js'; // smart icons hook (src/smart)\n\nregisterIcons(icons);\ndefineGlyphFox();\ndefineSmartElements();\n\nexport { GlyphFoxElement, defineGlyphFox };\nexport * from '../smart/web.js';\n",
     );
-    write(join(dir, 'index.d.ts'), read(join('types', 'web.d.ts')));
+    write(join(dir, 'index.d.ts'), read(join('types', 'web.d.ts')) + "export * from '../smart/web.js'; // smart icons hook (src/smart)\n");
     write(join(dir, 'cdn.js'), read(join('web', 'cdn.js')));
     const banner = `/*! glyphfox ${version} | MIT | Alexandre Kohler | https://github.com/kwy404/glyphfox */`;
     await esbuild.build({
