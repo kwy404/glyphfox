@@ -8,5 +8,25 @@
     "letter",
     "message",
     "inbox"
-  ]
+  ],
+  "animation": {
+    "name": "arrive",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 13],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": "all", "props": { "transform": "translate(0px, -1.5px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": "all", "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": "all", "props": { "transform": "translate(0px, -0.45px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "scale(1)" } },
+      { "at": 0.5, "element": 3, "props": { "transform": "scale(1)" } },
+      { "at": 0.65, "element": 3, "props": { "transform": "scale(0.7)" } },
+      { "at": 0.8, "element": 3, "props": { "transform": "scale(1.3)" } },
+      { "at": 1, "element": 3, "props": { "transform": "scale(1)" } }
+    ]
+  }
 }

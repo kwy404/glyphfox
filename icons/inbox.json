@@ -7,5 +7,17 @@
     "messages",
     "received",
     "email"
-  ]
+  ],
+  "animation": {
+    "name": "drop",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-in" },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(0px, 2.5px)" } },
+      { "at": 0.55, "element": 1, "props": { "transform": "translate(0px, 2.5px)" }, "easing": "ease-out" },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

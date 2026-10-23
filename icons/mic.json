@@ -8,5 +8,20 @@
     "voice",
     "audio",
     "input"
-  ]
+  ],
+  "animation": {
+    "name": "beat",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 7.5],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1)" } },
+      { "at": 0.15, "element": 0, "props": { "transform": "scale(1.08)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "scale(1)" } },
+      { "at": 0.45, "element": 0, "props": { "transform": "scale(1.05)" } },
+      { "at": 0.7, "element": 0, "props": { "transform": "scale(1)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1)" } }
+    ]
+  }
 }

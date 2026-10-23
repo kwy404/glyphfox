@@ -7,5 +7,22 @@
     "silent",
     "sound off",
     "speaker"
-  ]
+  ],
+  "animation": {
+    "name": "pop",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [18.5, 12],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "scale(1)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "scale(0.75)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "scale(1.25)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1)" } },
+      { "at": 0, "element": 2, "props": { "transform": "scale(1)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "scale(0.75)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "scale(1.25)" } },
+      { "at": 1, "element": 2, "props": { "transform": "scale(1)" } }
+    ]
+  }
 }

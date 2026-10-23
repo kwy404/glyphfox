@@ -8,5 +8,16 @@
     "photo",
     "gallery",
     "landscape"
-  ]
+  ],
+  "animation": {
+    "name": "rise",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 2px)", "opacity": 0 }, "easing": "ease-out" },
+      { "at": 0.5, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } }
+    ]
+  }
 }

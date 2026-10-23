@@ -7,5 +7,35 @@
     "network",
     "connect",
     "social"
-  ]
+  ],
+  "animation": {
+    "name": "connect",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(-6px, 0px) scale(1) translate(6px, 0px)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "translate(-6px, 0px) scale(0.8) translate(6px, 0px)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "translate(-6px, 0px) scale(1.2) translate(6px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(-6px, 0px) scale(1) translate(6px, 0px)" } },
+      { "at": 0, "element": 0, "props": { "transform": "translate(6px, -7px) scale(1) translate(-6px, 7px)" } },
+      { "at": 0.12, "element": 0, "props": { "transform": "translate(6px, -7px) scale(1) translate(-6px, 7px)" } },
+      { "at": 0.348, "element": 0, "props": { "transform": "translate(6px, -7px) scale(0.8) translate(-6px, 7px)" } },
+      { "at": 0.576, "element": 0, "props": { "transform": "translate(6px, -7px) scale(1.2) translate(-6px, 7px)" } },
+      { "at": 0.88, "element": 0, "props": { "transform": "translate(6px, -7px) scale(1) translate(-6px, 7px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(6px, -7px) scale(1) translate(-6px, 7px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(6px, 7px) scale(1) translate(-6px, -7px)" } },
+      { "at": 0.24, "element": 2, "props": { "transform": "translate(6px, 7px) scale(1) translate(-6px, -7px)" } },
+      { "at": 0.468, "element": 2, "props": { "transform": "translate(6px, 7px) scale(0.8) translate(-6px, -7px)" } },
+      { "at": 0.696, "element": 2, "props": { "transform": "translate(6px, 7px) scale(1.2) translate(-6px, -7px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(6px, 7px) scale(1) translate(-6px, -7px)" } },
+      { "at": 0, "element": 3, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.6, "element": 3, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 3, "props": { "strokeDashoffset": 0 } },
+      { "at": 0, "element": 4, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.1, "element": 4, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.64, "element": 4, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 4, "props": { "strokeDashoffset": 0 } }
+    ]
+  }
 }

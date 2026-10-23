@@ -8,5 +8,22 @@
     "video",
     "music",
     "break"
-  ]
+  ],
+  "animation": {
+    "name": "squash",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "scale(1, 0.82)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "scale(1, 1.03)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.15, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.448, "element": 1, "props": { "transform": "scale(1, 0.82)" } },
+      { "at": 0.703, "element": 1, "props": { "transform": "scale(1, 1.03)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

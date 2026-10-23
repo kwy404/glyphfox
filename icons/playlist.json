@@ -7,5 +7,25 @@
     "music",
     "list",
     "songs"
-  ]
+  ],
+  "animation": {
+    "name": "hop",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 3, "props": { "transform": "translate(0px, -1.5px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 3, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": 3, "props": { "transform": "translate(0px, -0.45px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 4, "props": { "transform": "translate(0px, -1.5px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 4, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": 4, "props": { "transform": "translate(0px, -0.45px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

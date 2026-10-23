@@ -7,5 +7,30 @@
     "ringing",
     "telephone",
     "contact"
-  ]
+  ],
+  "animation": {
+    "name": "ring",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": "all", "props": { "transform": "rotate(-8deg)" } },
+      { "at": 0.27, "element": "all", "props": { "transform": "rotate(8deg)" } },
+      { "at": 0.42, "element": "all", "props": { "transform": "rotate(-5.6deg)" } },
+      { "at": 0.57, "element": "all", "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.72, "element": "all", "props": { "transform": "rotate(-2deg)" } },
+      { "at": 0.86, "element": "all", "props": { "transform": "rotate(0.8deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 2, "props": { "opacity": 0.15 } },
+      { "at": 0.5, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.12, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.296, "element": 1, "props": { "opacity": 0.15 } },
+      { "at": 0.56, "element": 1, "props": { "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "opacity": 1 } }
+    ]
+  }
 }
