@@ -1,0 +1,38 @@
+{
+  "categories": [
+    "media"
+  ],
+  "tags": [
+    "sound",
+    "audio",
+    "volume",
+    "speaker",
+    "playing"
+  ],
+  "animation": {
+    "duration": 1400,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 1,
+        "keyframes": [
+          { "offset": 0, "opacity": 0.2 },
+          { "offset": 0.25, "opacity": 1 },
+          { "offset": 0.75, "opacity": 1 },
+          { "offset": 1, "opacity": 0.2 }
+        ]
+      },
+      {
+        "index": 2,
+        "keyframes": [
+          { "offset": 0, "opacity": 0.2 },
+          { "offset": 0.25, "opacity": 0.2 },
+          { "offset": 0.5, "opacity": 1 },
+          { "offset": 0.75, "opacity": 1 },
+          { "offset": 1, "opacity": 0.2 }
+        ]
+      }
+    ]
+  }
+}

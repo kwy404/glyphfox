@@ -1,0 +1,48 @@
+{
+  "categories": [
+    "interface",
+    "communication"
+  ],
+  "tags": [
+    "notification",
+    "ring",
+    "alert",
+    "alarm"
+  ],
+  "animation": {
+    "duration": 1600,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 0,
+        "origin": [12, 3],
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.1, "rotate": 12 },
+          { "offset": 0.2, "rotate": -10 },
+          { "offset": 0.3, "rotate": 7 },
+          { "offset": 0.4, "rotate": -4 },
+          { "offset": 0.5, "rotate": 2 },
+          { "offset": 0.6, "rotate": 0 },
+          { "offset": 1, "rotate": 0 }
+        ]
+      },
+      {
+        "index": 1,
+        "origin": [12, 3],
+        "delay": 60,
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.1, "rotate": 16 },
+          { "offset": 0.2, "rotate": -14 },
+          { "offset": 0.3, "rotate": 9 },
+          { "offset": 0.4, "rotate": -5 },
+          { "offset": 0.5, "rotate": 2 },
+          { "offset": 0.6, "rotate": 0 },
+          { "offset": 1, "rotate": 0 }
+        ]
+      }
+    ]
+  }
+}

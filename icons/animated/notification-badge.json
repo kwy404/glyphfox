@@ -1,0 +1,30 @@
+{
+  "categories": [
+    "interface",
+    "communication"
+  ],
+  "tags": [
+    "notification",
+    "unread",
+    "badge",
+    "new"
+  ],
+  "animation": {
+    "duration": 2000,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 2,
+        "origin": [18.5, 5.5],
+        "keyframes": [
+          { "offset": 0, "scale": 0 },
+          { "offset": 0.2, "scale": 1.25 },
+          { "offset": 0.3, "scale": 1 },
+          { "offset": 0.85, "scale": 1 },
+          { "offset": 1, "scale": 0 }
+        ]
+      }
+    ]
+  }
+}

@@ -281,7 +281,15 @@ for (const col of Object.values(COLLECTIONS)) {
       svg = lintSvg(name, text, col);
       if (svg) {
         const canonical = serializeSvg(svg, col.grid);
-        const body = canonical.split('\n').slice(1, -2).map((l) => l.trim()).sort().join('\n');
+        let body = canonical.split('\n').slice(1, -2).map((l) => l.trim()).sort().join('\n');
+        // Animated icons may share a drawing and differ in motion.
+        if (col.animation && jsonNames.has(base)) {
+          try {
+            body += JSON.stringify(JSON.parse(readFileSync(join(dir, `${base}.json`), 'utf8')).animation);
+          } catch {
+            // the sidecar check reports broken JSON
+          }
+        }
         if (bodies.has(body)) report(name, 'duplicate', `same geometry as "${bodies.get(body)}"`);
         else bodies.set(body, base);
         if (text !== canonical) {

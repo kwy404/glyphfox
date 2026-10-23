@@ -592,7 +592,7 @@ export function stripBom(text) {
 //   }
 //
 // translate moves in grid units, rotate is in degrees, scale is a number or
-// [sx, sy], draw is the visible fraction of the stroke (0 to 1). The order
+// [sx, sy] (negative flips), draw is the visible fraction of the stroke (0 to 1). The order
 // matches CSS: translate, then rotate and scale about the origin.
 
 const EASING_RE =
@@ -671,8 +671,8 @@ export function animationProblems(anim, svg, grid = GRID) {
       if (kf.opacity !== undefined && !(isNum(kf.opacity) && kf.opacity >= 0 && kf.opacity <= 1)) out.push(`${w}.opacity must be from 0 to 1`);
       if (kf.translate !== undefined && !(isPair(kf.translate) && kf.translate.every((v) => Math.abs(v) <= grid / 2))) out.push(`${w}.translate must be [dx, dy] in grid units`);
       if (kf.rotate !== undefined && !(isNum(kf.rotate) && Math.abs(kf.rotate) <= 720)) out.push(`${w}.rotate must be degrees from -720 to 720`);
-      if (kf.scale !== undefined && !((isNum(kf.scale) && kf.scale >= 0 && kf.scale <= 3) || (isPair(kf.scale) && kf.scale.every((v) => v >= 0 && v <= 3)))) {
-        out.push(`${w}.scale must be from 0 to 3, or [sx, sy]`);
+      if (kf.scale !== undefined && !((isNum(kf.scale) && Math.abs(kf.scale) <= 3) || (isPair(kf.scale) && kf.scale.every((v) => Math.abs(v) <= 3)))) {
+        out.push(`${w}.scale must be from -3 to 3, or [sx, sy] (negative values flip)`);
       }
       if (kf.draw !== undefined && !(isNum(kf.draw) && kf.draw >= 0 && kf.draw <= 1)) out.push(`${w}.draw must be from 0 to 1`);
       if (kf.draw !== undefined && target.attrs.has('class')) out.push(`${w}: draw needs a stroke element, not the duotone layer`);
@@ -684,31 +684,104 @@ export function animationProblems(anim, svg, grid = GRID) {
     if (kfs[kfs.length - 1] && kfs[kfs.length - 1].offset !== 1) out.push(`${where}: the last keyframe needs offset 1`);
     if (!animated) out.push(`${where}: the keyframes do not animate anything`);
     if (needsOrigin && el.origin === undefined) out.push(`${where}: rotate and scale need an origin`);
-    // Every pose must keep the stroke on the canvas.
-    let box;
+    // Every pose, including the ones between keyframes, must keep the stroke
+    // on the canvas (1 grid unit of margin for the stroke).
+    let points;
     try {
-      box = elementBounds(target);
+      points = elementPoints(target);
     } catch {
       return;
     }
-    const corners = [
-      [box.minX, box.minY],
-      [box.maxX, box.minY],
-      [box.maxX, box.maxY],
-      [box.minX, box.maxY],
-    ];
-    for (const kf of kfs) {
-      if (!kf || typeof kf !== 'object') continue;
-      for (const p of corners) {
+    const valid = kfs.filter((kf) => kf && typeof kf === 'object' && isNum(kf.offset));
+    const poses = [];
+    for (let k = 0; k < valid.length; k++) {
+      poses.push(valid[k]);
+      if (k + 1 < valid.length) for (let s = 1; s < 8; s++) poses.push(lerpPose(valid[k], valid[k + 1], s / 8));
+    }
+    for (const kf of poses) {
+      for (const p of points) {
         const [x, y] = transformPoint(p, kf, el.origin);
         if (x < 1 - 1e-6 || y < 1 - 1e-6 || x > grid - 1 + 1e-6 || y > grid - 1 + 1e-6) {
-          out.push(`${where}: the keyframe at offset ${kf.offset} moves element ${el.index} off the canvas`);
+          out.push(`${where}: the pose near offset ${Math.round(kf.offset * 100) / 100} moves element ${el.index} off the canvas`);
           return;
         }
       }
     }
   });
   return out;
+}
+
+// A pose between two keyframes (linear, for the canvas check).
+function lerpPose(a, b, t) {
+  const mix = (x, y) => x + (y - x) * t;
+  const pair = (v, def) => (v === undefined ? def : Array.isArray(v) ? v : [v, v]);
+  const ta = pair(a.translate, [0, 0]);
+  const tb = pair(b.translate, ta);
+  const sa = pair(a.scale, [1, 1]);
+  const sb = pair(b.scale, sa);
+  const ra = a.rotate || 0;
+  const rb = b.rotate === undefined ? ra : b.rotate;
+  return {
+    offset: mix(a.offset, b.offset),
+    translate: [mix(ta[0], tb[0]), mix(ta[1], tb[1])],
+    scale: [mix(sa[0], sb[0]), mix(sa[1], sb[1])],
+    rotate: mix(ra, rb),
+  };
+}
+
+// Points along the outline of one element, for pose checks.
+export function elementPoints(el) {
+  const pts = [];
+  const num = (k, def = 0) => (el.attrs.has(k) ? parseFloat(el.attrs.get(k)) : def);
+  const ring = (cx, cy, rx, ry) => {
+    for (let k = 0; k < 48; k++) pts.push([cx + rx * Math.cos((k / 48) * 2 * Math.PI), cy + ry * Math.sin((k / 48) * 2 * Math.PI)]);
+  };
+  switch (el.name) {
+    case 'circle':
+      ring(num('cx'), num('cy'), num('r'), num('r'));
+      break;
+    case 'ellipse':
+      ring(num('cx'), num('cy'), num('rx'), num('ry'));
+      break;
+    case 'rect': {
+      const x = num('x');
+      const y = num('y');
+      const w = num('width');
+      const h = num('height');
+      pts.push([x, y], [x + w, y], [x + w, y + h], [x, y + h]);
+      break;
+    }
+    case 'line':
+      pts.push([num('x1'), num('y1')], [num('x2'), num('y2')]);
+      break;
+    case 'polyline':
+    case 'polygon':
+      pts.push(...parsePoints(el.attrs.get('points')).pts);
+      break;
+    case 'path':
+      for (const s of parsePath(el.attrs.get('d')).segments) {
+        if (s.type === 'M') {
+          pts.push([s.x, s.y]);
+          continue;
+        }
+        for (let k = 1; k <= 16; k++) {
+          const t = k / 16;
+          if (s.type === 'L') pts.push([s.x0 + (s.x - s.x0) * t, s.y0 + (s.y - s.y0) * t]);
+          else if (s.type === 'C') pts.push([cubicAt(s.x0, s.x1, s.x2, s.x, t), cubicAt(s.y0, s.y1, s.y2, s.y, t)]);
+          else if (s.type === 'Q') {
+            const mt = 1 - t;
+            pts.push([mt * mt * s.x0 + 2 * mt * t * s.x1 + t * t * s.x, mt * mt * s.y0 + 2 * mt * t * s.y1 + t * t * s.y]);
+          } else if (s.type === 'A') {
+            const a = arcCenter(s);
+            pts.push(a ? arcPoint(a, a.theta1 + a.dtheta * t) : [s.x, s.y]);
+          }
+        }
+      }
+      break;
+    default:
+      break;
+  }
+  return pts;
 }
 
 function inline(v) {

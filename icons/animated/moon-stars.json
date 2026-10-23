@@ -1,0 +1,36 @@
+{
+  "categories": [
+    "weather"
+  ],
+  "tags": [
+    "moon",
+    "night",
+    "stars",
+    "sleep",
+    "dark"
+  ],
+  "animation": {
+    "duration": 2400,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 1,
+        "origin": [17, 7],
+        "keyframes": [
+          { "offset": 0, "scale": 0.6 },
+          { "offset": 0.5, "scale": 1.15 },
+          { "offset": 1, "scale": 0.6 }
+        ]
+      },
+      {
+        "index": 2,
+        "keyframes": [
+          { "offset": 0, "opacity": 1 },
+          { "offset": 0.5, "opacity": 0.2 },
+          { "offset": 1, "opacity": 1 }
+        ]
+      }
+    ]
+  }
+}

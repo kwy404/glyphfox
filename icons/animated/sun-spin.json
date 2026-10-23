@@ -1,0 +1,91 @@
+{
+  "categories": [
+    "weather"
+  ],
+  "tags": [
+    "sun",
+    "day",
+    "bright",
+    "sunny",
+    "weather"
+  ],
+  "animation": {
+    "duration": 3000,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 1,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      },
+      {
+        "index": 2,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      },
+      {
+        "index": 3,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      },
+      {
+        "index": 4,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      },
+      {
+        "index": 5,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      },
+      {
+        "index": 6,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      },
+      {
+        "index": 7,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      },
+      {
+        "index": 8,
+        "origin": [12, 12],
+        "easing": "linear",
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 1, "rotate": 45 }
+        ]
+      }
+    ]
+  }
+}

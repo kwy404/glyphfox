@@ -1,0 +1,27 @@
+{
+  "categories": [
+    "media"
+  ],
+  "tags": [
+    "microphone",
+    "recording",
+    "voice",
+    "live"
+  ],
+  "animation": {
+    "duration": 1400,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 3,
+        "origin": [19, 4.5],
+        "keyframes": [
+          { "offset": 0, "opacity": 1, "scale": 1 },
+          { "offset": 0.5, "opacity": 0.35, "scale": 1.4 },
+          { "offset": 1, "opacity": 1, "scale": 1 }
+        ]
+      }
+    ]
+  }
+}

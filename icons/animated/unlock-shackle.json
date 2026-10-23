@@ -1,0 +1,27 @@
+{
+  "categories": [
+    "security"
+  ],
+  "tags": [
+    "unlock",
+    "open",
+    "access",
+    "lock"
+  ],
+  "animation": {
+    "duration": 2000,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 1,
+        "keyframes": [
+          { "offset": 0, "translate": [0, 0] },
+          { "offset": 0.3, "translate": [0, -2.5] },
+          { "offset": 0.7, "translate": [0, -2.5] },
+          { "offset": 1, "translate": [0, 0] }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "categories": [
+    "devices"
+  ],
+  "tags": [
+    "battery",
+    "charging",
+    "power",
+    "energy"
+  ],
+  "animation": {
+    "duration": 1800,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 2,
+        "keyframes": [
+          { "offset": 0, "opacity": 0 },
+          { "offset": 0.2, "opacity": 1 },
+          { "offset": 0.85, "opacity": 1 },
+          { "offset": 1, "opacity": 0 }
+        ]
+      },
+      {
+        "index": 3,
+        "keyframes": [
+          { "offset": 0, "opacity": 0 },
+          { "offset": 0.2, "opacity": 0 },
+          { "offset": 0.4, "opacity": 1 },
+          { "offset": 0.85, "opacity": 1 },
+          { "offset": 1, "opacity": 0 }
+        ]
+      },
+      {
+        "index": 4,
+        "keyframes": [
+          { "offset": 0, "opacity": 0 },
+          { "offset": 0.4, "opacity": 0 },
+          { "offset": 0.6, "opacity": 1 },
+          { "offset": 0.85, "opacity": 1 },
+          { "offset": 1, "opacity": 0 }
+        ]
+      }
+    ]
+  }
+}

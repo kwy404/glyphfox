@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "nature"
+  ],
+  "tags": [
+    "fire",
+    "flame",
+    "hot",
+    "burn",
+    "trending"
+  ],
+  "animation": {
+    "duration": 900,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 0,
+        "origin": [12, 22],
+        "keyframes": [
+          { "offset": 0, "rotate": 0, "scale": [1, 1] },
+          { "offset": 0.3, "rotate": -2, "scale": [0.97, 1.04] },
+          { "offset": 0.6, "rotate": 1.5, "scale": [1.02, 0.98] },
+          { "offset": 1, "rotate": 0, "scale": [1, 1] }
+        ]
+      }
+    ]
+  }
+}

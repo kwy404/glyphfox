@@ -1,0 +1,36 @@
+{
+  "categories": [
+    "arrows"
+  ],
+  "tags": [
+    "next",
+    "forward",
+    "go",
+    "call to action"
+  ],
+  "animation": {
+    "duration": 1400,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 0,
+        "keyframes": [
+          { "offset": 0, "translate": [0, 0] },
+          { "offset": 0.3, "translate": [2, 0] },
+          { "offset": 0.6, "translate": [0, 0] },
+          { "offset": 1, "translate": [0, 0] }
+        ]
+      },
+      {
+        "index": 1,
+        "keyframes": [
+          { "offset": 0, "translate": [0, 0] },
+          { "offset": 0.3, "translate": [2, 0] },
+          { "offset": 0.6, "translate": [0, 0] },
+          { "offset": 1, "translate": [0, 0] }
+        ]
+      }
+    ]
+  }
+}

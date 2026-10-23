@@ -1,0 +1,32 @@
+{
+  "categories": [
+    "maps",
+    "navigation"
+  ],
+  "tags": [
+    "compass",
+    "direction",
+    "navigate",
+    "explore"
+  ],
+  "animation": {
+    "duration": 2400,
+    "iterations": "infinite",
+    "easing": "ease-in-out",
+    "elements": [
+      {
+        "index": 1,
+        "origin": [12, 12],
+        "keyframes": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.15, "rotate": 40 },
+          { "offset": 0.3, "rotate": -25 },
+          { "offset": 0.45, "rotate": 15 },
+          { "offset": 0.6, "rotate": -8 },
+          { "offset": 0.75, "rotate": 4 },
+          { "offset": 1, "rotate": 0 }
+        ]
+      }
+    ]
+  }
+}
