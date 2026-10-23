@@ -7,5 +7,25 @@
     "wise",
     "night",
     "animal"
-  ]
+  ],
+  "animation": {
+    "name": "look",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.25, "element": 3, "props": { "transform": "translate(-1.2px, 0px)" } },
+      { "at": 0.45, "element": 3, "props": { "transform": "translate(-1.2px, 0px)" } },
+      { "at": 0.7, "element": 3, "props": { "transform": "translate(1.2px, 0px)" } },
+      { "at": 0.85, "element": 3, "props": { "transform": "translate(1.2px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.25, "element": 4, "props": { "transform": "translate(-1.2px, 0px)" } },
+      { "at": 0.45, "element": 4, "props": { "transform": "translate(-1.2px, 0px)" } },
+      { "at": 0.7, "element": 4, "props": { "transform": "translate(1.2px, 0px)" } },
+      { "at": 0.85, "element": 4, "props": { "transform": "translate(1.2px, 0px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

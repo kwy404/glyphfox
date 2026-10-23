@@ -8,5 +8,16 @@
     "chance",
     "roll",
     "board game"
-  ]
+  ],
+  "animation": {
+    "name": "roll",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 0.5, "element": "all", "props": { "transform": "rotate(45deg) scale(0.85)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(90deg) scale(1)" } }
+    ]
+  }
 }

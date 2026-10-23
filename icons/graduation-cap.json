@@ -8,5 +8,19 @@
     "school",
     "university",
     "learn"
-  ]
+  ],
+  "animation": {
+    "name": "toss",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 9],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px) rotate(0deg)" }, "easing": "ease-out" },
+      { "at": 0.35, "element": "all", "props": { "transform": "translate(0px, -1.5px) rotate(-8deg)" }, "easing": "ease-in" },
+      { "at": 0.65, "element": "all", "props": { "transform": "translate(0px, 0px) rotate(0deg)" } },
+      { "at": 0.8, "element": "all", "props": { "transform": "translate(0px, 0px) rotate(2deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px) rotate(0deg)" } }
+    ]
+  }
 }

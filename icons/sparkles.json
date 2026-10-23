@@ -8,5 +8,22 @@
     "shine",
     "new",
     "effects"
-  ]
+  ],
+  "animation": {
+    "name": "twinkle",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(-2px, 1px) rotate(0deg) scale(1) translate(2px, -1px)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "translate(-2px, 1px) rotate(15deg) scale(0.85) translate(2px, -1px)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "translate(-2px, 1px) rotate(-7.5deg) scale(1.1) translate(2px, -1px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(-2px, 1px) rotate(0deg) scale(1) translate(2px, -1px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(7px, -7px) rotate(0deg) scale(1) translate(-7px, 7px)" } },
+      { "at": 0.2, "element": 1, "props": { "transform": "translate(7px, -7px) rotate(0deg) scale(1) translate(-7px, 7px)" } },
+      { "at": 0.44, "element": 1, "props": { "transform": "translate(7px, -7px) rotate(20deg) scale(0.85) translate(-7px, 7px)" } },
+      { "at": 0.72, "element": 1, "props": { "transform": "translate(7px, -7px) rotate(-10deg) scale(1.1) translate(-7px, 7px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(7px, -7px) rotate(0deg) scale(1) translate(-7px, 7px)" } }
+    ]
+  }
 }

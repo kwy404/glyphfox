@@ -8,5 +8,19 @@
     "clever",
     "forest",
     "tail"
-  ]
+  ],
+  "animation": {
+    "name": "sweep",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [15, 20],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.25, "element": 1, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "rotate(8deg)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

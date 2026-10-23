@@ -7,5 +7,40 @@
     "recognition",
     "biometric",
     "camera"
-  ]
+  ],
+  "animation": {
+    "name": "focus",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 9.5],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "translate(1px, 1px)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "translate(1px, 1px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(-1px, 1px)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "translate(-1px, 1px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "translate(-1px, -1px)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "translate(-1px, -1px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 3, "props": { "transform": "translate(1px, -1px)" } },
+      { "at": 0.6, "element": 3, "props": { "transform": "translate(1px, -1px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.4, "element": 4, "props": { "transform": "scale(1, 1)" }, "easing": "ease-in" },
+      { "at": 0.5, "element": 4, "props": { "transform": "scale(1, 0.1)" }, "easing": "ease-out" },
+      { "at": 0.6, "element": 4, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 4, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 5, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.4, "element": 5, "props": { "transform": "scale(1, 1)" }, "easing": "ease-in" },
+      { "at": 0.5, "element": 5, "props": { "transform": "scale(1, 0.1)" }, "easing": "ease-out" },
+      { "at": 0.6, "element": 5, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 5, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

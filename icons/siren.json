@@ -8,5 +8,28 @@
     "alert",
     "police",
     "light"
-  ]
+  ],
+  "animation": {
+    "name": "flash",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 3, "props": { "opacity": 0.1 } },
+      { "at": 0.5, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.12, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.272, "element": 2, "props": { "opacity": 0.1 } },
+      { "at": 0.5, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.88, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.24, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.392, "element": 4, "props": { "opacity": 0.1 } },
+      { "at": 0.62, "element": 4, "props": { "opacity": 1 } },
+      { "at": 1, "element": 4, "props": { "opacity": 1 } }
+    ]
+  }
 }

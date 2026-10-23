@@ -7,5 +7,32 @@
     "ocean",
     "animal",
     "mammal"
-  ]
+  ],
+  "animation": {
+    "name": "spout",
+    "duration": 1300,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.4, "element": "all", "props": { "transform": "translate(0px, -1px)" } },
+      { "at": 0.8, "element": "all", "props": { "transform": "translate(0px, 0.3px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 5, "props": { "opacity": 0.1 } },
+      { "at": 0.5, "element": 5, "props": { "opacity": 1 } },
+      { "at": 1, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.1, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.26, "element": 6, "props": { "opacity": 0.1 } },
+      { "at": 0.5, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.9, "element": 6, "props": { "opacity": 1 } },
+      { "at": 1, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0, "element": 7, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 7, "props": { "opacity": 1 } },
+      { "at": 0.36, "element": 7, "props": { "opacity": 0.1 } },
+      { "at": 0.6, "element": 7, "props": { "opacity": 1 } },
+      { "at": 1, "element": 7, "props": { "opacity": 1 } }
+    ]
+  }
 }

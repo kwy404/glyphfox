@@ -7,5 +7,18 @@
     "disapprove",
     "bad",
     "no"
-  ]
+  ],
+  "animation": {
+    "name": "nod",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 10],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "rotate(10deg)" } },
+      { "at": 0.6, "element": "all", "props": { "transform": "rotate(-4deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

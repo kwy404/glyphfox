@@ -9,5 +9,20 @@
     "deploy",
     "space",
     "fast"
-  ]
+  ],
+  "animation": {
+    "name": "launch",
+    "duration": 1100,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.1, "element": "all", "props": { "transform": "translate(-0.4px, 0px)" } },
+      { "at": 0.2, "element": "all", "props": { "transform": "translate(0.4px, 0px)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "translate(-0.3px, 0px)" } },
+      { "at": 0.4, "element": "all", "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.65, "element": "all", "props": { "transform": "translate(0px, -1px)" }, "easing": "ease-in" },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

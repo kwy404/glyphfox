@@ -8,5 +8,33 @@
     "wings",
     "spring",
     "change"
-  ]
+  ],
+  "animation": {
+    "name": "flap",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.25, "element": 0, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 0.5, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.75, "element": 0, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.25, "element": 1, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.25, "element": 2, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 0.5, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.75, "element": 2, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 1, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.25, "element": 3, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 0.5, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.75, "element": 3, "props": { "transform": "scale(0.35, 1)" } },
+      { "at": 1, "element": 3, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

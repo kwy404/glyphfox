@@ -8,5 +8,18 @@
     "achievement",
     "medal",
     "ribbon"
-  ]
+  ],
+  "animation": {
+    "name": "pop",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 8.5],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "scale(0.92)" } },
+      { "at": 0.6, "element": "all", "props": { "transform": "scale(1.08)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)" } }
+    ]
+  }
 }

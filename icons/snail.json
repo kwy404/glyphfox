@@ -7,5 +7,33 @@
     "animal",
     "shell",
     "garden"
-  ]
+  ],
+  "animation": {
+    "name": "crawl",
+    "duration": 1600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [6, 14],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.5, "element": "all", "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 4, "props": { "transform": "rotate(-10deg)" } },
+      { "at": 0.27, "element": 4, "props": { "transform": "rotate(10deg)" } },
+      { "at": 0.42, "element": 4, "props": { "transform": "rotate(-7deg)" } },
+      { "at": 0.57, "element": 4, "props": { "transform": "rotate(5deg)" } },
+      { "at": 0.72, "element": 4, "props": { "transform": "rotate(-2.5deg)" } },
+      { "at": 0.86, "element": 4, "props": { "transform": "rotate(1deg)" } },
+      { "at": 1, "element": 4, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 5, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 5, "props": { "transform": "rotate(-10deg)" } },
+      { "at": 0.27, "element": 5, "props": { "transform": "rotate(10deg)" } },
+      { "at": 0.42, "element": 5, "props": { "transform": "rotate(-7deg)" } },
+      { "at": 0.57, "element": 5, "props": { "transform": "rotate(5deg)" } },
+      { "at": 0.72, "element": 5, "props": { "transform": "rotate(-2.5deg)" } },
+      { "at": 0.86, "element": 5, "props": { "transform": "rotate(1deg)" } },
+      { "at": 1, "element": 5, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

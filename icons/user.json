@@ -8,5 +8,28 @@
     "profile",
     "avatar",
     "member"
-  ]
+  ],
+  "animation": {
+    "name": "hop",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 21],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 0, "props": { "transform": "translate(0px, -1.5px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "scale(1.04, 0.96)" } },
+      { "at": 0.8, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.5, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "scale(1.04, 0.96)" } },
+      { "at": 0.8, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 2, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

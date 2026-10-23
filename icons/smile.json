@@ -8,5 +8,24 @@
     "face",
     "emotion",
     "good"
-  ]
+  ],
+  "animation": {
+    "name": "blink",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 9.5],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.4, "element": 1, "props": { "transform": "scale(1, 1)" }, "easing": "ease-in" },
+      { "at": 0.5, "element": 1, "props": { "transform": "scale(1, 0.1)" }, "easing": "ease-out" },
+      { "at": 0.6, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.4, "element": 2, "props": { "transform": "scale(1, 1)" }, "easing": "ease-in" },
+      { "at": 0.5, "element": 2, "props": { "transform": "scale(1, 0.1)" }, "easing": "ease-out" },
+      { "at": 0.6, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 2, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

@@ -7,5 +7,17 @@
     "honey",
     "buzz",
     "nature"
-  ]
+  ],
+  "animation": {
+    "name": "hover",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "translate(0px, -1px)" } },
+      { "at": 0.65, "element": "all", "props": { "transform": "translate(0px, 0.5px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }
