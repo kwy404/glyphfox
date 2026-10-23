@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import { createElement as h } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { fuse, getIcon, hasIconSource, loadIcon, normalizeIcon, parseSpec, registerIconSource, toSvg } from 'glyphfox';
+import { createMorph, fuse, getIcon, hasIconSource, loadIcon, normalizeIcon, parseSpec, registerIconSource, toSvg } from 'glyphfox';
 import { Icon } from 'glyphfox/react';
 import { render } from 'svelte/server';
 import * as S from 'glyphfox/svelte';
@@ -66,6 +66,17 @@ describe('icon sources', () => {
     expect(fused.body).toContain('<mask id="gf-k');
     expect(fused.body).toMatch(/<g mask="url\(#gf-k[^"]+\)">/);
     expect(toSvg('tst:dot&tst:bar:stack')).toContain('glyphfox-tst-dot-tst-bar-stack');
+  });
+
+  it('cross fades morphs that involve filled icons', () => {
+    const frame = createMorph(getIcon('fil:blob'), getIcon('tst:dot')).frame(0.25);
+    expect(frame.body).toContain('<g opacity="0.75">');
+    expect(frame.body).toContain('<g opacity="0.25">');
+    const css = toSvg('fil:blob', { morphTo: 'tst:dot', trigger: 'hover' });
+    expect(css).toContain('class="gf-ma"');
+    expect(css).toContain('transition:opacity');
+    expect(css).not.toContain('d:path');
+    expect(toSvg('tst:bar', { morphTo: 'tst:dot', trigger: 'hover' })).toContain('d:path');
   });
 
   it('works in the Svelte components', () => {

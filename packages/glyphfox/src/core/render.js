@@ -294,6 +294,37 @@ export function renderToString(icon, props) {
 
 const MORPH_EASE = 'cubic-bezier(.65,0,.35,1)';
 
+/** Content of a rendered icon without its title and style, for morph layers. */
+function layerContent(icon, o, variant) {
+  const node = renderIcon(icon, { ...o, morphTo: undefined, modifier: undefined, title: undefined, decorative: true, animate: undefined, rotate: 0, flipX: false, flipY: false, mirrorRtl: false, variant });
+  return node[2].filter((c) => c[0] !== 'title' && c[0] !== 'style');
+}
+
+/** CSS morph for filled icons: the source fades out while the target fades in. */
+function renderFadeMorph(from, to, o, sw, { dur, del, trigger }) {
+  const key = 'gf-x' + hash(`${from.body}>${to.body}|${dur}|${del}|${trigger}|fade`);
+  const sel = trigger === 'hover' ? [`.${key}:hover`, `:hover>.${key}`] : [`.${key}.gf-on`];
+  const S = (tail) => sel.map((s) => `${s} ${tail}`).join(',');
+  let css = `.${key} .gf-mb{opacity:0}`;
+  if (trigger === 'mount') {
+    css += `@keyframes ${key}-f{to{opacity:1}}@keyframes ${key}-o{to{opacity:0}}.${key} .gf-ma{animation:${key}-o ${dur}ms ${MORPH_EASE} ${del}ms both}.${key} .gf-mb{animation:${key}-f ${dur}ms ${MORPH_EASE} ${del}ms both}`;
+  } else {
+    css += `.${key} .gf-ma,.${key} .gf-mb{transition:opacity ${dur}ms ${MORPH_EASE} ${del}ms}${S('.gf-ma')}{opacity:0}${S('.gf-mb')}{opacity:1}`;
+  }
+  css += `@media (prefers-reduced-motion:reduce){.${key} *{transition:none!important;animation-duration:1ms!important}}`;
+  const children = [];
+  if (o.title) children.push(['title', {}, String(o.title)]);
+  children.push(['style', {}, css]);
+  let content = [
+    ['g', { class: 'gf-ma' }, layerContent(from, o, o.variant)],
+    ['g', { class: 'gf-mb' }, layerContent(to, o, o.morphVariant || o.variant)],
+  ];
+  const tf = transformFor(o.rotate, bool(o.flipX), bool(o.flipY));
+  if (tf) content = [['g', { transform: tf }, content]];
+  children.push(...content);
+  return ['svg', rootAttrs(from, o, sw, [key]), children];
+}
+
 /**
  * CSS only morph: the paths carry the source shape and switch to the target
  * shape with a `d` transition when the trigger matches (hover, the gf-on
@@ -301,10 +332,11 @@ const MORPH_EASE = 'cubic-bezier(.65,0,.35,1)';
  * `d` support cross fade to the exact target instead.
  */
 function renderStaticMorph(from, to, o, sw) {
-  const prep = prepareMorph(from, to);
   const dur = Number.isFinite(Number(o.duration)) && o.duration !== undefined ? Math.round(Number(o.duration)) : 450;
   const del = Number.isFinite(Number(o.delay)) ? Math.round(Number(o.delay)) : 0;
   const trigger = ['mount', 'hover', 'click', 'state'].includes(o.trigger) ? o.trigger : 'mount';
+  if (from.filled === true || to.filled === true) return renderFadeMorph(from, to, o, sw, { dur, del, trigger });
+  const prep = prepareMorph(from, to);
   const paths = prep.pairs.map((p) => {
     const a = { d: pointsToPath(pairPoints(p, 0), p.closed) };
     const op = pairOpacity(p, 0);

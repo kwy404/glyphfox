@@ -307,8 +307,22 @@ export function pairOpacity(p, t) {
  * data object for progress t: the exact source at 0, the exact target at 1.
  */
 export function createMorph(from, to, options = {}) {
-  const prep = prepareMorph(from, to, options.hints);
   const { fromVariant, toVariant } = options;
+  // Filled icons (from filled sets) cannot be restroked: they cross fade.
+  if (from.filled === true || to.filled === true) {
+    return {
+      from,
+      to,
+      pairs: [],
+      frame(t) {
+        if (t <= 0) return from;
+        if (t >= 1) return to;
+        const body = `<g opacity="${r2(1 - t)}">${from.body}</g><g opacity="${r2(t)}">${to.body}</g>`;
+        return { name: `${from.name}>${to.name}`, body, tags: [], categories: [], filled: true };
+      },
+    };
+  }
+  const prep = prepareMorph(from, to, options.hints);
   return {
     from,
     to,

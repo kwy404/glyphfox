@@ -187,7 +187,7 @@ await loadIcon('remote:rocket'); // the components load names on their own
 A source returns `{ body, viewBox?, mode?, tags?, categories?, set?, license?, author? }`. The body is moved onto the 24 grid when `viewBox` is not `0 0 24 24`, groups are flattened and their paint is passed down to the shapes.
 
 - Stroke based icons (`mode: "stroke"`, the default) behave like the glyphfox set: weight, corners, animations, modifiers, Fusion and morph all apply. The style axis uses their closed shapes.
-- Filled icons (`mode: "fill"`) keep their own paint. Weight and the style axis do not change them, `draw` falls back to `pop`, modifiers cut a disk out of the shapes, and Fusion cuts the parts behind with a mask. The result is marked `filled: true`.
+- Filled icons (`mode: "fill"`) keep their own paint. Weight and the style axis do not change them, `draw` falls back to `pop`, modifiers cut a disk out of the shapes, Fusion cuts the parts behind with a mask, and morphs cross fade. The result is marked `filled: true`.
 
 The registry is shared through `globalThis`, so the ESM build, the CommonJS build and the framework entry points see the same icons and sources.
 
