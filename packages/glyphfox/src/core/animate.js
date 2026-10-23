@@ -83,7 +83,43 @@ export const ANIMATIONS = {
 };
 
 export const ANIMATION_NAMES = Object.keys(ANIMATIONS);
-export const TRIGGERS = ['mount', 'hover', 'click', 'state'];
+export const TRIGGERS = ['mount', 'hover', 'click', 'focus', 'press', 'inView', 'loop', 'state'];
+
+/** Interactive parents that play an icon with `triggerParent`. */
+export const TRIGGER_PARENTS = 'a,button,label,summary,[role=button],[role=link],[role=menuitem],[role=tab],[role=option]';
+
+/**
+ * Selector groups that start an animation for a trigger. Hover, focus and
+ * press also listen to a `.gf-trigger` ancestor (and, with `triggerParent`,
+ * to the closest link or button); the trigger engine takes those over (the
+ * gf-js class) to play the reverse smoothly. inView plays when the engine
+ * adds gf-in; state plays with gf-on; click alternates data-gf-run.
+ */
+export function triggerScopes(cls, trigger, triggerParent = false) {
+  const own = `.${cls}:not(.gf-js)`;
+  const parents = (state) => [`:${state}>${own}`, `.gf-trigger:${state} ${own}`, ...(triggerParent ? [`:is(${TRIGGER_PARENTS}):${state} ${own}`] : [])];
+  switch (trigger) {
+    case 'hover':
+      return [[`${own}:hover`, ...parents('hover')]];
+    case 'focus':
+      return [[`${own}:focus-visible`, ...parents('focus-visible')]];
+    case 'press':
+      return [[`${own}:active`, ...parents('active')]];
+    case 'state':
+      return [[`.${cls}.gf-on`]];
+    case 'inView':
+      return [[`.${cls}.gf-in`]];
+    case 'click':
+      return [[`.${cls}[data-gf-run="1"]`], [`.${cls}[data-gf-run="2"]`]];
+    default:
+      return [[`.${cls}`]];
+  }
+}
+
+/** Rules that stop an animation: reduced motion, disabled parents and gf-off. */
+export function stopCss(cls) {
+  return `@media (prefers-reduced-motion:reduce){.${cls} *{animation:none!important}}:is(:disabled,[aria-disabled="true"]) .${cls} *,.${cls}.gf-off *{animation:none!important}`;
+}
 
 const NAMED_EASING = {
   linear: [0, 0, 1, 1],
@@ -164,24 +200,18 @@ function keyframes(name, suffix) {
  * Builds the scoped stylesheet for an animation. Returns { className, css }
  * or null when `animate` is not a known preset.
  */
-export function animationCss({ animate, trigger = 'mount', duration, delay, loop, count = 1 } = {}) {
+export function animationCss({ animate, trigger = 'mount', triggerParent = false, duration, delay, loop, count = 1 } = {}) {
   const p = ANIMATIONS[animate];
   if (!p) return null;
   const trig = TRIGGERS.includes(trigger) ? trigger : 'mount';
   const dur = ms(duration, p.duration);
   const del = ms(delay, 0);
-  const it = iterations(loop, p);
+  const it = trig === 'loop' ? Infinity : iterations(loop, p);
   const iter = it === Infinity ? 'infinite' : String(it);
   const n = animate === 'draw' ? Math.max(1, count | 0) : 0;
-  const cls = 'gf-a' + hash([animate, trig, dur, del, iter, n].join('|'));
-  const scopes =
-    trig === 'hover'
-      ? [[`.${cls}:hover`, `:hover>.${cls}`]]
-      : trig === 'state'
-        ? [[`.${cls}.gf-on`]]
-        : trig === 'click'
-          ? [[`.${cls}[data-gf-run="1"]`], [`.${cls}[data-gf-run="2"]`]]
-          : [[`.${cls}`]];
+  const tp = triggerParent === true || triggerParent === 'true' || triggerParent === '';
+  const cls = 'gf-a' + hash([animate, trig, dur, del, iter, n, tp ? 'p' : ''].join('|'));
+  const scopes = triggerScopes(cls, trig, tp);
   let css = '';
   scopes.forEach((_, k) => {
     css += keyframes(animate, k ? '-r' : '');
@@ -204,7 +234,7 @@ export function animationCss({ animate, trigger = 'mount', duration, delay, loop
       css += `${S('.gf-anim')}{animation:gf-${animate}${suf} ${dur}ms ${p.easing} ${del}ms ${iter} both}`;
     }
   });
-  css += `@media (prefers-reduced-motion:reduce){.${cls} *{animation:none!important}}`;
+  css += stopCss(cls);
   return { className: cls, css };
 }
 

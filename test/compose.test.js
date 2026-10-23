@@ -185,3 +185,58 @@ describe('morph engine', () => {
     expect(splitLayers(parseBody(m.frame(0.4).body)).primary.length).toBeGreaterThan(1);
   });
 });
+
+describe('fusion quality', () => {
+  const CURATED = [
+    ['cloud', 'lock', 'overlap'],
+    ['file', 'check', 'badge'],
+    ['user', 'shield', 'badge'],
+    ['message-circle', 'heart', 'overlap'],
+    ['shopping-cart', 'clock', 'badge'],
+    ['shield', 'heart', 'inside'],
+    ['folder', 'search', 'overlap'],
+    ['calendar', 'bell', 'side'],
+  ];
+  for (const [a, b, layout] of CURATED) {
+    it(`keeps ${a} and ${b} readable in ${layout}`, () => {
+      for (const [weight, gap] of [
+        [2, 1],
+        [1.3, 3],
+        [3, 0.5],
+      ]) {
+        const f = fuse([getIcon(a), getIcon(b)], { layout, weight, gap });
+        for (const part of f.parts) {
+          expect(part.kept, `${a}&${b}:${layout} w${weight} g${gap}`).toBeGreaterThanOrEqual(0.45);
+          if (part.shortest !== null) expect(part.shortest, `${a}&${b}:${layout} w${weight} g${gap}`).toBeGreaterThanOrEqual(1.5);
+        }
+      }
+    });
+  }
+
+  it('puts the back part large at the top left and the front part small at the bottom right', () => {
+    const f = fuse([getIcon('cloud'), getIcon('lock')], { layout: 'overlap' });
+    expect(f.parts[0]).toMatchObject({ x: 2, y: 2, size: 17 });
+    expect(f.parts[1]).toMatchObject({ x: 10, y: 10, size: 12, kept: 1 });
+  });
+
+  it('cuts only inside the filled outline of the front part', () => {
+    // A lock in front of a long line: the line is cut where the lock is, the
+    // rest of it stays.
+    const line = { name: 'line', body: '<path d="M2 18H22"/>', tags: [], categories: [] };
+    const f = fuse([line, getIcon('lock')], { layout: 'overlap', gap: 1 });
+    expect(f.parts[0].kept).toBeGreaterThan(0.3);
+    expect(f.parts[0].kept).toBeLessThan(0.7);
+    // What stays of the line is left of the lock.
+    const y = 2 + 16 * (17 / 20);
+    const pieces = parseBody(f.body)
+      .map((n) => {
+        const b = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
+        segmentsBounds(shapeToSegments(n), b);
+        return b;
+      })
+      .filter((b) => Math.abs(b.minY - y) < 0.05 && Math.abs(b.maxY - y) < 0.05);
+    expect(pieces.length).toBeGreaterThan(0);
+    for (const b of pieces) expect(b.maxX).toBeLessThan(10);
+  });
+});
+

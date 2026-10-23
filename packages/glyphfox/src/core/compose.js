@@ -6,6 +6,7 @@
 import {
   distToPolylines,
   flattenNode,
+  polylineLength,
   isClosedNode,
   pointInPolygon,
   polygonArea,
@@ -86,10 +87,10 @@ function cornerCenter(corner, rb) {
 }
 
 /** Trims stroke nodes where `excluded(point)` is true; untouched nodes keep their form. */
-export function trimNodes(nodes, excluded) {
+export function trimNodes(nodes, excluded, options) {
   const out = [];
   for (const n of nodes) {
-    const { segs, changed } = trimSegments(shapeToSegments(n), excluded);
+    const { segs, changed } = trimSegments(shapeToSegments(n), excluded, options);
     if (!changed) out.push(n);
     else if (segs.length) out.push(['path', { d: serializePath(segs, 3) }]);
   }
@@ -284,13 +285,92 @@ function silhouette(nodes) {
   return { strokes, closed, bb };
 }
 
-function silhouetteExcluder(sil, dist) {
+// The filled outline of a part: its strokes (at the stroke width), its
+// closed shapes and every area the strokes enclose together (the inside of
+// a lock shackle, for example), on a 0.25 grid flood filled from outside.
+const CELL = 0.25;
+const ORIGIN = -2;
+const CELLS = Math.round(28 / CELL);
+
+function enclosedGrid(sil, half) {
+  const ink = new Uint8Array(CELLS * CELLS);
   const { bb } = sil;
+  for (let gy = 0; gy < CELLS; gy++) {
+    const y = ORIGIN + (gy + 0.5) * CELL;
+    if (y < bb.minY - half - CELL || y > bb.maxY + half + CELL) continue;
+    for (let gx = 0; gx < CELLS; gx++) {
+      const x = ORIGIN + (gx + 0.5) * CELL;
+      if (x < bb.minX - half - CELL || x > bb.maxX + half + CELL) continue;
+      const pt = [x, y];
+      if (sil.closed.some((poly) => pointInPolygon(pt, poly)) || distToPolylines(pt, sil.strokes) <= half) ink[gy * CELLS + gx] = 1;
+    }
+  }
+  // Flood fill the outside (4 neighbours) from the border.
+  const out = new Uint8Array(CELLS * CELLS);
+  const stack = [];
+  const push = (gx, gy) => {
+    if (gx < 0 || gy < 0 || gx >= CELLS || gy >= CELLS) return;
+    const k = gy * CELLS + gx;
+    if (out[k] || ink[k]) return;
+    out[k] = 1;
+    stack.push(k);
+  };
+  for (let i = 0; i < CELLS; i++) {
+    push(i, 0);
+    push(i, CELLS - 1);
+    push(0, i);
+    push(CELLS - 1, i);
+  }
+  while (stack.length) {
+    const k = stack.pop();
+    const gx = k % CELLS;
+    const gy = (k - gx) / CELLS;
+    push(gx + 1, gy);
+    push(gx - 1, gy);
+    push(gx, gy + 1);
+    push(gx, gy - 1);
+  }
+  return (pt) => {
+    const gx = Math.floor((pt[0] - ORIGIN) / CELL);
+    const gy = Math.floor((pt[1] - ORIGIN) / CELL);
+    if (gx < 0 || gy < 0 || gx >= CELLS || gy >= CELLS) return false;
+    return !out[gy * CELLS + gx];
+  };
+}
+
+/**
+ * Excludes the points of a back part that fall inside the front part's
+ * filled outline, or closer to its strokes than `dist` (the stroke weight
+ * plus the gap, so the visible gap between the two strokes is `gap`).
+ */
+function silhouetteExcluder(sil, dist, half = 1) {
+  const { bb } = sil;
+  const inside = enclosedGrid(sil, half);
   return (p) => {
     if (p[0] < bb.minX - dist || p[0] > bb.maxX + dist || p[1] < bb.minY - dist || p[1] > bb.maxY + dist) return false;
-    for (const poly of sil.closed) if (pointInPolygon(p, poly)) return true;
+    if (inside(p)) return true;
     return distToPolylines(p, sil.strokes) < dist;
   };
+}
+
+/** Length of the drawn strokes of nodes (dots excluded). */
+function strokeLength(nodes) {
+  let len = 0;
+  for (const n of nodes) for (const poly of flattenNode(n, 0.2)) len += polylineLength(poly.points);
+  return len;
+}
+
+/** Shortest piece among nodes that a knockout created (not in `original`). */
+function shortestPiece(nodes, original) {
+  let min = Infinity;
+  for (const n of nodes) {
+    if (original.includes(n)) continue;
+    for (const poly of flattenNode(n, 0.2)) {
+      const len = polylineLength(poly.points);
+      if (len > 0.05) min = Math.min(min, len);
+    }
+  }
+  return min;
 }
 
 function geometryRadius(nodes, cx, cy) {
@@ -321,7 +401,15 @@ function layoutBoxes(layout, parts, { weight, gap }) {
   const n = parts.length;
   switch (layout) {
     case 'overlap': {
-      const step = Math.min(5, 8 / (n - 1));
+      // The back part fills most of the box from the top left, the front
+      // part sits smaller in the bottom right, so both stay readable.
+      if (n === 2) {
+        const back = 17;
+        const front = 12;
+        return [box(2, 2, back), box(22 - front, 22 - front, front)];
+      }
+      // A cascade: every part keeps its top left corner in view.
+      const step = Math.min(4, 11 / (n - 1));
       const size = 20 - step * (n - 1);
       return parts.map((_, i) => box(2 + i * step, 2 + i * step, size));
     }
@@ -368,7 +456,8 @@ function layoutBoxes(layout, parts, { weight, gap }) {
     }
     case 'badge': {
       const order = ['bottom-right', 'top-right', 'bottom-left', 'top-left'];
-      const size = 9.5;
+      // Smaller badges when several share the corners of the base icon.
+      const size = n === 2 ? 9.5 : n === 3 ? 8.5 : 7.5;
       const out = [box(2, 2, 20)];
       for (let i = 1; i < n; i++) {
         const corner = order[(i - 1) % 4];
@@ -381,10 +470,9 @@ function layoutBoxes(layout, parts, { weight, gap }) {
     case 'inside': {
       const out = [box(2, 2, 20)];
       const circle = inscribedCircle(parts[0].primary);
-      if (!circle) {
-        out.push(box(7, 7, 10));
-        return out;
-      }
+      // Without a room large enough inside the first icon, the second one
+      // would cover it: fall back to the overlap arrangement.
+      if (!circle || circle.d - weight - gap < 2.5) return layoutBoxes('overlap', parts, { weight, gap });
       const inner = parts[1].primary;
       const bb = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
       for (const node of inner) segmentsBounds(shapeToSegments(node), bb);
@@ -458,16 +546,9 @@ export function fuse(icons, options = {}) {
   // Knockouts: every part is trimmed by the parts in front of it.
   const cutters = [];
   const masks = placed.map(() => []);
-  if (layout === 'badge') {
-    for (let j = 1; j < n; j++) {
-      const b = placed[j].box;
-      const c = [b.x + b.size / 2, b.y + b.size / 2];
-      const rb = geometryRadius(placed[j].primary, c[0], c[1]);
-      cutters.push({ j, ex: diskExcluder(c, rb + weight + gap) });
-      const r3 = (v) => Math.round(v * 1000) / 1000;
-      for (let i = 0; i < j; i++) masks[i].push(['circle', { cx: r3(c[0]), cy: r3(c[1]), r: r3(rb + weight / 2 + gap), fill: '#000', stroke: 'none' }]);
-    }
-  } else {
+  // Every layout cuts with the front part's filled outline (badges too), so
+  // the part behind only loses what the front part really covers.
+  {
     const boxes2 = placed.map((p) => silhouette(p.primary).bb);
     const overlaps = (a, b) => a.minX < b.maxX && b.minX < a.maxX && a.minY < b.maxY && b.minY < a.maxY;
     for (let j = 1; j < n; j++) {
@@ -475,7 +556,7 @@ export function fuse(icons, options = {}) {
       const behind = [];
       for (let i = 0; i < j; i++) if (overlaps(boxes2[i], boxes2[j])) behind.push(i);
       if (!behind.length) continue;
-      cutters.push({ j, ex: silhouetteExcluder(sil, weight + gap), only: new Set(behind) });
+      cutters.push({ j, ex: silhouetteExcluder(sil, weight + gap, weight / 2), only: new Set(behind) });
       for (const i of behind) {
         for (const node of placed[j].primary) {
           masks[i].push([node[0], { ...node[1], fill: isClosedNode(node) ? '#000' : 'none', stroke: '#000', 'stroke-width': weight + 2 * gap }]);
@@ -483,9 +564,11 @@ export function fuse(icons, options = {}) {
       }
     }
   }
+  // Knockouts drop the leftover pieces shorter than this (grid units).
+  const MIN_PIECE = 1.5;
   const trimFor = (i, nodes) => {
     let out = nodes;
-    for (const { j, ex, only } of cutters) if (j > i && (!only || only.has(i))) out = trimNodes(out, ex);
+    for (const { j, ex, only } of cutters) if (j > i && (!only || only.has(i))) out = trimNodes(out, ex, { minLength: MIN_PIECE });
     return out;
   };
   // Filled shapes (from filled sets) are cut by a mask instead of trimmed.
@@ -504,7 +587,13 @@ export function fuse(icons, options = {}) {
     return [['g', { mask: `url(#${id})` }, fills.map((n) => roundNode(n, 2))], ...out];
   };
   const strokes = [];
-  placed.forEach((p, i) => strokes.push(...partNodes(i, p.primary)));
+  const quality = [];
+  placed.forEach((p, i) => {
+    const kept = partNodes(i, p.primary);
+    strokes.push(...kept);
+    const before = strokeLength(p.primary);
+    quality.push({ kept: before > 0 ? Math.min(1, strokeLength(kept.filter((n) => n[0] !== 'g')) / before) : 1, shortest: shortestPiece(kept, p.primary) });
+  });
 
   // One duotone layer for the whole fusion (merged subpaths).
   let secondary = null;
@@ -533,7 +622,7 @@ export function fuse(icons, options = {}) {
     tags: [...new Set(icons.flatMap((ic) => ic.tags || []))],
     categories: [...new Set(icons.flatMap((ic) => ic.categories || []))],
     layers: { solid: groups.length && !filled ? { groups, strokes: finish(solidStrokes) } : null },
-    parts: boxes.map((b) => ({ x: b.x, y: b.y, size: b.size })),
+    parts: boxes.map((b, i) => ({ x: b.x, y: b.y, size: b.size, kept: Math.round(quality[i].kept * 1000) / 1000, shortest: Number.isFinite(quality[i].shortest) ? Math.round(quality[i].shortest * 100) / 100 : null })),
   };
   if (filled) out.filled = true;
   return out;

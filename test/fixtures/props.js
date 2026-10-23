@@ -49,7 +49,7 @@ export const PROP_CASES = [
       expect(h).toContain('class="gf-anim"');
     },
   },
-  { prop: 'trigger', icon: 'heart', props: { animate: 'wiggle', trigger: 'hover' }, check: (h) => expect(h).toMatch(/\.gf-a[0-9a-z]+:hover \.gf-anim/) },
+  { prop: 'trigger', icon: 'heart', props: { animate: 'wiggle', trigger: 'hover' }, check: (h) => expect(h).toMatch(/\.gf-a[0-9a-z]+:not\(\.gf-js\):hover \.gf-anim/) },
   { prop: 'active', icon: 'heart', props: { animate: 'shake', trigger: 'state', active: true }, check: (h) => expect(classOf(h).split(/\s+/)).toContain('gf-on') },
   { prop: 'duration', icon: 'heart', props: { animate: 'pop', duration: 1234 }, check: (h) => expect(h).toContain('animation:gf-pop 1234ms') },
   { prop: 'delay', icon: 'heart', props: { animate: 'pop', delay: 321 }, check: (h) => expect(h).toMatch(/animation:gf-pop \d+ms [^;}]* 321ms/) },
