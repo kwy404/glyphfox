@@ -9,7 +9,7 @@
     "energy"
   ],
   "animation": {
-    "name": "battery-charging",
+    "name": "battery-charge",
     "duration": 1800,
     "easing": "ease-in-out",
     "loop": true,
