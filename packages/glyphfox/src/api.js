@@ -11,6 +11,7 @@ import { isComposite, parseSpec, resolveSpec } from './core/spec.js';
 import { nodesToString, parseBody } from './core/nodes.js';
 import { analyzeSolid } from './core/solid.js';
 import { replaceGlyphs as replaceWith } from './core/runtime.js';
+import { searchIcons } from './search/index.js';
 
 export { icons };
 export const iconNames = Object.keys(icons);
@@ -64,37 +65,14 @@ export function fuse(list, options = {}) {
   return fuseIcons(parts, { ...options, weight: options.weight === undefined ? 2 : strokeWidth(options) });
 }
 
-/** Ranks icons for a query by name, tag and category. */
-export function search(query, { limit = 50, category } = {}) {
-  const words = String(query || '')
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean);
-  const out = [];
-  for (const name of iconNames) {
-    const ic = icons[name];
-    if (category && !ic.categories.includes(category)) continue;
-    let score = 0;
-    let ok = true;
-    for (const w of words) {
-      let s = 0;
-      if (name === w) s = 100;
-      else if (name.startsWith(w)) s = 60;
-      else if (name.includes(w)) s = 40;
-      else if (ic.tags.some((t) => t === w)) s = 30;
-      else if (ic.tags.some((t) => t.startsWith(w))) s = 20;
-      else if (ic.categories.some((c) => c.startsWith(w))) s = 10;
-      else if (ic.tags.some((t) => t.includes(w))) s = 5;
-      if (!s) {
-        ok = false;
-        break;
-      }
-      score += s;
-    }
-    if (ok) out.push({ name, score });
-  }
-  out.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
-  return out.slice(0, limit).map((r) => icons[r.name]);
+const iconList = iconNames.map((n) => icons[n]);
+
+/**
+ * Ranks icons for a query by name, tag and category, with synonyms in English,
+ * Portuguese, Spanish, French and German, accent folding and simple plurals.
+ */
+export function search(query, options = {}) {
+  return searchIcons(iconList, query, options);
 }
 
 /** Replaces <i data-glyph="name"> elements (or any element with data-glyph) with SVG. */
@@ -129,6 +107,7 @@ export {
   propsFromAttributes,
   renderIcon,
   renderToString,
+  searchIcons,
   sizeToPx,
   snippet,
   strokeWidth,

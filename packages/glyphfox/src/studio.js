@@ -9,3 +9,4 @@ export { replaceGlyphs } from './core/runtime.js';
 export { GlyphFoxElement, defineGlyphFox } from './web/element.js';
 export { toDataUri } from './core/formats.js';
 export * as geometry from './core/geometry.js';
+export { searchIcons } from './search/index.js';

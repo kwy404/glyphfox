@@ -1,7 +1,7 @@
 // Icon browser: search, categories, sketch search, live axes, inspector with
 // copy in every format and downloads (SVG, PNG, animated SVG, GIF, WebM).
 
-import { $, $$, FORMAT_LABELS, codeBlock, copy, download, gf, loadIcons, svg, t, toast } from './app.js';
+import { $, $$, FORMAT_LABELS, codeBlock, copy, download, gf, lang, loadIcons, svg, t, toast } from './app.js';
 import { animatedSvg, animationGif, animationWebm, bakeColor, svgToPng } from './exporters.js';
 import { rank, sketchPad } from './sketch.js';
 
@@ -20,35 +20,14 @@ const state = {
 let data = null;
 let version = '1';
 
-function score(icon, words) {
-  let total = 0;
-  for (const w of words) {
-    let s = 0;
-    if (icon.name === w) s = 100;
-    else if (icon.name.startsWith(w)) s = 60;
-    else if (icon.name.includes(w)) s = 40;
-    else if (icon.tags.includes(w)) s = 30;
-    else if (icon.tags.some((tg) => tg.startsWith(w))) s = 20;
-    else if (icon.categories.some((c) => c.startsWith(w))) s = 10;
-    else if (icon.tags.some((tg) => tg.includes(w))) s = 5;
-    if (!s) return 0;
-    total += s;
-  }
-  return total;
-}
-
 function visible() {
   let list = data.icons;
   if (state.sketch) {
     const order = new Map(state.sketch.map((n, i) => [n, i]));
     list = list.filter((i) => order.has(i.name)).sort((a, b) => order.get(a.name) - order.get(b.name));
   } else if (state.q.trim()) {
-    const words = state.q.toLowerCase().split(/\s+/).filter(Boolean);
-    list = list
-      .map((i) => [i, score(i, words)])
-      .filter(([, s]) => s > 0)
-      .sort((a, b) => b[1] - a[1] || a[0].name.localeCompare(b[0].name))
-      .map(([i]) => i);
+    // Same ranking as the package and the CLI, synonyms in five languages included.
+    list = gf.searchIcons(list, state.q, { limit: Infinity, lang });
   }
   if (state.cat) list = list.filter((i) => i.categories.includes(state.cat));
   return list;
