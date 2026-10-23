@@ -15,4 +15,6 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 - 23 shared props with the same names in React, Vue, Svelte, Angular and the web component.
 - Packages: `glyphfox` (core, icons, `toSvg`, `icons.json`, `sprite.svg`, runtime), `glyphfox/react`, `glyphfox/vue`, `glyphfox/svelte`, `glyphfox/web` with a single file CDN build, `glyphfox/tailwind` (v3 and v4), `glyphfox/core`, `glyphfox/tools` and `glyphfox-angular`.
 - The `glyphfox` CLI: search, show with a terminal preview, copy in nine formats, fuse, morph, build subsets (sprite, CSS masks, package), lint and Fox-ify.
+- Icon sources: `registerIconSource(prefix, source)` makes `prefix:name` icons from other sets work in `toSvg`, every component, the web component and the CDN, with weight, animations, modifiers and Fusion on stroke icons and a fallback for filled icons.
 - The studio site: icon browser, live customization, sketch search, editor, Fox-ify, Fusion, brand kit and 3D.
+- Fenn illustrations (sitting, running, drawing, orbit) built from the icon geometry, README banners and the social preview.
