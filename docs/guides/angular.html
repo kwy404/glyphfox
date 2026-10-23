@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/angular.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icons in Angular: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.angular.title">Angular icons with the glyphfox standalone component</title>
+<meta name="description" content="Add glyphfox icons to Angular with the standalone gf-icon component: provideGlyphFox, inputs, fusion, modifiers, lazy route icons, SSR and zoneless apps." data-i18n-attr="content:guide.angular.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/guides/angular.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/angular.html">
+<meta property="og:title" content="Angular icons with the glyphfox standalone component">
+<meta property="og:description" content="Add glyphfox icons to Angular with the standalone gf-icon component: provideGlyphFox, inputs, fusion, modifiers, lazy route icons, SSR and zoneless apps.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/guides/angular.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Angular icons with the glyphfox standalone component">
+<meta name="twitter:description" content="Add glyphfox icons to Angular with the standalone gf-icon component: provideGlyphFox, inputs, fusion, modifiers, lazy route icons, SSR and zoneless apps.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/angular.png">
+<meta name="twitter:image:alt" content="Icons in Angular: glyphfox">
+<link rel="stylesheet" href="../assets/docs.css">
+<link rel="stylesheet" href="guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kwy404.github.io/glyphfox/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/guides/"},{"@type":"ListItem","position":3,"name":"Angular","item":"https://kwy404.github.io/glyphfox/guides/angular.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I use glyphfox-angular in an NgModule based app?","acceptedAnswer":{"@type":"Answer","text":"Yes. GlyphFoxIcon is a standalone component, so add it to the imports of the NgModule that declares your components, and put provideGlyphFox(...) in the providers of your root module."}},{"@type":"Question","name":"Which Angular versions are supported?","acceptedAnswer":{"@type":"Answer","text":"Angular 17 and newer, the peer dependency range of the package. On 17 and 18, keep standalone: true on the components that import GlyphFoxIcon; from 19 it is the default. Self closing tags such as \u003cgf-icon name=\"home\" /> work in every supported version."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copied to the clipboard" data-theme-light="Switch to the light theme" data-theme-dark="Switch to the dark theme">
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../pt-br/" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">All guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" aria-current="page" class="on" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit and web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML and CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Topics</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animated icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibility</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Server rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Breadcrumb" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../" data-i18n="seo.crumb.home">Home</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.angular.short">Angular</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.angular.h1">Icons in Angular</h1>
+<p class="lead" data-i18n="guide.angular.lead">glyphfox-angular adds a standalone <code>gf-icon</code> component and a provider that registers icons by name. It supports Angular 17 and newer, server rendering, OnPush and zoneless change detection.</p>
+<nav class="toc" aria-label="On this page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.angular.install.h">Install</a></li><li><a href="#provide" data-i18n="guide.angular.provide.h">Register icons with provideGlyphFox</a></li><li><a href="#component" data-i18n="guide.angular.component.h">Use gf-icon</a></li><li><a href="#syntax" data-i18n="guide.angular.syntax.h">Modifiers, styles and fusion</a></li><li><a href="#data" data-i18n="guide.angular.data.h">Icon data instead of names</a></li><li><a href="#lazy" data-i18n="guide.angular.lazy.h">Icons for lazy routes</a></li><li><a href="#ssr" data-i18n="guide.angular.ssr.h">Server rendering and hydration</a></li><li><a href="#change-detection" data-i18n="guide.angular.change-detection.h">OnPush, signals and zoneless apps</a></li><li><a href="#props" data-i18n="guide.angular.props.h">Inputs</a></li><li><a href="#pitfalls" data-i18n="guide.angular.pitfalls.h">Pitfalls</a></li><li><a href="#faq" data-i18n="seo.faq">Questions</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.angular.install.h">Install</h2>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span> <span class="tok-k">glyphfox</span><span class="tok-a">-angular</span></pre></div>
+<p data-i18n="guide.angular.install.p"><code>glyphfox-angular</code> is published in the Angular package format, built with ng-packagr, and uses <code>glyphfox</code> for the icon data and the rendering engine. Its peer dependency is <code>@angular/core</code> 17 or newer, because the inputs rely on input transforms such as <code>booleanAttribute</code>.</p>
+</section>
+<section id="provide">
+<h2 data-i18n="guide.angular.provide.h">Register icons with provideGlyphFox</h2>
+<p data-i18n="guide.angular.provide.p"><code>gf-icon</code> looks icons up by name, so register the ones your templates use. Every icon is a named data export of <code>glyphfox</code>: <code>home</code> is <code>iconHome</code>, <code>arrow-right</code> is <code>iconArrowRight</code>.</p>
+<div class="code"><div class="code-head"><span>src/app/app.config.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { ApplicationConfig } <span class="tok-k">from</span> <span class="tok-s">'@angular/core'</span>;
+<span class="tok-k">import</span> { provideRouter } <span class="tok-k">from</span> <span class="tok-s">'@angular/router'</span>;
+<span class="tok-k">import</span> { iconCheck, iconFile, iconHome, iconMenu, iconSave, iconSearch, iconX } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+<span class="tok-k">import</span> { provideGlyphFox } <span class="tok-k">from</span> <span class="tok-s">'glyphfox-angular'</span>;
+<span class="tok-k">import</span> { routes } <span class="tok-k">from</span> <span class="tok-s">'./app.routes'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideGlyphFox({
+      icons: [iconHome, iconSearch, iconFile, iconMenu, iconX, iconSave, iconCheck],
+      defaults: { weight: <span class="tok-n">1.75</span> },
+    }),
+  ],
+};</pre></div>
+<p data-i18n="guide.angular.provide.defaults"><code>defaults</code> applies to every <code>gf-icon</code> under that injector, and an input on the element wins over the default. Several <code>provideGlyphFox</code> calls in the same injector add up: their icons are all registered and their defaults are merged in order. <code>provideGlyphFoxIcons(icons)</code> is the short form when you only register icons.</p>
+<p data-i18n="guide.angular.provide.all">To make every icon available by name, pass the full record: <code>import { icons } from 'glyphfox'</code> and <code>provideGlyphFox({ icons })</code>. That puts the data of all 419 icons in the bundle that loads the provider, about 105 KB minified and 25 KB gzip, so keep it for prototypes and internal tools. Two named data exports cost well under 1 KB.</p>
+</section>
+<section id="component">
+<h2 data-i18n="guide.angular.component.h">Use gf-icon</h2>
+<div class="code"><div class="code-head"><span>src/app/toolbar.component.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Component, signal } <span class="tok-k">from</span> <span class="tok-s">'@angular/core'</span>;
+<span class="tok-k">import</span> { GlyphFoxIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox-angular'</span>;
+
+@Component({
+  selector: <span class="tok-s">'app-toolbar'</span>,
+  standalone: <span class="tok-k">true</span>, <span class="tok-c">// the default from Angular 19</span>
+  imports: [GlyphFoxIcon],
+  template: <span class="tok-s">`
+    &lt;a href="/" aria-label="Home"&gt;&lt;gf-icon name="home" /&gt;&lt;/a&gt;
+    &lt;gf-icon name="search" size="20" /&gt;
+    &lt;gf-icon name="file+check@tr" variant="duotone" secondaryColor="#ff7a1a" /&gt;
+    &lt;button type="button" aria-label="Menu" [attr.aria-expanded]="open()" (click)="open.set(!open())"&gt;
+      &lt;gf-icon name="menu" morphTo="x" trigger="state" [active]="open()" /&gt;
+    &lt;/button&gt;
+  `</span>,
+})
+<span class="tok-k">export</span> <span class="tok-k">class</span> Toolbar {
+  readonly open = signal(<span class="tok-k">false</span>);
+}</pre></div>
+<p data-i18n="guide.angular.component.inputs">Inputs use the camelCase prop names: <code>secondaryColor</code>, <code>modifierCorner</code>, <code>flipX</code>. Static strings work for every input, numeric ones included (<code>size="20"</code> becomes the number 20), and boolean inputs accept a bare attribute, so <code>&lt;gf-icon name="arrow-right" mirrorRtl /&gt;</code> mirrors the arrow in right to left layouts.</p>
+<p data-i18n="guide.angular.component.host"><code>class</code> and <code>style</code> go on the <code>gf-icon</code> host, an inline flex box around the svg. Strokes use <code>currentColor</code>, so the CSS <code>color</code> of the host or of any parent colors the icon, and the <code>color</code> input sets it directly.</p>
+</section>
+<section id="syntax">
+<h2 data-i18n="guide.angular.syntax.h">Modifiers, styles and fusion</h2>
+<p data-i18n="guide.angular.syntax.p"><code>name</code> takes the full name syntax. <code>file+check</code> adds a badge, <code>@tl</code>, <code>@tr</code>, <code>@bl</code> or <code>@br</code> picks its corner, and <code>heart/solid</code> picks a style. Badges are drawn by the engine, so only the base icon has to be registered. For a fusion, pass the parts to <code>[icons]</code> and choose a <code>layout</code>.</p>
+<div class="code"><div class="code-head"><span>src/app/status.component.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;gf-icon</span> <span class="tok-a">name</span>=<span class="tok-s">"cloud+sync@tr"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;gf-icon</span> <span class="tok-a">name</span>=<span class="tok-s">"heart/solid"</span> <span class="tok-a">color</span>=<span class="tok-s">"#e5484d"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;gf-icon</span> [icons]=<span class="tok-s">"['cloud', 'lock']"</span> <span class="tok-a">layout</span>=<span class="tok-s">"overlap"</span> [gap]=<span class="tok-s">"1"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;gf-icon</span> [icons]=<span class="tok-s">"['user', 'shield']"</span> <span class="tok-a">layout</span>=<span class="tok-s">"badge"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;gf-icon</span> [icons]=<span class="tok-s">"['file', 'image', 'music', 'video']"</span> <span class="tok-a">layout</span>=<span class="tok-s">"grid"</span> <span class="tok-t">/&gt;</span></pre></div>
+<p data-i18n="guide.angular.syntax.fusion">A fusion is resolved by name like any other icon, so every part must be registered. The result follows <code>weight</code>, <code>variant</code> and the other inputs, and where parts overlap the part behind is cut around the part in front. Layouts are overlap, side, stack, grid, orbit, badge and inside.</p>
+</section>
+<section id="data">
+<h2 data-i18n="guide.angular.data.h">Icon data instead of names</h2>
+<p data-i18n="guide.angular.data.p">The <code>icon</code> input takes icon data directly and skips the registry, which suits icons picked in code from a fixed map.</p>
+<div class="code"><div class="code-head"><span>src/app/file-row.component.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Component, computed, input } <span class="tok-k">from</span> <span class="tok-s">'@angular/core'</span>;
+<span class="tok-k">import</span> { iconFile, iconFileCode, iconFileImage, iconFileText } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+<span class="tok-k">import</span> { GlyphFoxIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox-angular'</span>;
+
+<span class="tok-k">const</span> byType = { code: iconFileCode, image: iconFileImage, text: iconFileText };
+<span class="tok-k">type</span> FileType = keyof typeof byType;
+
+@Component({
+  selector: <span class="tok-s">'app-file-row'</span>,
+  standalone: <span class="tok-k">true</span>,
+  imports: [GlyphFoxIcon],
+  template: <span class="tok-s">`&lt;gf-icon [icon]="icon()" size="18" /&gt; {{ name() }}`</span>,
+})
+<span class="tok-k">export</span> <span class="tok-k">class</span> FileRow {
+  readonly name = input.required<span class="tok-t">&lt;string</span><span class="tok-t">&gt;</span>();
+  readonly <span class="tok-k">type</span> = input<span class="tok-t">&lt;FileType</span> | <span class="tok-k">null</span><span class="tok-t">&gt;</span>(<span class="tok-k">null</span>);
+  readonly icon = computed(() =<span class="tok-t">&gt;</span> {
+    <span class="tok-k">const</span> <span class="tok-k">type</span> = this.<span class="tok-k">type</span>();
+    <span class="tok-k">return</span> <span class="tok-k">type</span> ? byType[<span class="tok-k">type</span>] : iconFile;
+  });
+}</pre></div>
+</section>
+<section id="lazy">
+<h2 data-i18n="guide.angular.lazy.h">Icons for lazy routes</h2>
+<p data-i18n="guide.angular.lazy.p"><code>provideGlyphFox</code> returns environment providers, so it also works in the <code>providers</code> of a route. Declared in a lazily loaded routes file, feature icons travel with the lazy chunk instead of the main bundle.</p>
+<div class="code"><div class="code-head"><span>src/app/icons.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { iconHome, iconMenu, iconSearch, iconX } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+<span class="tok-k">import</span> <span class="tok-k">type</span> { GlyphFoxConfig } <span class="tok-k">from</span> <span class="tok-s">'glyphfox-angular'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> sharedIcons = {
+  icons: [iconHome, iconSearch, iconMenu, iconX],
+  defaults: { weight: <span class="tok-n">1.75</span> },
+} satisfies GlyphFoxConfig;</pre></div>
+<div class="code"><div class="code-head"><span>src/app/app.routes.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Routes } <span class="tok-k">from</span> <span class="tok-s">'@angular/router'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> routes: Routes = [
+  { path: <span class="tok-s">'billing'</span>, loadChildren: () =<span class="tok-t">&gt;</span> <span class="tok-k">import</span>(<span class="tok-s">'./billing/billing.routes'</span>).then((m) =<span class="tok-t">&gt;</span> m.BILLING_ROUTES) },
+];</pre></div>
+<div class="code"><div class="code-head"><span>src/app/billing/billing.routes.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Routes } <span class="tok-k">from</span> <span class="tok-s">'@angular/router'</span>;
+<span class="tok-k">import</span> { iconCreditCard, iconReceipt, iconWallet } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+<span class="tok-k">import</span> { provideGlyphFox } <span class="tok-k">from</span> <span class="tok-s">'glyphfox-angular'</span>;
+<span class="tok-k">import</span> { sharedIcons } <span class="tok-k">from</span> <span class="tok-s">'../icons'</span>;
+<span class="tok-k">import</span> { BillingPage } <span class="tok-k">from</span> <span class="tok-s">'./billing.page'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> BILLING_ROUTES: Routes = [
+  {
+    path: <span class="tok-s">''</span>,
+    providers: [
+      provideGlyphFox({ ...sharedIcons, icons: [...sharedIcons.icons, iconCreditCard, iconReceipt, iconWallet] }),
+    ],
+    component: BillingPage,
+  },
+];</pre></div>
+<p data-i18n="guide.angular.lazy.scope">A route that calls <code>provideGlyphFox</code> gets its own configuration. Angular does not merge multi providers across injectors, so components under that route read only the route call, including its defaults. Spreading a shared object, as above, keeps the root icons and defaults in place.</p>
+</section>
+<section id="ssr">
+<h2 data-i18n="guide.angular.ssr.h">Server rendering and hydration</h2>
+<p data-i18n="guide.angular.ssr.p"><code>gf-icon</code> writes its svg through <code>Renderer2</code>, so with Angular SSR or prerendering the icon is already in the HTML, and the browser redraws the same markup when the component initializes. The server has no <code>requestAnimationFrame</code>: a morph goes straight to its end value there, and a morph with the default trigger (mount) only plays once the app boots in the browser.</p>
+<p data-i18n="guide.angular.ssr.register">Register every icon the server renders. A name that is not registered is fetched with a dynamic import, and that request can still be pending when the server serializes the page, which leaves an empty icon in the HTML until hydration fills it in.</p>
+<p data-i18n="guide.angular.ssr.chunks">The same loader explains a detail of production builds: the output lists one small chunk per icon, because the builder bundles every possible target of that dynamic import. Those chunks are only downloaded for names you did not register.</p>
+</section>
+<section id="change-detection">
+<h2 data-i18n="guide.angular.change-detection.h">OnPush, signals and zoneless apps</h2>
+<p data-i18n="guide.angular.cd.p"><code>gf-icon</code> uses OnPush and draws its svg itself whenever an input changes, on hover and click triggers, and on every frame of a morph. It does not depend on zone.js, so it works in zoneless apps, and signals bind like any other value: <code>[active]="saved()"</code>.</p>
+<div class="code"><div class="code-head"><span>src/app/save-button.component.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Component, signal } <span class="tok-k">from</span> <span class="tok-s">'@angular/core'</span>;
+<span class="tok-k">import</span> { GlyphFoxIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox-angular'</span>;
+
+@Component({
+  selector: <span class="tok-s">'app-save-button'</span>,
+  standalone: <span class="tok-k">true</span>,
+  imports: [GlyphFoxIcon],
+  template: <span class="tok-s">`
+    &lt;button type="button" (click)="save()"&gt;
+      &lt;gf-icon name="save" morphTo="check" trigger="state" [active]="saved()" [duration]="300" /&gt;
+      {{ saved() ? 'Saved' : 'Save' }}
+    &lt;/button&gt;
+  `</span>,
+})
+<span class="tok-k">export</span> <span class="tok-k">class</span> SaveButton {
+  readonly saved = signal(<span class="tok-k">false</span>);
+
+  save() {
+    this.saved.set(<span class="tok-k">true</span>);
+    setTimeout(() =<span class="tok-t">&gt;</span> this.saved.set(<span class="tok-k">false</span>), <span class="tok-n">1500</span>);
+  }
+}</pre></div>
+<p data-i18n="guide.angular.cd.living">Living state presets work the same way: <code>&lt;gf-icon name="bell" animate="shake" trigger="state" [active]="hasNews()" /&gt;</code> swings the bell while the signal is true, and <code>animate="spin"</code> on <code>loader-circle</code> makes a spinner. The animations are CSS inside the svg and stop under reduced motion; the <a href="animated-icons.html">animated icons guide</a> lists every preset and trigger.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.angular.props.h">Inputs</h2>
+<p data-i18n="guide.angular.props.p">Every shared prop is an input with the same name and meaning as in the other glyphfox packages.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.input">Input</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Default</th><th data-i18n="docs.desc">Description</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Width and height; numbers are pixels.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Main color.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color of the duotone layer and of the solid fill.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacity of the duotone layer or of the solid fill.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Stroke from 1 to 3 on the 24 grid, optically compensated below 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Keeps the stroke at weight pixels at any size.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Round or sharp joins and caps.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Style axis; solid comes from the closed shapes.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotation in degrees.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Mirror horizontally.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Mirror vertically.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Mirror in right to left layouts.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Living state preset.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">The state for trigger state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>per preset</td><td data-i18n="prop.duration">Animation or morph duration.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Animation or morph delay.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repeat forever or a number of times (spin and pulse loop by default).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>none</td><td data-i18n="prop.modifier">Badge with an automatic knockout gap.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Corner of the badge.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Morph target; the trigger decides when it shows.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Accessible name: title, role img and aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true without a title</td><td data-i18n="prop.decorative">Hides the icon from assistive technology.</td></tr>
+</tbody></table></div>
+<p data-i18n="guide.angular.props.extra">Besides the shared props, <code>gf-icon</code> takes <code>name</code> (any spec), <code>icon</code> (icon data), <code>icons</code> (2 to 10 parts of a fusion), <code>layout</code> and <code>gap</code>.</p>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.angular.pitfalls.h">Pitfalls</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.angular.pitfalls.list.1.t">provideGlyphFox in a component</dt><dd data-i18n="guide.angular.pitfalls.list.1.d">It returns environment providers, which belong in the application config, an NgModule or a route. Angular rejects them in the <code>providers</code> of a component.</dd></div><div><dt data-i18n="guide.angular.pitfalls.list.2.t">A lazy route loses the root defaults</dt><dd data-i18n="guide.angular.pitfalls.list.2.d">Route providers replace the configuration for everything under the route, because multi providers are not merged across injectors. Spread a shared config object into every call.</dd></div><div><dt data-i18n="guide.angular.pitfalls.list.3.t">aria-label on the host</dt><dd data-i18n="guide.angular.pitfalls.list.3.d">An <code>aria-label</code> on <code>gf-icon</code> makes the inner svg non decorative (<code>role="img"</code>), but the label stays on the host element, which has no role, so screen readers may announce nothing. Use the <code>title</code> input for a meaningful icon, or label the parent button and keep the icon decorative.</dd></div><div><dt data-i18n="guide.angular.pitfalls.list.4.t">A fusion that never appears</dt><dd data-i18n="guide.angular.pitfalls.list.4.d">If one part of <code>[icons]</code> is not registered, the whole fusion waits for it and renders empty in the meantime, on the server included. Register every part.</dd></div><div><dt data-i18n="guide.angular.pitfalls.list.5.t">Registering the whole set by accident</dt><dd data-i18n="guide.angular.pitfalls.list.5.d"><code>provideGlyphFox({ icons })</code> with the full record from <code>glyphfox</code> keeps every icon in the bundle. Import the named data exports you need instead.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions</h2>
+<h3 data-i18n="guide.angular.faq.ngmodule.q">Can I use glyphfox-angular in an NgModule based app?</h3>
+<p data-i18n="guide.angular.faq.ngmodule.a">Yes. <code>GlyphFoxIcon</code> is a standalone component, so add it to the <code>imports</code> of the NgModule that declares your components, and put <code>provideGlyphFox(...)</code> in the <code>providers</code> of your root module.</p>
+<h3 data-i18n="guide.angular.faq.versions.q">Which Angular versions are supported?</h3>
+<p data-i18n="guide.angular.faq.versions.a">Angular 17 and newer, the peer dependency range of the package. On 17 and 18, keep <code>standalone: true</code> on the components that import <code>GlyphFoxIcon</code>; from 19 it is the default. Self closing tags such as <code>&lt;gf-icon name="home" /&gt;</code> work in every supported version.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in this guide</h2>
+<ul class="icon-links"><li><a href="../icons/check.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-check" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg><span>check</span></a></li><li><a href="../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../icons/save.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-save" aria-hidden="true"><path d="M5 3h11.5L21 7.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M7 21v-6a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v6"/><path d="M7 3v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3"/></svg><span>save</span></a></li><li><a href="../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/></svg><span>cloud</span></a></li><li><a href="../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../icons/file-code.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file-code" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M10 11.5L8 14l2 2.5"/><path d="M14 11.5l2 2.5-2 2.5"/></svg><span>file-code</span></a></li><li><a href="../icons/file-image.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file-image" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M9 10a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M8 18l3-3 2 2 1.5-1.5L16 17"/></svg><span>file-image</span></a></li><li><a href="../icons/file-text.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file-text" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M8 9h3"/><path d="M8 13h8"/><path d="M8 17h6"/></svg><span>file-text</span></a></li><li><a href="../icons/credit-card.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-credit-card" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg><span>credit-card</span></a></li><li><a href="../icons/receipt.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-receipt" aria-hidden="true"><path d="M5 2h14v20l-2.5-1.5L14 22l-2-1.5-2 1.5-2.5-1.5L5 22Z"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M9 15h3"/></svg><span>receipt</span></a></li><li><a href="../icons/wallet.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-wallet" aria-hidden="true"><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M5 6l11.4-3.3A1.2 1.2 0 0 1 18 3.85V6"/><path d="M21 11.5h-3.5a2 2 0 0 0 0 4H21"/></svg><span>wallet</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Related guides</h2>
+<ul class="guide-cards"><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Server rendering</strong><span data-i18n="guide.ssr.description">Render glyphfox icons on the server: what each package outputs, registering icons used by name, toSvg strings, hydration, motion and the web component.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking icons</strong><span data-i18n="guide.tree-shaking.description">How glyphfox icons tree shake in Vite, webpack, Rollup and esbuild: measured bundle sizes, what defeats tree shaking, icons loaded by name and fixed subsets.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Accessible icons</strong><span data-i18n="guide.accessibility.description">Make glyphfox icons accessible: decorative by default, titles and labels, icon only buttons, status icons, contrast, reduced motion and right to left layouts.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">All icons by category</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="page.js"></script>
+</body>
+</html>
