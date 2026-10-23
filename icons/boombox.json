@@ -8,5 +8,26 @@
     "radio",
     "retro",
     "speakers"
-  ]
+  ],
+  "animation": {
+    "name": "beat",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "translate(-4.75px, 3px) scale(1) translate(4.75px, -3px)" } },
+      { "at": 0.15, "element": 2, "props": { "transform": "translate(-4.75px, 3px) scale(1.2) translate(4.75px, -3px)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "translate(-4.75px, 3px) scale(1) translate(4.75px, -3px)" } },
+      { "at": 0.45, "element": 2, "props": { "transform": "translate(-4.75px, 3px) scale(1.12) translate(4.75px, -3px)" } },
+      { "at": 0.7, "element": 2, "props": { "transform": "translate(-4.75px, 3px) scale(1) translate(4.75px, -3px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(-4.75px, 3px) scale(1) translate(4.75px, -3px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(4.75px, 3px) scale(1) translate(-4.75px, -3px)" } },
+      { "at": 0.1, "element": 3, "props": { "transform": "translate(4.75px, 3px) scale(1) translate(-4.75px, -3px)" } },
+      { "at": 0.235, "element": 3, "props": { "transform": "translate(4.75px, 3px) scale(1.2) translate(-4.75px, -3px)" } },
+      { "at": 0.37, "element": 3, "props": { "transform": "translate(4.75px, 3px) scale(1) translate(-4.75px, -3px)" } },
+      { "at": 0.505, "element": 3, "props": { "transform": "translate(4.75px, 3px) scale(1.12) translate(-4.75px, -3px)" } },
+      { "at": 0.73, "element": 3, "props": { "transform": "translate(4.75px, 3px) scale(1) translate(-4.75px, -3px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(4.75px, 3px) scale(1) translate(-4.75px, -3px)" } }
+    ]
+  }
 }

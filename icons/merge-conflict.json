@@ -8,5 +8,29 @@
     "branches",
     "clash",
     "version control"
-  ]
+  ],
+  "animation": {
+    "name": "shake",
+    "duration": 700,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 4, "props": { "transform": "translate(-1px, 0px)" } },
+      { "at": 0.27, "element": 4, "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.42, "element": 4, "props": { "transform": "translate(-0.7px, 0px)" } },
+      { "at": 0.57, "element": 4, "props": { "transform": "translate(0.5px, 0px)" } },
+      { "at": 0.72, "element": 4, "props": { "transform": "translate(-0.25px, 0px)" } },
+      { "at": 0.86, "element": 4, "props": { "transform": "translate(0.1px, 0px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 5, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 5, "props": { "transform": "translate(-1px, 0px)" } },
+      { "at": 0.27, "element": 5, "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.42, "element": 5, "props": { "transform": "translate(-0.7px, 0px)" } },
+      { "at": 0.57, "element": 5, "props": { "transform": "translate(0.5px, 0px)" } },
+      { "at": 0.72, "element": 5, "props": { "transform": "translate(-0.25px, 0px)" } },
+      { "at": 0.86, "element": 5, "props": { "transform": "translate(0.1px, 0px)" } },
+      { "at": 1, "element": 5, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

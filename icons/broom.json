@@ -8,5 +8,29 @@
     "lint",
     "sweep",
     "tidy"
-  ]
+  ],
+  "animation": {
+    "name": "sweep",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(7.78px, -7.78px) rotate(0deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "translate(7.78px, -7.78px) rotate(-10deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "translate(7.78px, -7.78px) rotate(6deg) translate(-7.78px, 7.78px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(7.78px, -7.78px) rotate(0deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(7.78px, -7.78px) rotate(0deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "translate(7.78px, -7.78px) rotate(-10deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "translate(7.78px, -7.78px) rotate(6deg) translate(-7.78px, 7.78px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(7.78px, -7.78px) rotate(0deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(7.78px, -7.78px) rotate(0deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "translate(7.78px, -7.78px) rotate(-10deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "translate(7.78px, -7.78px) rotate(6deg) translate(-7.78px, 7.78px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(7.78px, -7.78px) rotate(0deg) translate(-7.78px, 7.78px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(-6.5px, -6.5px) rotate(0deg) scale(1) translate(6.5px, 6.5px)" } },
+      { "at": 0.3, "element": 3, "props": { "transform": "translate(-6.5px, -6.5px) rotate(20deg) scale(0.85) translate(6.5px, 6.5px)" } },
+      { "at": 0.65, "element": 3, "props": { "transform": "translate(-6.5px, -6.5px) rotate(-10deg) scale(1.1) translate(6.5px, 6.5px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(-6.5px, -6.5px) rotate(0deg) scale(1) translate(6.5px, 6.5px)" } }
+    ]
+  }
 }

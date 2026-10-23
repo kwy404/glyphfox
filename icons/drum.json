@@ -8,5 +8,24 @@
     "percussion",
     "beat",
     "rhythm"
-  ]
+  ],
+  "animation": {
+    "name": "hit",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 5, "props": { "transform": "translate(-6px, -10px) rotate(0deg) translate(6px, 10px)" } },
+      { "at": 0.2, "element": 5, "props": { "transform": "translate(-6px, -10px) rotate(-12deg) translate(6px, 10px)" } },
+      { "at": 0.35, "element": 5, "props": { "transform": "translate(-6px, -10px) rotate(4deg) translate(6px, 10px)" } },
+      { "at": 0.5, "element": 5, "props": { "transform": "translate(-6px, -10px) rotate(0deg) translate(6px, 10px)" } },
+      { "at": 1, "element": 5, "props": { "transform": "translate(-6px, -10px) rotate(0deg) translate(6px, 10px)" } },
+      { "at": 0, "element": 6, "props": { "transform": "translate(7px, -9px) rotate(0deg) translate(-7px, 9px)" } },
+      { "at": 0.25, "element": 6, "props": { "transform": "translate(7px, -9px) rotate(0deg) translate(-7px, 9px)" } },
+      { "at": 0.4, "element": 6, "props": { "transform": "translate(7px, -9px) rotate(12deg) translate(-7px, 9px)" } },
+      { "at": 0.513, "element": 6, "props": { "transform": "translate(7px, -9px) rotate(-4deg) translate(-7px, 9px)" } },
+      { "at": 0.625, "element": 6, "props": { "transform": "translate(7px, -9px) rotate(0deg) translate(-7px, 9px)" } },
+      { "at": 1, "element": 6, "props": { "transform": "translate(7px, -9px) rotate(0deg) translate(-7px, 9px)" } }
+    ]
+  }
 }

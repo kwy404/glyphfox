@@ -8,5 +8,22 @@
     "keys",
     "instrument",
     "chords"
-  ]
+  ],
+  "animation": {
+    "name": "play",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.2, "element": 1, "props": { "transform": "translate(0px, 1px)" } },
+      { "at": 0.45, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.2, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.36, "element": 2, "props": { "transform": "translate(0px, 1px)" } },
+      { "at": 0.56, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

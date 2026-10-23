@@ -8,5 +8,41 @@
     "tune",
     "frequency",
     "sound"
-  ]
+  ],
+  "animation": {
+    "name": "ring",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 2, "props": { "opacity": 0.1 } },
+      { "at": 0.3, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 2, "props": { "opacity": 0.1 } },
+      { "at": 0.6, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 3, "props": { "opacity": 0.1 } },
+      { "at": 0.3, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 3, "props": { "opacity": 0.1 } },
+      { "at": 0.6, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 0, "props": { "transform": "translate(-0.4px, 0px)" } },
+      { "at": 0.27, "element": 0, "props": { "transform": "translate(0.4px, 0px)" } },
+      { "at": 0.42, "element": 0, "props": { "transform": "translate(-0.28px, 0px)" } },
+      { "at": 0.57, "element": 0, "props": { "transform": "translate(0.2px, 0px)" } },
+      { "at": 0.72, "element": 0, "props": { "transform": "translate(-0.1px, 0px)" } },
+      { "at": 0.86, "element": 0, "props": { "transform": "translate(0.04px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 1, "props": { "transform": "translate(-0.4px, 0px)" } },
+      { "at": 0.27, "element": 1, "props": { "transform": "translate(0.4px, 0px)" } },
+      { "at": 0.42, "element": 1, "props": { "transform": "translate(-0.28px, 0px)" } },
+      { "at": 0.57, "element": 1, "props": { "transform": "translate(0.2px, 0px)" } },
+      { "at": 0.72, "element": 1, "props": { "transform": "translate(-0.1px, 0px)" } },
+      { "at": 0.86, "element": 1, "props": { "transform": "translate(0.04px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }
