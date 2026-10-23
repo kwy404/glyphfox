@@ -237,7 +237,7 @@ function renderSets() {
   for (const s of catalog.list) {
     if (s.cdn === false) continue;
     if (f && !s.name.toLowerCase().includes(f) && !s.prefix.includes(f)) continue;
-    items.push(`<li><button type="button" data-set="${esc(s.prefix)}" aria-pressed="${state.set === s.prefix}" title="${esc(`${s.name} (${s.prefix}), ${s.license.title}`)}"><span>${esc(s.name)}</span><small>${fmt(s.total)}</small></button></li>`);
+    items.push(`<li><button type="button" data-set="${esc(s.prefix)}" aria-pressed="${state.set === s.prefix}" title="${esc(`${s.name} (${s.prefix}), ${s.license.title}`)}"><span>${esc(s.name)}<em>${esc(s.license.spdx)}</em></span><small>${fmt(s.total)}</small></button></li>`);
   }
   els.setList.innerHTML = items.join('');
 }

@@ -74,12 +74,17 @@ Many other sets have stroke based icons too (for example the outline themes of H
 | `registerIcons(bundle)` | Registers offline icons (what the plugins and `add()` write). |
 | `attributionFor(name)`, `attributionLine(set)` | The credit line of CC BY and CC BY-SA sets. |
 | `licenseDecision`, `checkCatalog` | The license policy and the check the build runs. |
-| `configure(options)` | `cdn`, `dataUrl` (folder with `catalog.json` and `index.json`), `fetch`, `offline`, `maxSets`. |
+| `configure(options)` | `cdn`, `dataUrl` (folder with `catalog.json` and `index.json`), `fetch`, `offline`, `maxSets` (sets kept in memory), `persist` (Cache Storage, on by default), `cacheName`, `caches`. |
+| `clear(options)` | Empties the persistent cache and the memory caches (`{ persistent, memory }`, both true by default); icons registered offline stay. |
 | `PREFIXES` (from `glyphfox-universe/glyphfox`) | Every shipped prefix; `registerUniverse(register, prefixes)` registers a subset. |
 
 Options of `toSvg` and `iconToSvg`: `size` (number or CSS length, the height; the width keeps the ratio), `color`, `secondaryColor` and `secondaryOpacity` (paint the translucent duotone layer), `weight`, `absoluteWeight`, `corners` (`round` or `sharp`), `rotate` (degrees), `flipX`, `flipY`, `animate` (`spin`, `pulse`, `draw`; always behind `prefers-reduced-motion`), `title` (accessible name, else `aria-hidden`), `class`, `attrs`, `idPrefix` (ids of gradients and masks get a unique prefix so many icons can share a page; pass one for stable server output).
 
 Search matches icon names, Iconify aliases, set categories and upstream tags: Lucide, Tabler and Phosphor tags from their packages, and the Material Symbols and Material Icons tags of the Google Fonts metadata (tags shared by too many icons are dropped). Search options: `limit`, `sets`, `styles` (`outline`, `solid`, `duotone`, `color`), `brand` (`true` for logos only, `false` to leave them out), `stroke`, `licenses` (SPDX ids or kinds: `public-domain`, `permissive`, `attribution`, `share-alike`). A query that starts with `prefix:` searches one set. Styles come from the theme names of each set (Iconify prefixes and suffixes), style words in the names and the drawing itself.
+
+## Caching
+
+In the browser every download is kept in the Cache Storage API (cache `glyphfox-universe`), so a set loaded once is not downloaded again on the next visit, even offline. Only exact versioned jsDelivr URLs are stored (`@iconify-json/mdi@1.2.3/icons.json`, `glyphfox-universe@0.1.0/dist/index.json`), which never change; when the catalog pins a new version of a set, that version is fetched once and the old entry is dropped. Where Cache Storage is missing or refused (private windows, insecure origins), the memory cache keeps working: the most recent `maxSets` sets stay in memory. Turn the persistent cache off with `configure({ persist: false })` and empty it with `clear()`.
 
 ## Offline builds
 

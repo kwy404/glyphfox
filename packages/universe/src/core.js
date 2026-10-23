@@ -37,12 +37,17 @@ const state = {
   local: null,
   offline: false,
   maxSets: 24,
+  persist: true,
+  cacheName: 'glyphfox-universe',
+  caches: undefined,
 };
 
 /**
  * Options: cdn (base URL of an npm CDN), dataUrl (folder with catalog.json
  * and index.json), fetch (a fetch function), offline (never use the
- * network), maxSets (sets kept in memory).
+ * network), maxSets (sets kept in memory), persist (keep downloads in the
+ * Cache Storage of the browser, default true), cacheName, caches (a
+ * CacheStorage, for tests and workers).
  */
 export function configure(options = {}) {
   for (const k of Object.keys(state)) if (k in options) state[k] = options[k];
@@ -60,13 +65,88 @@ export function setLocalSource(local) {
 
 const dataUrl = () => state.dataUrl || `${state.cdn}glyphfox-universe@${VERSION}/dist/`;
 
+// Persistent cache. Only exact versioned package URLs are stored (they never
+// change); storing a version drops the other versions of the same package.
+const VERSIONED = /\/npm\/((?:@[^/@]+\/)?[^/@]+)@(\d+\.\d+\.\d+[^/]*)\//;
+
+function cacheStorage() {
+  const store = state.caches !== undefined ? state.caches : globalThis.caches;
+  return store && typeof store.open === 'function' ? store : null;
+}
+
+async function persistentCache() {
+  if (state.persist === false) return null;
+  const store = cacheStorage();
+  if (!store) return null;
+  try {
+    return await store.open(state.cacheName);
+  } catch {
+    return null;
+  }
+}
+
+async function dropOtherVersions(cache, name, version) {
+  try {
+    for (const req of await cache.keys()) {
+      const m = VERSIONED.exec(typeof req === 'string' ? req : req.url);
+      if (m && m[1] === name && m[2] !== version) await cache.delete(req);
+    }
+  } catch {
+    // the cache stays as it is
+  }
+}
+
 async function fetchJson(url) {
+  const versioned = VERSIONED.exec(url);
+  const cache = versioned ? await persistentCache() : null;
+  if (cache) {
+    try {
+      const hit = await cache.match(url);
+      if (hit) return await hit.json();
+    } catch {
+      // a broken entry is fetched again
+    }
+  }
   if (state.offline) throw new Error(`glyphfox universe: offline, cannot load ${url}`);
   const f = state.fetch || globalThis.fetch;
   if (!f) throw new Error('glyphfox universe: no fetch available; pass one to configure({ fetch })');
   const res = await f(url);
   if (!res.ok) throw new Error(`glyphfox universe: ${url}: HTTP ${res.status}`);
+  if (cache && typeof res.clone === 'function') {
+    try {
+      await cache.put(url, res.clone());
+      dropOtherVersions(cache, versioned[1], versioned[2]);
+    } catch {
+      // quota or private mode: the memory cache still works
+    }
+  }
   return res.json();
+}
+
+/**
+ * Clears downloaded data: the persistent cache (Cache Storage) and the
+ * memory caches (sets, catalog, index, icons resolved from them). Icons
+ * registered offline stay.
+ */
+export async function clear({ persistent = true, memory = true } = {}) {
+  if (memory) {
+    setCache.clear();
+    for (const key of downloaded) registry.delete(key);
+    downloaded.clear();
+    catalogPromise = null;
+    catalogValue = null;
+    indexPromise = null;
+  }
+  if (persistent) {
+    const store = cacheStorage();
+    if (store && typeof store.delete === 'function') {
+      try {
+        await store.delete(state.cacheName);
+      } catch {
+        // nothing stored
+      }
+    }
+  }
 }
 
 async function packageData(file) {
@@ -81,6 +161,7 @@ let catalogPromise = null;
 let catalogValue = null;
 let indexPromise = null;
 const registry = new Map();
+const downloaded = new Set();
 const setCache = new Map();
 const setInfoExtra = new Map();
 
@@ -228,6 +309,7 @@ export async function getIcon(name) {
   if (!raw) return null;
   const icon = makeIcon(p.prefix, p.name, { ...raw, left: raw.left, top: raw.top }, setOf(p.prefix));
   registry.set(key, icon);
+  downloaded.add(key);
   return icon;
 }
 
@@ -270,6 +352,7 @@ export async function attributionFor(name) {
 /** Clears caches (tests). */
 export function reset() {
   registry.clear();
+  downloaded.clear();
   setCache.clear();
   setInfoExtra.clear();
   catalogPromise = null;
