@@ -9,6 +9,7 @@ import { initFusion, loadSpec } from './fusion-ui.js';
 
 const ready = {};
 let data = null;
+let hero3d = null;
 
 function renderCollection() {
   const list = collection.load();
@@ -31,6 +32,11 @@ function openInEditor(body, name) {
   show('editor');
   openBody(body, { name });
   history.replaceState(null, '', '#editor');
+}
+
+function openIn3d(icon, spec) {
+  history.replaceState(null, '', `#3d=${encodeURIComponent(spec)}`);
+  show('3d', { icon, name: spec });
 }
 
 async function show(tool, payload) {
@@ -59,7 +65,7 @@ async function show(tool, payload) {
   }
   if (tool === 'fusion') {
     if (!ready.fusion) {
-      initFusion(data, { openInEditor });
+      initFusion(data, { openInEditor, openIn3d });
       ready.fusion = true;
     }
     if (payload) loadSpec(payload);
@@ -69,9 +75,10 @@ async function show(tool, payload) {
     initBrand(data);
     ready.brand = true;
   }
-  const three = await import('./three-view.js');
-  if (tool === '3d') three.showThree(data);
-  else three.hideThree();
+  if (tool === '3d') {
+    hero3d = hero3d || import('./hero3d/panel.js');
+    (await hero3d).show(payload);
+  } else if (hero3d) (await hero3d).hide();
   if (tool === 'collection') renderCollection();
 }
 
