@@ -273,7 +273,7 @@ export class Viewer {
     this.settings = s;
     if (s.light !== prev.light) this.applyLight();
     if (s.material !== prev.material || s.color !== prev.color || s.secondary !== prev.secondary) this.applyMaterial();
-    else if (s.material === 'glass' && s.depth !== prev.depth) for (const m of this.mats) m.thickness = s.depth;
+    else if (s.material === 'glass' && s.depth !== prev.depth) for (const m of this.mats) m.thickness = s.depth * 0.6;
     if (s.background !== prev.background || (s.background === 'glow' && s.color !== prev.color) || s.material !== prev.material) this.paintBg();
     if (s.variant !== prev.variant && this.source) this.parts = this.source(s.variant);
     if (s.variant !== prev.variant || s.weight !== prev.weight || s.bevel !== prev.bevel) this.rebuild(true);
@@ -405,20 +405,27 @@ export class Viewer {
       case 'metal':
         return new T.MeshPhysicalMaterial({ color: c.clone().lerp(white, 0.12), metalness: 1, roughness: 0.55, roughnessMap: this.brushed(), anisotropy: 0.8, anisotropyRotation: 0 });
       case 'glass':
+        // A light tint so the backdrop still shows through in every channel,
+        // and a faint inner glow so the glass reads on dark backdrops too.
         return new T.MeshPhysicalMaterial({
-          color: white,
+          color: c.clone().lerp(white, 0.55),
           metalness: 0,
-          roughness: 0.05,
+          roughness: 0.12,
           transmission: 1,
-          thickness: this.settings.depth,
-          ior: 1.5,
-          attenuationColor: c,
-          attenuationDistance: 2.2,
+          thickness: this.settings.depth * 0.6,
+          ior: 1.45,
+          attenuationColor: c.clone().lerp(white, 0.35),
+          attenuationDistance: 5,
           specularIntensity: 1,
-          dispersion: 1.2,
+          clearcoat: 1,
+          clearcoatRoughness: 0.04,
+          emissive: c,
+          emissiveIntensity: 0.15,
+          envMapIntensity: 1.6,
+          dispersion: 1,
         });
       case 'neon':
-        return new T.MeshStandardMaterial({ color: c.clone().multiplyScalar(0.3), emissive: c, emissiveIntensity: 2.4, roughness: 0.4, metalness: 0 });
+        return new T.MeshPhysicalMaterial({ color: c.clone().multiplyScalar(0.5), emissive: c, emissiveIntensity: 1.25, roughness: 0.3, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08 });
       default:
         return new T.MeshPhysicalMaterial({ color: c, roughness: 0.3, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.05, specularIntensity: 0.7 });
     }
@@ -430,7 +437,7 @@ export class Viewer {
     this.mats = [this.makeMaterial(s.material, s.color), this.makeMaterial(s.material, s.secondary)];
     if (this.meshes[0]) this.meshes[0].material = this.mats[0];
     if (this.meshes[1]) this.meshes[1].material = this.mats[1];
-    this.scene.environmentIntensity = (LIGHTING[s.light] || LIGHTING.studio).env * (s.material === 'neon' ? 0.35 : 1);
+    this.scene.environmentIntensity = (LIGHTING[s.light] || LIGHTING.studio).env * (s.material === 'neon' ? 0.6 : 1);
     this.canvas.style.filter = s.material === 'neon' ? glowFilter(s.color) : '';
     this.requestRender();
   }
@@ -469,7 +476,7 @@ export class Viewer {
     if (this.envRT) this.envRT.dispose();
     this.envRT = rt;
     this.scene.environment = rt.texture;
-    this.scene.environmentIntensity = preset.env * (this.settings.material === 'neon' ? 0.35 : 1);
+    this.scene.environmentIntensity = preset.env * (this.settings.material === 'neon' ? 0.6 : 1);
     for (const l of [...this.lights.children]) {
       this.lights.remove(l);
       l.dispose?.();
