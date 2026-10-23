@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.2fa4695b.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/vue.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icons in Vue 3: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location.pathname.replace(/(pt-br\/)?[^/]*$/,'');navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}</script>
+<title data-i18n="guide.vue.title">Vue 3 icon components with glyphfox: setup and examples</title>
+<meta name="description" content="Use glyphfox icons in Vue 3: install, import tree shakable components, set props in templates, morph with useMorph, fuse icons and avoid empty icons." data-i18n-attr="content:guide.vue.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/guides/vue.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/vue.html">
+<meta property="og:title" content="Vue 3 icon components with glyphfox: setup and examples">
+<meta property="og:description" content="Use glyphfox icons in Vue 3: install, import tree shakable components, set props in templates, morph with useMorph, fuse icons and avoid empty icons.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/guides/vue.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Vue 3 icon components with glyphfox: setup and examples">
+<meta name="twitter:description" content="Use glyphfox icons in Vue 3: install, import tree shakable components, set props in templates, morph with useMorph, fuse icons and avoid empty icons.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/vue.png">
+<meta name="twitter:image:alt" content="Icons in Vue 3: glyphfox">
+<link rel="stylesheet" href="../assets/docs.4063d59a.css">
+<link rel="stylesheet" href="guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kwy404.github.io/glyphfox/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/guides/"},{"@type":"ListItem","position":3,"name":"Vue","item":"https://kwy404.github.io/glyphfox/guides/vue.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does glyphfox work with Vue 2?","acceptedAnswer":{"@type":"Answer","text":"The components need Vue 3.2 or newer. In a Vue 2 app, use the \u003cglyph-fox> web component, which takes the same props as attributes; add glyph-fox to Vue.config.ignoredElements so Vue leaves the tag alone. See the web components guide."}},{"@type":"Question","name":"Can I use the components with the Options API?","acceptedAnswer":{"@type":"Answer","text":"Yes. They are regular components: list them in components: { HomeIcon } and use them in the template. useMorph is a composable, so it belongs in setup()."}},{"@type":"Question","name":"Can my own SVG icons get the same props?","acceptedAnswer":{"@type":"Answer","text":"Yes. createIcon({ name, body, tags, categories }) from glyphfox/vue turns icon data into a component, where body is the inner markup of a 24 by 24 stroke icon. Run your SVG through Fox-ify in the studio first, so it follows the grid, stroke and padding rules that weight and the other axes rely on."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copied to the clipboard" data-theme-light="Switch to the light theme" data-theme-dark="Switch to the dark theme">
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../pt-br/" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">All guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" aria-current="page" class="on" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit and web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML and CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Topics</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animated icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibility</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Server rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Breadcrumb" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../" data-i18n="seo.crumb.home">Home</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.vue.short">Vue</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.vue.h1">Icons in Vue 3</h1>
+<p class="lead" data-i18n="guide.vue.lead">Every glyphfox icon is a Vue 3 component with the same props as every other glyphfox package. This guide covers the install, props in templates, icons by name, morphing, global registration, TypeScript and the mistakes that leave an icon empty.</p>
+<nav class="toc" aria-label="On this page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.vue.install.h">Install</a></li><li><a href="#components" data-i18n="guide.vue.components.h">Use the components</a></li><li><a href="#axes" data-i18n="guide.vue.axes.h">Weight, corners and style</a></li><li><a href="#by-name" data-i18n="guide.vue.by-name.h">Icons by name, modifiers and fusion</a></li><li><a href="#morph" data-i18n="guide.vue.morph.h">Morph between icons</a></li><li><a href="#living" data-i18n="guide.vue.living.h">Living states</a></li><li><a href="#global" data-i18n="guide.vue.global.h">Global registration</a></li><li><a href="#typescript" data-i18n="guide.vue.typescript.h">TypeScript</a></li><li><a href="#bundle" data-i18n="guide.vue.bundle.h">Deep imports and bundle size</a></li><li><a href="#props" data-i18n="guide.vue.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.vue.pitfalls.h">Pitfalls</a></li><li><a href="#faq" data-i18n="seo.faq">Questions</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.vue.install.h">Install</h2>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.vue.install.p">glyphfox has no dependencies. Vue 3.2 or newer is an optional peer dependency, only needed when you import <code>glyphfox/vue</code>. The same package also holds the React, Svelte and web component builds, so there is nothing else to install.</p>
+<p data-i18n="guide.vue.install.names">Each icon is a component named after the icon in PascalCase with an <code>Icon</code> suffix: <code>arrow-right</code> becomes <code>ArrowRightIcon</code>, <code>x</code> becomes <code>XIcon</code>. The <a href="../icons.html">icon browser</a> shows the name of every icon and copies the Vue snippet for you.</p>
+</section>
+<section id="components">
+<h2 data-i18n="guide.vue.components.h">Use the components</h2>
+<div class="code"><div class="code-head"><span>Toolbar.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { HomeIcon, SearchIcon, BellIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+defineProps({ unread: { <span class="tok-k">type</span>: Number, <span class="tok-k">default</span>: <span class="tok-n">0</span> } });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;nav</span> <span class="tok-k">class</span>=<span class="tok-s">"toolbar"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Home"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;HomeIcon</span> <span class="tok-t">/&gt;</span><span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;SearchIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"20"</span> <span class="tok-a">:weight</span>=<span class="tok-s">"1.5"</span> <span class="tok-k">class</span>=<span class="tok-s">"muted"</span> <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;BellIcon</span> <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-a">secondary-color</span>=<span class="tok-s">"#ff7a1a"</span> <span class="tok-a">:modifier</span>=<span class="tok-s">"unread ? 'dot' : undefined"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/nav</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.vue.components.case">Props are declared in camelCase, and Vue accepts both spellings in templates: <code>secondary-color</code> and <code>secondaryColor</code> reach the same prop. Bind numbers with <code>:size="20"</code>; a plain <code>size="20"</code> also works, because size, weight, rotate, duration and the other numeric props accept strings.</p>
+<p data-i18n="guide.vue.components.fallthrough">The components do not declare <code>class</code>, <code>style</code> or listeners, so Vue passes them through to the root <code>&lt;svg&gt;</code>. Your classes are merged with the built in <code>glyphfox glyphfox-NAME</code> classes, and <code>@click</code>, <code>aria-*</code>, <code>data-*</code> and <code>id</code> land on the svg itself.</p>
+<p data-i18n="guide.vue.components.color">Strokes use <code>currentColor</code>, so an icon takes the CSS <code>color</code> of its parent and follows hover states and themes for free. The <code>color</code> prop sets the color on the svg when you need a fixed one. The svg gets <code>width</code> and <code>height</code> attributes from <code>size</code> (24 by default); CSS width and height on a class override them.</p>
+</section>
+<section id="axes">
+<h2 data-i18n="guide.vue.axes.h">Weight, corners and style</h2>
+<p data-i18n="guide.vue.axes.p">Three props change the drawing itself rather than the box around it: <code>weight</code> sets the stroke from 1 to 3, <code>corners</code> switches between round and sharp joins, and <code>variant</code> picks outline, duotone or solid. Below 24 px the stroke is thickened slightly so small icons do not look faint; <code>absolute-weight</code> keeps the exact stroke you asked for.</p>
+<div class="code"><div class="code-head"><span>Axes.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { FolderIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;FolderIcon</span> <span class="tok-a">:weight</span>=<span class="tok-s">"1"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;FolderIcon</span> <span class="tok-a">:weight</span>=<span class="tok-s">"3"</span> <span class="tok-a">corners</span>=<span class="tok-s">"sharp"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;FolderIcon</span> <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-a">secondary-color</span>=<span class="tok-s">"#ff7a1a"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;FolderIcon</span> <span class="tok-a">variant</span>=<span class="tok-s">"solid"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;FolderIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"16"</span> <span class="tok-a">:weight</span>=<span class="tok-s">"1.5"</span> absolute-weight <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.vue.axes.solid">The solid style is generated at build time from the closed shapes of each icon, with inner lines cut out as negative space. Icons without closed shapes keep their outline when you ask for solid.</p>
+</section>
+<section id="by-name">
+<h2 data-i18n="guide.vue.by-name.h">Icons by name, modifiers and fusion</h2>
+<p data-i18n="guide.vue.byname.p"><code>Icon</code> renders any spec of the name syntax: a plain name, a modifier badge (<code>file+check</code>, with <code>@tl</code>, <code>@tr</code>, <code>@bl</code> or <code>@br</code> for the corner), a fusion (<code>cloud&amp;lock:overlap</code>) or a style (<code>heart/solid</code>). <code>Fusion</code> takes a list of names and a layout. Both are useful when the icon comes from data, such as a menu definition, a status field or a CMS.</p>
+<p data-i18n="guide.vue.byname.register">Components such as <code>FileIcon</code> bring their own data. A name inside a string has no import behind it, so register the data once with <code>registerIcons</code>. The registry is shared by <code>Icon</code>, <code>Fusion</code>, <code>MorphIcon</code> and every <code>morph-to</code> prop, so one module covers the whole app. Modifier badges are drawn by the engine and need no registration.</p>
+<div class="code"><div class="code-head"><span>src/icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-k">import</span> file <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/file'</span>;
+<span class="tok-k">import</span> cloud <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/cloud'</span>;
+<span class="tok-k">import</span> lock <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/lock'</span>;
+<span class="tok-k">import</span> menu <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/menu'</span>;
+<span class="tok-k">import</span> x <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/x'</span>;
+<span class="tok-k">import</span> pause <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/pause'</span>;
+
+<span class="tok-c">// Every name used in a string: Icon, Fusion, MorphIcon and morph-to.</span>
+registerIcons([file, cloud, lock, menu, x, pause]);</pre></div>
+<div class="code"><div class="code-head"><span>src/main.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { createApp } <span class="tok-k">from</span> <span class="tok-s">'vue'</span>;
+<span class="tok-k">import</span> App <span class="tok-k">from</span> <span class="tok-s">'./App.vue'</span>;
+<span class="tok-k">import</span> <span class="tok-s">'./icons.js'</span>;
+
+createApp(App).mount(<span class="tok-s">'#app'</span>);</pre></div>
+<div class="code"><div class="code-head"><span>FileStatus.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { Icon, Fusion } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+defineProps({ saved: Boolean });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;Icon</span> <span class="tok-a">:name</span>=<span class="tok-s">"saved ? 'file+check' : 'file'"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>=<span class="tok-s">"file+alert@tr"</span> <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;Fusion</span> <span class="tok-a">:icons</span>=<span class="tok-s">"['cloud', 'lock']"</span> <span class="tok-a">layout</span>=<span class="tok-s">"overlap"</span> <span class="tok-a">:gap</span>=<span class="tok-s">"1"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.vue.byname.fusion">A fusion is a real icon: it follows <code>weight</code>, <code>variant</code> and every other prop, and where the parts overlap the part behind is cut around the part in front. Layouts are overlap, side, stack, grid, orbit, badge and inside; <code>scale</code> and <code>offsets</code> fine tune the parts.</p>
+</section>
+<section id="morph">
+<h2 data-i18n="guide.vue.morph.h">Morph between icons</h2>
+<p data-i18n="guide.vue.morph.p">There are three ways to morph. <code>MorphIcon</code> animates whenever its <code>name</code> changes. Any icon component takes <code>morph-to</code> with a trigger (mount, hover, click or state). And the <code>useMorph</code> composable returns the animated frames for your own rendering.</p>
+<div class="code"><div class="code-head"><span>MenuButton.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { ref } <span class="tok-k">from</span> <span class="tok-s">'vue'</span>;
+<span class="tok-k">import</span> { MorphIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+<span class="tok-k">const</span> open = ref(<span class="tok-k">false</span>);
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Menu"</span> <span class="tok-a">:aria-expanded</span>=<span class="tok-s">"open"</span> <span class="tok-a">@click</span>=<span class="tok-s">"open = !open"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">:name</span>=<span class="tok-s">"open ? 'x' : 'menu'"</span> <span class="tok-a">:duration</span>=<span class="tok-s">"300"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<div class="code"><div class="code-head"><span>Triggers.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { HeartIcon, PlayIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+defineProps({ playing: Boolean });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-c">&lt;!-- toggles on every click --&gt;</span>
+  <span class="tok-t">&lt;HeartIcon</span> <span class="tok-a">morph-to</span>=<span class="tok-s">"heart/solid"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"click"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-c">&lt;!-- shows pause while playing is true --&gt;</span>
+  <span class="tok-t">&lt;PlayIcon</span> <span class="tok-a">morph-to</span>=<span class="tok-s">"pause"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">:active</span>=<span class="tok-s">"playing"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.vue.morph.composable"><code>useMorph</code> accepts a ref, a getter or a plain value and returns a computed <code>{ icon, variant }</code> frame that animates whenever the spec changes. Pass the frame to <code>Icon</code> through its <code>icon</code> prop, or hand it to your own renderer.</p>
+<div class="code"><div class="code-head"><span>PlayToggle.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { ref } <span class="tok-k">from</span> <span class="tok-s">'vue'</span>;
+<span class="tok-k">import</span> { Icon, useMorph } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+<span class="tok-k">const</span> playing = ref(<span class="tok-k">false</span>);
+<span class="tok-k">const</span> frame = useMorph(() =<span class="tok-t">&gt;</span> (playing.value ? <span class="tok-s">'pause'</span> : <span class="tok-s">'play'</span>), { duration: <span class="tok-n">250</span> });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Play"</span> <span class="tok-a">:aria-pressed</span>=<span class="tok-s">"playing"</span> <span class="tok-a">@click</span>=<span class="tok-s">"playing = !playing"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;Icon</span> <span class="tok-a">v-if</span>=<span class="tok-s">"frame"</span> <span class="tok-a">:icon</span>=<span class="tok-s">"frame.icon"</span> <span class="tok-a">:variant</span>=<span class="tok-s">"frame.variant"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.vue.morph.pairs">Hand tuned pairs make common transitions feel designed: menu to x, play to pause, plus to check, sun to moon, eye to eye-off, bell to bell-ring, heart to heart/solid, copy to check, lock to unlock and wifi to wifi-off. Any other pair still morphs with an automatic match. The <a href="animated-icons.html">animated icons guide</a> covers durations, delays and reduced motion.</p>
+</section>
+<section id="living">
+<h2 data-i18n="guide.vue.living.h">Living states</h2>
+<p data-i18n="guide.vue.living.p">The <code>animate</code> prop adds a preset that understands the icon: draw traces the strokes in drawing order, shake swings from the top, and pop, wiggle, spin, pulse and bounce do what they say. The animation is a small stylesheet inside the svg, so it needs no CSS import and it stops for visitors who prefer reduced motion.</p>
+<div class="code"><div class="code-head"><span>Inbox.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { BellIcon, LoaderCircleIcon, SparklesIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+defineProps({ hasNews: Boolean, loading: Boolean });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;BellIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"shake"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">:active</span>=<span class="tok-s">"hasNews"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;LoaderCircleIcon</span> <span class="tok-a">v-if</span>=<span class="tok-s">"loading"</span> <span class="tok-a">animate</span>=<span class="tok-s">"spin"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;SparklesIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"draw"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"hover"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+</section>
+<section id="global">
+<h2 data-i18n="guide.vue.global.h">Global registration</h2>
+<p data-i18n="guide.vue.global.p">Importing icons where you use them keeps each bundle small. When a design system needs a fixed set in every template, register those components once with <code>app.component</code>. Give <code>Icon</code> a distinct name such as <code>GfIcon</code>, so it cannot collide with another global component.</p>
+<div class="code"><div class="code-head"><span>src/main.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { createApp } <span class="tok-k">from</span> <span class="tok-s">'vue'</span>;
+<span class="tok-k">import</span> { HomeIcon, SearchIcon, SettingsIcon, Icon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-k">import</span> App <span class="tok-k">from</span> <span class="tok-s">'./App.vue'</span>;
+<span class="tok-k">import</span> <span class="tok-s">'./icons.js'</span>;
+
+<span class="tok-k">const</span> app = createApp(App);
+app.component(<span class="tok-s">'HomeIcon'</span>, HomeIcon);
+app.component(<span class="tok-s">'SearchIcon'</span>, SearchIcon);
+app.component(<span class="tok-s">'SettingsIcon'</span>, SettingsIcon);
+app.component(<span class="tok-s">'GfIcon'</span>, Icon);
+app.mount(<span class="tok-s">'#app'</span>);</pre></div>
+<p data-i18n="guide.vue.global.ts">With TypeScript, declare the global components so templates are checked:</p>
+<div class="code"><div class="code-head"><span>src/glyphfox.d.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> <span class="tok-k">type</span> { HomeIcon, SearchIcon, SettingsIcon, Icon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+declare module <span class="tok-s">'vue'</span> {
+  <span class="tok-k">interface</span> GlobalComponents {
+    HomeIcon: typeof HomeIcon;
+    SearchIcon: typeof SearchIcon;
+    SettingsIcon: typeof SettingsIcon;
+    GfIcon: typeof Icon;
+  }
+}
+
+<span class="tok-k">export</span> {};</pre></div>
+</section>
+<section id="typescript">
+<h2 data-i18n="guide.vue.typescript.h">TypeScript</h2>
+<p data-i18n="guide.vue.ts.p">Every component is typed as <code>GlyphComponent</code> with the shared props, so editors complete <code>variant</code>, <code>modifier</code>, <code>animate</code> and the rest. Icon specs are plain strings in the Vue types, because Vue prop inference cannot expand the full union of icon names. When you keep names in your own code, type them with <code>IconName</code> from <code>glyphfox</code> to catch typos at compile time.</p>
+<div class="code"><div class="code-head"><span>src/nav.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> <span class="tok-k">type</span> { IconName } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> nav: { label: string; to: string; icon: IconName }[] = [
+  { label: <span class="tok-s">'Home'</span>, to: <span class="tok-s">'/'</span>, icon: <span class="tok-s">'home'</span> },
+  { label: <span class="tok-s">'Search'</span>, to: <span class="tok-s">'/search'</span>, icon: <span class="tok-s">'search'</span> },
+  { label: <span class="tok-s">'Settings'</span>, to: <span class="tok-s">'/settings'</span>, icon: <span class="tok-s">'settings'</span> },
+];</pre></div>
+</section>
+<section id="bundle">
+<h2 data-i18n="guide.vue.bundle.h">Deep imports and bundle size</h2>
+<p data-i18n="guide.vue.bundle.p">Named imports from <code>glyphfox/vue</code> are tree shaken: the icon modules are marked free of side effects and each component is created with a pure call. In a Vite 8 production build (with Vue itself excluded), one icon component and the shared runtime come to about 53 KB minified, 20 KB gzip, and nine more icons add less than 1 KB gzip. The runtime carries the renderer, morph, fusion and modifier engines and is paid once.</p>
+<div class="code"><div class="code-head"><span>Logo.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-c">// One module, for tools that do not tree shake.</span>
+<span class="tok-k">import</span> { FoxIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue/icons/fox'</span>;
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;FoxIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"32"</span> <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-a">title</span>=<span class="tok-s">"glyphfox"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.vue.bundle.more">The <a href="tree-shaking.html">tree shaking guide</a> explains what keeps the set out of your bundle and what pulls it back in.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.vue.props.h">Props</h2>
+<p data-i18n="guide.vue.props.p">Every icon component, <code>Icon</code>, <code>Fusion</code> and <code>MorphIcon</code> takes the shared props. In templates you can write the kebab-case attribute from the second column.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="seo.props.template">In templates</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Default</th><th data-i18n="docs.desc">Description</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Width and height; numbers are pixels.</td></tr>
+<tr><td><code>color</code></td><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Main color.</td></tr>
+<tr><td><code>secondaryColor</code></td><td><code>secondary-color</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color of the duotone layer and of the solid fill.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td><code>secondary-opacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacity of the duotone layer or of the solid fill.</td></tr>
+<tr><td><code>weight</code></td><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Stroke from 1 to 3 on the 24 grid, optically compensated below 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td><code>absolute-weight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Keeps the stroke at weight pixels at any size.</td></tr>
+<tr><td><code>corners</code></td><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Round or sharp joins and caps.</td></tr>
+<tr><td><code>variant</code></td><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Style axis; solid comes from the closed shapes.</td></tr>
+<tr><td><code>rotate</code></td><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotation in degrees.</td></tr>
+<tr><td><code>flipX</code></td><td><code>flip-x</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Mirror horizontally.</td></tr>
+<tr><td><code>flipY</code></td><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Mirror vertically.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Mirror in right to left layouts.</td></tr>
+<tr><td><code>animate</code></td><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Living state preset.</td></tr>
+<tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
+<tr><td><code>active</code></td><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">The state for trigger state.</td></tr>
+<tr><td><code>duration</code></td><td><code>duration</code></td><td>number (ms)</td><td>per preset</td><td data-i18n="prop.duration">Animation or morph duration.</td></tr>
+<tr><td><code>delay</code></td><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Animation or morph delay.</td></tr>
+<tr><td><code>loop</code></td><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repeat forever or a number of times (spin and pulse loop by default).</td></tr>
+<tr><td><code>modifier</code></td><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>none</td><td data-i18n="prop.modifier">Badge with an automatic knockout gap.</td></tr>
+<tr><td><code>modifierCorner</code></td><td><code>modifier-corner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Corner of the badge.</td></tr>
+<tr><td><code>morphTo</code></td><td><code>morph-to</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Morph target; the trigger decides when it shows.</td></tr>
+<tr><td><code>title</code></td><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Accessible name: title, role img and aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td><code>decorative</code></td><td>boolean</td><td>true without a title</td><td data-i18n="prop.decorative">Hides the icon from assistive technology.</td></tr>
+</tbody></table></div>
+<p data-i18n="guide.vue.props.extra"><code>Icon</code> adds <code>name</code>, <code>icon</code> (icon data) and <code>gap</code>. <code>Fusion</code> adds <code>icons</code>, <code>layout</code>, <code>gap</code>, <code>scale</code> and <code>offsets</code>. <code>MorphIcon</code> adds <code>name</code> and <code>icon</code>. A default slot renders inside the svg.</p>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.vue.pitfalls.h">Pitfalls</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.vue.pitfalls.list.1.t">An icon used by name is empty in production</dt><dd data-i18n="guide.vue.pitfalls.list.1.d">The dev server pre-bundles the whole package, so every name resolves while you develop. A production build keeps only what you import, and Vite does not bundle the on demand loader that sits in node_modules: unregistered names in <code>Icon</code>, <code>Fusion</code>, <code>MorphIcon</code> or <code>morph-to</code> render an empty svg. Register them with <code>registerIcons</code>, as in <code>src/icons.js</code> above.</dd></div><div><dt data-i18n="guide.vue.pitfalls.list.2.t">Icon only buttons without a name</dt><dd data-i18n="guide.vue.pitfalls.list.2.d">Icons are decorative by default and get <code>aria-hidden="true"</code>. A button that contains only an icon therefore has no accessible name. Put <code>aria-label</code> on the button, or give the icon a <code>title</code>. More patterns in the <a href="accessibility.html">accessibility guide</a>.</dd></div><div><dt data-i18n="guide.vue.pitfalls.list.3.t">morph-to plays as soon as the page loads</dt><dd data-i18n="guide.vue.pitfalls.list.3.d">The default trigger is mount: the icon morphs to its target right after mounting. When the target is the state you want to show immediately, use <code>trigger="state"</code> with <code>:active</code>, which starts at the right end without an animation.</dd></div><div><dt data-i18n="guide.vue.pitfalls.list.4.t">Boolean props written as strings</dt><dd data-i18n="guide.vue.pitfalls.list.4.d"><code>active="false"</code> passes the string "false". glyphfox reads it as false, but Vue warns about the prop type. Write boolean props bare (<code>flip-x</code>) or bind them (<code>:active="playing"</code>).</dd></div><div><dt data-i18n="guide.vue.pitfalls.list.5.t">Star imports</dt><dd data-i18n="guide.vue.pitfalls.list.5.d"><code>import * as icons from 'glyphfox/vue'</code> followed by <code>icons[name]</code> keeps every icon in the bundle, because the bundler cannot know which names you read. Build a small map of the components you need instead.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions</h2>
+<h3 data-i18n="guide.vue.faq.vue2.q">Does glyphfox work with Vue 2?</h3>
+<p data-i18n="guide.vue.faq.vue2.a">The components need Vue 3.2 or newer. In a Vue 2 app, use the <code>&lt;glyph-fox&gt;</code> web component, which takes the same props as attributes; add <code>glyph-fox</code> to <code>Vue.config.ignoredElements</code> so Vue leaves the tag alone. See the <a href="web-components.html">web components guide</a>.</p>
+<h3 data-i18n="guide.vue.faq.options-api.q">Can I use the components with the Options API?</h3>
+<p data-i18n="guide.vue.faq.options-api.a">Yes. They are regular components: list them in <code>components: { HomeIcon }</code> and use them in the template. <code>useMorph</code> is a composable, so it belongs in <code>setup()</code>.</p>
+<h3 data-i18n="guide.vue.faq.own-icons.q">Can my own SVG icons get the same props?</h3>
+<p data-i18n="guide.vue.faq.own-icons.a">Yes. <code>createIcon({ name, body, tags, categories })</code> from <code>glyphfox/vue</code> turns icon data into a component, where <code>body</code> is the inner markup of a 24 by 24 stroke icon. Run your SVG through Fox-ify in the <a href="../studio.html">studio</a> first, so it follows the grid, stroke and padding rules that weight and the other axes rely on.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in this guide</h2>
+<ul class="icon-links"><li><a href="../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M15.5 5.72V3H19v5.44"/><path d="M9.5 21v-4.5a2.5 2.5 0 0 1 5 0V21"/></svg><span>home</span></a></li><li><a href="../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M7.62 10.09A3.5 3.5 0 0 1 10.09 7.62"/></svg><span>search</span></a></li><li><a href="../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../icons/folder.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/><path d="M2 11h20"/></svg><span>folder</span></a></li><li><a href="../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/><path d="M8.79 10.07A2.5 2.5 0 0 1 11.25 8"/></svg><span>cloud</span></a></li><li><a href="../icons/lock.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-lock" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M11 15.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M12 15.5v2"/></svg><span>lock</span></a></li><li><a href="../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../icons/pause.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-pause" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1.5"/><rect x="14" y="4" width="5" height="16" rx="1.5"/></svg><span>pause</span></a></li><li><a href="../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../icons/play.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-play" aria-hidden="true"><path d="M7 4v16l12-8Z"/></svg><span>play</span></a></li><li><a href="../icons/loader-circle.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-loader-circle" aria-hidden="true"><path d="M12 3A9 9 0 1 1 3 12"/></svg><span>loader-circle</span></a></li><li><a href="../icons/sparkles.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><span>sparkles</span></a></li><li><a href="../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../icons/fox.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fox" aria-hidden="true"><path d="M2.5 9.5L6 6.5 7.5 2.5 9.5 6 11 3l1 4.5c2 1.5 3.5 3 4 5.5 .5 2.5 0 5.5-1 8H6.5c0-3.5 .5-6.5 0-9.5Z"/><path d="M15 21c3.5 0 6.5-2 6.5-5.5 0-2-1-3.5-2.5-4.5 .5 3-1 5.5-4 6.5"/></svg><span>fox</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Related guides</h2>
+<ul class="guide-cards"><li><a href="nuxt.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-mountain" aria-hidden="true"><path d="M2 20L9 6l5.5 9.5L17 11l5 9Z"/></svg><strong data-i18n="guide.nuxt.h1">Icons in Nuxt</strong><span data-i18n="guide.nuxt.description">Server render glyphfox icons in Nuxt: import components, register names in a plugin, wrap icons for auto import, keep morphs in sync and avoid empty icons.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking icons</strong><span data-i18n="guide.tree-shaking.description">How glyphfox icons tree shake in Vite, webpack, Rollup and esbuild: measured bundle sizes, what defeats tree shaking, icons loaded by name and fixed subsets.</span></a></li><li><a href="animated-icons.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><strong data-i18n="guide.animated-icons.h1">Animated icons</strong><span data-i18n="guide.animated-icons.description">Animate glyphfox icons: draw, pop, spin and shake presets, hover, click and state triggers, morphs between icons, CSS only morphs and reduced motion.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Accessible icons</strong><span data-i18n="guide.accessibility.description">Make glyphfox icons accessible: decorative by default, titles and labels, icon only buttons, status icons, contrast, reduced motion and right to left layouts.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">All icons by category</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+          <li><a href="../labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="page.js"></script>
+</body>
+</html>

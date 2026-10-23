@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.2fa4695b.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/animated-icons.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Animated icons: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location.pathname.replace(/(pt-br\/)?[^/]*$/,'');navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}</script>
+<title data-i18n="guide.animated-icons.title">Animated SVG icons: morphs and living states in glyphfox</title>
+<meta name="description" content="Animate glyphfox icons: draw, pop, spin and shake presets, hover, click and state triggers, morphs between icons, CSS only morphs and reduced motion." data-i18n-attr="content:guide.animated-icons.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/guides/animated-icons.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/animated-icons.html">
+<meta property="og:title" content="Animated SVG icons: morphs and living states in glyphfox">
+<meta property="og:description" content="Animate glyphfox icons: draw, pop, spin and shake presets, hover, click and state triggers, morphs between icons, CSS only morphs and reduced motion.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/guides/animated-icons.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Animated SVG icons: morphs and living states in glyphfox">
+<meta name="twitter:description" content="Animate glyphfox icons: draw, pop, spin and shake presets, hover, click and state triggers, morphs between icons, CSS only morphs and reduced motion.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/animated-icons.png">
+<meta name="twitter:image:alt" content="Animated icons: glyphfox">
+<link rel="stylesheet" href="../assets/docs.4063d59a.css">
+<link rel="stylesheet" href="guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kwy404.github.io/glyphfox/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/guides/"},{"@type":"ListItem","position":3,"name":"Animated icons","item":"https://kwy404.github.io/glyphfox/guides/animated-icons.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do animated icons need JavaScript?","acceptedAnswer":{"@type":"Answer","text":"Living states do not: the CSS is inside the SVG, so a server rendered or static icon animates on mount and on hover with no script. The CSS only morph from toSvg also runs without a framework. Component morphs such as MorphIcon use JavaScript to compute the frames."}},{"@type":"Question","name":"Can an icon morph and play a preset at the same time?","acceptedAnswer":{"@type":"Answer","text":"Yes. animate and morphTo are independent props, so a heart can pop on click while it morphs to the solid style: \u003cHeartIcon animate=\"pop\" morphTo=\"heart/solid\" trigger=\"click\" />."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copied to the clipboard" data-theme-light="Switch to the light theme" data-theme-dark="Switch to the dark theme">
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../pt-br/" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">All guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit and web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML and CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Topics</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" aria-current="page" class="on" data-i18n="guide.animated-icons.short">Animated icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibility</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Server rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Breadcrumb" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../" data-i18n="seo.crumb.home">Home</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.animated-icons.short">Animated icons</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.topics">Topics</span>
+<h1 class="title" data-i18n="guide.animated-icons.h1">Animated icons</h1>
+<p class="lead" data-i18n="guide.animated-icons.lead">glyphfox animates icons in two ways. Living states are presets such as draw, pop or shake that play on a trigger. Morphs reshape one icon into another. Both work in every package and both turn themselves off for people who ask for reduced motion.</p>
+<nav class="toc" aria-label="On this page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#setup" data-i18n="guide.animated-icons.setup.h">Setup</a></li><li><a href="#presets" data-i18n="guide.animated-icons.presets.h">The seven presets</a></li><li><a href="#triggers" data-i18n="guide.animated-icons.triggers.h">Triggers</a></li><li><a href="#morph" data-i18n="guide.animated-icons.morph.h">Morph one icon into another</a></li><li><a href="#frameworks" data-i18n="guide.animated-icons.frameworks.h">The same morphs in Vue, Svelte and the web component</a></li><li><a href="#css-only" data-i18n="guide.animated-icons.css-only.h">Morphs without JavaScript</a></li><li><a href="#css-classes" data-i18n="guide.animated-icons.css-classes.h">Tailwind CSS animation classes</a></li><li><a href="#motion" data-i18n="guide.animated-icons.motion.h">Reduced motion</a></li><li><a href="#export" data-i18n="guide.animated-icons.export.h">Export animated files</a></li><li><a href="#performance" data-i18n="guide.animated-icons.performance.h">Performance</a></li><li><a href="#props" data-i18n="guide.animated-icons.props.h">Animation props</a></li><li><a href="#pitfalls" data-i18n="guide.animated-icons.pitfalls.h">Pitfalls</a></li><li><a href="#faq" data-i18n="seo.faq">Questions</a></li></ol></nav>
+</header>
+<section id="setup">
+<h2 data-i18n="guide.animated-icons.setup.h">Setup</h2>
+<p data-i18n="guide.animated-icons.setup.p">There is nothing extra to install: animation is part of the shared props. The examples below use <code>glyphfox/react</code>; the props have the same names in <a href="vue.html">Vue</a>, <a href="svelte.html">Svelte</a>, <a href="angular.html">Angular</a> and the <a href="web-components.html">web component</a>, where they are attributes in kebab-case.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.animated-icons.setup.p2">A living state is a few lines of CSS that travel inside the SVG itself, in a <code>&lt;style&gt;</code> element scoped to a class generated for that icon. That is why the same animation works in a component, in the string from <code>toSvg</code>, in a data URI or in an exported file, with no stylesheet to import.</p>
+</section>
+<section id="presets">
+<h2 data-i18n="guide.animated-icons.presets.h">The seven presets</h2>
+<p data-i18n="guide.animated-icons.presets.p">Each preset is tuned for icons rather than generic elements. <code>draw</code> traces the strokes in the order they were drawn and fades in the fill layer at the end. <code>shake</code> swings from the top, like a bell on a hook. The others move the whole icon around its center.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.animated-icons.presets.table.h1">Preset</th><th data-i18n="guide.animated-icons.presets.table.h2">Motion</th><th data-i18n="guide.animated-icons.presets.table.h3">Duration</th><th data-i18n="guide.animated-icons.presets.table.h4">Loops by default</th></tr></thead><tbody>
+<tr><td data-i18n="guide.animated-icons.presets.table.r1c1"><code>draw</code></td><td data-i18n="guide.animated-icons.presets.table.r1c2">traces each stroke, one after another</td><td data-i18n="guide.animated-icons.presets.table.r1c3">1100 ms</td><td data-i18n="guide.animated-icons.presets.table.r1c4">no</td></tr>
+<tr><td data-i18n="guide.animated-icons.presets.table.r2c1"><code>pop</code></td><td data-i18n="guide.animated-icons.presets.table.r2c2">grows in from 55 percent with a little overshoot</td><td data-i18n="guide.animated-icons.presets.table.r2c3">520 ms</td><td data-i18n="guide.animated-icons.presets.table.r2c4">no</td></tr>
+<tr><td data-i18n="guide.animated-icons.presets.table.r3c1"><code>wiggle</code></td><td data-i18n="guide.animated-icons.presets.table.r3c2">rotates left and right, settling down</td><td data-i18n="guide.animated-icons.presets.table.r3c3">720 ms</td><td data-i18n="guide.animated-icons.presets.table.r3c4">no</td></tr>
+<tr><td data-i18n="guide.animated-icons.presets.table.r4c1"><code>spin</code></td><td data-i18n="guide.animated-icons.presets.table.r4c2">full turn at a constant speed</td><td data-i18n="guide.animated-icons.presets.table.r4c3">1000 ms</td><td data-i18n="guide.animated-icons.presets.table.r4c4">yes</td></tr>
+<tr><td data-i18n="guide.animated-icons.presets.table.r5c1"><code>pulse</code></td><td data-i18n="guide.animated-icons.presets.table.r5c2">shrinks and fades a little, then returns</td><td data-i18n="guide.animated-icons.presets.table.r5c3">1500 ms</td><td data-i18n="guide.animated-icons.presets.table.r5c4">yes</td></tr>
+<tr><td data-i18n="guide.animated-icons.presets.table.r6c1"><code>bounce</code></td><td data-i18n="guide.animated-icons.presets.table.r6c2">jumps up, then settles with two smaller bounces</td><td data-i18n="guide.animated-icons.presets.table.r6c3">900 ms</td><td data-i18n="guide.animated-icons.presets.table.r6c4">no</td></tr>
+<tr><td data-i18n="guide.animated-icons.presets.table.r7c1"><code>shake</code></td><td data-i18n="guide.animated-icons.presets.table.r7c2">swings from the top with decreasing amplitude</td><td data-i18n="guide.animated-icons.presets.table.r7c3">950 ms</td><td data-i18n="guide.animated-icons.presets.table.r7c4">no</td></tr>
+</tbody></table></div>
+<div class="code"><div class="code-head"><span>Presets.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { LoaderCircleIcon, SparklesIcon, BellIcon, HeartIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Presets({ hasNews, liked }) {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;LoaderCircleIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"spin"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;SparklesIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"draw"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;BellIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"shake"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">active</span>={hasNews} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;HeartIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"pop"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"click"</span> <span class="tok-a">variant</span>={liked ? <span class="tok-s">'solid'</span> : <span class="tok-s">'outline'</span>} <span class="tok-t">/&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.animated-icons.presets.timing"><code>duration</code> and <code>delay</code> take milliseconds. <code>loop</code> takes <code>true</code> for forever or a number of runs; spin and pulse loop unless you pass <code>loop={false}</code>. A looping <code>draw</code> alternates direction, so the icon draws itself and then erases itself instead of jumping back.</p>
+</section>
+<section id="triggers">
+<h2 data-i18n="guide.animated-icons.triggers.h">Triggers</h2>
+<p data-i18n="guide.animated-icons.triggers.p">The <code>trigger</code> prop decides when a preset plays:</p>
+<ul class="list"><li data-i18n="guide.animated-icons.triggers.list.1"><code>mount</code>, the default, plays when the icon first renders.</li><li data-i18n="guide.animated-icons.triggers.list.2"><code>hover</code> plays while the pointer is over the icon or over its direct parent, so an icon inside a button animates when the button is hovered.</li><li data-i18n="guide.animated-icons.triggers.list.3"><code>click</code> replays on every click on the icon.</li><li data-i18n="guide.animated-icons.triggers.list.4"><code>state</code> plays while <code>active</code> is true. This is the trigger to use for anything your application decides: a new notification, a failed save, a finished upload.</li></ul>
+<div class="code"><div class="code-head"><span>Notifications.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { BellIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> NotificationsButton({ unread }) {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>={<span class="tok-s">`Notifications, ${unread} unread`</span>}<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;BellIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"shake"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">active</span>={unread <span class="tok-t">&gt;</span> <span class="tok-n">0</span>} <span class="tok-a">loop</span>={<span class="tok-n">2</span>} <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.animated-icons.triggers.static">In static markup the triggers map to plain CSS hooks. A <code>state</code> animation plays while the <code>svg</code> element has the class <code>gf-on</code>, so server rendered HTML and strings from <code>toSvg</code> can be driven with one line of script: <code>svg.classList.toggle('gf-on', unread &gt; 0)</code>. <code>hover</code> needs no script at all.</p>
+</section>
+<section id="morph">
+<h2 data-i18n="guide.animated-icons.morph.h">Morph one icon into another</h2>
+<p data-i18n="guide.animated-icons.morph.p">The morph engine flattens both icons into strands, matches them with an optimal assignment, resamples them to the same number of points and interpolates. Strands without a partner shrink and fade. Any two icons can morph; ten pairs are tuned by hand so they feel designed rather than computed:</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.animated-icons.morph.pairs.h1">From</th><th data-i18n="guide.animated-icons.morph.pairs.h2">To</th></tr></thead><tbody>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r1c1"><a href="../icons/menu.html">menu</a></td><td data-i18n="guide.animated-icons.morph.pairs.r1c2"><a href="../icons/x.html">x</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r2c1"><a href="../icons/play.html">play</a></td><td data-i18n="guide.animated-icons.morph.pairs.r2c2"><a href="../icons/pause.html">pause</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r3c1"><a href="../icons/plus.html">plus</a></td><td data-i18n="guide.animated-icons.morph.pairs.r3c2"><a href="../icons/check.html">check</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r4c1"><a href="../icons/sun.html">sun</a></td><td data-i18n="guide.animated-icons.morph.pairs.r4c2"><a href="../icons/moon.html">moon</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r5c1"><a href="../icons/eye.html">eye</a></td><td data-i18n="guide.animated-icons.morph.pairs.r5c2"><a href="../icons/eye-off.html">eye-off</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r6c1"><a href="../icons/bell.html">bell</a></td><td data-i18n="guide.animated-icons.morph.pairs.r6c2"><a href="../icons/bell-ring.html">bell-ring</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r7c1"><a href="../icons/heart.html">heart</a></td><td data-i18n="guide.animated-icons.morph.pairs.r7c2">heart in the solid style</td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r8c1"><a href="../icons/copy.html">copy</a></td><td data-i18n="guide.animated-icons.morph.pairs.r8c2"><a href="../icons/check.html">check</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r9c1"><a href="../icons/lock.html">lock</a></td><td data-i18n="guide.animated-icons.morph.pairs.r9c2"><a href="../icons/unlock.html">unlock</a></td></tr>
+<tr><td data-i18n="guide.animated-icons.morph.pairs.r10c1"><a href="../icons/wifi.html">wifi</a></td><td data-i18n="guide.animated-icons.morph.pairs.r10c2"><a href="../icons/wifi-off.html">wifi-off</a></td></tr>
+</tbody></table></div>
+<p data-i18n="guide.animated-icons.morph.ways">There are three ways to ask for a morph. <code>MorphIcon</code> morphs whenever its <code>name</code> changes. <code>morphTo</code> on any icon morphs toward a target when its trigger fires and back when it stops. Hooks and stores (<code>useMorph</code> in React and Vue, <code>morphStore</code> in Svelte) hand you the frames for your own rendering.</p>
+<div class="code"><div class="code-head"><span>CopyButton.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { useState } <span class="tok-k">from</span> <span class="tok-s">'react'</span>;
+<span class="tok-k">import</span> { MorphIcon, MenuIcon, registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+<span class="tok-k">import</span> { iconCopy, iconCheck, iconX } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-c">// Morph targets are looked up by name: register their data once.</span>
+registerIcons([iconCopy, iconCheck, iconX]);
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> CopyButton({ text }) {
+  <span class="tok-k">const</span> [copied, setCopied] = useState(<span class="tok-k">false</span>);
+  <span class="tok-k">const</span> copy = <span class="tok-k">async</span> () =<span class="tok-t">&gt;</span> {
+    <span class="tok-k">await</span> navigator.clipboard.writeText(text);
+    setCopied(<span class="tok-k">true</span>);
+    setTimeout(() =<span class="tok-t">&gt;</span> setCopied(<span class="tok-k">false</span>), <span class="tok-n">1500</span>);
+  };
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={copy}<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">name</span>={copied ? <span class="tok-s">'check'</span> : <span class="tok-s">'copy'</span>} <span class="tok-a">duration</span>={<span class="tok-n">300</span>} <span class="tok-t">/&gt;</span>
+      {copied ? <span class="tok-s">'Copied'</span> : <span class="tok-s">'Copy'</span>}
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  );
+}
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> MenuButton({ open, onToggle }) {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-expanded</span>={open} <span class="tok-a">aria-label</span>=<span class="tok-s">"Menu"</span> <span class="tok-a">onClick</span>={onToggle}<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;MenuIcon</span> <span class="tok-a">morphTo</span>=<span class="tok-s">"x"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">active</span>={open} <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.animated-icons.morph.duration">Morphs take 450 ms unless you pass <code>duration</code>. With <code>trigger="state"</code> the icon follows <code>active</code> in both directions, which suits toggles such as a menu, a password field (<code>eye</code> to <code>eye-off</code>) or a play button.</p>
+</section>
+<section id="frameworks">
+<h2 data-i18n="guide.animated-icons.frameworks.h">The same morphs in Vue, Svelte and the web component</h2>
+<div class="code"><div class="code-head"><span>PlayButton.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup<span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { ref } <span class="tok-k">from</span> <span class="tok-s">'vue'</span>;
+<span class="tok-k">import</span> { MorphIcon, registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-k">import</span> { iconPlay, iconPause } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+registerIcons([iconPlay, iconPause]);
+<span class="tok-k">const</span> playing = ref(<span class="tok-k">false</span>);
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">:aria-label</span>=<span class="tok-s">"playing ? 'Pause' : 'Play'"</span> <span class="tok-a">@click</span>=<span class="tok-s">"playing = !playing"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">:name</span>=<span class="tok-s">"playing ? 'pause' : 'play'"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<div class="code"><div class="code-head"><span>ThemeToggle.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">import</span> { Icon, morphStore, registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/svelte'</span>;
+  <span class="tok-k">import</span> { iconSun, iconMoon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+  registerIcons([iconSun, iconMoon]);
+  <span class="tok-k">const</span> icon = morphStore(<span class="tok-s">'sun'</span>, { duration: <span class="tok-n">400</span> });
+  <span class="tok-k">let</span> dark = $state(<span class="tok-k">false</span>);
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Dark theme"</span> <span class="tok-a">aria-pressed</span>={dark}
+  <span class="tok-a">onclick</span>={() =<span class="tok-t">&gt;</span> { dark = !dark; icon.set(dark ? <span class="tok-s">'moon'</span> : <span class="tok-s">'sun'</span>); }}<span class="tok-t">&gt;</span>
+  {#<span class="tok-k">if</span> $icon}<span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={$icon.icon} <span class="tok-a">variant</span>={$icon.variant} <span class="tok-t">/&gt;</span>{/<span class="tok-k">if</span>}
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span></pre></div>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> <span class="tok-a">src</span>=<span class="tok-s">"https://cdn.jsdelivr.net/npm/glyphfox@1"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">id</span>=<span class="tok-s">"menu"</span> <span class="tok-a">aria-expanded</span>=<span class="tok-s">"false"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Menu"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"menu"</span> morph <span class="tok-a">duration</span>=<span class="tok-s">"300"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;script</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">const</span> button = document.getElementById(<span class="tok-s">'menu'</span>);
+  <span class="tok-k">const</span> icon = button.querySelector(<span class="tok-s">'glyph-fox'</span>);
+  button.addEventListener(<span class="tok-s">'click'</span>, () =<span class="tok-t">&gt;</span> {
+    <span class="tok-k">const</span> open = button.getAttribute(<span class="tok-s">'aria-expanded'</span>) !== <span class="tok-s">'true'</span>;
+    button.setAttribute(<span class="tok-s">'aria-expanded'</span>, String(open));
+    icon.setAttribute(<span class="tok-s">'name'</span>, open ? <span class="tok-s">'x'</span> : <span class="tok-s">'menu'</span>);
+  });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.animated-icons.frameworks.p">The <code>morph</code> attribute makes <code>&lt;glyph-fox&gt;</code> animate every change of <code>name</code>. The CDN build already contains every icon, so no registration is needed there.</p>
+</section>
+<section id="css-only">
+<h2 data-i18n="guide.animated-icons.css-only.h">Morphs without JavaScript</h2>
+<p data-i18n="guide.animated-icons.css-only.p"><code>toSvg</code> with <code>morphTo</code> returns an SVG whose paths carry the start shape and switch to the target with a CSS <code>d</code> transition. Browsers without CSS <code>d</code> support cross fade to the exact target instead. The result is a plain string, ready for server templates, static sites or a CMS.</p>
+<div class="code"><div class="code-head"><span>build-icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-c">// Morphs while the pointer is over the icon or its direct parent.</span>
+<span class="tok-k">const</span> menu = toSvg(<span class="tok-s">'menu'</span>, { morphTo: <span class="tok-s">'x'</span>, trigger: <span class="tok-s">'hover'</span>, duration: <span class="tok-n">300</span> });
+
+<span class="tok-c">// Morphs while the svg has the class gf-on: toggle it from any script.</span>
+<span class="tok-k">const</span> play = toSvg(<span class="tok-s">'play'</span>, { morphTo: <span class="tok-s">'pause'</span>, trigger: <span class="tok-s">'state'</span> });</pre></div>
+<p data-i18n="guide.animated-icons.css-only.cli">The CLI writes the same file: <code>npx glyphfox morph menu x --trigger hover --out menu.svg</code>. Only <code>toSvg</code> resolves a target given as a name; <code>renderToString</code> from <code>glyphfox/core</code> expects icon data for <code>morphTo</code>.</p>
+</section>
+<section id="css-classes">
+<h2 data-i18n="guide.animated-icons.css-classes.h">Tailwind CSS animation classes</h2>
+<p data-i18n="guide.animated-icons.css-classes.p">Icons rendered with the <a href="tailwind.html">Tailwind CSS plugin</a> are masks, not SVG, so they take whole element animations: <code>gf-spin</code>, <code>gf-pulse</code>, <code>gf-pop</code>, <code>gf-wiggle</code>, <code>gf-bounce</code> and <code>gf-shake</code>, with the same timing as the presets. They work with variants such as <code>hover:gf-wiggle</code>. Draw and morphs need inline SVG.</p>
+</section>
+<section id="motion">
+<h2 data-i18n="guide.animated-icons.motion.h">Reduced motion</h2>
+<p data-i18n="guide.animated-icons.motion.p">Every preset carries a <code>prefers-reduced-motion: reduce</code> rule that turns its animation off, the CSS only morph switches without a transition, and the JavaScript morphs of the components jump straight to the final shape. You do not need to check the setting yourself. People who set it still see the final state: the solid heart, the x of an open menu, the check after a copy.</p>
+<p data-i18n="guide.animated-icons.motion.p2">Reduced motion is not the only reason to keep animation short. Motion draws the eye, so reserve looping animations for things that are in progress, such as a <code>loader-circle</code> that spins while a request runs, and stop them when the work is done. The <a href="accessibility.html">accessibility guide</a> has more on motion and meaning.</p>
+</section>
+<section id="export">
+<h2 data-i18n="guide.animated-icons.export.h">Export animated files</h2>
+<p data-i18n="guide.animated-icons.export.p">The customizer in the <a href="../icons.html">icon browser</a> exports any icon with a preset as an animated SVG, a GIF or a WebM video, using the exact same motion: the GIF and WebM frames are sampled from the preset timing. Use the animated SVG wherever SVG is accepted, and GIF or WebM for slides, documentation tools and chat apps that strip SVG.</p>
+</section>
+<section id="performance">
+<h2 data-i18n="guide.animated-icons.performance.h">Performance</h2>
+<ul class="list"><li data-i18n="guide.animated-icons.performance.list.1">Presets other than <code>draw</code> animate <code>transform</code> and <code>opacity</code> only, which browsers run without layout work. <code>draw</code> animates <code>stroke-dashoffset</code>, which repaints the icon on every frame: fine for a few icons, worth avoiding on long lists.</li><li data-i18n="guide.animated-icons.performance.list.2">Component morphs run on <code>requestAnimationFrame</code> and re-render the icon each frame for the length of the morph. A handful at once is cheap; hundreds starting together are not.</li><li data-i18n="guide.animated-icons.performance.list.3">The generated class names are hashes of the settings, so identical icons produce identical markup and the server and client output match.</li></ul>
+</section>
+<section id="props">
+<h2 data-i18n="guide.animated-icons.props.h">Animation props</h2>
+<p data-i18n="guide.animated-icons.props.p">These are the props that control motion. Every other shared prop, such as <code>variant</code> or <code>weight</code>, can be combined with them.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Default</th><th data-i18n="docs.desc">Description</th></tr></thead><tbody>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Living state preset.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">The state for trigger state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>per preset</td><td data-i18n="prop.duration">Animation or morph duration.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Animation or morph delay.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repeat forever or a number of times (spin and pulse loop by default).</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Morph target; the trigger decides when it shows.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.animated-icons.pitfalls.h">Pitfalls</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.animated-icons.pitfalls.list.1.t">Morph targets that render nothing</dt><dd data-i18n="guide.animated-icons.pitfalls.list.1.d">Morph targets, <code>MorphIcon</code> names and <code>morphStore</code> names are looked up by name. A name whose data was never imported or registered is loaded on demand, and in a Vite production build that load does not happen because Vite leaves the variable dynamic import inside <code>node_modules</code> untouched. The target stays empty. Register every name you morph to with <code>registerIcons</code>. Importing a component such as <code>CheckIcon</code> only for its side effect does not help, because tree shaking removes an import that is never used.</dd></div><div><dt data-i18n="guide.animated-icons.pitfalls.list.2.t">Hover and click outside the icon</dt><dd data-i18n="guide.animated-icons.pitfalls.list.2.d">A hover preset on inline SVG also responds to the direct parent, through CSS. Everything driven by events does not: <code>trigger="click"</code> and the hover trigger of a morph listen on the icon itself, and <code>glyph-fox</code> only reacts to the pointer on the element itself. Clicking the padding of a button does not reach them. Keep the state in the button and pass it down with <code>trigger="state"</code> and <code>active</code>.</dd></div><div><dt data-i18n="guide.animated-icons.pitfalls.list.3.t">Mount animations that replay</dt><dd data-i18n="guide.animated-icons.pitfalls.list.3.d">A <code>mount</code> animation plays every time the icon mounts: when a list re-renders with new keys, when a route changes, and on <code>glyph-fox</code> whenever one of its attributes changes. If an icon should animate once, use <code>trigger="state"</code> and decide in your code when it plays.</dd></div><div><dt data-i18n="guide.animated-icons.pitfalls.list.4.t">State animations that never stop</dt><dd data-i18n="guide.animated-icons.pitfalls.list.4.d">A preset with <code>loop</code> keeps playing while <code>active</code> stays true. Set <code>active</code> back to false when the event is handled, or give <code>loop</code> a number.</dd></div><div><dt data-i18n="guide.animated-icons.pitfalls.list.5.t">Static markup and clicks</dt><dd data-i18n="guide.animated-icons.pitfalls.list.5.d">In HTML from <code>toSvg</code> nothing listens for clicks. Use <code>trigger: 'state'</code> and toggle the <code>gf-on</code> class from your own handler.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions</h2>
+<h3 data-i18n="guide.animated-icons.faq.no-js.q">Do animated icons need JavaScript?</h3>
+<p data-i18n="guide.animated-icons.faq.no-js.a">Living states do not: the CSS is inside the SVG, so a server rendered or static icon animates on mount and on hover with no script. The CSS only morph from <code>toSvg</code> also runs without a framework. Component morphs such as <code>MorphIcon</code> use JavaScript to compute the frames.</p>
+<h3 data-i18n="guide.animated-icons.faq.combine.q">Can an icon morph and play a preset at the same time?</h3>
+<p data-i18n="guide.animated-icons.faq.combine.a">Yes. <code>animate</code> and <code>morphTo</code> are independent props, so a heart can pop on click while it morphs to the solid style: <code>&lt;HeartIcon animate="pop" morphTo="heart/solid" trigger="click" /&gt;</code>.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in this guide</h2>
+<ul class="icon-links"><li><a href="../icons/loader-circle.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-loader-circle" aria-hidden="true"><path d="M12 3A9 9 0 1 1 3 12"/></svg><span>loader-circle</span></a></li><li><a href="../icons/sparkles.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><span>sparkles</span></a></li><li><a href="../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../icons/copy.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-copy" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span>copy</span></a></li><li><a href="../icons/check.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-check" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg><span>check</span></a></li><li><a href="../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../icons/play.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-play" aria-hidden="true"><path d="M7 4v16l12-8Z"/></svg><span>play</span></a></li><li><a href="../icons/pause.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-pause" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1.5"/><rect x="14" y="4" width="5" height="16" rx="1.5"/></svg><span>pause</span></a></li><li><a href="../icons/sun.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 4.5L12 2"/><path d="M19.5 12L22 12"/><path d="M12 19.5L12 22"/><path d="M4.5 12L2 12"/><path d="M17.66 6.34L18.72 5.28"/><path d="M17.66 17.66L18.72 18.72"/><path d="M6.34 17.66L5.28 18.72"/><path d="M6.34 6.34L5.28 5.28"/></svg><span>sun</span></a></li><li><a href="../icons/moon.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-moon" aria-hidden="true"><path d="M11.44 3.5A9 9 0 1 0 20.46 13.34A7 7 0 0 1 11.44 3.5Z"/><path d="M17 4.5Q17.3 6.7 19.5 7Q17.3 7.3 17 9.5Q16.7 7.3 14.5 7Q16.7 6.7 17 4.5Z"/></svg><span>moon</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Related guides</h2>
+<ul class="guide-cards"><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">React icons</strong><span data-i18n="guide.react.description">Use glyphfox icons in React: install, tree shakable SVG components, every prop, icons by name, modifiers, Fusion, morphing, refs and TypeScript types.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Accessible icons</strong><span data-i18n="guide.accessibility.description">Make glyphfox icons accessible: decorative by default, titles and labels, icon only buttons, status icons, contrast, reduced motion and right to left layouts.</span></a></li><li><a href="tailwind.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-wind" aria-hidden="true"><path d="M3 10h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg><strong data-i18n="guide.tailwind.h1">Tailwind CSS icons</strong><span data-i18n="guide.tailwind.description">Use glyphfox icons as Tailwind CSS v3 and v4 classes: setup, the gf class syntax, styles and weights after the slash, badges, fusions, animations and options.</span></a></li><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Icons in Lit and web components</strong><span data-i18n="guide.web-components.description">Use the glyph-fox custom element in Lit and plain web components: register every icon or a subset, bind attributes, style it and keep it accessible.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">All icons by category</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+          <li><a href="../labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="page.js"></script>
+</body>
+</html>

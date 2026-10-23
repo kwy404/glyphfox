@@ -207,6 +207,12 @@ export async function docsFiles(root, icons, { version }) {
       }
     }
   }
+  // Guides, icon pages, social images, sitemaps and robots.txt (scripts/seo),
+  // with the hashed assets like every other page.
+  const { seoFiles } = await import(pathToFileURL(join(root, 'scripts', 'seo', 'index.mjs')).href);
+  for (const [file, text] of Object.entries(await seoFiles({ root, icons, files, siteDict: dict }))) {
+    files[file] = typeof text === 'string' && file.endsWith('.html') ? withAssets(text, assets) : text;
+  }
   // The service worker precaches the pages, the hashed assets and the data;
   // the manifest keeps the SHA-256 of every precached file.
   const precache = precacheList(docs, assets.outputs, files);
@@ -229,8 +235,8 @@ export async function buildDocsData(root, icons, { version, check }) {
   const files = await docsFiles(root, icons, { version });
   const changed = [];
   for (const [file, text] of Object.entries(files)) {
-    const old = existsSync(file) ? readFileSync(file, 'utf8') : null;
-    if (old === text) continue;
+    const old = existsSync(file) ? readFileSync(file) : null;
+    if (old && (Buffer.isBuffer(text) ? old.equals(text) : old.toString('utf8') === text)) continue;
     changed.push(relative(root, file).split('\\').join('/'));
     if (!check) {
       mkdirSync(dirname(file), { recursive: true });

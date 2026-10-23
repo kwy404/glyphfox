@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.2fa4695b.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/html-cdn.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icons in plain HTML from a CDN: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location.pathname.replace(/(pt-br\/)?[^/]*$/,'');navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}</script>
+<title data-i18n="guide.html-cdn.title">SVG icons from a CDN in plain HTML: glyphfox</title>
+<meta name="description" content="Add glyphfox to any HTML page with one script tag: the glyph-fox element, data-glyph placeholders, the global API, version pinning and when to build a subset." data-i18n-attr="content:guide.html-cdn.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/guides/html-cdn.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/html-cdn.html">
+<meta property="og:title" content="SVG icons from a CDN in plain HTML: glyphfox">
+<meta property="og:description" content="Add glyphfox to any HTML page with one script tag: the glyph-fox element, data-glyph placeholders, the global API, version pinning and when to build a subset.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/guides/html-cdn.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="SVG icons from a CDN in plain HTML: glyphfox">
+<meta name="twitter:description" content="Add glyphfox to any HTML page with one script tag: the glyph-fox element, data-glyph placeholders, the global API, version pinning and when to build a subset.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/html-cdn.png">
+<meta name="twitter:image:alt" content="Icons in plain HTML from a CDN: glyphfox">
+<link rel="stylesheet" href="../assets/docs.4063d59a.css">
+<link rel="stylesheet" href="guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kwy404.github.io/glyphfox/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/guides/"},{"@type":"ListItem","position":3,"name":"HTML and CDN","item":"https://kwy404.github.io/glyphfox/guides/html-cdn.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Should I use the element or data-glyph placeholders?","acceptedAnswer":{"@type":"Answer","text":"Placeholders for icons that never change after load: they turn into plain inline SVG with no live element behind them. The element for icons that switch names, morph, or react to hover, click or state. Both come from the same script and can be mixed on one page."}},{"@type":"Question","name":"Does it work with HTML swapped in later, for example by htmx?","acceptedAnswer":{"@type":"Answer","text":"Yes. The runtime observes the whole document, so placeholders inside inserted HTML are replaced as they arrive, and \u003cglyph-fox> elements upgrade on insertion because the element is defined for the page."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copied to the clipboard" data-theme-light="Switch to the light theme" data-theme-dark="Switch to the dark theme">
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../pt-br/" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">All guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit and web components</a>
+<a href="html-cdn.html" aria-current="page" class="on" data-i18n="guide.html-cdn.short">HTML and CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Topics</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animated icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibility</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Server rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Breadcrumb" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../" data-i18n="seo.crumb.home">Home</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.html-cdn.short">HTML and CDN</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.html-cdn.h1">Icons in plain HTML from a CDN</h1>
+<p class="lead" data-i18n="guide.html-cdn.lead">One script tag gives a page every glyphfox icon, the <code>&lt;glyph-fox&gt;</code> element and a runtime that turns <code>&lt;i data-glyph&gt;</code> placeholders into inline SVG. No build step and no framework.</p>
+<nav class="toc" aria-label="On this page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.html-cdn.install.h">Add the script</a></li><li><a href="#pin" data-i18n="guide.html-cdn.pin.h">Pin the version</a></li><li><a href="#element" data-i18n="guide.html-cdn.element.h">The glyph-fox element</a></li><li><a href="#runtime" data-i18n="guide.html-cdn.runtime.h">Placeholders with data-glyph</a></li><li><a href="#api" data-i18n="guide.html-cdn.api.h">The global API</a></li><li><a href="#size" data-i18n="guide.html-cdn.size.h">File size, and when to build instead</a></li><li><a href="#props" data-i18n="guide.html-cdn.props.h">Attributes</a></li><li><a href="#pitfalls" data-i18n="guide.html-cdn.pitfalls.h">Pitfalls</a></li><li><a href="#faq" data-i18n="seo.faq">Questions</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.html-cdn.install.h">Add the script</h2>
+<p data-i18n="guide.html-cdn.install.p">The single file build carries every icon, the element, the placeholder runtime and the engine. jsDelivr and unpkg both resolve the bare package URL to it, <code>dist/web/glyphfox.min.js</code>.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1">&lt;!doctype html<span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;html</span> <span class="tok-a">lang</span>=<span class="tok-s">"en"</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;head</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;meta</span> <span class="tok-a">charset</span>=<span class="tok-s">"utf-8"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;title</span><span class="tok-t">&gt;</span>My page<span class="tok-t">&lt;/title</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;script</span> defer <span class="tok-a">src</span>=<span class="tok-s">"https://cdn.jsdelivr.net/npm/glyphfox@1"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+  <span class="tok-c">&lt;!-- or https://unpkg.com/glyphfox@1 --&gt;</span>
+<span class="tok-t">&lt;/head</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;body</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"home"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;i</span> <span class="tok-a">data-glyph</span>=<span class="tok-s">"search"</span> <span class="tok-a">data-size</span>=<span class="tok-s">"20"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/i</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/body</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/html</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.html-cdn.install.defer">With <code>defer</code> the download does not block parsing. The script runs once the document is parsed, defines the element, upgrades every <code>&lt;glyph-fox&gt;</code> on the page and replaces the placeholders.</p>
+</section>
+<section id="pin">
+<h2 data-i18n="guide.html-cdn.pin.h">Pin the version</h2>
+<p data-i18n="guide.html-cdn.pin.p"><code>glyphfox@1</code> follows the latest 1.x release, which is convenient while you prototype. In production, pin the exact version and file, so the page never changes under you and the CDN can cache the file for good.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> defer <span class="tok-a">src</span>=<span class="tok-s">"https://cdn.jsdelivr.net/npm/glyphfox@1.0.0/dist/web/glyphfox.min.js"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.html-cdn.pin.sri">An exact version can also carry Subresource Integrity: take the hash of that file, which jsDelivr lists for every file, and add <code>integrity</code> and <code>crossorigin="anonymous"</code> to the tag. A range such as <code>@1</code> cannot carry a hash, because the file behind it changes with each release.</p>
+<p data-i18n="guide.html-cdn.pin.self">You can also self host it. Copy <code>node_modules/glyphfox/dist/web/glyphfox.min.js</code> into your public folder and point the tag at it: the file is self contained and makes no further requests.</p>
+</section>
+<section id="element">
+<h2 data-i18n="guide.html-cdn.element.h">The glyph-fox element</h2>
+<p data-i18n="guide.html-cdn.element.p">Use the element for icons that change: a name that switches, a morph, a hover or click trigger, a state. It reads every prop from its attributes and redraws when one of them changes.</p>
+<div class="code"><div class="code-head"><span>menu.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-k">class</span>=<span class="tok-s">"menu"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Open menu"</span> <span class="tok-a">aria-expanded</span>=<span class="tok-s">"false"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"menu"</span> morph <span class="tok-a">duration</span>=<span class="tok-s">"300"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;script</span> <span class="tok-k">type</span>=<span class="tok-s">"module"</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">const</span> button = document.querySelector(<span class="tok-s">'.menu'</span>);
+  <span class="tok-k">const</span> icon = button.querySelector(<span class="tok-s">'glyph-fox'</span>);
+  button.addEventListener(<span class="tok-s">'click'</span>, () =<span class="tok-t">&gt;</span> {
+    <span class="tok-k">const</span> open = button.getAttribute(<span class="tok-s">'aria-expanded'</span>) !== <span class="tok-s">'true'</span>;
+    button.setAttribute(<span class="tok-s">'aria-expanded'</span>, String(open));
+    button.setAttribute(<span class="tok-s">'aria-label'</span>, open ? <span class="tok-s">'Close menu'</span> : <span class="tok-s">'Open menu'</span>);
+    icon.setAttribute(<span class="tok-s">'name'</span>, open ? <span class="tok-s">'x'</span> : <span class="tok-s">'menu'</span>);
+  });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.html-cdn.element.more">The <code>morph</code> attribute animates the change from <code>menu</code> to <code>x</code>, one of the hand tuned pairs. Shadow DOM styling, custom tag names and triggers are covered in the <a href="web-components.html">web components guide</a>.</p>
+</section>
+<section id="runtime">
+<h2 data-i18n="guide.html-cdn.runtime.h">Placeholders with data-glyph</h2>
+<p data-i18n="guide.html-cdn.runtime.p">For icons that never change, a placeholder is lighter than a live element. The runtime replaces every element that has a <code>data-glyph</code> attribute with inline SVG, copies its <code>class</code> to the svg, and keeps watching the page, so placeholders added later by your scripts are replaced too.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;i</span> <span class="tok-a">data-glyph</span>=<span class="tok-s">"search"</span> <span class="tok-a">data-size</span>=<span class="tok-s">"20"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/i</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;i</span> <span class="tok-a">data-glyph</span>=<span class="tok-s">"file+check@tr"</span> <span class="tok-a">data-weight</span>=<span class="tok-s">"1.5"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/i</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;i</span> <span class="tok-a">data-glyph</span>=<span class="tok-s">"folder"</span> <span class="tok-a">data-variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-a">data-secondary-color</span>=<span class="tok-s">"#ff7a1a"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/i</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;i</span> <span class="tok-a">data-glyph</span>=<span class="tok-s">"trash"</span> <span class="tok-k">class</span>=<span class="tok-s">"danger"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Delete"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/i</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.html-cdn.runtime.props">Props are data attributes in kebab-case: <code>data-size</code>, <code>data-weight</code>, <code>data-variant</code>, <code>data-modifier</code>, <code>data-animate</code> and the rest of the table below. An <code>aria-label</code> on the placeholder becomes the title of the icon, so the svg gets an accessible name.</p>
+<p data-i18n="guide.html-cdn.runtime.once">The replacement happens once. The placeholder is gone afterwards, so changing its data attributes later does nothing, and listeners attached to the <code>&lt;i&gt;</code> are lost with it. Attach listeners to a parent, or use the element when the icon has to change.</p>
+<p data-i18n="guide.html-cdn.runtime.module">With a bundler, import <code>glyphfox/runtime</code> instead of the CDN file. It exports <code>replaceGlyphs</code> and runs it on load, and it includes every icon, since a page can ask for any name. Do not load that module straight from a CDN: it imports the package as separate ES modules, one file per icon, which costs hundreds of requests. The single file build already contains the same runtime.</p>
+</section>
+<section id="api">
+<h2 data-i18n="guide.html-cdn.api.h">The global API</h2>
+<p data-i18n="guide.html-cdn.api.p">The CDN build also sets <code>window.glyphfox</code> with the core API: <code>toSvg</code>, <code>fuse</code>, <code>search</code>, <code>getIcon</code>, <code>iconNames</code>, <code>categories</code>, <code>createMorph</code>, <code>toDataUri</code>, <code>replaceGlyphs</code> and more. It exists once the script has run, so call it from a module script placed after the tag, or after <code>DOMContentLoaded</code>.</p>
+<div class="code"><div class="code-head"><span>icon-search.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;input</span> <span class="tok-k">type</span>=<span class="tok-s">"search"</span> <span class="tok-a">id</span>=<span class="tok-s">"q"</span> <span class="tok-a">placeholder</span>=<span class="tok-s">"Search icons"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Search icons"</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;div</span> <span class="tok-a">id</span>=<span class="tok-s">"results"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/div</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;script</span> <span class="tok-k">type</span>=<span class="tok-s">"module"</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">const</span> { search, toSvg } = window.glyphfox;
+  <span class="tok-k">const</span> q = document.getElementById(<span class="tok-s">'q'</span>);
+  <span class="tok-k">const</span> results = document.getElementById(<span class="tok-s">'results'</span>);
+  q.addEventListener(<span class="tok-s">'input'</span>, () =<span class="tok-t">&gt;</span> {
+    results.innerHTML = search(q.value, { limit: <span class="tok-n">24</span> })
+      .map((icon) =<span class="tok-t">&gt;</span> <span class="tok-s">`&lt;button type="button" aria-label="${icon.name}"&gt;${toSvg(icon.name, { size: 28 })}&lt;/button&gt;`</span>)
+      .join(<span class="tok-s">''</span>);
+  });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.html-cdn.api.datauri"><code>toDataUri</code> turns an SVG string into a URL for CSS backgrounds or an <code>&lt;img&gt;</code>. An image cannot inherit <code>currentColor</code> from the page, so pass an explicit color.</p>
+<div class="code"><div class="code-head"><span>checklist.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">const</span> { toDataUri, toSvg } = window.glyphfox;
+<span class="tok-k">const</span> check = toDataUri(toSvg(<span class="tok-s">'check'</span>, { size: <span class="tok-n">16</span>, color: <span class="tok-s">'#16a34a'</span> }));
+document.documentElement.style.setProperty(<span class="tok-s">'--icon-check'</span>, <span class="tok-s">`url("${check}")`</span>);</pre></div>
+<div class="code"><div class="code-head"><span>checklist.css</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="css" data-done="1"><span class="tok-t">.done</span>::before {
+  <span class="tok-a">content</span>: <span class="tok-s">''</span>;
+  <span class="tok-a">display</span>: inline-block;
+  <span class="tok-a">width</span>: <span class="tok-n">16px</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">16px</span>;
+  <span class="tok-a">margin-right</span>: <span class="tok-n">6px</span>;
+  <span class="tok-a">background</span>: var(--icon-check) no-repeat center / contain;
+}</pre></div>
+<p data-i18n="guide.html-cdn.api.esm"><code>dist/web/glyphfox.esm.js</code> is the same build as an ES module. Its default export is the API object, and like the classic file it defines the element and runs the placeholder runtime.</p>
+<div class="code"><div class="code-head"><span>logo.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;div</span> <span class="tok-a">id</span>=<span class="tok-s">"logo"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/div</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;script</span> <span class="tok-k">type</span>=<span class="tok-s">"module"</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">import</span> glyphfox <span class="tok-k">from</span> <span class="tok-s">'https://cdn.jsdelivr.net/npm/glyphfox@1/dist/web/glyphfox.esm.js'</span>;
+
+  document.getElementById(<span class="tok-s">'logo'</span>).innerHTML = glyphfox.toSvg(<span class="tok-s">'fox'</span>, { size: <span class="tok-n">48</span>, variant: <span class="tok-s">'duotone'</span> });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+</section>
+<section id="size">
+<h2 data-i18n="guide.html-cdn.size.h">File size, and when to build instead</h2>
+<p data-i18n="guide.html-cdn.size.p">The single file holds every icon: 216.4 KB minified, 62.4 KB with gzip. Served from a CDN with long caching, that is a fair price for a prototype, a documentation site or a page that shows many different icons. It is a poor deal for a landing page that shows six.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.html-cdn.size.table.h1">Approach</th><th data-i18n="guide.html-cdn.size.table.h2">What ships</th><th data-i18n="guide.html-cdn.size.table.h3">Good for</th></tr></thead><tbody>
+<tr><td data-i18n="guide.html-cdn.size.table.r1c1">One CDN script</td><td data-i18n="guide.html-cdn.size.table.r1c2">Every icon, the element, the runtime and the API.</td><td data-i18n="guide.html-cdn.size.table.r1c3">Prototypes, docs, pages with many icons.</td></tr>
+<tr><td data-i18n="guide.html-cdn.size.table.r2c1">A bundler with <code>glyphfox/web/element</code></td><td data-i18n="guide.html-cdn.size.table.r2c2">The element and the icons you register.</td><td data-i18n="guide.html-cdn.size.table.r2c3">Apps that already have a build step, see <a href="tree-shaking.html">tree shaking</a>.</td></tr>
+<tr><td data-i18n="guide.html-cdn.size.table.r3c1">CLI subset as CSS</td><td data-i18n="guide.html-cdn.size.table.r3c2">One stylesheet with a mask class per icon and no JavaScript.</td><td data-i18n="guide.html-cdn.size.table.r3c3">Static sites and icons that never change.</td></tr>
+<tr><td data-i18n="guide.html-cdn.size.table.r4c1">CLI subset as a sprite</td><td data-i18n="guide.html-cdn.size.table.r4c2">One SVG file with a symbol per icon.</td><td data-i18n="guide.html-cdn.size.table.r4c3">Server rendered HTML that repeats the same icons, see <a href="svg-sprite.html">SVG sprites</a>.</td></tr>
+</tbody></table></div>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build home search menu loader <span class="tok-a">--type</span> css <span class="tok-a">--out</span> public
+<span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build home search menu loader <span class="tok-a">--type</span> sprite <span class="tok-a">--out</span> public/icons</pre></div>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;link</span> <span class="tok-a">rel</span>=<span class="tok-s">"stylesheet"</span> <span class="tok-a">href</span>=<span class="tok-s">"/glyphfox.css"</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf gf-home"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf gf-loader gf-spin"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.html-cdn.size.css">The CSS build draws each icon as a mask filled with <code>currentColor</code>, so it takes the text color and the font size, and it includes the <code>gf-spin</code> and <code>gf-pulse</code> animations. Every command takes the shared props as flags, such as <code>--weight 1.5</code> or <code>--variant duotone</code>.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.html-cdn.props.h">Attributes</h2>
+<p data-i18n="guide.html-cdn.props.p">The element and the placeholders read the same props, both in kebab-case: as plain attributes on <code>&lt;glyph-fox&gt;</code>, such as <code>size</code> and <code>secondary-color</code>, and with a <code>data-</code> prefix on placeholders, such as <code>data-size</code> and <code>data-secondary-color</code>. The element also takes <code>layout</code>, <code>gap</code> and <code>morph</code>.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.attr">Attribute</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Default</th><th data-i18n="docs.desc">Description</th></tr></thead><tbody>
+<tr><td><code>name</code></td><td>string</td><td>none</td><td data-i18n="seo.prop.name">The icon spec: a name, <code>name+modifier@corner</code>, <code>a&amp;b:layout</code> or <code>name/variant</code>.</td></tr>
+<tr><td><code>layout</code></td><td>overlap, side, stack, grid, orbit, badge, inside</td><td>none</td><td data-i18n="seo.prop.layout">Fusion layout when the name joins icons with <code>&amp;</code>.</td></tr>
+<tr><td><code>gap</code></td><td>number</td><td><code>1</code></td><td data-i18n="seo.prop.gap">Knockout gap of a fusion, in grid units.</td></tr>
+<tr><td><code>morph</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="seo.prop.morph">Animates every change of <code>name</code> as a morph.</td></tr>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Width and height; numbers are pixels.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Main color.</td></tr>
+<tr><td><code>secondary-color</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color of the duotone layer and of the solid fill.</td></tr>
+<tr><td><code>secondary-opacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacity of the duotone layer or of the solid fill.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Stroke from 1 to 3 on the 24 grid, optically compensated below 24 px.</td></tr>
+<tr><td><code>absolute-weight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Keeps the stroke at weight pixels at any size.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Round or sharp joins and caps.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Style axis; solid comes from the closed shapes.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotation in degrees.</td></tr>
+<tr><td><code>flip-x</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Mirror horizontally.</td></tr>
+<tr><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Mirror vertically.</td></tr>
+<tr><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Mirror in right to left layouts.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Living state preset.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">The state for trigger state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>per preset</td><td data-i18n="prop.duration">Animation or morph duration.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Animation or morph delay.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repeat forever or a number of times (spin and pulse loop by default).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>none</td><td data-i18n="prop.modifier">Badge with an automatic knockout gap.</td></tr>
+<tr><td><code>modifier-corner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Corner of the badge.</td></tr>
+<tr><td><code>morph-to</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Morph target; the trigger decides when it shows.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Accessible name: title, role img and aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true without a title</td><td data-i18n="prop.decorative">Hides the icon from assistive technology.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.html-cdn.pitfalls.h">Pitfalls</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.html-cdn.pitfalls.list.1.t">Scripts that run too early</dt><dd data-i18n="guide.html-cdn.pitfalls.list.1.d">An inline classic script runs during parsing, before a deferred CDN script, so <code>window.glyphfox</code> is still undefined there. Use <code>type="module"</code>, since module scripts run after deferred scripts in document order, or wait for <code>DOMContentLoaded</code>.</dd></div><div><dt data-i18n="guide.html-cdn.pitfalls.list.2.t">The runtime module from a CDN</dt><dd data-i18n="guide.html-cdn.pitfalls.list.2.d"><code>dist/runtime/auto.js</code> is meant for bundlers. Loaded directly in the browser it pulls the package one module at a time, a file per icon. Use the single file build on plain pages.</dd></div><div><dt data-i18n="guide.html-cdn.pitfalls.list.3.t">Placeholders are replaced once</dt><dd data-i18n="guide.html-cdn.pitfalls.list.3.d">Changing <code>data-*</code> attributes after the replacement has no effect, and listeners on the placeholder are dropped. Use <code>&lt;glyph-fox&gt;</code> for icons that change.</dd></div><div><dt data-i18n="guide.html-cdn.pitfalls.list.4.t">Self closing elements</dt><dd data-i18n="guide.html-cdn.pitfalls.list.4.d"><code>&lt;glyph-fox name="home" /&gt;</code> is an open tag in HTML, so the content after it disappears inside the element. Always write the closing tag.</dd></div><div><dt data-i18n="guide.html-cdn.pitfalls.list.5.t">currentColor in images</dt><dd data-i18n="guide.html-cdn.pitfalls.list.5.d">SVG used as an <code>&lt;img&gt;</code> source or a CSS background cannot see the page color. Pass a color to <code>toSvg</code>, or use the CSS subset, which works with masks.</dd></div><div><dt data-i18n="guide.html-cdn.pitfalls.list.6.t">Click triggers on placeholders</dt><dd data-i18n="guide.html-cdn.pitfalls.list.6.d">Placeholders become static SVG. Hover morphs and animations still play, because they are CSS inside the SVG, but click and state triggers need the element, which switches the states for you.</dd></div><div><dt data-i18n="guide.html-cdn.pitfalls.list.7.t">Floating versions in production</dt><dd data-i18n="guide.html-cdn.pitfalls.list.7.d"><code>glyphfox@1</code> moves with every 1.x release, and a changed file breaks an integrity hash. Pin <code>glyphfox@1.0.0</code> and the full file path.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions</h2>
+<h3 data-i18n="guide.html-cdn.faq.which.q">Should I use the element or data-glyph placeholders?</h3>
+<p data-i18n="guide.html-cdn.faq.which.a">Placeholders for icons that never change after load: they turn into plain inline SVG with no live element behind them. The element for icons that switch names, morph, or react to hover, click or state. Both come from the same script and can be mixed on one page.</p>
+<h3 data-i18n="guide.html-cdn.faq.htmx.q">Does it work with HTML swapped in later, for example by htmx?</h3>
+<p data-i18n="guide.html-cdn.faq.htmx.a">Yes. The runtime observes the whole document, so placeholders inside inserted HTML are replaced as they arrive, and <code>&lt;glyph-fox&gt;</code> elements upgrade on insertion because the element is defined for the page.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in this guide</h2>
+<ul class="icon-links"><li><a href="../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M15.5 5.72V3H19v5.44"/><path d="M9.5 21v-4.5a2.5 2.5 0 0 1 5 0V21"/></svg><span>home</span></a></li><li><a href="../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M7.62 10.09A3.5 3.5 0 0 1 10.09 7.62"/></svg><span>search</span></a></li><li><a href="../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../icons/folder.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/><path d="M2 11h20"/></svg><span>folder</span></a></li><li><a href="../icons/trash.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-trash" aria-hidden="true"><path d="M5 6h14l-1.2 14.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z"/><path d="M3 6h18"/><path d="M9 6V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/><path d="M10 11v6"/><path d="M14 11v6"/></svg><span>trash</span></a></li><li><a href="../icons/check.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-check" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg><span>check</span></a></li><li><a href="../icons/fox.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fox" aria-hidden="true"><path d="M2.5 9.5L6 6.5 7.5 2.5 9.5 6 11 3l1 4.5c2 1.5 3.5 3 4 5.5 .5 2.5 0 5.5-1 8H6.5c0-3.5 .5-6.5 0-9.5Z"/><path d="M15 21c3.5 0 6.5-2 6.5-5.5 0-2-1-3.5-2.5-4.5 .5 3-1 5.5-4 6.5"/></svg><span>fox</span></a></li><li><a href="../icons/loader.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-loader" aria-hidden="true"><path d="M12 7L12 2.5"/><path d="M15.54 8.46L18.72 5.28"/><path d="M17 12L21.5 12"/><path d="M15.54 15.54L18.72 18.72"/><path d="M12 17L12 21.5"/><path d="M8.46 15.54L5.28 18.72"/><path d="M7 12L2.5 12"/><path d="M8.46 8.46L5.28 5.28"/></svg><span>loader</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Related guides</h2>
+<ul class="guide-cards"><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Icons in Lit and web components</strong><span data-i18n="guide.web-components.description">Use the glyph-fox custom element in Lit and plain web components: register every icon or a subset, bind attributes, style it and keep it accessible.</span></a></li><li><a href="svg-sprite.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-grid" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><strong data-i18n="guide.svg-sprite.h1">SVG sprites</strong><span data-i18n="guide.svg-sprite.description">Use glyphfox icons from an SVG sprite: symbol ids, use references, the same origin rule, inline sprites, CLI subsets, styling limits and caching.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking icons</strong><span data-i18n="guide.tree-shaking.description">How glyphfox icons tree shake in Vite, webpack, Rollup and esbuild: measured bundle sizes, what defeats tree shaking, icons loaded by name and fixed subsets.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Accessible icons</strong><span data-i18n="guide.accessibility.description">Make glyphfox icons accessible: decorative by default, titles and labels, icon only buttons, status icons, contrast, reduced motion and right to left layouts.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">All icons by category</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+          <li><a href="../labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="page.js"></script>
+</body>
+</html>

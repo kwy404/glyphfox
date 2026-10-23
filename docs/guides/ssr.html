@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.2fa4695b.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/ssr.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Server rendering: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location.pathname.replace(/(pt-br\/)?[^/]*$/,'');navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}</script>
+<title data-i18n="guide.ssr.title">Server side rendering of SVG icons with glyphfox</title>
+<meta name="description" content="Render glyphfox icons on the server: what each package outputs, registering icons used by name, toSvg strings, hydration, motion and the web component." data-i18n-attr="content:guide.ssr.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/guides/ssr.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/ssr.html">
+<meta property="og:title" content="Server side rendering of SVG icons with glyphfox">
+<meta property="og:description" content="Render glyphfox icons on the server: what each package outputs, registering icons used by name, toSvg strings, hydration, motion and the web component.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/guides/ssr.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Server side rendering of SVG icons with glyphfox">
+<meta name="twitter:description" content="Render glyphfox icons on the server: what each package outputs, registering icons used by name, toSvg strings, hydration, motion and the web component.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/ssr.png">
+<meta name="twitter:image:alt" content="Server rendering: glyphfox">
+<link rel="stylesheet" href="../assets/docs.4063d59a.css">
+<link rel="stylesheet" href="guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kwy404.github.io/glyphfox/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/guides/"},{"@type":"ListItem","position":3,"name":"Server rendering","item":"https://kwy404.github.io/glyphfox/guides/ssr.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do the React components work in React Server Components?","acceptedAnswer":{"@type":"Answer","text":"Not directly: they use hooks, so they need a client boundary. In a Server Component you can render toSvg or renderToString output with dangerouslySetInnerHTML and ship no JavaScript for the icon. The Next.js guide shows both."}},{"@type":"Question","name":"Why is my icon empty in the server HTML?","acceptedAnswer":{"@type":"Answer","text":"It is rendered by name, through Icon, morphTo, Fusion or MorphIcon, and its data was not registered when the server rendered. Call registerIcons with the data exports in a module both entries import."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copied to the clipboard" data-theme-light="Switch to the light theme" data-theme-dark="Switch to the dark theme">
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../pt-br/" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">All guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit and web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML and CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Topics</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animated icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibility</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG sprites</a>
+<a href="ssr.html" aria-current="page" class="on" data-i18n="guide.ssr.short">Server rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Breadcrumb" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../" data-i18n="seo.crumb.home">Home</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.ssr.short">Server rendering</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.topics">Topics</span>
+<h1 class="title" data-i18n="guide.ssr.h1">Server rendering</h1>
+<p class="lead" data-i18n="guide.ssr.lead">glyphfox icons are plain SVG, so they render on the server like any other markup. The details that matter are where the icon data comes from, what happens at hydration, and which ways of rendering need JavaScript in the browser.</p>
+<nav class="toc" aria-label="On this page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#overview" data-i18n="guide.ssr.overview.h">What each package renders on the server</a></li><li><a href="#registry" data-i18n="guide.ssr.registry.h">Icon data on the server</a></li><li><a href="#mismatch" data-i18n="guide.ssr.mismatch.h">When the server knows more than the client</a></li><li><a href="#strings" data-i18n="guide.ssr.strings.h">SVG strings with toSvg</a></li><li><a href="#hydration" data-i18n="guide.ssr.hydration.h">Hydration, morphs and living states</a></li><li><a href="#element" data-i18n="guide.ssr.element.h">The web component on server rendered pages</a></li><li><a href="#email" data-i18n="guide.ssr.email.h">Emails</a></li><li><a href="#props" data-i18n="guide.ssr.props.h">toSvg options</a></li><li><a href="#pitfalls" data-i18n="guide.ssr.pitfalls.h">Pitfalls</a></li><li><a href="#faq" data-i18n="seo.faq">Questions</a></li></ol></nav>
+</header>
+<section id="overview">
+<h2 data-i18n="guide.ssr.overview.h">What each package renders on the server</h2>
+<p data-i18n="guide.ssr.overview.p">Every package uses the same renderer, so an icon looks identical whether it was rendered by React on a server, by Vue in the browser or by <code>toSvg</code> in a build script. What differs is whether the server can produce the markup at all.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.ssr.overview.table.h1">Way of rendering</th><th data-i18n="guide.ssr.overview.table.h2">Server output</th><th data-i18n="guide.ssr.overview.table.h3">JavaScript in the browser</th></tr></thead><tbody>
+<tr><td data-i18n="guide.ssr.overview.table.r1c1">React, Vue, Svelte and Angular components</td><td data-i18n="guide.ssr.overview.table.r1c2">complete <code>svg</code> markup</td><td data-i18n="guide.ssr.overview.table.r1c3">only for morphs and for click and state triggers</td></tr>
+<tr><td data-i18n="guide.ssr.overview.table.r2c1"><code>toSvg</code> and <code>renderToString</code></td><td data-i18n="guide.ssr.overview.table.r2c2">a complete <code>svg</code> string</td><td data-i18n="guide.ssr.overview.table.r2c3">none</td></tr>
+<tr><td data-i18n="guide.ssr.overview.table.r3c1">The <code>glyph-fox</code> element</td><td data-i18n="guide.ssr.overview.table.r3c2">an empty element</td><td data-i18n="guide.ssr.overview.table.r3c3">required: the icon appears when the element upgrades</td></tr>
+<tr><td data-i18n="guide.ssr.overview.table.r4c1">The <code>data-glyph</code> runtime</td><td data-i18n="guide.ssr.overview.table.r4c2">an empty <code>&lt;i&gt;</code></td><td data-i18n="guide.ssr.overview.table.r4c3">required: the runtime replaces it</td></tr>
+<tr><td data-i18n="guide.ssr.overview.table.r5c1">Tailwind CSS classes</td><td data-i18n="guide.ssr.overview.table.r5c2">an empty element styled by your CSS</td><td data-i18n="guide.ssr.overview.table.r5c3">none</td></tr>
+<tr><td data-i18n="guide.ssr.overview.table.r6c1">SVG sprite</td><td data-i18n="guide.ssr.overview.table.r6c2">an <code>svg</code> with a <code>use</code> reference</td><td data-i18n="guide.ssr.overview.table.r6c3">none</td></tr>
+</tbody></table></div>
+<p data-i18n="guide.ssr.overview.frameworks">Framework specifics live in their own guides: the client boundary of the <a href="nextjs.html">Next.js</a> App Router, plugins in <a href="nuxt.html">Nuxt</a>, layouts in <a href="sveltekit.html">SvelteKit</a>, zero JavaScript icons in <a href="astro.html">Astro</a> and <a href="qwik.html">Qwik</a>, and <a href="solid.html">SolidStart</a>. This page covers what they have in common.</p>
+</section>
+<section id="registry">
+<h2 data-i18n="guide.ssr.registry.h">Icon data on the server</h2>
+<p data-i18n="guide.ssr.registry.p">A component such as <code>HomeIcon</code> carries its own data and registers it when its module runs, so it always renders on the server. Everything that refers to an icon by name looks the name up in a registry instead: <code>Icon name</code>, <code>morphTo</code>, the parts of <code>Fusion</code>, <code>MorphIcon</code>, <code>useMorph</code>, <code>morphStore</code> and the <code>name</code> input of the Angular component.</p>
+<p data-i18n="guide.ssr.registry.empty">A name that is not registered is loaded on demand with a dynamic import. That load only starts in the browser, after mount, so the server renders a placeholder of the right size and nothing else:</p>
+<div class="code"><div class="code-head"><span>server output</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;svg</span> <span class="tok-a">xmlns</span>=<span class="tok-s">"http://www.w3.org/2000/svg"</span> <span class="tok-a">width</span>=<span class="tok-s">"24"</span> <span class="tok-a">height</span>=<span class="tok-s">"24"</span> <span class="tok-a">viewBox</span>=<span class="tok-s">"0 0 24 24"</span> <span class="tok-a">fill</span>=<span class="tok-s">"none"</span>
+  <span class="tok-a">stroke</span>=<span class="tok-s">"currentColor"</span> <span class="tok-a">stroke-width</span>=<span class="tok-s">"2"</span> <span class="tok-a">stroke-linecap</span>=<span class="tok-s">"round"</span> <span class="tok-a">stroke-linejoin</span>=<span class="tok-s">"round"</span>
+  <span class="tok-k">class</span>=<span class="tok-s">"glyphfox glyphfox-empty"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.ssr.registry.fix">Register the names you use in a module that both the server entry and the client entry import. The data exports such as <code>iconSettings</code> are small and tree shaken like the components.</p>
+<div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>; <span class="tok-c">// or glyphfox/vue, glyphfox/svelte</span>
+<span class="tok-k">import</span> { iconSettings, iconFile, iconCloud, iconLock, iconX } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-c">// Names used through Icon, morphTo, Fusion and MorphIcon.</span>
+registerIcons([iconSettings, iconFile, iconCloud, iconLock, iconX]);</pre></div>
+<p data-i18n="guide.ssr.registry.angular">In Angular the same list goes to <code>provideGlyphFox({ icons })</code>, which runs on the server and in the browser; see the <a href="angular.html">Angular guide</a>.</p>
+</section>
+<section id="mismatch">
+<h2 data-i18n="guide.ssr.mismatch.h">When the server knows more than the client</h2>
+<p data-i18n="guide.ssr.mismatch.p">The opposite problem is just as real. When the server runs the package without bundling it, as Node does for dependencies that stay external, importing anything from <code>glyphfox/react</code> or <code>glyphfox/vue</code> evaluates the whole entry point, and every one of the 419 icon modules registers itself. <code>&lt;Icon name="settings" /&gt;</code> then renders fully on the server.</p>
+<p data-i18n="guide.ssr.mismatch.p2">The browser bundle is tree shaken, so <code>settings</code> is not registered there. The first client render produces the empty placeholder, the markup no longer matches the server HTML, and the framework reports a hydration mismatch before the icon loads again. Registering the names explicitly, as above, makes both sides agree.</p>
+</section>
+<section id="strings">
+<h2 data-i18n="guide.ssr.strings.h">SVG strings with toSvg</h2>
+<p data-i18n="guide.ssr.strings.p">Outside a component framework, <code>toSvg(spec, props)</code> returns the markup as a string. It accepts the full name syntax and every shared prop, has no browser dependencies and does no I/O, so it works in server templates, static site generators, serverless functions and build scripts.</p>
+<div class="code"><div class="code-head"><span>server.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> express <span class="tok-k">from</span> <span class="tok-s">'express'</span>;
+<span class="tok-k">import</span> { toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">const</span> app = express();
+
+app.get(<span class="tok-s">'/'</span>, (req, res) =<span class="tok-t">&gt;</span> {
+  res.send(<span class="tok-s">`&lt;!doctype html&gt;
+&lt;title&gt;Files&lt;/title&gt;
+&lt;ul&gt;
+  &lt;li&gt;${toSvg('file+check', { size: 18 })} report.pdf&lt;/li&gt;
+  &lt;li&gt;${toSvg('cloud&amp;lock:overlap', { size: 18, title: 'Encrypted backup' })} backup.zip&lt;/li&gt;
+&lt;/ul&gt;`</span>);
+});
+
+app.listen(<span class="tok-n">3000</span>);</pre></div>
+<p data-i18n="guide.ssr.strings.cache">Rendering is fast, but modifiers, fusions and the solid style do real geometry work. For icons that repeat on every request, cache the strings; the output depends only on the spec and the props.</p>
+<div class="code"><div class="code-head"><span>icon.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">const</span> cache = <span class="tok-k">new</span> Map();
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> icon(spec, props = {}) {
+  <span class="tok-k">const</span> key = spec + JSON.stringify(props);
+  <span class="tok-k">let</span> svg = cache.get(key);
+  <span class="tok-k">if</span> (svg === <span class="tok-k">undefined</span>) {
+    svg = toSvg(spec, props);
+    cache.set(key, svg);
+  }
+  <span class="tok-k">return</span> svg;
+}</pre></div>
+<p data-i18n="guide.ssr.strings.size"><code>toSvg</code> from the main entry loads every icon, which is fine for a server process. Where code size matters, such as edge functions with a size limit, use <code>renderToString</code> from <code>glyphfox/core</code> with the data of each icon from <code>glyphfox/icons/NAME</code>; the <a href="tree-shaking.html">tree shaking guide</a> has the numbers.</p>
+<div class="code"><div class="code-head"><span>edge.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { renderToString } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> download <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/download'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> downloadIcon = renderToString(download, { size: <span class="tok-n">18</span> });</pre></div>
+</section>
+<section id="hydration">
+<h2 data-i18n="guide.ssr.hydration.h">Hydration, morphs and living states</h2>
+<p data-i18n="guide.ssr.hydration.p">The server renders the state an icon has at render time. Morphs are computed in the browser: <code>MorphIcon</code>, <code>morphTo</code> and the hooks start animating after hydration, because effects do not run on the server. An icon with <code>morphTo</code>, <code>trigger="state"</code> and <code>active</code> already true renders its target on the server, so a menu that starts open shows the <code>x</code> in the HTML.</p>
+<p data-i18n="guide.ssr.hydration.css">Living states need no hydration at all. Their CSS is inside the SVG, so a <code>mount</code> animation plays as soon as the browser parses the HTML and a <code>hover</code> animation works before any script loads. A <code>state</code> animation that is already active renders with its <code>gf-on</code> class and plays from the HTML as well. Clicks and later changes of state need the framework, because it toggles the attribute and the class that start them. The <code>prefers-reduced-motion</code> rule travels in the same stylesheet and applies to server markup too.</p>
+<p data-i18n="guide.ssr.hydration.ids">The markup is deterministic. Animation classes, mask ids and morph classes are hashes of their content, not counters or random values, so the server and the browser produce the same attributes and ids never cause a hydration mismatch.</p>
+</section>
+<section id="element">
+<h2 data-i18n="guide.ssr.element.h">The web component on server rendered pages</h2>
+<p data-i18n="guide.ssr.element.p">The <code>glyph-fox</code> element draws into a shadow root when its script runs. It does not use declarative shadow DOM, so server HTML contains an empty element with no size, and the line around it moves when the icon appears. Reserve the space until the element is defined:</p>
+<div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="css" data-done="1"><span class="tok-a">glyph-fox</span>:not(:defined) {
+  <span class="tok-a">display</span>: inline-block;
+  <span class="tok-a">width</span>: <span class="tok-n">24px</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">24px</span>;
+  <span class="tok-a">vertical-align</span>: middle;
+}</pre></div>
+<p data-i18n="guide.ssr.element.p2">For icons above the fold, server render inline SVG with a component or <code>toSvg</code> and keep the element for parts of the page that change on the client. The <a href="web-components.html">web components guide</a> covers the element in detail.</p>
+</section>
+<section id="email">
+<h2 data-i18n="guide.ssr.email.h">Emails</h2>
+<p data-i18n="guide.ssr.email.p">Server rendering often ends in an email template, and that is the one place where SVG strings do not help: many email clients do not display inline SVG or SVG images. Use PNG files there. The <a href="../icons.html">icon browser</a> downloads any icon as a PNG at the size you need, with your color and weight.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.ssr.props.h">toSvg options</h2>
+<p data-i18n="guide.ssr.props.p"><code>toSvg</code> and <code>renderToString</code> take the same props as the components, as plain options.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.option">Option</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Default</th><th data-i18n="docs.desc">Description</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Width and height; numbers are pixels.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Main color.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color of the duotone layer and of the solid fill.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacity of the duotone layer or of the solid fill.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Stroke from 1 to 3 on the 24 grid, optically compensated below 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Keeps the stroke at weight pixels at any size.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Round or sharp joins and caps.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Style axis; solid comes from the closed shapes.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotation in degrees.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Mirror horizontally.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Mirror vertically.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Mirror in right to left layouts.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Living state preset.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">The state for trigger state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>per preset</td><td data-i18n="prop.duration">Animation or morph duration.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Animation or morph delay.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repeat forever or a number of times (spin and pulse loop by default).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>none</td><td data-i18n="prop.modifier">Badge with an automatic knockout gap.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Corner of the badge.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Morph target; the trigger decides when it shows.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Accessible name: title, role img and aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true without a title</td><td data-i18n="prop.decorative">Hides the icon from assistive technology.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.ssr.pitfalls.h">Pitfalls</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.ssr.pitfalls.list.1.t">Empty icons in the server HTML</dt><dd data-i18n="guide.ssr.pitfalls.list.1.d">An icon rendered by name that was never registered is an empty <code>svg</code> with the class <code>glyphfox-empty</code> on the server. Register the names, or import the component for that icon.</dd></div><div><dt data-i18n="guide.ssr.pitfalls.list.2.t">Hydration mismatch warnings</dt><dd data-i18n="guide.ssr.pitfalls.list.2.d">If the server renders a name the browser does not have yet, the markup differs on the first client render. The usual causes are an unbundled server import of a whole entry point and names that come from data. Register the names in shared code.</dd></div><div><dt data-i18n="guide.ssr.pitfalls.list.3.t">Icons that depend on the browser</dt><dd data-i18n="guide.ssr.pitfalls.list.3.d">An icon chosen from <code>localStorage</code>, the color scheme or the window size cannot match on the server. Render a neutral icon on the server and switch after mount, or read the value from a cookie the server can see.</dd></div><div><dt data-i18n="guide.ssr.pitfalls.list.4.t">Layout shift from the element</dt><dd data-i18n="guide.ssr.pitfalls.list.4.d">An undefined <code>glyph-fox</code> has no size. Reserve the space with <code>:not(:defined)</code> or render inline SVG on the server.</dd></div><div><dt data-i18n="guide.ssr.pitfalls.list.5.t">Morph targets in production builds</dt><dd data-i18n="guide.ssr.pitfalls.list.5.d">In a Vite production build, names that are neither imported nor registered stay empty in the browser, because the on demand loader inside <code>node_modules</code> is not transformed. Server rendering does not hide this; registering the names fixes both sides.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions</h2>
+<h3 data-i18n="guide.ssr.faq.rsc.q">Do the React components work in React Server Components?</h3>
+<p data-i18n="guide.ssr.faq.rsc.a">Not directly: they use hooks, so they need a client boundary. In a Server Component you can render <code>toSvg</code> or <code>renderToString</code> output with <code>dangerouslySetInnerHTML</code> and ship no JavaScript for the icon. The <a href="nextjs.html">Next.js guide</a> shows both.</p>
+<h3 data-i18n="guide.ssr.faq.empty.q">Why is my icon empty in the server HTML?</h3>
+<p data-i18n="guide.ssr.faq.empty.a">It is rendered by name, through <code>Icon</code>, <code>morphTo</code>, <code>Fusion</code> or <code>MorphIcon</code>, and its data was not registered when the server rendered. Call <code>registerIcons</code> with the data exports in a module both entries import.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in this guide</h2>
+<ul class="icon-links"><li><a href="../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/><path d="M8.79 10.07A2.5 2.5 0 0 1 11.25 8"/></svg><span>cloud</span></a></li><li><a href="../icons/lock.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-lock" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M11 15.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M12 15.5v2"/></svg><span>lock</span></a></li><li><a href="../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../icons/download.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-download" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>download</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Related guides</h2>
+<ul class="guide-cards"><li><a href="nextjs.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-route" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg><strong data-i18n="guide.nextjs.h1">Icons in Next.js</strong><span data-i18n="guide.nextjs.description">Use glyphfox in Next.js: a client boundary for the App Router, zero JavaScript SVG in Server Components, the Pages Router and icons by name on the server.</span></a></li><li><a href="nuxt.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-mountain" aria-hidden="true"><path d="M2 20L9 6l5.5 9.5L17 11l5 9Z"/></svg><strong data-i18n="guide.nuxt.h1">Icons in Nuxt</strong><span data-i18n="guide.nuxt.description">Server render glyphfox icons in Nuxt: import components, register names in a plugin, wrap icons for auto import, keep morphs in sync and avoid empty icons.</span></a></li><li><a href="sveltekit.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-rocket" aria-hidden="true"><path d="M12 2c3 2.5 4.5 6 4.5 10v5h-9v-5c0-4 1.5-7.5 4.5-10Z"/><path d="M11 9.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7.5 13L4.5 16v4l3-2.5"/><path d="M16.5 13l3 3v4l-3-2.5"/><path d="M10 20.5l2 1.5 2-1.5"/></svg><strong data-i18n="guide.sveltekit.h1">Icons in SvelteKit</strong><span data-i18n="guide.sveltekit.description">Server render and prerender glyphfox icons in SvelteKit: setup, a root layout for icon names, SVG endpoints, adapter-static, hydration and common pitfalls.</span></a></li><li><a href="astro.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-planet" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M2.6 15.42A10 3.5-20 0 1 3.12 13.49"/><path d="M19.76 7.44A10 3.5-20 0 1 21.4 8.58"/><path d="M21.4 8.58A10 3.5-20 0 1 2.6 15.42"/></svg><strong data-i18n="guide.astro.h1">Icons in Astro</strong><span data-i18n="guide.astro.description">Render glyphfox icons in Astro at build time with no client JavaScript, wrap them in an Icon.astro component, and add islands or the element for motion.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">All icons by category</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+          <li><a href="../labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="page.js"></script>
+</body>
+</html>
