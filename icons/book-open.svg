@@ -1,4 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M12 7c-2-2-5-3-9-3v14c4 0 7 1 9 3 2-2 5-3 9-3V4c-4 0-7 1-9 3Z"/>
   <path d="M12 7v14"/>
+  <path d="M6.25 9.5c.9 0 1.7.1 2.5.4"/>
+  <path d="M17.75 9.5c-.9 0-1.7.1-2.5.4"/>
+  <path d="M6.25 13.5c.9 0 1.7.1 2.5.4"/>
+  <path d="M17.75 13.5c-.9 0-1.7.1-2.5.4"/>
 </svg>

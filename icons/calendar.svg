@@ -4,4 +4,6 @@
   <path d="M3 10h18"/>
   <path d="M8 2v4"/>
   <path d="M16 2v4"/>
+  <path d="M7 15a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/>
+  <path d="M12 15h4"/>
 </svg>
