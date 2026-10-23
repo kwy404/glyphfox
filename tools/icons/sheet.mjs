@@ -13,6 +13,7 @@
 //   --scale N         device scale factor for the PNG (default 1)
 //   --width N         page width in CSS pixels (default 1600)
 //   --columns N       grid columns (default 10, review 7)
+//   --slices N        also write the PNG as bands of N CSS pixels (NAME-01.png, ...)
 //
 // The PNG is rendered with Playwright when it is installed, otherwise with a
 // local Edge or Chrome driven over the DevTools protocol (Node 22 or newer).
@@ -40,6 +41,7 @@ const outPng = option('png', null);
 const scale = Number(option('scale', '1'));
 const width = Number(option('width', '1600'));
 const columns = Number(option('columns', review ? '7' : '10'));
+const sliceHeight = Number(option('slices', '0'));
 
 function loadIcons() {
   const names = readdirSync(iconsDir)
@@ -180,6 +182,12 @@ async function renderWithPlaywright(htmlPath, pngPath) {
     const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: scale });
     await page.goto(pathToFileURL(htmlPath).href);
     await page.screenshot({ path: pngPath, fullPage: true });
+    if (sliceHeight) {
+      const height = await page.evaluate(() => Math.ceil(document.documentElement.scrollHeight));
+      for (const [k, y, h] of slices(height)) {
+        await page.screenshot({ path: slicePath(pngPath, k), clip: { x: 0, y, width, height: h }, fullPage: true });
+      }
+    }
   } finally {
     if (browser) await browser.close();
   }
@@ -187,6 +195,17 @@ async function renderWithPlaywright(htmlPath, pngPath) {
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// Horizontal bands of the page, for reviewing a tall sheet piece by piece.
+function slices(height) {
+  const out = [];
+  for (let y = 0, k = 1; y < height; y += sliceHeight, k++) out.push([k, y, Math.min(sliceHeight, height - y)]);
+  return out;
+}
+
+function slicePath(pngPath, k) {
+  return pngPath.replace(/\.png$/i, '') + `-${String(k).padStart(2, '0')}.png`;
+}
 
 function killTree(child) {
   if (child.exitCode !== null) return;
@@ -272,6 +291,12 @@ async function renderWithDevTools(htmlPath, pngPath) {
     await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: scale, mobile: false }, sessionId);
     const shot = await send('Page.captureScreenshot', { format: 'png', fromSurface: true }, sessionId);
     writeFileSync(pngPath, Buffer.from(shot.data, 'base64'));
+    if (sliceHeight) {
+      for (const [k, y, h] of slices(height)) {
+        const part = await send('Page.captureScreenshot', { format: 'png', fromSurface: true, clip: { x: 0, y, width, height: h, scale: 1 } }, sessionId);
+        writeFileSync(slicePath(pngPath, k), Buffer.from(part.data, 'base64'));
+      }
+    }
     await send('Browser.close').catch(() => {});
   } finally {
     try {
