@@ -44,4 +44,7 @@ export declare const MorphIcon: ForwardRefExoticComponent<MorphIconProps & RefAt
 /** Icon data that morphs into the new icon whenever `spec` changes. */
 export declare function useMorph(spec: IconSpec | IconData | null | undefined, options?: MorphOptions): { icon: IconData; variant?: Variant } | null;
 
+// smart icons hook (src/smart): SmartIcon, StatusIcon and IconGroup.
+export * from '../smart/react.js';
+
 /*COMPONENTS*/

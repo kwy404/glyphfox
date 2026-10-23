@@ -1,6 +1,9 @@
 // glyphfox/core: the rendering engine without icon data.
 import type { AnimationName, AnimationTimeline, FuseOptions, IconData, IconNode, IconSource, IconProps, IconSpec, Layout, ModifierCorner, ModifierName, Morph, SvgOptions, Trigger, Variant } from '../index.js';
 
+// smart icons hook (src/smart)
+export * from '../smart/index.js';
+
 export declare const PROPS: Array<keyof IconProps>;
 export declare const DEFAULTS: Readonly<Partial<IconProps>>;
 export declare const VARIANTS: Variant[];

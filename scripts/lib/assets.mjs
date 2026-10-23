@@ -11,8 +11,8 @@ import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css'];
-export const ENTRIES = ['landing', 'browser', 'studio', 'docs', 'app'];
+export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css', 'assets/smart.css'];
+export const ENTRIES = ['landing', 'browser', 'studio', 'docs', 'app', 'smart'];
 export const PAGES = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
 const HASH_CSS = /\.[0-9a-f]{8}\.css$/;
 

@@ -15,3 +15,5 @@ export * from './attributes.js';
 export * from './formats.js';
 export { parseBody, nodesToString, iconNodes, splitLayers, hash } from './nodes.js';
 export { analyzeSolid, solidLayers } from './solid.js';
+// smart icons hook (src/smart): data icons, locale aware icons, StatusIcon and IconGroup.
+export * from '../smart/index.js';

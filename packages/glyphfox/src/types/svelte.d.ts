@@ -14,4 +14,7 @@ export declare function morphStore(
   options?: { duration?: number; delay?: number; weight?: number; size?: number | string },
 ): { set(spec: IconSpec | IconData): void; subscribe(run: (value: { icon: IconData; variant?: Variant } | null) => void): () => void };
 
+// smart icons hook (src/smart): SmartIcon, StatusIcon and IconGroup.
+export * from '../smart/svelte/index.js';
+
 /*COMPONENTS*/

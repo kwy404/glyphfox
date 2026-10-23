@@ -259,5 +259,7 @@ export declare function normalizeTimeline(timeline: AnimationTimeline | string):
 export declare function sampleTimeline(timeline: NormalizedTimeline, t: number, options?: { duration?: number; delay?: number; loop?: boolean | number }): Array<{ element: string; transform?: string; opacity?: number; strokeDashoffset?: number; d?: string }>;
 /** Scoped CSS that plays a timeline with a trigger. */
 export declare function timelineCss(timeline: NormalizedTimeline, options?: { trigger?: Trigger; triggerParent?: boolean; duration?: number; delay?: number; loop?: boolean | number }): { className: string; css: string };
+// smart icons hook (src/smart): data icons, locale aware icons, StatusIcon and IconGroup.
+export * from './smart/index.js';
 
 /*ICON_EXPORTS*/

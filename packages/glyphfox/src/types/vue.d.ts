@@ -20,4 +20,7 @@ export declare function useMorph(
   options?: { duration?: number; delay?: number; weight?: number; size?: number | string },
 ): ComputedRef<{ icon: IconData; variant?: Variant } | null>;
 
+// smart icons hook (src/smart): SmartIcon, StatusIcon and IconGroup.
+export * from '../smart/vue.js';
+
 /*COMPONENTS*/

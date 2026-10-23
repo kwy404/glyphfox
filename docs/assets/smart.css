@@ -1,0 +1,87 @@
+/* Smart icons page: controls and demo rows on top of docs.css. */
+
+.smart-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  align-items: end;
+  margin: 18px 0 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+.smart-controls .seg {
+  justify-self: start;
+}
+.smart-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.smart-rows {
+  display: grid;
+  gap: 4px;
+  margin: 18px 0;
+}
+.smart-rows .demo {
+  margin: 0;
+}
+.smart-rows .smart-caption {
+  margin: 10px 0 0;
+  font: 500 12px var(--mono);
+  color: var(--text-3);
+}
+.demo figure.wide {
+  width: 148px;
+}
+.demo .glyphfox.gf-low {
+  color: var(--bad);
+}
+.demo .gf-badge {
+  color: var(--accent);
+}
+.demo .gf-status-success {
+  color: var(--good);
+}
+.demo .gf-status-error {
+  color: var(--bad);
+}
+.demo glyph-fox-smart,
+.demo glyph-fox-status,
+.demo glyph-fox-group {
+  color: var(--text);
+}
+.smart-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  min-height: 72px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--icon-bg);
+  color: var(--text);
+}
+.smart-group glyph-fox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.smart-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.smart-list li {
+  font: 500 12px var(--mono);
+  color: var(--text-2);
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}

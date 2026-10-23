@@ -8,6 +8,7 @@ import { normalizeCorner, withModifier } from './compose.js';
 import { pairOpacity, pairPoints, pointsToPath, prepareMorph } from './morph.js';
 import { hash, iconNodes, nodesToString, splitLayers } from './nodes.js';
 import { solidLayers } from './solid.js';
+import { directionProps } from '../smart/locale.js'; // smart icons hook: RTL mirroring of directional icons
 
 export const VARIANTS = ['outline', 'duotone', 'solid'];
 export const CORNER_STYLES = ['round', 'sharp'];
@@ -217,7 +218,7 @@ function rootAttrs(icon, o, sw, extraClasses) {
  */
 export function renderIcon(icon, props = {}) {
   if (!icon || typeof icon.body !== 'string') throw new TypeError('renderIcon expects an icon data object');
-  const o = props;
+  const o = directionProps(icon, props); // smart icons hook (src/smart/locale.js)
   const sw = strokeWidth(o);
   // Filled icons (from filled sets) keep their own paint: the style axis has
   // nothing to change and the draw animation falls back to pop.

@@ -56,7 +56,7 @@ function withAxes(spec, axes) {
 export function maskUrl(spec, axes = {}) {
   const weight = axes.weight ?? 2;
   const { icon, variant } = resolveSpec(withAxes(spec, axes), lookup, { weight });
-  const svg = renderToString(icon, { variant: variant || axes.variant, corners: axes.corners, weight, decorative: true })
+  const svg = renderToString(icon, { variant: variant || axes.variant, corners: axes.corners, weight, decorative: true, mirrorRtl: false /* smart icons hook: masks stay unmirrored */ })
     .replace(/ class="[^"]*"/, '')
     .replace(/ aria-hidden="true"/, '');
   return toDataUri(svg);
