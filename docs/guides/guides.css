@@ -15,11 +15,13 @@
   margin-right: 6px;
   color: var(--line-3);
 }
-.crumbs a {
+.crumbs a,
+.guide .crumbs a {
   color: var(--text-2);
   text-decoration: none;
 }
-.crumbs a:hover {
+.crumbs a:hover,
+.guide .crumbs a:hover {
   color: var(--text);
   text-decoration: underline;
 }
@@ -35,7 +37,8 @@
   padding: 0;
   list-style: none;
 }
-.toc a {
+.toc a,
+.guide .toc a {
   display: inline-flex;
   align-items: center;
   height: 30px;
@@ -46,7 +49,8 @@
   font-size: 13px;
   text-decoration: none;
 }
-.toc a:hover {
+.toc a:hover,
+.guide .toc a:hover {
   border-color: var(--line-3);
   color: var(--text);
 }
@@ -196,8 +200,9 @@
 /* Icon pages */
 
 .icon-page {
-  padding: 28px 0 88px;
-  max-width: 1080px;
+  padding-top: 28px;
+  padding-bottom: 88px;
+  max-width: 1128px;
 }
 .icon-hero {
   display: grid;
