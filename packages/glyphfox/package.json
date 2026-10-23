@@ -97,6 +97,14 @@
       "types": "./dist/tools.d.ts",
       "default": "./dist/tools.js"
     },
+    "./script": {
+      "types": "./dist/script/index.d.ts",
+      "default": "./dist/script/index.js"
+    },
+    "./export": {
+      "types": "./dist/export/index.d.ts",
+      "default": "./dist/export/index.js"
+    },
     "./react": {
       "import": {
         "types": "./dist/react/index.d.ts",

@@ -119,4 +119,10 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
     "export interface LintProblem { rule: string; message: string }\nexport declare function lintSvg(svg: string): LintProblem[];\nexport declare function lintBody(body: string): LintProblem[];\nexport declare function canonicalSvg(body: string): string;\nexport declare function foxify(svg: string, options?: { snap?: number; fit?: 'auto' | 'viewbox' | 'content'; padding?: number }): { svg: string; body: string; problems: LintProblem[]; notes: string[] };\nexport declare function parseTransform(transform: string): [number, number, number, number, number, number];\n",
   );
   cpSync(join(src, 'cli'), join(dist, 'cli'), { recursive: true });
+
+  // Glyph script and the exporters (glyphfox/script, glyphfox/export), also used by the CLI.
+  for (const dir of ['script', 'export']) {
+    cpSync(join(src, dir), join(dist, dir), { recursive: true });
+    write(join(dist, dir, 'index.d.ts'), read(join('types', `${dir}.d.ts`)));
+  }
 }

@@ -1,5 +1,6 @@
 // glyphfox command line: search, show, copy in any format, fuse, morph,
 // build subsets (sprite, CSS masks or a small package), lint and Fox-ify.
+// Glyph scripts, the usage scan and the exporters live in commands.js.
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -32,7 +33,7 @@ import { foxify } from '../core/foxify.js';
 const here = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(readFileSync(join(here, '..', '..', 'package.json'), 'utf8'));
 
-const BOOLEAN = new Set(['absolute-weight', 'flip-x', 'flip-y', 'mirror-rtl', 'active', 'decorative', 'json', 'print', 'no-clipboard', 'help', 'version', 'canonical']);
+const BOOLEAN = new Set(['absolute-weight', 'flip-x', 'flip-y', 'mirror-rtl', 'active', 'decorative', 'json', 'print', 'no-clipboard', 'help', 'version', 'canonical', 'check', 'strict', 'ascii', 'inline', 'once', 'no-optimize', 'no-flip', 'no-autostart']);
 
 /** Parses argv into { positionals, flags }. */
 export function parseArgs(argv) {
@@ -84,12 +85,19 @@ Usage
   glyphfox list | categories        list icons or categories
   glyphfox lint <file.svg...>       check SVG files against the icon rules
   glyphfox foxify <file.svg>        convert any SVG to the glyphfox style
+  glyphfox script <file.gfs>        draw an icon with a glyph script
+  glyphfox scan [dir]               find the icons a project uses, build a subset
+  glyphfox favicon <input>          animated favicon with a static fallback
+  glyphfox cursor <input>           CSS cursor (PNG at 32 and 64 px) with a hotspot
+  glyphfox plot <input>             single line SVG or G-code for pen plotters
+  glyphfox stl <input>              extruded icon for 3D printing
 
 Specs
   file              an icon
   file+check@tr     a modifier badge (${MODIFIER_NAMES.join(', ')})
   cloud&lock:side   a fusion (${LAYOUTS.join(', ')})
   heart/solid       a style (outline, duotone, solid)
+  <input>           a spec, a .gfs glyph script or an .svg file (exports)
 
 Options
   --format <f>      ${FORMATS.join(', ')} (copy, fuse)
@@ -98,12 +106,20 @@ Options
   --mirror-rtl --animate --trigger --active --duration --delay --loop
   --modifier --modifier-corner --morph-to --title --decorative
   --layout --gap    fusion layout and knockout gap
-  --type <t>        sprite, css or package (build)
+  --type <t>        sprite, css or package (build), sprite or esm (scan)
   --from <file>     read names from a file, one per line (build)
   --out, -o <path>  write to a file or directory
   --category <c>    filter (search, list)
   --json            machine readable output
   --print           print only, do not touch the clipboard
+  --check           compile only and report (script)
+  --strict          fail on accessibility findings (scan)
+  favicon           --animate --morph-to --frames --fps --background --once
+  cursor            --hotspot center|tl|tr|bl|br|x,y --outline --name --inline
+  plot              --format svg|gcode --size --feed --travel-feed --pen-up
+                    --pen-down --dwell --origin --no-optimize --no-flip
+  stl               --size --thickness --bevel --bevel-style chamfer|round
+                    --variant outline|solid --resolution --ascii
 `;
 
 function out(text, flags, io) {
@@ -385,6 +401,15 @@ export async function main(argv = process.argv.slice(2), io = {}) {
         for (const p of r.problems) io.err(`[${p.rule}] ${p.message}`);
         out(r.svg, flags, io);
         return r.problems.length ? 1 : 0;
+      }
+      case 'script':
+      case 'scan':
+      case 'favicon':
+      case 'cursor':
+      case 'plot':
+      case 'stl': {
+        const { runCommand } = await import('./commands.js');
+        return await runCommand(cmd, args, flags, io, { resolve, iconNames, getIcon, props });
       }
       default:
         io.err(`unknown command "${cmd}"\n`);
