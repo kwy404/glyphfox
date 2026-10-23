@@ -100,19 +100,19 @@ export function modsScene() {
     // Flight: from in front of the stage, outside its corner, to the corner.
     const dir = [s.c[0] - 12, s.c[1] - 12];
     const len = Math.hypot(dir[0], dir[1]) || 1;
-    const from = [s.c[0] + (dir[0] / len) * 15 - (dir[1] / len) * 6, s.c[1] + (dir[1] / len) * 15 + (dir[0] / len) * 6];
+    const from = [s.c[0] + (dir[0] / len) * 11 - (dir[1] / len) * 4, s.c[1] + (dir[1] / len) * 11 + (dir[0] / len) * 4];
     const u = span(w, 0.08, 0.5);
     const e = reduced ? 1 : spring(u, { bounce: 0.5, speed: 11 });
     const ctrl = [lerp(from[0], s.c[0], 0.5) - (dir[1] / len) * 5, lerp(from[1], s.c[1], 0.5) + (dir[0] / len) * 5];
     const bez = (a, b, c, t) => (1 - t) * (1 - t) * a + 2 * (1 - t) * t * b + t * t * c;
     let pos = [bez(from[0], ctrl[0], s.c[0], e), bez(from[1], ctrl[1], s.c[1], e)];
-    let scale = lerp(2.4, 1, e);
+    let scale = lerp(2.1, 1, e);
     let alpha = clamp(u * 4);
     const leave = last || reduced ? 0 : span(w, 0.84, 1);
     if (leave > 0) {
       const k = leave * leave;
       pos = [lerp(s.c[0], from[0], k), lerp(s.c[1], from[1], k)];
-      scale = lerp(1, 2.4, k);
+      scale = lerp(1, 2.1, k);
       alpha = 1 - k;
     }
     const dist = Math.hypot(pos[0] - s.c[0], pos[1] - s.c[1]);

@@ -69,9 +69,10 @@ export function gridScene() {
         el('path', { class: 'g-body', d }, wrap);
         el('path', { class: 'g-spine', d }, wrap);
         const dots = anchors(node).map(([x, y]) => el('rect', { class: 'g-node', x: x - 0.32, y: y - 0.32, width: 0.64, height: 0.64, rx: 0.12 }, group));
-        const a = rnd() * Math.PI * 2;
-        const dist = 9 + rnd() * 6;
-        return { wrap, dots, d, c: centerOf(d), dx: Math.cos(a) * dist, dy: Math.sin(a) * dist, rot: (rnd() - 0.5) * 140, sc: 0.45 + rnd() * 1.1, at: l.primary.length > 1 ? (i / (l.primary.length - 1)) * 0.3 : 0, out: rnd() * Math.PI * 2 };
+        // Fly in from the right, top or bottom, never across the copy on the left.
+        const a = (rnd() - 0.5) * Math.PI * 1.35;
+        const dist = 7 + rnd() * 4;
+        return { wrap, dots, d, c: centerOf(d), dx: Math.cos(a) * dist, dy: Math.sin(a) * dist, rot: (rnd() - 0.5) * 140, sc: 0.45 + rnd() * 1.1, at: l.primary.length > 1 ? (i / (l.primary.length - 1)) * 0.3 : 0, out: (rnd() - 0.5) * Math.PI * 1.35 };
       });
       const text = strokes.map((s) => s.d).join(' ');
       return { name, group, fill, strokes, text };
@@ -117,8 +118,8 @@ export function gridScene() {
         const e = spring(u, { bounce: 0.42, speed: 10 });
         const o = last ? 0 : span(w, 0.86 + s.at * 0.25, 1);
         const oe = o * o;
-        const tx = s.dx * (1 - e) + Math.cos(s.out) * 14 * oe;
-        const ty = s.dy * (1 - e) + Math.sin(s.out) * 14 * oe;
+        const tx = s.dx * (1 - e) + Math.cos(s.out) * 10 * oe;
+        const ty = s.dy * (1 - e) + Math.sin(s.out) * 10 * oe;
         const r = s.rot * (1 - e) + s.rot * 0.6 * oe;
         const sc = 1 + (s.sc - 1) * (1 - e);
         s.wrap.setAttribute('transform', `translate(${(tx + s.c[0]).toFixed(3)} ${(ty + s.c[1]).toFixed(3)}) rotate(${r.toFixed(2)}) scale(${sc.toFixed(3)}) translate(${-s.c[0]} ${-s.c[1]})`);
