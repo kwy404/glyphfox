@@ -107,7 +107,7 @@ const LIGHT = ' stroke-opacity=".5"';
  * up the back with a light tip. With `raised`, a front paw is lifted.
  */
 function sittingPose(p, { raised = false } = {}) {
-  const body = 'M22.5 25.6C17 33 15 45 18 53L19 88H56C68 88 74 78 72 66C70 50 60 36 45 24.6';
+  const body = 'M23 25.5C19.5 31 16 42 18 53L19 88H56C68 88 74 78 72 66C70 50 60 36 45 24.6';
   const tail = 'M56 88C74 90 90 82 91 64C92 52 86 44 79 41C82 52 81 66 70 74';
   let out = p.shadow(54, 89.5, 40, 2.4);
   out += p.fill(body + 'L37.5 27.75 33 35.25 28.5 27.75Z', 0.16);
@@ -131,20 +131,22 @@ art.sitting = () => open(96, 96, 'Fenn the fox sitting') + sittingPose(pen()) + 
 // pairs, the tail streams behind and the head leans into the run.
 art.running = () => {
   const p = pen();
-  const body = 'M97 30C95 40 89 50 79 50C71 50 64 45 57 45C50 45 46 49 41 47C35 44 34 36 38 31C42 25 50 23 60 23C72 23 82 22 92 17';
+  const body = 'M99 27C96 37 89 45 78 46C69 47 62 44 54 44C45 44 38 43 35 37C32 30 38 23 50 22C63 21 78 22 92 15';
+  const tail = 'M36 29C27 21 15 17 3 20C10 28 22 33 35 36';
   let out = open(128, 80, 'Fenn the fox running');
-  out += p.shadow(64, 74, 44, 2.4);
-  out += p.fill(body + 'L100 25Z', 0.16);
-  out += p.fill('M41 47C35 44 34 36 38 31C41 27 45 25.5 50 24.6C54 32 53 41 47 47.5Z', 0.3);
-  out += p.fill('M39 30C30 22 21 20 14 21.5L11 27C16 31 25 35 37 38Z', 0.3);
-  out += p.path('M80 48C83 55 88 60 97 63', ' stroke-opacity=".55"');
-  out += p.path('M51 45C48 53 43 60 33 63', ' stroke-opacity=".55"');
+  out += p.shadow(64, 72, 44, 2.4);
+  out += p.fill(body + 'Z', 0.16);
+  out += p.fill('M36 29C29 23 20 19 12 18.5L9 25C15 30 24 33 35 36Z', 0.3);
+  // Far legs behind the body, lighter; near legs in front, every joint drawn.
+  out += p.line([[79, 45], [84, 54], [94, 58]], ' stroke-opacity=".5"');
+  out += p.line([[50, 44], [43, 54], [31, 58]], ' stroke-opacity=".5"');
+  out += p.path(tail);
+  out += p.path('M12 18.5L9 25');
   out += p.path(body);
-  out += p.path('M86 45C92 51 98 55 108 54');
-  out += p.path('M44 46C39 53 32 56 22 55');
-  out += p.path('M39 30C30 22 18 19 5 23C12 30 24 35 37 38');
-  out += p.path('M14 21.5L11 27');
-  out += p.path('M0 42H8M3 50H15M1 58H9', ' stroke-opacity=".4"');
+  out += p.path('M52 23.5C56.5 30 56 38 50 44', LIGHT);
+  out += p.line([[84, 44], [92, 50.5], [104, 51]]);
+  out += p.line([[44, 43.5], [34, 48.5], [22, 47.5]]);
+  out += p.path('M0 38H8M3 46H15M1 54H9', ' stroke-opacity=".4"');
   out += p.head(104, 20, 1.5, 10);
   return out + '</svg>\n';
 };
