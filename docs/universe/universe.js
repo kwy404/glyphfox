@@ -88,7 +88,7 @@ function cellSvg(prefix, name, size = 28) {
   const raw = U.iconData(data, name);
   if (!raw) return '';
   const b = U.bakeTransforms(raw);
-  return `<svg viewBox="${b.left} ${b.top} ${b.width} ${b.height}" width="${size}" height="${size}" aria-hidden="true">${b.body}</svg>`;
+  return `<svg viewBox="${b.left} ${b.top} ${b.width} ${b.height}" width="${size}" height="${size}" aria-hidden="true">${U.uniqueIds(b.body)}</svg>`;
 }
 
 // Virtual grid.
@@ -166,12 +166,19 @@ function render(fromLoad = false) {
   }, fromLoad ? 0 : 90);
 }
 
+let fallback = 0;
+
+// One render per frame; the timer covers pages that do not paint (background tabs).
 function schedule() {
   if (frame) return;
-  frame = requestAnimationFrame(() => {
+  const run = () => {
+    cancelAnimationFrame(frame);
+    clearTimeout(fallback);
     frame = 0;
     render();
-  });
+  };
+  frame = requestAnimationFrame(run);
+  fallback = setTimeout(run, 80);
 }
 
 // Filters and search.
@@ -443,7 +450,7 @@ async function start() {
   setupControls();
   setupDetail();
   const url = await dataUrl();
-  if (url) U.configure({ dataUrl: url });
+  U.configure(url ? { dataUrl: url, maxSets: 12 } : { maxSets: 12 });
   try {
     catalog = await U.loadCatalog();
     info = new Map(catalog.list.map((s) => [s.prefix, s]));

@@ -76,6 +76,7 @@ export interface SvgOptions {
   title?: string;
   class?: string;
   attrs?: Record<string, string | number>;
+  idPrefix?: string;
 }
 
 export interface SearchOptions {
@@ -135,6 +136,7 @@ export declare function toSvg(name: string, options?: SvgOptions): Promise<strin
 export declare function toSvgSync(name: string, options?: SvgOptions): string;
 export declare function iconToSvg(icon: UniverseIcon, options?: SvgOptions): string;
 export declare function svgToDataUri(svg: string): string;
+export declare function uniqueIds(body: string, prefix?: string): string;
 export declare function search(query: string, options?: SearchOptions): Promise<SearchResult[]>;
 export declare function attributionFor(name: string): Promise<string>;
 export declare function attributionLine(set: SetRecord, options?: { modified?: boolean }): string;

@@ -12,6 +12,26 @@ function sizePx(size) {
   return m ? Number(m[1]) : null;
 }
 
+let idCounter = 0;
+
+/**
+ * Gives every id of a body (gradients, masks, clip paths) a unique prefix,
+ * so many inline icons can share one document. `prefix` makes it stable
+ * (server rendering).
+ */
+export function uniqueIds(body, prefix) {
+  const ids = [...new Set([...String(body).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]))];
+  if (!ids.length) return body;
+  const p = prefix || `gfu${(idCounter++).toString(36)}-`;
+  ids.sort((a, b) => b.length - a.length);
+  let out = body;
+  for (const id of ids) {
+    const e = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.replace(new RegExp(`([#;"])(${e})([")]|\\.[a-z])`, 'g'), `$1${p}$2$3`);
+  }
+  return out;
+}
+
 /** True when the body draws with currentColor strokes (weight and draw apply). */
 export const isStroke = (body) => /stroke="currentColor"/.test(body || '');
 
@@ -91,7 +111,8 @@ function withAnimation(body, animate, stroke) {
  * SVG markup of an icon object (from getIcon). Options: size, color,
  * secondaryColor, secondaryOpacity, weight, absoluteWeight, corners
  * ("round" or "sharp"), rotate (degrees), flipX, flipY, animate ("spin",
- * "pulse", "draw"), title, class, attrs (extra root attributes).
+ * "pulse", "draw"), title, class, attrs (extra root attributes), idPrefix
+ * (stable ids for gradients and masks; unique ones by default).
  */
 export function iconToSvg(icon, options = {}) {
   if (!icon) return '';
@@ -114,6 +135,7 @@ export function iconToSvg(icon, options = {}) {
     if (flipX || flipY) t.push(`translate(${cx} ${cy}) scale(${flipX ? -1 : 1} ${flipY ? -1 : 1}) translate(${-cx} ${-cy})`);
     body = `<g transform="${t.join(' ')}">${body}</g>`;
   }
+  body = uniqueIds(body, options.idPrefix);
   const anim = withAnimation(body, options.animate, stroke);
   body = anim.body;
   const size = options.size ?? 24;

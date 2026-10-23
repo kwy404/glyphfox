@@ -11,7 +11,7 @@ import { UniverseIndex } from './search.js';
 import { VERSION } from './version.js';
 
 export { VERSION };
-export { iconToSvg, svgToDataUri, applyWeight, applyCorners, applySecondary, isStroke, baseStrokeWidth } from './svg.js';
+export { iconToSvg, svgToDataUri, applyWeight, applyCorners, applySecondary, isStroke, baseStrokeWidth, uniqueIds } from './svg.js';
 export { licenseOf, attributionLine, checkCatalog, TRADEMARK_NOTICE } from './license.js';
 export { licenseDecision, LICENSE_KINDS, KIND_LABELS, STYLES } from './policy.js';
 export { UniverseIndex, parseQuery } from './search.js';

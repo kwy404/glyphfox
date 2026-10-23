@@ -109,3 +109,16 @@ describe('style transforms', () => {
     expect(await U.toSvg('fil:star', { animate: 'spin' })).toContain('class="gfu-spin"');
   });
 });
+
+describe('ids', () => {
+  it('gives gradient and mask ids a unique prefix in every icon', () => {
+    const body = '<defs><linearGradient id="a"><stop offset="0"/></linearGradient><mask id="ab"/></defs><path fill="url(#a)" mask="url(#ab)" d="M0 0h4v4H0z"/><use href="#a"/>';
+    const one = U.uniqueIds(body, 'x-');
+    expect(one).toContain('id="x-a"');
+    expect(one).toContain('fill="url(#x-a)"');
+    expect(one).toContain('mask="url(#x-ab)"');
+    expect(one).toContain('href="#x-a"');
+    expect(U.uniqueIds(body)).not.toBe(U.uniqueIds(body));
+    expect(U.uniqueIds('<path d="M0 0"/>')).toBe('<path d="M0 0"/>');
+  });
+});

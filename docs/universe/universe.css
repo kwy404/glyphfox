@@ -241,6 +241,9 @@
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
+.uv-cell[hidden] {
+  display: none;
+}
 .uv-cell:hover {
   border-color: var(--line-3);
 }
