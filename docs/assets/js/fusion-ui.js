@@ -96,7 +96,7 @@ export function loadSpec(s) {
   }
 }
 
-export function initFusion(data, { openInEditor }) {
+export function initFusion(data, { openInEditor, openIn3d }) {
   $('[data-fu-names]').innerHTML = data.icons.map((i) => `<option value="${i.name}"></option>`).join('');
   if (!state.parts.every(has)) state.parts = data.icons.slice(0, 2).map((i) => i.name);
   $('[data-fu-layout]').innerHTML = gf.LAYOUTS.map((l) => `<button type="button" value="${l}" aria-pressed="${l === state.layout}">${l}</button>`).join('');
@@ -201,7 +201,9 @@ export function initFusion(data, { openInEditor }) {
         collection.save({ name, body: fused.body, tags: [...state.parts, 'fusion'], categories: fused.categories.slice(0, 1), source: 'fusion' });
         toast(t('toast.saved'));
       } else if (b.dataset.fuAct === 'edit') openInEditor(fused.body, name);
-      else download(gf.canonicalSvg(fused.body), `${name}.svg`, 'image/svg+xml');
+      else if (b.dataset.fuAct === '3d') {
+        if (openIn3d) openIn3d(fused, spec());
+      } else download(gf.canonicalSvg(fused.body), `${name}.svg`, 'image/svg+xml');
     });
   }
   render();

@@ -26,15 +26,14 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/studio.html">
 <meta property="og:title" content="glyphfox studio">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/studio.html">
-<link rel="stylesheet" href="assets/studio.056244a8.css">
+<link rel="stylesheet" href="assets/studio.1946cba3.css">
 <link rel="stylesheet" href="assets/js/labs/labs.f9d3b180.css">
 <link rel="preload" href="data/icons.json" as="fetch" crossorigin>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"}}</script>
-<link rel="modulepreload" href="assets/js/bundle/studio.7PZYZVXO.js">
-<link rel="modulepreload" href="assets/js/bundle/chunk.FODKAD7X.js">
-<link rel="modulepreload" href="assets/js/bundle/chunk.5UWSIT42.js">
-<link rel="modulepreload" href="assets/js/bundle/chunk.GXYZYRUM.js">
-<link rel="modulepreload" href="assets/js/bundle/chunk.EKCEKE4N.js">
+<link rel="modulepreload" href="assets/js/bundle/studio.7JNIBQIG.js">
+<link rel="modulepreload" href="assets/js/bundle/chunk.VRDJ44SF.js">
+<link rel="modulepreload" href="assets/js/bundle/chunk.UJQFML2A.js">
+<link rel="modulepreload" href="assets/js/bundle/chunk.JA4DXUXM.js">
+<link rel="modulepreload" href="assets/js/bundle/chunk.EXWUTZMF.js">
 </head>
 <body class="studio-page">
 <!-- header:start -->
@@ -205,6 +204,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <button class="btn small primary" type="button" data-fu-act="save" data-i18n="editor.save">Save to collection</button>
           <button class="btn small" type="button" data-fu-act="edit" data-i18n="icons.openEditor">Open in the editor</button>
           <button class="btn small" type="button" data-fu-act="download" data-i18n="editor.download">Download SVG</button>
+          <button class="btn small" type="button" data-fu-act="3d" data-i18n="three.open">View in 3D</button>
         </div>
       </div>
     </div>
@@ -302,22 +302,68 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
     <div class="wrap tool-three">
       <div class="card pad th-controls">
         <h2 class="subtitle" data-i18n="tool.3d">Hero 3D</h2>
-        <label class="field"><span data-i18n="home.mp.base">Icon</span><input class="input" list="fu-names" data-th="icon" value="heart" spellcheck="false"></label>
-        <div class="field"><span data-i18n="axis.style">Style</span><div class="seg" role="group" data-th-seg="variant"><button type="button" value="outline" aria-pressed="true" data-i18n="variant.outline">Outline</button><button type="button" value="solid" aria-pressed="false" data-i18n="variant.solid">Solid</button></div></div>
-        <label class="field"><span data-i18n="three.material">Material</span><select class="input" data-th="material"><option value="clay" data-i18n="three.clay">Clay</option><option value="glossy" data-i18n="three.glossy">Glossy</option><option value="metal" data-i18n="three.metal">Metal</option><option value="glass" data-i18n="three.glass">Glass</option></select></label>
-        <label class="field"><span data-i18n="three.light">Lighting</span><select class="input" data-th="light"><option value="studio" data-i18n="three.studio">Studio</option><option value="sunset" data-i18n="three.sunset">Sunset</option><option value="neon" data-i18n="three.neon">Neon</option></select></label>
+        <label class="field"><span data-i18n="three.icon">Icon or fusion</span><input class="input" list="fu-names" data-th="icon" value="heart" spellcheck="false" autocomplete="off" aria-describedby="th-icon-note"></label>
+        <p class="faint small-note" id="th-icon-note"><span data-i18n="three.icon.hint">A name, a fusion like cloud&amp;lock:overlap or a modifier like file+check.</span> <span class="th-unknown" data-th-unknown hidden data-i18n="three.unknown">No icon has this name.</span></p>
+        <div class="field"><span data-i18n="axis.style">Style</span><div class="seg" role="group" data-th-seg="variant"><button type="button" value="outline" aria-pressed="true" data-i18n="variant.outline">Outline</button><button type="button" value="duotone" aria-pressed="false" data-i18n="variant.duotone">Duotone</button><button type="button" value="solid" aria-pressed="false" data-i18n="variant.solid">Solid</button></div></div>
+        <div class="field"><span data-i18n="three.material">Material</span><div class="th-chips" role="group" data-th-seg="material">
+          <button class="chip" type="button" value="clay" aria-pressed="false"><i class="th-ball" data-ball="clay" aria-hidden="true"></i><span data-i18n="three.clay">Matte clay</span></button>
+          <button class="chip" type="button" value="plastic" aria-pressed="true"><i class="th-ball" data-ball="plastic" aria-hidden="true"></i><span data-i18n="three.plastic">Glossy plastic</span></button>
+          <button class="chip" type="button" value="metal" aria-pressed="false"><i class="th-ball" data-ball="metal" aria-hidden="true"></i><span data-i18n="three.metal">Brushed metal</span></button>
+          <button class="chip" type="button" value="glass" aria-pressed="false"><i class="th-ball" data-ball="glass" aria-hidden="true"></i><span data-i18n="three.glass">Glass</span></button>
+          <button class="chip" type="button" value="neon" aria-pressed="false"><i class="th-ball" data-ball="neon" aria-hidden="true"></i><span data-i18n="three.neon">Neon</span></button>
+        </div></div>
+        <div class="field"><span data-i18n="three.light">Lighting</span><div class="th-chips" role="group" data-th-seg="light">
+          <button class="chip" type="button" value="studio" aria-pressed="true" data-i18n="three.studio">Studio</button>
+          <button class="chip" type="button" value="soft" aria-pressed="false" data-i18n="three.soft">Soft</button>
+          <button class="chip" type="button" value="dramatic" aria-pressed="false" data-i18n="three.dramatic">Dramatic</button>
+          <button class="chip" type="button" value="sunset" aria-pressed="false" data-i18n="three.sunset">Sunset</button>
+          <button class="chip" type="button" value="cyber" aria-pressed="false" data-i18n="three.cyber">Cyber</button>
+        </div></div>
+        <div class="field"><span data-i18n="three.bg">Background</span><div class="th-swatches" role="group" data-th-seg="background">
+          <button type="button" value="transparent" aria-pressed="false" title="Transparent" aria-label="Transparent" data-i18n-attr="title:three.transparent;aria-label:three.transparent"><i></i></button>
+          <button type="button" value="glow" aria-pressed="true" title="Glow" aria-label="Glow" data-i18n-attr="title:three.bg.glow;aria-label:three.bg.glow"><i></i></button>
+          <button type="button" value="dark" aria-pressed="false" title="Dark" aria-label="Dark" data-i18n-attr="title:icons.bg.dark;aria-label:icons.bg.dark"><i></i></button>
+          <button type="button" value="light" aria-pressed="false" title="Light" aria-label="Light" data-i18n-attr="title:icons.bg.light;aria-label:icons.bg.light"><i></i></button>
+          <button type="button" value="studio" aria-pressed="false" title="Studio sweep" aria-label="Studio sweep" data-i18n-attr="title:three.bg.studio;aria-label:three.bg.studio"><i></i></button>
+          <button type="button" value="midnight" aria-pressed="false" title="Midnight" aria-label="Midnight" data-i18n-attr="title:three.bg.midnight;aria-label:three.bg.midnight"><i></i></button>
+        </div></div>
         <div class="row2">
           <label class="field"><span data-i18n="axis.color">Color</span><input type="color" value="#ff7a1a" data-th="color"></label>
-          <label class="field"><span data-i18n="three.bg">Background</span><select class="input" data-th="bg"><option value="dark" data-i18n="icons.bg.dark">Dark</option><option value="light" data-i18n="icons.bg.light">Light</option><option value="none" data-i18n="three.transparent">Transparent</option></select></label>
+          <label class="field"><span data-i18n="three.secondary">Plate color</span><input type="color" value="#ffd0a6" data-th="secondary"></label>
         </div>
-        <label class="field"><span><span data-i18n="three.depth">Depth</span><output data-th-o="depth">2</output></span><input type="range" min="0.5" max="6" step="0.25" value="2" data-th="depth"></label>
-        <label class="field check"><input type="checkbox" checked data-th="spin"> <span data-i18n="three.spin">Turntable</span></label>
-        <div class="hero-actions">
-          <button class="btn small primary" type="button" data-th-act="png" data-i18n="three.png">Export PNG</button>
+        <label class="field"><span><span data-i18n="three.depth">Depth</span><output data-th-o="depth">2.5</output></span><input type="range" min="0.5" max="6" step="0.25" value="2.5" data-th="depth"></label>
+        <label class="field"><span><span data-i18n="three.bevel">Bevel</span><output data-th-o="bevel">0.25</output></span><input type="range" min="0" max="0.6" step="0.05" value="0.25" data-th="bevel"></label>
+        <label class="field"><span><span data-i18n="axis.weight">Weight</span><output data-th-o="weight">2</output></span><input type="range" min="1" max="3" step="0.05" value="2" data-th="weight"></label>
+        <div class="th-row">
+          <label class="field check"><input type="checkbox" checked data-th="turntable"> <span data-i18n="three.spin">Turntable</span></label>
+          <button class="btn small" type="button" data-th-act="reset" data-i18n="three.reset">Reset view</button>
         </div>
-        <p class="faint small-note" data-i18n="three.note">three.js loads from jsDelivr when you open this tab.</p>
+        <p class="faint small-note" data-th-motion hidden data-i18n="three.reduced">Reduced motion is on, so the turntable stays still.</p>
       </div>
-      <div class="card th-stage" data-th-stage><p class="th-status faint" data-th-status data-i18n="three.loading">Loading three.js</p></div>
+      <div class="th-main">
+        <div class="card th-stage" data-th-stage>
+          <p class="th-status faint" data-th-status data-i18n="three.loading">Loading three.js</p>
+          <p class="th-hint" aria-hidden="true" data-i18n="three.hint">Drag to orbit, scroll to zoom, double click to reset</p>
+        </div>
+        <div class="card pad th-out">
+          <div class="th-export">
+            <h3 class="side-title" data-i18n="three.png">Export PNG</h3>
+            <div class="hero-actions">
+              <button class="btn small" type="button" data-th-png="1">1x</button>
+              <button class="btn small primary" type="button" data-th-png="2">2x</button>
+              <button class="btn small" type="button" data-th-png="4">4x</button>
+            </div>
+            <label class="field check"><input type="checkbox" checked data-th-alpha> <span data-i18n="three.alpha">Transparent background</span></label>
+            <p class="faint small-note" data-th-size></p>
+          </div>
+          <div class="th-embed">
+            <h3 class="side-title" data-i18n="three.embed">Embed</h3>
+            <p class="faint small-note" data-i18n="three.embed.lead">Paste it on any page. The SVG inside gives the shape and stays as the fallback without WebGL. Add a controls attribute to let visitors orbit it.</p>
+            <div data-th-embed></div>
+          </div>
+          <p class="faint small-note th-note"><span data-i18n="three.note">three.js loads from jsDelivr when you open this tab.</span> <span class="mono">three@<span data-th-version>0.186.1</span></span></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -388,6 +434,6 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="assets/js/bundle/studio.7PZYZVXO.js"></script>
+<script type="module" src="assets/js/bundle/studio.7JNIBQIG.js"></script>
 </body>
 </html>

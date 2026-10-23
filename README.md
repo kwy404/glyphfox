@@ -623,7 +623,7 @@ Every target takes names, `--from list.txt` or `--all`, plus `--size`, `--weight
 - **share** the collection as a link that carries every icon inside its fragment (no server), or **edit it live** with friends peer to peer: six words open a WebRTC session, end to end encrypted with a key made from the words, with presence (who is editing what) and conflict free merging;
 - **Fox-ify** any SVG into the glyphfox style with a before and after view;
 - export a **brand kit** (themed package, sprite, CSS, favicon and app icons);
-- render any icon in **3D** with lighting and material presets;
+- render any icon, fusion or modifier in **3D**: the strokes become bevelled solids in matte clay, glossy plastic, brushed metal, glass or neon under five lighting setups, with orbit controls and a turntable, exported as PNG at 1x, 2x or 4x (transparent if you like) or embedded on any page with `<glyphfox-3d>`.
 - in **Labs**, write icons in glyph script with a live preview, and export an animated favicon, a CSS cursor, plotter SVG and G-code or an STL.
 
 ## Icon rules

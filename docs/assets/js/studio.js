@@ -7,6 +7,7 @@ import { initEditor, openBody } from './editor.js';
 
 const ready = {};
 let data = null;
+let hero3d = null;
 
 function renderCollection() {
   const list = collection.load();
@@ -49,6 +50,11 @@ function openInEditor(body, name) {
   history.replaceState(null, '', '#editor');
 }
 
+function openIn3d(icon, spec) {
+  history.replaceState(null, '', `#3d=${encodeURIComponent(spec)}`);
+  show('3d', { icon, name: spec });
+}
+
 async function show(tool, payload) {
   for (const b of $$('[data-studio-tabs] [data-tool]')) b.setAttribute('aria-selected', String(b.dataset.tool === tool));
   for (const p of $$('[data-panel]')) p.hidden = p.dataset.panel !== tool;
@@ -79,7 +85,7 @@ async function show(tool, payload) {
     const fusion = await import('./fusion-ui.js');
     if (!ready.fusion) {
       ready.fusion = true;
-      fusion.initFusion(data, { openInEditor });
+      fusion.initFusion(data, { openInEditor, openIn3d });
     }
     if (payload) fusion.loadSpec(payload);
   }
@@ -96,9 +102,10 @@ async function show(tool, payload) {
     initBrand(data);
     ready.brand = true;
   }
-  const three = await import('./three-view.js');
-  if (tool === '3d') three.showThree(data);
-  else three.hideThree();
+  if (tool === '3d') {
+    hero3d = hero3d || import('./hero3d/panel.js');
+    (await hero3d).show(payload);
+  } else if (hero3d) (await hero3d).hide();
   if (tool === 'collection') renderCollection();
 }
 
