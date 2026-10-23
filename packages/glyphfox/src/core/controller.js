@@ -46,9 +46,9 @@ export function tween(from, to, { duration = 450, delay = 0 } = {}, onFrame) {
   const start = now() + Math.max(0, Number(delay) || 0);
   let id = 0;
   let stopped = false;
-  const tick = (t) => {
+  const tick = () => {
     if (stopped) return;
-    const k = Math.min(1, Math.max(0, ((typeof t === 'number' ? t : now()) - start) / span));
+    const k = Math.min(1, Math.max(0, (now() - start) / span));
     onFrame(from + (to - from) * k);
     if (k < 1) id = raf(tick);
   };

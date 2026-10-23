@@ -43,7 +43,8 @@
   let hovered = $state(false);
   let toggled = $state(false);
   let run = $state(null);
-  let p = $state(morphTo && trigger === 'state' && bool(active) ? 1 : 0);
+  const initialProgress = () => (morphTo && trigger === 'state' && bool(active) ? 1 : 0);
+  let p = $state(initialProgress());
   let last = null;
 
   const glyph = $derived({ size, color, secondaryColor, secondaryOpacity, weight, absoluteWeight, corners, variant, rotate, flipX, flipY, mirrorRtl, animate, trigger, active, duration, delay, loop, modifier, modifierCorner, title });

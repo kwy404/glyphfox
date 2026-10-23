@@ -235,7 +235,8 @@ export function withModifier(icon, modifier, corner, { weight = 2, gap = 1 } = {
   const sec = secondary ? subtractDiskFromNode(secondary, c, rb + w / 2 + g) : null;
   const nodes = finish([...(sec ? [sec] : []), ...trimNodes(primary, cut), ...badge]);
   const base = solidLayers(icon);
-  const disk = ['circle', { cx: c[0], cy: c[1], r: rb + w / 2 + g, fill: '#000', stroke: 'none' }];
+  const r3 = (v) => Math.round(v * 1000) / 1000;
+  const disk = ['circle', { cx: r3(c[0]), cy: r3(c[1]), r: r3(rb + w / 2 + g), fill: '#000', stroke: 'none' }];
   const solid = base
     ? {
         groups: base.groups.map((gr) => ({ fill: gr.fill, mask: [...gr.mask, disk] })),
@@ -458,7 +459,8 @@ export function fuse(icons, options = {}) {
       const c = [b.x + b.size / 2, b.y + b.size / 2];
       const rb = geometryRadius(placed[j].primary, c[0], c[1]);
       cutters.push({ j, ex: diskExcluder(c, rb + weight + gap) });
-      for (let i = 0; i < j; i++) masks[i].push(['circle', { cx: c[0], cy: c[1], r: rb + weight / 2 + gap, fill: '#000', stroke: 'none' }]);
+      const r3 = (v) => Math.round(v * 1000) / 1000;
+      for (let i = 0; i < j; i++) masks[i].push(['circle', { cx: r3(c[0]), cy: r3(c[1]), r: r3(rb + weight / 2 + gap), fill: '#000', stroke: 'none' }]);
     }
   } else {
     const boxes2 = placed.map((p) => silhouette(p.primary).bb);

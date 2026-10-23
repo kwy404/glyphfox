@@ -42,7 +42,7 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
     for (const icon of icons) {
       write(
         join(dir, 'icons', `${icon.name}.svelte`),
-        `<script>\n  import Icon from '../Icon.svelte';\n  import icon from '../../icons/${icon.name}.js';\n  let props = $props();\n</script>\n\n<Icon {...props} {icon} />\n`,
+        `<script module>\n  import icon from '../../icons/${icon.name}.js';\n  import { registerIcons } from '../glyph.js';\n\n  registerIcons([icon]);\n</script>\n\n<script>\n  import Icon from '../Icon.svelte';\n\n  let props = $props();\n</script>\n\n<Icon {...props} {icon} />\n`,
       );
       write(join(dir, 'icons', `${icon.name}.svelte.d.ts`), `import type { Component } from 'svelte';\nimport type { GlyphProps } from '../index.js';\ndeclare const Icon: Component<GlyphProps>;\nexport default Icon;\n`);
     }

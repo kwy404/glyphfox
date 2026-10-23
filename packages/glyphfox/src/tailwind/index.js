@@ -1,13 +1,14 @@
 // Tailwind CSS plugin (v3 and v4). Classes render icons as a CSS mask in
 // currentColor, so text color, size and opacity utilities apply:
-//   gf-file            an icon (1em square)
-//   gf-file+check      with a modifier badge (corners: gf-[file+check@tr])
-//   gf-[cloud&lock]    a fusion (any layout: gf-[cloud&lock:side])
-//   gf-file/solid      axes after the slash: solid, duotone, sharp, w1.5 (joined with -)
+//   gf-file              an icon (1em square)
+//   gf-[file+check]      a modifier badge (v3 also accepts gf-file+check)
+//   gf-[cloud&lock]      a fusion (v3 also accepts combos such as gf-cloud&lock)
+//   gf-file/solid        tokens after the slash, joined with "-": solid, duotone,
+//                        sharp, w1.5, a layout (side, grid...) or a corner (tl, tr, bl, br)
 //   gf-spin gf-pulse gf-pop gf-wiggle gf-bounce gf-shake   animations
 //
 // v3: plugins: [require('glyphfox/tailwind')] or glyphfox({ prefix, combos })
-// v4: @plugin "glyphfox/tailwind";
+// v4: @plugin "glyphfox/tailwind";  (Tailwind v4 only allows + and & inside [ ])
 
 import { icons } from '../registry.js';
 import { MODIFIER_NAMES } from '../core/compose.js';
@@ -17,22 +18,44 @@ import { resolveSpec } from '../core/spec.js';
 
 const lookup = (n) => (Object.prototype.hasOwnProperty.call(icons, n) ? icons[n] : null);
 
-/** Parses the axes after the slash: solid, duotone, outline, sharp, round, w2.5. */
+const LAYOUT_NAMES = ['overlap', 'side', 'stack', 'grid', 'orbit', 'badge', 'inside'];
+const CORNER_CODES = ['tl', 'tr', 'bl', 'br'];
+
+/**
+ * Parses the tokens after the slash: solid, duotone, outline, sharp, round,
+ * w2.5, a fusion layout (side, grid...) or a modifier corner (tl, tr, bl, br).
+ */
 export function parseAxes(modifier, defaults = {}) {
-  const axes = { ...defaults };
+  const axes = {};
+  for (const k of Object.keys(defaults)) if (defaults[k] !== undefined) axes[k] = defaults[k];
   if (!modifier) return axes;
   for (const tok of String(modifier).split(/[-_,\s]+/)) {
     if (tok === 'outline' || tok === 'duotone' || tok === 'solid') axes.variant = tok;
     else if (tok === 'sharp' || tok === 'round') axes.corners = tok;
     else if (/^w\d*\.?\d+$/.test(tok)) axes.weight = Number(tok.slice(1));
+    else if (LAYOUT_NAMES.includes(tok)) axes.layout = tok;
+    else if (CORNER_CODES.includes(tok)) axes.corner = tok;
   }
   return axes;
+}
+
+function withAxes(spec, axes) {
+  let s = spec;
+  if (axes.layout && s.includes('&') && !s.includes(':')) {
+    const i = s.search(/[+@/]/);
+    s = i < 0 ? `${s}:${axes.layout}` : `${s.slice(0, i)}:${axes.layout}${s.slice(i)}`;
+  }
+  if (axes.corner && s.includes('+') && !s.includes('@')) {
+    const i = s.indexOf('/');
+    s = i < 0 ? `${s}@${axes.corner}` : `${s.slice(0, i)}@${axes.corner}${s.slice(i)}`;
+  }
+  return s;
 }
 
 /** Data URI for a spec rendered with axes (used as the mask image). */
 export function maskUrl(spec, axes = {}) {
   const weight = axes.weight ?? 2;
-  const { icon, variant } = resolveSpec(spec, lookup, { weight });
+  const { icon, variant } = resolveSpec(withAxes(spec, axes), lookup, { weight });
   const svg = renderToString(icon, { variant: variant || axes.variant, corners: axes.corners, weight, decorative: true })
     .replace(/ class="[^"]*"/, '')
     .replace(/ aria-hidden="true"/, '');
@@ -110,13 +133,14 @@ function createHandler(options = {}) {
       { values, modifiers: 'any' },
     );
     const utils = {};
-    const names = [];
     for (const [name, [timing, frames]] of Object.entries(ANIMATION_CSS)) {
       utils[`@keyframes ${prefix}-${name}`] = frames;
-      utils[`.${prefix}-${name}`] = { animation: `${prefix}-${name} ${timing}`, ...(name === 'shake' ? { 'transform-origin': '50% 10%' } : {}) };
-      names.push(`.${prefix}-${name}`);
+      utils[`.${prefix}-${name}`] = {
+        animation: `${prefix}-${name} ${timing}`,
+        ...(name === 'shake' ? { 'transform-origin': '50% 10%' } : {}),
+        '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
+      };
     }
-    utils['@media (prefers-reduced-motion: reduce)'] = { [names.join(', ')]: { animation: 'none' } };
     addUtilities(utils);
   };
 }

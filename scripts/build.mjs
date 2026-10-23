@@ -56,6 +56,7 @@ export const write = (file, text) => {
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist, { recursive: true });
 cpSync(join(src, 'core'), join(dist, 'core'), { recursive: true });
+write(join(dist, 'core', 'index.d.ts'), readFileSync(join(src, 'types', 'core.d.ts'), 'utf8'));
 write(join(dist, 'api.js'), readFileSync(join(src, 'api.js'), 'utf8'));
 
 const json = (v) => JSON.stringify(v);
@@ -84,6 +85,9 @@ write(
     .join('\n')}\n</svg>\n`,
 );
 write(join(dist, 'styles.css'), readFileSync(join(src, 'styles.css'), 'utf8'));
+// npm shows the README of the published folder: copy the root README and LICENSE.
+write(join(pkgDir, 'README.md'), readFileSync(join(root, 'README.md'), 'utf8'));
+write(join(pkgDir, 'LICENSE'), readFileSync(join(root, 'LICENSE'), 'utf8'));
 
 const esbuild = await import('esbuild');
 await esbuild.build({

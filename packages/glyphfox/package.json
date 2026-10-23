@@ -89,6 +89,10 @@
       "types": "./dist/runtime/auto.d.ts",
       "default": "./dist/runtime/auto.js"
     },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
+    },
     "./tools": {
       "types": "./dist/tools.d.ts",
       "default": "./dist/tools.js"

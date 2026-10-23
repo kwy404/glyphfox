@@ -14,7 +14,7 @@ export interface IconComponentProps extends GlyphProps {
   gap?: number;
 }
 
-export interface FusionProps extends GlyphProps {
+export interface FusionProps extends Omit<GlyphProps, 'scale'> {
   /** 2 to 10 icons (names, specs or icon data). */
   icons: Array<IconSpec | IconData>;
   layout?: Layout;

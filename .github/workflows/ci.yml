@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - name: Icon lint
+        run: |
+          if [ -f tools/icons/lint.mjs ]; then node tools/icons/lint.mjs; else echo "no icon lint yet"; fi
+      - name: Text rules
+        run: npm run check:text
+      - name: Build
+        run: npm run build
+      - name: Studio data is committed and up to date
+        run: git diff --exit-code -- docs/data
+      - name: Build glyphfox-angular
+        run: npm run build:angular
+      - name: Type declarations
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
