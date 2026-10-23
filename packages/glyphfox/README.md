@@ -72,7 +72,7 @@ interface IconData {
 
 ## Props
 
-The same 23 props in every package. The web component takes them as kebab case attributes (`secondary-color`, `flip-x`, `morph-to`).
+The same 26 props in every package. The web component takes them as kebab case attributes (`secondary-color`, `flip-x`, `morph-to`, `trigger-parent`).
 
 | Prop | Type | Default | What it does |
 | --- | --- | --- | --- |
@@ -88,7 +88,7 @@ The same 23 props in every package. The web component takes them as kebab case a
 | `flipX`, `flipY` | boolean | false | Mirror horizontally or vertically |
 | `mirrorRtl` | boolean | false | Mirror when the icon sits in a right to left context |
 | `animate` | `draw`, `pop`, `wiggle`, `spin`, `pulse`, `bounce`, `shake` | none | Living state preset |
-| `trigger` | `mount`, `hover`, `click`, `state` | mount | When the animation or the morph plays |
+| `trigger` | `mount`, `hover`, `click`, `focus`, `press`, `inView`, `loop`, `state` | mount | When the animation or the morph plays |
 | `active` | boolean | false | Plays (or morphs) while true with `trigger="state"` |
 | `duration`, `delay` | number (ms) | preset | Animation or morph timing |
 | `loop` | boolean or number | preset | true loops forever, a number sets the count |
@@ -97,6 +97,9 @@ The same 23 props in every package. The web component takes them as kebab case a
 | `morphTo` | spec or icon data | none | Morph target |
 | `title` | string | none | Accessible name: adds `<title>` and `role="img"` |
 | `decorative` | boolean | true without a title | Hides the icon from assistive technology |
+| `animation` | true, a name, a timeline object or JSON | none | The icon's own designed animation (true for its first one); wins over `animate` |
+| `triggerParent` | boolean | false | Hover, focus and press of the closest link or button also play the icon |
+| `disabled` | boolean | false | Stops every animation |
 
 Animations respect `prefers-reduced-motion`. `PROPS`, `DEFAULTS` and `ATTRIBUTES` (prop to attribute name) are exported for integrations.
 
@@ -143,7 +146,7 @@ const icon = fuse(['cloud', 'lock'], { layout: 'overlap', gap: 1 });
 toSvg(icon, { weight: 1.75 });
 ```
 
-`fuse(list, options)` takes 2 to 10 names, specs or icon data. Options: `layout` (`LAYOUTS`: overlap, side, stack, grid, orbit, badge, inside), `gap` (knockout gap, default 1), `weight` (the stroke it will be drawn with), `scale` (one number or one per part), `offsets` (`[dx, dy]` per part in grid units). Parts are scaled and snapped to the grid; where they overlap, the part behind is trimmed around the part in front. The result is icon data that passes the icon lint, with `parts` (the box of every part).
+`fuse(list, options)` takes 2 to 10 names, specs or icon data. Options: `layout` (`LAYOUTS`: overlap, side, stack, grid, orbit, badge, inside), `gap` (knockout gap, default 1), `weight` (the stroke it will be drawn with), `scale` (one number or one per part), `offsets` (`[dx, dy]` per part in grid units). Parts are scaled and snapped to the grid (overlap puts the back part at 17 units in the top left and the front part at 12 in the bottom right); where they overlap, the part behind is trimmed only inside the front part's filled outline plus the weight and the gap, and leftover pieces shorter than 1.5 units are dropped. The result is icon data that passes the icon lint, with `parts`: the box of every part, `kept` (the share of its stroke length that stays) and `shortest` (the shortest piece a knockout left).
 
 ## Modifiers
 
@@ -158,6 +161,44 @@ withModifier(getIcon('file'), 'check', 'top-right', { weight: 2, gap: 1 });
 ## Living states
 
 `ANIMATIONS` holds the presets (duration, easing, loop), `ANIMATION_NAMES` and `TRIGGERS` the names. `animationLength(spec)` gives the total time and `frameState(spec, t)` samples a preset at a time, which the studio uses to export GIF and WebM. Rendered animations are scoped CSS inside the SVG, so they work anywhere SVG markup does.
+
+### Designed animations
+
+Many icons carry their own animation in their JSON sidecar, a frame timeline per element:
+
+```json
+{
+  "animation": {
+    "name": "heartbeat",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": true,
+    "origin": [12, 12],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1)" } },
+      { "at": 0.14, "element": 0, "props": { "transform": "scale(1.12)" }, "easing": "ease-out" },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1)" } }
+    ]
+  }
+}
+```
+
+`element` is the index of a drawn element (the duotone layer is not counted), `"all"` for the whole icon or `"secondary"` for the duotone layer. `props` takes `transform` (CSS, in grid units), `opacity`, `strokeDashoffset` (the element is drawn with pathLength 1) and `d`. The `animation` prop plays it: `toSvg('heartbeat', { animation: true })`, `<HeartbeatIcon animation trigger="hover" />`, `<glyph-fox name="heartbeat" animation>`. A timeline object (or JSON) works too. `normalizeTimeline(timeline)` validates one, `timelineCss(timeline, { trigger })` writes its CSS and `sampleTimeline(timeline, ms)` samples it for export. The studio's Motion tool edits timelines and exports them.
+
+### Triggers
+
+| Trigger | Plays |
+| --- | --- |
+| `mount` | Once when the icon renders |
+| `loop` | Forever from the start |
+| `hover`, `focus`, `press` | While the icon (or its parent) is hovered, focused with the keyboard or pressed; leaving plays it back |
+| `click` | On every click |
+| `inView` | When the icon scrolls into view |
+| `state` | While `active` is true |
+
+Any ancestor with the `gf-trigger` class plays the icons inside it (`.gf-trigger:hover`), and `triggerParent` makes the closest link or button do the same. A disabled parent (`:disabled`, `aria-disabled="true"`) or the `disabled` prop stops every animation, and `prefers-reduced-motion: reduce` keeps icons still.
+
+The CSS inside the SVG needs no script. In the components and the web component, `attachTriggers(svg, props, icon)` (exported for custom renderers) runs `inView` and takes `hover`, `focus` and `press` over on the Web Animations API, so leaving plays the animation back from where it is and loops finish their round.
 
 ## Icon sources
 

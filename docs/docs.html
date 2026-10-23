@@ -27,8 +27,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <meta property="og:title" content="glyphfox docs">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/docs.html">
 <link rel="stylesheet" href="assets/docs.4063d59a.css">
-<link rel="modulepreload" href="assets/js/bundle/docs.HFEBN36Q.js">
-<link rel="modulepreload" href="assets/js/bundle/chunk.FKAMOZ5D.js">
+<link rel="modulepreload" href="assets/js/bundle/docs.DBSMN2P6.js">
+<link rel="modulepreload" href="assets/js/bundle/chunk.G2CHIQEQ.js">
 </head>
 <body class="docs-page">
 <!-- header:start -->
@@ -235,7 +235,7 @@ search('arrow', { limit: 10 });</pre></div>
             <tr><td><code>flipY</code></td><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Mirror vertically.</td></tr>
             <tr><td><code>mirrorRtl</code></td><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Mirror in right to left layouts.</td></tr>
             <tr><td><code>animate</code></td><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Living state preset.</td></tr>
-            <tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
+            <tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, focus, press, inView, loop, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
             <tr><td><code>active</code></td><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">The state for trigger state.</td></tr>
             <tr><td><code>duration</code></td><td><code>duration</code></td><td>number (ms)</td><td data-i18n="prop.duration.default">per preset</td><td data-i18n="prop.duration">Animation or morph duration.</td></tr>
             <tr><td><code>delay</code></td><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Animation or morph delay.</td></tr>
@@ -245,6 +245,9 @@ search('arrow', { limit: 10 });</pre></div>
             <tr><td><code>morphTo</code></td><td><code>morph-to</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Morph target; the trigger decides when it shows.</td></tr>
             <tr><td><code>title</code></td><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Accessible name: title, role img and aria-label.</td></tr>
             <tr><td><code>decorative</code></td><td><code>decorative</code></td><td>boolean</td><td data-i18n="prop.decorative.default">true without a title</td><td data-i18n="prop.decorative">Hides the icon from assistive technology.</td></tr>
+            <tr><td><code>animation</code></td><td><code>animation</code></td><td>true, name, timeline</td><td></td><td data-i18n="prop.animation">Plays the icon's own designed animation, a frame timeline per element. Wins over animate.</td></tr>
+            <tr><td><code>triggerParent</code></td><td><code>trigger-parent</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.triggerParent">Hover, focus and press of the closest link or button also play the icon.</td></tr>
+            <tr><td><code>disabled</code></td><td><code>disabled</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.disabled">Stops every animation.</td></tr>
           </tbody>
         </table>
       </div>
@@ -358,6 +361,6 @@ npx glyphfox foxify any.svg --out fox.svg</pre></div>
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="assets/js/bundle/docs.HFEBN36Q.js"></script>
+<script type="module" src="assets/js/bundle/docs.DBSMN2P6.js"></script>
 </body>
 </html>

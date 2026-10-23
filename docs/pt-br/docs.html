@@ -27,8 +27,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <meta property="og:title" content="glyphfox docs">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/docs.html">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
-<link rel="modulepreload" href="../assets/js/bundle/docs.HFEBN36Q.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.FKAMOZ5D.js">
+<link rel="modulepreload" href="../assets/js/bundle/docs.DBSMN2P6.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.G2CHIQEQ.js">
 </head>
 <body class="docs-page">
 <!-- header:start -->
@@ -235,7 +235,7 @@ search('arrow', { limit: 10 });</pre></div>
             <tr><td><code>flipY</code></td><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Espelha na vertical.</td></tr>
             <tr><td><code>mirrorRtl</code></td><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Espelha em layouts da direita para a esquerda.</td></tr>
             <tr><td><code>animate</code></td><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Animação de estado vivo.</td></tr>
-            <tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Quando a animação ou o morph acontece.</td></tr>
+            <tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, focus, press, inView, loop, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Quando a animação ou o morph acontece.</td></tr>
             <tr><td><code>active</code></td><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">O estado para o gatilho state.</td></tr>
             <tr><td><code>duration</code></td><td><code>duration</code></td><td>number (ms)</td><td data-i18n="prop.duration.default">por animação</td><td data-i18n="prop.duration">Duração da animação ou do morph.</td></tr>
             <tr><td><code>delay</code></td><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Atraso da animação ou do morph.</td></tr>
@@ -245,6 +245,9 @@ search('arrow', { limit: 10 });</pre></div>
             <tr><td><code>morphTo</code></td><td><code>morph-to</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Destino do morph; o gatilho decide quando aparece.</td></tr>
             <tr><td><code>title</code></td><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Nome acessível: title, role img e aria-label.</td></tr>
             <tr><td><code>decorative</code></td><td><code>decorative</code></td><td>boolean</td><td data-i18n="prop.decorative.default">true sem title</td><td data-i18n="prop.decorative">Esconde o ícone das tecnologias assistivas.</td></tr>
+            <tr><td><code>animation</code></td><td><code>animation</code></td><td>true, name, timeline</td><td></td><td data-i18n="prop.animation">Toca a animação desenhada do próprio ícone, uma linha do tempo por elemento. Tem prioridade sobre animate.</td></tr>
+            <tr><td><code>triggerParent</code></td><td><code>trigger-parent</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.triggerParent">Hover, foco e clique pressionado no link ou botão mais próximo também tocam o ícone.</td></tr>
+            <tr><td><code>disabled</code></td><td><code>disabled</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.disabled">Para todas as animações.</td></tr>
           </tbody>
         </table>
       </div>
@@ -358,6 +361,6 @@ npx glyphfox foxify any.svg --out fox.svg</pre></div>
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/docs.HFEBN36Q.js"></script>
+<script type="module" src="../assets/js/bundle/docs.DBSMN2P6.js"></script>
 </body>
 </html>

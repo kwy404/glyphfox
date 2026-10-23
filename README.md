@@ -202,7 +202,7 @@ The same props, with the same names and meaning, in every package. Attributes us
 | `flipY` | boolean | `false` | Mirror vertically. |
 | `mirrorRtl` | boolean | `false` | Mirror in right to left layouts. |
 | `animate` | `draw`, `pop`, `wiggle`, `spin`, `pulse`, `bounce`, `shake` | none | Living state preset. |
-| `trigger` | `mount`, `hover`, `click`, `state` | `mount` | When the animation, or the morph, plays. |
+| `trigger` | `mount`, `hover`, `click`, `focus`, `press`, `inView`, `loop`, `state` | `mount` | When the animation, or the morph, plays. Hover, focus and press play back smoothly when they end. |
 | `active` | boolean | `false` | The state for `trigger="state"`. |
 | `duration` | number (ms) | per preset, `450` for morphs | Animation or morph duration. |
 | `delay` | number (ms) | `0` | Animation or morph delay. |
@@ -212,6 +212,9 @@ The same props, with the same names and meaning, in every package. Attributes us
 | `morphTo` | icon name or data | none | Morph target; the trigger decides when it shows. |
 | `title` | string | none | Accessible name: adds `<title>`, `role="img"` and `aria-label`. |
 | `decorative` | boolean | `true` without a title | Hides the icon from assistive technology (`aria-hidden`). |
+| `animation` | `true`, a name or a timeline | none | Plays the icon's own designed animation (a frame timeline per element). Wins over `animate`. |
+| `triggerParent` | boolean | `false` | Hover, focus and press of the closest link or button also play the icon. |
+| `disabled` | boolean | `false` | Stops every animation. |
 
 Plus `class` (`className` in React) and `style`, passed to the `<svg>` (or to the host element for Angular and the web component). Every animation respects `prefers-reduced-motion`.
 
