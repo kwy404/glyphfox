@@ -4,9 +4,11 @@ import { createElement as h, createRef, act } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createRoot } from 'react-dom/client';
 import * as R from 'glyphfox/react';
+import * as RS from 'glyphfox/react/server';
 import { iconNames } from 'glyphfox';
 import { componentName } from '../packages/glyphfox/dist/core/formats.js';
-import { PROP_CASES, checkDefault } from './fixtures/props.js';
+import { readFileSync } from 'node:fs';
+import { PROP_CASES, STATIC_PROP_CASES, checkDefault } from './fixtures/props.js';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const comp = (name) => R[componentName(name)];
@@ -102,5 +104,28 @@ describe('glyphfox/react', () => {
     await act(() => new Promise((r) => setTimeout(r, 250)));
     expect(div.querySelector('svg').getAttribute('class')).toContain('glyphfox-x');
     expect(typeof R.useMorph).toBe('function');
+  });
+});
+
+describe('glyphfox/react/server', () => {
+  it('marks the client modules for React Server Components', () => {
+    for (const f of ['index.js', 'runtime.js', 'icons/file.js']) expect(readFileSync(`packages/glyphfox/dist/react/${f}`, 'utf8').startsWith("'use client';"), f).toBe(true);
+    expect(readFileSync('packages/glyphfox/dist/react/server.js', 'utf8')).not.toContain('use client');
+  });
+
+  it('keeps the plain use simple without hooks', () => {
+    checkDefault(html(h(RS.Icon, { name: 'file' })));
+  });
+
+  for (const c of STATIC_PROP_CASES) {
+    it(`supports the ${c.prop} prop`, () => c.check(html(h(RS.Icon, { name: c.icon, ...c.props }))));
+  }
+
+  it('passes className, style and svg props through and resolves every icon by name', () => {
+    const out = html(h(RS.Icon, { name: 'file+check@tr', className: 'extra', style: { color: 'red' }, id: 'x1' }));
+    expect(out).toMatch(/class="glyphfox glyphfox-file-check-tr extra"/);
+    expect(out).toContain('style="color:red"');
+    expect(out).toContain('id="x1"');
+    expect(html(h(RS.Fusion, { icons: ['cloud', 'lock'], layout: 'side' }))).toContain('glyphfox-cloud-lock-side');
   });
 });

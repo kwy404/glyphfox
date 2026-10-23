@@ -1,6 +1,7 @@
-// Generates the framework entry points of the glyphfox package: React, Vue,
-// Svelte, the web component (module and CDN builds), Tailwind, the plain
-// HTML runtime and the CLI.
+// Generates the framework entry points of the glyphfox package: React (and
+// React Server Components), Vue, Svelte, Solid, Preact, Qwik, Lit, Astro,
+// React Native, Ember, the web component (module and CDN builds), Tailwind,
+// the plain HTML runtime and the CLI.
 
 import { cpSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -11,28 +12,61 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
   const bundle = (entry, outfile, options = {}) =>
     esbuild.build({ entryPoints: [entry], outfile, bundle: true, format: 'cjs', platform: 'neutral', target: 'es2019', logLevel: 'error', ...options });
 
-  // React and Vue share the same layout.
-  for (const fw of ['react', 'vue']) {
+  // One module per icon calling the runtime's createIcon, a barrel and the
+  // types. React modules are marked as client modules for Server Components.
+  const iconModules = (fw, t, directive = '', extra = '') => {
     const dir = join(dist, fw);
-    write(join(dir, 'runtime.js'), read(join(fw, 'runtime.js')));
+    write(join(dir, 'runtime.js'), directive + read(join(fw, 'runtime.js')));
     for (const icon of icons) {
       const comp = componentName(icon.name);
       write(
         join(dir, 'icons', `${icon.name}.js`),
-        `import { createIcon } from '../runtime.js';\nimport icon from '../../icons/${icon.name}.js';\n\nexport const ${comp} = /*#__PURE__*/ createIcon(icon);\nexport default ${comp};\n`,
+        `${directive}import { createIcon } from '../runtime.js';\nimport icon from '../../icons/${icon.name}.js';\n\nexport const ${comp} = /*#__PURE__*/ createIcon(icon);\nexport default ${comp};\n`,
       );
-      const t = fw === 'react' ? 'GlyphIconComponent' : 'GlyphComponent';
       write(join(dir, 'icons', `${icon.name}.d.ts`), `import type { ${t} } from '../index.js';\nexport declare const ${comp}: ${t};\nexport default ${comp};\n`);
+    }
+    write(join(dir, 'index.js'), `${directive}export * from './runtime.js';\n${extra}${icons.map((ic) => `export { ${componentName(ic.name)} } from './icons/${ic.name}.js';`).join('\n')}\n`);
+    const d = types(`${fw}.d.ts`, icons.map((ic) => `export declare const ${componentName(ic.name)}: ${t};`).join('\n'));
+    write(join(dir, 'index.d.ts'), d);
+    return { dir, d };
+  };
+
+  // React and Vue also ship a CJS bundle.
+  for (const fw of ['react', 'vue']) {
+    const smart = `export * from '../smart/${fw}.js'; // smart icons hook (src/smart)\n`;
+    const { dir, d } = iconModules(fw, fw === 'react' ? 'GlyphIconComponent' : 'GlyphComponent', fw === 'react' ? "'use client';\n" : '', smart);
+    write(join(dir, 'index.d.cts'), d);
+    await bundle(join(dir, 'index.js'), join(dir, 'index.cjs'), { external: [fw] });
+  }
+
+  // React Server Components: hook free Icon and Fusion (glyphfox/react/server).
+  write(join(dist, 'react', 'server.js'), read(join('react', 'server.js')));
+  write(join(dist, 'react', 'server.d.ts'), read(join('types', 'react-server.d.ts')));
+
+  // ESM packages: Solid, Preact, Qwik, Lit, React Native and Ember.
+  const esm = { solid: 'GlyphComponent', preact: 'GlyphIconComponent', qwik: 'GlyphComponent', lit: 'GlyphElementClass', native: 'GlyphIconComponent', ember: 'GlyphHelper' };
+  for (const [fw, t] of Object.entries(esm)) iconModules(fw, t);
+
+  // Astro: .astro sources compiled by the app, rendered on the server.
+  {
+    const dir = join(dist, 'astro');
+    for (const f of ['glyph.js', 'Icon.astro', 'Fusion.astro']) write(join(dir, f), read(join('astro', f)));
+    for (const icon of icons) {
+      write(
+        join(dir, 'icons', `${icon.name}.astro`),
+        `---\nimport icon from '../../icons/${icon.name}.js';\nimport { renderIcon } from '../glyph.js';\n\nconst svg = renderIcon(icon, Astro.props);\n---\n\n<Fragment set:html={svg} />\n`,
+      );
     }
     write(
       join(dir, 'index.js'),
-      `export * from './runtime.js';\nexport * from '../smart/${fw}.js'; // smart icons hook (src/smart)\n${icons.map((ic) => `export { ${componentName(ic.name)} } from './icons/${ic.name}.js';`).join('\n')}\n`,
+      [
+        "export { default as Icon } from './Icon.astro';",
+        "export { default as Fusion } from './Fusion.astro';",
+        ...icons.map((ic) => `export { default as ${componentName(ic.name)} } from './icons/${ic.name}.astro';`),
+        '',
+      ].join('\n'),
     );
-    const t = fw === 'react' ? 'GlyphIconComponent' : 'GlyphComponent';
-    const d = types(`${fw}.d.ts`, icons.map((ic) => `export declare const ${componentName(ic.name)}: ${t};`).join('\n'));
-    write(join(dir, 'index.d.ts'), d);
-    write(join(dir, 'index.d.cts'), d);
-    await bundle(join(dir, 'index.js'), join(dir, 'index.cjs'), { external: [fw] });
+    write(join(dir, 'index.d.ts'), types('astro.d.ts', icons.map((ic) => `export declare const ${componentName(ic.name)}: AstroComponent<GlyphProps>;`).join('\n')));
   }
 
   // Svelte: ship .svelte sources (compiled by the app).

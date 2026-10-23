@@ -17,7 +17,7 @@
 
 # glyphfox
 
-Original open source icons on a 24 grid that do more than sit still. Every icon is **variable** (weight, corners and style axes), **morphs** into any other icon, **fuses** with other icons into new ones that still pass the rules, takes **modifier badges** in any corner and comes with **living states** (draw, pop, wiggle, spin, pulse, bounce, shake). One set of props works the same in React, Vue, Svelte, Angular, the `<glyph-fox>` web component, Tailwind CSS, the CDN and the CLI.
+Original open source icons on a 24 grid that do more than sit still. Every icon is **variable** (weight, corners and style axes), **morphs** into any other icon, **fuses** with other icons into new ones that still pass the rules, takes **modifier badges** in any corner and comes with **living states** (draw, pop, wiggle, spin, pulse, bounce, shake). One set of props works the same in React (Server Components included), Vue, Svelte, Angular, Solid, Preact, Qwik, Lit, Astro, React Native, Ember, the `<glyph-fox>` web component, Tailwind CSS, the CDN and the CLI.
 
 **[Open the studio](https://kwy404.github.io/glyphfox/)** to browse, customize, morph, fuse, draw your own icons, Fox-ify any SVG, search by sketch, export a brand kit and render icons in 3D.
 
@@ -26,7 +26,8 @@ Original open source icons on a 24 grid that do more than sit still. Every icon 
 ## Contents
 
 - [Install](#install)
-- [Quick start](#quick-start): [React](#react), [Vue](#vue), [Svelte](#svelte), [Angular](#angular), [Web component and CDN](#web-component-and-cdn), [Tailwind CSS](#tailwind-css), [Plain HTML](#plain-html), [JavaScript](#javascript)
+- [Quick start](#quick-start): [React](#react), [Vue](#vue), [Svelte](#svelte), [Angular](#angular), [Solid](#solid), [Preact](#preact), [Qwik](#qwik), [Lit](#lit), [Astro](#astro), [React Native](#react-native), [Ember](#ember), [Web component and CDN](#web-component-and-cdn), [Tailwind CSS](#tailwind-css), [Plain HTML](#plain-html), [JavaScript](#javascript)
+- [Recipes](#recipes): [Next.js App Router](#nextjs-app-router-with-server-components), [Nuxt](#nuxt), [SvelteKit](#sveltekit), [Remix and React Router](#remix-and-react-router), [Alpine](#alpine), [htmx](#htmx)
 - [Props](#props)
 - [Name syntax](#name-syntax)
 - [Variable axes](#variable-axes) · [Morph](#morph) · [Fusion](#fusion) · [Living states](#living-states) · [Modifiers](#modifiers)
@@ -43,7 +44,7 @@ Original open source icons on a 24 grid that do more than sit still. Every icon 
 npm install glyphfox
 ```
 
-`glyphfox` has no dependencies. React, Vue, Svelte and Tailwind CSS are optional peer dependencies, used only when you import their entry points. Angular lives in its own package:
+`glyphfox` has no dependencies. React, Vue, Svelte, Solid, Preact, Qwik, Lit, Astro, React Native (with `react-native-svg`), Ember and Tailwind CSS are optional peer dependencies, used only when you import their entry points. Angular lives in its own package:
 
 ```sh
 npm install glyphfox-angular
@@ -69,6 +70,15 @@ export function Toolbar({ open, saved }) {
 ```
 
 Components are tree shakable (`/*#__PURE__*/`, `sideEffects: false`), use `forwardRef`, and pass `className`, `style` and every SVG attribute through. Deep imports work too: `import { FileIcon } from 'glyphfox/react/icons/file'`. The `useMorph(name, { duration })` hook returns icon data that morphs whenever `name` changes.
+
+The modules are marked `'use client'`, so Server Components can render them as client components. For icons that ship no JavaScript at all, `glyphfox/react/server` has hook free `Icon` and `Fusion` server components with every icon available by name:
+
+```jsx
+import { Icon, Fusion } from 'glyphfox/react/server';
+
+<Icon name="file+check@tr" size={20} variant="duotone" />
+<Fusion icons={['cloud', 'lock']} layout="overlap" />
+```
 
 ### Vue
 
@@ -121,6 +131,130 @@ bootstrapApplication(App, {
 ```
 
 `GlyphFoxIcon` is a standalone component with every shared prop as an input. Register only the icons you use, or pass `icons` from `glyphfox` to register all of them.
+
+### Solid
+
+```jsx
+import { createSignal } from 'solid-js';
+import { HomeIcon, HeartIcon, Fusion, MorphIcon } from 'glyphfox/solid';
+
+export function Toolbar() {
+  const [open, setOpen] = createSignal(false);
+  return (
+    <nav>
+      <HomeIcon size={20} class="nav-icon" />
+      <HeartIcon animate="pop" trigger="click" variant="duotone" />
+      <Fusion icons={['cloud', 'lock']} layout="overlap" />
+      <button onClick={() => setOpen(!open())}>
+        <MorphIcon name={open() ? 'x' : 'menu'} />
+      </button>
+    </nav>
+  );
+}
+```
+
+No compiler setup: the same module renders in SolidStart on the server and in the browser. `class`, `style`, `ref` and events reach the svg; `useMorph(accessor)` returns an accessor that morphs when the name changes.
+
+### Preact
+
+```jsx
+import { FileIcon, HeartIcon, MorphIcon } from 'glyphfox/preact';
+
+<FileIcon size={20} weight={1.5} modifier="check" class="doc" />
+<HeartIcon animate="pop" trigger="click" />
+<MorphIcon name={copied ? 'check' : 'copy'} />
+```
+
+The React API (`Icon`, `Fusion`, `MorphIcon`, `useMorph`) on `preact` and `preact/hooks`, without `preact/compat`. On Preact 11 a `ref` reaches the svg.
+
+### Qwik
+
+```tsx
+import { component$, useSignal } from '@qwik.dev/core';
+import { iconX } from 'glyphfox';
+import { BellIcon, HomeIcon, MenuIcon, registerIcons } from 'glyphfox/qwik';
+
+registerIcons([iconX]); // names used only by morphTo, Icon or Fusion
+
+export default component$(() => {
+  const open = useSignal(false);
+  return (
+    <header>
+      <HomeIcon size={20} class="logo" />
+      <BellIcon animate="shake" trigger="hover" />
+      <button onClick$={() => (open.value = !open.value)}>
+        <MenuIcon morphTo="x" trigger="state" active={open.value} />
+      </button>
+    </header>
+  );
+});
+```
+
+For Qwik 2 (`@qwik.dev/core`). Lightweight components that render on the server and resume with no JavaScript: living states and `morphTo` run on CSS, `active` switches `trigger="state"`, and `trigger="click"` uses a tiny inline handler. Names in `Icon`, `morphTo` and `Fusion` must be registered: icon components register their icon, and `registerIcons([iconX])` (or `registerIcons(icons)` for the whole set) covers names you only write as strings.
+
+### Lit
+
+```js
+import { html } from 'lit';
+import { defineIcons, FileIcon, HeartIcon, Icon, Fusion, MorphIcon } from 'glyphfox/lit';
+
+defineIcons([FileIcon, HeartIcon, Icon, Fusion, MorphIcon]); // <gf-file>, <gf-heart>, <gf-glyph>, <gf-fusion>, <gf-morph>
+
+html`
+  <gf-file size="20" weight="1.5" modifier="check"></gf-file>
+  <gf-heart animate="pop" trigger="click" secondary-color="#ff7a1a"></gf-heart>
+  <gf-glyph name="cloud&lock:overlap"></gf-glyph>
+  <gf-morph .name=${open ? 'x' : 'menu'}></gf-morph>
+`;
+```
+
+Lit 3 elements in shadow DOM that also render with `@lit-labs/ssr`. Nothing is defined on import; `defineIcons(list, { prefix: 'my' })` gives `<my-file>`. Attributes are kebab-case, properties camelCase, and the `animate` attribute is the `animatePreset` property (every element already has an `animate()` method), while `animation` plays the designed animation as in every package. `class` and `style` style the host element.
+
+### Astro
+
+```astro
+---
+import { HomeIcon, Icon, Fusion } from 'glyphfox/astro';
+import SearchIcon from 'glyphfox/astro/icons/search';
+---
+
+<HomeIcon size={20} class:list={['nav-icon', { active: true }]} />
+<SearchIcon weight={1.5} />
+<Icon name="file+check@tr" variant="duotone" />
+<Fusion icons={['cloud', 'lock']} layout="overlap" />
+```
+
+`.astro` components that render static SVG on the server and ship no JavaScript, with every icon available to `Icon`, `morphTo` and `Fusion`. `class`, `style` (string or object) and any attribute pass through.
+
+### React Native
+
+```sh
+npm install glyphfox react-native-svg
+```
+
+```jsx
+import { HomeIcon, BellIcon, MorphIcon } from 'glyphfox/native';
+
+<HomeIcon size={28} color="#ff7a1a" />
+<BellIcon animate="shake" trigger="state" active={unread > 0} />
+<MorphIcon name={open ? 'x' : 'menu'} style={{ marginLeft: 8 }} />
+```
+
+The same components on `react-native-svg`. There is no CSS on native, so living states are sampled frame by frame from the same presets and morphs are tweened, both following the reduce motion setting; `trigger="click"` plays on press. `title` sets the accessibility label and refs reach the `Svg`.
+
+### Ember
+
+```gjs
+import { FileIcon, Glyph, Fusion } from 'glyphfox/ember';
+
+<template>
+  {{FileIcon size=20 weight=1.5 class="toolbar-icon"}}
+  {{Glyph "file+check@tr" variant="duotone"}}
+  {{Fusion "cloud" "lock" layout="overlap"}}
+</template>
+```
+
+Plain function helpers (Ember 4.5 and newer, no addon setup) that return trusted markup, for .gjs, .gts and classic templates. Props, `class`, `style` and attributes are named arguments. Names in `Glyph`, `morphTo` and `Fusion` must be registered: icon helpers register their icon, and `registerIcons([iconCloud])` (or `registerIcons(icons)`) covers the rest.
 
 ### Web component and CDN
 
@@ -189,6 +323,93 @@ search('lixeira');                           // trash, synonyms in five language
 
 Also in the package: `glyphfox/icons.json`, `glyphfox/sprite.svg` (`<use href="sprite.svg#gf-home">`), `glyphfox/styles.css` (optional animation classes), `glyphfox/core` (the engine without icon data) and `glyphfox/tools` (lint and Fox-ify).
 
+## Recipes
+
+Longer versions with every step live in the [framework guides](https://kwy404.github.io/glyphfox/frameworks/).
+
+### Next.js App Router with Server Components
+
+```tsx
+// app/page.tsx: a Server Component, no JavaScript sent for these icons
+import { Icon } from 'glyphfox/react/server';
+
+export default function Page() {
+  return <Icon name="bell" animate="shake" trigger="hover" title="Notifications" />;
+}
+```
+
+```tsx
+// app/like-button.tsx
+'use client';
+import { HeartIcon } from 'glyphfox/react';
+```
+
+Server Components render static SVG with `glyphfox/react/server` (every icon by name, CSS living states and hover or state morphs). Use `glyphfox/react` in client components for the click trigger and morph tweens. Add `experimental.optimizePackageImports: ['glyphfox']` to `next.config` or use deep imports (`glyphfox/react/icons/file`). [Full recipe](https://kwy404.github.io/glyphfox/frameworks/nextjs.html).
+
+### Nuxt
+
+```ts
+// modules/glyphfox.ts: auto import the components you choose
+import { addComponent, defineNuxtModule } from '@nuxt/kit';
+
+export default defineNuxtModule({
+  setup() {
+    for (const name of ['HomeIcon', 'BellIcon', 'Icon', 'MorphIcon']) addComponent({ name, export: name, filePath: 'glyphfox/vue' });
+  },
+});
+```
+
+`glyphfox/vue` renders on the server and hydrates, with no `build.transpile`. Register icons you only use by name in a plugin (`registerIcons([iconCloud])`) so the server render contains them. [Full recipe](https://kwy404.github.io/glyphfox/frameworks/nuxt.html).
+
+### SvelteKit
+
+```svelte
+<script>
+  import { HomeIcon } from 'glyphfox/svelte';
+  import FileIcon from 'glyphfox/svelte/icons/file';
+</script>
+
+<HomeIcon size={20} />
+<FileIcon modifier="check" />
+```
+
+`glyphfox/svelte` ships `.svelte` sources that SvelteKit compiles, so icons render on the server and prerender to static HTML. Call `registerIcons` in `+layout.js` for icons you only use by name. [Full recipe](https://kwy404.github.io/glyphfox/frameworks/sveltekit.html).
+
+### Remix and React Router
+
+```tsx
+// app/root.tsx
+import sprite from 'glyphfox/sprite.svg?url';
+
+export const links = () => [{ rel: 'preload', href: sprite, as: 'image', type: 'image/svg+xml' }];
+```
+
+`glyphfox/react` works in routes as is, server rendered and hydrated. For long static lists, point `<use>` elements at the cached sprite (`sprite + '#gf-home'`). [Full recipe](https://kwy404.github.io/glyphfox/frameworks/remix.html).
+
+### Alpine
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/glyphfox@1"></script>
+
+<div x-data="{ open: false }">
+  <button @click="open = !open"><glyph-fox :name="open ? 'x' : 'menu'" morph></glyph-fox></button>
+  <span x-html="glyphfox.toSvg(open ? 'heart/solid' : 'heart', { size: 20 })"></span>
+</div>
+```
+
+`<glyph-fox>` reacts to attribute changes, so Alpine bindings drive every prop and `morph` animates name changes. [Full recipe](https://kwy404.github.io/glyphfox/frameworks/alpine.html).
+
+### htmx
+
+```js
+// a server route that answers an htmx request
+import { toSvg } from 'glyphfox';
+
+res.send(`<button hx-post="/like" hx-swap="outerHTML">${toSvg('heart/solid', { animate: 'pop' })}</button>`);
+```
+
+Render SVG on the server with `toSvg`, return `<glyph-fox>` tags (custom elements upgrade when swapped in), or use the `data-glyph` runtime, which also replaces placeholders that arrive later. [Full recipe](https://kwy404.github.io/glyphfox/frameworks/htmx.html).
+
 ## Props
 
 The same props, with the same names and meaning, in every package. Attributes use kebab-case (`secondary-color`). The plain use stays `<HomeIcon />`.
@@ -222,7 +443,7 @@ The same props, with the same names and meaning, in every package. Attributes us
 | `triggerParent` | boolean | `false` | Hover, focus and press of the closest link or button also play the icon. |
 | `disabled` | boolean | `false` | Stops every animation. |
 
-Plus `class` (`className` in React) and `style`, passed to the `<svg>` (or to the host element for Angular and the web component). Every animation respects `prefers-reduced-motion`.
+Plus `class` (`className` in React) and `style`, passed to the `<svg>` (or to the host element for Angular, Lit and the web component; React Native takes `style` only). Every animation respects `prefers-reduced-motion`.
 
 ## Name syntax
 

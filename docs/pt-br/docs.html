@@ -27,8 +27,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <meta property="og:title" content="glyphfox docs">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/docs.html">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
-<link rel="modulepreload" href="../assets/js/bundle/docs.SUGIGQF2.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.TWKLBFQP.js">
+<link rel="modulepreload" href="../assets/js/bundle/docs.UV2OLEZV.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.6JH46KWY.js">
 </head>
 <body class="docs-page">
 <!-- header:start -->
@@ -66,6 +66,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
     <a href="#tailwind">Tailwind CSS</a>
     <a href="#html" data-i18n="docs.html">HTML puro</a>
     <a href="#js">JavaScript</a>
+    <a href="#frameworks" data-i18n="docs.frameworks">Frameworks e receitas</a>
     <p class="docs-nav-title" data-i18n="docs.reference">Referência</p>
     <a href="#props">Props</a>
     <a href="#syntax" data-i18n="docs.syntax">Sintaxe de nomes</a>
@@ -92,7 +93,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
       <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh">npm install glyphfox
 # Angular
 npm install glyphfox-angular</pre></div>
-      <p data-i18n="docs.install.p">O glyphfox não tem dependências. React, Vue, Svelte e Tailwind CSS são peer dependencies opcionais, usadas só quando você importa os pontos de entrada deles.</p>
+      <p data-i18n="docs.install.p">O glyphfox não tem dependências. React, Vue, Svelte, Solid, Preact, Qwik, Lit, Astro, React Native, Ember e Tailwind CSS são peer dependencies opcionais, usadas só quando você importa os pontos de entrada deles.</p>
     </section>
 
     <section id="react">
@@ -215,6 +216,12 @@ fuse(['cloud', 'lock'], { layout: 'overlap', gap: 1 }); // icon data that passes
 createMorph(getIcon('play'), getIcon('pause')).frame(0.5);
 search('arrow', { limit: 10 });</pre></div>
       <p data-i18n="docs.js.p">O pacote também traz <code>icons.json</code>, <code>sprite.svg</code>, <code>styles.css</code>, <code>glyphfox/core</code> (o motor sem os dados dos ícones) e <code>glyphfox/tools</code> (lint e Fox-ify).</p>
+    </section>
+
+    <section id="frameworks">
+      <h2 data-i18n="docs.frameworks">Frameworks e receitas</h2>
+      <p data-i18n="docs.frameworks.p">As mesmas props vêm em pacotes para Solid, Preact, Qwik, Lit, Astro, React Native e Ember, e como Server Components sem hooks para React. As receitas cobrem Next.js, Nuxt, SvelteKit, Remix, Alpine e htmx.</p>
+      <p><a href="../frameworks/index.html" data-i18n="docs.frameworks.link">Todos os frameworks e receitas (em inglês)</a></p>
     </section>
 
     <section id="props">
@@ -345,6 +352,7 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
         <ul>
           <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
           <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
           <li><a href="docs.html#cli">CLI</a></li>
           <li><a href="changelog.html" data-i18n="nav.changelog">Novidades</a></li>
         </ul>
@@ -365,6 +373,6 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/docs.SUGIGQF2.js"></script>
+<script type="module" src="../assets/js/bundle/docs.UV2OLEZV.js"></script>
 </body>
 </html>

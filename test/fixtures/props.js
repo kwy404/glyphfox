@@ -96,3 +96,21 @@ export function checkDefault(h) {
 }
 
 export { classOf, svgOpen };
+
+/**
+ * The same cases for the packages that render static markup (Qwik, Astro,
+ * Ember, React Server Components): morphTo stays a CSS morph that `active`
+ * switches on with the gf-on class.
+ */
+export const STATIC_PROP_CASES = PROP_CASES.map((c) =>
+  c.prop !== 'morphTo'
+    ? c
+    : {
+        ...c,
+        check: (h) => {
+          expect(classOf(h).split(/\s+/)).toContain('gf-on');
+          expect(h).toContain('class="gf-ma"');
+          expect(h).toMatch(/\.gf-x[0-9a-z]+\.gf-on /);
+        },
+      },
+);

@@ -92,9 +92,15 @@ describe('build', () => {
   });
 
   it('writes every framework entry point', () => {
-    for (const f of ['react/index.js', 'react/index.cjs', 'react/index.d.ts', 'vue/index.js', 'vue/index.cjs', 'vue/index.d.ts', 'svelte/index.js', 'svelte/index.d.ts', 'svelte/Icon.svelte', 'web/index.js', 'web/element.js', 'web/glyphfox.min.js', 'tailwind/index.js', 'tailwind/index.cjs', 'runtime/auto.js', 'core/index.js', 'core/index.d.ts', 'tools.js', 'cli/index.js']) {
+    for (const f of ['react/index.js', 'react/index.cjs', 'react/index.d.ts', 'vue/index.js', 'vue/index.cjs', 'vue/index.d.ts', 'svelte/index.js', 'svelte/index.d.ts', 'svelte/Icon.svelte', 'web/index.js', 'web/element.js', 'web/glyphfox.min.js', 'tailwind/index.js', 'tailwind/index.cjs', 'runtime/auto.js', 'core/index.js', 'core/index.d.ts', 'core/static.js', 'tools.js', 'cli/index.js']) {
       expect(existsSync(join(dist, f)), f).toBe(true);
     }
+    for (const fw of ['solid', 'preact', 'qwik', 'lit', 'native', 'ember']) {
+      for (const f of ['index.js', 'index.d.ts', 'runtime.js', 'icons/file.js', 'icons/file.d.ts']) expect(existsSync(join(dist, fw, f)), `${fw}/${f}`).toBe(true);
+      const mod = readFileSync(join(dist, fw, 'icons', 'file.js'), 'utf8');
+      expect(mod, fw).toContain(`export const ${componentName('file')} = /*#__PURE__*/ createIcon(icon);`);
+    }
+    for (const f of ['astro/index.js', 'astro/index.d.ts', 'astro/Icon.astro', 'astro/Fusion.astro', 'astro/icons/file.astro', 'react/server.js', 'react/server.d.ts']) expect(existsSync(join(dist, f)), f).toBe(true);
     const react = readFileSync(join(dist, 'react', 'icons', 'file.js'), 'utf8');
     expect(react).toContain('/*#__PURE__*/');
     expect(react).toContain(`export const ${componentName('file')}`);
@@ -102,7 +108,7 @@ describe('build', () => {
 
   it('declares exports for every entry point and keeps frameworks optional', () => {
     const pkg = JSON.parse(readFileSync(join(root, 'packages', 'glyphfox', 'package.json'), 'utf8'));
-    for (const k of ['.', './icons/*', './icons.json', './sprite.svg', './styles.css', './runtime', './core', './tools', './react', './vue', './svelte', './web', './web/element', './tailwind']) expect(pkg.exports[k], k).toBeTruthy();
+    for (const k of ['.', './icons/*', './icons.json', './sprite.svg', './styles.css', './runtime', './core', './tools', './react', './react/server', './vue', './svelte', './solid', './preact', './qwik', './lit', './astro', './native', './ember', './web', './web/element', './tailwind']) expect(pkg.exports[k], k).toBeTruthy();
     for (const p of Object.keys(pkg.peerDependencies)) expect(pkg.peerDependenciesMeta[p].optional).toBe(true);
     expect(pkg.dependencies).toBeUndefined();
     expect(pkg.bin.glyphfox).toBe('./bin/glyphfox.js');

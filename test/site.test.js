@@ -13,6 +13,7 @@ const pages = [
     .filter((f) => f.endsWith('.html'))
     .map((f) => join(docs, f)),
   ...readdirSync(join(docs, 'pt-br')).map((f) => join(docs, 'pt-br', f)),
+  ...readdirSync(join(docs, 'frameworks')).map((f) => join(docs, 'frameworks', f)),
 ];
 const read = (f) => readFileSync(f, 'utf8');
 const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js')).href);
@@ -25,6 +26,17 @@ describe('studio site', () => {
       expect(read(join(docs, 'pt-br', p))).toContain('<html lang="pt-BR">');
     }
     expect(existsSync(join(docs, '404.html'))).toBe(true);
+  });
+
+  it('has the framework guide and every recipe', () => {
+    for (const p of ['index', 'nextjs', 'nuxt', 'sveltekit', 'remix', 'alpine', 'htmx']) {
+      const html = read(join(docs, 'frameworks', `${p}.html`));
+      expect(html, p).toContain('<html lang="en">');
+      expect(html, p).toMatch(/href="\.\.\/assets\/site\.[0-9a-f]{8}\.css"/);
+      expect(html, p).toContain(`<link rel="canonical" href="https://kwy404.github.io/glyphfox/frameworks/${p === 'index' ? '' : p + '.html'}">`);
+    }
+    expect(read(join(docs, 'docs.html'))).toContain('href="frameworks/index.html"');
+    expect(read(join(docs, 'pt-br', 'docs.html'))).toContain('href="../frameworks/index.html"');
   });
 
   it('only links to files that exist', () => {
@@ -78,7 +90,13 @@ describe('studio site', () => {
     const names = new Set(iconNames);
     const components = new Set(iconNames.map(componentName));
     const data = new Set(iconNames.map(dataName));
-    const docsText = [read('README.md'), read(join(docs, 'docs.html')), read(join('packages', 'glyphfox-angular', 'README.md'))].join('\n');
+    const guides = readdirSync(join(docs, 'frameworks')).map((f) =>
+      read(join(docs, 'frameworks', f))
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&'),
+    );
+    const docsText = [read('README.md'), read(join(docs, 'docs.html')), read(join('packages', 'glyphfox-angular', 'README.md')), ...guides].join('\n');
     for (const m of docsText.matchAll(/\b([A-Z][A-Za-z0-9]*Icon)\b/g)) {
       if (['MorphIcon', 'GlyphFoxIcon'].includes(m[1])) continue;
       expect(components.has(m[1]), m[1]).toBe(true);

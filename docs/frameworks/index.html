@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.2fa4695b.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location.pathname.replace(/(pt-br\/)?[^/]*$/,'');navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}</script>
+<!-- head:end -->
+<title>Frameworks: glyphfox</title>
+<meta name="description" content="glyphfox in every framework: React, React Server Components, Vue, Svelte, Angular, Solid, Preact, Qwik, Lit, Astro, React Native, Ember, the web component and Tailwind CSS, plus recipes for Next.js, Nuxt, SvelteKit, Remix, Alpine and htmx.">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/frameworks/">
+<meta property="og:title" content="Frameworks: glyphfox">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/frameworks/">
+<link rel="stylesheet" href="../assets/docs.4063d59a.css">
+<link rel="modulepreload" href="../assets/js/bundle/docs.UV2OLEZV.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.6JH46KWY.js">
+</head>
+<body class="docs-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../pt-br/docs.html" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<div class="wrap docs-layout">
+  <nav class="docs-nav" aria-label="Documentation">
+    <p class="docs-nav-title">On this page</p>
+    <a href="#packages">Packages</a>
+    <a href="#solid">Solid</a>
+    <a href="#preact">Preact</a>
+    <a href="#qwik">Qwik</a>
+    <a href="#lit">Lit</a>
+    <a href="#astro">Astro</a>
+    <a href="#react-native">React Native</a>
+    <a href="#ember">Ember</a>
+    <a href="#recipes">Recipes</a>
+    <p class="docs-nav-title">Recipes</p>
+    <a href="nextjs.html">Next.js App Router</a>
+    <a href="nuxt.html">Nuxt</a>
+    <a href="sveltekit.html">SvelteKit</a>
+    <a href="remix.html">Remix and React Router</a>
+    <a href="alpine.html">Alpine.js</a>
+    <a href="htmx.html">htmx</a>
+    <p class="docs-nav-title">More</p>
+    <a href="index.html">Every framework</a>
+    <a href="../docs.html">Docs</a>
+    <a href="../docs.html#props">Props</a>
+  </nav>
+
+  <main id="main" class="docs-main">
+    <header class="docs-hero">
+      <span class="eyebrow">Frameworks</span>
+      <h1 class="title">One icon set, every framework</h1>
+      <p class="lead">Every package takes the same props (size, color, weight, corners, variant, animate, modifier, morphTo and the rest) and renders the same SVG. Pick your framework, or follow a recipe for your meta framework.</p>
+    </header>
+
+    <section id="packages">
+      <h2>Packages</h2>
+      <p>Everything ships in the <code>glyphfox</code> package (Angular also has <code>glyphfox-angular</code>). Each framework is an optional peer dependency, used only when you import its entry point. Icon components are tree shakable and every entry point is typed.</p>
+      <div class="table-wrap"><table class="props">
+        <thead><tr><th>Framework</th><th>Import</th><th>Renders</th></tr></thead>
+        <tbody>
+          <tr><td>React</td><td><code>glyphfox/react</code></td><td>Client components (marked <code>'use client'</code>), forwardRef</td></tr>
+          <tr><td>React Server Components</td><td><code>glyphfox/react/server</code></td><td>Hook free Icon and Fusion, zero JavaScript</td></tr>
+          <tr><td>Vue 3</td><td><code>glyphfox/vue</code></td><td>Components and <code>useMorph</code></td></tr>
+          <tr><td>Svelte 5</td><td><code>glyphfox/svelte</code></td><td>.svelte sources and <code>morphStore</code></td></tr>
+          <tr><td>Angular</td><td><code>glyphfox-angular</code></td><td>Standalone component and registry provider</td></tr>
+          <tr><td>Solid</td><td><code>glyphfox/solid</code></td><td>Components and <code>useMorph</code>, server and client</td></tr>
+          <tr><td>Preact</td><td><code>glyphfox/preact</code></td><td>Components and hooks, no compat layer</td></tr>
+          <tr><td>Qwik</td><td><code>glyphfox/qwik</code></td><td>Lightweight components that resume with no JavaScript</td></tr>
+          <tr><td>Lit</td><td><code>glyphfox/lit</code></td><td>Lit elements (<code>&lt;gf-file&gt;</code>, <code>&lt;gf-glyph&gt;</code>)</td></tr>
+          <tr><td>Astro</td><td><code>glyphfox/astro</code></td><td>.astro components, static SVG</td></tr>
+          <tr><td>React Native</td><td><code>glyphfox/native</code></td><td>react-native-svg components</td></tr>
+          <tr><td>Ember</td><td><code>glyphfox/ember</code></td><td>Helpers for .gjs, .gts and classic templates</td></tr>
+          <tr><td>Web component</td><td><code>glyphfox/web</code></td><td><code>&lt;glyph-fox&gt;</code>, also from the CDN</td></tr>
+          <tr><td>Tailwind CSS</td><td><code>glyphfox/tailwind</code></td><td>CSS mask classes</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="solid">
+      <h2>Solid</h2>
+      <div class="code"><div class="code-head"><span>Toolbar.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { createSignal } from 'solid-js';
+import { HomeIcon, HeartIcon, Fusion, MorphIcon } from 'glyphfox/solid';
+
+export function Toolbar() {
+  const [open, setOpen] = createSignal(false);
+  return (
+    &lt;nav&gt;
+      &lt;HomeIcon size={20} class="nav-icon" /&gt;
+      &lt;HeartIcon animate="pop" trigger="click" variant="duotone" /&gt;
+      &lt;Fusion icons={['cloud', 'lock']} layout="overlap" /&gt;
+      &lt;button onClick={() =&gt; setOpen(!open())}&gt;
+        &lt;MorphIcon name={open() ? 'x' : 'menu'} /&gt;
+      &lt;/button&gt;
+    &lt;/nav&gt;
+  );
+}</pre></div>
+      <p>No JSX compiler setup and no special export condition: the same module renders in SolidStart on the server and in the browser. <code>class</code>, <code>style</code>, <code>ref</code> and events pass through to the svg. <code>useMorph(accessor)</code> returns an accessor of icon data that morphs whenever the name changes.</p>
+    </section>
+
+    <section id="preact">
+      <h2>Preact</h2>
+      <div class="code"><div class="code-head"><span>App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { useState } from 'preact/hooks';
+import { FileIcon, HeartIcon, MorphIcon } from 'glyphfox/preact';
+
+export function App() {
+  const [copied, setCopied] = useState(false);
+  return (
+    &lt;&gt;
+      &lt;FileIcon size={20} weight={1.5} modifier="check" class="doc" /&gt;
+      &lt;HeartIcon animate="pop" trigger="click" /&gt;
+      &lt;MorphIcon name={copied ? 'check' : 'copy'} onClick={() =&gt; setCopied(true)} /&gt;
+    &lt;/&gt;
+  );
+}</pre></div>
+      <p>The same API as React (Icon, Fusion, MorphIcon, useMorph) built on <code>preact</code> and <code>preact/hooks</code>, so it does not pull in <code>preact/compat</code>. On Preact 11 a <code>ref</code> reaches the svg element. Both <code>class</code> and <code>className</code> work.</p>
+    </section>
+
+    <section id="qwik">
+      <h2>Qwik</h2>
+      <div class="code"><div class="code-head"><span>header.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { component$, useSignal } from '@qwik.dev/core';
+import { iconX } from 'glyphfox';
+import { BellIcon, HomeIcon, MenuIcon, registerIcons } from 'glyphfox/qwik';
+
+registerIcons([iconX]); // names used only by morphTo, Icon or Fusion
+
+export default component$(() =&gt; {
+  const open = useSignal(false);
+  return (
+    &lt;header&gt;
+      &lt;HomeIcon size={20} class="logo" /&gt;
+      &lt;BellIcon animate="shake" trigger="hover" /&gt;
+      &lt;button onClick$={() =&gt; (open.value = !open.value)}&gt;
+        &lt;MenuIcon morphTo="x" trigger="state" active={open.value} /&gt;
+      &lt;/button&gt;
+    &lt;/header&gt;
+  );
+});</pre></div>
+      <p>Built for Qwik 2 (<code>@qwik.dev/core</code>). The icons are lightweight components: they render on the server and resume without downloading anything. Living states and <code>morphTo</code> run on CSS, <code>active</code> switches <code>trigger="state"</code>, and <code>trigger="click"</code> uses a tiny inline handler. Names used by <code>Icon</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon components register their icon, and <code>registerIcons([iconX])</code> (or <code>registerIcons(icons)</code> with <code>icons</code> from <code>glyphfox</code> for the whole set) covers names you only write as strings.</p>
+    </section>
+
+    <section id="lit">
+      <h2>Lit</h2>
+      <div class="code"><div class="code-head"><span>app.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { LitElement, html } from 'lit';
+import { defineIcons, FileIcon, HeartIcon, Icon, Fusion, MorphIcon } from 'glyphfox/lit';
+
+// &lt;gf-file&gt;, &lt;gf-heart&gt;, &lt;gf-glyph&gt;, &lt;gf-fusion&gt; and &lt;gf-morph&gt;
+defineIcons([FileIcon, HeartIcon, Icon, Fusion, MorphIcon]);
+
+class AppBar extends LitElement {
+  static properties = { open: { type: Boolean } };
+  render() {
+    return html`
+      &lt;gf-file size="20" weight="1.5" modifier="check"&gt;&lt;/gf-file&gt;
+      &lt;gf-heart animate="pop" trigger="click" secondary-color="#ff7a1a"&gt;&lt;/gf-heart&gt;
+      &lt;gf-glyph name="cloud&amp;lock:overlap"&gt;&lt;/gf-glyph&gt;
+      &lt;gf-morph .name=${this.open ? 'x' : 'menu'} @click=${() =&gt; (this.open = !this.open)}&gt;&lt;/gf-morph&gt;
+    `;
+  }
+}
+customElements.define('app-bar', AppBar);</pre></div>
+      <p>Nothing is registered on import: <code>defineIcons(list, { prefix })</code> defines the elements you use (<code>{ prefix: 'my' }</code> gives <code>&lt;my-file&gt;</code>). Attributes are kebab-case (<code>secondary-color</code>, <code>flip-x</code>, <code>morph-to</code>), properties camelCase; the <code>animate</code> attribute is the <code>animatePreset</code> property, because <code>animate()</code> is a method of every element, and <code>animation</code> plays the designed animation as in every package. <code>class</code> and <code>style</code> style the host element. The elements render in shadow DOM and work with <code>@lit-labs/ssr</code>.</p>
+    </section>
+
+    <section id="astro">
+      <h2>Astro</h2>
+      <div class="code"><div class="code-head"><span>src/pages/index.astro</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="html">---
+import { HomeIcon, BellIcon, Icon, Fusion } from 'glyphfox/astro';
+import SearchIcon from 'glyphfox/astro/icons/search';
+---
+
+&lt;nav&gt;
+  &lt;HomeIcon size={20} class:list={['nav-icon', { active: true }]} /&gt;
+  &lt;SearchIcon weight={1.5} /&gt;
+  &lt;BellIcon animate="shake" trigger="hover" /&gt;
+  &lt;Icon name="file+check@tr" variant="duotone" /&gt;
+  &lt;Fusion icons={['cloud', 'lock']} layout="overlap" /&gt;
+&lt;/nav&gt;</pre></div>
+      <p>Components render static SVG on the server and ship no JavaScript. Every icon of the set is available to <code>Icon</code> names, <code>morphTo</code> and <code>Fusion</code>. <code>class</code> (and <code>class:list</code>), <code>style</code> as a string or an object, and any other attribute pass through to the svg. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
+    </section>
+
+    <section id="react-native">
+      <h2>React Native</h2>
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh">npm install glyphfox react-native-svg</pre></div>
+      <div class="code"><div class="code-head"><span>Tabs.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { HomeIcon, BellIcon, HeartIcon, MorphIcon } from 'glyphfox/native';
+
+export function Tabs({ open, unread }) {
+  return (
+    &lt;View style={{ flexDirection: 'row', gap: 16 }}&gt;
+      &lt;HomeIcon size={28} color="#ff7a1a" /&gt;
+      &lt;BellIcon animate="shake" trigger="state" active={unread &gt; 0} /&gt;
+      &lt;HeartIcon animate="pop" trigger="click" variant="duotone" /&gt;
+      &lt;MorphIcon name={open ? 'x' : 'menu'} style={{ marginLeft: 'auto' }} /&gt;
+    &lt;/View&gt;
+  );
+}</pre></div>
+      <p>Components render react-native-svg elements with the same props. There is no CSS on native, so living states are sampled frame by frame from the same presets and morphs are tweened; both follow the reduce motion setting. <code>trigger="click"</code> plays on press and <code>trigger="hover"</code> while pressed. <code>title</code> sets the accessibility label, <code>style</code> and other props reach the <code>Svg</code>, and refs are forwarded. Metro resolves the <code>glyphfox/native</code> export with package exports, on by default since React Native 0.79.</p>
+    </section>
+
+    <section id="ember">
+      <h2>Ember</h2>
+      <div class="code"><div class="code-head"><span>app/components/toolbar.gjs</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { FileIcon, BellIcon, Glyph, Fusion } from 'glyphfox/ember';
+
+&lt;template&gt;
+  {{FileIcon size=20 weight=1.5 class="toolbar-icon"}}
+  {{BellIcon animate="shake" trigger="hover"}}
+  {{Glyph "file+check@tr" variant="duotone"}}
+  {{Fusion "cloud" "lock" layout="overlap"}}
+&lt;/template&gt;</pre></div>
+      <p>Plain function helpers (Ember 4.5 and newer), so they need no addon setup and work in .gjs, .gts and classic templates. They return trusted markup: the shared props, <code>class</code>, <code>style</code> and other attributes are named arguments. Names used by <code>Glyph</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon helpers register their icon, and <code>registerIcons([iconCloud])</code> (or <code>registerIcons(icons)</code>) covers the rest. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
+    </section>
+
+    <section id="recipes">
+      <h2>Recipes</h2>
+      <ul>
+        <li><a href="nextjs.html">Next.js App Router</a></li>
+        <li><a href="nuxt.html">Nuxt</a></li>
+        <li><a href="sveltekit.html">SvelteKit</a></li>
+        <li><a href="remix.html">Remix and React Router</a></li>
+        <li><a href="alpine.html">Alpine.js</a></li>
+        <li><a href="htmx.html">htmx</a></li>
+      </ul>
+    </section>
+  </main>
+</div>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+          <li><a href="../labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="../assets/js/bundle/docs.UV2OLEZV.js"></script>
+</body>
+</html>
