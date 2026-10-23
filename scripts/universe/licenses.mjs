@@ -157,7 +157,7 @@ writeFileSync(catalogFile, JSON.stringify(catalog) + '\n');
 // License texts are kept as published; report the ones the text check would flag.
 const flagged = [...files.entries()].filter(([, t]) => t.split('\n').some((l) => breaks(l))).map(([n]) => n);
 console.log(`${files.size} license files for ${list.length} sets, ${attrib.length} sets need attribution`);
-if (flagged.length) console.log(`texts with characters outside the repository text rules: ${flagged.join(', ')}`);
+if (flagged.length) console.log(`kept as published, with characters our own files avoid: ${flagged.join(', ')}`);
 if (problems.length) {
   for (const p of problems) console.error(p);
   process.exit(1);

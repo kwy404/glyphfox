@@ -72,13 +72,14 @@ export function fixtureIndex() {
     ['logo', 'solid', true, false],
     ['star', 'solid', false, false],
   ];
-  const enc = (list, aliases, cats) => {
+  const enc = (list, aliases, cats, tags) => {
     const pos = new Map(list.map((e, i) => [e[0], i]));
     return {
       n: encodeNames(list.map((e) => e[0])),
       f: list.map(([, style, brand, stroke]) => encodeFlags({ style, brand, stroke })).join(''),
       a: encodeAliases(aliases.map(([a, p]) => [a, pos.get(p)])),
       c: cats.map(([name, names]) => [name, encodeRanges(names.map((n) => pos.get(n)))]),
+      ...(tags ? { t: tags } : {}),
     };
   };
   return {
@@ -86,7 +87,8 @@ export function fixtureIndex() {
     total: 7,
     sets: ['tst', 'fil'],
     data: {
-      tst: enc(tst, [['back', 'arrow-left'], ['house', 'home']], [['Arrows', ['arrow-left', 'arrow-right']], ['Buildings', ['home', 'home-filled']]]),
+      // Tags: 0 dwelling, 1 navigation, 2 love; home and home-filled share a line (=).
+      tst: enc(tst, [['back', 'arrow-left'], ['house', 'home']], [['Arrows', ['arrow-left', 'arrow-right']], ['Buildings', ['home', 'home-filled']]], { d: 'dwelling\nnavigation\nlove', r: '1\n1\n2\n0\n=' }),
       fil: enc(fil, [], [['Brand Logos', ['logo']]]),
     },
   };

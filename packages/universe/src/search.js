@@ -69,7 +69,7 @@ export class UniverseIndex {
     const aliasPairs = decodeAliases(raw.a);
     const alias = joinNames(aliasPairs.map((a) => a[0]));
     const cats = raw.c.map(([name, ranges]) => ({ name, lower: name.toLowerCase(), ids: decodeRanges(ranges) }));
-    d = { prefix, count: names.length, text, starts, flags: raw.f, alias, aliasParent: Int32Array.from(aliasPairs.map((a) => a[1])), cats, catsOf: null };
+    d = { prefix, count: names.length, text, starts, flags: raw.f, alias, aliasParent: Int32Array.from(aliasPairs.map((a) => a[1])), cats, catsOf: null, tagsRaw: raw.t || null, tags: null };
     this.decoded.set(prefix, d);
     return d;
   }
@@ -106,6 +106,33 @@ export class UniverseIndex {
       for (const c of d.cats) for (const i of c.ids) d.catsOf.set(i, [...(d.catsOf.get(i) || []), c.name]);
     }
     return d.catsOf.get(index) || [];
+  }
+
+  /** Upstream tags of a decoded set: { dict, refs (tag ids per icon), byTag (icons per tag id) }, or null. */
+  tagData(d) {
+    if (!d.tagsRaw) return null;
+    if (!d.tags) {
+      const dict = d.tagsRaw.d.split('\n');
+      const refs = [];
+      let prev = [];
+      for (const line of d.tagsRaw.r.split('\n')) {
+        prev = line === '=' ? prev : line ? line.split(' ').map((x) => parseInt(x, 36)) : [];
+        refs.push(prev);
+      }
+      const byTag = dict.map(() => []);
+      refs.forEach((ids, i) => {
+        for (const id of ids) byTag[id].push(i);
+      });
+      d.tags = { dict, refs, byTag };
+    }
+    return d.tags;
+  }
+
+  /** Upstream tags of an icon (Lucide, Tabler, Phosphor and Material carry them). */
+  tagsOf(prefix, index) {
+    const d = this.set(prefix);
+    const td = d && this.tagData(d);
+    return td && td.refs[index] ? td.refs[index].map((id) => td.dict[id]) : [];
   }
 
   /** Aliases of an icon. */
@@ -220,6 +247,20 @@ export class UniverseIndex {
         if (!c.lower.includes(anchor)) continue;
         for (const i of c.ids) {
           if (check(`${c.lower} ${this.nameAt(d, i)}`)) put(i, 8 + rank);
+        }
+      }
+      // Upstream tags.
+      const td = this.tagData(d);
+      if (td) {
+        const phrase = terms.join(' ');
+        for (let k = 0; k < td.dict.length; k++) {
+          const tag = td.dict[k];
+          if (!tag.includes(anchor)) continue;
+          const exact = tag === anchor || tag === phrase;
+          for (const i of td.byTag[k]) {
+            if (others.length && !check(`${tag} ${this.nameAt(d, i)} ${td.refs[i].map((id) => td.dict[id]).join(' ')}`)) continue;
+            put(i, (exact ? 20 : 12) + rank);
+          }
         }
       }
     });

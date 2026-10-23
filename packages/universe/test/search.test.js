@@ -56,6 +56,14 @@ describe('search', () => {
     expect(index.aliasesOf('tst', 3)).toEqual(['house']);
   });
 
+  it('finds icons by their upstream tags', () => {
+    expect(names('dwelling')).toEqual(['tst:home', 'tst:home-filled']);
+    expect(names('love')).toEqual(['tst:heart-duotone']);
+    expect(names('navigation left')).toEqual(['tst:arrow-left']);
+    expect(index.tagsOf('tst', 4)).toEqual(['dwelling']);
+    expect(index.tagsOf('fil', 0)).toEqual([]);
+  });
+
   it('returns nothing for words that do not match', () => {
     expect(names('zebra')).toEqual([]);
     expect(names('arrow zebra')).toEqual([]);
@@ -73,5 +81,6 @@ describe.skipIf(!existsSync(built))('the built index', () => {
     expect(performance.now() - t0).toBeLessThan(500);
     for (const n of ['lucide:arrow-left', 'mdi:arrow-left', 'tabler:arrow-left', 'material-symbols:arrow-left']) expect(hits).toContain(n);
     expect(big.search('home', { sets: ['lucide'] })[0].name).toBe('lucide:house');
+    expect(big.search('garbage', { sets: ['lucide'] }).map((r) => r.name)).toContain('lucide:trash');
   });
 });

@@ -55,10 +55,11 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "node ../../scripts/universe/build.mjs && node ../../scripts/universe/licenses.mjs",
+    "build": "node ../../scripts/universe/build.mjs",
+    "site": "node ../../scripts/universe/site.mjs",
     "check": "node ../../scripts/universe/check-licenses.mjs",
     "test": "vitest run --config vitest.config.js",
-    "prepack": "node ../../scripts/universe/build.mjs --offline && node ../../scripts/universe/licenses.mjs --offline && node ../../scripts/universe/check-licenses.mjs"
+    "prepack": "node ../../scripts/universe/build.mjs --offline"
   },
   "universe": {
     "iconify": "2.2.547"

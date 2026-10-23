@@ -251,7 +251,7 @@ async function select(id, focus = true) {
   const e = index.entry(id);
   const set = info.get(e.prefix);
   els.name.textContent = fullName(e);
-  const tags = index.categoriesOf(e.prefix, e.index);
+  const tags = [...index.categoriesOf(e.prefix, e.index), ...index.tagsOf(e.prefix, e.index)].slice(0, 10);
   const aliases = index.aliasesOf(e.prefix, e.index);
   els.meta.innerHTML = `${esc(set.name)} by ${set.author.url ? `<a href="${esc(set.author.url)}">${esc(set.author.name)}</a>` : esc(set.author.name)}. ${esc(e.style)}${e.brand ? ', brand' : ''}${e.stroke ? ', stroke based' : ''}${tags.length ? `. Tags: ${esc(tags.join(', '))}` : ''}${aliases.length ? `. Aliases: ${esc(aliases.slice(0, 6).join(', '))}` : ''}`;
   const lic = set.license;

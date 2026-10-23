@@ -6,7 +6,7 @@ One glyphfox API over <!-- universe:total -->414,952<!-- /universe:total --> ope
 npm i glyphfox-universe
 ```
 
-The package is small: it ships the code, a catalog of every set (counts, authors, licenses) and a compact search index (about 5 MB, loaded lazily). Icon drawings are never copied into it: each set loads on demand as one JSON file, from the `@iconify-json/<prefix>` packages on jsDelivr, or from a local install of `@iconify-json/<prefix>` or `@iconify/json` when there is one (Node reads those first). The data comes from [@iconify/json](https://github.com/iconify/icon-sets) <!-- universe:source -->2.2.547<!-- /universe:source --> (MIT); every set keeps its own license.
+The package is small: it ships the code, a catalog of every set (counts, authors, licenses) and a compact search index (about 6 MB, under 2 MB compressed, loaded lazily). Icon drawings are never copied into it: each set loads on demand as one JSON file, from the `@iconify-json/<prefix>` packages on jsDelivr, or from a local install of `@iconify-json/<prefix>` or `@iconify/json` when there is one (Node reads those first). The data comes from [@iconify/json](https://github.com/iconify/icon-sets) <!-- universe:source -->2.2.547<!-- /universe:source --> (MIT); every set keeps its own license.
 
 ## Quick start
 
@@ -79,7 +79,7 @@ Many other sets have stroke based icons too (for example the outline themes of H
 
 Options of `toSvg` and `iconToSvg`: `size` (number or CSS length, the height; the width keeps the ratio), `color`, `secondaryColor` and `secondaryOpacity` (paint the translucent duotone layer), `weight`, `absoluteWeight`, `corners` (`round` or `sharp`), `rotate` (degrees), `flipX`, `flipY`, `animate` (`spin`, `pulse`, `draw`; always behind `prefers-reduced-motion`), `title` (accessible name, else `aria-hidden`), `class`, `attrs`, `idPrefix` (ids of gradients and masks get a unique prefix so many icons can share a page; pass one for stable server output).
 
-Search options: `limit`, `sets`, `styles` (`outline`, `solid`, `duotone`, `color`), `brand` (`true` for logos only, `false` to leave them out), `stroke`, `licenses` (SPDX ids or kinds: `public-domain`, `permissive`, `attribution`, `share-alike`). A query that starts with `prefix:` searches one set. Styles come from the theme names of each set (Iconify prefixes and suffixes), style words in the names and the drawing itself.
+Search matches icon names, Iconify aliases, set categories and upstream tags: Lucide, Tabler and Phosphor tags from their packages, and the Material Symbols and Material Icons tags of the Google Fonts metadata (tags shared by too many icons are dropped). Search options: `limit`, `sets`, `styles` (`outline`, `solid`, `duotone`, `color`), `brand` (`true` for logos only, `false` to leave them out), `stroke`, `licenses` (SPDX ids or kinds: `public-domain`, `permissive`, `attribution`, `share-alike`). A query that starts with `prefix:` searches one set. Styles come from the theme names of each set (Iconify prefixes and suffixes), style words in the names and the drawing itself.
 
 ## Offline builds
 
@@ -455,7 +455,7 @@ Sets left out:
 
 ## Build
 
-`npm run build` in this folder streams the @iconify/json tarball one set at a time (it is never extracted), keeps the sets the policy allows, classifies every icon (style, brand, stroke), writes `dist/catalog.json` and `dist/index.json`, fetches the license texts into `LICENSES/` and runs the license check. `dist/` is generated and not committed. Tests: `npm test` (vitest).
+`npm run build` in this folder streams the @iconify/json tarball one set at a time (it is never extracted), keeps the sets the policy allows, classifies every icon (style, brand, stroke), adds the upstream tags, writes `dist/catalog.json` and `dist/index.json`, fetches the license texts into `LICENSES/` and runs the license check. `dist/` is generated and not committed. Tests: `npm test` (vitest).
 
 ## License
 

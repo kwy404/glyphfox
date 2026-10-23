@@ -7,7 +7,8 @@
 //   packages/universe/dist/catalog.json   sets, counts, licenses, CDN versions
 //   packages/universe/dist/index.json     names, flags, aliases and categories
 //
-// Icon bodies are not copied: the runtime loads them on demand from the
+// Then it writes LICENSES/ and runs the license check (licenses.mjs and
+// check-licenses.mjs). Icon bodies are not copied: the runtime loads them on demand from the
 // @iconify-json/<prefix> packages on jsDelivr or from a local install.
 //
 //   node scripts/universe/build.mjs [--source file.tgz] [--offline]
@@ -20,6 +21,7 @@ import { Readable } from 'node:stream';
 import { tarEntries } from './lib/tar.mjs';
 import { classifySet } from './lib/classify.mjs';
 import { loadTextRules, textTester } from './lib/text-rules.mjs';
+import { encodeTags, upstreamTags } from './lib/tags.mjs';
 import { licenseDecision, FEATURED } from '../../packages/universe/src/policy.js';
 import { encodeAliases, encodeFlags, encodeNames, encodeRanges } from '../../packages/universe/src/format.js';
 
@@ -95,6 +97,13 @@ async function cdnVersions(prefixes) {
 const t0 = Date.now();
 const rules = loadTextRules(root);
 const breaks = textTester(rules);
+
+// Upstream search tags of the most used sets, pinned and cached per source version.
+const tagVersionsFile = join(cache, `tag-versions-${SOURCE_VERSION}.json`);
+const tagVersions = existsSync(tagVersionsFile) ? JSON.parse(readFileSync(tagVersionsFile, 'utf8')) : {};
+const tagSources = await upstreamTags({ cache: join(cache, 'tags'), versions: tagVersions, offline, breaks });
+mkdirSync(cache, { recursive: true });
+writeFileSync(tagVersionsFile, JSON.stringify(tagVersions, null, 1) + '\n');
 const source = await sourceFile();
 const sets = [];
 const index = {};
@@ -167,6 +176,8 @@ for await (const entry of tarEntries(source, (name) => /^package\/json\/[^/]+\.j
     if (c.stroke) stroke++;
   }
   index[prefix] = { n: encodeNames(kept), f: flags, a: encodeAliases(aliases), c: cats };
+  const tags = tagSources[prefix] ? encodeTags(kept, tagSources[prefix]) : null;
+  if (tags) index[prefix].t = tags;
   const samples = (info.samples || []).filter((s) => pos.has(s)).slice(0, 6);
   for (const n of kept) {
     if (samples.length >= 6) break;
@@ -222,3 +233,8 @@ console.log(`${total} icons in ${sets.length} sets (source: ${sourceTotal} icons
 console.log(`excluded: ${excluded.map((e) => `${e.prefix} (${e.reason})`).join(', ')}`);
 console.log(`text rules: ${textDropped} icon names left out`);
 console.log(`catalog ${kb('catalog.json')} KB, index ${kb('index.json')} KB, ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+
+// License texts, the notice and the license check run with every build, so
+// the catalog always carries the license file of every set.
+await import('./licenses.mjs');
+await import('./check-licenses.mjs');
