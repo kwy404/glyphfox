@@ -68,6 +68,7 @@ Many other sets have stroke based icons too (for example the outline themes of H
 | `toSvg(name, options)`, `toSvgSync(name, options)` | SVG markup with the style transforms. |
 | `iconToSvg(icon, options)` | SVG markup of an icon object. |
 | `search(query, options)` | Search names, aliases and categories (tags) across every set. |
+| `loadPreviews()` | The preview strips of the sets gallery: 12 small icons per set, the same concepts in every set (home, search, heart, user, settings, bell, trash, star, arrow-right, check, mail, calendar), found by synonyms. |
 | `loadIndex()` | The search index (`UniverseIndex`: `searchIds`, `browse`, `entry`, `categoriesOf`, `aliasesOf`). |
 | `listSets()`, `getSet(prefix)`, `loadCatalog()` | The catalog: every set with its counts, styles, author, license and CDN package. |
 | `loadSet(prefix)` | The Iconify JSON of a set. |
@@ -460,7 +461,7 @@ Sets left out:
 
 ## Build
 
-`npm run build` in this folder streams the @iconify/json tarball one set at a time (it is never extracted), keeps the sets the policy allows, classifies every icon (style, brand, stroke), adds the upstream tags, writes `dist/catalog.json` and `dist/index.json`, fetches the license texts into `LICENSES/` and runs the license check. `dist/` is generated and not committed. Tests: `npm test` (vitest).
+`npm run build` in this folder streams the @iconify/json tarball one set at a time (it is never extracted), keeps the sets the policy allows, classifies every icon (style, brand, stroke), adds the upstream tags, writes `dist/catalog.json`, `dist/index.json` and `dist/previews.json` (the gallery strips, about 400 KB compressed), fetches the license texts into `LICENSES/` and runs the license check. `dist/` is generated and not committed. Tests: `npm test` (vitest).
 
 ## License
 

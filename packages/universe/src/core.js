@@ -17,6 +17,7 @@ export { licenseDecision, LICENSE_KINDS, KIND_LABELS, STYLES } from './policy.js
 export { UniverseIndex, parseQuery } from './search.js';
 export { iconData, bakeTransforms } from './iconify.js';
 export { PREFIXES } from './prefixes.js';
+export { decodeFlags, encodeFlags } from './format.js';
 
 const NAME = /^([a-z0-9]+(?:-[a-z0-9]+)*):([a-z0-9_]+(?:-[a-z0-9_]+)*)$/;
 
@@ -136,6 +137,7 @@ export async function clear({ persistent = true, memory = true } = {}) {
     catalogPromise = null;
     catalogValue = null;
     indexPromise = null;
+    previewsPromise = null;
   }
   if (persistent) {
     const store = cacheStorage();
@@ -194,6 +196,22 @@ export function loadIndex() {
     });
   }
   return indexPromise;
+}
+
+let previewsPromise = null;
+
+/**
+ * Preview strips of the sets gallery (dist/previews.json): 12 small icons
+ * per set, the same concepts in every set (home, search, heart, user...).
+ */
+export function loadPreviews() {
+  if (!previewsPromise) {
+    previewsPromise = packageData('previews.json');
+    previewsPromise.catch(() => {
+      previewsPromise = null;
+    });
+  }
+  return previewsPromise;
 }
 
 /** Uses an index object directly (tests, custom hosting). */
@@ -358,4 +376,5 @@ export function reset() {
   catalogPromise = null;
   catalogValue = null;
   indexPromise = null;
+  previewsPromise = null;
 }

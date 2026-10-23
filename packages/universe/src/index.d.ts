@@ -125,6 +125,8 @@ export declare function configure(options?: { cdn?: string; dataUrl?: string | n
 export declare function clear(options?: { persistent?: boolean; memory?: boolean }): Promise<void>;
 export declare function loadCatalog(): Promise<Catalog>;
 export declare function loadIndex(): Promise<UniverseIndex>;
+/** Preview strips: { concepts, sets: { prefix: { box: [left, top, width, height], icons: [name, body, flags, concept, box?][] } } }. */
+export declare function loadPreviews(): Promise<{ concepts: string[]; sets: Record<string, { box: number[]; icons: [string, string, string, number, number[]?][] }> }>;
 export declare function listSets(): Promise<SetRecord[]>;
 export declare function getSet(prefix: string): Promise<SetRecord | null>;
 export declare function loadSet(prefix: string): Promise<unknown>;

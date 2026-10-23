@@ -5,6 +5,7 @@
 
 import { $, $$, copy, codeBlock } from '../assets/js/app.js';
 import * as U from './runtime.js';
+import { createGallery } from './gallery.js';
 
 const params = new URLSearchParams(location.search);
 const LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
@@ -200,7 +201,8 @@ function syncUrl() {
   if (state.styles.size) q.set('style', [...state.styles].join(','));
   if (state.licenses.size) q.set('license', [...state.licenses].join(','));
   const s = q.toString();
-  history.replaceState(null, '', s ? `?${s}` : location.pathname);
+  const hash = location.hash.startsWith('#set=') ? '' : location.hash;
+  history.replaceState(null, '', `${s ? `?${s}` : location.pathname}${hash}`);
 }
 
 function update() {
@@ -446,9 +448,53 @@ function setupControls() {
   }).observe(els.grid);
 }
 
+// Views: the icon browser (#browse, #set=prefix) and the sets gallery
+// (#gallery, #compare=a,b). Routes live in the hash: no page per set.
+let gallery = null;
+
+function setView(view) {
+  els.app.hidden = view !== 'browse';
+  for (const a of $$('[data-view-link]')) a.setAttribute('aria-current', String(a.dataset.viewLink === view));
+}
+
+function toViews(smooth) {
+  const nav = $('.uv-views');
+  const y = window.scrollY + nav.getBoundingClientRect().top - nav.offsetHeight - 13;
+  if (Math.abs(window.scrollY - y) > 4) window.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+}
+
+async function ensureIndex() {
+  if (!index) {
+    els.result.textContent = 'Loading the search index';
+    index = await U.loadIndex();
+  }
+  update();
+}
+
+async function route(scroll = true) {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h === 'gallery' || h === 'compare' || h.startsWith('compare=')) {
+    setView(h === 'gallery' ? 'gallery' : 'compare');
+    if (!gallery) gallery = createGallery({ catalog, onOpen: (p) => (location.hash = `#set=${p}`) });
+    await gallery.show(h === 'gallery' ? null : h.slice(8).split(',').filter(Boolean));
+    if (scroll) toViews(false);
+    return;
+  }
+  setView('browse');
+  if (gallery) gallery.hide();
+  if (h.startsWith('set=') && info.has(h.slice(4))) {
+    state.set = h.slice(4);
+    renderSets();
+    counts();
+  }
+  await ensureIndex();
+  if (scroll && (h.startsWith('set=') || h === 'browse')) toViews(false);
+}
+
 async function start() {
   setupControls();
   setupDetail();
+  els.app = $('.uv-app');
   const url = await dataUrl();
   U.configure(url ? { dataUrl: url, maxSets: 12 } : { maxSets: 12 });
   try {
@@ -458,10 +504,10 @@ async function start() {
     els.setsCount.textContent = fmt(catalog.list.filter((s) => s.cdn !== false).length);
     renderSets();
     counts();
-    els.result.textContent = 'Loading the search index';
-    index = await U.loadIndex();
-    update();
+    window.addEventListener('hashchange', () => route(true));
+    await route(Boolean(location.hash && location.hash !== '#sets'));
   } catch (err) {
+    console.error(err);
     els.result.textContent = 'The icon data is not reachable';
     els.note.hidden = false;
     els.note.textContent = 'The catalog and the search index load from jsDelivr, from the published glyphfox-universe package. The table below lists every set with its count and license.';

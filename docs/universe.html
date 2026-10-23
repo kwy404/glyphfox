@@ -55,6 +55,7 @@
       <p class="lead">Every icon set in Iconify whose license allows redistribution and modification, from Material Symbols, Fluent, Carbon and Font Awesome Free to Lucide, Tabler and Phosphor. One <code>prefix:name</code> resolver, instant search, license metadata on every icon and the glyphfox transforms on top: weight, corners, color, duotone, rotation and motion.</p>
       <div class="uv-install">
         <div class="install"><span>npm i glyphfox-universe</span><button type="button" data-copy="npm i glyphfox-universe" aria-label="Copy the install command"><!--gf:copy:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-copy" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><!--/gf--></button></div>
+        <a class="btn primary" href="#gallery">Sets gallery</a>
         <a class="btn ghost" href="#sets">Sets and licenses</a>
       </div>
       <!-- universe:stats:start -->
@@ -66,6 +67,53 @@
       </ul>
       <!-- universe:stats:end -->
     </div>
+  </section>
+
+  <nav class="uv-views" aria-label="Universe views">
+    <div class="wrap">
+      <a href="#browse" data-view-link="browse">Browse icons</a>
+      <a href="#gallery" data-view-link="gallery">Sets gallery</a>
+      <a href="#compare" data-view-link="compare">Compare sets</a>
+    </div>
+  </nav>
+
+  <section class="gx" data-gallery hidden aria-labelledby="gx-title">
+    <div class="wrap gx-head">
+      <div class="gx-row">
+        <h2 id="gx-title" class="subtitle">Sets gallery <span class="gx-count" data-gx-count></span></h2>
+        <div class="gx-tools">
+          <input class="input gx-filter" type="search" placeholder="Filter sets by name" aria-label="Filter sets by name" data-gx-filter autocomplete="off" spellcheck="false">
+          <label class="gx-sort"><span>Sort</span><select class="input" data-gx-sort aria-label="Sort sets"><option value="size">Size</option><option value="name">Name</option><option value="license">License kind</option></select></label>
+          <button class="btn small" type="button" data-gx-compare aria-pressed="false">Compare sets</button>
+        </div>
+      </div>
+      <div class="gx-row gx-chips">
+        <div class="uv-chips" role="group" aria-label="Filter by style" data-gx-styles>
+          <button class="chip" type="button" value="outline" aria-pressed="false">Outline</button>
+          <button class="chip" type="button" value="solid" aria-pressed="false">Solid</button>
+          <button class="chip" type="button" value="duotone" aria-pressed="false">Duotone</button>
+          <button class="chip" type="button" value="color" aria-pressed="false">Color</button>
+          <button class="chip" type="button" value="brand" aria-pressed="false">Brand</button>
+          <button class="chip" type="button" value="stroke" aria-pressed="false">Weight and draw</button>
+        </div>
+        <div class="uv-chips" role="group" aria-label="Filter by license" data-gx-licenses>
+          <button class="chip" type="button" value="public-domain" aria-pressed="false">Public domain</button>
+          <button class="chip" type="button" value="permissive" aria-pressed="false">Permissive</button>
+          <button class="chip" type="button" value="attribution" aria-pressed="false">Attribution</button>
+          <button class="chip" type="button" value="share-alike" aria-pressed="false">Share alike</button>
+        </div>
+      </div>
+      <form class="gx-controls" data-gx-controls aria-label="Preview controls">
+        <label class="field gx-color"><span>Color</span><input type="color" name="color" value="#f5f5f6"></label>
+        <label class="field"><span><span>Size</span><output data-gx-o="size">24</output></span><input type="range" name="size" min="16" max="40" step="1" value="24"></label>
+        <label class="field"><span><span>Weight</span><output data-gx-o="weight">native</output></span><input type="range" name="weight" min="0.75" max="3" step="0.25" value="2"></label>
+        <div class="field"><span>Corners</span><div class="seg" role="group" data-gx-corners><button type="button" value="" aria-pressed="true">Native</button><button type="button" value="round" aria-pressed="false">Round</button><button type="button" value="sharp" aria-pressed="false">Sharp</button></div></div>
+        <div class="field gx-toggle"><span>glyphfox style</span><button class="gx-switch" type="button" role="switch" aria-checked="false" data-gx-glyphfox><i></i><span>Off</span></button></div>
+        <button class="btn small ghost" type="button" data-gx-reset>Reset</button>
+      </form>
+    </div>
+    <div class="wrap gx-compare" data-gx-compare-panel hidden></div>
+    <div class="wrap"><div class="gx-grid" data-gx-grid aria-live="polite"></div><p class="uv-note" data-gx-note hidden></p></div>
   </section>
 
   <section class="uv-app" aria-label="Browse the universe">

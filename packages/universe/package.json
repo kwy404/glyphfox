@@ -42,7 +42,8 @@
     "./bundle": "./src/bundle.js",
     "./catalog.json": "./dist/catalog.json",
     "./index.json": "./dist/index.json",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./previews.json": "./dist/previews.json"
   },
   "files": [
     "src",
