@@ -26,7 +26,7 @@ glyphfox is an open source icon library and icon studio by Alexandre Kohler (kwy
 - Copy as SVG, JSX, Vue, Svelte, Angular, HTML web component, Tailwind class, CDN snippet, data URI; download SVG and PNG at any size.
 - Create icons directly in the browser: an editor on the 24 grid with snapping, pen and shape tools (line, polyline, rect, rounded rect, circle, ellipse, arc, bezier), node editing, undo and redo, import an SVG and normalize it to the grid and stroke rules, live lint against the icon rules, preview in context, save to a local collection, export the collection as SVG files, a sprite or a ready to publish package.json skeleton.
 - Docs for every framework with copyable examples, a changelog, and the author footer: Alexandre Kohler with https://github.com/kwy404 and https://www.linkedin.com/in/alexandre-silva-173687256/ .
-- Serious, premium design, light and dark, responsive, fast, accessible. Site copy in English and Portuguese (Brazil).
+- Serious, premium design, light and dark, responsive, fast, accessible. Site copy in English, Portuguese (Brazil), Spanish, French and German.
 
 ## Rules
 
@@ -51,3 +51,13 @@ Name syntax shared by the CDN, the web component, Tailwind and the CLI: `name`, 
 ## Site
 
 Dark first, precise grid, generous whitespace, sharp typography, subtle borders and gradients. Only original art: the glyphfox icons, Fenn and illustrations built from the icon geometry. Cinematic scroll scenes (icons that assemble, morph and draw themselves, a weight axis that sweeps with the scroll, modifiers that snap in, icons that fly together and fuse), a hero where hundreds of icons flow into the glyphfox mark, spring easing and parallax depth, all with CSS, requestAnimationFrame or the Web Animations API, lazy offscreen work and a still, complete layout under prefers-reduced-motion. Lighthouse performance and accessibility at 95 or more.
+
+## Scope additions for 1.0
+
+The checklist lives in ROADMAP.md. In short:
+
+- Frameworks: Solid, Preact, Qwik, Lit, Astro, React Native (react-native-svg) and Ember next to React, Vue, Svelte 4 and 5, Angular and the web component, with recipes for Next.js, Nuxt, SvelteKit, Remix, Alpine and htmx, and CLI exports for Android (VectorDrawable, Compose ImageVector), iOS (asset catalog, SwiftUI) and Flutter (assets and Dart constants). Same props everywhere they make sense, tests per package.
+- Universe: the components accept `prefix:name` icons from packages/universe through a small resolver hook; weight, animations, modifiers and Fusion work on stroke based sets, with a clear fallback for filled sets.
+- The site ships as static pages in five languages with hreflang, canonical and a language switcher, plus a check for untranslated English.
+- Discovery: a guide per framework and per use case in every language, a page per glyphfox icon, structured data, sitemap index and robots.txt. No thin or duplicated pages, no pages about other libraries and no pages for universe icons.
+- Extras: smart data icons, locale aware icons, StatusIcon, glyph script, IconGroup, `glyphfox scan`, animated favicon, CSS cursor, plotter and STL export, shared collections with peer to peer co-editing, multilingual search synonyms.
