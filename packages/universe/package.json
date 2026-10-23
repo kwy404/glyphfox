@@ -1,0 +1,74 @@
+{
+  "name": "glyphfox-universe",
+  "version": "0.1.0",
+  "description": "One glyphfox API over more than 400,000 open license icons from established sets: a prefix:name resolver, search, license metadata on every icon, style transforms and offline bundling.",
+  "license": "MIT",
+  "author": "Alexandre Kohler (https://github.com/kwy404)",
+  "homepage": "https://kwy404.github.io/glyphfox/universe.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwy404/glyphfox.git",
+    "directory": "packages/universe"
+  },
+  "bugs": "https://github.com/kwy404/glyphfox/issues",
+  "keywords": [
+    "icons",
+    "svg",
+    "iconify",
+    "icon-search",
+    "glyphfox",
+    "vite-plugin",
+    "webpack-plugin"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "./src/glyphfox.js",
+    "./src/node.js"
+  ],
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "node": "./src/node.js",
+      "default": "./src/index.js"
+    },
+    "./glyphfox": "./src/glyphfox.js",
+    "./vite": "./src/plugin/vite.js",
+    "./webpack": "./src/plugin/webpack.js",
+    "./rspack": "./src/plugin/webpack.js",
+    "./add": "./src/add.js",
+    "./bundle": "./src/bundle.js",
+    "./catalog.json": "./dist/catalog.json",
+    "./index.json": "./dist/index.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node ../../scripts/universe/build.mjs && node ../../scripts/universe/licenses.mjs",
+    "check": "node ../../scripts/universe/check-licenses.mjs",
+    "test": "vitest run --config vitest.config.js",
+    "prepack": "node ../../scripts/universe/build.mjs --offline && node ../../scripts/universe/licenses.mjs --offline && node ../../scripts/universe/check-licenses.mjs"
+  },
+  "universe": {
+    "iconify": "2.2.547"
+  },
+  "peerDependencies": {
+    "glyphfox": "*"
+  },
+  "peerDependenciesMeta": {
+    "glyphfox": {
+      "optional": true
+    }
+  }
+}
