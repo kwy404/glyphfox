@@ -1,0 +1,12 @@
+{
+  "categories": [
+    "development"
+  ],
+  "tags": [
+    "feature flag",
+    "toggle",
+    "rollout",
+    "release",
+    "experiment"
+  ]
+}
