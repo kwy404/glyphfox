@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!-- head:end -->
+<title>Universe: glyphfox</title>
+<meta name="description" content="glyphfox universe: one API over every open license icon set in Iconify, with search, filters, license metadata on every icon and the glyphfox style transforms on top.">
+<meta property="og:title" content="glyphfox universe">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/universe.html">
+<link rel="stylesheet" href="universe/universe.css">
+</head>
+<body class="universe-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="icons.html" data-nav="icons">Icons</a>
+      <a href="universe.html" data-nav="universe" aria-current="page">Universe</a>
+      <a href="studio.html" data-nav="studio">Studio</a>
+      <a href="docs.html" data-nav="docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+  <section class="uv-hero">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="wrap uv-hero-in">
+      <p class="eyebrow">glyphfox universe</p>
+      <h1 class="title"><span data-stat="total-text">414,952</span> open license icons. <span class="grad">One API.</span></h1>
+      <p class="lead">Every icon set in Iconify whose license allows redistribution and modification, from Material Symbols, Fluent, Carbon and Font Awesome Free to Lucide, Tabler and Phosphor. One <code>prefix:name</code> resolver, instant search, license metadata on every icon and the glyphfox transforms on top: weight, corners, color, duotone, rotation and motion.</p>
+      <div class="uv-install">
+        <div class="install"><span>npm i glyphfox-universe</span><button type="button" data-copy="npm i glyphfox-universe" aria-label="Copy the install command"><!--gf:copy:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-copy" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><!--/gf--></button></div>
+        <a class="btn ghost" href="#sets">Sets and licenses</a>
+      </div>
+      <!-- universe:stats:start -->
+      <ul class="uv-stats">
+        <li><b data-stat="total">414,952</b><span>icons</span></li>
+        <li><b>245</b><span>open license sets</span></li>
+        <li><b>16</b><span>licenses, all checked</span></li>
+        <li><b>63</b><span>sets credited below</span></li>
+      </ul>
+      <!-- universe:stats:end -->
+    </div>
+  </section>
+
+  <section class="uv-app" aria-label="Browse the universe">
+    <aside class="uv-side" aria-label="Filters">
+      <div class="uv-group">
+        <h2 class="uv-label" id="uv-style-label">Style</h2>
+        <div class="uv-chips" role="group" aria-labelledby="uv-style-label" data-styles>
+          <button class="chip" type="button" value="outline" aria-pressed="false">Outline <small data-count-style="outline"></small></button>
+          <button class="chip" type="button" value="solid" aria-pressed="false">Solid <small data-count-style="solid"></small></button>
+          <button class="chip" type="button" value="duotone" aria-pressed="false">Duotone <small data-count-style="duotone"></small></button>
+          <button class="chip" type="button" value="color" aria-pressed="false">Color <small data-count-style="color"></small></button>
+          <button class="chip" type="button" value="brand" aria-pressed="false" data-brand>Brand <small data-count-style="brand"></small></button>
+        </div>
+      </div>
+      <div class="uv-group">
+        <h2 class="uv-label" id="uv-license-label">License</h2>
+        <div class="uv-chips" role="group" aria-labelledby="uv-license-label" data-licenses>
+          <button class="chip" type="button" value="public-domain" aria-pressed="false">Public domain <small data-count-kind="public-domain"></small></button>
+          <button class="chip" type="button" value="permissive" aria-pressed="false">Permissive <small data-count-kind="permissive"></small></button>
+          <button class="chip" type="button" value="attribution" aria-pressed="false">Attribution <small data-count-kind="attribution"></small></button>
+          <button class="chip" type="button" value="share-alike" aria-pressed="false">Share alike <small data-count-kind="share-alike"></small></button>
+        </div>
+      </div>
+      <div class="uv-group uv-sets-group">
+        <h2 class="uv-label" id="uv-sets-label">Sets <small data-sets-count></small></h2>
+        <input class="input uv-set-filter" type="search" placeholder="Filter sets" aria-label="Filter sets" data-set-filter autocomplete="off" spellcheck="false">
+        <ul class="uv-set-list" aria-labelledby="uv-sets-label" data-set-list></ul>
+      </div>
+    </aside>
+
+    <div class="uv-center">
+      <div class="uv-topbar">
+        <div class="search">
+          <!--gf:search:18:search-icon--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search search-icon" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M7.62 10.09A3.5 3.5 0 0 1 10.09 7.62"/></svg><!--/gf-->
+          <input class="input" type="search" data-search placeholder="Search names, tags and aliases in every set" aria-label="Search icons" autocomplete="off" spellcheck="false">
+          <kbd aria-hidden="true">/</kbd>
+        </div>
+        <p class="uv-result" aria-live="polite" data-result>Loading the index</p>
+      </div>
+      <div class="uv-grid" data-grid role="listbox" aria-label="Icons" tabindex="0">
+        <div class="uv-spacer" data-spacer></div>
+        <div class="uv-layer" data-layer></div>
+      </div>
+      <div class="uv-note" data-note hidden></div>
+    </div>
+
+    <aside class="uv-detail" aria-label="Selected icon" data-detail>
+      <div class="uv-preview" data-bg="dark">
+        <div class="uv-preview-icon" data-preview></div>
+        <div class="seg" role="group" aria-label="Preview background" data-preview-bg>
+          <button type="button" value="dark" aria-pressed="true">Dark</button>
+          <button type="button" value="light" aria-pressed="false">Light</button>
+          <button type="button" value="grid" aria-pressed="false">Grid</button>
+        </div>
+      </div>
+      <div class="uv-detail-head">
+        <h2 class="uv-name" data-name>Pick an icon</h2>
+        <p class="faint uv-meta" data-meta></p>
+      </div>
+      <div class="uv-license" data-license></div>
+      <form class="uv-form" data-form>
+        <label class="field"><span><span>Size</span><output data-o="size">24</output></span><input type="range" name="size" min="12" max="128" step="1" value="24"></label>
+        <label class="field" data-weight-field><span><span>Weight</span><output data-o="weight">native</output></span><input type="range" name="weight" min="0.75" max="3" step="0.25" value="2"></label>
+        <div class="field" data-corners-field><span>Corners</span><div class="seg" role="group" data-seg="corners"><button type="button" value="" aria-pressed="true">Native</button><button type="button" value="round" aria-pressed="false">Round</button><button type="button" value="sharp" aria-pressed="false">Sharp</button></div></div>
+        <div class="uv-row">
+          <label class="field"><span>Color</span><input type="color" name="color" value="#f5f5f6"></label>
+          <label class="field"><span><span>Rotate</span><output data-o="rotate">0</output></span><input type="range" name="rotate" min="0" max="360" step="15" value="0"></label>
+        </div>
+        <div class="field"><span>Flip</span><div class="seg" role="group"><button type="button" data-toggle="flipX" aria-pressed="false">X</button><button type="button" data-toggle="flipY" aria-pressed="false">Y</button></div></div>
+      </form>
+      <div class="uv-copy">
+        <div class="tabs" role="tablist" aria-label="Formats" data-formats>
+          <button type="button" role="tab" value="svg" aria-selected="true">SVG</button>
+          <button type="button" role="tab" value="react" aria-selected="false">React</button>
+          <button type="button" role="tab" value="vue" aria-selected="false">Vue</button>
+          <button type="button" role="tab" value="web" aria-selected="false">Web component</button>
+          <button type="button" role="tab" value="cdn" aria-selected="false">CDN</button>
+        </div>
+        <div data-snippet></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section uv-sets" id="sets">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Sets and licenses</p>
+        <h2 class="title">Every set keeps its own license</h2>
+        <p class="lead">Sets ship only when their license allows redistribution and modification. Every icon carries its license, and the build fails when a set has a missing or non redistributable license. License texts and the notice with every author live in <a href="https://github.com/kwy404/glyphfox/tree/main/LICENSES">LICENSES</a>.</p>
+      </div>
+      <!-- universe:sets:start -->
+      <div class="uv-table-wrap">
+        <table class="uv-table">
+          <caption class="sr-only">Every set in glyphfox universe with its icon count and license</caption>
+          <thead><tr><th scope="col">Set</th><th scope="col">Prefix</th><th scope="col" class="num">Icons</th><th scope="col">Author</th><th scope="col">License</th><th scope="col">Kind</th></tr></thead>
+          <tbody>
+          <tr><td><a href="https://github.com/google/material-design-icons">Material Symbols</a></td><td><code>material-symbols</code></td><td class="num">15,744</td><td>Google</td><td><a href="https://github.com/google/material-design-icons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/Templarian/MaterialDesign">Material Design Icons</a></td><td><code>mdi</code></td><td class="num">7,447</td><td>Pictogrammers</td><td><a href="https://github.com/Templarian/MaterialDesign/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/microsoft/fluentui-system-icons">Fluent UI System Icons</a></td><td><code>fluent</code></td><td class="num">19,900</td><td>Microsoft Corporation</td><td><a href="https://github.com/microsoft/fluentui-system-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/lucide-icons/lucide">Lucide</a></td><td><code>lucide</code></td><td class="num">1,902</td><td>Lucide Contributors</td><td><a href="https://github.com/lucide-icons/lucide/blob/main/LICENSE">ISC</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/tabler/tabler-icons">Tabler Icons</a></td><td><code>tabler</code></td><td class="num">6,216</td><td>Paweł Kuna</td><td><a href="https://github.com/tabler/tabler-icons/blob/master/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/phosphor-icons/core">Phosphor</a></td><td><code>ph</code></td><td class="num">9,066</td><td>Phosphor Icons</td><td><a href="https://github.com/phosphor-icons/core/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/carbon-design-system/carbon/tree/main/packages/icons">Carbon</a></td><td><code>carbon</code></td><td class="num">2,611</td><td>IBM</td><td>Apache 2.0</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/twbs/icons">Bootstrap Icons</a></td><td><code>bi</code></td><td class="num">2,074</td><td>The Bootstrap Authors</td><td><a href="https://github.com/twbs/icons/blob/main/LICENSE.md">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/tailwindlabs/heroicons">HeroIcons</a></td><td><code>heroicons</code></td><td class="num">1,288</td><td>Refactoring UI Inc</td><td><a href="https://github.com/tailwindlabs/heroicons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/cyberalien/RemixIcon">Remix Icon</a></td><td><code>ri</code></td><td class="num">3,061</td><td>Remix Design</td><td><a href="https://github.com/cyberalien/RemixIcon/blob/master/License">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome Solid</a></td><td><code>fa7-solid</code></td><td class="num">2,000</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome Regular</a></td><td><code>fa7-regular</code></td><td class="num">272</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome Brands</a></td><td><code>fa7-brands</code></td><td class="num">605</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/simple-icons/simple-icons">Simple Icons</a></td><td><code>simple-icons</code></td><td class="num">3,464</td><td>Simple Icons Collaborators</td><td><a href="https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md">CC0 1.0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/material-icons/material-icons">Google Material Icons</a></td><td><code>ic</code></td><td class="num">10,955</td><td>Material Design Authors</td><td><a href="https://github.com/material-icons/material-icons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/google/material-design-icons">Material Symbols Light</a></td><td><code>material-symbols-light</code></td><td class="num">15,809</td><td>Google</td><td><a href="https://github.com/google/material-design-icons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/ionic-team/ionicons">IonIcons</a></td><td><code>ion</code></td><td class="num">1,357</td><td>Ben Sperry</td><td><a href="https://github.com/ionic-team/ionicons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/ant-design/ant-design-icons">Ant Design Icons</a></td><td><code>ant-design</code></td><td class="num">846</td><td>HeskeyBaozi</td><td><a href="https://github.com/ant-design/ant-design-icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/primer/octicons/">Octicons</a></td><td><code>octicon</code></td><td class="num">768</td><td>GitHub</td><td><a href="https://github.com/primer/octicons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/microsoft/vscode-codicons">Codicons</a></td><td><code>codicon</code></td><td class="num">640</td><td>Microsoft Corporation</td><td><a href="https://github.com/microsoft/vscode-codicons/blob/main/LICENSE">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/feathericons/feather">Feather Icons</a></td><td><code>feather</code></td><td class="num">286</td><td>Cole Bemis</td><td><a href="https://github.com/feathericons/feather/blob/master/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://www.figma.com/community/file/1166831539721848736">Solar</a></td><td><code>solar</code></td><td class="num">8,706</td><td>480 Design</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/Richard9394/MingCute">MingCute Icon</a></td><td><code>mingcute</code></td><td class="num">3,216</td><td>MingCute Design</td><td><a href="https://github.com/Richard9394/MingCute/blob/main/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/iconoir-icons/iconoir">Iconoir</a></td><td><code>iconoir</code></td><td class="num">1,671</td><td>Luca Burgio</td><td><a href="https://github.com/iconoir-icons/iconoir/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://icon-sets.iconify.design/icon-sets/hugeicons/">Huge Icons</a></td><td><code>hugeicons</code></td><td class="num">5,949</td><td>Hugeicons</td><td>MIT</td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/bytedance/IconPark">IconPark Outline</a></td><td><code>icon-park-outline</code></td><td class="num">2,658</td><td>ByteDance</td><td><a href="https://github.com/bytedance/IconPark/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/Tencent/tdesign-icons">TDesign Icons</a></td><td><code>tdesign</code></td><td class="num">2,316</td><td>TDesign</td><td><a href="https://github.com/Tencent/tdesign-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/vmware/clarity">Clarity</a></td><td><code>clarity</code></td><td class="num">1,103</td><td>VMware</td><td><a href="https://github.com/vmware/clarity-assets/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/Iconscout/unicons">Unicons</a></td><td><code>uil</code></td><td class="num">1,215</td><td>Iconscout</td><td><a href="https://github.com/Iconscout/unicons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/box-icons/boxicons-core">Boxicons</a></td><td><code>boxicons</code></td><td class="num">3,768</td><td>Boxicons</td><td><a href="https://github.com/box-icons/boxicons-core/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/radix-ui/icons">Radix Icons</a></td><td><code>radix-icons</code></td><td class="num">332</td><td>WorkOS</td><td><a href="https://github.com/radix-ui/icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/artcoholic/akar-icons">Akar Icons</a></td><td><code>akar-icons</code></td><td class="num">454</td><td>Arturo Wibawa</td><td><a href="https://github.com/artcoholic/akar-icons/blob/master/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Streamline</a></td><td><code>streamline</code></td><td class="num">2,943</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/gilbarbara/logos">SVG Logos</a></td><td><code>logos</code></td><td class="num">1,999</td><td>Gil Barbara</td><td><a href="https://raw.githubusercontent.com/gilbarbara/logos/master/LICENSE.txt">CC0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/devicons/devicon/tree/master">Devicon</a></td><td><code>devicon</code></td><td class="num">1,062</td><td>konpa</td><td><a href="https://github.com/devicons/devicon/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/tandpfun/skill-icons">Skill Icons</a></td><td><code>skill-icons</code></td><td class="num">400</td><td>tandpfun</td><td><a href="https://github.com/tandpfun/skill-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/vscode-icons/vscode-icons">VSCode Icons</a></td><td><code>vscode-icons</code></td><td class="num">1,705</td><td>Roberto Huertas</td><td><a href="https://github.com/vscode-icons/vscode-icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/microsoft/fluentui-system-icons">Fluent UI System Color Icons</a></td><td><code>fluent-color</code></td><td class="num">890</td><td>Microsoft Corporation</td><td><a href="https://github.com/microsoft/fluentui-system-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/microsoft/fluentui-emoji">Fluent Emoji Flat</a></td><td><code>fluent-emoji-flat</code></td><td class="num">3,139</td><td>Microsoft Corporation</td><td><a href="https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/googlefonts/noto-emoji">Noto Emoji</a></td><td><code>noto</code></td><td class="num">3,729</td><td>Google Inc</td><td><a href="https://github.com/googlefonts/noto-emoji/blob/main/svg/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/jdecked/twemoji">Twitter Emoji</a></td><td><code>twemoji</code></td><td class="num">3,988</td><td>Twitter</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/hfg-gmuend/openmoji">OpenMoji</a></td><td><code>openmoji</code></td><td class="num">4,543</td><td>OpenMoji</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/lipis/flag-icons">Flag Icons</a></td><td><code>flag</code></td><td class="num">542</td><td>Panayiotis Lipiridis</td><td><a href="https://github.com/lipis/flag-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/HatScripts/circle-flags">Circle Flags</a></td><td><code>circle-flags</code></td><td class="num">444</td><td>HatScripts</td><td><a href="https://github.com/HatScripts/circle-flags/blob/gh-pages/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/game-icons/icons">Game Icons</a></td><td><code>game-icons</code></td><td class="num">4,132</td><td>GameIcons</td><td><a href="https://github.com/game-icons/icons/blob/master/license.txt">CC BY 3.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/jpswalsh/academicons">Academicons</a></td><td><code>academicons</code></td><td class="num">158</td><td>James Walsh</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/andrsrxn/icons">andrsrxn/icons</a></td><td><code>andrsrxn</code></td><td class="num">2,562</td><td>Andrés Raxón</td><td><a href="https://github.com/andrsrxn/icons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/Arcticons-Team/Arcticons">Arcticons</a></td><td><code>arcticons</code></td><td class="num">15,292</td><td>Donnnno</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></td><td>Share alike, stroke</td></tr>
+          <tr><td><a href="https://github.com/Voxybuns/at-icons">@icons</a></td><td><code>at-icons</code></td><td class="num">642</td><td>Valentin Fossati</td><td><a href="https://github.com/Voxybuns/at-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://www.figma.com/community/file/931906394678748246">Basil</a></td><td><code>basil</code></td><td class="num">493</td><td>Craftwork</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/BitcoinDesign/Bitcoin-Icons">Bitcoin Icons</a></td><td><code>bitcoin-icons</code></td><td class="num">330</td><td>Bitcoin Design Community</td><td><a href="https://github.com/BitcoinDesign/Bitcoin-Icons/blob/main/LICENSE-MIT">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/bpmn-io/bpmn-font">BPMN</a></td><td><code>bpmn</code></td><td class="num">112</td><td>Camunda Services GmbH</td><td><a href="https://github.com/bpmn-io/bpmn-font/blob/master/LICENSE">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/fontello/brandico.font">Brandico</a></td><td><code>brandico</code></td><td class="num">45</td><td>Fontello</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY SA</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/leemonade/bubbles">Bubbles</a></td><td><code>bubbles</code></td><td class="num">409</td><td>Leemons</td><td><a href="https://github.com/leemonade/bubbles/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/box-icons/boxicons">BoxIcons v2</a></td><td><code>bx</code></td><td class="num">814</td><td>Boxicons</td><td><a href="https://github.com/box-icons/boxicons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/box-icons/boxicons-core">Boxicons Brands</a></td><td><code>bxl</code></td><td class="num">288</td><td>Boxicons</td><td><a href="https://github.com/box-icons/boxicons-core/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/box-icons/boxicons">BoxIcons v2 Solid</a></td><td><code>bxs</code></td><td class="num">665</td><td>Boxicons</td><td><a href="https://github.com/box-icons/boxicons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/danklammer/bytesize-icons">Bytesize Icons</a></td><td><code>bytesize</code></td><td class="num">101</td><td>Dan Klammer</td><td><a href="https://github.com/danklammer/bytesize-icons/blob/master/LICENSE.md">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/catppuccin/vscode-icons">Catppuccin Icons</a></td><td><code>catppuccin</code></td><td class="num">655</td><td>Catppuccin</td><td><a href="https://github.com/catppuccin/vscode-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/jaynewey/charm-icons">Charm Icons</a></td><td><code>charm</code></td><td class="num">261</td><td>Jay Newey</td><td><a href="https://github.com/jaynewey/charm-icons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/krystonschwarze/coolicons">coolicons</a></td><td><code>ci</code></td><td class="num">442</td><td>Kryston Schwarze</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution, stroke</td></tr>
+          <tr><td><a href="https://github.com/coreui/coreui-icons">CoreUI Brands</a></td><td><code>cib</code></td><td class="num">829</td><td>creativeLabs Łukasz Holeczek</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/coreui/coreui-icons">CoreUI Flags</a></td><td><code>cif</code></td><td class="num">199</td><td>creativeLabs Łukasz Holeczek</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/coreui/coreui-icons">CoreUI Free</a></td><td><code>cil</code></td><td class="num">554</td><td>creativeLabs Łukasz Holeczek</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/Klarr-Agency/Circum-Icons">Circum Icons</a></td><td><code>circum</code></td><td class="num">288</td><td>Klarr Agency</td><td><a href="https://github.com/Klarr-Agency/Circum-Icons/blob/main/LICENSE">Mozilla Public License 2.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/codex-team/icons">CodeX Icons</a></td><td><code>codex</code></td><td class="num">78</td><td>CodeX</td><td><a href="https://github.com/codex-team/icons/blob/master/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Covid Icons</a></td><td><code>covid</code></td><td class="num">142</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution, stroke</td></tr>
+          <tr><td><a href="https://github.com/atomiclabs/cryptocurrency-icons">Cryptocurrency Icons</a></td><td><code>cryptocurrency</code></td><td class="num">483</td><td>Christopher Downer</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/atomiclabs/cryptocurrency-icons">Cryptocurrency Color Icons</a></td><td><code>cryptocurrency-color</code></td><td class="num">483</td><td>Christopher Downer</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/Sysvale/cuida-icons">Cuida Icons</a></td><td><code>cuida</code></td><td class="num">182</td><td>Sysvale</td><td><a href="https://github.com/Sysvale/cuida-icons/blob/main/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/WordPress/dashicons">Dashicons</a></td><td><code>dashicons</code></td><td class="num">342</td><td>WordPress</td><td><a href="https://github.com/WordPress/dashicons/blob/master/gpl.txt">GPL</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/devicons/devicon/tree/master">Devicon Line</a></td><td><code>devicon-line</code></td><td class="num">69</td><td>konpa</td><td><a href="https://github.com/devicons/devicon/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/devicons/devicon/tree/master">Devicon Original</a></td><td><code>devicon-original</code></td><td class="num">659</td><td>konpa</td><td><a href="https://github.com/devicons/devicon/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/devicons/devicon/tree/master">Devicon Plain</a></td><td><code>devicon-plain</code></td><td class="num">772</td><td>konpa</td><td><a href="https://github.com/devicons/devicon/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/atelier-anchor/dinkie-icons">Dinkie Icons</a></td><td><code>dinkie-icons</code></td><td class="num">1,198</td><td>atelierAnchor</td><td><a href="https://github.com/atelier-anchor/dinkie-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/fazdiu/duo-icons">Duoicons</a></td><td><code>duo-icons</code></td><td class="num">91</td><td>fernandcf</td><td><a href="https://github.com/fazdiu/duo-icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/evil-icons/evil-icons">Evil Icons</a></td><td><code>ei</code></td><td class="num">70</td><td>Alexander Madyankin and Roman Shamin</td><td><a href="https://github.com/evil-icons/evil-icons/blob/master/LICENSE.txt">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/dovy/elusive-icons">Elusive Icons</a></td><td><code>el</code></td><td class="num">304</td><td>Team Redux</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/EmojiTwo/emojitwo">Emoji One (Colored)</a></td><td><code>emojione</code></td><td class="num">1,834</td><td>Emoji One</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/EmojiTwo/emojitwo">Emoji One (Monotone)</a></td><td><code>emojione-monotone</code></td><td class="num">1,403</td><td>Emoji One</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/joypixels/emojione-legacy">Emoji One (v1)</a></td><td><code>emojione-v1</code></td><td class="num">1,262</td><td>Emoji One</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/Sam-r-passmore/energy-icons">Energy Icons</a></td><td><code>energy-icons</code></td><td class="num">8,244</td><td>Sam Passmore</td><td><a href="https://github.com/Sam-r-passmore/energy-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/chancancode/entypo-plus">Entypo+</a></td><td><code>entypo</code></td><td class="num">321</td><td>Daniel Bruce</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/chancancode/entypo-plus">Entypo+ Social</a></td><td><code>entypo-social</code></td><td class="num">76</td><td>Daniel Bruce</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://gitlab.com/SUSE-UIUX/eos-icons">EOS Icons</a></td><td><code>eos-icons</code></td><td class="num">246</td><td>SUSE UX/UI team</td><td><a href="https://gitlab.com/SUSE-UIUX/eos-icons/-/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/element-plus/element-plus-icons">Element Plus</a></td><td><code>ep</code></td><td class="num">293</td><td>Element Plus</td><td><a href="https://github.com/element-plus/element-plus-icons/blob/main/packages/svg/package.json">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/pprince/etlinefont-bower">Elegant</a></td><td><code>et</code></td><td class="num">100</td><td>Kenny Sing</td><td><a href="https://www.gnu.org/licenses/gpl.html">GPL 3.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/akveo/eva-icons/">Eva Icons</a></td><td><code>eva</code></td><td class="num">490</td><td>Akveo</td><td><a href="https://github.com/akveo/eva-icons/blob/master/LICENSE.txt">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/framework7io/framework7-icons">Framework7 Icons</a></td><td><code>f7</code></td><td class="num">1,253</td><td>Vladimir Kharlampidi</td><td><a href="https://github.com/framework7io/framework7-icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome/tree/fa-4">Font Awesome 4</a></td><td><code>fa</code></td><td class="num">649</td><td>Dave Gandy</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome 5 Brands</a></td><td><code>fa-brands</code></td><td class="num">457</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome 5 Regular</a></td><td><code>fa-regular</code></td><td class="num">151</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome 5 Solid</a></td><td><code>fa-solid</code></td><td class="num">1,001</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome 6 Brands</a></td><td><code>fa6-brands</code></td><td class="num">495</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome 6 Regular</a></td><td><code>fa6-regular</code></td><td class="num">163</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/FortAwesome/Font-Awesome">Font Awesome 6 Solid</a></td><td><code>fa6-solid</code></td><td class="num">1,402</td><td>Dave Gandy</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/fefanto/fontaudio">FontAudio</a></td><td><code>fad</code></td><td class="num">155</td><td>@fefanto</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/familyjs/famicons">Famicons</a></td><td><code>famicons</code></td><td class="num">1,342</td><td>Family</td><td><a href="https://github.com/familyjs/famicons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/feathericon/feathericon">Feather Icon</a></td><td><code>fe</code></td><td class="num">255</td><td>Megumi Hano</td><td><a href="https://github.com/feathericon/feathericon/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/file-icons/icons">File Icons</a></td><td><code>file-icons</code></td><td class="num">930</td><td>John Gardner</td><td><a href="https://github.com/file-icons/icons/blob/master/LICENSE.md">ISC</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/Yummygum/flagpack-core">Flagpack</a></td><td><code>flagpack</code></td><td class="num">254</td><td>Yummygum</td><td><a href="https://github.com/Yummygum/flagpack-core/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/icons8/flat-Color-icons">Flat Color Icons</a></td><td><code>flat-color-icons</code></td><td class="num">329</td><td>Icons8</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/designmodo/Flat-UI">Flat UI Icons</a></td><td><code>flat-ui</code></td><td class="num">100</td><td>Designmodo, Inc.</td><td><a href="https://github.com/designmodo/Flat-UI/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/themesberg/flowbite-icons">Flowbite Icons</a></td><td><code>flowbite</code></td><td class="num">751</td><td>Themesberg</td><td><a href="https://github.com/themesberg/flowbite-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/microsoft/fluentui-emoji">Fluent Emoji</a></td><td><code>fluent-emoji</code></td><td class="num">3,120</td><td>Microsoft Corporation</td><td><a href="https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/microsoft/fluentui-emoji">Fluent Emoji High Contrast</a></td><td><code>fluent-emoji-high-contrast</code></td><td class="num">1,594</td><td>Microsoft Corporation</td><td><a href="https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/microsoft/fluentui/tree/master/packages/react-icons-mdl2">Fluent UI MDL2</a></td><td><code>fluent-mdl2</code></td><td class="num">1,734</td><td>Microsoft Corporation</td><td><a href="https://github.com/microsoft/fluentui/blob/master/packages/react-icons-mdl2/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/fontello/fontelico.font">Fontelico</a></td><td><code>fontelico</code></td><td class="num">34</td><td>Fontello</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY SA</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/kenangundogan/fontisto">Fontisto</a></td><td><code>fontisto</code></td><td class="num">615</td><td>Kenan Gündoğan</td><td><a href="https://github.com/kenangundogan/fontisto/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/formkit/formkit/tree/master/packages/icons">FormKit Icons</a></td><td><code>formkit</code></td><td class="num">144</td><td>FormKit, Inc</td><td><a href="https://github.com/formkit/formkit/blob/master/packages/icons/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/zurb/foundation-icon-fonts">Foundation</a></td><td><code>foundation</code></td><td class="num">283</td><td>Zurb</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/mozilla/fxemoji">Firefox OS Emoji</a></td><td><code>fxemoji</code></td><td class="num">1,034</td><td>Mozilla</td><td><a href="https://mozilla.github.io/fxemoji/LICENSE.md">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/cyberalien/gala-icons">Gala Icons</a></td><td><code>gala</code></td><td class="num">51</td><td>Jake Wells</td><td><a href="https://github.com/cyberalien/gala-icons/blob/main/LICENSE">GPL</a></td><td>Share alike, stroke</td></tr>
+          <tr><td><a href="https://github.com/zendeskgarden/svg-icons">Garden SVG Icons</a></td><td><code>garden</code></td><td class="num">1,491</td><td>Zendesk</td><td><a href="https://github.com/zendeskgarden/svg-icons/blob/main/LICENSE.md">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td>Google Cloud Icons</td><td><code>gcp</code></td><td class="num">206</td><td>Google Cloud</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/cugos/geoglyphs">GeoGlyphs</a></td><td><code>geo</code></td><td class="num">30</td><td>Sam Matthews</td><td><a href="https://github.com/cugos/geoglyphs/blob/main/LICENSE.md">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/astrit/css.gg">css.gg</a></td><td><code>gg</code></td><td class="num">704</td><td>Astrit</td><td><a href="https://github.com/astrit/css.gg/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/yessir-web-tech/ginetex-icons">Ginetex Care Symbols</a></td><td><code>ginetex</code></td><td class="num">50</td><td>YESSIR Organization</td><td><a href="https://github.com/yessir-web-tech/ginetex-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/viglino/font-gis">Font-GIS</a></td><td><code>gis</code></td><td class="num">367</td><td>Jean-Marc Viglino</td><td><a href="https://github.com/Viglino/font-gis/blob/main/LICENSE-CC-BY.md">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/gorango/glyphs">Glyphs</a></td><td><code>glyphs</code></td><td class="num">3,452</td><td>Goran Spasojevic</td><td><a href="https://github.com/gorango/glyphs/blob/main/license">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/gorango/glyphs">Glyphs Poly</a></td><td><code>glyphs-poly</code></td><td class="num">863</td><td>Goran Spasojevic</td><td><a href="https://github.com/gorango/glyphs/blob/main/license">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/gravity-ui/icons/">Gravity UI Icons</a></td><td><code>gravity-ui</code></td><td class="num">809</td><td>YANDEX LLC</td><td><a href="https://github.com/gravity-ui/icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/griddy-icons/griddy-icons">Griddy Icons</a></td><td><code>griddy-icons</code></td><td class="num">2,003</td><td>Zuzana Benova</td><td><a href="https://github.com/griddy-icons/griddy-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/Automattic/gridicons">Gridicons</a></td><td><code>gridicons</code></td><td class="num">207</td><td>Automattic</td><td><a href="https://github.com/Automattic/gridicons/blob/trunk/LICENSE.md">GPL 2.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/grommet/grommet-icons">Grommet Icons</a></td><td><code>grommet-icons</code></td><td class="num">636</td><td>Grommet</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Guidance</a></td><td><code>guidance</code></td><td class="num">360</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution, stroke</td></tr>
+          <tr><td><a href="https://github.com/resolvetosavelives/healthicons">Health Icons</a></td><td><code>healthicons</code></td><td class="num">2,060</td><td>Resolve to Save Lives</td><td><a href="https://github.com/resolvetosavelives/healthicons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/tailwindlabs/heroicons">HeroIcons v1 Outline</a></td><td><code>heroicons-outline</code></td><td class="num">230</td><td>Refactoring UI Inc</td><td><a href="https://github.com/tailwindlabs/heroicons/blob/master/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/tailwindlabs/heroicons">HeroIcons v1 Solid</a></td><td><code>heroicons-solid</code></td><td class="num">230</td><td>Refactoring UI Inc</td><td><a href="https://github.com/tailwindlabs/heroicons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/zraly/humbleicons">Humbleicons</a></td><td><code>humbleicons</code></td><td class="num">286</td><td>Jiří Zralý</td><td><a href="https://github.com/zraly/humbleicons/blob/master/license">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/Keyamoon/IcoMoon-Free">IcoMoon Free</a></td><td><code>icomoon-free</code></td><td class="num">491</td><td>Keyamoon</td><td><a href="https://www.gnu.org/licenses/gpl.html">GPL</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/bytedance/IconPark">IconPark</a></td><td><code>icon-park</code></td><td class="num">2,658</td><td>ByteDance</td><td><a href="https://github.com/bytedance/IconPark/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/bytedance/IconPark">IconPark Solid</a></td><td><code>icon-park-solid</code></td><td class="num">1,947</td><td>ByteDance</td><td><a href="https://github.com/bytedance/IconPark/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/bytedance/IconPark">IconPark TwoTone</a></td><td><code>icon-park-twotone</code></td><td class="num">1,944</td><td>ByteDance</td><td><a href="https://github.com/bytedance/IconPark/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/dariushhpg1/IconaMoon">IconaMoon</a></td><td><code>iconamoon</code></td><td class="num">1,781</td><td>Dariush Habibpour</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution, stroke</td></tr>
+          <tr><td><a href="https://github.com/Iconmind/iconmind">IconMind</a></td><td><code>iconmind</code></td><td class="num">31,644</td><td>IconMind</td><td><a href="https://github.com/Iconmind/iconmind/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://iconoven.com/icons">IconOven</a></td><td><code>iconoven</code></td><td class="num">18,132</td><td>Appic Marketing</td><td>MIT</td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/icons8/windows-10-icons">Icons8 Windows 10 Icons</a></td><td><code>icons8</code></td><td class="num">234</td><td>Icons8</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td>Icalicons</td><td><code>il</code></td><td class="num">84</td><td>Icalia Labs</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/innowatio/iwwa-icons">Innowatio Font</a></td><td><code>iwwa</code></td><td class="num">105</td><td>Innowatio</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/siemens/ix-icons">Siemens Industrial Experience Icons</a></td><td><code>ix</code></td><td class="num">1,461</td><td>Siemens AG</td><td><a href="https://github.com/siemens/ix-icons/blob/main/LICENSE.md">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/michaelampr">Jam Icons</a></td><td><code>jam</code></td><td class="num">940</td><td>Michael Amprimo</td><td><a href="https://github.com/cyberalien/jam-backup/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://kubernetes.io">Kubernetes Icons</a></td><td><code>k8s</code></td><td class="num">38</td><td>The Kubernetes Authors</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/keyline-icons/keyline-icons">Keyline Icons</a></td><td><code>keyline-icons</code></td><td class="num">12,544</td><td>Keyline Icons</td><td><a href="https://github.com/keyline-icons/keyline-icons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/icons8/line-awesome">Line Awesome</a></td><td><code>la</code></td><td class="num">1,544</td><td>Icons8</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://www.figma.com/community/file/886554014393250663">Lets Icons</a></td><td><code>lets-icons</code></td><td class="num">1,528</td><td>Leonid Tsvetkov</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution, stroke</td></tr>
+          <tr><td><a href="https://github.com/cyberalien/line-md">Material Line Icons</a></td><td><code>line-md</code></td><td class="num">1,218</td><td>Vjacheslav Trushkin</td><td><a href="https://github.com/cyberalien/line-md/blob/main/license.txt">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/LineiconsHQ/Lineicons">Lineicons</a></td><td><code>lineicons</code></td><td class="num">603</td><td>Lineicons</td><td><a href="https://github.com/LineiconsHQ/Lineicons/blob/main/LICENSE.md">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/kudakurage/LigatureSymbols">Ligature Symbols</a></td><td><code>ls</code></td><td class="num">348</td><td>Kazuyuki Motoyama</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://www.lsicon.com/">Lsicon</a></td><td><code>lsicon</code></td><td class="num">716</td><td>Wis Design</td><td><a href="https://github.com/wisdesignsystem/lsicon/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/applifted/lucide-extended">Lucide Extended</a></td><td><code>lucide-extended</code></td><td class="num">2,717</td><td>Applifted</td><td><a href="https://github.com/applifted/lucide-extended/blob/main/LICENSE">ISC</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/lucide-icons/lucide-lab">Lucide Lab</a></td><td><code>lucide-lab</code></td><td class="num">373</td><td>Lucide Contributors</td><td><a href="https://github.com/lucide-icons/lucide-lab/blob/main/LICENSE">ISC</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/Mage-Icons/mage-icons">Mage Icons</a></td><td><code>mage</code></td><td class="num">1,042</td><td>MageIcons</td><td><a href="https://github.com/Mage-Icons/mage-icons/blob/main/License.txt">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/halfmage/majesticons">Majesticons</a></td><td><code>majesticons</code></td><td class="num">760</td><td>Gerrit Halfmann</td><td><a href="https://github.com/halfmage/majesticons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/mapbox/maki">Maki</a></td><td><code>maki</code></td><td class="num">215</td><td>Mapbox</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/scottdejonge/map-icons">Map Icons</a></td><td><code>map</code></td><td class="num">167</td><td>Scott de Jonge</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td>Marketeq</td><td><code>marketeq</code></td><td class="num">590</td><td>Marketeq</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/material-extensions/vscode-material-icon-theme">Material Icon Theme</a></td><td><code>material-icon-theme</code></td><td class="num">900</td><td>Material Extensions</td><td><a href="https://github.com/material-extensions/vscode-material-icon-theme/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/matita-dev/icons">Matita</a></td><td><code>matita</code></td><td class="num">260</td><td>matita.dev</td><td><a href="https://github.com/matita-dev/icons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/Templarian/MaterialDesignLight">Material Design Light</a></td><td><code>mdi-light</code></td><td class="num">284</td><td>Pictogrammers</td><td><a href="https://github.com/Templarian/MaterialDesignLight/blob/master/LICENSE.md">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/samcome/webfont-medical-icons">Medical Icons</a></td><td><code>medical-icon</code></td><td class="num">144</td><td>Samuel Frémondière</td><td><a href="https://github.com/samcome/webfont-medical-icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/Pictogrammers/Memory">Memory Icons</a></td><td><code>memory</code></td><td class="num">651</td><td>Pictogrammers</td><td><a href="https://github.com/Pictogrammers/Memory/blob/main/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/basmilius/weather-icons">Meteocons</a></td><td><code>meteocons</code></td><td class="num">447</td><td>Bas Milius</td><td><a href="https://github.com/basmilius/weather-icons/blob/dev/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/zkreations/icons">Meteor Icons</a></td><td><code>meteor-icons</code></td><td class="num">404</td><td>zkreations</td><td><a href="https://github.com/zkreations/icons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/mono-company/mono-icons">Mono Icons</a></td><td><code>mi</code></td><td class="num">180</td><td>Mono</td><td><a href="https://github.com/mono-company/mono-icons/blob/master/LICENSE.md">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/mono-company/mono-icons">Mono Icons</a></td><td><code>mono-icons</code></td><td class="num">180</td><td>Mono</td><td><a href="https://github.com/mono-company/mono-icons/blob/master/LICENSE.md">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/praveenjuge/mynaui-icons">Myna UI Icons</a></td><td><code>mynaui</code></td><td class="num">2,620</td><td>Praveen Juge</td><td><a href="https://github.com/praveenjuge/mynaui-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/cyberalien/nimbus-icons">Nimbus</a></td><td><code>nimbus</code></td><td class="num">140</td><td>Linkedstore S.A.</td><td><a href="https://github.com/cyberalien/nimbus-icons/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/yamatsum/nonicons">Nonicons</a></td><td><code>nonicons</code></td><td class="num">69</td><td>yamatsum</td><td><a href="https://github.com/yamatsum/nonicons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/googlefonts/noto-emoji">Noto Emoji (v1)</a></td><td><code>noto-v1</code></td><td class="num">2,162</td><td>Google Inc</td><td><a href="https://github.com/googlefonts/noto-emoji/blob/main/svg/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/nrkno/core-icons">NRK Core Icons</a></td><td><code>nrk</code></td><td class="num">633</td><td>Norsk rikskringkasting</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/iconic/open-iconic">Open Iconic</a></td><td><code>oi</code></td><td class="num">223</td><td>Iconic</td><td><a href="https://github.com/iconic/open-iconic/blob/master/ICON-LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/wikimedia/oojs-ui">OOUI</a></td><td><code>ooui</code></td><td class="num">421</td><td>OOUI Team</td><td><a href="https://github.com/wikimedia/oojs-ui/blob/master/LICENSE-MIT">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/gmgeo/osmic">OSM Icons</a></td><td><code>osmic</code></td><td class="num">169</td><td>GMGeo</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/opensearch-project/oui">OpenSearch UI</a></td><td><code>oui</code></td><td class="num">436</td><td>OpenSearch Contributors</td><td><a href="https://github.com/opensearch-project/oui/blob/main/LICENSE.txt">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://gitlab.com/gitlab-org/gitlab-svgs/-/tree/main">Gitlab SVGs</a></td><td><code>pajamas</code></td><td class="num">403</td><td>GitLab B.V.</td><td><a href="https://gitlab.com/gitlab-org/gitlab-svgs/-/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/CyCraft/pepicons">Pepicons</a></td><td><code>pepicons</code></td><td class="num">428</td><td>CyCraft</td><td><a href="https://github.com/CyCraft/pepicons/blob/dev/LICENSE">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/CyCraft/pepicons">Pepicons Pencil</a></td><td><code>pepicons-pencil</code></td><td class="num">1,275</td><td>CyCraft</td><td><a href="https://github.com/CyCraft/pepicons/blob/dev/LICENSE">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/CyCraft/pepicons">Pepicons Pop!</a></td><td><code>pepicons-pop</code></td><td class="num">1,275</td><td>CyCraft</td><td><a href="https://github.com/CyCraft/pepicons/blob/dev/LICENSE">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/CyCraft/pepicons">Pepicons Print</a></td><td><code>pepicons-print</code></td><td class="num">1,275</td><td>CyCraft</td><td><a href="https://github.com/CyCraft/pepicons/blob/dev/LICENSE">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/yne/picon">Pico-icon</a></td><td><code>picon</code></td><td class="num">824</td><td>Picon Contributors</td><td><a href="https://github.com/yne/picon/blob/master/OFL.txt">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/waysidemapping/pinhead">Pinhead Map Icons</a></td><td><code>pinhead</code></td><td class="num">2,747</td><td>Quincy Morgan</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/hackernoon/pixel-icon-library">Pixel Icon</a></td><td><code>pixel</code></td><td class="num">575</td><td>HackerNoon</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/halfmage/pixelarticons">Pixelarticons</a></td><td><code>pixelarticons</code></td><td class="num">1,024</td><td>Gerrit Halfmann</td><td><a href="https://github.com/halfmage/pixelarticons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/primefaces/primeicons">Prime Icons</a></td><td><code>prime</code></td><td class="num">312</td><td>PrimeTek</td><td><a href="https://github.com/primefaces/primeicons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/ProCode-Software/proicons">ProIcons</a></td><td><code>proicons</code></td><td class="num">543</td><td>ProCode</td><td><a href="https://github.com/ProCode-Software/proicons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/oclero/qlementine-icons">Qlementine Icons</a></td><td><code>qlementine-icons</code></td><td class="num">905</td><td>Olivier Cléro</td><td><a href="https://github.com/oclero/qlementine-icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://www.figma.com/community/file/1034432054377533052/Quill-Iconset">Quill Icons</a></td><td><code>quill</code></td><td class="num">140</td><td>Casper Lourens</td><td><a href="https://github.com/yourtempo/tempo-quill-icons/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/dmitrybaranovskiy/raphael">Raphael</a></td><td><code>raphael</code></td><td class="num">266</td><td>Dmitry Baranovskiy</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/dqev/reicon">Reicon</a></td><td><code>reicon</code></td><td class="num">6,590</td><td>REICON</td><td><a href="https://github.com/dqev/reicon/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/indiana-university/rivet-icons">Rivet Icons</a></td><td><code>rivet-icons</code></td><td class="num">210</td><td>Indiana University</td><td><a href="https://github.com/indiana-university/rivet-icons/blob/develop/LICENSE">BSD 3-Clause</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/enzet/Roentgen">Röntgen</a></td><td><code>roentgen</code></td><td class="num">574</td><td>Sergey Vartanov</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/selfhst/icons">selfh.st/icons</a></td><td><code>selfhst</code></td><td class="num">7,237</td><td>selfh.st</td><td><a href="https://github.com/selfhst/icons/blob/main/LICENSE">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/planetabhi/sargam-icons">Sargam Icons</a></td><td><code>si</code></td><td class="num">1,215</td><td>Abhimanyu Rana</td><td><a href="https://github.com/planetabhi/sargam-icons/blob/main/LICENSE.txt">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td>SmartIcons Glyph</td><td><code>si-glyph</code></td><td class="num">799</td><td>SmartIcons</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/ndri/sidekickicons">SidekickIcons</a></td><td><code>sidekickicons</code></td><td class="num">232</td><td>Andri Soone</td><td><a href="https://github.com/ndri/sidekickicons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/thesabbir/simple-line-icons">Simple line icons</a></td><td><code>simple-line-icons</code></td><td class="num">189</td><td>Sabbir Ahmed</td><td><a href="https://github.com/thesabbir/simple-line-icons/blob/master/LICENSE.md">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/stash-ui/icons">Stash Icons</a></td><td><code>stash</code></td><td class="num">982</td><td>Pingback LLC</td><td><a href="https://github.com/stash-ui/icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Streamline Block</a></td><td><code>streamline-block</code></td><td class="num">300</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Streamline color</a></td><td><code>streamline-color</code></td><td class="num">1,962</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Cyber free icons</a></td><td><code>streamline-cyber</code></td><td class="num">500</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution, stroke</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Cyber color icons</a></td><td><code>streamline-cyber-color</code></td><td class="num">500</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Streamline Emojis</a></td><td><code>streamline-emojis</code></td><td class="num">787</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Flex free icons</a></td><td><code>streamline-flex</code></td><td class="num">1,488</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Flex color icons</a></td><td><code>streamline-flex-color</code></td><td class="num">992</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Freehand free icons</a></td><td><code>streamline-freehand</code></td><td class="num">1,000</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Freehand color icons</a></td><td><code>streamline-freehand-color</code></td><td class="num">1,000</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Guidance</a></td><td><code>streamline-guidance</code></td><td class="num">360</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution, stroke</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Kameleon color icons</a></td><td><code>streamline-kameleon-color</code></td><td class="num">400</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Logos free icons</a></td><td><code>streamline-logos</code></td><td class="num">1,359</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Pixel free icons</a></td><td><code>streamline-pixel</code></td><td class="num">659</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Plump free icons</a></td><td><code>streamline-plump</code></td><td class="num">1,481</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Plump color icons</a></td><td><code>streamline-plump-color</code></td><td class="num">988</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Sharp free icons</a></td><td><code>streamline-sharp</code></td><td class="num">1,476</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Sharp color icons</a></td><td><code>streamline-sharp-color</code></td><td class="num">984</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Stickies color icons</a></td><td><code>streamline-stickies-color</code></td><td class="num">200</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Ultimate free icons</a></td><td><code>streamline-ultimate</code></td><td class="num">1,997</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/webalys-hq/streamline-vectors">Ultimate color icons</a></td><td><code>streamline-ultimate-color</code></td><td class="num">997</td><td>Streamline</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/mariuszostrowski/subway">Subway Icon Set</a></td><td><code>subway</code></td><td class="num">306</td><td>Mariusz Ostrowski</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td><td>Attribution</td></tr>
+          <tr><td><a href="https://github.com/n3r4zzurr0/svg-spinners">SVG Spinners</a></td><td><code>svg-spinners</code></td><td class="num">46</td><td>Utkarsh Verma</td><td><a href="https://github.com/n3r4zzurr0/svg-spinners/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/CoreyGinnivan/system-uicons">System UIcons</a></td><td><code>system-uicons</code></td><td class="num">430</td><td>Corey Ginnivan</td><td><a href="https://github.com/CoreyGinnivan/system-uicons/blob/master/LICENSE">Unlicense</a></td><td>Public domain, stroke</td></tr>
+          <tr><td><a href="https://github.com/teenyicons/teenyicons">Teenyicons</a></td><td><code>teenyicons</code></td><td class="num">1,200</td><td>smhmd</td><td><a href="https://github.com/teenyicons/teenyicons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/rapideditor/temaki">Temaki</a></td><td><code>temaki</code></td><td class="num">557</td><td>Bryan Housel</td><td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></td><td>Public domain</td></tr>
+          <tr><td><a href="https://github.com/glincker/thesvg">theSVG</a></td><td><code>thesvg</code></td><td class="num">3,744</td><td>thesvg.org</td><td><a href="https://github.com/glincker/thesvg/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/glincker/thesvg">theSVG Color</a></td><td><code>thesvg-color</code></td><td class="num">5,112</td><td>thesvg.org</td><td><a href="https://github.com/glincker/thesvg/blob/main/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/0xa3k5/web3icons">Web3 Icons</a></td><td><code>token</code></td><td class="num">1,787</td><td>0xa3k5</td><td><a href="https://github.com/0xa3k5/web3icons/blob/main/LICENCE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/0xa3k5/web3icons">Web3 Icons Branded</a></td><td><code>token-branded</code></td><td class="num">4,083</td><td>0xa3k5</td><td><a href="https://github.com/0xa3k5/web3icons/blob/main/LICENCE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/topcoat/icons">TopCoat Icons</a></td><td><code>topcoat</code></td><td class="num">89</td><td>TopCoat</td><td><a href="https://github.com/topcoat/icons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/stephenhutchings/typicons.font">Typicons</a></td><td><code>typcn</code></td><td class="num">336</td><td>Stephen Hutchings</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/Iconscout/unicons">Unicons Monochrome</a></td><td><code>uim</code></td><td class="num">298</td><td>Iconscout</td><td><a href="https://github.com/Iconscout/unicons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/Iconscout/unicons">Unicons Solid</a></td><td><code>uis</code></td><td class="num">190</td><td>Iconscout</td><td><a href="https://github.com/Iconscout/unicons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/Iconscout/unicons">Unicons Thin Line</a></td><td><code>uit</code></td><td class="num">216</td><td>Iconscout</td><td><a href="https://github.com/Iconscout/unicons/blob/master/LICENSE">Apache 2.0</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/uiwjs/icons">uiw icons</a></td><td><code>uiw</code></td><td class="num">214</td><td>liwen0526</td><td><a href="https://github.com/uiwjs/icons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/unjs">UnJS Logos</a></td><td><code>unjs</code></td><td class="num">63</td><td>UnJS</td><td>Apache 2.0</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/vaadin/web-components">Vaadin Icons</a></td><td><code>vaadin</code></td><td class="num">636</td><td>Vaadin</td><td>Apache 2.0</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/praveenjuge/vadivam">Vadivam</a></td><td><code>vadivam</code></td><td class="num">1,902</td><td>Praveen Juge</td><td><a href="https://github.com/praveenjuge/vadivam/blob/main/LICENSE">MIT</a></td><td>Permissive, stroke</td></tr>
+          <tr><td><a href="https://github.com/kkvesper/vesper-icons">Vesper Icons</a></td><td><code>vs</code></td><td class="num">159</td><td>TableCheck</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td>Web Symbols Liga</td><td><code>websymbol</code></td><td class="num">85</td><td>Just Be Nice studio</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/weui/weui-icon">WeUI Icon</a></td><td><code>weui</code></td><td class="num">162</td><td>WeUI</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td>WebHostingHub Glyphs</td><td><code>whh</code></td><td class="num">2,125</td><td>WebHostingHub</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/erikflowers/weather-icons">Weather Icons</a></td><td><code>wi</code></td><td class="num">219</td><td>Erik Flowers</td><td><a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL">Open Font License</a></td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/WordPress/gutenberg/tree/HEAD/packages/icons">WordPress Icons</a></td><td><code>wordpress</code></td><td class="num">346</td><td>The WordPress Contributors</td><td><a href="https://github.com/WordPress/gutenberg/blob/HEAD/LICENSE.md#gnu-general-public-license-version-2">GPL</a></td><td>Share alike, stroke</td></tr>
+          <tr><td><a href="https://github.com/icons8/WPF-UI-Framework">Icons8 Windows 8 Icons</a></td><td><code>wpf</code></td><td class="num">200</td><td>Icons8</td><td>MIT</td><td>Permissive</td></tr>
+          <tr><td><a href="https://github.com/zavoloklom/material-design-iconic-font">Material Design Iconic Font</a></td><td><code>zmdi</code></td><td class="num">777</td><td>MDI Community</td><td>Open Font License</td><td>Share alike</td></tr>
+          <tr><td><a href="https://github.com/dukestreetstudio/zondicons">Zondicons</a></td><td><code>zondicons</code></td><td class="num">297</td><td>Steve Schoger</td><td><a href="https://github.com/dukestreetstudio/zondicons/blob/master/LICENSE">MIT</a></td><td>Permissive</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td></td><td class="num">414,952</td><td colspan="3">245 sets from @iconify/json 2.2.547</td></tr></tfoot>
+        </table>
+      </div>
+      <h3 class="uv-sub" id="attribution">Attribution</h3>
+      <p class="uv-fine">These sets are licensed under Creative Commons Attribution or Attribution ShareAlike. Credit them where their icons are used; the detail panel above gives the line to copy for each icon.</p>
+      <ul class="uv-credits">
+        <li>Icons from &quot;Font Awesome Solid&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Font Awesome Regular&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Font Awesome Brands&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Codicons&quot; by Microsoft Corporation (https://github.com/microsoft/vscode-codicons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Solar&quot; by 480 Design (https://www.figma.com/community/file/1166831539721848736), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Streamline&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Twitter Emoji&quot; by Twitter (https://github.com/jdecked/twemoji), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;OpenMoji&quot; by OpenMoji (https://github.com/hfg-gmuend/openmoji), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).</li>
+        <li>Icons from &quot;Game Icons&quot; by GameIcons (https://github.com/game-icons/icons), licensed under CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/).</li>
+        <li>Icons from &quot;Arcticons&quot; by Donnnno (https://github.com/Arcticons-Team/Arcticons), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).</li>
+        <li>Icons from &quot;Basil&quot; by Craftwork (https://www.figma.com/community/file/931906394678748246), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Brandico&quot; by Fontello (https://github.com/fontello/brandico.font), licensed under CC BY SA (https://creativecommons.org/licenses/by-sa/3.0/).</li>
+        <li>Icons from &quot;coolicons&quot; by Kryston Schwarze (https://github.com/krystonschwarze/coolicons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;CoreUI Free&quot; by creativeLabs Łukasz Holeczek (https://github.com/coreui/coreui-icons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Covid Icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Emoji One (Colored)&quot; by Emoji One (https://github.com/EmojiTwo/emojitwo), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Emoji One (Monotone)&quot; by Emoji One (https://github.com/EmojiTwo/emojitwo), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Emoji One (v1)&quot; by Emoji One (https://github.com/joypixels/emojione-legacy), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).</li>
+        <li>Icons from &quot;Entypo+&quot; by Daniel Bruce (https://github.com/chancancode/entypo-plus), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).</li>
+        <li>Icons from &quot;Entypo+ Social&quot; by Daniel Bruce (https://github.com/chancancode/entypo-plus), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).</li>
+        <li>Icons from &quot;Font Awesome 5 Brands&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Font Awesome 5 Regular&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Font Awesome 5 Solid&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Font Awesome 6 Brands&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Font Awesome 6 Regular&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Font Awesome 6 Solid&quot; by Dave Gandy (https://github.com/FortAwesome/Font-Awesome), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;FontAudio&quot; by @fefanto (https://github.com/fefanto/fontaudio), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Fontelico&quot; by Fontello (https://github.com/fontello/fontelico.font), licensed under CC BY SA (https://creativecommons.org/licenses/by-sa/3.0/).</li>
+        <li>Icons from &quot;Font-GIS&quot; by Jean-Marc Viglino (https://github.com/viglino/font-gis), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Guidance&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;IconaMoon&quot; by Dariush Habibpour (https://github.com/dariushhpg1/IconaMoon), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Lets Icons&quot; by Leonid Tsvetkov (https://www.figma.com/community/file/886554014393250663), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;NRK Core Icons&quot; by Norsk rikskringkasting (https://github.com/nrkno/core-icons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Pepicons&quot; by CyCraft (https://github.com/CyCraft/pepicons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Pepicons Pencil&quot; by CyCraft (https://github.com/CyCraft/pepicons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Pepicons Pop!&quot; by CyCraft (https://github.com/CyCraft/pepicons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Pepicons Print&quot; by CyCraft (https://github.com/CyCraft/pepicons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Pixel Icon&quot; by HackerNoon (https://github.com/hackernoon/pixel-icon-library), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Röntgen&quot; by Sergey Vartanov (https://github.com/enzet/Roentgen), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;selfh.st/icons&quot; by selfh.st (https://github.com/selfhst/icons), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;SmartIcons Glyph&quot; by SmartIcons, licensed under CC BY SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).</li>
+        <li>Icons from &quot;Streamline Block&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Streamline color&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Cyber free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Cyber color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Streamline Emojis&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Flex free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Flex color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Freehand free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Freehand color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Guidance&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Kameleon color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Logos free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Pixel free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Plump free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Plump color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Sharp free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Sharp color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Stickies color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Ultimate free icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Ultimate color icons&quot; by Streamline (https://github.com/webalys-hq/streamline-vectors), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Subway Icon Set&quot; by Mariusz Ostrowski (https://github.com/mariuszostrowski/subway), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).</li>
+        <li>Icons from &quot;Typicons&quot; by Stephen Hutchings (https://github.com/stephenhutchings/typicons.font), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).</li>
+      </ul>
+      <h3 class="uv-sub" id="trademarks">Trademarks</h3>
+      <p class="uv-fine">Brand and logo icons show trademarks of their owners. The icon licenses cover the drawings, not the trademarks: use a logo only to refer to its brand, follow the brand guidelines of its owner, and do not suggest an endorsement.</p>
+      <h3 class="uv-sub" id="excluded">Sets left out</h3>
+      <p class="uv-fine">Sets whose license does not allow commercial redistribution and modification never ship, and neither do proprietary sets such as Apple SF Symbols. 1,207 icon names are also left out of the index by the repository text rules; they still resolve by name.</p>
+      <div class="uv-table-wrap">
+        <table class="uv-table">
+          <thead><tr><th scope="col">Set</th><th scope="col">Prefix</th><th scope="col" class="num">Icons</th><th scope="col">License</th><th scope="col" colspan="2">Reason</th></tr></thead>
+          <tbody>
+          <tr><td>Custom Brand Icons</td><td><code>cbi</code></td><td class="num">1,757</td><td>CC-BY-NC-SA-4.0</td><td colspan="2">CC-BY-NC-SA-4.0 does not allow commercial use or modification</td></tr>
+          <tr><td>Emblemicons</td><td><code>emblemicons</code></td><td class="num">0</td><td>MIT</td><td colspan="2">the set has no icons</td></tr>
+          <tr><td>PrestaShop Icons</td><td><code>ps</code></td><td class="num">479</td><td>CC-BY-NC-4.0</td><td colspan="2">CC-BY-NC-4.0 does not allow commercial use or modification</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- universe:sets:end -->
+    </div>
+  </section>
+</main>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="universe/universe.js"></script>
+</body>
+</html>
