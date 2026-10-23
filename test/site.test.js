@@ -19,7 +19,7 @@ const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js'
 
 describe('studio site', () => {
   it('has every page in English and Portuguese', () => {
-    for (const p of ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html']) {
+    for (const p of ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html']) {
       expect(existsSync(join(docs, p)), p).toBe(true);
       expect(existsSync(join(docs, 'pt-br', p)), p).toBe(true);
       expect(read(join(docs, 'pt-br', p))).toContain('<html lang="pt-BR">');

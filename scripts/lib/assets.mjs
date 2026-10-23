@@ -11,8 +11,9 @@ import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css', 'assets/smart.css'];
-export const ENTRIES = ['landing', 'browser', 'studio', 'docs', 'app', 'smart'];
+export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css', 'assets/smart.css', 'assets/labs.css'];
+// Page scripts: bundle name and its source in docs/assets/js/.
+export const ENTRIES = { landing: 'landing.js', browser: 'browser.js', studio: 'studio.js', docs: 'docs.js', app: 'app.js', smart: 'smart.js', labs: 'labs/main.js' };
 export const PAGES = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
 const HASH_CSS = /\.[0-9a-f]{8}\.css$/;
 
@@ -20,13 +21,14 @@ export const sha256 = (buf) => createHash('sha256').update(buf).digest('hex');
 const posix = (p) => p.split('\\').join('/');
 
 /** Builds the hashed CSS and the bundled page scripts. Returns { files, map, imports, outputs }. */
-export async function buildAssets(root, { vendor } = {}) {
+export async function buildAssets(root, { vendor, labs } = {}) {
   const docs = join(root, 'docs');
-  // The engine bundle of this build is still in memory: serve it to esbuild.
+  // The engine bundles of this build are still in memory: serve them to esbuild.
   const vendorPlugin = {
     name: 'vendor',
     setup(b) {
       if (vendor) b.onLoad({ filter: /vendor[\\/]glyphfox\.js$/ }, () => ({ contents: vendor, loader: 'js' }));
+      if (labs) b.onLoad({ filter: /vendor[\\/]glyphfox-labs\.js$/ }, () => ({ contents: labs, loader: 'js' }));
     },
   };
   const files = {};
@@ -43,7 +45,11 @@ export async function buildAssets(root, { vendor } = {}) {
   }
   const esbuild = await import('esbuild');
   const result = await esbuild.build({
-    entryPoints: Object.fromEntries(ENTRIES.filter((n) => existsSync(join(docs, 'assets', 'js', `${n}.js`))).map((n) => [n, join(docs, 'assets', 'js', `${n}.js`)])),
+    entryPoints: Object.fromEntries(
+      Object.entries(ENTRIES)
+        .filter(([, file]) => existsSync(join(docs, 'assets', 'js', file)))
+        .map(([name, file]) => [name, join(docs, 'assets', 'js', file)]),
+    ),
     outdir: join(docs, 'assets', 'js', 'bundle'),
     bundle: true,
     splitting: true,
@@ -68,8 +74,12 @@ export async function buildAssets(root, { vendor } = {}) {
   for (const [out, meta] of Object.entries(result.metafile.outputs)) {
     const rel = posix(relative(docs, join(root, out)));
     if (meta.entryPoint) {
-      const name = posix(meta.entryPoint).split('/').pop();
-      map[`assets/js/${name}`] = rel;
+      // Keyed by the source (assets/js/labs/main.js) and by the bundle name
+      // (assets/js/labs.js), which is what a page built before refers to.
+      const source = posix(relative(join(docs, 'assets', 'js'), join(root, meta.entryPoint)));
+      map[`assets/js/${source}`] = rel;
+      const name = Object.keys(ENTRIES).find((n) => ENTRIES[n] === source);
+      if (name) map[`assets/js/${name}.js`] = rel;
     }
     imports[rel] = meta.imports.filter((i) => i.kind === 'import-statement' && !i.external).map((i) => posix(relative(docs, join(root, i.path))));
   }
@@ -82,7 +92,7 @@ export function withAssets(html, { map, imports }) {
     const hit = map[`${path}.css`];
     return hit ? `${a}${prefix}${hit}"` : m;
   });
-  out = out.replace(/((?:href|src)=")((?:\.\.\/|\/glyphfox\/)?)assets\/js\/(?:bundle\/|dist\/)?([\w-]+?)(?:\.[A-Za-z0-9]{8})?\.js"/g, (m, a, prefix, name) => {
+  out = out.replace(/((?:href|src)=")((?:\.\.\/|\/glyphfox\/)?)assets\/js\/(?:bundle\/|dist\/)?((?:[\w-]+\/)?[\w-]+?)(?:\.[A-Za-z0-9]{8})?\.js"/g, (m, a, prefix, name) => {
     const hit = map[`assets/js/${name}.js`];
     return hit ? `${a}${prefix}${hit}"` : m;
   });

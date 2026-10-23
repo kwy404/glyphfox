@@ -1,7 +1,8 @@
 // Generated files of the studio site in docs/ (committed, served by GitHub
-// Pages): the icon data, the engine bundle, the changelog, the shared head,
-// header and footer of every page, inline icons, the Fenn illustrations,
-// and the Portuguese pages in docs/pt-br/ built from docs/assets/js/i18n.js.
+// Pages): the icon data, the engine and Labs bundles, the changelog, the
+// shared head, header and footer of every page, inline icons, the Fenn
+// illustrations, and the Portuguese pages in docs/pt-br/ built from
+// docs/assets/js/i18n.js.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -10,12 +11,12 @@ import { buildAssets, precacheList, serviceWorker, sha256, staleAssets, withAsse
 
 const SITE = 'https://kwy404.github.io/glyphfox/';
 const PARTIALS = ['head', 'header', 'footer'];
-const LOCALIZED = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
+const LOCALIZED = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html'];
 // smart icons hook: pages without a Portuguese version (docs/smart.html) link the
 // language switch to the Portuguese docs and are linked as ../page from pt-br/.
 const englishOnly = (page) => !LOCALIZED.includes(page) && page !== '404.html';
 
-async function engineBundle(root) {
+async function engineBundle(root, entry = 'studio.js', banner = '/*! glyphfox engine for the studio | MIT | Alexandre Kohler */') {
   const esbuild = await import('esbuild');
   // The studio loads icon data itself, so the on demand loader of the
   // package (one chunk per icon) is replaced by a stub.
@@ -29,7 +30,7 @@ async function engineBundle(root) {
     },
   };
   const result = await esbuild.build({
-    entryPoints: [join(root, 'packages', 'glyphfox', 'src', 'studio.js')],
+    entryPoints: [join(root, 'packages', 'glyphfox', 'src', entry)],
     plugins: [noLoader],
     bundle: true,
     format: 'esm',
@@ -40,7 +41,7 @@ async function engineBundle(root) {
     legalComments: 'none',
     logLevel: 'error',
   });
-  return `/*! glyphfox engine for the studio | MIT | Alexandre Kohler */\n${result.outputFiles[0].text}`;
+  return `${banner}\n${result.outputFiles[0].text}`;
 }
 
 function withPartials(root, html, page) {
@@ -172,9 +173,10 @@ export async function docsFiles(root, icons, { version }) {
   // Designed animations, loaded by the studio's Motion tool when it opens.
   files[join(root, 'docs', 'data', 'animations.json')] = JSON.stringify(Object.fromEntries(icons.filter((ic) => ic.animation).map((ic) => [ic.name, ic.animation]))) + '\n';
   files[join(root, 'docs', 'vendor', 'glyphfox.js')] = await engineBundle(root);
+  files[join(root, 'docs', 'vendor', 'glyphfox-labs.js')] = await engineBundle(root, 'labs.js', '/*! glyphfox labs: glyph script and exporters for the studio | MIT | Alexandre Kohler */');
   const docs = join(root, 'docs');
   // Hashed CSS and bundled page scripts (see assets.mjs).
-  const assets = await buildAssets(root, { vendor: files[join(docs, 'vendor', 'glyphfox.js')] });
+  const assets = await buildAssets(root, { vendor: files[join(docs, 'vendor', 'glyphfox.js')], labs: files[join(docs, 'vendor', 'glyphfox-labs.js')] });
   Object.assign(files, assets.files);
   lastOutputs = assets.outputs;
   const api = await import(pathToFileURL(join(root, 'packages', 'glyphfox', 'dist', 'index.js')).href);

@@ -27,8 +27,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <meta property="og:title" content="glyphfox changelog">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/changelog.html">
 <link rel="stylesheet" href="assets/docs.4063d59a.css">
-<link rel="modulepreload" href="assets/js/bundle/app.SEJAAGBJ.js">
-<link rel="modulepreload" href="assets/js/bundle/chunk.FOUL5M6U.js">
+<link rel="modulepreload" href="assets/js/bundle/app.45CLMEGK.js">
+<link rel="modulepreload" href="assets/js/bundle/chunk.TWKLBFQP.js">
 </head>
 <body>
 <!-- header:start -->
@@ -78,6 +78,9 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <li>Fenn illustrations (sitting, running, drawing, orbit) built from the icon geometry, README banners and the social preview.</li>
 <li>Multilingual search: synonyms in English, Portuguese, Spanish, French and German, accent folding and simple plurals in <code>search()</code>, the new <code>searchIcons()</code>, the CLI (<code>--lang</code>) and the studio.</li>
 <li>Shared collections in the studio: a share link that carries the whole collection, compressed, in its URL fragment, and live sessions where friends edit one collection together over WebRTC, paired with six words through public MQTT relays, end to end encrypted, with presence and last writer wins merging per icon.</li>
+<li>Glyph script: a tiny text language for icons (circle, ellipse, rect with radius, line, polyline, polygon, arc, path, group, mirror x or y, repeat around a center) with errors at the line and column, compiled to SVG that passes the icon lint. In <code>glyphfox/script</code>, the <code>glyphfox script file.gfs</code> command and a live playground in the studio Labs page.</li>
+<li><code>glyphfox scan [dir]</code>: finds the icons a project uses in JS, TS, JSX, Vue, Svelte, Angular templates and HTML, builds the minimal subset as a sprite or an ES module and flags icons without an accessible label where one is needed.</li>
+<li>Exports in <code>glyphfox/export</code>, the CLI and the studio Labs page: an animated favicon (a canvas runtime with a static fallback), CSS cursors (PNG at 32 and 64 px with a hotspot), plotter output (single line SVG ordered for minimal pen travel, and G-code with feed rates and pen up and down commands) and STL from an extruded icon (thickness and bevel).</li>
 </ul>
 <!-- log:end -->
 </div>
@@ -100,6 +103,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <li><a href="studio.html" data-i18n="nav.studio">Studio</a></li>
           <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
           <li><a href="studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+          <li><a href="labs.html" data-i18n="footer.labs">Labs</a></li>
         </ul>
       </div>
       <div>
@@ -127,6 +131,6 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="assets/js/bundle/app.SEJAAGBJ.js"></script>
+<script type="module" src="assets/js/bundle/app.45CLMEGK.js"></script>
 </body>
 </html>
