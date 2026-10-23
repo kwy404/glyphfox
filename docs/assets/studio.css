@@ -371,7 +371,9 @@
 }
 .fox-out {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
+  min-width: 0;
 }
 .fox-compare {
   display: grid;
@@ -459,7 +461,6 @@
 }
 .fu-stage .box.sel {
   border: 1.5px solid var(--accent);
-  background: var(--accent-soft);
 }
 .fu-stage .box span {
   position: absolute;
@@ -478,7 +479,9 @@
 }
 .fu-out {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
+  min-width: 0;
 }
 .fu-out .code pre {
   max-height: 260px;

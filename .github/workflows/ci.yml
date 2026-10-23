@@ -31,7 +31,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Studio data is committed and up to date
-        run: git diff --exit-code -- docs/data
+        run: git diff --exit-code -- docs
       - name: Build glyphfox-angular
         run: npm run build:angular
       - name: Type declarations

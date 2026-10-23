@@ -157,6 +157,7 @@
 }
 
 .icon-grid {
+  min-height: 120vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
   gap: 10px;

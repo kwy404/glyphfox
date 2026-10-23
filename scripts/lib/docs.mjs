@@ -54,6 +54,51 @@ function withPartials(root, html, page) {
   return out;
 }
 
+const escHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function inlineMd(s) {
+  return escHtml(s)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2">$1</a>');
+}
+
+/** The Markdown subset used by CHANGELOG.md, rendered to HTML. */
+export function markdown(md) {
+  const out = [];
+  let list = false;
+  for (const raw of md.split(/\r?\n/)) {
+    const line = raw.trimEnd();
+    const li = /^\s*[-*] (.*)$/.exec(line);
+    if (li) {
+      if (!list) {
+        out.push('<ul>');
+        list = true;
+      }
+      out.push(`<li>${inlineMd(li[1])}</li>`);
+      continue;
+    }
+    if (list) {
+      out.push('</ul>');
+      list = false;
+    }
+    const h = /^(#{1,3}) (.*)$/.exec(line);
+    if (h) {
+      if (h[1].length > 1) out.push(`<h${h[1].length}>${inlineMd(h[2].replace(/^\[([^\]]+)\]/, '$1'))}</h${h[1].length}>`);
+    } else if (line.trim()) out.push(`<p>${inlineMd(line)}</p>`);
+  }
+  if (list) out.push('</ul>');
+  return out.join('\n');
+}
+
+function withChangelog(root, html) {
+  const md = readFileSync(join(root, 'CHANGELOG.md'), 'utf8')
+    .split(/\r?\n/)
+    .filter((l) => !l.startsWith('# '))
+    .join('\n');
+  return html.replace(/(<!-- log:start -->)[\s\S]*?(<!-- log:end -->)/, (m, a, b) => `${a}\n${markdown(md)}\n${b}`);
+}
+
 function withGlyphs(html, api) {
   return html.replace(/<!--gf:([^:>]+):(\d+)(?::([^>]*?))?-->[\s\S]*?<!--\/gf-->/g, (m, spec, size, cls) => {
     let svg = '';
@@ -91,7 +136,7 @@ export function localize(html, page, tr) {
     return t;
   });
   out = out.replace(/(\s(?:href|src)=")((?:assets|data|vendor)\/)/g, '$1../$2');
-  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch[^>]*)>[^<]*</, (m, a, b) => `${a}href="../${page}"${b.replace(/hreflang="[^"]*"/, 'hreflang="en"').replace(/aria-label="[^"]*"/, `aria-label="${escAttr(tr['lang.switch'] || 'Read in English')}"`)}>EN<`);
+  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch[^>]*)>[^<]*</, (m, a, b) => `${a}href="../${page}"${b.replace(/hreflang="[^"]*"/, 'hreflang="en"').replace(/aria-label="[^"]*"/, `aria-label="${escAttr(tr['lang.switch'] || 'EN, read in English')}"`)}>EN<`);
   out = out.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}pt-br/${page === 'index.html' ? '' : page}$2`);
   return withAlternates(out, page, 'pt-BR');
 }
@@ -113,7 +158,7 @@ export async function docsFiles(root, icons, { version }) {
     for (const f of readdirSync(docs)) {
       if (!f.endsWith('.html') || f === '404.html') continue;
       const file = join(docs, f);
-      let html = withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api);
+      let html = withChangelog(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api));
       html = withAlternates(html, f, 'en');
       files[file] = html;
       if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);

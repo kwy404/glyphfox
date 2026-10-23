@@ -30,7 +30,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="glyphfox home">
-      <svg class="fenn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3l5 5h6l5-5 1 9-9 9-9-9z"/><path d="M6.5 13.5 12 18l5.5-4.5"/><path d="M9.5 11.5h.01M14.5 11.5h.01"/></svg>
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
       <span>glyph<b>fox</b></span>
     </a>
     <nav class="nav" id="site-nav" aria-label="Main">
@@ -40,7 +40,7 @@
       <a href="changelog.html" data-nav="changelog" aria-current="page" data-i18n="nav.changelog">Changelog</a>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="pt-br/changelog.html" hreflang="pt-BR" data-lang-switch aria-label="Ler em português">PT</a>
+      <a class="icon-btn" href="pt-br/changelog.html" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
       <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
       <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
       <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
@@ -52,7 +52,25 @@
   <span class="eyebrow" data-i18n="nav.changelog">Changelog</span>
   <h1 class="title" data-i18n="log.title">What changed</h1>
   <p class="lead" data-i18n="log.lead">Every release, newest first. The same notes live in CHANGELOG.md in the repository.</p>
-  <div class="log-body" data-log aria-live="polite"><p class="faint" data-i18n="log.loading">Loading the changelog</p></div>
+  <div class="log-body">
+<!-- log:start -->
+<p>All notable changes to glyphfox are documented here. The format follows <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> and the project uses <a href="https://semver.org/">Semantic Versioning</a>.</p>
+<h2>Unreleased</h2>
+<h3>Added</h3>
+<ul>
+<li>The icon set: original icons on a 24 grid with categories and tags, checked by the icon lint.</li>
+<li>Variable axes in every package: <code>weight</code> (1 to 3 with optical compensation at small sizes), <code>corners</code> (round or sharp) and <code>variant</code> (outline, duotone and a solid style generated at build time from closed shapes).</li>
+<li>The morph engine: any icon into any other, hand tuned pairs, <code>useMorph</code> for React, <code>useMorph</code> for Vue, <code>morphStore</code> for Svelte, the <code>morph</code> and <code>morph-to</code> attributes of the web component and a CSS only fallback.</li>
+<li>Fusion: <code>fuse()</code> combines 2 to 10 icons with the overlap, side, stack, grid, orbit, badge and inside layouts, with knockout gaps, and the result passes the icon lint.</li>
+<li>Living states: draw, pop, wiggle, spin, pulse, bounce and shake on mount, hover, click or a state prop, respecting <code>prefers-reduced-motion</code>.</li>
+<li>Modifiers: plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down and dot badges in any corner with knockout gaps.</li>
+<li>23 shared props with the same names in React, Vue, Svelte, Angular and the web component.</li>
+<li>Packages: <code>glyphfox</code> (core, icons, <code>toSvg</code>, <code>icons.json</code>, <code>sprite.svg</code>, runtime), <code>glyphfox/react</code>, <code>glyphfox/vue</code>, <code>glyphfox/svelte</code>, <code>glyphfox/web</code> with a single file CDN build, <code>glyphfox/tailwind</code> (v3 and v4), <code>glyphfox/core</code>, <code>glyphfox/tools</code> and <code>glyphfox-angular</code>.</li>
+<li>The <code>glyphfox</code> CLI: search, show with a terminal preview, copy in nine formats, fuse, morph, build subsets (sprite, CSS masks, package), lint and Fox-ify.</li>
+<li>The studio site: icon browser, live customization, sketch search, editor, Fox-ify, Fusion, brand kit and 3D.</li>
+</ul>
+<!-- log:end -->
+</div>
 </main>
 <!-- footer:start -->
 <footer class="site-footer">
@@ -60,7 +78,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="index.html" aria-label="glyphfox home">
-          <svg class="fenn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3l5 5h6l5-5 1 9-9 9-9-9z"/><path d="M6.5 13.5 12 18l5.5-4.5"/><path d="M9.5 11.5h.01M14.5 11.5h.01"/></svg>
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
           <span>glyph<b>fox</b></span>
         </a>
         <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
@@ -99,6 +117,6 @@
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="assets/js/changelog.js"></script>
+<script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

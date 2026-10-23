@@ -172,6 +172,7 @@ function build() {
   group.position.set(-12, 12, -depth / 2);
   const pivot = new THREE.Group();
   pivot.add(group);
+  pivot.rotation.set(-0.32, 0.55, 0);
   scene.add(pivot);
   group = pivot;
 }

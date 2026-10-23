@@ -664,6 +664,8 @@ button.chip {
 
 .code {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: color-mix(in srgb, var(--bg) 70%, var(--panel));

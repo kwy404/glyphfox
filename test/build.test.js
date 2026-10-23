@@ -103,7 +103,7 @@ describe('build', () => {
     expect(pkg.license).toBe('MIT');
   });
 
-  it('keeps the docs data in sync', () => {
-    expect(buildDocsData(root, icons, { version: JSON.parse(readFileSync(join(root, 'packages', 'glyphfox', 'package.json'), 'utf8')).version, check: true })).toEqual([]);
+  it('keeps the docs data in sync', async () => {
+    expect(await buildDocsData(root, icons, { version: JSON.parse(readFileSync(join(root, 'packages', 'glyphfox', 'package.json'), 'utf8')).version, check: true })).toEqual([]);
   });
 });

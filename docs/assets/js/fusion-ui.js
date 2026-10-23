@@ -1,7 +1,7 @@
 // Fusion tool: pick 2 to 10 icons, try every layout, drag and scale parts,
 // tune the gap, check the lint, copy, export or save.
 
-import { $, $$, codeBlock, download, gf, has, svg, t, toast } from './app.js';
+import { $, $$, FORMAT_LABELS, codeBlock, download, gf, has, svg, t, toast } from './app.js';
 import * as collection from './collection.js';
 
 const CURATED = [
@@ -104,7 +104,7 @@ export function initFusion(data, { openInEditor }) {
     .map(([a, b, l]) => `<button class="chip" type="button" data-spec="${a}&${b}:${l}">${svg(`${a}&${b}:${l}`, { size: 16 })}${a} &amp; ${b}</button>`)
     .join('');
   $('[data-fu-formats]').innerHTML = gf.FORMATS.filter((f) => f !== 'datauri')
-    .map((f) => `<button type="button" role="tab" aria-selected="${f === state.format}" data-format="${f}">${f === 'html' ? 'Web' : f === 'cdn' ? 'CDN' : f === 'svg' ? 'SVG' : f[0].toUpperCase() + f.slice(1)}</button>`)
+    .map((f) => `<button type="button" role="tab" aria-selected="${f === state.format}" data-format="${f}">${FORMAT_LABELS[f]}</button>`)
     .join('');
   const add = $('[data-fu-add]');
   add.addEventListener('change', () => {

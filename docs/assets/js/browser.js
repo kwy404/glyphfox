@@ -1,7 +1,7 @@
 // Icon browser: search, categories, sketch search, live axes, inspector with
 // copy in every format and downloads (SVG, PNG, animated SVG, GIF, WebM).
 
-import { $, $$, codeBlock, copy, download, gf, loadIcons, svg, t, toast } from './app.js';
+import { $, $$, FORMAT_LABELS, codeBlock, copy, download, gf, loadIcons, svg, t, toast } from './app.js';
 import { animatedSvg, animationGif, animationWebm, bakeColor, svgToPng } from './exporters.js';
 import { rank, sketchPad } from './sketch.js';
 
@@ -327,7 +327,7 @@ function wireDownloads() {
 
 function wireFormats() {
   const tabs = $('[data-formats]');
-  tabs.innerHTML = gf.FORMATS.map((f) => `<button type="button" role="tab" aria-selected="${f === state.format}" data-format="${f}">${f === 'datauri' ? 'Data URI' : f === 'cdn' ? 'CDN' : f === 'html' ? 'Web' : f.toUpperCase() === 'SVG' ? 'SVG' : f[0].toUpperCase() + f.slice(1)}</button>`).join('');
+  tabs.innerHTML = gf.FORMATS.map((f) => `<button type="button" role="tab" aria-selected="${f === state.format}" data-format="${f}">${FORMAT_LABELS[f]}</button>`).join('');
   tabs.addEventListener('click', (e) => {
     const b = e.target.closest('button');
     if (!b) return;

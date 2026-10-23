@@ -2,10 +2,10 @@
 
 import { $, $$, codeBlock, gf, has, loadIcons, pick, reduced, svg, t } from './app.js';
 
-const FENN = ['M4 3l5 5h6l5-5 1 9-9 9-9-9z', 'M6.5 13.5 12 18l5.5-4.5'];
+const FENN = ['M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z'];
 const EYES = [
-  [9.5, 11.5],
-  [14.5, 11.5],
+  [9, 12],
+  [15, 12],
 ];
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
@@ -292,10 +292,32 @@ function axesScene() {
     });
   };
   const out = (k) => $(`[data-out="${k}"]`);
+  const drawPhase = 0.14;
+  let drawing = false;
   registerScene($('[data-scene="axes"]'), (p) => {
-    const weight = p < 0.42 ? 1 + 2 * ease(p / 0.42) : p < 0.58 ? 3 - ease((p - 0.42) / 0.16) : 2;
-    const corners = p >= 0.48 && p < 0.66 ? 'sharp' : 'round';
-    const variant = reduced ? 'duotone' : p < 0.66 ? 'outline' : p < 0.83 ? 'duotone' : 'solid';
+    tiles.forEach((tl, i) => {
+      const row = Math.floor(i / 5);
+      tl.style.transform = reduced ? '' : `translateY(${(1 - p) * (row - 1) * 18}px)`;
+    });
+    if (!reduced && p < drawPhase) {
+      drawing = true;
+      state = { corners: '', variant: '' };
+      const t = (p / drawPhase) * 1100;
+      names.forEach((n, i) => {
+        const icon = gf.lookupIcon(n);
+        tiles[i].innerHTML = gf.renderToString(icon, { size: 48, weight: 1, animate: 'draw', frame: Math.max(0, t - i * 25) });
+      });
+      out('weight').textContent = '1.00';
+      return;
+    }
+    if (drawing) {
+      drawing = false;
+      state = { corners: '', variant: '' };
+    }
+    const q = reduced ? 1 : (p - drawPhase) / (1 - drawPhase);
+    const weight = q < 0.42 ? 1 + 2 * ease(q / 0.42) : q < 0.58 ? 3 - ease((q - 0.42) / 0.16) : 2;
+    const corners = q >= 0.48 && q < 0.66 ? 'sharp' : 'round';
+    const variant = reduced ? 'duotone' : q < 0.66 ? 'outline' : q < 0.83 ? 'duotone' : 'solid';
     if (corners !== state.corners || variant !== state.variant) {
       state = { corners, variant };
       paint(corners, variant);
@@ -414,7 +436,7 @@ function living() {
     ['shake', pick('bell-ring', 'bell', 'phone')],
   ].filter(([, n]) => n);
   grid.innerHTML = presets
-    .map(([preset, name]) => `<button class="living-card reveal" type="button" data-preset="${preset}" aria-label="${t('home.living.play')} ${preset}">${svg(name, { size: 64, animate: preset, trigger: 'state', variant: preset === 'pop' ? 'duotone' : undefined })}<b>${preset}</b><small>${name}</small></button>`)
+    .map(([preset, name]) => `<button class="living-card reveal" type="button" data-preset="${preset}">${svg(name, { size: 64, animate: preset, trigger: 'state', variant: preset === 'pop' ? 'duotone' : undefined })}<b>${preset}</b><small>${name}</small></button>`)
     .join('');
   const play = (card) => {
     const s = card.querySelector('svg');
@@ -565,8 +587,10 @@ function fusionScene() {
     const f = built[i];
     if (i !== current) {
       current = i;
-      partEls[0].innerHTML = svg(f.a, { size: 96, weight: 1.5 });
-      partEls[1].innerHTML = svg(f.b, { size: 96, weight: 1.5 });
+      f.fused.parts.forEach((box, j) => {
+        const final = (box.size / 20) * (70 / 46);
+        partEls[j].innerHTML = svg(j === 0 ? f.a : f.b, { size: 96, weight: Math.min(3, (1.5 * (70 / 46)) / final) });
+      });
       fusedEl.innerHTML = gf.renderToString(f.fused, { size: 96, weight: 1.5 });
       caption.innerHTML = `<b>${f.a} &amp; ${f.b}</b> / ${f.layout}`;
     }
@@ -577,14 +601,15 @@ function fusionScene() {
       const cx = ((box.x + box.size / 2 - 12) / 24) * 100;
       const cy = ((box.y + box.size / 2 - 12) / 24) * 100;
       const scale = (box.size / 20) * (70 / 46);
-      const fromX = j === 0 ? -95 : 95;
-      const fromY = j === 0 ? -30 : 30;
+      const fromX = j === 0 ? -70 : 70;
+      const fromY = j === 0 ? -24 : 24;
       const tx = fromX + (cx * (70 / 46) - fromX) * fly;
       const ty = fromY + (cy * (70 / 46) - fromY) * fly;
-      const s = 1 + (scale - 1) * fly;
+      const s0 = scale * 0.82;
+      const s = s0 + (scale - s0) * fly;
       const rot = (j === 0 ? -14 : 14) * (1 - fly);
       el.style.transform = `translate(${tx}%, ${ty}%) rotate(${rot}deg) scale(${s})`;
-      el.style.opacity = String(1 - merge);
+      el.style.opacity = String(Math.min(1, u * 6) * (1 - merge));
     });
     fusedEl.style.opacity = String(merge);
     fusedEl.style.transform = `scale(${0.94 + 0.06 * outBack(merge)})`;
@@ -599,7 +624,7 @@ function gallery() {
   const cards = items.map(([a, b, layout]) => ({ spec: `${a}&${b}:${layout}`, label: `${a} & ${b}`, layout }));
   if (orbit.length === 10) cards.push({ spec: `${orbit.join('&')}:orbit`, label: t('home.gallery.orbit'), layout: 'orbit' });
   host.innerHTML = cards
-    .map((c) => `<a class="card gallery-card reveal" href="studio.html#fusion=${encodeURIComponent(c.spec)}"><div class="tile">${svg(c.spec, { size: 96 })}</div><b>${c.label}</b><small>${c.layout}</small></a>`)
+    .map((c) => `<a class="card gallery-card reveal" href="studio.html#fusion=${encodeURIComponent(c.spec)}"><div class="tile">${svg(c.spec, { size: 96, weight: c.layout === 'orbit' || c.layout === 'grid' ? 1.25 : 2 })}</div><b>${c.label}</b><small>${c.layout}</small></a>`)
     .join('');
   for (const el of $$('.reveal', host)) requestAnimationFrame(() => el.classList.add('in'));
 }

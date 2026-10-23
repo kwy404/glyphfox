@@ -6,6 +6,9 @@ import { dict } from './i18n.js';
 
 export { gf };
 
+/** Display names of the copy formats. */
+export const FORMAT_LABELS = { svg: 'SVG', jsx: 'JSX', vue: 'Vue', svelte: 'Svelte', angular: 'Angular', html: 'Web', tailwind: 'Tailwind', cdn: 'CDN', datauri: 'Data URI' };
+
 export const lang = document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
 export const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const $ = (sel, root = document) => root.querySelector(sel);
