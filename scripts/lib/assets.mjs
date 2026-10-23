@@ -11,9 +11,9 @@ import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css', 'assets/smart.css', 'assets/labs.css', 'assets/js/labs/labs.css'];
+export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/scenes.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css', 'assets/smart.css', 'assets/labs.css', 'assets/js/labs/labs.css'];
 // Page scripts: bundle name and its source in docs/assets/js/.
-export const ENTRIES = { landing: 'landing.js', browser: 'browser.js', studio: 'studio.js', docs: 'docs.js', app: 'app.js', smart: 'smart.js', labs: 'labs/main.js' };
+export const ENTRIES = { landing: 'landing.js', scenes: 'scenes/index.js', browser: 'browser.js', studio: 'studio.js', docs: 'docs.js', app: 'app.js', smart: 'smart.js', labs: 'labs/main.js' };
 export const PAGES = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
 const HASH_CSS = /\.[0-9a-f]{8}\.css$/;
 
@@ -86,24 +86,26 @@ export async function buildAssets(root, { vendor, labs } = {}) {
   return { files, map, imports, outputs };
 }
 
-/** Rewrites the CSS and script references of a page to the hashed files and preloads the entry. */
+/** Rewrites the CSS and script references of a page to the hashed files and preloads the entries. */
 export function withAssets(html, { map, imports }) {
-  let out = html.replace(/((?:href|src)=")((?:\.\.\/|\/glyphfox\/)?)(assets\/[\w/-]*?)(?:\.[0-9a-f]{8})?\.css"/g, (m, a, prefix, path) => {
+  // Pages in subfolders and language folders refer to assets with ../ (any depth).
+  let out = html.replace(/((?:href|src)=")((?:\.\.\/)*|\/glyphfox\/)(assets\/[\w/-]*?)(?:\.[0-9a-f]{8})?\.css"/g, (m, a, prefix, path) => {
     const hit = map[`${path}.css`];
     return hit ? `${a}${prefix}${hit}"` : m;
   });
-  out = out.replace(/((?:href|src)=")((?:\.\.\/|\/glyphfox\/)?)assets\/js\/(?:bundle\/|dist\/)?((?:[\w-]+\/)?[\w-]+?)(?:\.[A-Za-z0-9]{8})?\.js"/g, (m, a, prefix, name) => {
+  out = out.replace(/((?:href|src)=")((?:\.\.\/)*|\/glyphfox\/)assets\/js\/(?:bundle\/|dist\/)?((?:[\w-]+\/)?[\w-]+?)(?:\.[A-Za-z0-9]{8})?\.js"/g, (m, a, prefix, name) => {
     const hit = map[`assets/js/${name}.js`];
     return hit ? `${a}${prefix}${hit}"` : m;
   });
-  // Preload the page module and the chunks it imports right away.
+  // Preload the page modules and the chunks they import right away.
   out = out.replace(/\n?<link rel="modulepreload" href="[^"]*">/g, '');
-  const entry = /<script type="module" src="((?:\.\.\/|\/glyphfox\/)?)(assets\/js\/bundle\/[^"]+)"/.exec(out);
-  if (entry) {
-    const [, prefix, path] = entry;
-    const list = [path, ...(imports[path] || [])];
-    out = out.replace('</head>', `${list.map((p) => `<link rel="modulepreload" href="${prefix}${p}">`).join('\n')}\n</head>`);
+  const list = [];
+  let prefix = '';
+  for (const entry of out.matchAll(/<script type="module" src="((?:\.\.\/)*|\/glyphfox\/)(assets\/js\/bundle\/[^"]+)"/g)) {
+    prefix = entry[1];
+    for (const p of [entry[2], ...(imports[entry[2]] || [])]) if (!list.includes(p)) list.push(p);
   }
+  if (list.length) out = out.replace('</head>', `${list.map((p) => `<link rel="modulepreload" href="${prefix}${p}">`).join('\n')}\n</head>`);
   return out;
 }
 

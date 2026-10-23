@@ -28,9 +28,11 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <meta property="og:description" content="Variable, morphable and fusable open source icons with a studio in the browser.">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/">
 <link rel="stylesheet" href="../assets/landing.64b67dcd.css">
+<link rel="stylesheet" href="../assets/scenes.065bdd8c.css">
 <link rel="preload" href="../data/icons.json" as="fetch" crossorigin>
-<link rel="modulepreload" href="../assets/js/bundle/landing.DANOAIDO.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.EXWUTZMF.js">
+<link rel="modulepreload" href="../assets/js/bundle/landing.6SU3PFUI.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.XVXU2NDV.js">
+<link rel="modulepreload" href="../assets/js/bundle/scenes.CUQKH55M.js">
 </head>
 <body class="landing">
 <!-- header:start -->
@@ -60,6 +62,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
   <section class="hero" aria-labelledby="hero-title">
     <div class="grid-bg" aria-hidden="true"></div>
     <div class="glow" style="width:720px;height:720px;right:-160px;top:-260px" aria-hidden="true"></div>
+    <canvas class="flow-canvas" data-flow-canvas aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="eyebrow" data-i18n="home.hero.eyebrow">Sistema de ícones open source</span>
@@ -73,7 +76,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <span>npm i glyphfox</span>
           <button type="button" data-copy="npm i glyphfox" aria-label="Copy the install command"><!--gf:copy:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-copy" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><!--/gf--></button>
         </div>
-        <dl class="hero-stats" aria-label="glyphfox in numbers">
+        <dl class="hero-stats">
           <div><dt data-i18n="home.stats.icons">ícones</dt><dd data-count>0</dd></div>
           <div><dt data-i18n="home.stats.axes">eixos</dt><dd>3</dd></div>
           <div><dt data-i18n="home.stats.layouts">layouts de fusão</dt><dd>7</dd></div>
@@ -81,13 +84,27 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <div><dt data-i18n="home.stats.states">estados vivos</dt><dd>7</dd></div>
         </dl>
       </div>
-      <div class="hero-stage" aria-hidden="true">
-        <canvas id="swarm"></canvas>
-        <svg class="hero-fenn" viewBox="0 0 24 24" fill="none" stroke="url(#fenn-grad)" stroke-width=".28" stroke-linecap="round" stroke-linejoin="round">
-          <defs><linearGradient id="fenn-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd9a8"/><stop offset=".55" stop-color="#ff9442"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs>
-          <path pathLength="1" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path pathLength="1" d="M9 12h.01"/><path pathLength="1" d="M15 12h.01"/>
-        </svg>
+      <div class="hero-stage" aria-hidden="true" data-hero-flow>
         <!--art:sitting:hero-mascot--><svg class="fenn-art hero-mascot" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse class="fill" cx="54" cy="89.5" rx="40" ry="2.4" fill="#ff7a1a" stroke="none" opacity=".1"/><path class="fill" d="M23 25.5C19.5 31 16 42 18 53l1 35H56c12 0 18-10 16-22C70 50 60 36 45 24.6l-7.5 3.15L33 35.25l-4.5-7.5z" fill="#ff7a1a" stroke="none" opacity="0.16"/><path class="fill" d="M42 88c-2-11 4-21 16-25 8-3 12.5-1.5 14 3 2 12-4 22-16 22z" fill="#ff7a1a" stroke="none" opacity="0.3"/><path class="fill" d="M56 88c18 2 34-6 35-24l-.6-7.5-9.2-5C82 60 79 68 70 74c-4 6-8 12-14 14z" fill="#ff7a1a" stroke="none" opacity="0.3"/><path d="M56 88c18 2 34-6 35-24 1-12-5-20-12-23 3 11 2 25-9 33"/><path d="M90.4 56.5l-9.2-5"/><path d="M23 25.5C19.5 31 16 42 18 53l1 35H56c12 0 18-10 16-22C70 50 60 36 45 24.6"/><path d="M27 57V88"/><path d="M42 88c-2-11 4-21 16-25"/><path d="M21.5 40 25 43l3.5-3" stroke-opacity=".5"/><path class="fill" d="M21 6.75l7.5 6.75h9L45 6.75l.75 10.5 2.25 6-10.5 4.5L33 35.25l-4.5-7.5L18 23.25l2.25-6z" fill="#ff7a1a" stroke="none" opacity=".3"/><path d="M21 6.75l7.5 6.75h9L45 6.75l.75 10.5 2.25 6-10.5 4.5L33 35.25l-4.5-7.5L18 23.25l2.25-6z"/><path d="M28.5 21h.02"/><path d="M37.5 21h.02"/></svg><!--/art-->
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="grid" data-scene="grid" aria-labelledby="grid-title">
+    <div class="sticky">
+      <div class="wrap scene-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.grid.eyebrow">A grade</span>
+          <h2 id="grid-title" class="title" data-i18n="home.grid.title">Desenhado em uma só grade.</h2>
+          <p class="lead" data-i18n="home.grid.lead">Todo ícone nasce na mesma grade de 24 por 24, com 2 px de margem, traço de 2 px e junções redondas. Linhas guia compartilhadas mantêm círculos, quadrados e formas altas no mesmo tamanho óptico, então quaisquer dois ícones combinam como letras de uma mesma fonte.</p>
+          <ul class="grid-specs">
+            <li data-i18n="home.grid.s1">Grade 24 x 24</li>
+            <li data-i18n="home.grid.s2">2 px de margem</li>
+            <li data-i18n="home.grid.s3">Traço de 2 px</li>
+            <li data-i18n="home.grid.s4">Pontas e junções redondas</li>
+          </ul>
+        </div>
+        <div class="grid-stage" data-grid-stage aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -105,7 +122,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
             <div class="readout-row"><span data-i18n="axis.style">Estilo</span><b data-out="variant">outline</b></div>
           </div>
         </div>
-        <div class="axes-board" data-board></div>
+        <div class="weight-board" data-weight-board aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -142,7 +159,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
         </div>
         <div class="morph-stage">
           <div class="morph-ring" aria-hidden="true"></div>
-          <div class="morph-icon" data-morph-icon></div>
+          <div class="morph-icon" data-morph-chain></div>
           <div class="morph-label" data-morph-label aria-hidden="true"></div>
         </div>
       </div>
@@ -160,6 +177,19 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
     </div>
   </section>
 
+  <section class="scene scene-sync" id="sync" data-scene="sync" aria-labelledby="sync-title">
+    <div class="sticky">
+      <div class="wrap sync-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.sync.eyebrow">Movimento de assinatura</span>
+          <h2 id="sync-title" class="title" data-i18n="home.sync.title">Sete estados. Um só compasso.</h2>
+          <p class="lead" data-i18n="home.sync.lead">Todo estado vivo segue o mesmo relógio, então uma interface inteira pode se mover no mesmo ritmo. Role para trazer as faixas. O estúdio exporta os mesmos quadros em GIF e WebM.</p>
+        </div>
+        <div class="sync-stage" data-sync-stage aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="scene" id="modifiers" data-scene="mods" aria-labelledby="mods-title">
     <div class="sticky">
       <div class="wrap scene-grid flip">
@@ -168,7 +198,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <h2 id="mods-title" class="title" data-i18n="home.mods.title">Selos que abrem o próprio espaço.</h2>
           <p class="lead" data-i18n="home.mods.lead">Adicione mais, check, alerta, cadeado, relógio, sincronizar e outros em qualquer canto. O ícone de baixo é recortado em volta do selo, então algumas centenas de ícones viram milhares de combinações limpas.</p>
         </div>
-        <div class="mods-board" data-mods-board></div>
+        <div class="mods-stage" data-mods-stage aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -197,7 +227,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <p class="lead" data-i18n="home.fusion.lead">Funda de 2 a 10 ícones com sete layouts. As partes são escaladas e alinhadas à grade e, onde se sobrepõem, a de trás é recortada em volta da da frente, então as linhas nunca colidem e o resultado continua passando no lint.</p>
           <p class="fusion-caption" data-fusion-caption aria-live="off"></p>
         </div>
-        <div class="fusion-stage" data-fusion-stage aria-hidden="true"></div>
+        <div class="fusion-stage" data-fuse-stage aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -210,6 +240,21 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
       </div>
       <div class="gallery-grid" data-gallery></div>
       <p class="center-cta reveal"><a class="btn" href="studio.html#fusion" data-i18n="home.gallery.cta">Crie a sua fusão</a></p>
+    </div>
+  </section>
+
+  <section class="section art" aria-labelledby="art-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.art.eyebrow">Feito com o conjunto</span>
+        <h2 id="art-title" class="title" data-i18n="home.art.title">Arte desenhada com os ícones.</h2>
+        <p class="lead" data-i18n="home.art.lead">Toda ilustração desta página é construída com a própria geometria dos ícones: os mesmos traços, a mesma grade e a mesma espessura.</p>
+      </div>
+      <div class="art-grid">
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="fox"></div><figcaption><b data-i18n="home.art.fox">Uma raposa feita de ícones</b><span data-i18n="home.art.fox.note">Fenn, montado com os glifos do conjunto.</span></figcaption></figure>
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="constellation"></div><figcaption><b data-i18n="home.art.sky">Uma constelação de ícones</b><span data-i18n="home.art.sky.note">A cabeça do Fenn, traçada em estrelas.</span></figcaption></figure>
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="exploded"></div><figcaption><b data-i18n="home.art.grid">Uma grade explodida</b><span data-i18n="home.art.grid.note">Grade, linhas guia, preenchimento duotone e traços, separados em camadas.</span></figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -305,6 +350,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/landing.DANOAIDO.js"></script>
+<script type="module" src="../assets/js/bundle/landing.6SU3PFUI.js"></script>
+<script type="module" src="../assets/js/bundle/scenes.CUQKH55M.js"></script>
 </body>
 </html>
