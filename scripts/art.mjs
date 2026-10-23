@@ -49,57 +49,123 @@ const open = (w, h, label) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="
 
 const art = {};
 
-// Fenn sitting: the icon head on a low poly body, tail curled to the front.
-art.sitting = () =>
-  open(64, 64, 'Fenn the fox sitting') +
-  `<path class="fill" d="M27 17.5L36 24 44 35 46 47 42 60H21L19 44 21 30 24 22.5Z" fill="${ACCENT}" stroke="none" opacity=".16"/>` +
-  `<path class="fill" d="M41 59L52 56 59 47 58 37 53 46 45 52Z" fill="${ACCENT}" stroke="none" opacity=".28"/>` +
-  head(12, 1) +
-  '<path d="M27 17.5L36 24 44 35 46 47 42 60H21L19 44 21 30 24 22.5"/>' +
-  '<path d="M21 31l4.5 4 4.5-4"/>' +
-  '<path d="M25 41v18.5M30 43v16.5"/>' +
-  '<path d="M37 59.5l-1-8.5 7-6"/>' +
-  '<path d="M41 59L52 56 59 47 58 37 53 46 45 52"/>' +
-  '<path d="M55.5 41.5l3 1.5"/>' +
-  '</svg>\n';
+/**
+ * Drawing context for the illustrations: poses are designed in their own
+ * coordinates and placed with a scale, an offset and an optional mirror, so
+ * one pose serves several scenes. Every stroke keeps the icon weight.
+ */
+function pen({ s = 1, ox = 0, oy = 0, flip = false, w = 0 } = {}) {
+  const X = (x) => ox + s * (flip ? w - x : x);
+  const Y = (y) => oy + s * y;
+  const d = (pts, close) => pts.map(([x, y], i) => `${i ? 'L' : 'M'}${r2(X(x))} ${r2(Y(y))}`).join('') + (close ? 'Z' : '');
+  const m = [flip ? -s : s, 0, 0, s, ox + (flip ? s * w : 0), oy];
+  const curve = (src) => G.serializePath(G.transformSegments(G.shapeToSegments(['path', { d: src }]), m), 2);
+  return {
+    X,
+    Y,
+    path: (src, extra = '') => `<path d="${curve(src)}"${extra}/>`,
+    fill: (src, opacity) => `<path class="fill" d="${curve(src)}" fill="${ACCENT}" stroke="none" opacity="${opacity}"/>`,
+    line: (pts, extra = '') => `<path d="${d(pts)}"${extra}/>`,
+    shape: (pts, extra = '') => `<path d="${d(pts, true)}"${extra}/>`,
+    facet: (pts, opacity) => `<path class="fill" d="${d(pts, true)}" fill="${ACCENT}" stroke="none" opacity="${opacity}"/>`,
+    shadow: (cx, cy, rx, ry) => `<ellipse class="fill" cx="${r2(X(cx))}" cy="${r2(Y(cy))}" rx="${r2(rx * s)}" ry="${r2(ry * s)}" fill="${ACCENT}" stroke="none" opacity=".1"/>`,
+    head: (cx, cy, scale, rot = 0) => headAt(X(cx), Y(cy), scale * s, flip ? -rot : rot),
+  };
+}
 
-// Fenn running to the right with speed lines.
-art.running = () =>
-  open(96, 64, 'Fenn the fox running') +
-  `<path class="fill" d="M64 19L50 21 33 21 25 27 31 36 56 37 66 27Z" fill="${ACCENT}" stroke="none" opacity=".16"/>` +
-  `<path class="fill" d="M26 24L13 14 3 16 9 23 24 30Z" fill="${ACCENT}" stroke="none" opacity=".28"/>` +
-  head(60, 6) +
-  '<path d="M64 19L50 21 33 21 25 27 31 36 56 37 66 27"/>' +
-  '<path d="M57 36.5l9 6.5h8"/>' +
-  '<path d="M52 37l3 9 6 1"/>' +
-  '<path d="M31 35.5l-9 6.5h-8"/>' +
-  '<path d="M37 37l-2 9 5 4"/>' +
-  '<path d="M26 24L13 14 3 16 9 23 24 30"/>' +
-  '<path d="M6.5 15.5l3.5 4"/>' +
-  '<path d="M3 30h8M1 37h12M6 44h7" stroke-opacity=".5"/>' +
-  '</svg>\n';
+/** Fenn's head from the icon set, centered on (cx, cy), scaled and turned (baked). */
+function headAt(cx, cy, k, rot = 0) {
+  const a = (rot * Math.PI) / 180;
+  const c = Math.cos(a) * k;
+  const n = Math.sin(a) * k;
+  const m = [c, n, -n, c, cx - (c * 12 - n * 12), cy - (n * 12 + c * 12)];
+  let fill = '';
+  let lines = '';
+  for (const node of gf.parseBody(gf.getIcon('fenn').body)) {
+    const d = G.serializePath(G.transformSegments(G.shapeToSegments(node), m), 2);
+    if (node[1].class === 'gf-secondary') fill += `<path class="fill" d="${d}" fill="${ACCENT}" stroke="none" opacity=".3"/>`;
+    else lines += `<path d="${d}"/>`;
+  }
+  return fill + lines;
+}
 
-// Fenn holding a pencil, drawing a heart on a 24 grid canvas.
+/** Any icon of the set, centered on (cx, cy), scaled and turned (baked). */
+function iconAt(name, cx, cy, k, rot = 0, extra = '') {
+  const a = (rot * Math.PI) / 180;
+  const c = Math.cos(a) * k;
+  const n = Math.sin(a) * k;
+  const m = [c, n, -n, c, cx - (c * 12 - n * 12), cy - (n * 12 + c * 12)];
+  const nodes = gf.parseBody(gf.getIcon(name).body).filter((node) => node[1].class !== 'gf-secondary');
+  return `<g${extra}>${nodes.map((node) => `<path d="${G.serializePath(G.transformSegments(G.shapeToSegments(node), m), 2)}"/>`).join('')}</g>`;
+}
+
+const LIGHT = ' stroke-opacity=".5"';
+
+/**
+ * Fenn sitting, facing left, in a 96 by 96 design box: one continuous
+ * outline in the curves of the fox icon, a round haunch and the tail curled
+ * up the back with a light tip. With `raised`, a front paw is lifted.
+ */
+function sittingPose(p, { raised = false } = {}) {
+  const body = 'M22.5 25.6C17 33 15 45 18 53L19 88H56C68 88 74 78 72 66C70 50 60 36 45 24.6';
+  const tail = 'M56 88C74 90 90 82 91 64C92 52 86 44 79 41C82 52 81 66 70 74';
+  let out = p.shadow(54, 89.5, 40, 2.4);
+  out += p.fill(body + 'L37.5 27.75 33 35.25 28.5 27.75Z', 0.16);
+  out += p.fill('M42 88C40 77 46 67 58 63C66 60 70.5 61.5 72 66C74 78 68 88 56 88Z', 0.3);
+  out += p.fill('M56 88C74 90 90 82 91 64L90.4 56.5L81.2 51.5C82 60 79 68 70 74C66 80 62 86 56 88Z', 0.3);
+  out += p.path(tail);
+  out += p.path('M90.4 56.5L81.2 51.5');
+  out += p.path(body);
+  out += p.path('M27 57V88');
+  out += p.path('M42 88C40 77 46 67 58 63');
+  out += p.path('M21.5 40l3.5 3 3.5-3', LIGHT);
+  if (raised) out += p.path('M21 49C15 51 10 49 7 43');
+  out += p.head(33, 21, 1.5);
+  return out;
+}
+
+// Fenn sitting.
+art.sitting = () => open(96, 96, 'Fenn the fox sitting') + sittingPose(pen()) + '</svg>\n';
+
+// Fenn in a flying gallop to the right: the legs reach forward and back in
+// pairs, the tail streams behind and the head leans into the run.
+art.running = () => {
+  const p = pen();
+  const body = 'M97 30C95 40 89 50 79 50C71 50 64 45 57 45C50 45 46 49 41 47C35 44 34 36 38 31C42 25 50 23 60 23C72 23 82 22 92 17';
+  let out = open(128, 80, 'Fenn the fox running');
+  out += p.shadow(64, 74, 44, 2.4);
+  out += p.fill(body + 'L100 25Z', 0.16);
+  out += p.fill('M41 47C35 44 34 36 38 31C41 27 45 25.5 50 24.6C54 32 53 41 47 47.5Z', 0.3);
+  out += p.fill('M39 30C30 22 21 20 14 21.5L11 27C16 31 25 35 37 38Z', 0.3);
+  out += p.path('M80 48C83 55 88 60 97 63', ' stroke-opacity=".55"');
+  out += p.path('M51 45C48 53 43 60 33 63', ' stroke-opacity=".55"');
+  out += p.path(body);
+  out += p.path('M86 45C92 51 98 55 108 54');
+  out += p.path('M44 46C39 53 32 56 22 55');
+  out += p.path('M39 30C30 22 18 19 5 23C12 30 24 35 37 38');
+  out += p.path('M14 21.5L11 27');
+  out += p.path('M0 42H8M3 50H15M1 58H9', ' stroke-opacity=".4"');
+  out += p.head(104, 20, 1.5, 10);
+  return out + '</svg>\n';
+};
+
+// Fenn drawing a heart on a 24 grid board with the pencil from the icon set.
 art.drawing = () => {
+  const p = pen({ flip: true, w: 96, ox: 0 });
+  const bx = 88;
+  const by = 12;
+  const bw = 36;
+  const bh = 46;
   let grid = '';
-  for (let i = 1; i < 8; i++) grid += `<path d="M${58 + i * 4} 14v40M58 ${14 + i * 5}h32" stroke-width=".5" stroke-opacity=".22"/>`;
-  return (
-    open(96, 64, 'Fenn the fox drawing an icon') +
-    `<path class="fill" d="M27 17.5L36 24 44 35 46 47 42 60H21L19 44 21 30 24 22.5Z" fill="${ACCENT}" stroke="none" opacity=".16"/>` +
-    head(12, 1) +
-    '<path d="M27 17.5L36 24 44 35 46 47 42 60H21L19 44 21 30 24 22.5"/>' +
-    '<path d="M21 31l4.5 4 4.5-4"/>' +
-    '<path d="M25 41v18.5"/>' +
-    '<path d="M26 34l9 2 7-6"/>' +
-    '<path d="M37 59.5l-1-8.5 7-6"/>' +
-    '<rect x="58" y="14" width="32" height="40" rx="3"/>' +
-    grid +
-    `<path d="M74 47.5L64.9 38.4A5.76 5.76 0 1 1 74 31.5A5.76 5.76 0 1 1 83.1 38.4" stroke="${ACCENT}" class="accent"/>` +
-    `<path d="M83.1 38.4L79 42.5" stroke="${ACCENT}" stroke-dasharray="1 2.5" class="accent"/>` +
-    '<path d="M42 30l10-11 4 4-10 11-5 1z"/>' +
-    '<path d="M50 21l4 4"/>' +
-    '</svg>\n'
-  );
+  for (let i = 1; i < 6; i++) grid += `<path d="M${r2(bx + (i * bw) / 6)} ${by}v${bh}" stroke-width=".6" stroke-opacity=".2"/>`;
+  for (let i = 1; i < 8; i++) grid += `<path d="M${bx} ${r2(by + (i * bh) / 8)}h${bw}" stroke-width=".6" stroke-opacity=".2"/>`;
+  let out = open(128, 96, 'Fenn the fox drawing an icon');
+  out += `<path d="M${bx + 9} ${by + bh}L${bx + 5} 90M${bx + bw - 9} ${by + bh}L${bx + bw - 5} 90"/>`;
+  out += `<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="4"/>` + grid;
+  out += iconAt('heart', bx + bw / 2, by + bh / 2 + 1, 1.05, 0, ` stroke="${ACCENT}" class="accent"`);
+  out += sittingPose(p, { raised: true });
+  out += iconAt('pencil', p.X(7) + 5.2, p.Y(43) - 5.2, 0.7, 180);
+  return out + '</svg>\n';
 };
 
 // Fenn surrounded by orbiting icons.
@@ -112,15 +178,14 @@ art.orbit = () => {
     const a = -Math.PI / 2 + (i * 2 * Math.PI) / names.length;
     const x = cx + Math.cos(a) * 38;
     const y = cy + Math.sin(a) * 38;
-    const s = 0.5;
     ring += `<circle cx="${r2(x)}" cy="${r2(y)}" r="9" stroke-width="1" stroke-opacity=".25"/>`;
-    ring += icon(n, x - 12 * s, y - 12 * s, s, { strokeWidth: 1.6, cls: i % 3 === 0 ? 'accent' : '' }).replace('<g class="accent"', `<g class="accent" stroke="${ACCENT}"`);
+    ring += iconAt(n, x, y, 0.5, 0, i % 3 === 0 ? ` stroke="${ACCENT}" class="accent" stroke-width="1.6"` : ' stroke-width="1.6"');
   });
   return (
     open(96, 96, 'Fenn the fox surrounded by orbiting icons') +
     `<circle cx="48" cy="48" r="38" stroke-width="1" stroke-dasharray="2 4" stroke-opacity=".45"/>` +
     `<circle cx="48" cy="48" r="24" fill="${ACCENT}" stroke="none" opacity=".08" class="fill"/>` +
-    `<g stroke-width="2.2">${head(48 - 12 * 1.5, 48 - 12 * 1.5, 1.5)}</g>` +
+    `<g stroke-width="2.2">${headAt(48, 48, 1.5)}</g>` +
     ring +
     '</svg>\n'
   );
