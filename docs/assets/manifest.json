@@ -1,5 +1,5 @@
 {
- "version": "9914ce30dc67",
+ "version": "56b439a52fd6",
  "files": {
   "index.html": "549e03ef3c0247bb77a78baddeb04287248099109ddd752cbe058f35311f99dd",
   "icons.html": "8c4cfdfd99d8b15d8dfab4f745b631916c031202c7fadb19f5eba92ca75bc8b5",
@@ -11,7 +11,7 @@
   "pt-br/studio.html": "f15031022b57d59285a6f431b1234cea6b0b285a5b944e16acfae88aaa9f5eb8",
   "pt-br/docs.html": "6e208304032673ba57f398ce3d053db3b4d5ee40a044bd6a1e13d97fa8783876",
   "pt-br/changelog.html": "c83680cfa88ffe6740f9b4895f6cc68c68f57390fe16f35505fabe79e4ad9846",
-  "data/icons.json": "27b7288c66d796f607384af066958df1e9610a97323b882a049f2989abfdbcaa",
+  "data/icons.json": "e1eab7cfe703c0423e694093d308481146a14915c352123c4878a8b59c9a6630",
   "assets/favicon.svg": "1265caf2798632ed7badf1d7ea5ba2f8537423f161447935c40974521ab2021b",
   "assets/site.2fa4695b.css": "2fa4695b5a9c952398ce2b10a9db2eef74e75c1f93dce3e9f6ca565a0081ecea",
   "assets/landing.64b67dcd.css": "64b67dcdd1e62e6d1f7a67b7de9381da1fd4cb2db2b4faa36bf24c3e4a774c0d",

@@ -1,22 +1,12 @@
 // The repository text rules (scripts/check-text.mjs) applied to the icon
 // metadata of the universe build, so the index, the notice and the site pass
-// the same check as every other file. The patterns are read from that script
-// so both stay in sync.
+// the same check as every other file. Both import the same patterns
+// (scripts/lib/text-patterns.mjs).
 
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { RULES } from '../../lib/text-patterns.mjs';
 
-export function loadTextRules(root) {
-  const file = join(root, 'scripts', 'check-text.mjs');
-  const rules = [];
-  if (existsSync(file)) {
-    for (const line of readFileSync(file, 'utf8').split('\n')) {
-      const m = /^\s*\[\/(.+)\/([dgimsuvy]*),\s*'/.exec(line);
-      if (m) rules.push(new RegExp(m[1], m[2].replace('g', '')));
-    }
-  }
-  if (!rules.length) rules.push(new RegExp('[' + String.fromCharCode(0x2013, 0x2014) + ']', 'u'), /\p{Extended_Pictographic}/u);
-  return rules;
+export function loadTextRules() {
+  return RULES.map(([re]) => new RegExp(re.source, re.flags.replace('g', '')));
 }
 
 // Lower case name words with the same meaning as the upper case rule (icon

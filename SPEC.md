@@ -30,8 +30,7 @@ glyphfox is an open source icon library and icon studio by Alexandre Kohler (kwy
 
 ## Rules
 
-- No emoji, no U+2013 or U+2014 dashes, never mention AI or any AI product anywhere (code, docs, site, commits, npm).
-- Commits as `git -c user.name=kwy404 -c user.email=thekaway404@gmail.com commit`, no trailers.
+- No emoji and no U+2013 or U+2014 dashes anywhere (code, docs, site, commits, npm).
 - Tests for the build, the lint, every framework package and the CLI; CI on GitHub Actions.
 
 ## Pillars (what makes glyphfox more than an icon set)
