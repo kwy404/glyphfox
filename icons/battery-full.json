@@ -7,5 +7,25 @@
     "energy",
     "full",
     "charged"
-  ]
+  ],
+  "animation": {
+    "name": "charge",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "opacity": 0.15 } },
+      { "at": 0.35, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "opacity": 0.15 } },
+      { "at": 0.2, "element": 3, "props": { "opacity": 0.15 } },
+      { "at": 0.41, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.8, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0, "element": 4, "props": { "opacity": 0.15 } },
+      { "at": 0.4, "element": 4, "props": { "opacity": 0.15 } },
+      { "at": 0.61, "element": 4, "props": { "opacity": 1 } },
+      { "at": 1, "element": 4, "props": { "opacity": 1 } }
+    ]
+  }
 }

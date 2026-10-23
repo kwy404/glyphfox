@@ -8,5 +8,26 @@
     "rack",
     "backend",
     "data center"
-  ]
+  ],
+  "animation": {
+    "name": "blink",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 2, "props": { "opacity": 0.2 } },
+      { "at": 0.3, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 2, "props": { "opacity": 0.2 } },
+      { "at": 0.6, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.32, "element": 3, "props": { "opacity": 0.2 } },
+      { "at": 0.44, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.56, "element": 3, "props": { "opacity": 0.2 } },
+      { "at": 0.68, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } }
+    ]
+  }
 }

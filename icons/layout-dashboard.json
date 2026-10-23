@@ -8,5 +8,34 @@
     "widgets",
     "overview",
     "layout"
-  ]
+  ],
+  "animation": {
+    "name": "pop",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(-5.5px, -4.5px) scale(1) translate(5.5px, 4.5px)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "translate(-5.5px, -4.5px) scale(0.85) translate(5.5px, 4.5px)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "translate(-5.5px, -4.5px) scale(1.05) translate(5.5px, 4.5px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(-5.5px, -4.5px) scale(1) translate(5.5px, 4.5px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(5.5px, -6.5px) scale(1) translate(-5.5px, 6.5px)" } },
+      { "at": 0.12, "element": 1, "props": { "transform": "translate(5.5px, -6.5px) scale(1) translate(-5.5px, 6.5px)" } },
+      { "at": 0.312, "element": 1, "props": { "transform": "translate(5.5px, -6.5px) scale(0.85) translate(-5.5px, 6.5px)" } },
+      { "at": 0.536, "element": 1, "props": { "transform": "translate(5.5px, -6.5px) scale(1.05) translate(-5.5px, 6.5px)" } },
+      { "at": 0.76, "element": 1, "props": { "transform": "translate(5.5px, -6.5px) scale(1) translate(-5.5px, 6.5px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(5.5px, -6.5px) scale(1) translate(-5.5px, 6.5px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(5.5px, 4.5px) scale(1) translate(-5.5px, -4.5px)" } },
+      { "at": 0.24, "element": 2, "props": { "transform": "translate(5.5px, 4.5px) scale(1) translate(-5.5px, -4.5px)" } },
+      { "at": 0.432, "element": 2, "props": { "transform": "translate(5.5px, 4.5px) scale(0.85) translate(-5.5px, -4.5px)" } },
+      { "at": 0.656, "element": 2, "props": { "transform": "translate(5.5px, 4.5px) scale(1.05) translate(-5.5px, -4.5px)" } },
+      { "at": 0.88, "element": 2, "props": { "transform": "translate(5.5px, 4.5px) scale(1) translate(-5.5px, -4.5px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(5.5px, 4.5px) scale(1) translate(-5.5px, -4.5px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(-5.5px, 6.5px) scale(1) translate(5.5px, -6.5px)" } },
+      { "at": 0.36, "element": 3, "props": { "transform": "translate(-5.5px, 6.5px) scale(1) translate(5.5px, -6.5px)" } },
+      { "at": 0.552, "element": 3, "props": { "transform": "translate(-5.5px, 6.5px) scale(0.85) translate(5.5px, -6.5px)" } },
+      { "at": 0.776, "element": 3, "props": { "transform": "translate(-5.5px, 6.5px) scale(1.05) translate(5.5px, -6.5px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(-5.5px, 6.5px) scale(1) translate(5.5px, -6.5px)" } }
+    ]
+  }
 }

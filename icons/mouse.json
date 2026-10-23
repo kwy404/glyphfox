@@ -7,5 +7,18 @@
     "click",
     "scroll",
     "input"
-  ]
+  ],
+  "animation": {
+    "name": "scroll",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 }, "easing": "ease-in" },
+      { "at": 0.4, "element": 1, "props": { "transform": "translate(0px, 1.5px)", "opacity": 0 } },
+      { "at": 0.41, "element": 1, "props": { "transform": "translate(0px, -1px)", "opacity": 0 }, "easing": "ease-out" },
+      { "at": 0.7, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } }
+    ]
+  }
 }

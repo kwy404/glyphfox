@@ -7,5 +7,34 @@
     "keys",
     "input",
     "typing"
-  ]
+  ],
+  "animation": {
+    "name": "typing",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.2, "element": 1, "props": { "transform": "translate(0px, 0.75px)" } },
+      { "at": 0.45, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.248, "element": 2, "props": { "transform": "translate(0px, 0.75px)" } },
+      { "at": 0.408, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.76, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.24, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.368, "element": 3, "props": { "transform": "translate(0px, 0.75px)" } },
+      { "at": 0.528, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.88, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.36, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.488, "element": 4, "props": { "transform": "translate(0px, 0.75px)" } },
+      { "at": 0.648, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

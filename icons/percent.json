@@ -8,5 +8,15 @@
     "rate",
     "ratio",
     "interest"
-  ]
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(180deg)" } }
+    ]
+  }
 }

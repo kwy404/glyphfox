@@ -8,5 +8,20 @@
     "start",
     "dashboard",
     "building"
-  ]
+  ],
+  "animation": {
+    "name": "hop",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 21],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px) scale(1, 1)" } },
+      { "at": 0.15, "element": "all", "props": { "transform": "translate(0px, 0px) scale(1.04, 0.95)" }, "easing": "ease-out" },
+      { "at": 0.4, "element": "all", "props": { "transform": "translate(0px, -1.2px) scale(0.98, 1.03)" }, "easing": "ease-in" },
+      { "at": 0.62, "element": "all", "props": { "transform": "translate(0px, 0px) scale(1.04, 0.95)" } },
+      { "at": 0.8, "element": "all", "props": { "transform": "translate(0px, 0px) scale(0.99, 1.01)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px) scale(1, 1)" } }
+    ]
+  }
 }

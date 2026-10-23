@@ -7,5 +7,17 @@
     "disk",
     "store",
     "keep"
-  ]
+  ],
+  "animation": {
+    "name": "slide",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

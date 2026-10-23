@@ -7,5 +7,19 @@
     "notebook",
     "portable",
     "device"
-  ]
+  ],
+  "animation": {
+    "name": "open",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 15],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1, 1)" }, "easing": "ease-in" },
+      { "at": 0.35, "element": 0, "props": { "transform": "scale(1, 0.15)" } },
+      { "at": 0.45, "element": 0, "props": { "transform": "scale(1, 0.15)" }, "easing": "ease-out" },
+      { "at": 0.8, "element": 0, "props": { "transform": "scale(1, 1.04)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }
