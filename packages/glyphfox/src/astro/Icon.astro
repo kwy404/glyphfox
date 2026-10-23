@@ -1,0 +1,8 @@
+---
+// Any spec: <Icon name="file+check@tr" />, <Icon name="cloud&lock:side" />, <Icon icon={data} />.
+import { renderSpec } from './glyph.js';
+
+const svg = renderSpec(Astro.props);
+---
+
+<Fragment set:html={svg} />

@@ -1,0 +1,8 @@
+---
+// Fuses 2 to 10 icons: <Fusion icons={['cloud', 'lock']} layout="overlap" />.
+import { renderFusion } from './glyph.js';
+
+const svg = renderFusion(Astro.props);
+---
+
+<Fragment set:html={svg} />
