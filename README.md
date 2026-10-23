@@ -321,7 +321,7 @@ npx glyphfox foxify any-icon.svg --out fox.svg
 - **edit** icons on the 24 grid (pen and shape tools, node editing, undo and redo, live lint) and keep a local collection;
 - **Fox-ify** any SVG into the glyphfox style with a before and after view;
 - export a **brand kit** (themed package, sprite, CSS, favicon and app icons);
-- render any icon in **3D** with lighting and material presets.
+- render any icon, fusion or modifier in **3D**: the strokes become bevelled solids in matte clay, glossy plastic, brushed metal, glass or neon under five lighting setups, with orbit controls and a turntable, exported as PNG at 1x, 2x or 4x (transparent if you like) or embedded on any page with `<glyphfox-3d>`.
 
 ## Icon rules
 
