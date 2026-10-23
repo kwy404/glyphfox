@@ -10,6 +10,9 @@ import { pathToFileURL } from 'node:url';
 const SITE = 'https://kwy404.github.io/glyphfox/';
 const PARTIALS = ['head', 'header', 'footer'];
 const LOCALIZED = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
+// smart icons hook: pages without a Portuguese version (docs/smart.html) link the
+// language switch to the Portuguese docs and are linked as ../page from pt-br/.
+const englishOnly = (page) => !LOCALIZED.includes(page) && page !== '404.html';
 
 async function engineBundle(root) {
   const esbuild = await import('esbuild');
@@ -50,7 +53,7 @@ function withPartials(root, html, page) {
   }
   const key = page.replace(/\.html$/, '');
   out = out.replace(/ aria-current="page"/g, '').replace(new RegExp(`(<a [^>]*data-nav="${key}")`, 'g'), '$1 aria-current="page"');
-  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch)/, `$1href="pt-br/${page}"$2`);
+  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch)/, `$1href="pt-br/${englishOnly(page) ? 'docs.html' : page}"$2`);
   return out;
 }
 
@@ -149,6 +152,7 @@ export function localize(html, page, tr) {
     return t;
   });
   out = out.replace(/(\s(?:href|src)=")((?:assets|data|vendor)\/)/g, '$1../$2');
+  out = out.replace(/(\shref=")([a-z0-9-]+\.html)(?=[#"])/g, (m, a, p) => (englishOnly(p) ? `${a}../${p}` : m));
   out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch[^>]*)>[^<]*</, (m, a, b) => `${a}href="../${page}"${b.replace(/hreflang="[^"]*"/, 'hreflang="en"').replace(/aria-label="[^"]*"/, `aria-label="${escAttr(tr['lang.switch'] || 'EN, read in English')}"`)}>EN<`);
   out = out.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}pt-br/${page === 'index.html' ? '' : page}$2`);
   return withAlternates(out, page, 'pt-BR');
@@ -176,7 +180,7 @@ export async function docsFiles(root, icons, { version }) {
         continue;
       }
       let html = withChangelog(root, withArt(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api)));
-      html = withAlternates(html, f, 'en');
+      if (!englishOnly(f)) html = withAlternates(html, f, 'en');
       files[file] = html;
       if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);
     }

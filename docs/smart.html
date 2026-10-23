@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!-- head:end -->
+<title>Smart icons: glyphfox</title>
+<meta name="description" content="glyphfox smart icons: battery, signal, wifi, volume, progress, thermometer, calendar, clock, file and badge icons drawn from data, currency from the locale, automatic right to left mirroring, a contrast weight bump, a morphing StatusIcon and staggered IconGroup animations.">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/smart.html">
+<meta property="og:title" content="glyphfox smart icons">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/smart.html">
+<link rel="stylesheet" href="assets/docs.css">
+<link rel="stylesheet" href="assets/smart.css">
+<link rel="modulepreload" href="vendor/glyphfox.js">
+</head>
+<body class="docs-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="pt-br/docs.html" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<div class="wrap docs-layout">
+  <nav class="docs-nav" aria-label="Smart icons">
+    <p class="docs-nav-title">Smart icons</p>
+    <a href="#data">Data icons</a>
+    <a href="#time">Calendar and clock</a>
+    <a href="#files">Files and badges</a>
+    <p class="docs-nav-title">Locale aware</p>
+    <a href="#currency">Currency</a>
+    <a href="#rtl">Right to left</a>
+    <a href="#contrast">More contrast</a>
+    <p class="docs-nav-title">Motion</p>
+    <a href="#status">StatusIcon</a>
+    <a href="#group">IconGroup</a>
+    <p class="docs-nav-title">Reference</p>
+    <a href="#packages">Every package</a>
+    <a href="#options">Options</a>
+    <a href="docs.html">All docs</a>
+  </nav>
+
+  <main id="main" class="docs-main">
+    <header class="docs-hero">
+      <span class="eyebrow">Smart icons</span>
+      <h1 class="title">Icons that show data, follow the reader and report status</h1>
+      <p class="lead">Battery, signal, wifi, volume, progress, thermometer, calendar, clock, file and badge icons drawn from a value, a date or a count. A currency sign that comes from the locale, arrows that turn around in right to left layouts and lines that get heavier when the reader asks for more contrast. A status icon that morphs from loading to done, and groups that animate in a wave.</p>
+    </header>
+
+    <section id="data">
+      <h2>Data icons</h2>
+      <p>Every data icon is drawn on the same 24 grid, with the same stroke, caps and padding as the rest of the set, so size, color, weight, corners, variant, animate and title work as usual. The <code>value</code> runs from 0 to 1. A value above 1 without a <code>max</code> is read as a percentage, and <code>min</code> with <code>max</code> map real values, such as a temperature.</p>
+      <div class="smart-controls">
+        <label class="field"><span>Value <output data-smart-o="value">64%</output></span><input type="range" min="0" max="100" step="1" value="64" data-smart="value"></label>
+        <div class="seg" role="group" aria-label="Battery">
+          <button type="button" aria-pressed="false" data-smart="charging">Charging</button>
+        </div>
+      </div>
+      <div class="demo" data-demo="data"></div>
+      <div class="code"><div class="code-head"><span>Status.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { SmartIcon } from 'glyphfox/react';
+
+export function DeviceStatus({ battery, charging, signal, volume, upload }) {
+  return (
+    &lt;&gt;
+      &lt;SmartIcon kind="battery" value={battery} charging={charging} title="auto" /&gt;
+      &lt;SmartIcon kind="signal" value={signal} max={4} /&gt;
+      &lt;SmartIcon kind="wifi" value={0.66} /&gt;
+      &lt;SmartIcon kind="volume" value={volume} muted={volume === 0} /&gt;
+      &lt;SmartIcon kind="progress" value={upload} label /&gt;
+      &lt;SmartIcon kind="thermometer" value={21.5} min={-10} max={40} unit="°C" /&gt;
+    &lt;/&gt;
+  );
+}</pre></div>
+      <p>Each icon carries classes for its state (<code>gf-low</code>, <code>gf-full</code>, <code>gf-charging</code>, <code>gf-muted</code>, <code>gf-hot</code>, <code>gf-cold</code>), and unlit bars and arcs carry <code>gf-off</code>, so a stylesheet can color them. <code>title="auto"</code> gives the icon an accessible name that describes the data, such as "Battery 64%", with numbers formatted for the locale.</p>
+    </section>
+
+    <section id="time">
+      <h2>Calendar and clock</h2>
+      <p>The calendar shows today by default, or the <code>date</code> you pass (a Date, a timestamp or "2026-10-23"), with the digits of the <code>locale</code>. The clock shows the current time, or a given <code>time</code> ("09:30", "18:45:10" or a Date); <code>seconds</code> adds the second hand. With <code>tick</code>, the clock and the calendar follow the real time, updating once per second, per minute or at midnight.</p>
+      <div class="demo" data-demo="time"></div>
+      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;glyph-fox-smart kind="calendar" tick&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="calendar" date="2026-12-25" locale="ar-EG"&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="clock" tick seconds&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="clock" time="09:30"&gt;&lt;/glyph-fox-smart&gt;</pre></div>
+    </section>
+
+    <section id="files">
+      <h2>Files and badges</h2>
+      <p>The file icon prints its extension (up to four letters) from <code>ext</code> or a <code>filename</code>. The badge puts a notification count on the bell, or on any icon given as <code>icon</code>, with the same knockout gap the modifiers use. Counts above <code>max</code> (99) read "99+", 0 hides the bubble and <code>dot</code> shows a dot. <code>badgeColor</code> colors the bubble; the number is cut out of it, so it reads on any background.</p>
+      <div class="smart-controls">
+        <label class="field"><span>Extension</span><input class="input" value="pdf" maxlength="8" spellcheck="false" data-smart="ext"></label>
+        <div class="field"><span>Count <output data-smart-o="count">3</output></span>
+          <div class="seg" role="group" aria-label="Count">
+            <button type="button" data-smart="minus" aria-label="Fewer notifications">-</button>
+            <button type="button" data-smart="plus" aria-label="More notifications">+</button>
+            <button type="button" data-smart="many">120</button>
+          </div>
+        </div>
+      </div>
+      <div class="demo" data-demo="files"></div>
+      <div class="code"><div class="code-head"><span>Inbox.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;script setup&gt;
+import { SmartIcon } from 'glyphfox/vue';
+defineProps({ unread: Number, file: String });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;SmartIcon kind="badge" :count="unread" badge-color="#e5484d" /&gt;
+  &lt;SmartIcon kind="badge" icon="mail" :count="unread" :max="9" /&gt;
+  &lt;SmartIcon kind="file" :filename="file" :size="32" /&gt;
+&lt;/template&gt;</pre></div>
+    </section>
+
+    <section id="currency">
+      <h2>Currency</h2>
+      <p><code>kind="currency"</code> picks its sign from the locale: the region gives the currency and <code>Intl.NumberFormat</code> gives its symbol, which is drawn as R$, the euro, the yen (also for the yuan), the pound, the dollar (also for pesos and other dollars) or the generic currency sign. Pass <code>currency="EUR"</code> to choose the currency yourself. Without a locale, the icon uses the language of the document, then the language of the browser.</p>
+      <div class="demo" data-demo="currency"></div>
+      <div class="code"><div class="code-head"><span>Price.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;script&gt;
+  import { SmartIcon } from 'glyphfox/svelte';
+  let { locale } = $props();
+&lt;/script&gt;
+
+&lt;SmartIcon kind="currency" {locale} title="auto" /&gt;
+&lt;SmartIcon kind="currency" currency="JPY" /&gt;</pre></div>
+    </section>
+
+    <section id="rtl">
+      <h2>Right to left</h2>
+      <p>Directional icons (arrows, chevrons, undo and redo, reply, send, log in and out, lists, indent) now mirror by themselves in right to left layouts, in every package: they carry the <code>gf-rtl</code> class and a rule that flips them under <code>dir="rtl"</code>. With a <code>locale</code> or <code>dir</code> prop the decision follows that locale instead of the page, so an Arabic widget in an English page still points the right way. <code>mirrorRtl={false}</code> turns it off, and <code>registerDirectional(['my-arrow'])</code> adds your own icons. Media controls such as play and fast forward never mirror.</p>
+      <div class="smart-rows" data-demo="rtl"></div>
+      <div class="code"><div class="code-head"><span>Pager.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { ChevronRightIcon, SmartIcon } from 'glyphfox/react';
+
+// Follows the page: points left inside dir="rtl".
+&lt;ChevronRightIcon /&gt;
+
+// Follows a locale, whatever the page direction.
+&lt;SmartIcon name="chevron-right" locale="ar" /&gt;</pre></div>
+      <ul class="smart-list" data-demo="directional"></ul>
+    </section>
+
+    <section id="contrast">
+      <h2>More contrast</h2>
+      <p>When the reader asks for more contrast (<code>prefers-contrast: more</code>), smart icons draw their lines half a weight step heavier, set their labels bolder and raise the unlit parts. The rule travels inside the SVG, so it also works in server rendered markup and in exported files. <code>contrast="more"</code> applies the bump all the time and <code>contrast="off"</code> never does.</p>
+      <div class="demo" data-demo="contrast"></div>
+    </section>
+
+    <section id="status">
+      <h2>StatusIcon</h2>
+      <p>One icon for the four states of a task: <code>idle</code>, <code>loading</code>, <code>success</code> and <code>error</code>. Every change morphs with the glyphfox morph engine (the circle opens into the spinner, the spinner closes around the check), and loading spins once the morph has settled. <code>duration</code> times the morph, <code>spinDuration</code> the spin, and reduced motion jumps straight to the new state.</p>
+      <div class="smart-controls">
+        <div class="seg" role="group" aria-label="State" data-smart="states">
+          <button type="button" aria-pressed="true" data-state="idle">idle</button>
+          <button type="button" aria-pressed="false" data-state="loading">loading</button>
+          <button type="button" aria-pressed="false" data-state="success">success</button>
+          <button type="button" aria-pressed="false" data-state="error">error</button>
+        </div>
+        <div class="smart-row"><button class="btn small primary" type="button" data-smart="run">Run a task</button></div>
+      </div>
+      <div class="demo" data-demo="status"></div>
+      <div class="code"><div class="code-head"><span>SaveButton.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { StatusIcon } from 'glyphfox/react';
+
+export function SaveButton({ state, onSave }) {
+  return (
+    &lt;button onClick={onSave} aria-busy={state === 'loading'}&gt;
+      &lt;StatusIcon state={state} title="auto" /&gt; Save
+    &lt;/button&gt;
+  );
+}</pre></div>
+      <p>Without JavaScript, <code>statusSvg('success', { from: 'loading' })</code> returns an SVG that morphs on load with CSS only.</p>
+    </section>
+
+    <section id="group">
+      <h2>IconGroup</h2>
+      <p>A group plays one living state preset across its icons with a <code>stagger</code> between them. Triggers: <code>mount</code>, <code>hover</code> (the whole group), <code>click</code> (replays on every click) and <code>state</code> (plays while <code>active</code>). <code>from="end"</code> or <code>"center"</code> changes the order of the wave. Children that set their own preset or delay keep it; <code>icons</code> renders names, icon data or smart items for you.</p>
+      <div class="smart-controls">
+        <div class="seg" role="group" aria-label="Preset" data-smart="presets"></div>
+        <div class="smart-row"><button class="btn small primary" type="button" data-smart="replay">Replay</button></div>
+      </div>
+      <div class="smart-group" data-demo="group"></div>
+      <p class="smart-caption">Hover the row below.</p>
+      <div class="smart-group" data-demo="group-hover"></div>
+      <div class="code"><div class="code-head"><span>Toolbar.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { IconGroup, HomeIcon, SearchIcon, BellIcon } from 'glyphfox/react';
+
+&lt;IconGroup animate="pop" stagger={70}&gt;
+  &lt;HomeIcon /&gt;
+  &lt;SearchIcon /&gt;
+  &lt;BellIcon animate="shake" /&gt;
+&lt;/IconGroup&gt;
+
+&lt;IconGroup icons={['home', 'search', { kind: 'battery', value: 0.8 }]} animate="draw" trigger="hover" /&gt;</pre></div>
+    </section>
+
+    <section id="packages">
+      <h2>Every package</h2>
+      <p>The same three pieces ship in React, Vue and Svelte (<code>SmartIcon</code>, <code>StatusIcon</code>, <code>IconGroup</code>), as custom elements and as plain functions in the core.</p>
+      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;script src="https://cdn.jsdelivr.net/npm/glyphfox@1"&gt;&lt;/script&gt;
+
+&lt;glyph-fox-smart kind="battery" value="0.4" charging&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="currency" locale="pt-BR"&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart name="arrow-right" locale="he"&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-status state="loading"&gt;&lt;/glyph-fox-status&gt;
+&lt;glyph-fox-group animate="pop" stagger="80" trigger="hover"&gt;
+  &lt;glyph-fox name="home"&gt;&lt;/glyph-fox&gt;
+  &lt;glyph-fox name="search"&gt;&lt;/glyph-fox&gt;
+&lt;/glyph-fox-group&gt;</pre></div>
+      <div class="code"><div class="code-head"><span>server.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { smartSvg, statusSvg, groupSvg, currencyInfo, isRtlLocale } from 'glyphfox';
+
+smartSvg('battery', { value: 0.42, size: 32, title: 'auto' });
+smartSvg('calendar', { date: '2026-10-23', locale: 'pt-BR' });
+smartSvg('badge', { count: 12, icon: 'mail' });
+smartSvg('arrow-right', { locale: 'ar' });          // any icon, mirrored
+statusSvg('success', { from: 'loading' });          // CSS only morph
+groupSvg(['home', 'file', { kind: 'wifi', value: 1 }], { animate: 'pop', stagger: 80 });
+currencyInfo({ locale: 'ja-JP' });                  // { currency: 'JPY', symbol: '￥', glyph: 'yen', ... }
+isRtlLocale('fa-IR');                               // true</pre></div>
+      <p><code>smartIcon(kind, options)</code> returns plain icon data, so a smart icon can also feed <code>renderIcon</code>, a custom renderer or the morph engine. In <code>glyphfox/core</code> the same functions resolve names from the icons you register.</p>
+    </section>
+
+    <section id="options">
+      <h2>Options</h2>
+      <p>On top of every shared prop. Attributes use kebab-case (<code>badge-color</code>).</p>
+      <div class="table-wrap"><table class="props">
+        <thead><tr><th>Option</th><th>Kinds</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>kind</code></td><td>all</td><td>battery, signal, wifi, volume, progress, thermometer, calendar, clock, file, badge or currency. Without a kind, <code>name</code> renders any icon with the locale and contrast behaviors.</td></tr>
+          <tr><td><code>value</code>, <code>min</code>, <code>max</code></td><td>battery, signal, wifi, volume, progress, thermometer</td><td>The level: 0 to 1, a percentage, or a real value between min and max.</td></tr>
+          <tr><td><code>charging</code></td><td>battery</td><td>Draws a bolt cut into the level.</td></tr>
+          <tr><td><code>muted</code></td><td>volume</td><td>The muted speaker (also at value 0).</td></tr>
+          <tr><td><code>label</code></td><td>progress</td><td><code>true</code> prints the percentage inside the ring, a string prints up to four characters.</td></tr>
+          <tr><td><code>unit</code></td><td>thermometer</td><td>Unit of the accessible description, such as "°C".</td></tr>
+          <tr><td><code>date</code></td><td>calendar</td><td>A Date, a timestamp or "YYYY-MM-DD". Default today.</td></tr>
+          <tr><td><code>time</code>, <code>seconds</code></td><td>clock</td><td>"HH:MM", "HH:MM:SS", a Date or { hours, minutes }. Default now. seconds adds the second hand.</td></tr>
+          <tr><td><code>tick</code></td><td>clock, calendar</td><td>Follows the real time (when no time or date is given).</td></tr>
+          <tr><td><code>ext</code>, <code>filename</code></td><td>file</td><td>The extension label, up to four characters.</td></tr>
+          <tr><td><code>count</code>, <code>max</code>, <code>dot</code></td><td>badge</td><td>The count, the largest number shown before "+" (99) and a dot instead of a number.</td></tr>
+          <tr><td><code>icon</code>, <code>badgeColor</code></td><td>badge</td><td>The icon under the bubble (default bell) and the color of the bubble.</td></tr>
+          <tr><td><code>currency</code></td><td>currency</td><td>An ISO code instead of the currency of the locale.</td></tr>
+          <tr><td><code>locale</code>, <code>dir</code></td><td>all</td><td>Symbols, digits and dates; also decides the mirroring of directional icons.</td></tr>
+          <tr><td><code>contrast</code></td><td>all</td><td><code>auto</code> (default) follows prefers-contrast: more, <code>more</code> always bumps the weight, <code>off</code> never does.</td></tr>
+          <tr><td><code>title="auto"</code></td><td>all</td><td>An accessible name that describes the data or the state.</td></tr>
+          <tr><td><code>state</code>, <code>spinDuration</code></td><td>StatusIcon</td><td>idle, loading, success or error; the length of one turn of the spin.</td></tr>
+          <tr><td><code>animate</code>, <code>stagger</code>, <code>delay</code>, <code>from</code>, <code>trigger</code>, <code>active</code>, <code>icons</code></td><td>IconGroup</td><td>The preset, the delay between icons (60 ms), the first delay, the order of the wave, the trigger, the state and the icons to render.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+  </main>
+</div>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="assets/js/smart.js"></script>
+</body>
+</html>
