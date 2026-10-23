@@ -1,0 +1,11 @@
+{
+  "categories": [
+    "interface"
+  ],
+  "tags": [
+    "warning",
+    "caution",
+    "danger",
+    "exclamation"
+  ]
+}
