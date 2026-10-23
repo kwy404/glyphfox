@@ -38,7 +38,7 @@ if (!icons.length) {
 const version = JSON.parse(readFileSync(join(pkgDir, 'package.json'), 'utf8')).version;
 
 if (args.has('--check')) {
-  const changed = buildDocsData(root, icons, { version, check: true });
+  const changed = await buildDocsData(root, icons, { version, check: true });
   if (changed.length) {
     console.error(`docs data is out of date: ${changed.join(', ')}\nrun: npm run build`);
     process.exit(1);
@@ -101,7 +101,7 @@ await esbuild.build({
 });
 
 await buildFrameworks({ root, dist, src, icons, version, write, esbuild, componentName, dataName });
-const changed = buildDocsData(root, icons, { version, check: false });
+const changed = await buildDocsData(root, icons, { version, check: false });
 
 const count = (dir) => {
   let n = 0;

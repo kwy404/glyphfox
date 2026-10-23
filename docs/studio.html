@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!-- head:end -->
+<title data-i18n="studio.meta.title">Studio: glyphfox</title>
+<meta name="description" content="Draw icons on the 24 grid, Fox-ify any SVG, fuse icons, export a brand kit and render icons in 3D. Everything runs in your browser." data-i18n-attr="content:studio.meta.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/studio.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/studio.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/studio.html">
+<meta property="og:title" content="glyphfox studio">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/studio.html">
+<link rel="stylesheet" href="assets/studio.css">
+<link rel="modulepreload" href="vendor/glyphfox.js">
+<link rel="preload" href="data/icons.json" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"}}</script>
+</head>
+<body class="studio-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="glyphfox home">
+      <svg class="fenn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3l5 5h6l5-5 1 9-9 9-9-9z"/><path d="M6.5 13.5 12 18l5.5-4.5"/><path d="M9.5 11.5h.01M14.5 11.5h.01"/></svg>
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="studio.html" data-nav="studio" aria-current="page" data-i18n="nav.studio">Studio</a>
+      <a href="docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="pt-br/studio.html" hreflang="pt-BR" data-lang-switch aria-label="Ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<main id="main" class="studio">
+  <div class="studio-bar">
+    <div class="wrap studio-bar-inner">
+      <h1 class="studio-title"><span data-i18n="studio.title">Studio</span></h1>
+      <div class="tabs studio-tabs" role="tablist" aria-label="Studio tools" data-studio-tabs>
+        <button type="button" role="tab" id="tab-editor" aria-controls="panel-editor" data-tool="editor" aria-selected="true"><!--gf:pencil:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-pencil" aria-hidden="true"><path d="M15 4l5 5L9 20H4v-5Z"/><path d="M12 7l5 5"/></svg><!--/gf--><span data-i18n="tool.editor">Editor</span></button>
+        <button type="button" role="tab" id="tab-foxify" aria-controls="panel-foxify" data-tool="foxify" aria-selected="false"><!--gf:sparkles:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><!--/gf--><span>Fox-ify</span></button>
+        <button type="button" role="tab" id="tab-fusion" aria-controls="panel-fusion" data-tool="fusion" aria-selected="false"><!--gf:layers:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-layers" aria-hidden="true"><path d="M12 2.5l9 5-9 5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg><!--/gf--><span data-i18n="tool.fusion">Fusion</span></button>
+        <button type="button" role="tab" id="tab-brand" aria-controls="panel-brand" data-tool="brand" aria-selected="false"><!--gf:palette:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-palette" aria-hidden="true"><path d="M12 2a10 10 0 1 0 1.5 19.89c1.18-.18 1.66-1.6 .95-2.55-.95-1.27-.05-3.09 1.54-3.09H19a3 3 0 0 0 3-3C22 7.03 17.52 2 12 2Z"/><path d="M6.5 11a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M9 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M14 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><!--/gf--><span data-i18n="tool.brand">Brand kit</span></button>
+        <button type="button" role="tab" id="tab-3d" aria-controls="panel-3d" data-tool="3d" aria-selected="false"><!--gf:box:16--><!--/gf--><span>3D</span></button>
+        <button type="button" role="tab" id="tab-collection" aria-controls="panel-collection" data-tool="collection" aria-selected="false"><!--gf:folder:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/></svg><!--/gf--><span data-i18n="studio.collection">Collection</span> <small class="badge" data-col-count>0</small></button>
+      </div>
+    </div>
+  </div>
+
+  <section class="tool" id="panel-editor" role="tabpanel" aria-labelledby="tab-editor" data-panel="editor">
+    <div class="wrap editor">
+      <div class="ed-tools card" role="toolbar" aria-label="Drawing tools" data-ed-tools></div>
+      <div class="ed-stage card">
+        <div class="ed-stage-bar">
+          <label class="field inline"><span data-i18n="editor.snap">Snap</span><select class="input" data-ed-snap><option value="1">1</option><option value="0.5" selected>0.5</option><option value="0.25">0.25</option><option value="0" data-i18n="editor.snap.off">off</option></select></label>
+          <div class="ed-actions">
+            <button class="icon-btn" type="button" data-ed="undo" aria-label="Undo" title="Undo (Ctrl+Z)"><!--gf:undo:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-undo" aria-hidden="true"><path d="M11 20h3.5a5.5 5.5 0 0 0 0-11H4"/><path d="M9 4L4 9l5 5"/></svg><!--/gf--></button>
+            <button class="icon-btn" type="button" data-ed="redo" aria-label="Redo" title="Redo (Ctrl+Shift+Z)"><!--gf:redo:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-redo" aria-hidden="true"><path d="M13 20L9.5 20A5.5 5.5 0 0 1 9.5 9L20 9"/><path d="M15 4l5 5-5 5"/></svg><!--/gf--></button>
+            <button class="icon-btn" type="button" data-ed="delete" aria-label="Delete the selected shape" title="Delete"><!--gf:trash:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-trash" aria-hidden="true"><path d="M5 6h14l-1.2 14.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z"/><path d="M3 6h18"/><path d="M9 6V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/><path d="M10 11v6"/><path d="M14 11v6"/></svg><!--/gf--></button>
+            <button class="icon-btn" type="button" data-ed="secondary" aria-label="Use as the duotone layer" title="Duotone layer"><!--gf:layers:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-layers" aria-hidden="true"><path d="M12 2.5l9 5-9 5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg><!--/gf--></button>
+            <button class="icon-btn" type="button" data-ed="clear" aria-label="Clear the canvas" title="Clear"><!--gf:x:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><!--/gf--></button>
+          </div>
+        </div>
+        <svg class="ed-canvas" data-ed-canvas viewBox="-1 -1 26 26" role="img" aria-label="Icon canvas, 24 by 24 grid"></svg>
+        <p class="ed-hint faint" data-ed-hint></p>
+      </div>
+      <div class="ed-side">
+        <div class="card pad ed-meta">
+          <label class="field"><span data-i18n="editor.name">Name</span><input class="input" data-ed-name value="my-icon" spellcheck="false"></label>
+          <label class="field"><span data-i18n="editor.tags">Tags</span><input class="input" data-ed-tags placeholder="comma, separated" spellcheck="false"></label>
+          <label class="field"><span data-i18n="editor.category">Category</span><select class="input" data-ed-cat></select></label>
+          <div class="hero-actions">
+            <button class="btn small primary" type="button" data-ed="save"><span data-i18n="editor.save">Save to collection</span></button>
+            <button class="btn small" type="button" data-ed="new" data-i18n="editor.new">New</button>
+          </div>
+          <div class="hero-actions">
+            <button class="btn small" type="button" data-ed="import" data-i18n="editor.import">Import SVG</button>
+            <button class="btn small" type="button" data-ed="download" data-i18n="editor.download">Download SVG</button>
+            <button class="btn small" type="button" data-ed="copy" data-i18n="editor.copy">Copy SVG</button>
+          </div>
+          <input type="file" accept=".svg,image/svg+xml" data-ed-file hidden>
+        </div>
+        <div class="card pad">
+          <h2 class="side-title" data-i18n="editor.lint">Live lint</h2>
+          <ul class="lint" data-ed-lint aria-live="polite"></ul>
+        </div>
+        <div class="card pad">
+          <h2 class="side-title" data-i18n="editor.preview">Preview in context</h2>
+          <div class="ed-preview" data-ed-preview></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool" id="panel-foxify" role="tabpanel" aria-labelledby="tab-foxify" data-panel="foxify" hidden>
+    <div class="wrap tool-fox">
+      <div class="fox-input card pad">
+        <h2 class="subtitle">Fox-ify</h2>
+        <p class="muted" data-i18n="foxify.lead">Paste or drop any SVG. It is mapped onto the 24 grid, fills become strokes, transforms are baked and points snap, until it passes the icon rules.</p>
+        <label class="drop" data-fox-drop tabindex="0"><input type="file" accept=".svg,image/svg+xml" data-fox-file hidden><!--gf:upload:22--><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.053" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-upload" aria-hidden="true"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><!--/gf--><span data-i18n="foxify.drop">Drop an SVG here or choose a file</span></label>
+        <textarea class="input" data-fox-text rows="7" placeholder="&lt;svg ...&gt;...&lt;/svg&gt;" aria-label="SVG markup" data-i18n-attr="aria-label:foxify.paste"></textarea>
+        <div class="fox-opts">
+          <label class="field inline"><span data-i18n="editor.snap">Snap</span><select class="input" data-fox-snap><option value="0.25" selected>0.25</option><option value="0.5">0.5</option><option value="1">1</option></select></label>
+          <label class="field inline"><span data-i18n="foxify.fit">Fit</span><select class="input" data-fox-fit><option value="auto">auto</option><option value="viewbox">viewBox</option><option value="content" data-i18n="foxify.fit.content">content</option></select></label>
+          <button class="btn small" type="button" data-fox-sample data-i18n="foxify.sample">Try a sample</button>
+        </div>
+      </div>
+      <div class="fox-out card pad">
+        <div class="fox-compare">
+          <figure><figcaption data-i18n="foxify.before">Before</figcaption><div class="fox-box" data-fox-before></div></figure>
+          <figure><figcaption data-i18n="foxify.after">After</figcaption><div class="fox-box" data-fox-after></div></figure>
+        </div>
+        <div class="fox-sizes" data-fox-sizes></div>
+        <ul class="lint" data-fox-lint aria-live="polite"></ul>
+        <div class="hero-actions">
+          <label class="field inline"><span data-i18n="editor.name">Name</span><input class="input" data-fox-name value="foxified" spellcheck="false"></label>
+          <button class="btn small primary" type="button" data-fox="save" data-i18n="editor.save">Save to collection</button>
+          <button class="btn small" type="button" data-fox="edit" data-i18n="icons.openEditor">Open in the editor</button>
+          <button class="btn small" type="button" data-fox="download" data-i18n="editor.download">Download SVG</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool" id="panel-fusion" role="tabpanel" aria-labelledby="tab-fusion" data-panel="fusion" hidden>
+    <div class="wrap tool-fusion">
+      <div class="card pad fu-controls">
+        <h2 class="subtitle" data-i18n="tool.fusion">Fusion</h2>
+        <label class="field"><span data-i18n="fusion.add">Add icons (2 to 10)</span><input class="input" list="fu-names" data-fu-add placeholder="cloud, lock" spellcheck="false"></label>
+        <datalist id="fu-names" data-fu-names></datalist>
+        <div class="chips" data-fu-parts></div>
+        <div class="field"><span data-i18n="fusion.layout">Layout</span><div class="seg wrap-seg" role="group" data-fu-layout></div></div>
+        <label class="field"><span><span data-i18n="fusion.gap">Knockout gap</span><output data-fu-o="gap">1</output></span><input type="range" min="0" max="3" step="0.25" value="1" data-fu="gap"></label>
+        <label class="field"><span><span data-i18n="axis.weight">Weight</span><output data-fu-o="weight">2</output></span><input type="range" min="1" max="3" step="0.05" value="2" data-fu="weight"></label>
+        <label class="field"><span><span data-i18n="fusion.scale">Scale of the selected part</span><output data-fu-o="scale">1</output></span><input type="range" min="0.5" max="1.5" step="0.05" value="1" data-fu="scale"></label>
+        <p class="faint small-note" data-i18n="fusion.drag">Click a part in the preview to select it, then drag it or use the arrow keys.</p>
+        <div class="field"><span data-i18n="fusion.gallery">Curated</span><div class="chips" data-fu-gallery></div></div>
+      </div>
+      <div class="card pad fu-stage-card">
+        <div class="fu-stage" data-fu-stage tabindex="0" aria-label="Fusion preview, drag parts to move them" data-i18n-attr="aria-label:fusion.stage"></div>
+        <div class="fu-sizes" data-fu-sizes></div>
+        <ul class="lint" data-fu-lint aria-live="polite"></ul>
+      </div>
+      <div class="card pad fu-out">
+        <div class="tabs" role="tablist" aria-label="Formats" data-fu-formats></div>
+        <div data-fu-code></div>
+        <div class="hero-actions">
+          <button class="btn small primary" type="button" data-fu-act="save" data-i18n="editor.save">Save to collection</button>
+          <button class="btn small" type="button" data-fu-act="edit" data-i18n="icons.openEditor">Open in the editor</button>
+          <button class="btn small" type="button" data-fu-act="download" data-i18n="editor.download">Download SVG</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool" id="panel-brand" role="tabpanel" aria-labelledby="tab-brand" data-panel="brand" hidden>
+    <div class="wrap tool-brand">
+      <div class="card pad br-controls">
+        <h2 class="subtitle" data-i18n="tool.brand">Brand kit</h2>
+        <p class="muted" data-i18n="brand.lead">Theme the whole set and export it ready to ship.</p>
+        <div class="row2">
+          <label class="field"><span data-i18n="brand.seed">Seed color</span><input type="color" value="#7c5cff" data-br="seed"></label>
+          <label class="field"><span data-i18n="brand.background">App icon background</span><input type="color" value="#14112b" data-br="bg"></label>
+        </div>
+        <label class="field"><span><span data-i18n="axis.weight">Weight</span><output data-br-o="weight">2</output></span><input type="range" min="1" max="3" step="0.05" value="2" data-br="weight"></label>
+        <div class="field"><span data-i18n="axis.corners">Corners</span><div class="seg" role="group" data-br-seg="corners"><button type="button" value="round" aria-pressed="true" data-i18n="corners.round">Round</button><button type="button" value="sharp" aria-pressed="false" data-i18n="corners.sharp">Sharp</button></div></div>
+        <div class="field"><span data-i18n="axis.style">Style</span><div class="seg" role="group" data-br-seg="variant"><button type="button" value="outline" aria-pressed="true" data-i18n="variant.outline">Outline</button><button type="button" value="duotone" aria-pressed="false" data-i18n="variant.duotone">Duotone</button><button type="button" value="solid" aria-pressed="false" data-i18n="variant.solid">Solid</button></div></div>
+        <label class="field"><span data-i18n="brand.favicon">Favicon and app icon</span><input class="input" list="fu-names" data-br="mark" value="star" spellcheck="false"></label>
+        <label class="field"><span data-i18n="brand.name">Package name</span><input class="input" data-br="name" value="@acme/icons" spellcheck="false"></label>
+        <div class="br-exports">
+          <button class="btn small primary" type="button" data-br-dl="package" data-i18n="brand.dl.package">Package (.zip)</button>
+          <button class="btn small" type="button" data-br-dl="sprite" data-i18n="brand.dl.sprite">Sprite</button>
+          <button class="btn small" type="button" data-br-dl="css">CSS</button>
+          <button class="btn small" type="button" data-br-dl="favicon" data-i18n="brand.dl.favicon">Favicon</button>
+          <button class="btn small" type="button" data-br-dl="app" data-i18n="brand.dl.app">App icons</button>
+        </div>
+      </div>
+      <div class="card pad br-preview">
+        <div class="br-marks" data-br-marks></div>
+        <div class="br-grid" data-br-grid></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool" id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" data-panel="3d" hidden>
+    <div class="wrap tool-three">
+      <div class="card pad th-controls">
+        <h2 class="subtitle" data-i18n="tool.3d">Hero 3D</h2>
+        <label class="field"><span data-i18n="home.mp.base">Icon</span><input class="input" list="fu-names" data-th="icon" value="heart" spellcheck="false"></label>
+        <div class="field"><span data-i18n="axis.style">Style</span><div class="seg" role="group" data-th-seg="variant"><button type="button" value="outline" aria-pressed="true" data-i18n="variant.outline">Outline</button><button type="button" value="solid" aria-pressed="false" data-i18n="variant.solid">Solid</button></div></div>
+        <label class="field"><span data-i18n="three.material">Material</span><select class="input" data-th="material"><option value="clay" data-i18n="three.clay">Clay</option><option value="glossy" data-i18n="three.glossy">Glossy</option><option value="metal" data-i18n="three.metal">Metal</option><option value="glass" data-i18n="three.glass">Glass</option></select></label>
+        <label class="field"><span data-i18n="three.light">Lighting</span><select class="input" data-th="light"><option value="studio" data-i18n="three.studio">Studio</option><option value="sunset" data-i18n="three.sunset">Sunset</option><option value="neon" data-i18n="three.neon">Neon</option></select></label>
+        <div class="row2">
+          <label class="field"><span data-i18n="axis.color">Color</span><input type="color" value="#ff7a1a" data-th="color"></label>
+          <label class="field"><span data-i18n="three.bg">Background</span><select class="input" data-th="bg"><option value="dark" data-i18n="icons.bg.dark">Dark</option><option value="light" data-i18n="icons.bg.light">Light</option><option value="none" data-i18n="three.transparent">Transparent</option></select></label>
+        </div>
+        <label class="field"><span><span data-i18n="three.depth">Depth</span><output data-th-o="depth">2</output></span><input type="range" min="0.5" max="6" step="0.25" value="2" data-th="depth"></label>
+        <label class="field check"><input type="checkbox" checked data-th="spin"> <span data-i18n="three.spin">Turntable</span></label>
+        <div class="hero-actions">
+          <button class="btn small primary" type="button" data-th-act="png" data-i18n="three.png">Export PNG</button>
+        </div>
+        <p class="faint small-note" data-i18n="three.note">three.js loads from jsDelivr when you open this tab.</p>
+      </div>
+      <div class="card th-stage" data-th-stage><p class="th-status faint" data-th-status data-i18n="three.loading">Loading three.js</p></div>
+    </div>
+  </section>
+
+  <section class="tool" id="panel-collection" role="tabpanel" aria-labelledby="tab-collection" data-panel="collection" hidden>
+    <div class="wrap tool-collection">
+      <div class="col-head">
+        <div>
+          <h2 class="subtitle" data-i18n="studio.collection">Collection</h2>
+          <p class="muted" data-i18n="collection.lead">Icons you draw, Fox-ify or fuse are stored in this browser.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn small" type="button" data-col-dl="svgs" data-i18n="collection.svgs">SVG files (.zip)</button>
+          <button class="btn small" type="button" data-col-dl="sprite" data-i18n="brand.dl.sprite">Sprite</button>
+          <button class="btn small primary" type="button" data-col-dl="package" data-i18n="collection.package">Package skeleton (.zip)</button>
+        </div>
+      </div>
+      <div class="col-grid" data-col-grid></div>
+      <p class="empty faint" data-col-empty data-i18n="collection.empty">Nothing here yet. Draw an icon in the editor, Fox-ify an SVG or save a fusion.</p>
+    </div>
+  </section>
+</main>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="glyphfox home">
+          <svg class="fenn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3l5 5h6l5-5 1 9-9 9-9-9z"/><path d="M6.5 13.5 12 18l5.5-4.5"/><path d="M9.5 11.5h.01M14.5 11.5h.01"/></svg>
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="assets/js/studio.js"></script>
+</body>
+</html>

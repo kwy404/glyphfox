@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!-- head:end -->
+<title data-i18n="docs.meta.title">Docs: glyphfox</title>
+<meta name="description" content="Install glyphfox and use it with React, Vue, Svelte, Angular, the web component, the CDN, Tailwind CSS, plain HTML and the CLI. Every prop, the name syntax, morph, fusion, living states and modifiers." data-i18n-attr="content:docs.meta.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/docs.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/docs.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/docs.html">
+<meta property="og:title" content="glyphfox docs">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/docs.html">
+<link rel="stylesheet" href="assets/docs.css">
+<link rel="modulepreload" href="vendor/glyphfox.js">
+</head>
+<body class="docs-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="glyphfox home">
+      <svg class="fenn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3l5 5h6l5-5 1 9-9 9-9-9z"/><path d="M6.5 13.5 12 18l5.5-4.5"/><path d="M9.5 11.5h.01M14.5 11.5h.01"/></svg>
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="pt-br/docs.html" hreflang="pt-BR" data-lang-switch aria-label="Ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<div class="wrap docs-layout">
+  <nav class="docs-nav" aria-label="Documentation">
+    <p class="docs-nav-title" data-i18n="docs.start">Get started</p>
+    <a href="#install" data-i18n="docs.install">Install</a>
+    <a href="#react">React</a>
+    <a href="#vue">Vue</a>
+    <a href="#svelte">Svelte</a>
+    <a href="#angular">Angular</a>
+    <a href="#web" data-i18n="docs.web">Web component and CDN</a>
+    <a href="#tailwind">Tailwind CSS</a>
+    <a href="#html" data-i18n="docs.html">Plain HTML</a>
+    <a href="#js">JavaScript</a>
+    <p class="docs-nav-title" data-i18n="docs.reference">Reference</p>
+    <a href="#props">Props</a>
+    <a href="#syntax" data-i18n="docs.syntax">Name syntax</a>
+    <a href="#axes" data-i18n="docs.axes">Variable axes</a>
+    <a href="#morph">Morph</a>
+    <a href="#fusion" data-i18n="tool.fusion">Fusion</a>
+    <a href="#living" data-i18n="home.living.eyebrow">Living states</a>
+    <a href="#modifiers" data-i18n="home.mods.eyebrow">Modifiers</a>
+    <a href="#cli">CLI</a>
+    <a href="#rules" data-i18n="docs.rules">Icon rules</a>
+  </nav>
+
+  <main id="main" class="docs-main">
+    <header class="docs-hero">
+      <span class="eyebrow" data-i18n="docs.eyebrow">Documentation</span>
+      <h1 class="title" data-i18n="docs.title">Everything glyphfox can do</h1>
+      <p class="lead" data-i18n="docs.lead">One set of props in every framework. Learn the install, each package, the name syntax and the engines behind morph, fusion and living states.</p>
+    </header>
+
+    <section id="install">
+      <h2 data-i18n="docs.install">Install</h2>
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh">npm install glyphfox
+# Angular
+npm install glyphfox-angular</pre></div>
+      <p data-i18n="docs.install.p">glyphfox has no dependencies. React, Vue, Svelte and Tailwind CSS are optional peer dependencies, used only when you import their entry points.</p>
+    </section>
+
+    <section id="react">
+      <h2>React</h2>
+      <p data-i18n="docs.react.p">Each icon is a tree shakable forwardRef component named after the icon: <code>arrow-right</code> becomes <code>ArrowRightIcon</code>. className, style and every SVG attribute pass through to the svg.</p>
+      <div class="code"><div class="code-head"><span>App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { HomeIcon, FileIcon, Icon, Fusion, MorphIcon, useMorph } from 'glyphfox/react';
+
+export function App({ open, saved }) {
+  return (
+    &lt;nav&gt;
+      &lt;HomeIcon /&gt;
+      &lt;FileIcon size={20} weight={1.5} modifier={saved ? 'check' : undefined} /&gt;
+      &lt;Icon name="cloud&amp;lock:overlap" variant="duotone" /&gt;
+      &lt;Fusion icons={['user', 'shield']} layout="badge" /&gt;
+      &lt;MorphIcon name={open ? 'x' : 'menu'} duration={300} /&gt;
+    &lt;/nav&gt;
+  );
+}</pre></div>
+      <p data-i18n="docs.react.p2"><code>useMorph(name, options)</code> returns icon data that morphs whenever the name changes, for custom renderers. <code>registerIcons(icons)</code> makes names available synchronously, for example during server rendering.</p>
+    </section>
+
+    <section id="vue">
+      <h2>Vue</h2>
+      <div class="code"><div class="code-head"><span>App.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;script setup&gt;
+import { ref } from 'vue';
+import { HomeIcon, Fusion, MorphIcon } from 'glyphfox/vue';
+const playing = ref(false);
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;HomeIcon :size="32" color="#ff7a1a" variant="duotone" /&gt;
+  &lt;Fusion :icons="['file', 'check']" layout="badge" /&gt;
+  &lt;MorphIcon :name="playing ? 'pause' : 'play'" @click="playing = !playing" /&gt;
+&lt;/template&gt;</pre></div>
+      <p data-i18n="docs.vue.p">Props use the same names; in templates you can also write them in kebab-case (<code>secondary-color</code>). The <code>useMorph(nameRef)</code> composable mirrors the React hook.</p>
+    </section>
+
+    <section id="svelte">
+      <h2>Svelte</h2>
+      <div class="code"><div class="code-head"><span>App.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;script&gt;
+  import { HeartIcon, Fusion, morphStore } from 'glyphfox/svelte';
+  let liked = $state(false);
+  const icon = morphStore('menu');
+&lt;/script&gt;
+
+&lt;button onclick={() =&gt; (liked = !liked)}&gt;
+  &lt;HeartIcon animate="pop" trigger="state" active={liked} variant={liked ? 'solid' : 'outline'} /&gt;
+&lt;/button&gt;
+&lt;Fusion icons={['message-circle', 'heart']} layout="overlap" /&gt;</pre></div>
+      <p data-i18n="docs.svelte.p">For Svelte 5. Components ship as .svelte files compiled by your app. <code>morphStore(name)</code> is a store that morphs on every <code>set(name)</code>.</p>
+    </section>
+
+    <section id="angular">
+      <h2>Angular</h2>
+      <div class="code"><div class="code-head"><span>main.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { bootstrapApplication } from '@angular/platform-browser';
+import { iconHome, iconFile, iconCheck } from 'glyphfox';
+import { provideGlyphFox } from 'glyphfox-angular';
+
+bootstrapApplication(App, {
+  providers: [provideGlyphFox({ icons: [iconHome, iconFile, iconCheck], defaults: { weight: 1.75 } })],
+});</pre></div>
+      <div class="code"><div class="code-head"><span>toolbar.component.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { Component } from '@angular/core';
+import { GlyphFoxIcon } from 'glyphfox-angular';
+
+@Component({
+  selector: 'app-toolbar',
+  imports: [GlyphFoxIcon],
+  template: `
+    &lt;gf-icon name="home"&gt;&lt;/gf-icon&gt;
+    &lt;gf-icon name="file+check@tr" variant="duotone" [size]="20"&gt;&lt;/gf-icon&gt;
+    &lt;gf-icon [icons]="['cloud', 'lock']" layout="overlap"&gt;&lt;/gf-icon&gt;
+  `,
+})
+export class Toolbar {}</pre></div>
+      <p data-i18n="docs.angular.p"><code>glyphfox-angular</code> is published in the Angular package format, built with ng-packagr. <code>GlyphFoxIcon</code> is a standalone component; <code>provideGlyphFox</code> registers icons by name and default props.</p>
+    </section>
+
+    <section id="web">
+      <h2 data-i18n="docs.web">Web component and CDN</h2>
+      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;script src="https://cdn.jsdelivr.net/npm/glyphfox@1"&gt;&lt;/script&gt;
+&lt;!-- or https://unpkg.com/glyphfox@1 --&gt;
+
+&lt;glyph-fox name="home"&gt;&lt;/glyph-fox&gt;
+&lt;glyph-fox name="file+check" size="32" weight="1.5"&gt;&lt;/glyph-fox&gt;
+&lt;glyph-fox name="cloud&amp;lock" layout="overlap"&gt;&lt;/glyph-fox&gt;
+&lt;glyph-fox name="menu" morph duration="300"&gt;&lt;/glyph-fox&gt;</pre></div>
+      <p data-i18n="docs.web.p">One file with every icon, the element and the plain HTML runtime. Every prop is an attribute in kebab-case. With a bundler, import <code>glyphfox/web</code>, or <code>glyphfox/web/element</code> to register only your icons. The <code>morph</code> attribute animates every change of <code>name</code>.</p>
+      <div class="demo" data-demo="web"></div>
+    </section>
+
+    <section id="tailwind">
+      <h2>Tailwind CSS</h2>
+      <div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="css">/* Tailwind v4 */
+@import "tailwindcss";
+@plugin "glyphfox/tailwind";
+
+/* Tailwind v3: plugins: [require('glyphfox/tailwind')] */</pre></div>
+      <div class="code"><div class="code-head"><span>markup</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;span class="gf-home text-2xl text-orange-500"&gt;&lt;/span&gt;
+&lt;span class="gf-[file+check] gf-spin"&gt;&lt;/span&gt;
+&lt;span class="gf-[cloud&amp;lock]/side"&gt;&lt;/span&gt;
+&lt;span class="gf-heart/solid-sharp-w1.5"&gt;&lt;/span&gt;</pre></div>
+      <p data-i18n="docs.tailwind.p">Icons render as CSS masks in currentColor, so color, size and opacity utilities apply. After the slash you can join axes, a fusion layout or a badge corner with dashes. Tailwind v4 only accepts + and &amp; inside brackets; v3 also accepts <code>gf-file+check</code>.</p>
+    </section>
+
+    <section id="html">
+      <h2 data-i18n="docs.html">Plain HTML</h2>
+      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">&lt;script type="module" src="https://cdn.jsdelivr.net/npm/glyphfox@1/dist/runtime/auto.js"&gt;&lt;/script&gt;
+
+&lt;i data-glyph="search" data-size="20" data-variant="duotone"&gt;&lt;/i&gt;</pre></div>
+      <p data-i18n="docs.html.p">The runtime swaps every element with <code>data-glyph</code> for inline SVG, including elements added later. Props are data attributes in kebab-case.</p>
+    </section>
+
+    <section id="js">
+      <h2>JavaScript</h2>
+      <div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { toSvg, fuse, createMorph, search, getIcon, icons } from 'glyphfox';
+
+toSvg('file', { size: 32, color: '#ff7a1a', variant: 'solid' });
+toSvg('menu', { morphTo: 'x', trigger: 'hover' }); // CSS only morph
+fuse(['cloud', 'lock'], { layout: 'overlap', gap: 1 }); // icon data that passes the lint
+createMorph(getIcon('play'), getIcon('pause')).frame(0.5);
+search('arrow', { limit: 10 });</pre></div>
+      <p data-i18n="docs.js.p">The package also ships <code>icons.json</code>, <code>sprite.svg</code>, <code>styles.css</code>, <code>glyphfox/core</code> (the engine without icon data) and <code>glyphfox/tools</code> (lint and Fox-ify).</p>
+    </section>
+
+    <section id="props">
+      <h2>Props</h2>
+      <p data-i18n="docs.props.p">The same props, names and meaning in React, Vue, Svelte, Angular, the web component and toSvg. Plus class and style, passed to the svg (or to the host element for Angular and the web component).</p>
+      <div class="table-wrap">
+        <table class="props">
+          <thead><tr><th>Prop</th><th data-i18n="docs.attr">Attribute</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Default</th><th data-i18n="docs.desc">Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>size</code></td><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Width and height; numbers are pixels.</td></tr>
+            <tr><td><code>color</code></td><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Main color.</td></tr>
+            <tr><td><code>secondaryColor</code></td><td><code>secondary-color</code></td><td>string</td><td>color</td><td data-i18n="prop.secondaryColor">Color of the duotone layer and of the solid fill.</td></tr>
+            <tr><td><code>secondaryOpacity</code></td><td><code>secondary-opacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacity of the duotone layer or of the solid fill.</td></tr>
+            <tr><td><code>weight</code></td><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Stroke from 1 to 3 on the 24 grid, optically compensated below 24 px.</td></tr>
+            <tr><td><code>absoluteWeight</code></td><td><code>absolute-weight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Keeps the stroke at weight pixels at any size.</td></tr>
+            <tr><td><code>corners</code></td><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Round or sharp joins and caps.</td></tr>
+            <tr><td><code>variant</code></td><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Style axis; solid comes from the closed shapes.</td></tr>
+            <tr><td><code>rotate</code></td><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotation in degrees.</td></tr>
+            <tr><td><code>flipX</code></td><td><code>flip-x</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Mirror horizontally.</td></tr>
+            <tr><td><code>flipY</code></td><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Mirror vertically.</td></tr>
+            <tr><td><code>mirrorRtl</code></td><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Mirror in right to left layouts.</td></tr>
+            <tr><td><code>animate</code></td><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Living state preset.</td></tr>
+            <tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">When the animation or the morph plays.</td></tr>
+            <tr><td><code>active</code></td><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">The state for trigger state.</td></tr>
+            <tr><td><code>duration</code></td><td><code>duration</code></td><td>number (ms)</td><td data-i18n="prop.duration.default">per preset</td><td data-i18n="prop.duration">Animation or morph duration.</td></tr>
+            <tr><td><code>delay</code></td><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Animation or morph delay.</td></tr>
+            <tr><td><code>loop</code></td><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repeat forever or a number of times (spin and pulse loop by default).</td></tr>
+            <tr><td><code>modifier</code></td><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>none</td><td data-i18n="prop.modifier">Badge with an automatic knockout gap.</td></tr>
+            <tr><td><code>modifierCorner</code></td><td><code>modifier-corner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Corner of the badge.</td></tr>
+            <tr><td><code>morphTo</code></td><td><code>morph-to</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Morph target; the trigger decides when it shows.</td></tr>
+            <tr><td><code>title</code></td><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Accessible name: title, role img and aria-label.</td></tr>
+            <tr><td><code>decorative</code></td><td><code>decorative</code></td><td>boolean</td><td data-i18n="prop.decorative.default">true without a title</td><td data-i18n="prop.decorative">Hides the icon from assistive technology.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="syntax">
+      <h2 data-i18n="docs.syntax">Name syntax</h2>
+      <p data-i18n="docs.syntax.p">Shared by the web component, the CDN, Tailwind, the CLI, the Icon component and toSvg.</p>
+      <div class="table-wrap"><table class="props"><tbody>
+        <tr><td><code>file</code></td><td data-i18n="syntax.icon">an icon</td><td class="demo-cell" data-render="file"></td></tr>
+        <tr><td><code>file+check</code></td><td data-i18n="syntax.modifier">with a modifier badge</td><td class="demo-cell" data-render="file+check"></td></tr>
+        <tr><td><code>file+check@tl</code></td><td data-i18n="syntax.corner">badge in a corner: tl, tr, bl, br</td><td class="demo-cell" data-render="file+check@tl"></td></tr>
+        <tr><td><code>cloud&amp;lock</code></td><td data-i18n="syntax.fusion">a fusion of 2 to 10 icons</td><td class="demo-cell" data-render="cloud&amp;lock"></td></tr>
+        <tr><td><code>cloud&amp;lock:side</code></td><td data-i18n="syntax.layout">a fusion with a layout</td><td class="demo-cell" data-render="cloud&amp;lock:side"></td></tr>
+        <tr><td><code>heart/solid</code></td><td data-i18n="syntax.style">a style: outline, duotone, solid</td><td class="demo-cell" data-render="heart/solid"></td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="axes">
+      <h2 data-i18n="docs.axes">Variable axes</h2>
+      <p data-i18n="docs.axes.p">Weight runs from 1 to 3. Below 24 px the stroke grows a little so small icons keep their presence; absoluteWeight turns this off. Corners switch between round and sharp joins and caps. The solid style fills the closed outer shapes and cuts the inner lines out as negative space; it is computed at build time for the set and at render time for fusions and modifiers.</p>
+      <div class="demo axes-demo" data-demo="axes"></div>
+    </section>
+
+    <section id="morph">
+      <h2>Morph</h2>
+      <p data-i18n="docs.morph.p">Paths are flattened into strands, matched with an optimal assignment, resampled to the same number of points, aligned and interpolated. Strands without a partner shrink and fade. Hand tuned hints cover the common pairs. Without JavaScript, toSvg with morphTo returns an SVG that morphs with a CSS d transition and cross fades where that is not supported.</p>
+      <div class="demo" data-demo="morph"></div>
+    </section>
+
+    <section id="fusion">
+      <h2 data-i18n="tool.fusion">Fusion</h2>
+      <p data-i18n="docs.fusion.p">fuse combines 2 to 10 icons into one icon that still passes the lint. Layouts: overlap, side, stack, grid (2x2, 3x3 and 10 slots), orbit, badge and inside. Parts are scaled and snapped to the grid, and the part behind is trimmed around the part in front with a knockout gap. Options: layout, gap, weight, scale and offsets.</p>
+      <div class="demo layouts-demo" data-demo="fusion"></div>
+    </section>
+
+    <section id="living">
+      <h2 data-i18n="home.living.eyebrow">Living states</h2>
+      <p data-i18n="docs.living.p">Each preset is a small stylesheet inside the SVG, so it works everywhere the SVG goes. draw traces the strokes in drawing order, shake swings from the top. Triggers: mount, hover (the icon or its direct parent), click (replays on each click) and state (plays while active). Reduced motion turns every animation off.</p>
+      <div class="demo" data-demo="living"></div>
+    </section>
+
+    <section id="modifiers">
+      <h2 data-i18n="home.mods.eyebrow">Modifiers</h2>
+      <p data-i18n="docs.mods.p">Eleven badges in four corners. The icon underneath is trimmed around the badge geometrically, so the result is a plain icon that passes the lint, in every weight.</p>
+      <div class="demo" data-demo="modifiers"></div>
+    </section>
+
+    <section id="cli">
+      <h2>CLI</h2>
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh">npx glyphfox search arrow
+npx glyphfox show file+check --variant solid
+npx glyphfox copy heart --format jsx --size 32
+npx glyphfox fuse cloud lock --layout overlap --out cloud-lock.svg
+npx glyphfox morph menu x --trigger hover --out menu.svg
+npx glyphfox build home search file+check --type sprite --out public/icons
+npx glyphfox build --from icons.txt --type package --name @acme/icons
+npx glyphfox lint my-icon.svg
+npx glyphfox foxify any.svg --out fox.svg</pre></div>
+      <p data-i18n="docs.cli.p">copy prints the snippet and puts it on the clipboard (formats: svg, jsx, vue, svelte, angular, html, tailwind, cdn, datauri). build makes a sprite, a CSS file with mask classes or a small package from a list. Every command takes the shared props as flags, such as --weight 1.5 --corners sharp.</p>
+    </section>
+
+    <section id="rules">
+      <h2 data-i18n="docs.rules">Icon rules</h2>
+      <p data-i18n="docs.rules.p">Original drawings only, on a 24 by 24 grid: viewBox 0 0 24 24, no fill, stroke currentColor, stroke width 2, round caps and joins, 2 px padding, no transforms, and no fills except one optional duotone layer with the class gf-secondary. Sources live in icons/NAME.svg with a NAME.json sidecar for categories and tags, and tools/icons/lint.mjs checks them.</p>
+    </section>
+  </main>
+</div>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="glyphfox home">
+          <svg class="fenn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3l5 5h6l5-5 1 9-9 9-9-9z"/><path d="M6.5 13.5 12 18l5.5-4.5"/><path d="M9.5 11.5h.01M14.5 11.5h.01"/></svg>
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="assets/js/docs.js"></script>
+</body>
+</html>
