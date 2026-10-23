@@ -8,5 +8,29 @@
     "soup",
     "bowl",
     "chopsticks"
-  ]
+  ],
+  "animation": {
+    "name": "slurp",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(2px, -1px) rotate(0deg) translate(-2px, 1px)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "translate(2px, -1px) rotate(-8deg) translate(-2px, 1px)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "translate(2px, -1px) rotate(0deg) translate(-2px, 1px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(2px, -1px) rotate(0deg) translate(-2px, 1px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(2px, -1px) rotate(0deg) translate(-2px, 1px)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "translate(2px, -1px) rotate(-8deg) translate(-2px, 1px)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "translate(2px, -1px) rotate(0deg) translate(-2px, 1px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(2px, -1px) rotate(0deg) translate(-2px, 1px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(0deg) translate(-0.5px, -3.5px)" } },
+      { "at": 0.12, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(-5deg) translate(-0.5px, -3.5px)" } },
+      { "at": 0.27, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(5deg) translate(-0.5px, -3.5px)" } },
+      { "at": 0.42, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(-3.5deg) translate(-0.5px, -3.5px)" } },
+      { "at": 0.57, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(2.5deg) translate(-0.5px, -3.5px)" } },
+      { "at": 0.72, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(-1.25deg) translate(-0.5px, -3.5px)" } },
+      { "at": 0.86, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(0.5deg) translate(-0.5px, -3.5px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0.5px, 3.5px) rotate(0deg) translate(-0.5px, -3.5px)" } }
+    ]
+  }
 }

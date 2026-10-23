@@ -8,5 +8,25 @@
     "route",
     "trip",
     "drive"
-  ]
+  ],
+  "animation": {
+    "name": "drive",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.5, "element": 2, "props": { "transform": "translate(0px, 1.5px)", "opacity": 0.3 } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.1, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.5, "element": 3, "props": { "transform": "translate(0px, 1.5px)", "opacity": 0.3 } },
+      { "at": 0.9, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.2, "element": 4, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.6, "element": 4, "props": { "transform": "translate(0px, 1.5px)", "opacity": 0.3 } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } }
+    ]
+  }
 }

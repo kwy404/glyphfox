@@ -8,5 +8,21 @@
     "summer",
     "sun",
     "cool"
-  ]
+  ],
+  "animation": {
+    "name": "wiggle",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": "all", "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.27, "element": "all", "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.42, "element": "all", "props": { "transform": "rotate(-2.8deg)" } },
+      { "at": 0.57, "element": "all", "props": { "transform": "rotate(2deg)" } },
+      { "at": 0.72, "element": "all", "props": { "transform": "rotate(-1deg)" } },
+      { "at": 0.86, "element": "all", "props": { "transform": "rotate(0.4deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

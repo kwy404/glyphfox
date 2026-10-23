@@ -8,5 +8,17 @@
     "travel",
     "trip",
     "trolley"
-  ]
+  ],
+  "animation": {
+    "name": "roll",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.4, "element": "all", "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.75, "element": "all", "props": { "transform": "translate(-0.5px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

@@ -8,5 +8,17 @@
     "deck",
     "street",
     "board"
-  ]
+  ],
+  "animation": {
+    "name": "roll",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.4, "element": "all", "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.75, "element": "all", "props": { "transform": "translate(-0.33px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

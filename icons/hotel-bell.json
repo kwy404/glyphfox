@@ -8,5 +8,30 @@
     "reception",
     "service",
     "check in"
-  ]
+  ],
+  "animation": {
+    "name": "ring",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 20.5],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": "all", "props": { "transform": "rotate(-5deg)" } },
+      { "at": 0.27, "element": "all", "props": { "transform": "rotate(5deg)" } },
+      { "at": 0.42, "element": "all", "props": { "transform": "rotate(-3.5deg)" } },
+      { "at": 0.57, "element": "all", "props": { "transform": "rotate(2.5deg)" } },
+      { "at": 0.72, "element": "all", "props": { "transform": "rotate(-1.25deg)" } },
+      { "at": 0.86, "element": "all", "props": { "transform": "rotate(0.5deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.2, "element": 2, "props": { "transform": "translate(0px, 1px)" } },
+      { "at": 0.4, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.2, "element": 3, "props": { "transform": "translate(0px, 1px)" } },
+      { "at": 0.4, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

@@ -8,5 +8,42 @@
     "chips",
     "fast food",
     "potato"
-  ]
+  ],
+  "animation": {
+    "name": "hop",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 2, "props": { "transform": "translate(0px, -1px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 2, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": 2, "props": { "transform": "translate(0px, -0.3px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.08, "element": 3, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.308, "element": 3, "props": { "transform": "translate(0px, -1px)" }, "easing": "ease-in" },
+      { "at": 0.498, "element": 3, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.612, "element": 3, "props": { "transform": "translate(0px, -0.3px)" }, "easing": "ease-in" },
+      { "at": 0.726, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.84, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.16, "element": 4, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.388, "element": 4, "props": { "transform": "translate(0px, -1px)" }, "easing": "ease-in" },
+      { "at": 0.578, "element": 4, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.692, "element": 4, "props": { "transform": "translate(0px, -0.3px)" }, "easing": "ease-in" },
+      { "at": 0.806, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.92, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 5, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.24, "element": 5, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.468, "element": 5, "props": { "transform": "translate(0px, -1px)" }, "easing": "ease-in" },
+      { "at": 0.658, "element": 5, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.772, "element": 5, "props": { "transform": "translate(0px, -0.3px)" }, "easing": "ease-in" },
+      { "at": 0.886, "element": 5, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 5, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

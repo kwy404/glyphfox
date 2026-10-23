@@ -8,5 +8,35 @@
     "milk tea",
     "drink",
     "straw"
-  ]
+  ],
+  "animation": {
+    "name": "sip",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [13.5, 4.6],
+    "frames": [
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 4, "props": { "transform": "translate(0px, -1.5px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 4, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": 4, "props": { "transform": "translate(0px, -0.45px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 5, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.15, "element": 5, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.405, "element": 5, "props": { "transform": "translate(0px, -1.5px)" }, "easing": "ease-in" },
+      { "at": 0.618, "element": 5, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.745, "element": 5, "props": { "transform": "translate(0px, -0.45px)" }, "easing": "ease-in" },
+      { "at": 0.872, "element": 5, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 5, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 3, "props": { "transform": "rotate(-10deg)" } },
+      { "at": 0.27, "element": 3, "props": { "transform": "rotate(10deg)" } },
+      { "at": 0.42, "element": 3, "props": { "transform": "rotate(-7deg)" } },
+      { "at": 0.57, "element": 3, "props": { "transform": "rotate(5deg)" } },
+      { "at": 0.72, "element": 3, "props": { "transform": "rotate(-2.5deg)" } },
+      { "at": 0.86, "element": 3, "props": { "transform": "rotate(1deg)" } },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }
