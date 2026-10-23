@@ -2,5 +2,5 @@
   <path d="M2 6v14"/>
   <path d="M2 13h20v7"/>
   <path d="M2 17h20"/>
-  <rect x="5" y="9" width="5" height="4" rx="1"/>
+  <rect x="6" y="9" width="5" height="4" rx="1"/>
 </svg>
