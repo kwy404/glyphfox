@@ -28,6 +28,7 @@ import { iconNodes, nodesToString, splitLayers } from '../core/nodes.js';
 import { solidLayers } from '../core/solid.js';
 import { canonicalSvg, lintSvg } from '../core/lint.js';
 import { foxify } from '../core/foxify.js';
+import { exportCommand } from './export.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(readFileSync(join(here, '..', '..', 'package.json'), 'utf8'));
@@ -84,6 +85,7 @@ Usage
   glyphfox list | categories        list icons or categories
   glyphfox lint <file.svg...>       check SVG files against the icon rules
   glyphfox foxify <file.svg>        convert any SVG to the glyphfox style
+  glyphfox export <target> <specs>  native assets: android, compose, ios, swiftui, flutter
 
 Specs
   file              an icon
@@ -104,6 +106,8 @@ Options
   --category <c>    filter (search, list)
   --json            machine readable output
   --print           print only, do not touch the clipboard
+  --all             every icon (export)
+  --prefix --package --rendering --assets   native options (export, see the docs)
 `;
 
 function out(text, flags, io) {
@@ -386,6 +390,8 @@ export async function main(argv = process.argv.slice(2), io = {}) {
         out(r.svg, flags, io);
         return r.problems.length ? 1 : 0;
       }
+      case 'export':
+        return exportCommand(args, flags, props, io);
       default:
         io.err(`unknown command "${cmd}"\n`);
         io.log(HELP);
