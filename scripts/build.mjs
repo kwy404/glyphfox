@@ -3,7 +3,7 @@
 // output plus the data used by the studio site.
 //
 //   node scripts/build.mjs                 full build
-//   node scripts/build.mjs --check         fail when docs/ data is out of date
+//   node scripts/build.mjs --check         fail when docs/ data is out of date or a translation is missing
 //   node scripts/build.mjs --skip-invalid  warn about broken icons instead of failing
 
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
@@ -43,7 +43,14 @@ if (args.has('--check')) {
     console.error(`docs data is out of date: ${changed.join(', ')}\nrun: npm run build`);
     process.exit(1);
   }
-  console.log(`docs data is up to date (${icons.length} icons)`);
+  const { checkI18n } = await import('./lib/i18n-check.mjs');
+  const i18n = await checkI18n(root);
+  if (i18n.problems.length) {
+    for (const p of i18n.problems) console.error(p);
+    console.error(`${i18n.problems.length} translation problem(s), see docs/I18N.md`);
+    process.exit(1);
+  }
+  console.log(`docs data is up to date (${icons.length} icons) and ${i18n.checked} pages in ${i18n.languages} languages are translated`);
   process.exit(0);
 }
 

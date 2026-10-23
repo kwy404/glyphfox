@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--lang:detect--><script>(function(c,d,u){try{var k='gf-lang',s=localStorage.getItem(k);if(!s||!u[s]){s='';var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length&&!s;i++){var p=String(n[i]).toLowerCase();for(var l in u){var q=l.toLowerCase();if(p===q||p.split('-')[0]===q.split('-')[0]){s=l;break}}}s=s||d;localStorage.setItem(k,s)}if(c===d&&s!==d&&u[s])location.replace(u[s]+location.search+location.hash)}catch(e){}})("es","en",{"en":"../changelog.html","pt-BR":"../pt-br/changelog.html","es":"changelog.html","fr":"../fr/changelog.html","de":"../de/changelog.html"})</script><!--/lang-->
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: iconos que se mueven, se transforman y se fusionan" data-i18n-attr="content:home.meta.title">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Cambiar al tema claro","theme.dark":"Cambiar al tema oscuro","toast.copied":"Copiado al portapapeles","toast.downloaded":"Descarga iniciada","toast.saved":"Guardado en tu colección","action.copy":"Copiar","corners.round":"Redondas","corners.sharp":"Rectas","variant.outline":"Contorno","variant.duotone":"Duotono","variant.solid":"Sólido","mods.none":"ninguno","corner.topLeft":"Superior izquierda","corner.topRight":"Superior derecha","corner.bottomLeft":"Inferior izquierda","corner.bottomRight":"Inferior derecha","cat.animals":"animales","cat.arrows":"flechas","cat.commerce":"comercio","cat.communication":"comunicación","cat.data":"datos","cat.development":"desarrollo","cat.devices":"dispositivos","cat.files":"archivos","cat.finance":"finanzas","cat.interface":"interfaz","cat.maps":"mapas","cat.media":"multimedia","cat.nature":"naturaleza","cat.navigation":"navegación","cat.people":"personas","cat.security":"seguridad","cat.shapes":"formas","cat.symbols":"símbolos","cat.text":"texto","cat.weather":"clima","error.rasterize":"No se pudo convertir el SVG en imagen","error.video":"Este navegador no puede grabar video","home.morph.filled":"relleno","home.gallery.orbit":"órbita de diez iconos","icons.all":"Todos","icons.result.count":"{n} iconos","icons.result.sketch":"Los {n} iconos más parecidos a tu boceto","icons.dl.drawHint":"Sin animación elegida: se usa draw","editor.download":"Descargar SVG","editor.lint.ok":"Cumple todas las reglas de iconos.","editor.lint.empty":"Dibuja algo para empezar.","editor.ctx.button":"Guardar","editor.imported":"Importado y ajustado a la cuadrícula","editor.tool.select":"Seleccionar y editar nodos","editor.tool.pen":"Pluma","editor.tool.line":"Línea","editor.tool.polyline":"Polilínea","editor.tool.rect":"Rectángulo","editor.tool.rrect":"Rectángulo redondeado","editor.tool.circle":"Círculo","editor.tool.ellipse":"Elipse","editor.tool.arc":"Arco","editor.hint.select":"Haz clic en una forma para seleccionarla, arrástrala para moverla y arrastra los controles para editar los nodos. Las flechas la desplazan, Delete la elimina y Ctrl+D la duplica.","editor.hint.pen":"Haz clic para añadir esquinas y arrastra para crear curvas. Haz clic en el primer punto para cerrar; Enter o doble clic para terminar.","editor.hint.line":"Arrastra desde el inicio hasta el final.","editor.hint.polyline":"Haz clic para añadir puntos; Enter o doble clic para terminar.","editor.hint.rect":"Arrastra de una esquina a la otra.","editor.hint.rrect":"Arrastra de una esquina a la otra. Arrastra el control redondo para cambiar el radio.","editor.hint.circle":"Arrastra desde el centro hacia fuera.","editor.hint.ellipse":"Arrastra el cuadro delimitador.","editor.hint.arc":"Haz clic en el inicio y luego en el final; después mueve el cursor para curvar el arco y haz clic para fijarlo.","foxify.before":"Antes","foxify.waiting":"Pega un SVG, suelta un archivo o prueba un ejemplo.","foxify.nothing":"No hay nada que dibujar en ese SVG","foxify.note.text":"Elementos de texto omitidos: {n} (convierte antes el texto en trazados)","foxify.note.scaled":"El dibujo se redujo para caber en el área útil de 2 a 22","foxify.note.enlarged":"El dibujo se amplió hasta el área útil","foxify.note.filled":"Formas rellenas convertidas en contornos: {n}","fusion.need":"Añade al menos dos iconos.","fusion.lint.ok":"El icono fusionado cumple todas las reglas de iconos.","fusion.remove":"Quitar {name}","brand.favicon16":"favicon","brand.maskable":"enmascarable","three.error":"three.js no se pudo cargar. Revisa la conexión y vuelve a intentarlo.","three.canvas":"Icono renderizado en 3D","collection.empty.short":"La colección está vacía","collection.edit":"Editar","collection.delete":"Eliminar","collection.deleted":"Eliminado de la colección"}</script><!--/lang-->
+<!-- head:end -->
+<title data-i18n="log.meta.title">Novedades: glyphfox</title>
+<meta name="description" content="Todas las versiones de glyphfox: iconos, paquetes, el estudio y la CLI." data-i18n-attr="content:log.meta.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/changelog.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/changelog.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/changelog.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/changelog.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/changelog.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/changelog.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/changelog.html">
+<meta property="og:title" content="novedades de glyphfox" data-i18n-attr="content:log.meta.og">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/changelog.html">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="inicio de glyphfox" data-i18n-attr="aria-label:nav.home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span translate="no">glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Principal" data-i18n-attr="aria-label:nav.main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" aria-current="page" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <!--lang:menu--><details class="lang-menu" data-lang-menu><summary class="icon-btn" aria-label="Idioma: Español" title="Idioma"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><span>ES</span></summary><ul class="lang-list"><li><a href="../changelog.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="../pt-br/changelog.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="changelog.html" hreflang="es" lang="es" data-set-lang="es" aria-current="page">Español</a></li><li><a href="../fr/changelog.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/changelog.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></details><!--/lang-->
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar al tema claro" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox en GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menú" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<main id="main" class="wrap log">
+  <span class="eyebrow" data-i18n="nav.changelog">Novedades</span>
+  <h1 class="title" data-i18n="log.title">Historial de cambios</h1>
+  <p class="lead" data-i18n="log.lead">Todas las versiones, de la más reciente a la más antigua. Las mismas notas están en CHANGELOG.md, en el repositorio.</p>
+  <div class="log-body">
+<!-- log:start -->
+<p>Todos los cambios importantes de glyphfox se documentan aquí. El formato sigue <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> y el proyecto usa <a href="https://semver.org/lang/es/">Versionado Semántico</a>.</p>
+<h2>Sin publicar</h2>
+<h3>Añadido</h3>
+<ul>
+<li>El conjunto de iconos: iconos originales en una cuadrícula de 24 con categorías y etiquetas, revisados por el lint de iconos.</li>
+<li>Ejes variables en todos los paquetes: <code>weight</code> (de 1 a 3 con compensación óptica en tamaños pequeños), <code>corners</code> (round o sharp) y <code>variant</code> (outline, duotone y solid, un estilo generado en el build a partir de las formas cerradas).</li>
+<li>El motor de morph: cualquier icono en cualquier otro, pares ajustados a mano, <code>useMorph</code> para React, <code>useMorph</code> para Vue, <code>morphStore</code> para Svelte, los atributos <code>morph</code> y <code>morph-to</code> del componente web y una alternativa solo con CSS.</li>
+<li>Fusión: <code>fuse()</code> combina de 2 a 10 iconos con los layouts overlap, side, stack, grid, orbit, badge e inside, con espacios de recorte, y el resultado pasa el lint de iconos.</li>
+<li>Estados vivos: draw, pop, wiggle, spin, pulse, bounce y shake con mount, hover, click o una prop state, respetando <code>prefers-reduced-motion</code>.</li>
+<li>Modificadores: insignias plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down y dot en cualquier esquina, con espacios de recorte.</li>
+<li>23 props compartidas con los mismos nombres en React, Vue, Svelte, Angular y el componente web.</li>
+<li>Paquetes: <code>glyphfox</code> (núcleo, iconos, <code>toSvg</code>, <code>icons.json</code>, <code>sprite.svg</code>, runtime), <code>glyphfox/react</code>, <code>glyphfox/vue</code>, <code>glyphfox/svelte</code>, <code>glyphfox/web</code> con un build para CDN en un solo archivo, <code>glyphfox/tailwind</code> (v3 y v4), <code>glyphfox/core</code>, <code>glyphfox/tools</code> y <code>glyphfox-angular</code>.</li>
+<li>La CLI <code>glyphfox</code>: search, show con vista previa en la terminal, copy en nueve formatos, fuse, morph, build de subconjuntos (sprite, máscaras CSS, paquete), lint y Fox-ify.</li>
+<li>El sitio del estudio: explorador de iconos, personalización en vivo, búsqueda por boceto, editor, Fox-ify, Fusión, kit de marca y 3D.</li>
+<li>El sitio del estudio en inglés, portugués (Brasil), español, francés y alemán: páginas estáticas por idioma con etiquetas hreflang, un menú de idiomas en la cabecera y en el pie de página, y el idioma del navegador elegido en la primera visita.</li>
+</ul>
+<!-- log:end -->
+</div>
+</main>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="inicio de glyphfox" data-i18n-attr="aria-label:nav.home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span translate="no">glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de grosor, se transforman, se fusionan y cobran vida. Gratis y de código abierto, con licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+      <!--lang:list--><div class="footer-langs"><h2>Idioma</h2><ul><li><a href="../changelog.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="../pt-br/changelog.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="changelog.html" hreflang="es" lang="es" data-set-lang="es" aria-current="page">Español</a></li><li><a href="../fr/changelog.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/changelog.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></div><!--/lang-->
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Creado por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="../assets/js/app.js"></script>
+</body>
+</html>

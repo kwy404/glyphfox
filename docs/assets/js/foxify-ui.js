@@ -3,6 +3,21 @@
 import { $, $$, download, fennArt, gf, t, toast } from './app.js';
 import * as collection from './collection.js';
 
+// Notes of the Fox-ify engine (English in the package), shown in the page language.
+const NOTES = [
+  [/^(\d+) text element\(s\) skipped/, 'foxify.note.text'],
+  [/^the drawing was scaled into/, 'foxify.note.scaled'],
+  [/^the drawing was enlarged/, 'foxify.note.enlarged'],
+  [/^(\d+) filled shape\(s\) became outlines/, 'foxify.note.filled'],
+];
+function note(text) {
+  for (const [re, key] of NOTES) {
+    const m = re.exec(text);
+    if (m) return t(key, { n: m[1] });
+  }
+  return text;
+}
+
 const SAMPLES = [
   // A filled shape on a 512 grid.
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#222" d="M256 40l62 126 140 20-101 98 24 139-125-66-125 66 24-139L54 186l140-20z"/></svg>',
@@ -55,7 +70,7 @@ function run() {
   after.innerHTML = gf.renderToString(icon, { size: 200, weight: 2 });
   $('[data-fox-sizes]').innerHTML = [16, 24, 32, 48].map((s) => gf.renderToString(icon, { size: s })).join('') + gf.renderToString(icon, { size: 48, variant: 'solid' });
   const items = result.problems.length ? result.problems.map((p) => `<li class="bad"><b>${p.rule}</b> ${p.message}</li>`) : [`<li class="ok">${t('editor.lint.ok')}</li>`];
-  for (const n of result.notes) items.push(`<li>${n}</li>`);
+  for (const n of result.notes) items.push(`<li>${note(n)}</li>`);
   lint.innerHTML = items.join('');
 }
 

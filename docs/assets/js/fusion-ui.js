@@ -48,7 +48,7 @@ function render() {
   fused = fusedIcon();
   const stage = $('[data-fu-stage]');
   const parts = $('[data-fu-parts]');
-  parts.innerHTML = state.parts.map((n, i) => `<button class="chip" type="button" data-part="${i}" aria-pressed="${i === state.selected}">${has(n) ? svg(n, { size: 14 }) : ''}${n}<span class="x" data-remove="${i}" aria-label="remove ${n}">x</span></button>`).join('');
+  parts.innerHTML = state.parts.map((n, i) => `<button class="chip" type="button" data-part="${i}" aria-pressed="${i === state.selected}">${has(n) ? svg(n, { size: 14 }) : ''}${n}<span class="x" data-remove="${i}" aria-label="${t('fusion.remove', { name: n })}">x</span></button>`).join('');
   if (!fused) {
     stage.innerHTML = `<div class="empty">${fennArt('orbit')}<p class="faint">${t('fusion.need')}</p></div>`;
     $('[data-fu-sizes]').innerHTML = '';

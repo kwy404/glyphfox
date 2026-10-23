@@ -16,3 +16,4 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 - Packages: `glyphfox` (core, icons, `toSvg`, `icons.json`, `sprite.svg`, runtime), `glyphfox/react`, `glyphfox/vue`, `glyphfox/svelte`, `glyphfox/web` with a single file CDN build, `glyphfox/tailwind` (v3 and v4), `glyphfox/core`, `glyphfox/tools` and `glyphfox-angular`.
 - The `glyphfox` CLI: search, show with a terminal preview, copy in nine formats, fuse, morph, build subsets (sprite, CSS masks, package), lint and Fox-ify.
 - The studio site: icon browser, live customization, sketch search, editor, Fox-ify, Fusion, brand kit and 3D.
+- The studio site in English, Portuguese (Brazil), Spanish, French and German: static pages per language with hreflang tags, a language menu in the header and the footer, and the language of the browser picked on the first visit.

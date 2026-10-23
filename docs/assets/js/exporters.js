@@ -1,7 +1,7 @@
 // Export helpers: PNG, animated SVG, GIF (a small LZW encoder), WebM
 // (MediaRecorder) and ZIP (store only). Everything runs in the browser.
 
-import { gf } from './app.js';
+import { gf, t } from './app.js';
 
 /** Rasterizes SVG markup into a canvas of width x height. */
 export function svgToCanvas(markup, width, height = width, background = null) {
@@ -20,7 +20,7 @@ export function svgToCanvas(markup, width, height = width, background = null) {
       ctx.drawImage(img, 0, 0, width, height);
       resolve(c);
     };
-    img.onerror = () => reject(new Error('could not rasterize the SVG'));
+    img.onerror = () => reject(new Error(t('error.rasterize')));
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(sized);
   });
 }
@@ -247,7 +247,7 @@ export async function animationGif(icon, props, options) {
 
 /** Records the animation into a WebM video with MediaRecorder. */
 export async function animationWebm(icon, props, { size = 512, fps = 30, background = '#0b0b0f' } = {}) {
-  if (typeof MediaRecorder === 'undefined') throw new Error('this browser cannot record video');
+  if (typeof MediaRecorder === 'undefined') throw new Error(t('error.video'));
   const { frames, delay } = await animationFrames(icon, props, { size, fps, background });
   const canvas = document.createElement('canvas');
   canvas.width = size;

@@ -4,6 +4,7 @@
 <!-- head:start -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--lang:detect--><script>(function(c,d,u){try{var k='gf-lang',s=localStorage.getItem(k);if(!s||!u[s]){s='';var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length&&!s;i++){var p=String(n[i]).toLowerCase();for(var l in u){var q=l.toLowerCase();if(p===q||p.split('-')[0]===q.split('-')[0]){s=l;break}}}s=s||d;localStorage.setItem(k,s)}if(c===d&&s!==d&&u[s])location.replace(u[s]+location.search+location.hash)}catch(e){}})("pt-BR","en",{"en":"../docs.html","pt-BR":"docs.html","es":"../es/docs.html","fr":"../fr/docs.html","de":"../de/docs.html"})</script><!--/lang-->
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#07070a">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -14,17 +15,27 @@
 <meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta property="og:image:alt" content="glyphfox: ícones que se movem, se transformam e se fundem" data-i18n-attr="content:home.meta.title">
 <meta name="twitter:card" content="summary_large_image">
 <script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Mudar para o tema claro","theme.dark":"Mudar para o tema escuro","toast.copied":"Copiado para a área de transferência","toast.downloaded":"Download iniciado","toast.saved":"Salvo na sua coleção","action.copy":"Copiar","corners.round":"Redondos","corners.sharp":"Retos","variant.outline":"Contorno","variant.duotone":"Duotone","variant.solid":"Sólido","mods.none":"nenhum","corner.topLeft":"Superior esquerdo","corner.topRight":"Superior direito","corner.bottomLeft":"Inferior esquerdo","corner.bottomRight":"Inferior direito","cat.animals":"animais","cat.arrows":"setas","cat.commerce":"comércio","cat.communication":"comunicação","cat.data":"dados","cat.development":"desenvolvimento","cat.devices":"dispositivos","cat.files":"arquivos","cat.finance":"finanças","cat.interface":"interface","cat.maps":"mapas","cat.media":"mídia","cat.nature":"natureza","cat.navigation":"navegação","cat.people":"pessoas","cat.security":"segurança","cat.shapes":"formas","cat.symbols":"símbolos","cat.text":"texto","cat.weather":"clima","error.rasterize":"Não foi possível transformar o SVG em imagem","error.video":"Este navegador não consegue gravar vídeo","home.morph.filled":"preenchido","home.gallery.orbit":"órbita de dez ícones","icons.all":"Todos","icons.result.count":"{n} ícones","icons.result.sketch":"Os {n} ícones mais parecidos com o seu desenho","icons.dl.drawHint":"Nenhuma animação escolhida, usando draw","editor.download":"Baixar SVG","editor.lint.ok":"Passa em todas as regras de ícone.","editor.lint.empty":"Desenhe algo para começar.","editor.ctx.button":"Salvar","editor.imported":"Importado e ajustado à grade","editor.tool.select":"Selecionar e editar nós","editor.tool.pen":"Caneta","editor.tool.line":"Linha","editor.tool.polyline":"Polilinha","editor.tool.rect":"Retângulo","editor.tool.rrect":"Retângulo arredondado","editor.tool.circle":"Círculo","editor.tool.ellipse":"Elipse","editor.tool.arc":"Arco","editor.hint.select":"Clique numa forma para selecionar, arraste para mover e arraste as alças para editar os nós. As setas movem, Delete apaga e Ctrl+D duplica.","editor.hint.pen":"Clique para criar cantos e arraste para fazer curvas. Clique no primeiro ponto para fechar, Enter ou clique duplo para terminar.","editor.hint.line":"Arraste do início até o fim.","editor.hint.polyline":"Clique para adicionar pontos, Enter ou clique duplo para terminar.","editor.hint.rect":"Arraste de um canto até o outro.","editor.hint.rrect":"Arraste de um canto até o outro. Arraste a alça redonda para mudar o raio.","editor.hint.circle":"Arraste do centro para fora.","editor.hint.ellipse":"Arraste a caixa delimitadora.","editor.hint.arc":"Clique no início, clique no fim, depois mova para curvar o arco e clique para fixar.","foxify.before":"Antes","foxify.waiting":"Cole um SVG, solte um arquivo ou teste um exemplo.","foxify.nothing":"Nada para desenhar nesse SVG","foxify.note.text":"Elementos de texto ignorados: {n} (converta o texto em traços antes)","foxify.note.scaled":"O desenho foi reduzido para caber na área de 2 a 22","foxify.note.enlarged":"O desenho foi ampliado até a área útil","foxify.note.filled":"Formas preenchidas que viraram contorno: {n}","fusion.need":"Adicione pelo menos dois ícones.","fusion.lint.ok":"O ícone fundido passa em todas as regras de ícone.","fusion.remove":"Remover {name}","brand.favicon16":"favicon","brand.maskable":"maskable","three.error":"Não foi possível carregar o three.js. Verifique a conexão e tente de novo.","three.canvas":"Ícone renderizado em 3D","collection.empty.short":"A coleção está vazia","collection.edit":"Editar","collection.delete":"Apagar","collection.deleted":"Removido da coleção"}</script><!--/lang-->
 <!-- head:end -->
 <title data-i18n="docs.meta.title">Docs: glyphfox</title>
 <meta name="description" content="Instale o glyphfox e use com React, Vue, Svelte, Angular, o web component, a CDN, Tailwind CSS, HTML puro e a CLI. Todas as props, a sintaxe de nomes, morph, fusão, estados vivos e modificadores." data-i18n-attr="content:docs.meta.description">
 <link rel="canonical" href="https://kwy404.github.io/glyphfox/pt-br/docs.html">
 <link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/docs.html">
 <link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/docs.html">
-<meta property="og:title" content="glyphfox docs">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/docs.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/docs.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/docs.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/docs.html">
+<meta property="og:title" content="Documentação do glyphfox" data-i18n-attr="content:docs.meta.og">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/docs.html">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
 <link rel="stylesheet" href="../assets/docs.css">
 <link rel="modulepreload" href="../vendor/glyphfox.js">
 </head>
@@ -33,27 +44,27 @@
 <a class="skip" href="#main" data-i18n="nav.skip">Pular para o conteúdo</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="glyphfox home">
+    <a class="brand" href="index.html" aria-label="Página inicial do glyphfox" data-i18n-attr="aria-label:nav.home">
       <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
-      <span>glyph<b>fox</b></span>
+      <span translate="no">glyph<b>fox</b></span>
     </a>
-    <nav class="nav" id="site-nav" aria-label="Main">
+    <nav class="nav" id="site-nav" aria-label="Principal" data-i18n-attr="aria-label:nav.main">
       <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Ícones</a>
       <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Estúdio</a>
       <a href="docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
       <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novidades</a>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="../docs.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
-      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
-      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
-      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+      <!--lang:menu--><details class="lang-menu" data-lang-menu><summary class="icon-btn" aria-label="Idioma: Português (Brasil)" title="Idioma"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><span>PT</span></summary><ul class="lang-list"><li><a href="../docs.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="docs.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR" aria-current="page">Português (Brasil)</a></li><li><a href="../es/docs.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/docs.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/docs.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></details><!--/lang-->
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Mudar para o tema claro" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox no GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
     </div>
   </div>
 </header>
 <!-- header:end -->
 <div class="wrap docs-layout">
-  <nav class="docs-nav" aria-label="Documentation">
+  <nav class="docs-nav" aria-label="Documentação" data-i18n-attr="aria-label:docs.eyebrow">
     <p class="docs-nav-title" data-i18n="docs.start">Começar</p>
     <a href="#install" data-i18n="docs.install">Instalação</a>
     <a href="#react">React</a>
@@ -65,10 +76,10 @@
     <a href="#html" data-i18n="docs.html">HTML puro</a>
     <a href="#js">JavaScript</a>
     <p class="docs-nav-title" data-i18n="docs.reference">Referência</p>
-    <a href="#props">Props</a>
+    <a href="#props" data-i18n="footer.props">Props</a>
     <a href="#syntax" data-i18n="docs.syntax">Sintaxe de nomes</a>
     <a href="#axes" data-i18n="docs.axes">Eixos variáveis</a>
-    <a href="#morph">Morph</a>
+    <a href="#morph" data-i18n="docs.morph">Morph</a>
     <a href="#fusion" data-i18n="tool.fusion">Fusão</a>
     <a href="#living" data-i18n="home.living.eyebrow">Estados vivos</a>
     <a href="#modifiers" data-i18n="home.mods.eyebrow">Modificadores</a>
@@ -85,7 +96,7 @@
 
     <section id="install">
       <h2 data-i18n="docs.install">Instalação</h2>
-      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh">npm install glyphfox
+      <div class="code"><div class="code-head"><span data-i18n="docs.code.terminal">terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh">npm install glyphfox
 # Angular
 npm install glyphfox-angular</pre></div>
       <p data-i18n="docs.install.p">O glyphfox não tem dependências. React, Vue, Svelte e Tailwind CSS são peer dependencies opcionais, usadas só quando você importa os pontos de entrada deles.</p>
@@ -94,7 +105,7 @@ npm install glyphfox-angular</pre></div>
     <section id="react">
       <h2>React</h2>
       <p data-i18n="docs.react.p">Cada ícone é um componente forwardRef com tree shaking, com o nome do ícone: <code>arrow-right</code> vira <code>ArrowRightIcon</code>. className, style e qualquer atributo SVG passam direto para o svg.</p>
-      <div class="code"><div class="code-head"><span>App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { HomeIcon, FileIcon, Icon, Fusion, MorphIcon, useMorph } from 'glyphfox/react';
+      <div class="code"><div class="code-head"><span translate="no">App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { HomeIcon, FileIcon, Icon, Fusion, MorphIcon, useMorph } from 'glyphfox/react';
 
 export function App({ open, saved }) {
   return (
@@ -112,7 +123,7 @@ export function App({ open, saved }) {
 
     <section id="vue">
       <h2>Vue</h2>
-      <div class="code"><div class="code-head"><span>App.vue</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script setup&gt;
+      <div class="code"><div class="code-head"><span translate="no">App.vue</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script setup&gt;
 import { ref } from 'vue';
 import { HomeIcon, Fusion, MorphIcon } from 'glyphfox/vue';
 const playing = ref(false);
@@ -128,7 +139,7 @@ const playing = ref(false);
 
     <section id="svelte">
       <h2>Svelte</h2>
-      <div class="code"><div class="code-head"><span>App.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script&gt;
+      <div class="code"><div class="code-head"><span translate="no">App.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script&gt;
   import { HeartIcon, Fusion, morphStore } from 'glyphfox/svelte';
   let liked = $state(false);
   const icon = morphStore('menu');
@@ -143,14 +154,14 @@ const playing = ref(false);
 
     <section id="angular">
       <h2>Angular</h2>
-      <div class="code"><div class="code-head"><span>main.ts</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { bootstrapApplication } from '@angular/platform-browser';
+      <div class="code"><div class="code-head"><span translate="no">main.ts</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { bootstrapApplication } from '@angular/platform-browser';
 import { iconHome, iconFile, iconCheck } from 'glyphfox';
 import { provideGlyphFox } from 'glyphfox-angular';
 
 bootstrapApplication(App, {
   providers: [provideGlyphFox({ icons: [iconHome, iconFile, iconCheck], defaults: { weight: 1.75 } })],
 });</pre></div>
-      <div class="code"><div class="code-head"><span>toolbar.component.ts</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { Component } from '@angular/core';
+      <div class="code"><div class="code-head"><span translate="no">toolbar.component.ts</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { Component } from '@angular/core';
 import { GlyphFoxIcon } from 'glyphfox-angular';
 
 @Component({
@@ -168,7 +179,7 @@ export class Toolbar {}</pre></div>
 
     <section id="web">
       <h2 data-i18n="docs.web">Web component e CDN</h2>
-      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script src="https://cdn.jsdelivr.net/npm/glyphfox@1"&gt;&lt;/script&gt;
+      <div class="code"><div class="code-head"><span translate="no">index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script src="https://cdn.jsdelivr.net/npm/glyphfox@1"&gt;&lt;/script&gt;
 &lt;!-- or https://unpkg.com/glyphfox@1 --&gt;
 
 &lt;glyph-fox name="home"&gt;&lt;/glyph-fox&gt;
@@ -181,12 +192,12 @@ export class Toolbar {}</pre></div>
 
     <section id="tailwind">
       <h2>Tailwind CSS</h2>
-      <div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="css">/* Tailwind v4 */
+      <div class="code"><div class="code-head"><span translate="no">app.css</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="css">/* Tailwind v4 */
 @import "tailwindcss";
 @plugin "glyphfox/tailwind";
 
 /* Tailwind v3: plugins: [require('glyphfox/tailwind')] */</pre></div>
-      <div class="code"><div class="code-head"><span>markup</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;span class="gf-home text-2xl text-orange-500"&gt;&lt;/span&gt;
+      <div class="code"><div class="code-head"><span data-i18n="docs.code.markup">marcação</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;span class="gf-home text-2xl text-orange-500"&gt;&lt;/span&gt;
 &lt;span class="gf-[file+check] gf-spin"&gt;&lt;/span&gt;
 &lt;span class="gf-[cloud&amp;lock]/side"&gt;&lt;/span&gt;
 &lt;span class="gf-heart/solid-sharp-w1.5"&gt;&lt;/span&gt;</pre></div>
@@ -195,7 +206,7 @@ export class Toolbar {}</pre></div>
 
     <section id="html">
       <h2 data-i18n="docs.html">HTML puro</h2>
-      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script type="module" src="https://cdn.jsdelivr.net/npm/glyphfox@1/dist/runtime/auto.js"&gt;&lt;/script&gt;
+      <div class="code"><div class="code-head"><span translate="no">index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script type="module" src="https://cdn.jsdelivr.net/npm/glyphfox@1/dist/runtime/auto.js"&gt;&lt;/script&gt;
 
 &lt;i data-glyph="search" data-size="20" data-variant="duotone"&gt;&lt;/i&gt;</pre></div>
       <p data-i18n="docs.html.p">O runtime troca todo elemento com <code>data-glyph</code> por SVG inline, inclusive elementos adicionados depois. As props são atributos data em kebab-case.</p>
@@ -203,7 +214,7 @@ export class Toolbar {}</pre></div>
 
     <section id="js">
       <h2>JavaScript</h2>
-      <div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { toSvg, fuse, createMorph, search, getIcon, icons } from 'glyphfox';
+      <div class="code"><div class="code-head"><span translate="no">icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { toSvg, fuse, createMorph, search, getIcon, icons } from 'glyphfox';
 
 toSvg('file', { size: 32, color: '#ff7a1a', variant: 'solid' });
 toSvg('menu', { morphTo: 'x', trigger: 'hover' }); // CSS only morph
@@ -214,35 +225,35 @@ search('arrow', { limit: 10 });</pre></div>
     </section>
 
     <section id="props">
-      <h2>Props</h2>
+      <h2 data-i18n="footer.props">Props</h2>
       <p data-i18n="docs.props.p">As mesmas props, com os mesmos nomes e significado, em React, Vue, Svelte, Angular, no web component e no toSvg. Além de class e style, que vão para o svg (ou para o elemento host no Angular e no web component).</p>
       <div class="table-wrap">
         <table class="props">
-          <thead><tr><th>Prop</th><th data-i18n="docs.attr">Atributo</th><th data-i18n="docs.type">Tipo</th><th data-i18n="docs.default">Padrão</th><th data-i18n="docs.desc">Descrição</th></tr></thead>
+          <thead><tr><th data-i18n="docs.prop">Prop</th><th data-i18n="docs.attr">Atributo</th><th data-i18n="docs.type">Tipo</th><th data-i18n="docs.default">Padrão</th><th data-i18n="docs.desc">Descrição</th></tr></thead>
           <tbody>
-            <tr><td><code>size</code></td><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Largura e altura; números são pixels.</td></tr>
-            <tr><td><code>color</code></td><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Cor principal.</td></tr>
-            <tr><td><code>secondaryColor</code></td><td><code>secondary-color</code></td><td>string</td><td>color</td><td data-i18n="prop.secondaryColor">Cor da camada duotone e do preenchimento sólido.</td></tr>
-            <tr><td><code>secondaryOpacity</code></td><td><code>secondary-opacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacidade da camada duotone ou do preenchimento sólido.</td></tr>
-            <tr><td><code>weight</code></td><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Traço de 1 a 3 na grade de 24, com compensação óptica abaixo de 24 px.</td></tr>
-            <tr><td><code>absoluteWeight</code></td><td><code>absolute-weight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Mantém o traço com weight pixels em qualquer tamanho.</td></tr>
-            <tr><td><code>corners</code></td><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Junções e pontas redondas ou retas.</td></tr>
-            <tr><td><code>variant</code></td><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Eixo de estilo; o sólido vem das formas fechadas.</td></tr>
-            <tr><td><code>rotate</code></td><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotação em graus.</td></tr>
-            <tr><td><code>flipX</code></td><td><code>flip-x</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Espelha na horizontal.</td></tr>
-            <tr><td><code>flipY</code></td><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Espelha na vertical.</td></tr>
-            <tr><td><code>mirrorRtl</code></td><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Espelha em layouts da direita para a esquerda.</td></tr>
-            <tr><td><code>animate</code></td><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>none</td><td data-i18n="prop.animate">Animação de estado vivo.</td></tr>
-            <tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Quando a animação ou o morph acontece.</td></tr>
-            <tr><td><code>active</code></td><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">O estado para o gatilho state.</td></tr>
-            <tr><td><code>duration</code></td><td><code>duration</code></td><td>number (ms)</td><td data-i18n="prop.duration.default">por animação</td><td data-i18n="prop.duration">Duração da animação ou do morph.</td></tr>
-            <tr><td><code>delay</code></td><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Atraso da animação ou do morph.</td></tr>
-            <tr><td><code>loop</code></td><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repete para sempre ou um número de vezes (spin e pulse repetem por padrão).</td></tr>
-            <tr><td><code>modifier</code></td><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>none</td><td data-i18n="prop.modifier">Selo com espaço de recorte automático.</td></tr>
-            <tr><td><code>modifierCorner</code></td><td><code>modifier-corner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Canto do selo.</td></tr>
-            <tr><td><code>morphTo</code></td><td><code>morph-to</code></td><td>name, data</td><td>none</td><td data-i18n="prop.morphTo">Destino do morph; o gatilho decide quando aparece.</td></tr>
-            <tr><td><code>title</code></td><td><code>title</code></td><td>string</td><td>none</td><td data-i18n="prop.title">Nome acessível: title, role img e aria-label.</td></tr>
-            <tr><td><code>decorative</code></td><td><code>decorative</code></td><td>boolean</td><td data-i18n="prop.decorative.default">true sem title</td><td data-i18n="prop.decorative">Esconde o ícone das tecnologias assistivas.</td></tr>
+            <tr><td><code>size</code></td><td><code>size</code></td><td translate="no">number, string</td><td><code>24</code></td><td data-i18n="prop.size">Largura e altura; números são pixels.</td></tr>
+            <tr><td><code>color</code></td><td><code>color</code></td><td translate="no">string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Cor principal.</td></tr>
+            <tr><td><code>secondaryColor</code></td><td><code>secondary-color</code></td><td translate="no">string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Cor da camada duotone e do preenchimento sólido.</td></tr>
+            <tr><td><code>secondaryOpacity</code></td><td><code>secondary-opacity</code></td><td translate="no">number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacidade da camada duotone ou do preenchimento sólido.</td></tr>
+            <tr><td><code>weight</code></td><td><code>weight</code></td><td translate="no">number</td><td><code>2</code></td><td data-i18n="prop.weight">Traço de 1 a 3 na grade de 24, com compensação óptica abaixo de 24 px.</td></tr>
+            <tr><td><code>absoluteWeight</code></td><td><code>absolute-weight</code></td><td translate="no">boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Mantém o traço com weight pixels em qualquer tamanho.</td></tr>
+            <tr><td><code>corners</code></td><td><code>corners</code></td><td translate="no">round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Junções e pontas redondas ou retas.</td></tr>
+            <tr><td><code>variant</code></td><td><code>variant</code></td><td translate="no">outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Eixo de estilo; o sólido vem das formas fechadas.</td></tr>
+            <tr><td><code>rotate</code></td><td><code>rotate</code></td><td translate="no">number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotação em graus.</td></tr>
+            <tr><td><code>flipX</code></td><td><code>flip-x</code></td><td translate="no">boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Espelha na horizontal.</td></tr>
+            <tr><td><code>flipY</code></td><td><code>flip-y</code></td><td translate="no">boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Espelha na vertical.</td></tr>
+            <tr><td><code>mirrorRtl</code></td><td><code>mirror-rtl</code></td><td translate="no">boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Espelha em layouts da direita para a esquerda.</td></tr>
+            <tr><td><code>animate</code></td><td><code>animate</code></td><td translate="no">draw, pop, wiggle, spin, pulse, bounce, shake</td><td data-i18n="mods.none">nenhum</td><td data-i18n="prop.animate">Animação de estado vivo.</td></tr>
+            <tr><td><code>trigger</code></td><td><code>trigger</code></td><td translate="no">mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Quando a animação ou o morph acontece.</td></tr>
+            <tr><td><code>active</code></td><td><code>active</code></td><td translate="no">boolean</td><td><code>false</code></td><td data-i18n="prop.active">O estado para o gatilho state.</td></tr>
+            <tr><td><code>duration</code></td><td><code>duration</code></td><td translate="no">number (ms)</td><td data-i18n="prop.duration.default">por animação</td><td data-i18n="prop.duration">Duração da animação ou do morph.</td></tr>
+            <tr><td><code>delay</code></td><td><code>delay</code></td><td translate="no">number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Atraso da animação ou do morph.</td></tr>
+            <tr><td><code>loop</code></td><td><code>loop</code></td><td translate="no">boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repete para sempre ou um número de vezes (spin e pulse repetem por padrão).</td></tr>
+            <tr><td><code>modifier</code></td><td><code>modifier</code></td><td translate="no">plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td data-i18n="mods.none">nenhum</td><td data-i18n="prop.modifier">Selo com espaço de recorte automático.</td></tr>
+            <tr><td><code>modifierCorner</code></td><td><code>modifier-corner</code></td><td translate="no">top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Canto do selo.</td></tr>
+            <tr><td><code>morphTo</code></td><td><code>morph-to</code></td><td translate="no">name, data</td><td data-i18n="mods.none">nenhum</td><td data-i18n="prop.morphTo">Destino do morph; o gatilho decide quando aparece.</td></tr>
+            <tr><td><code>title</code></td><td><code>title</code></td><td translate="no">string</td><td data-i18n="mods.none">nenhum</td><td data-i18n="prop.title">Nome acessível: title, role img e aria-label.</td></tr>
+            <tr><td><code>decorative</code></td><td><code>decorative</code></td><td translate="no">boolean</td><td data-i18n="prop.decorative.default">true sem title</td><td data-i18n="prop.decorative">Esconde o ícone das tecnologias assistivas.</td></tr>
           </tbody>
         </table>
       </div>
@@ -268,7 +279,7 @@ search('arrow', { limit: 10 });</pre></div>
     </section>
 
     <section id="morph">
-      <h2>Morph</h2>
+      <h2 data-i18n="docs.morph">Morph</h2>
       <p data-i18n="docs.morph.p">Os traços viram fios achatados, pareados por uma atribuição ótima, reamostrados com o mesmo número de pontos, alinhados e interpolados. Fios sem par encolhem e somem. Dicas ajustadas à mão cobrem os pares mais comuns. Sem JavaScript, toSvg com morphTo devolve um SVG que se transforma com uma transição CSS de d e faz um cross fade onde isso não é suportado.</p>
       <div class="demo" data-demo="morph"></div>
     </section>
@@ -293,7 +304,7 @@ search('arrow', { limit: 10 });</pre></div>
 
     <section id="cli">
       <h2>CLI</h2>
-      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh">npx glyphfox search arrow
+      <div class="code"><div class="code-head"><span data-i18n="docs.code.terminal">terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh">npx glyphfox search arrow
 npx glyphfox show file+check --variant solid
 npx glyphfox copy heart --format jsx --size 32
 npx glyphfox fuse cloud lock --layout overlap --out cloud-lock.svg
@@ -316,9 +327,9 @@ npx glyphfox foxify any.svg --out fox.svg</pre></div>
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html" aria-label="glyphfox home">
+        <a class="brand" href="index.html" aria-label="Página inicial do glyphfox" data-i18n-attr="aria-label:nav.home">
           <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
-          <span>glyph<b>fox</b></span>
+          <span translate="no">glyph<b>fox</b></span>
         </a>
         <p data-i18n="footer.about">Ícones originais em uma grade de 24 que mudam de peso, se transformam, se fundem e ganham vida. Livre e de código aberto sob a licença MIT.</p>
       </div>
@@ -348,6 +359,7 @@ npx glyphfox foxify any.svg --out fox.svg</pre></div>
           <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licença MIT</a></li>
         </ul>
       </div>
+      <!--lang:list--><div class="footer-langs"><h2>Idioma</h2><ul><li><a href="../docs.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="docs.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR" aria-current="page">Português (Brasil)</a></li><li><a href="../es/docs.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/docs.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/docs.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></div><!--/lang-->
     </div>
     <div class="footer-base">
       <span><span data-i18n="footer.made">Feito por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>

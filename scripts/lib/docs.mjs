@@ -1,15 +1,16 @@
 // Generated files of the studio site in docs/ (committed, served by GitHub
 // Pages): the icon data, the engine bundle, the changelog, the shared head,
 // header and footer of every page, inline icons, the Fenn illustrations,
-// and the Portuguese pages in docs/pt-br/ built from docs/assets/js/i18n.js.
+// and every page again in each language of docs/i18n/languages.json
+// (docs/pt-br/, docs/es/, docs/fr/, docs/de/), built from the string files
+// in docs/i18n/. See scripts/lib/i18n.mjs and docs/I18N.md.
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { findPages, langPath, loadI18n, moveLinks, notFoundPage, runtimeKeys, translate, usesStrings, withAlternates, withLangUi } from './i18n.mjs';
 
-const SITE = 'https://kwy404.github.io/glyphfox/';
 const PARTIALS = ['head', 'header', 'footer'];
-const LOCALIZED = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
 
 async function engineBundle(root) {
   const esbuild = await import('esbuild');
@@ -39,19 +40,20 @@ async function engineBundle(root) {
   return `/*! glyphfox engine for the studio | MIT | Alexandre Kohler */\n${result.outputFiles[0].text}`;
 }
 
+/** Inserts the partials (their links rebased for pages in subfolders) and marks the current nav item. */
 function withPartials(root, html, page) {
   let out = html;
   for (const name of PARTIALS) {
     const file = join(root, 'docs', 'partials', `${name}.html`);
     if (!existsSync(file)) continue;
-    const body = readFileSync(file, 'utf8').trim();
+    const body = moveLinks(readFileSync(file, 'utf8').trim(), 'index.html', page);
     const re = new RegExp(`(<!-- ${name}:start -->)[\\s\\S]*?(<!-- ${name}:end -->)`);
     out = out.replace(re, (m, a, b) => `${a}\n${body}\n${b}`);
   }
   const key = page.replace(/\.html$/, '');
-  out = out.replace(/ aria-current="page"/g, '').replace(new RegExp(`(<a [^>]*data-nav="${key}")`, 'g'), '$1 aria-current="page"');
-  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch)/, `$1href="pt-br/${page}"$2`);
-  return out;
+  const keys = [key, key.split('/')[0]];
+  out = out.replace(/ aria-current="page"/g, '');
+  return out.replace(/(<a [^>]*data-nav="([^"]+)")/g, (m, a, nav) => (keys.includes(nav) ? `${a} aria-current="page"` : m));
 }
 
 const escHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -91,8 +93,15 @@ export function markdown(md) {
   return out.join('\n');
 }
 
-function withChangelog(root, html) {
-  const md = readFileSync(join(root, 'CHANGELOG.md'), 'utf8')
+/** The changelog of a language: CHANGELOG.md, or its translation in docs/i18n/changelog/. */
+export function changelogFile(root, lang, def) {
+  const file = join(root, 'docs', 'i18n', 'changelog', `${lang.code}.md`);
+  return lang === def || !existsSync(file) ? join(root, 'CHANGELOG.md') : file;
+}
+
+function withChangelog(root, html, file) {
+  if (!html.includes('<!-- log:start -->')) return html;
+  const md = readFileSync(file, 'utf8')
     .split(/\r?\n/)
     .filter((l) => !l.startsWith('# '))
     .join('\n');
@@ -124,34 +133,14 @@ function withArt(root, html) {
   });
 }
 
-function withAlternates(html, page, lang) {
-  const path = page === 'index.html' ? '' : page;
-  const en = SITE + path;
-  const pt = `${SITE}pt-br/${path}`;
-  let out = html.replace(/\n?<link rel="alternate" hreflang="[^"]*" href="[^"]*">/g, '');
-  out = out.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${lang === 'en' ? en : pt}">\n<link rel="alternate" hreflang="en" href="${en}">\n<link rel="alternate" hreflang="pt-BR" href="${pt}">`);
-  return out;
-}
-
-const escAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-
-/** Builds the Portuguese version of an English page. */
-export function localize(html, page, tr) {
-  let out = html.replace('<html lang="en">', '<html lang="pt-BR">');
-  out = out.replace(/<([a-zA-Z][\w-]*)\b([^>]*?\sdata-i18n="([^"]+)"[^>]*)>([\s\S]*?)<\/\1>/g, (m, tag, attrs, key) => (tr[key] !== undefined ? `<${tag}${attrs}>${tr[key]}</${tag}>` : m));
-  out = out.replace(/<[a-zA-Z][^>]*\sdata-i18n-attr="([^"]+)"[^>]*>/g, (tagText, spec) => {
-    let t = tagText;
-    for (const pair of spec.split(';')) {
-      const [name, key] = pair.split(':');
-      if (!name || !key || tr[key] === undefined) continue;
-      t = t.replace(new RegExp(`(\\s${name}=")[^"]*(")`), `$1${escAttr(tr[key])}$2`);
-    }
-    return t;
-  });
-  out = out.replace(/(\s(?:href|src)=")((?:assets|data|vendor)\/)/g, '$1../$2');
-  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch[^>]*)>[^<]*</, (m, a, b) => `${a}href="../${page}"${b.replace(/hreflang="[^"]*"/, 'hreflang="en"').replace(/aria-label="[^"]*"/, `aria-label="${escAttr(tr['lang.switch'] || 'EN, read in English')}"`)}>EN<`);
-  out = out.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}pt-br/${page === 'index.html' ? '' : page}$2`);
-  return withAlternates(out, page, 'pt-BR');
+/** One page in one language: strings, changelog, links, alternates and the language menus. */
+function renderPage(html, page, lang, ctx) {
+  const { root, i18n, localized } = ctx;
+  let out = translate(html, i18n.strings[lang.code], lang.code);
+  out = withChangelog(root, out, changelogFile(root, lang, i18n.def));
+  if (lang !== i18n.def) out = moveLinks(out, page, langPath(lang, page), (p) => (localized.has(p) ? langPath(lang, p) : p));
+  out = withAlternates(out, page, lang, localized.has(page) ? i18n.languages : [i18n.def], i18n.def);
+  return withLangUi(out, page, lang, ctx);
 }
 
 export async function docsFiles(root, icons, { version }) {
@@ -166,19 +155,26 @@ export async function docsFiles(root, icons, { version }) {
   files[join(root, 'docs', 'vendor', 'glyphfox.js')] = await engineBundle(root);
   const docs = join(root, 'docs');
   const api = await import(pathToFileURL(join(root, 'packages', 'glyphfox', 'dist', 'index.js')).href);
-  const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js')).href + `?v=${Date.now()}`);
-  if (existsSync(docs)) {
-    for (const f of readdirSync(docs)) {
-      if (!f.endsWith('.html')) continue;
-      const file = join(docs, f);
-      if (f === '404.html') {
-        files[file] = withArt(root, readFileSync(file, 'utf8'));
-        continue;
-      }
-      let html = withChangelog(root, withArt(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api)));
-      html = withAlternates(html, f, 'en');
-      files[file] = html;
-      if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);
+  const i18n = await loadI18n(root);
+  const base = new Map();
+  for (const page of findPages(root, i18n.languages)) {
+    const file = join(docs, page);
+    const html = readFileSync(file, 'utf8');
+    if (page === '404.html') files[file] = notFoundPage(withArt(root, html), i18n);
+    else base.set(page, withArt(root, withGlyphs(withPartials(root, html, page), api)));
+  }
+  const localized = new Set([...base].filter(([, html]) => usesStrings(html)).map(([page]) => page));
+  let globe = '';
+  try {
+    globe = api.toSvg('globe', { size: 18 });
+  } catch {
+    globe = '';
+  }
+  const ctx = { root, i18n, localized, globe, runtimeKeys: runtimeKeys(root, i18n.strings[i18n.def.code]) };
+  for (const [page, html] of base) {
+    for (const lang of i18n.languages) {
+      if (lang !== i18n.def && !localized.has(page)) continue;
+      files[join(docs, langPath(lang, page))] = renderPage(html, page, lang, ctx);
     }
   }
   return files;

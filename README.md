@@ -321,7 +321,8 @@ npx glyphfox foxify any-icon.svg --out fox.svg
 - **edit** icons on the 24 grid (pen and shape tools, node editing, undo and redo, live lint) and keep a local collection;
 - **Fox-ify** any SVG into the glyphfox style with a before and after view;
 - export a **brand kit** (themed package, sprite, CSS, favicon and app icons);
-- render any icon in **3D** with lighting and material presets.
+- render any icon in **3D** with lighting and material presets;
+- read the whole site in English, Português (Brasil), Español, Français or Deutsch, picked from your browser on the first visit ([how the site is translated](docs/I18N.md)).
 
 ## Icon rules
 
@@ -334,6 +335,7 @@ npm install
 npm run build          # icons/ to packages/glyphfox/dist and docs/data
 npm run build:angular  # packages/glyphfox-angular/dist (ng-packagr)
 npm run typecheck
+npm run check:i18n     # every page translated in every language
 npm test
 npm run serve          # the studio on http://localhost:4173
 ```

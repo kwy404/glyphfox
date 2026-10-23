@@ -14,11 +14,12 @@
     "lint:icons": "node tools/icons/lint.mjs",
     "check:text": "node scripts/check-text.mjs",
     "check:docs": "node scripts/build.mjs --check",
+    "check:i18n": "node scripts/check-i18n.mjs",
     "art": "node scripts/art.mjs",
     "test": "vitest run",
     "serve": "node scripts/serve.mjs",
     "typecheck": "node scripts/typecheck.mjs",
-    "ci": "node tools/icons/lint.mjs && npm run check:text && npm run build && npm run build:angular && npm run typecheck && npm test"
+    "ci": "node tools/icons/lint.mjs && npm run check:text && npm run build && npm run check:i18n && npm run build:angular && npm run typecheck && npm test"
   },
   "devDependencies": {
     "@angular/common": "^21.2.25",
