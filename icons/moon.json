@@ -9,5 +9,21 @@
     "theme",
     "sleep",
     "crescent"
-  ]
+  ],
+  "animation": {
+    "name": "rock",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.65, "element": "all", "props": { "transform": "rotate(7.2deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(5px, -5px) rotate(0deg) scale(1) translate(-5px, 5px)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "translate(5px, -5px) rotate(20deg) scale(0.85) translate(-5px, 5px)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "translate(5px, -5px) rotate(-10deg) scale(1.1) translate(-5px, 5px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(5px, -5px) rotate(0deg) scale(1) translate(-5px, 5px)" } }
+    ]
+  }
 }

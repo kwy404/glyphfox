@@ -7,5 +7,25 @@
     "colors",
     "arc",
     "sky"
-  ]
+  ],
+  "animation": {
+    "name": "draw",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.6, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 0, "element": 1, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.15, "element": 1, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.57, "element": 1, "props": { "strokeDashoffset": 0 } },
+      { "at": 0.85, "element": 1, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 1, "props": { "strokeDashoffset": 0 } },
+      { "at": 0, "element": 2, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.3, "element": 2, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.72, "element": 2, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 2, "props": { "strokeDashoffset": 0 } }
+    ]
+  }
 }

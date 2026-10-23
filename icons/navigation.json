@@ -9,5 +9,17 @@
     "location",
     "arrow",
     "pointer"
-  ]
+  ],
+  "animation": {
+    "name": "nudge",
+    "duration": 700,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": "all", "props": { "transform": "translate(1.25px, -1.25px)" } },
+      { "at": 0.65, "element": "all", "props": { "transform": "translate(-0.19px, 0.19px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

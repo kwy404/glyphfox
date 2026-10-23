@@ -8,5 +8,46 @@
     "city",
     "business",
     "tower"
-  ]
+  ],
+  "animation": {
+    "name": "lights",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 1, "props": { "opacity": 0.2 } },
+      { "at": 0.5, "element": 1, "props": { "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.08, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 2, "props": { "opacity": 0.2 } },
+      { "at": 0.38, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.68, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.16, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.28, "element": 3, "props": { "opacity": 0.2 } },
+      { "at": 0.46, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.76, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.24, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.36, "element": 4, "props": { "opacity": 0.2 } },
+      { "at": 0.54, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.84, "element": 4, "props": { "opacity": 1 } },
+      { "at": 1, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.32, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.44, "element": 5, "props": { "opacity": 0.2 } },
+      { "at": 0.62, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.92, "element": 5, "props": { "opacity": 1 } },
+      { "at": 1, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.4, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.52, "element": 6, "props": { "opacity": 0.2 } },
+      { "at": 0.7, "element": 6, "props": { "opacity": 1 } },
+      { "at": 1, "element": 6, "props": { "opacity": 1 } }
+    ]
+  }
 }

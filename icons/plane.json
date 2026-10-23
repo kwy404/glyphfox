@@ -8,5 +8,18 @@
     "travel",
     "airport",
     "trip"
-  ]
+  ],
+  "animation": {
+    "name": "takeoff",
+    "duration": 1100,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)", "opacity": 1 }, "easing": "ease-in" },
+      { "at": 0.35, "element": "all", "props": { "transform": "translate(0px, -1.5px)", "opacity": 0 } },
+      { "at": 0.36, "element": "all", "props": { "transform": "translate(0px, 1.5px)", "opacity": 0 }, "easing": "ease-out" },
+      { "at": 0.75, "element": "all", "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)", "opacity": 1 } }
+    ]
+  }
 }

@@ -9,5 +9,19 @@
     "power",
     "energy",
     "flash"
-  ]
+  ],
+  "animation": {
+    "name": "flash",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)", "opacity": 1 } },
+      { "at": 0.2, "element": "all", "props": { "transform": "scale(0.95)", "opacity": 0.3 } },
+      { "at": 0.4, "element": "all", "props": { "transform": "scale(1.06)", "opacity": 1 } },
+      { "at": 0.6, "element": "all", "props": { "transform": "scale(1)", "opacity": 0.5 } },
+      { "at": 0.8, "element": "all", "props": { "transform": "scale(1)", "opacity": 1 } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)", "opacity": 1 } }
+    ]
+  }
 }

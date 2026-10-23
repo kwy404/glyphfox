@@ -8,5 +8,22 @@
     "plant",
     "eco",
     "start"
-  ]
+  ],
+  "animation": {
+    "name": "grow",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 1px) scale(0.3) translate(0px, -1px)" }, "easing": "ease-out" },
+      { "at": 0.55, "element": 1, "props": { "transform": "translate(0px, 1px) scale(1.05) translate(0px, -1px)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "translate(0px, 1px) scale(1) translate(0px, -1px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 1px) scale(1) translate(0px, -1px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, -2px) scale(0.3) translate(0px, 2px)" } },
+      { "at": 0.15, "element": 2, "props": { "transform": "translate(0px, -2px) scale(0.3) translate(0px, 2px)" }, "easing": "ease-out" },
+      { "at": 0.618, "element": 2, "props": { "transform": "translate(0px, -2px) scale(1.05) translate(0px, 2px)" } },
+      { "at": 0.788, "element": 2, "props": { "transform": "translate(0px, -2px) scale(1) translate(0px, 2px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, -2px) scale(1) translate(0px, 2px)" } }
+    ]
+  }
 }

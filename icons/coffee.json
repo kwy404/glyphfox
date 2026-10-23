@@ -8,5 +8,24 @@
     "cup",
     "break",
     "morning"
-  ]
+  ],
+  "animation": {
+    "name": "steam",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.45, "element": 2, "props": { "transform": "translate(0px, -1.5px)", "opacity": 0 } },
+      { "at": 0.46, "element": 2, "props": { "transform": "translate(0px, 1px)", "opacity": 0 } },
+      { "at": 0.8, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.15, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.533, "element": 3, "props": { "transform": "translate(0px, -1.5px)", "opacity": 0 } },
+      { "at": 0.541, "element": 3, "props": { "transform": "translate(0px, 1px)", "opacity": 0 } },
+      { "at": 0.83, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } }
+    ]
+  }
 }

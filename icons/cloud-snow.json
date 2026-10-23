@@ -7,5 +7,31 @@
     "winter",
     "cold",
     "forecast"
-  ]
+  ],
+  "animation": {
+    "name": "fall",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 }, "easing": "ease-in" },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(0.5px, 1.5px)", "opacity": 0 } },
+      { "at": 0.36, "element": 1, "props": { "transform": "translate(-0.5px, -1.5px)", "opacity": 0 }, "easing": "ease-out" },
+      { "at": 0.75, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.12, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 }, "easing": "ease-in" },
+      { "at": 0.386, "element": 2, "props": { "transform": "translate(0.5px, 1.5px)", "opacity": 0 } },
+      { "at": 0.394, "element": 2, "props": { "transform": "translate(-0.5px, -1.5px)", "opacity": 0 }, "easing": "ease-out" },
+      { "at": 0.69, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.88, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.24, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 }, "easing": "ease-in" },
+      { "at": 0.506, "element": 3, "props": { "transform": "translate(0.5px, 1.5px)", "opacity": 0 } },
+      { "at": 0.514, "element": 3, "props": { "transform": "translate(-0.5px, -1.5px)", "opacity": 0 }, "easing": "ease-out" },
+      { "at": 0.81, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } }
+    ]
+  }
 }

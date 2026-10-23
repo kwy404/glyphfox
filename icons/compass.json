@@ -8,5 +8,18 @@
     "explore",
     "north",
     "orientation"
-  ]
+  ],
+  "animation": {
+    "name": "seek",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(40deg)" } },
+      { "at": 0.55, "element": 1, "props": { "transform": "rotate(-25deg)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "rotate(10deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

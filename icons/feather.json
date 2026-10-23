@@ -9,5 +9,18 @@
     "quill",
     "write",
     "soft"
-  ]
+  ],
+  "animation": {
+    "name": "sway",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [3, 21],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.65, "element": "all", "props": { "transform": "rotate(3.6deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

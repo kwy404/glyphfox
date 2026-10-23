@@ -7,5 +7,28 @@
     "air",
     "blow",
     "weather"
-  ]
+  ],
+  "animation": {
+    "name": "blow",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "translate(-0.22px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.386, "element": 1, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.614, "element": 1, "props": { "transform": "translate(-0.22px, 0px)" } },
+      { "at": 0.88, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.24, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.506, "element": 2, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.734, "element": 2, "props": { "transform": "translate(-0.22px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }
