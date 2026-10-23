@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!-- head:end -->
+<title>Native exports: glyphfox</title>
+<meta name="description" content="Export glyphfox icons as Android VectorDrawable XML, Jetpack Compose ImageVector code, an iOS asset catalog with SwiftUI helpers, and Flutter SVG assets with a Dart constants file and a GlyphFoxIcon widget.">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/native.html">
+<meta property="og:title" content="glyphfox native exports">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/native.html">
+<link rel="stylesheet" href="assets/docs.css">
+<link rel="modulepreload" href="vendor/glyphfox.js">
+</head>
+<body class="docs-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="pt-br/index.html" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<div class="wrap docs-layout">
+  <nav class="docs-nav" aria-label="Native exports">
+    <p class="docs-nav-title">Native exports</p>
+    <a href="#overview">Overview</a>
+    <a href="#android">Android</a>
+    <a href="#compose">Jetpack Compose</a>
+    <a href="#ios">iOS asset catalog</a>
+    <a href="#swiftui">SwiftUI</a>
+    <a href="#flutter">Flutter</a>
+    <p class="docs-nav-title">Reference</p>
+    <a href="#options">Options</a>
+    <a href="#names">Names and colors</a>
+    <a href="docs.html">All docs</a>
+  </nav>
+
+  <main id="main" class="docs-main">
+    <header class="docs-hero">
+      <span class="eyebrow">Documentation</span>
+      <h1 class="title">Native exports</h1>
+      <p class="lead">One command turns glyphfox icons into real vector assets for Android, Jetpack Compose, iOS, SwiftUI and Flutter. Weight, corners, duotone, modifiers and fusions export as plain paths, and strokes stay strokes.</p>
+    </header>
+
+    <section id="overview">
+      <h2>Overview</h2>
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button">Copy</button></div><pre data-lang="sh">npx glyphfox export android home search file+check --out app/src/main/res
+npx glyphfox export compose --from icons.txt --package com.acme.icons --out app/src/main/java
+npx glyphfox export ios home search --out MyApp/Assets.xcassets
+npx glyphfox export swiftui home search --out MyApp
+npx glyphfox export flutter home search --out .
+npx glyphfox export android --all --weight 1.5 --corners sharp --out app/src/main/res</pre></div>
+      <p>Pass icon names or any spec of the <a href="docs.html#syntax">name syntax</a>, a list file with <code>--from</code> (one name per line, <code>#</code> starts a comment) or <code>--all</code> for the whole set. The geometry is the one the web packages draw, so the same specs look the same everywhere:</p>
+      <div class="demo">
+        <figure><!--gf:heart:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><!--/gf--><figcaption>heart</figcaption></figure>
+        <figure><!--gf:bell/duotone:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><!--/gf--><figcaption>bell/duotone</figcaption></figure>
+        <figure><!--gf:file+check:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file-check" aria-hidden="true"><path d="M20 10.77V8L14 2H6C4.89 2 4 2.9 4 4V20c0 1.11 .89 2 2 2h5.8"/><path d="M14.2 18.2l2.5 2.5 4.5-5.5"/></svg><!--/gf--><figcaption>file+check</figcaption></figure>
+        <figure><!--gf:cloud&lock:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud-lock" aria-hidden="true"><path d="M5.5 15.13H5.19c-1.53 0-2.82-1.15-2.99-2.66-.17-1.52 .82-2.93 2.31-3.27C4.2 7.52 4.87 5.82 6.23 4.79c1.36-1.03 3.18-1.2 4.71-.44 .46 .23 .86 .53 1.21 .88"/><rect x="8.5" y="13.75" width="12" height="7.5" rx="1.5"/><path d="M11.5 13.75v-3a3 3 0 0 1 6 0v3"/><path d="M14.5 16.75v1.5"/></svg><!--/gf--><figcaption>cloud&amp;lock</figcaption></figure>
+        <figure><!--gf:user+plus@tl:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-user-plus-tl" aria-hidden="true"><path d="M11.51 3.03C11.67 3.01 11.84 3 12 3c2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4-.8 0-1.55-.24-2.18-.64"/><path d="M4 21a8 6 0 0 1 16 0z"/><path d="M5.5 2V9M2 5.5H9"/></svg><!--/gf--><figcaption>user+plus@tl</figcaption></figure>
+      </div>
+      <div class="table-wrap">
+        <table class="props">
+          <thead><tr><th>Target</th><th>Writes under --out</th><th>Use it as</th></tr></thead>
+          <tbody>
+            <tr><td><code>android</code></td><td><code>drawable/gf_NAME.xml</code></td><td><code>@drawable/gf_home</code>, <code>R.drawable.gf_home</code></td></tr>
+            <tr><td><code>compose</code></td><td><code>PACKAGE/GlyphFox.kt</code> and <code>PACKAGE/NAME.kt</code></td><td><code>Icon(GlyphFox.Home, null)</code></td></tr>
+            <tr><td><code>ios</code></td><td><code>GlyphFox.xcassets/gf-NAME.imageset</code></td><td><code>UIImage(named: "gf-home")</code></td></tr>
+            <tr><td><code>swiftui</code></td><td><code>GlyphFox.swift</code> and the catalog</td><td><code>Image(glyphfox: .home)</code></td></tr>
+            <tr><td><code>flutter</code></td><td><code>assets/glyphfox/NAME.svg</code> and <code>lib/glyphfox.dart</code></td><td><code>GlyphFoxIcon(GlyphFoxIcons.home)</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="android">
+      <h2>Android</h2>
+      <p>One VectorDrawable per icon in <code>drawable/</code>, so point <code>--out</code> at <code>app/src/main/res</code>. Strokes keep their width in viewport units, their round or square caps and joins, and never get a fill, so they scale with the drawable exactly like the SVG. The color is a tint: <code>?attr/colorControlNormal</code> by default, so the icons follow the theme like the Material icons do.</p>
+      <div class="code"><div class="code-head"><span>res/drawable/gf_heart.xml</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal"&gt;
+    &lt;path
+        android:pathData="M12,19.89 L4.41,12.3 A4.8,4.8,0,1,1,12,6.58 A4.8,4.8,0,1,1,19.59,12.3 Z"
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" /&gt;
+&lt;/vector&gt;</pre></div>
+      <div class="code"><div class="code-head"><span>layout.xml</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">&lt;ImageView
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:src="@drawable/gf_heart"
+    android:contentDescription="@string/favorite" /&gt;</pre></div>
+      <p>Pass a theme attribute or a color resource as <code>--color</code> (<code>?attr/colorPrimary</code>, <code>@color/brand</code>) to tint with it, or a hex color (<code>#ff7a1a</code>) to bake the color into the paths without a tint. Duotone layers are filled paths with <code>fillAlpha</code>, <code>--mirror-rtl</code> sets <code>android:autoMirrored</code>, and rotate and flips become a group around the center.</p>
+    </section>
+
+    <section id="compose">
+      <h2>Jetpack Compose</h2>
+      <p><code>GlyphFox.kt</code> declares the <code>GlyphFox</code> object and every icon is an <code>ImageVector</code> extension property on it, built on first use and cached, in its own file. The files go to the package folder under <code>--out</code>, so point it at the Kotlin source root.</p>
+      <div class="code"><div class="code-head"><span>com/acme/icons/Heart.kt</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">package com.acme.icons
+
+val GlyphFox.Heart: ImageVector
+    get() {
+        if (_heart != null) {
+            return _heart!!
+        }
+        _heart = ImageVector.Builder(
+            name = "GlyphFox.Heart",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f,
+        ).apply {
+            path(
+                stroke = SolidColor(Color.Black),
+                strokeLineWidth = 2f,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+            ) {
+                moveTo(12f, 19.89f)
+                lineTo(4.41f, 12.3f)
+                arcTo(4.8f, 4.8f, 0f, true, true, 12f, 6.58f)
+                arcTo(4.8f, 4.8f, 0f, true, true, 19.59f, 12.3f)
+                close()
+            }
+        }.build()
+        return _heart!!
+    }
+
+private var _heart: ImageVector? = null</pre></div>
+      <div class="code"><div class="code-head"><span>Screen.kt</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import com.acme.icons.GlyphFox
+import com.acme.icons.Heart
+
+Icon(GlyphFox.Heart, contentDescription = "Favorite")
+Icon(GlyphFox.Heart, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+Image(GlyphFox.Heart, contentDescription = null) // keeps the exported color
+
+GlyphFox.all.forEach { (name, vector) -&gt; Icon(vector, contentDescription = name) }</pre></div>
+      <p>Each property is imported by name, like the Material icons. <code>GlyphFox.all</code> maps every exported name to its vector for pickers and previews. With code shrinking on, R8 removes the icons an app never uses, unless it reads <code>GlyphFox.all</code>.</p>
+    </section>
+
+    <section id="ios">
+      <h2>iOS asset catalog</h2>
+      <p>One image set per icon with the SVG, Preserve Vector Data and Render As Template Image, so the icons stay sharp at any size and take the tint color. Point <code>--out</code> at an existing catalog such as <code>MyApp/Assets.xcassets</code> to add the image sets to it (its own <code>Contents.json</code> is kept), or at a folder to get <code>GlyphFox.xcassets</code>.</p>
+      <div class="code"><div class="code-head"><span>gf-heart.imageset/Contents.json</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">{
+  "images" : [
+    {
+      "filename" : "gf-heart.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}</pre></div>
+      <div class="code"><div class="code-head"><span>ViewController.swift</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">let heart = UIImageView(image: UIImage(named: "gf-heart"))
+heart.tintColor = .systemOrange</pre></div>
+      <p>The SVG files carry concrete colors (black by default), which template rendering replaces with the tint. With a hex <code>--color</code> the catalog switches to original rendering so the color shows; <code>--rendering template</code> or <code>original</code> picks one explicitly, and <code>--mirror-rtl</code> marks the image sets to flip in right to left layouts.</p>
+    </section>
+
+    <section id="swiftui">
+      <h2>SwiftUI</h2>
+      <p><code>glyphfox export swiftui</code> writes the same asset catalog plus <code>GlyphFox.swift</code>: an enum with one case per image set, <code>Image(glyphfox:)</code> and <code>UIImage.glyphfox(_:)</code> for UIKit.</p>
+      <div class="code"><div class="code-head"><span>GlyphFox.swift</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">public enum GlyphFox: String, CaseIterable, Sendable {
+    case heart = "gf-heart"
+    case `repeat` = "gf-repeat"
+}
+
+public extension Image {
+    init(glyphfox icon: GlyphFox, bundle: Bundle? = nil) {
+        self = Image(icon.rawValue, bundle: bundle).renderingMode(.template)
+    }
+}</pre></div>
+      <div class="code"><div class="code-head"><span>ContentView.swift</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">Label { Text("Favorites") } icon: { Image(glyphfox: .heart) }
+
+Image(glyphfox: .heart)
+    .resizable()
+    .frame(width: 32, height: 32)
+    .foregroundStyle(.orange)
+    .accessibilityLabel("Favorite")
+
+ForEach(GlyphFox.allCases, id: \.self) { Image(glyphfox: $0) }</pre></div>
+      <p>Pass <code>bundle: .module</code> when the catalog lives in a Swift package.</p>
+    </section>
+
+    <section id="flutter">
+      <h2>Flutter</h2>
+      <p>SVG files in <code>assets/glyphfox/</code> and <code>lib/glyphfox.dart</code> with one constant per icon and a small <code>GlyphFoxIcon</code> widget on top of flutter_svg. Point <code>--out</code> at the app folder, then add the package and the assets to <code>pubspec.yaml</code>:</p>
+      <div class="code"><div class="code-head"><span>pubspec.yaml</span><button class="copy" type="button">Copy</button></div><pre data-lang="sh">dependencies:
+  flutter_svg: ^2.0.0
+
+flutter:
+  assets:
+    - assets/glyphfox/</pre></div>
+      <div class="code"><div class="code-head"><span>main.dart</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'glyphfox.dart';
+
+Row(children: [
+  const GlyphFoxIcon(GlyphFoxIcons.heart),
+  GlyphFoxIcon(GlyphFoxIcons.heart, size: 32, color: Colors.orange, semanticLabel: 'Favorite'),
+  SvgPicture.asset(GlyphFoxIcons.heart), // the exported colors, no tint
+])</pre></div>
+      <p><code>GlyphFoxIcon</code> follows the surrounding <code>IconTheme</code> for size and color like <code>Icon</code> does, tints the whole drawing (the duotone layer keeps its opacity) and is decorative unless it gets a <code>semanticLabel</code>. <code>GlyphFoxIcons.values</code> lists every exported path, and <code>--assets</code> moves the SVG folder.</p>
+    </section>
+
+    <section id="options">
+      <h2>Options</h2>
+      <div class="table-wrap">
+        <table class="props">
+          <thead><tr><th>Option</th><th>Targets</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>specs</code></td><td>all</td><td></td><td>Names or specs such as <code>file+check@tr</code>, <code>cloud&amp;lock:side</code> or <code>heart/duotone</code>.</td></tr>
+            <tr><td><code>--from</code></td><td>all</td><td></td><td>A list file: one name per line or separated by commas, <code>#</code> starts a comment.</td></tr>
+            <tr><td><code>--all</code></td><td>all</td><td></td><td>Every icon of the set.</td></tr>
+            <tr><td><code>--out</code></td><td>all</td><td><code>.</code></td><td>The project folder: <code>res</code> for android, the Kotlin source root for compose, a folder or an <code>.xcassets</code> catalog for ios and swiftui, the app folder for flutter.</td></tr>
+            <tr><td><code>--size</code></td><td>all</td><td><code>24</code></td><td>Size in dp, points or logical pixels. Below 24 the stroke is optically compensated, as on the web.</td></tr>
+            <tr><td><code>--weight</code></td><td>all</td><td><code>2</code></td><td>Stroke width from 1 to 3 on the 24 grid.</td></tr>
+            <tr><td><code>--absolute-weight</code></td><td>all</td><td></td><td>Keeps the stroke at weight units at the export size.</td></tr>
+            <tr><td><code>--corners</code></td><td>all</td><td><code>round</code></td><td><code>round</code> or <code>sharp</code> (square caps and miter joins).</td></tr>
+            <tr><td><code>--variant</code></td><td>all</td><td><code>outline</code></td><td><code>outline</code> or <code>duotone</code>. The solid style cuts lines out with masks, which VectorDrawable and ImageVector cannot draw, so it is refused.</td></tr>
+            <tr><td><code>--color</code></td><td>all</td><td>tint</td><td>A hex color baked into the files. Android also takes a theme attribute or a color resource, used as the tint.</td></tr>
+            <tr><td><code>--secondary-color</code>, <code>--secondary-opacity</code></td><td>all</td><td>color, <code>0.3</code></td><td>Color and opacity of the duotone layer.</td></tr>
+            <tr><td><code>--rotate</code>, <code>--flip-x</code>, <code>--flip-y</code></td><td>all</td><td></td><td>A transform around the center of the grid.</td></tr>
+            <tr><td><code>--mirror-rtl</code></td><td>all</td><td></td><td>Flips the icon in right to left layouts (<code>autoMirrored</code>, <code>autoMirror</code>, the image set direction).</td></tr>
+            <tr><td><code>--modifier</code>, <code>--modifier-corner</code></td><td>all</td><td></td><td>The same badge on every icon, like <code>file+check</code>.</td></tr>
+            <tr><td><code>--prefix</code></td><td>android, ios, swiftui</td><td><code>gf_</code>, <code>gf-</code></td><td>Prefix of the drawable or image set names.</td></tr>
+            <tr><td><code>--package</code></td><td>compose</td><td><code>glyphfox</code></td><td>Kotlin package, also the folder under <code>--out</code>.</td></tr>
+            <tr><td><code>--rendering</code></td><td>ios, swiftui</td><td><code>template</code></td><td><code>template</code> or <code>original</code>; original is the default with a hex <code>--color</code>.</td></tr>
+            <tr><td><code>--assets</code></td><td>flutter</td><td><code>assets/glyphfox</code></td><td>Folder of the SVG files and of the paths in the constants.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="names">
+      <h2>Names and colors</h2>
+      <p>A spec becomes a name on each platform: <code>file+check@tr</code> is <code>gf_file_check_tr</code> on Android, <code>GlyphFox.FileCheckTr</code> in Compose, <code>gf-file-check-tr</code> in the catalog and <code>fileCheckTr</code> in Swift and Dart. Two specs that end up with the same name are refused, and keywords are escaped (<code>repeat</code> becomes <code>`repeat`</code> in Swift).</p>
+      <p>Without <code>--color</code> every target follows the platform tint: <code>colorControlNormal</code>, <code>LocalContentColor</code>, the SwiftUI foreground style or <code>IconTheme</code>. With a hex color the color is baked in and stays: Android drops the tint, the catalog renders the original and <code>GlyphFoxIcon</code> keeps the exported colors unless it gets a <code>color</code>. Compose <code>Icon()</code> always tints, so use <code>Image()</code> or <code>tint = Color.Unspecified</code> to see the baked color.</p>
+    </section>
+  </main>
+</div>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="assets/js/docs.js"></script>
+</body>
+</html>

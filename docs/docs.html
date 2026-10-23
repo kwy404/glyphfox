@@ -73,6 +73,7 @@
     <a href="#living" data-i18n="home.living.eyebrow">Living states</a>
     <a href="#modifiers" data-i18n="home.mods.eyebrow">Modifiers</a>
     <a href="#cli">CLI</a>
+    <a href="/glyphfox/native.html">Android, iOS, Flutter</a>
     <a href="#rules" data-i18n="docs.rules">Icon rules</a>
   </nav>
 
@@ -301,7 +302,8 @@ npx glyphfox morph menu x --trigger hover --out menu.svg
 npx glyphfox build home search file+check --type sprite --out public/icons
 npx glyphfox build --from icons.txt --type package --name @acme/icons
 npx glyphfox lint my-icon.svg
-npx glyphfox foxify any.svg --out fox.svg</pre></div>
+npx glyphfox foxify any.svg --out fox.svg
+npx glyphfox export android home search --out app/src/main/res</pre></div>
       <p data-i18n="docs.cli.p">copy prints the snippet and puts it on the clipboard (formats: svg, jsx, vue, svelte, angular, html, tailwind, cdn, datauri). build makes a sprite, a CSS file with mask classes or a small package from a list. Every command takes the shared props as flags, such as --weight 1.5 --corners sharp.</p>
     </section>
 
