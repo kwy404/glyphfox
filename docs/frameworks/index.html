@@ -148,8 +148,10 @@ export function App() {
     <section id="qwik">
       <h2>Qwik</h2>
       <div class="code"><div class="code-head"><span>header.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { component$, useSignal } from '@qwik.dev/core';
-import { BellIcon, HomeIcon, MenuIcon } from 'glyphfox/qwik';
-import 'glyphfox/qwik/icons/x'; // registers "x" for morphTo
+import { iconX } from 'glyphfox';
+import { BellIcon, HomeIcon, MenuIcon, registerIcons } from 'glyphfox/qwik';
+
+registerIcons([iconX]); // names used only by morphTo, Icon or Fusion
 
 export default component$(() =&gt; {
   const open = useSignal(false);
@@ -163,7 +165,7 @@ export default component$(() =&gt; {
     &lt;/header&gt;
   );
 });</pre></div>
-      <p>Built for Qwik 2 (<code>@qwik.dev/core</code>). The icons are lightweight components: they render on the server and resume without downloading anything. Living states and <code>morphTo</code> run on CSS, <code>active</code> switches <code>trigger="state"</code>, and <code>trigger="click"</code> uses a tiny inline handler. Names used by <code>Icon</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: importing an icon component registers it, or call <code>registerIcons(icons)</code> with <code>icons</code> from <code>glyphfox</code> to register all of them.</p>
+      <p>Built for Qwik 2 (<code>@qwik.dev/core</code>). The icons are lightweight components: they render on the server and resume without downloading anything. Living states and <code>morphTo</code> run on CSS, <code>active</code> switches <code>trigger="state"</code>, and <code>trigger="click"</code> uses a tiny inline handler. Names used by <code>Icon</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon components register their icon, and <code>registerIcons([iconX])</code> (or <code>registerIcons(icons)</code> with <code>icons</code> from <code>glyphfox</code> for the whole set) covers names you only write as strings.</p>
     </section>
 
     <section id="lit">
@@ -234,7 +236,7 @@ export function Tabs({ open, unread }) {
   {{Glyph "file+check@tr" variant="duotone"}}
   {{Fusion "cloud" "lock" layout="overlap"}}
 &lt;/template&gt;</pre></div>
-      <p>Plain function helpers (Ember 4.5 and newer), so they need no addon setup and work in .gjs, .gts and classic templates. They return trusted markup: the shared props, <code>class</code>, <code>style</code> and other attributes are named arguments. Names used by <code>Glyph</code>, <code>morphTo</code> and <code>Fusion</code> must be registered, by importing their helpers or with <code>registerIcons(icons)</code>. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
+      <p>Plain function helpers (Ember 4.5 and newer), so they need no addon setup and work in .gjs, .gts and classic templates. They return trusted markup: the shared props, <code>class</code>, <code>style</code> and other attributes are named arguments. Names used by <code>Glyph</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon helpers register their icon, and <code>registerIcons([iconCloud])</code> (or <code>registerIcons(icons)</code>) covers the rest. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
     </section>
 
     <section id="recipes">

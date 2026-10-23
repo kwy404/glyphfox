@@ -168,8 +168,10 @@ The React API (`Icon`, `Fusion`, `MorphIcon`, `useMorph`) on `preact` and `preac
 
 ```tsx
 import { component$, useSignal } from '@qwik.dev/core';
-import { BellIcon, HomeIcon, MenuIcon } from 'glyphfox/qwik';
-import 'glyphfox/qwik/icons/x'; // registers "x" for morphTo
+import { iconX } from 'glyphfox';
+import { BellIcon, HomeIcon, MenuIcon, registerIcons } from 'glyphfox/qwik';
+
+registerIcons([iconX]); // names used only by morphTo, Icon or Fusion
 
 export default component$(() => {
   const open = useSignal(false);
@@ -185,7 +187,7 @@ export default component$(() => {
 });
 ```
 
-For Qwik 2 (`@qwik.dev/core`). Lightweight components that render on the server and resume with no JavaScript: living states and `morphTo` run on CSS, `active` switches `trigger="state"`, and `trigger="click"` uses a tiny inline handler. Names in `Icon`, `morphTo` and `Fusion` must be registered: import their components, or call `registerIcons(icons)` with `icons` from `glyphfox`.
+For Qwik 2 (`@qwik.dev/core`). Lightweight components that render on the server and resume with no JavaScript: living states and `morphTo` run on CSS, `active` switches `trigger="state"`, and `trigger="click"` uses a tiny inline handler. Names in `Icon`, `morphTo` and `Fusion` must be registered: icon components register their icon, and `registerIcons([iconX])` (or `registerIcons(icons)` for the whole set) covers names you only write as strings.
 
 ### Lit
 
@@ -249,7 +251,7 @@ import { FileIcon, Glyph, Fusion } from 'glyphfox/ember';
 </template>
 ```
 
-Plain function helpers (Ember 4.5 and newer, no addon setup) that return trusted markup, for .gjs, .gts and classic templates. Props, `class`, `style` and attributes are named arguments. Names in `Glyph`, `morphTo` and `Fusion` must be registered, by importing their helpers or with `registerIcons(icons)`.
+Plain function helpers (Ember 4.5 and newer, no addon setup) that return trusted markup, for .gjs, .gts and classic templates. Props, `class`, `style` and attributes are named arguments. Names in `Glyph`, `morphTo` and `Fusion` must be registered: icon helpers register their icon, and `registerIcons([iconCloud])` (or `registerIcons(icons)`) covers the rest.
 
 ### Web component and CDN
 
