@@ -213,7 +213,10 @@ export function renderIcon(icon, props = {}) {
   if (!icon || typeof icon.body !== 'string') throw new TypeError('renderIcon expects an icon data object');
   const o = props;
   const sw = strokeWidth(o);
-  const variant = VARIANTS.includes(o.variant) ? o.variant : 'outline';
+  // Filled icons (from filled sets) keep their own paint: the style axis has
+  // nothing to change and the draw animation falls back to pop.
+  const filled = icon.filled === true;
+  const variant = !filled && VARIANTS.includes(o.variant) ? o.variant : 'outline';
   const cap = o.corners === 'sharp' ? 'sharp' : 'round';
   let ic = icon;
   if (o.modifier) ic = modified(ic, String(o.modifier), normalizeCorner(o.modifierCorner), sw);
@@ -236,7 +239,8 @@ export function renderIcon(icon, props = {}) {
     ({ fills, strokes } = variantLayers(ic, variant, ctx));
   }
 
-  const anim = o.animate && ANIMATIONS[o.animate] ? String(o.animate) : null;
+  let anim = o.animate && ANIMATIONS[o.animate] ? String(o.animate) : null;
+  if (anim === 'draw' && (filled || ic.filled === true)) anim = 'pop';
   const trigger = ['mount', 'hover', 'click', 'state'].includes(o.trigger) ? o.trigger : 'mount';
   const frame = typeof o.frame === 'number' && Number.isFinite(o.frame) ? o.frame : null;
   const classes = [];

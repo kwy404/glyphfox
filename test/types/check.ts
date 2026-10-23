@@ -5,6 +5,10 @@ import type { Component } from 'svelte';
 import {
   fuse,
   getIcon,
+  hasIconSource,
+  loadIcon,
+  normalizeIcon,
+  registerIconSource,
   iconFile,
   icons,
   resolve,
@@ -89,3 +93,9 @@ registerIcons([iconFile]);
 morphFrame(iconFile, null, 0);
 const fx: string = foxify('<svg></svg>').svg;
 void [fx, lintSvg(fx)];
+
+registerIconSource('demo', { get: (name: string) => (name === 'dot' ? { body: '<circle cx="12" cy="12" r="4"/>' } : null) });
+registerIconSource('lazy', (name: string) => Promise.resolve({ body: '<path d="M4 4h16"/>', viewBox: '0 0 24 24', mode: 'stroke' as const, tags: [name] }));
+const hasDemo: boolean = hasIconSource('demo');
+const loaded: Promise<IconData | null> = loadIcon('demo:dot');
+void [hasDemo, loaded, normalizeIcon({ body: '<rect width="48" height="48"/>', viewBox: '0 0 48 48', mode: 'fill' })];

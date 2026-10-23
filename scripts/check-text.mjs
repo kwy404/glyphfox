@@ -8,7 +8,8 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SKIP_DIRS = new Set(['node_modules', 'dist', '.git', 'coverage', '.angular', 'out-tsc']);
+// Third party license texts (LICENSES/, caches of them) are kept verbatim.
+const SKIP_DIRS = new Set(['node_modules', 'dist', '.git', 'coverage', '.angular', 'out-tsc', '.cache', 'LICENSES']);
 const SKIP_FILES = new Set(['package-lock.json', 'scripts/check-text.mjs', 'SPEC.md']);
 const EXT = /\.(md|html|css|js|mjs|cjs|ts|json|svelte|svg|yml|yaml|txt)$/;
 const RULES = [

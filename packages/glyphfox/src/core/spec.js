@@ -4,7 +4,8 @@
 //   a&b&c:layout              a fusion of 2 to 10 icons
 //   any of the above/variant  a style override (outline, duotone, solid)
 
-import { fuse, normalizeCorner, withModifier } from './compose.js';
+import { LAYOUTS, fuse, normalizeCorner, withModifier } from './compose.js';
+import { hasIconSource } from './lookup.js';
 
 /** Splits a spec string into its parts. */
 export function parseSpec(spec) {
@@ -28,10 +29,20 @@ export function parseSpec(spec) {
     modifier = s.slice(plus + 1).trim() || undefined;
     s = s.slice(0, plus);
   }
-  const colon = s.indexOf(':');
+  // "a&b:layout". A colon inside a part is a prefixed name ("mdi:home"):
+  // the last colon is a layout when its word is a layout, when the last part
+  // already has a prefix, or when no source is registered for the prefix.
+  const amp = s.lastIndexOf('&');
+  const lastPart = s.slice(amp + 1);
+  const colon = lastPart.lastIndexOf(':');
   if (colon >= 0) {
-    layout = s.slice(colon + 1).trim() || undefined;
-    s = s.slice(0, colon);
+    const word = lastPart.slice(colon + 1).trim();
+    const before = lastPart.slice(0, colon).trim();
+    const isLayout = amp < 0 ? !hasIconSource(before) && !before.includes(':') && LAYOUTS.includes(word) : LAYOUTS.includes(word) || before.includes(':') || !hasIconSource(before);
+    if (isLayout) {
+      layout = word || undefined;
+      s = s.slice(0, amp + 1 + colon);
+    }
   }
   const names = s
     .split('&')

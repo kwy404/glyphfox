@@ -11,14 +11,20 @@ import { isComposite, parseSpec, resolveSpec } from './core/spec.js';
 import { nodesToString, parseBody } from './core/nodes.js';
 import { analyzeSolid } from './core/solid.js';
 import { replaceGlyphs as replaceWith } from './core/runtime.js';
+import { hasIconSource, loadIcon, lookupIcon, registerIconSource } from './core/lookup.js';
+import { normalizeIcon } from './core/external.js';
 
 export { icons };
 export const iconNames = Object.keys(icons);
 export const categories = [...new Set(iconNames.flatMap((n) => icons[n].categories))].sort();
 
-/** Icon data for a plain name, or null. */
+/**
+ * Icon data for a plain name, or null. Prefixed names ("mdi:home") come from
+ * a registered icon source once they are loaded (see registerIconSource).
+ */
 export function getIcon(name) {
-  return Object.prototype.hasOwnProperty.call(icons, name) ? icons[name] : null;
+  if (Object.prototype.hasOwnProperty.call(icons, name)) return icons[name];
+  return typeof name === 'string' && name.indexOf(':') > 0 ? lookupIcon(name) : null;
 }
 
 /**
@@ -122,11 +128,15 @@ export {
   createMorph,
   dataName,
   frameState,
+  hasIconSource,
   isComposite,
+  loadIcon,
+  normalizeIcon,
   nodesToString,
   parseBody,
   parseSpec,
   propsFromAttributes,
+  registerIconSource,
   renderIcon,
   renderToString,
   sizeToPx,

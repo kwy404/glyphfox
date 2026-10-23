@@ -27,7 +27,27 @@ export interface IconData<N extends string = string> {
   categories: string[];
   /** Indices of the fill shapes and knockout lines of the solid style (null when no shape is closed). */
   solid?: [number[], number[]] | null;
+  /** Set on icons from filled sets: shapes keep their own fill, the style axis and the draw animation fall back. */
+  filled?: boolean;
 }
+
+/** Icon data as an icon source returns it, before it is normalized onto the 24 grid. */
+export interface SourceIcon {
+  body: string;
+  /** Grid of the body when it is not "0 0 24 24". */
+  viewBox?: string;
+  /** "fill" for filled sets (shapes are filled with currentColor). Default "stroke". */
+  mode?: 'stroke' | 'fill';
+  filled?: boolean;
+  tags?: string[];
+  categories?: string[];
+  set?: string;
+  license?: string;
+  author?: string;
+}
+
+/** Resolves "prefix:name" icons: get() synchronously, load() asynchronously. */
+export type IconSource = ((name: string) => Promise<SourceIcon | null> | SourceIcon | null) | { get?(name: string): SourceIcon | null; load?(name: string): Promise<SourceIcon | null> };
 
 /** The props shared by every package (React, Vue, Svelte, Angular, the web component and toSvg). */
 export interface IconProps {
@@ -129,8 +149,16 @@ export declare const LAYOUTS: Layout[];
 export declare const FORMATS: Format[];
 export declare const MORPH_PAIRS: Array<[string, string]>;
 
-/** Icon data for a plain name, or null. */
+/** Icon data for a name, or null. Prefixed names come from a registered icon source. */
 export declare function getIcon(name: IconName | (string & {})): IconData | null;
+/** Registers the source of "prefix:name" icons for every package and the web component. Pass null to remove it. */
+export declare function registerIconSource(prefix: string, source: IconSource | null): void;
+/** True when a source is registered for the prefix. */
+export declare function hasIconSource(prefix: string): boolean;
+/** Loads (and registers) an icon by name, including prefixed names. */
+export declare function loadIcon(name: string): Promise<IconData | null>;
+/** Normalizes icon data from another set onto the 24 grid. */
+export declare function normalizeIcon(icon: SourceIcon, name?: string): IconData | null;
 /** Resolves any spec into icon data (applies modifiers and fusions). */
 export declare function resolve(spec: IconSpec | IconData, options?: SvgOptions): IconData;
 /** Renders any spec to an SVG string. */

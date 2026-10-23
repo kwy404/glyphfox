@@ -15,7 +15,8 @@ import {
   transformNode,
   trimSegments,
 } from './geometry.js';
-import { iconNodes, nodesToString, roundNode, splitLayers } from './nodes.js';
+import { isFilledNode } from './external.js';
+import { hash, iconNodes, nodesToString, roundNode, splitLayers } from './nodes.js';
 import { solidLayers } from './solid.js';
 
 export const CORNERS = ['bottom-right', 'top-right', 'bottom-left', 'top-left'];
@@ -209,7 +210,7 @@ function subtractDiskFromNode(node, c, r) {
   const d = ringsToPath(rings);
   if (!d) return null;
   const { class: cls, fill, stroke, opacity } = node[1];
-  return ['path', { class: cls, d, fill, stroke, opacity }];
+  return ['path', { class: cls, d, fill, stroke, opacity, 'fill-rule': node[1]['fill-rule'] }];
 }
 
 function finish(nodes) {
@@ -233,23 +234,27 @@ export function withModifier(icon, modifier, corner, { weight = 2, gap = 1 } = {
   const { secondary, primary } = splitLayers(iconNodes(icon));
   const badge = glyph.map((n) => transformNode(n, 1, c[0], c[1]));
   const sec = secondary ? subtractDiskFromNode(secondary, c, rb + w / 2 + g) : null;
-  const nodes = finish([...(sec ? [sec] : []), ...trimNodes(primary, cut), ...badge]);
-  const base = solidLayers(icon);
+  // Filled shapes cannot be trimmed like strokes: the disk is cut out of them.
+  const base = primary.flatMap((n) => (isFilledNode(n) ? [subtractDiskFromNode(n, c, rb + w / 2 + g)].filter(Boolean) : trimNodes([n], cut)));
+  const nodes = finish([...(sec ? [sec] : []), ...base, ...badge]);
+  const solidBase = icon.filled ? null : solidLayers(icon);
   const r3 = (v) => Math.round(v * 1000) / 1000;
   const disk = ['circle', { cx: r3(c[0]), cy: r3(c[1]), r: r3(rb + w / 2 + g), fill: '#000', stroke: 'none' }];
-  const solid = base
+  const solid = solidBase
     ? {
-        groups: base.groups.map((gr) => ({ fill: gr.fill, mask: [...gr.mask, disk] })),
-        strokes: finish([...trimNodes(base.strokes, cut), ...badge]),
+        groups: solidBase.groups.map((gr) => ({ fill: gr.fill, mask: [...gr.mask, disk] })),
+        strokes: finish([...trimNodes(solidBase.strokes, cut), ...badge]),
       }
     : null;
-  return {
+  const out = {
     name: `${icon.name}+${modifier}${where === 'bottom-right' ? '' : '@' + cornerCode(where)}`,
     body: nodesToString(nodes),
     tags: [...(icon.tags || []), modifier],
     categories: [...(icon.categories || [])],
     layers: { solid },
   };
+  if (icon.filled) out.filled = true;
+  return out;
 }
 
 function cornerCode(c) {
@@ -441,7 +446,7 @@ export function fuse(icons, options = {}) {
     const ox = b.x - 2 * s;
     const oy = b.y - 2 * s;
     const tf = (node) => transformNode(node, s, ox, oy);
-    const solid = solidLayers(p.icon);
+    const solid = p.icon.filled ? null : solidLayers(p.icon);
     return {
       box: b,
       primary: p.primary.map(tf),
@@ -483,8 +488,23 @@ export function fuse(icons, options = {}) {
     for (const { j, ex, only } of cutters) if (j > i && (!only || only.has(i))) out = trimNodes(out, ex);
     return out;
   };
+  // Filled shapes (from filled sets) are cut by a mask instead of trimmed.
+  const defs = [];
+  const partNodes = (i, nodes) => {
+    const fills = nodes.filter(isFilledNode);
+    const out = trimFor(
+      i,
+      nodes.filter((n) => !isFilledNode(n)),
+    );
+    if (!fills.length) return out;
+    if (!masks[i].length) return [...fills, ...out];
+    const kids = [['rect', { x: '-2', y: '-2', width: '28', height: '28', fill: '#fff', stroke: 'none' }], ...masks[i]];
+    const id = 'gf-k' + hash(nodesToString(kids));
+    if (!defs.some((d) => d[1].id === id)) defs.push(['mask', { id, maskUnits: 'userSpaceOnUse', x: '-2', y: '-2', width: '28', height: '28' }, kids]);
+    return [['g', { mask: `url(#${id})` }, fills.map((n) => roundNode(n, 2))], ...out];
+  };
   const strokes = [];
-  placed.forEach((p, i) => strokes.push(...trimFor(i, p.primary)));
+  placed.forEach((p, i) => strokes.push(...partNodes(i, p.primary)));
 
   // One duotone layer for the whole fusion (merged subpaths).
   let secondary = null;
@@ -494,7 +514,7 @@ export function fuse(icons, options = {}) {
     .join('');
   if (secD) secondary = ['path', { class: 'gf-secondary', d: secD, fill: 'currentColor', stroke: 'none', opacity: '0.3' }];
 
-  const nodes = finish([...(secondary ? [secondary] : []), ...strokes]);
+  const nodes = [...(defs.length ? [['defs', {}, defs]] : []), ...finish([...(secondary ? [secondary] : []), ...strokes])];
   const groups = [];
   const solidStrokes = [];
   placed.forEach((p, i) => {
@@ -506,13 +526,16 @@ export function fuse(icons, options = {}) {
     }
   });
   const names = icons.map((ic) => ic.name);
-  return {
+  const filled = icons.some((ic) => ic.filled === true);
+  const out = {
     name: names.join('&') + (options.layout ? `:${layout}` : ''),
     body: nodesToString(nodes),
     tags: [...new Set(icons.flatMap((ic) => ic.tags || []))],
     categories: [...new Set(icons.flatMap((ic) => ic.categories || []))],
-    layers: { solid: groups.length ? { groups, strokes: finish(solidStrokes) } : null },
+    layers: { solid: groups.length && !filled ? { groups, strokes: finish(solidStrokes) } : null },
     parts: boxes.map((b) => ({ x: b.x, y: b.y, size: b.size })),
   };
+  if (filled) out.filled = true;
+  return out;
 }
 

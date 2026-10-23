@@ -1,5 +1,5 @@
 // glyphfox/core: the rendering engine without icon data.
-import type { AnimationName, FuseOptions, IconData, IconNode, IconProps, IconSpec, Layout, ModifierCorner, ModifierName, Morph, SvgOptions, Trigger, Variant } from '../index.js';
+import type { AnimationName, FuseOptions, IconData, IconNode, IconSource, IconProps, IconSpec, Layout, ModifierCorner, ModifierName, Morph, SvgOptions, Trigger, Variant } from '../index.js';
 
 export declare const PROPS: Array<keyof IconProps>;
 export declare const DEFAULTS: Readonly<Partial<IconProps>>;
@@ -30,6 +30,8 @@ export declare function registerIcons(icons: IconData[] | Record<string, IconDat
 export declare function lookupIcon(name: string): IconData | null;
 export declare function loadIcon(name: string): Promise<IconData | null>;
 export declare function setIconLoader(loader: (name: string) => Promise<IconData | null>): void;
+export declare function registerIconSource(prefix: string, source: IconSource | null): void;
+export declare function hasIconSource(prefix: string): boolean;
 export declare function splitProps<T extends Record<string, unknown>>(props: T): { glyph: IconProps; rest: Record<string, unknown> };
 export declare function reducedMotion(): boolean;
 export declare function tween(from: number, to: number, options: { duration?: number; delay?: number }, onFrame: (value: number) => void): () => void;
