@@ -147,6 +147,13 @@ function addImport() {
 
 // Live session ---------------------------------------------------------------
 
+/** Everything we know, oldest first: a peer that saves them in turn keeps our order. */
+function snapshot() {
+  const list = collection.load();
+  const at = new Map(list.map((i, k) => [i.id, k]));
+  return ledger.snapshot(list).sort((a, b) => (at.get(b.id) ?? list.length) - (at.get(a.id) ?? list.length));
+}
+
 function sendOps(ops, to) {
   for (let i = 0; i < ops.length; i += OPS_PER_MESSAGE) room.send({ k: 'ops', ops: ops.slice(i, i + OPS_PER_MESSAGE) }, to);
 }
@@ -238,8 +245,8 @@ async function startSession(joinWords) {
   r.on('roster', () => room === r && renderPeople());
   r.on('join', (peer) => {
     if (room !== r) return;
-    if (r.role === 'host') sendOps(ledger.snapshot(collection.load()), peer.id);
-    else if (peer.host) sendOps(ledger.snapshot(collection.load()));
+    if (r.role === 'host') sendOps(snapshot(), peer.id);
+    else if (peer.host) sendOps(snapshot());
     sendPresence(true);
     if (!peer.host || r.role === 'host') toast(s('live.joined', { name: peer.name }));
     renderPeople();
