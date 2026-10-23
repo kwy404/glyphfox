@@ -160,6 +160,9 @@
   min-height: 120vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  /* Rows keep their own height: with few icons the cards must not stretch to fill the min-height. */
+  grid-auto-rows: max-content;
+  align-content: start;
   gap: 10px;
   outline: none;
 }
