@@ -18,8 +18,23 @@ Everything on this page is in scope for 1.0. The packages stay at 0.0.0 until ev
 
 ## Fenn
 
-- [ ] Redraw the illustrations with better proportions, a confident silhouette, rhythm in the legs and tail, and the icon stroke style
-- [ ] Re-render the sheet, the banners and the site uses
+- [x] Redraw the illustrations with better proportions, a confident silhouette, rhythm in the legs and tail, and the icon stroke style
+- [x] Re-render the sheet, the banners and the site uses
+
+## Living animations
+
+- [x] Triggers: mount, hover, click, focus, press, inView, loop and state, parent triggers (`triggerParent`, `.gf-trigger`), a smooth reverse when hover, focus or press ends, and `disabled`
+- [x] Designed animations: a frame timeline per element from the icon sidecar, the `animation` prop in every package and the web component, a CSS fallback with no script and a Web Animations engine
+- [x] Motion, the frames editor in the studio: keyframes per element, live preview with play, scrub and loop, export as CSS, JSON, animated SVG, GIF and WebM
+- [x] Reduced motion everywhere, tests for the engine, the triggers and the CSS
+
+## Fusion quality
+
+- [x] Readable overlap defaults, knockouts limited to the front part's filled outline plus the gap, no leftover pieces under 1.5 units, and a quality test for the curated fusions
+
+## Site speed
+
+- [x] Hashed CSS and bundled scripts, a service worker that precaches the shell, module preloads, the studio tools loaded when opened, and a test for the precache list and its hashes
 
 ## Frameworks
 
@@ -37,8 +52,8 @@ Everything on this page is in scope for 1.0. The packages stay at 0.0.0 until ev
 
 ## Universe
 
-- [ ] Components accept universe names (`prefix:name`) through a small resolver hook, in every package and the web component
-- [ ] Weight, animations, modifiers and Fusion on stroke based universe sets, with a clear fallback for filled sets
+- [x] Components accept universe names (`prefix:name`) through a small resolver hook, in every package and the web component
+- [x] Weight, animations, modifiers and Fusion on stroke based universe sets, with a clear fallback for filled sets
 
 ## Site in five languages
 
