@@ -1,5 +1,5 @@
-// Site copy of the studio labs tools (sketch search), merged into the main
-// dictionary by ../i18n.js.
+// Site copy of the studio labs tools (sketch search and the brand kit
+// export), merged into the main dictionary by ../i18n.js.
 
 export const labs = {
   en: {
@@ -12,6 +12,16 @@ export const labs = {
     'sketch.failed': 'The shape index could not be loaded.',
     'sketch.view': 'Open in Icons',
     'sketch.note': 'Your strokes stay on this device: nothing is uploaded, the sketch is compared with a precomputed index of every icon.',
+    'brand.dl.kit': 'Brand kit (.zip)',
+    'brand.count': 'All {n} icons, themed',
+    'brand.preview': 'Preview of the themed set',
+    'brand.contents': 'Inside the zip',
+    'brand.contents.svg': 'svg/ with every icon as a themed SVG file',
+    'brand.contents.sprite': 'sprite.svg and icons.css with the brand CSS variables',
+    'brand.contents.favicon': 'favicon/ with favicon.ico, PNGs at 16, 32, 180, 192 and 512, maskable icons and a web manifest',
+    'brand.contents.app': 'app/ with store icons and an Android adaptive foreground',
+    'brand.contents.package': 'package.json, index.js and typings, ready to publish',
+    'brand.building': 'Building the brand kit',
   },
   'pt-BR': {
     'sketch.lead': 'Desenhe uma forma aproximada. Os 24 ícones mais parecidos aparecem enquanto você desenha, ordenados na própria página com um índice de formas do conjunto todo.',
@@ -23,5 +33,15 @@ export const labs = {
     'sketch.failed': 'Não foi possível carregar o índice de formas.',
     'sketch.view': 'Abrir em Ícones',
     'sketch.note': 'Os seus traços ficam neste aparelho: nada é enviado, o desenho é comparado com um índice pré-calculado de todos os ícones.',
+    'brand.dl.kit': 'Kit de marca (.zip)',
+    'brand.count': 'Todos os {n} ícones, com a sua marca',
+    'brand.preview': 'Prévia do conjunto com a sua marca',
+    'brand.contents': 'Dentro do zip',
+    'brand.contents.svg': 'svg/ com cada ícone num arquivo SVG temático',
+    'brand.contents.sprite': 'sprite.svg e icons.css com as variáveis CSS da marca',
+    'brand.contents.favicon': 'favicon/ com favicon.ico, PNGs em 16, 32, 180, 192 e 512, ícones maskable e um manifesto web',
+    'brand.contents.app': 'app/ com ícones para as lojas e a camada da frente do ícone adaptativo do Android',
+    'brand.contents.package': 'package.json, index.js e tipos, pronto para publicar',
+    'brand.building': 'Montando o kit de marca',
   },
 };

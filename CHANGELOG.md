@@ -17,3 +17,4 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 - The `glyphfox` CLI: search, show with a terminal preview, copy in nine formats, fuse, morph, build subsets (sprite, CSS masks, package), lint and Fox-ify.
 - The studio site: icon browser, live customization, sketch search, editor, Fox-ify, Fusion, brand kit and 3D.
 - Sketch search in the studio: the 24 closest icons appear while you draw, ranked in the page against a compact shape index built by `scripts/labs/sketch-index.mjs` (32 by 32 stroke masks expanded into distance fields, stroke direction histograms and Zernike moments).
+- The brand kit previews the whole set themed and exports one zip with themed SVG files, a sprite, CSS variables, a favicon set (ico, 16, 32, 180, 192 and 512 PNGs), app icons and a package.json skeleton.

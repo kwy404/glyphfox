@@ -218,16 +218,25 @@
         <label class="field"><span data-i18n="brand.favicon">Favicon e ícone de app</span><input class="input" list="fu-names" data-br="mark" value="star" spellcheck="false"></label>
         <label class="field"><span data-i18n="brand.name">Nome do pacote</span><input class="input" data-br="name" value="@acme/icons" spellcheck="false"></label>
         <div class="br-exports">
-          <button class="btn small primary" type="button" data-br-dl="package" data-i18n="brand.dl.package">Pacote (.zip)</button>
+          <button class="btn small primary" type="button" data-br-dl="kit" data-i18n="brand.dl.kit">Kit de marca (.zip)</button>
           <button class="btn small" type="button" data-br-dl="sprite" data-i18n="brand.dl.sprite">Sprite</button>
           <button class="btn small" type="button" data-br-dl="css">CSS</button>
-          <button class="btn small" type="button" data-br-dl="favicon" data-i18n="brand.dl.favicon">Favicon</button>
-          <button class="btn small" type="button" data-br-dl="app" data-i18n="brand.dl.app">Ícones de app</button>
+        </div>
+        <div class="br-contents">
+          <h3 class="side-title" data-i18n="brand.contents">Dentro do zip</h3>
+          <ul class="faint">
+            <li data-i18n="brand.contents.svg">svg/ com cada ícone num arquivo SVG temático</li>
+            <li data-i18n="brand.contents.sprite">sprite.svg e icons.css com as variáveis CSS da marca</li>
+            <li data-i18n="brand.contents.favicon">favicon/ com favicon.ico, PNGs em 16, 32, 180, 192 e 512, ícones maskable e um manifesto web</li>
+            <li data-i18n="brand.contents.app">app/ com ícones para as lojas e a camada da frente do ícone adaptativo do Android</li>
+            <li data-i18n="brand.contents.package">package.json, index.js e tipos, pronto para publicar</li>
+          </ul>
         </div>
       </div>
       <div class="card pad br-preview">
         <div class="br-marks" data-br-marks></div>
-        <div class="br-grid" data-br-grid></div>
+        <p class="faint br-count" data-br-count></p>
+        <div class="br-grid" data-br-grid tabindex="0" role="region" aria-label="Prévia do conjunto com a sua marca" data-i18n-attr="aria-label:brand.preview"></div>
       </div>
     </div>
   </section>

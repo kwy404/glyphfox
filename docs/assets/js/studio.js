@@ -66,7 +66,7 @@ async function show(tool, payload) {
   }
   if (tool === 'sketch' && !ready.sketch) ready.sketch = import('./labs/sketch-ui.js').then((m) => m.initSketch(data, { openInEditor }));
   if (tool === 'brand' && !ready.brand) {
-    const { initBrand } = await import('./brand.js');
+    const { initBrand } = await import('./labs/brand-kit.js');
     initBrand(data);
     ready.brand = true;
   }

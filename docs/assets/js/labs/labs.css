@@ -1,4 +1,4 @@
-/* Studio labs: the sketch search tool. */
+/* Studio labs: the sketch search tool and the brand kit additions. */
 
 .tool-sketch {
   display: grid;
@@ -98,6 +98,33 @@
 .sk-actions b {
   margin-right: auto;
   font: 600 13px var(--mono);
+}
+
+.br-contents ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+.br-count {
+  margin: 0;
+  font: 500 12px var(--mono);
+}
+.br-maskable {
+  border-radius: 50%;
+}
+.br-grid {
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+  max-height: min(72vh, 760px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px 4px 2px 2px;
+  border-radius: 12px;
+}
+.br-grid:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 860px) {
