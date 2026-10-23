@@ -31,6 +31,7 @@ Original open source icons on a 24 grid that do more than sit still. Every icon 
 - [Name syntax](#name-syntax)
 - [Variable axes](#variable-axes) · [Morph](#morph) · [Fusion](#fusion) · [Living states](#living-states) · [Modifiers](#modifiers)
 - [CLI](#cli)
+- [Native exports](#native-exports): Android, Jetpack Compose, iOS, SwiftUI, Flutter
 - [The studio](#the-studio)
 - [Icon rules](#icon-rules)
 
@@ -313,6 +314,28 @@ npx glyphfox foxify any-icon.svg --out fox.svg
 ```
 
 `build` makes a sprite, a CSS file with mask classes, or a small package (`package.json`, ESM exports, types, sprite and SVG files) from a list of names. Every command takes the shared props as flags (`--weight 1.5 --corners sharp --variant duotone`).
+
+## Native exports
+
+`glyphfox export` writes real vector assets for mobile apps from the same geometry as the web packages, so weight, corners, duotone, modifiers and fusions carry over and strokes stay strokes.
+
+```sh
+npx glyphfox export android home search file+check --out app/src/main/res   # res/drawable/gf_home.xml
+npx glyphfox export compose --from icons.txt --package com.acme.icons --out app/src/main/java
+npx glyphfox export ios home search --out MyApp/Assets.xcassets              # SVG image sets
+npx glyphfox export swiftui home search --out MyApp                          # GlyphFox.swift and the catalog
+npx glyphfox export flutter home search --out .                              # assets/glyphfox and lib/glyphfox.dart
+```
+
+| Target | Output | Use |
+| --- | --- | --- |
+| `android` | VectorDrawable XML per icon, tinted with `?attr/colorControlNormal` | `@drawable/gf_home` |
+| `compose` | `ImageVector` properties on a `GlyphFox` object, one Kotlin file per icon | `Icon(GlyphFox.Home, contentDescription = null)` |
+| `ios` | an `.xcassets` catalog of SVG image sets with Preserve Vector Data and template rendering | `UIImage(named: "gf-home")` |
+| `swiftui` | the same catalog plus a `GlyphFox` enum and `Image(glyphfox:)` | `Image(glyphfox: .home)` |
+| `flutter` | SVG assets, `GlyphFoxIcons` constants and a `GlyphFoxIcon` widget built on flutter_svg | `GlyphFoxIcon(GlyphFoxIcons.home)` |
+
+Every target takes names, `--from list.txt` or `--all`, plus `--size`, `--weight`, `--corners`, `--variant outline|duotone`, `--color`, `--secondary-color`, `--rotate`, `--flip-x` and `--mirror-rtl`. Without `--color` the icons follow the platform tint; a hex color is baked in, and on Android a theme attribute or a color resource (`?attr/colorPrimary`, `@color/brand`) becomes the tint. `--prefix`, `--package`, `--rendering` and `--assets` adjust names and folders. The [native exports guide](https://kwy404.github.io/glyphfox/native.html) covers each platform.
 
 ## The studio
 

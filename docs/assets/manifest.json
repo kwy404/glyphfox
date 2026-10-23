@@ -1,15 +1,15 @@
 {
- "version": "bfec2e1c570d",
+ "version": "c7f293fcb94f",
  "files": {
   "index.html": "b24ff730fbedaedabca3484e2cb599c52b289442d20b7d421cdb2136b56dcf63",
   "icons.html": "3f68d336f9d8b8566329c094f1fab0a0ac1a0c2d5d2c84f666ac93ff53e3eeac",
   "studio.html": "37e0ea7909f1d83e14cfade1663dc6ddc6dddef656171ec91e55249e85ccb336",
-  "docs.html": "be6a1edc06204341a0a33e33ae27a4da3daeeef24eaf69dae508744b4444d564",
+  "docs.html": "f7de9597a7c2b789a2e86b368ef0d63e33c218a45affa58ea3710c1f33e60dc3",
   "changelog.html": "b22a329ee3d26f9401061a04a08a0573fa953c37a7e82d9b3a3845e677750154",
   "pt-br/index.html": "c5271c7ec6c156bf8dcc1ade89b88321eb74512453c5586e8b1fb9ea45643fb7",
   "pt-br/icons.html": "012dc9509e6fb0499692ea14872ef099d9cf9e9d5487087018522ae9139b6c17",
   "pt-br/studio.html": "42032e6ded4579ee98ad7a5a1ce0e0c6caac114b68f12d6d71936a165990c29c",
-  "pt-br/docs.html": "e37d4e7682f9498af9efee276a4179f499689af8f64e7f9b799a9e67cc3285f2",
+  "pt-br/docs.html": "5d7c438bcc4e48d4ca870204a7fe4dfe26963b76d9bffefa6cd9b825e8b6a2a4",
   "pt-br/changelog.html": "9ac6ceecd3e26fb89e0e28561cb6fc8d95429369e376b820327140d3ff25b882",
   "data/icons.json": "d273b89c6740d768fdabf4a3da5ed672ba685ea895ff6caee5e60bef560e1a71",
   "assets/favicon.svg": "1265caf2798632ed7badf1d7ea5ba2f8537423f161447935c40974521ab2021b",

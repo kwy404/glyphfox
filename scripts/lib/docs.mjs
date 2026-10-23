@@ -51,7 +51,8 @@ function withPartials(root, html, page) {
   }
   const key = page.replace(/\.html$/, '');
   out = out.replace(/ aria-current="page"/g, '').replace(new RegExp(`(<a [^>]*data-nav="${key}")`, 'g'), '$1 aria-current="page"');
-  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch)/, `$1href="pt-br/${page}"$2`);
+  // Pages that are only in English (native.html) switch to the Portuguese home.
+  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch)/, `$1href="pt-br/${LOCALIZED.includes(page) ? page : 'index.html'}"$2`);
   return out;
 }
 
@@ -183,7 +184,7 @@ export async function docsFiles(root, icons, { version }) {
         continue;
       }
       let html = withAssets(withChangelog(root, withArt(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api))), assets);
-      html = withAlternates(html, f, 'en');
+      if (LOCALIZED.includes(f)) html = withAlternates(html, f, 'en');
       files[file] = html;
       if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);
     }
