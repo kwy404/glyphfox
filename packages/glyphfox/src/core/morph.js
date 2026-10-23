@@ -27,8 +27,12 @@ export const MORPH_PAIRS = [
  */
 export const MORPH_HINTS = {
   'menu>x': { map: [[0, 0], [1, null], [2, 1]], mode: 'rotate' },
+  'menu>close': { map: [[0, 0], [1, null], [2, 1]], mode: 'rotate' },
   'play>pause': { map: [[0, 0], [0, 1]], mode: 'linear' },
-  'plus>check': { mode: 'rotate' },
+  'plus>check': { map: [[1, 0], [0, null]], mode: 'rotate' },
+  'eye>eye-off': { map: [[0, 0], [0, 1], [1, null], [null, 2]], mode: 'linear' },
+  'copy>check': { map: [[0, 0], [1, null]], mode: 'linear' },
+  'sun>moon': { mode: 'linear' },
 };
 
 function centroid(points) {

@@ -1,7 +1,7 @@
 // Generated files of the studio site in docs/ (committed, served by GitHub
 // Pages): the icon data, the engine bundle, the changelog, the shared head,
-// header and footer of every page, inline icons, and the Portuguese pages
-// in docs/pt-br/ built from docs/assets/js/i18n.js.
+// header and footer of every page, inline icons, the Fenn illustrations,
+// and the Portuguese pages in docs/pt-br/ built from docs/assets/js/i18n.js.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -111,6 +111,19 @@ function withGlyphs(html, api) {
   });
 }
 
+/** Fenn illustrations from docs/assets/fenn (see scripts/art.mjs), inlined as decoration. */
+function withArt(root, html) {
+  return html.replace(/<!--art:([a-z]+)(?::([^>]*?))?-->[\s\S]*?<!--\/art-->/g, (m, name, cls) => {
+    const file = join(root, 'docs', 'assets', 'fenn', `${name}.svg`);
+    if (!existsSync(file)) throw new Error(`docs: there is no Fenn illustration named ${name}`);
+    const svg = readFileSync(file, 'utf8')
+      .trim()
+      .replace(/ role="img" aria-label="[^"]*"/, '')
+      .replace('<svg ', `<svg class="fenn-art${cls ? ' ' + cls : ''}" aria-hidden="true" focusable="false" `);
+    return `<!--art:${name}${cls ? ':' + cls : ''}-->${svg}<!--/art-->`;
+  });
+}
+
 function withAlternates(html, page, lang) {
   const path = page === 'index.html' ? '' : page;
   const en = SITE + path;
@@ -156,9 +169,13 @@ export async function docsFiles(root, icons, { version }) {
   const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js')).href + `?v=${Date.now()}`);
   if (existsSync(docs)) {
     for (const f of readdirSync(docs)) {
-      if (!f.endsWith('.html') || f === '404.html') continue;
+      if (!f.endsWith('.html')) continue;
       const file = join(docs, f);
-      let html = withChangelog(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api));
+      if (f === '404.html') {
+        files[file] = withArt(root, readFileSync(file, 'utf8'));
+        continue;
+      }
+      let html = withChangelog(root, withArt(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api)));
       html = withAlternates(html, f, 'en');
       files[file] = html;
       if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);

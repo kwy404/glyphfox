@@ -24,7 +24,7 @@ describe('modifiers', () => {
   it('keep an even knockout gap around the badge at every weight', () => {
     for (const weight of [1, 2, 3]) {
       const out = withModifier(icon('file'), 'plus', 'bottom-right', { weight, gap: 1 });
-      const nodes = parseBody(out.body);
+      const nodes = splitLayers(parseBody(out.body)).primary;
       const badge = nodes.slice(-1);
       const base = nodes.slice(0, -1);
       const badgePolys = polys(badge);
@@ -81,10 +81,11 @@ describe('fusion', () => {
     const weight = 2;
     const gap = 1;
     const out = fuse([icon('cloud'), icon('lock')], { layout: 'overlap', weight, gap });
-    const nodes = parseBody(out.body);
-    // The lock is drawn last: two elements (body and shackle).
-    const front = nodes.slice(-2);
-    const back = nodes.slice(0, -2);
+    const nodes = splitLayers(parseBody(out.body)).primary;
+    // The lock is drawn last, with all its stroke elements.
+    const lockCount = splitLayers(parseBody(icon('lock').body)).primary.length;
+    const front = nodes.slice(-lockCount);
+    const back = nodes.slice(0, -lockCount);
     const frontPolys = polys(front);
     for (const p of polys(back)) {
       for (const pt of p.points) expect(distToPolylines(pt, frontPolys)).toBeGreaterThan(weight + gap - 0.05);

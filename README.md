@@ -1,5 +1,10 @@
 <p align="center">
-  <a href="https://kwy404.github.io/glyphfox/"><img src="https://cdn.jsdelivr.net/gh/kwy404/glyphfox@main/docs/assets/banner.png" alt="glyphfox: variable, morphable and fusable icons" width="880"></a>
+  <a href="https://kwy404.github.io/glyphfox/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/kwy404/glyphfox@main/assets/banner-dark.png">
+      <img src="https://cdn.jsdelivr.net/gh/kwy404/glyphfox@main/assets/banner-light.png" alt="glyphfox: icons that move, morph and fuse" width="880">
+    </picture>
+  </a>
 </p>
 
 <p align="center">
@@ -16,7 +21,7 @@ Original open source icons on a 24 grid that do more than sit still. Every icon 
 
 **[Open the studio](https://kwy404.github.io/glyphfox/)** to browse, customize, morph, fuse, draw your own icons, Fox-ify any SVG, search by sketch, export a brand kit and render icons in 3D.
 
-[Portugues (Brasil)](i18n/README.pt-BR.md)
+[Português (Brasil)](i18n/README.pt-BR.md)
 
 ## Contents
 
@@ -274,7 +279,7 @@ Presets that understand the icon: `draw` traces the strokes in drawing order, `p
 
 ```jsx
 <BellIcon animate="shake" trigger="state" active={hasNews} />
-<SparkIcon animate="draw" trigger="hover" />
+<SparklesIcon animate="draw" trigger="hover" />
 ```
 
 ## Modifiers

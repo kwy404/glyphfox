@@ -1,7 +1,7 @@
 // Fusion tool: pick 2 to 10 icons, try every layout, drag and scale parts,
 // tune the gap, check the lint, copy, export or save.
 
-import { $, $$, FORMAT_LABELS, codeBlock, download, gf, has, svg, t, toast } from './app.js';
+import { $, $$, FORMAT_LABELS, codeBlock, download, fennArt, gf, has, svg, t, toast } from './app.js';
 import * as collection from './collection.js';
 
 const CURATED = [
@@ -50,7 +50,7 @@ function render() {
   const parts = $('[data-fu-parts]');
   parts.innerHTML = state.parts.map((n, i) => `<button class="chip" type="button" data-part="${i}" aria-pressed="${i === state.selected}">${has(n) ? svg(n, { size: 14 }) : ''}${n}<span class="x" data-remove="${i}" aria-label="remove ${n}">x</span></button>`).join('');
   if (!fused) {
-    stage.innerHTML = `<p class="faint" style="padding:24px">${t('fusion.need')}</p>`;
+    stage.innerHTML = `<div class="empty">${fennArt('orbit')}<p class="faint">${t('fusion.need')}</p></div>`;
     $('[data-fu-sizes]').innerHTML = '';
     $('[data-fu-lint]').innerHTML = '';
     $('[data-fu-code]').innerHTML = '';

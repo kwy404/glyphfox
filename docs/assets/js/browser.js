@@ -78,6 +78,8 @@ function renderGrid() {
     .map((i) => `<button class="icon-cell" type="button" role="option" id="ic-${i.name}" data-name="${i.name}" aria-selected="${i.name === state.selected}" title="${i.name}"><span class="ic">${svg(i.name, gp)}</span><span>${i.name}</span></button>`)
     .join('');
   $('[data-empty]').hidden = list.length > 0;
+  // The grid keeps its height while the data loads, not when nothing matches.
+  grid.style.minHeight = list.length ? '' : '0';
   const line = $('[data-result]');
   if (state.sketch) line.textContent = t('icons.result.sketch', { n: list.length });
   else if (state.q || state.cat) line.textContent = t('icons.result.count', { n: list.length });

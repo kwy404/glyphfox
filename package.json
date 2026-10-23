@@ -14,6 +14,7 @@
     "lint:icons": "node tools/icons/lint.mjs",
     "check:text": "node scripts/check-text.mjs",
     "check:docs": "node scripts/build.mjs --check",
+    "art": "node scripts/art.mjs",
     "test": "vitest run",
     "serve": "node scripts/serve.mjs",
     "typecheck": "node scripts/typecheck.mjs",

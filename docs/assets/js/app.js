@@ -72,6 +72,12 @@ export function pick(...specs) {
   return specs.find(has) || null;
 }
 
+/** A Fenn illustration the page carries in a template (empty states). */
+export function fennArt(name) {
+  const tpl = document.querySelector(`template[data-fenn="${name}"]`);
+  return tpl ? tpl.innerHTML.trim() : '';
+}
+
 // Toast.
 let toastEl = null;
 let toastTimer = 0;

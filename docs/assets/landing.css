@@ -89,6 +89,25 @@
 .hero-fenn.on path:nth-child(4) {
   transition-delay: 0.7s;
 }
+.hero-mascot {
+  position: absolute;
+  z-index: 2;
+  right: -1%;
+  bottom: -3%;
+  width: 24%;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transform-origin: 50% 100%;
+  pointer-events: none;
+}
+.hero-fenn.on ~ .hero-mascot {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s var(--ease) 1.2s, transform 1s var(--spring) 1.2s;
+}
+.reduced .hero-fenn.on ~ .hero-mascot {
+  transition: none;
+}
 @media (max-width: 900px) {
   .hero {
     min-height: 0;
@@ -597,10 +616,21 @@
   gap: 26px;
   text-align: center;
 }
-.cta-fenn {
-  width: 96px;
-  height: 96px;
-  color: var(--accent);
+.cta-art {
+  width: min(240px, 64vw);
+}
+.cta-art > circle:first-of-type {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cta-orbit 80s linear infinite;
+}
+@keyframes cta-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.reduced .cta-art > circle:first-of-type {
+  animation: none;
 }
 
 /* Reduced motion: scenes become plain sections. */

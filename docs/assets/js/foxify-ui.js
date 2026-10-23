@@ -1,6 +1,6 @@
 // Fox-ify: any SVG in, the glyphfox style out, with a before and after view.
 
-import { $, $$, download, gf, t, toast } from './app.js';
+import { $, $$, download, fennArt, gf, t, toast } from './app.js';
 import * as collection from './collection.js';
 
 const SAMPLES = [
@@ -29,7 +29,7 @@ function run() {
   const lint = $('[data-fox-lint]');
   if (!text) {
     before.innerHTML = '';
-    after.innerHTML = '';
+    after.innerHTML = fennArt('drawing');
     lint.innerHTML = `<li>${t('foxify.waiting')}</li>`;
     result = null;
     return;

@@ -903,6 +903,29 @@ button.chip {
   transform: none;
 }
 
+/* Fenn illustrations (docs/assets/fenn), drawn with the icon strokes. */
+
+.fenn-art {
+  display: block;
+  height: auto;
+  overflow: visible;
+  color: var(--text);
+}
+.fenn-art .fill {
+  fill: var(--accent);
+}
+.fenn-art .accent {
+  stroke: var(--accent);
+}
+.empty-art {
+  width: min(220px, 64%);
+  margin: 0 auto 14px;
+  color: var(--text-2);
+}
+.empty[hidden] {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
