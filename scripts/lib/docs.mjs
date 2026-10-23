@@ -1,7 +1,8 @@
 // Generated files of the studio site in docs/ (committed, served by GitHub
 // Pages): the icon data, the engine bundle, the changelog, the shared head,
 // header and footer of every page, inline icons, the Fenn illustrations,
-// and the Portuguese pages in docs/pt-br/ built from docs/assets/js/i18n.js.
+// the Portuguese pages in docs/pt-br/ built from docs/assets/js/i18n.js, and
+// the framework guides and recipes in docs/frameworks/ (English only).
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -39,18 +40,20 @@ async function engineBundle(root) {
   return `/*! glyphfox engine for the studio | MIT | Alexandre Kohler */\n${result.outputFiles[0].text}`;
 }
 
-function withPartials(root, html, page) {
+/** Fills the shared partials. `base` prefixes their relative links for pages in a subfolder. */
+function withPartials(root, html, page, base = '') {
   let out = html;
   for (const name of PARTIALS) {
     const file = join(root, 'docs', 'partials', `${name}.html`);
     if (!existsSync(file)) continue;
-    const body = readFileSync(file, 'utf8').trim();
+    let body = readFileSync(file, 'utf8').trim();
+    if (base) body = body.replace(/(\s(?:href|src)=")(?![a-z]+:|#|\/)/g, `$1${base}`);
     const re = new RegExp(`(<!-- ${name}:start -->)[\\s\\S]*?(<!-- ${name}:end -->)`);
     out = out.replace(re, (m, a, b) => `${a}\n${body}\n${b}`);
   }
   const key = page.replace(/\.html$/, '');
   out = out.replace(/ aria-current="page"/g, '').replace(new RegExp(`(<a [^>]*data-nav="${key}")`, 'g'), '$1 aria-current="page"');
-  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch)/, `$1href="pt-br/${page}"$2`);
+  out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch)/, `$1href="${base}pt-br/${page}"$2`);
   return out;
 }
 
@@ -148,7 +151,7 @@ export function localize(html, page, tr) {
     }
     return t;
   });
-  out = out.replace(/(\s(?:href|src)=")((?:assets|data|vendor)\/)/g, '$1../$2');
+  out = out.replace(/(\s(?:href|src)=")((?:assets|data|vendor|frameworks)\/)/g, '$1../$2');
   out = out.replace(/(<a [^>]*)href="[^"]*"([^>]*data-lang-switch[^>]*)>[^<]*</, (m, a, b) => `${a}href="../${page}"${b.replace(/hreflang="[^"]*"/, 'hreflang="en"').replace(/aria-label="[^"]*"/, `aria-label="${escAttr(tr['lang.switch'] || 'EN, read in English')}"`)}>EN<`);
   out = out.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}pt-br/${page === 'index.html' ? '' : page}$2`);
   return withAlternates(out, page, 'pt-BR');
@@ -179,6 +182,15 @@ export async function docsFiles(root, icons, { version }) {
       html = withAlternates(html, f, 'en');
       files[file] = html;
       if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);
+    }
+    // Framework guides and recipes: part of the docs, one folder down.
+    const guides = join(docs, 'frameworks');
+    if (existsSync(guides)) {
+      for (const f of readdirSync(guides)) {
+        if (!f.endsWith('.html')) continue;
+        const file = join(guides, f);
+        files[file] = withArt(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), 'docs.html', '../'), api));
+      }
     }
   }
   return files;

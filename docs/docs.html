@@ -64,6 +64,7 @@
     <a href="#tailwind">Tailwind CSS</a>
     <a href="#html" data-i18n="docs.html">Plain HTML</a>
     <a href="#js">JavaScript</a>
+    <a href="#frameworks" data-i18n="docs.frameworks">Frameworks and recipes</a>
     <p class="docs-nav-title" data-i18n="docs.reference">Reference</p>
     <a href="#props">Props</a>
     <a href="#syntax" data-i18n="docs.syntax">Name syntax</a>
@@ -88,7 +89,7 @@
       <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh">npm install glyphfox
 # Angular
 npm install glyphfox-angular</pre></div>
-      <p data-i18n="docs.install.p">glyphfox has no dependencies. React, Vue, Svelte and Tailwind CSS are optional peer dependencies, used only when you import their entry points.</p>
+      <p data-i18n="docs.install.p">glyphfox has no dependencies. React, Vue, Svelte, Solid, Preact, Qwik, Lit, Astro, React Native, Ember and Tailwind CSS are optional peer dependencies, used only when you import their entry points.</p>
     </section>
 
     <section id="react">
@@ -211,6 +212,12 @@ fuse(['cloud', 'lock'], { layout: 'overlap', gap: 1 }); // icon data that passes
 createMorph(getIcon('play'), getIcon('pause')).frame(0.5);
 search('arrow', { limit: 10 });</pre></div>
       <p data-i18n="docs.js.p">The package also ships <code>icons.json</code>, <code>sprite.svg</code>, <code>styles.css</code>, <code>glyphfox/core</code> (the engine without icon data) and <code>glyphfox/tools</code> (lint and Fox-ify).</p>
+    </section>
+
+    <section id="frameworks">
+      <h2 data-i18n="docs.frameworks">Frameworks and recipes</h2>
+      <p data-i18n="docs.frameworks.p">The same props come as packages for Solid, Preact, Qwik, Lit, Astro, React Native and Ember, and as hook free Server Components for React. Recipes cover Next.js, Nuxt, SvelteKit, Remix, Alpine and htmx.</p>
+      <p><a href="frameworks/index.html" data-i18n="docs.frameworks.link">Every framework and recipe</a></p>
     </section>
 
     <section id="props">
@@ -336,6 +343,7 @@ npx glyphfox foxify any.svg --out fox.svg</pre></div>
         <ul>
           <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
           <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
           <li><a href="docs.html#cli">CLI</a></li>
           <li><a href="changelog.html" data-i18n="nav.changelog">Changelog</a></li>
         </ul>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<!-- head:end -->
+<title>Next.js App Router: glyphfox</title>
+<meta name="description" content="Use glyphfox icons in the Next.js App Router: zero JavaScript Server Components with glyphfox/react/server, interactive client components with glyphfox/react, tree shaking and the sprite.">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/frameworks/nextjs.html">
+<meta property="og:title" content="Next.js App Router: glyphfox">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/frameworks/nextjs.html">
+<link rel="stylesheet" href="../assets/docs.css">
+<link rel="modulepreload" href="../vendor/glyphfox.js">
+</head>
+<body class="docs-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../pt-br/docs.html" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<div class="wrap docs-layout">
+  <nav class="docs-nav" aria-label="Documentation">
+    <p class="docs-nav-title">On this page</p>
+    <a href="#server">Server Components</a>
+    <a href="#client">Client components</a>
+    <a href="#bundle">Bundle size</a>
+    <a href="#sprite">Sprite</a>
+    <p class="docs-nav-title">Recipes</p>
+    <a href="nextjs.html">Next.js App Router</a>
+    <a href="nuxt.html">Nuxt</a>
+    <a href="sveltekit.html">SvelteKit</a>
+    <a href="remix.html">Remix and React Router</a>
+    <a href="alpine.html">Alpine.js</a>
+    <a href="htmx.html">htmx</a>
+    <p class="docs-nav-title">More</p>
+    <a href="index.html">Every framework</a>
+    <a href="../docs.html">Docs</a>
+    <a href="../docs.html#props">Props</a>
+  </nav>
+
+  <main id="main" class="docs-main">
+    <header class="docs-hero">
+      <span class="eyebrow">Recipe</span>
+      <h1 class="title">Next.js App Router with Server Components</h1>
+      <p class="lead">Render icons in Server Components with no JavaScript at all, and reach for client components only where an icon reacts to clicks or morphs between names.</p>
+    </header>
+
+    <section id="server">
+      <h2>Server Components</h2>
+      <div class="code"><div class="code-head"><span>app/page.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { Icon, Fusion } from 'glyphfox/react/server';
+
+export default function Page() {
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;
+        &lt;Icon name="home" size={28} className="title-icon" /&gt; Dashboard
+      &lt;/h1&gt;
+      &lt;Icon name="file+check@tr" variant="duotone" title="Saved" /&gt;
+      &lt;Icon name="bell" animate="shake" trigger="hover" /&gt;
+      &lt;Icon name="menu" morphTo="x" trigger="hover" /&gt;
+      &lt;Fusion icons={['cloud', 'lock']} layout="overlap" /&gt;
+    &lt;/main&gt;
+  );
+}</pre></div>
+      <p><code>glyphfox/react/server</code> exports hook free <code>Icon</code> and <code>Fusion</code> components. They render static SVG during the server render, so nothing is sent to the browser for them, and every icon of the set is available by name. Living states, hover and state morphs travel inside the SVG as CSS.</p>
+    </section>
+
+    <section id="client">
+      <h2>Client components</h2>
+      <div class="code"><div class="code-head"><span>app/like-button.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">'use client';
+
+import { useState } from 'react';
+import { HeartIcon, MorphIcon } from 'glyphfox/react';
+
+export function LikeButton() {
+  const [liked, setLiked] = useState(false);
+  return (
+    &lt;button onClick={() =&gt; setLiked(!liked)} aria-pressed={liked}&gt;
+      &lt;HeartIcon animate="pop" trigger="state" active={liked} variant={liked ? 'solid' : 'outline'} /&gt;
+      &lt;MorphIcon name={liked ? 'check' : 'heart'} /&gt;
+    &lt;/button&gt;
+  );
+}</pre></div>
+      <p>The modules of <code>glyphfox/react</code> are marked <code>'use client'</code>, so the icon components also work when a Server Component renders them directly: they are server rendered and hydrated. Use them where you need the click trigger, morph tweens or <code>useMorph</code>.</p>
+    </section>
+
+    <section id="bundle">
+      <h2>Bundle size</h2>
+      <div class="code"><div class="code-head"><span>next.config.mjs</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">/** @type {import('next').NextConfig} */
+export default {
+  experimental: {
+    optimizePackageImports: ['glyphfox'],
+  },
+};</pre></div>
+      <p>Each icon is its own module. With <code>optimizePackageImports</code> Next.js rewrites barrel imports to those modules; deep imports such as <code>import { FileIcon } from 'glyphfox/react/icons/file'</code> work everywhere without configuration.</p>
+    </section>
+
+    <section id="sprite">
+      <h2>Sprite</h2>
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh">npx glyphfox build home search file+check --type sprite --out public/icons</pre></div>
+      <div class="code"><div class="code-head"><span>app/nav.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">export function SpriteGlyph({ name }: { name: string }) {
+  return (
+    &lt;svg width="20" height="20" aria-hidden="true"&gt;
+      &lt;use href={`/icons/sprite.svg#gf-${name}`} /&gt;
+    &lt;/svg&gt;
+  );
+}</pre></div>
+      <p>For long lists of static icons, a sprite of just the icons you use keeps the HTML small and caches across pages.</p>
+    </section>
+  </main>
+</div>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Product</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Brand kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Developers</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Project</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn the fox is drawn on the same grid as the icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="../assets/js/docs.js"></script>
+</body>
+</html>
