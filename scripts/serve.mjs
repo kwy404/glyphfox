@@ -11,8 +11,8 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
 
 createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
-  let path = normalize(decodeURIComponent(url.pathname)).replace(/^([/\])+/, '');
-  if (path.startsWith('glyphfox')) path = path.slice('glyphfox'.length).replace(/^[/\]+/, '');
+  let path = normalize(decodeURIComponent(url.pathname)).replace(/^[\\/]+/, '');
+  if (/^glyphfox(?:[\\/]|$)/.test(path)) path = path.slice('glyphfox'.length).replace(/^[\\/]+/, '');
   let file = join(root, path);
   if (!file.startsWith(root)) {
     res.writeHead(403).end();
