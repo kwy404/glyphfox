@@ -617,3 +617,48 @@ Object.assign(dict['pt-BR'], {
   'log.lead': 'Todas as versões, da mais nova para a mais antiga. As mesmas notas ficam no CHANGELOG.md do repositório.',
   'log.loading': 'Carregando as novidades',
 });
+
+// Landing scenes (docs/assets/js/scenes).
+Object.assign(dict.en, {
+  'home.grid.eyebrow': 'The grid',
+  'home.grid.title': 'Drawn on one grid.',
+  'home.grid.lead': 'Every icon is built on the same 24 by 24 grid with 2 px of padding, a 2 px stroke and round joins. Shared keylines hold circles, squares and tall shapes to one optical size, so any two icons sit together like letters of one font.',
+  'home.grid.s1': '24 x 24 grid',
+  'home.grid.s2': '2 px padding',
+  'home.grid.s3': '2 px stroke',
+  'home.grid.s4': 'Round caps and joins',
+  'home.sync.eyebrow': 'Signature motion',
+  'home.sync.title': 'Seven states. One beat.',
+  'home.sync.lead': 'Every living state samples one clock, so a whole interface can move in step. Scroll to bring the tracks in. The studio exports the same frames as GIF and WebM.',
+  'home.art.eyebrow': 'Made from the set',
+  'home.art.title': 'Art drawn with the icons.',
+  'home.art.lead': 'Every illustration on this page is built from the icon geometry itself: the same paths, the same grid and the same stroke.',
+  'home.art.fox': 'A fox made of icons',
+  'home.art.fox.note': 'Fenn, tiled from the glyphs of the set.',
+  'home.art.sky': 'A constellation of icons',
+  'home.art.sky.note': "Fenn's head, traced in stars.",
+  'home.art.grid': 'An exploded grid',
+  'home.art.grid.note': 'Grid, keylines, duotone fill and strokes, pulled apart.',
+});
+
+Object.assign(dict['pt-BR'], {
+  'home.grid.eyebrow': 'A grade',
+  'home.grid.title': 'Desenhado em uma só grade.',
+  'home.grid.lead': 'Todo ícone nasce na mesma grade de 24 por 24, com 2 px de margem, traço de 2 px e junções redondas. Linhas guia compartilhadas mantêm círculos, quadrados e formas altas no mesmo tamanho óptico, então quaisquer dois ícones combinam como letras de uma mesma fonte.',
+  'home.grid.s1': 'Grade 24 x 24',
+  'home.grid.s2': '2 px de margem',
+  'home.grid.s3': 'Traço de 2 px',
+  'home.grid.s4': 'Pontas e junções redondas',
+  'home.sync.eyebrow': 'Movimento de assinatura',
+  'home.sync.title': 'Sete estados. Um só compasso.',
+  'home.sync.lead': 'Todo estado vivo segue o mesmo relógio, então uma interface inteira pode se mover no mesmo ritmo. Role para trazer as faixas. O estúdio exporta os mesmos quadros em GIF e WebM.',
+  'home.art.eyebrow': 'Feito com o conjunto',
+  'home.art.title': 'Arte desenhada com os ícones.',
+  'home.art.lead': 'Toda ilustração desta página é construída com a própria geometria dos ícones: os mesmos traços, a mesma grade e a mesma espessura.',
+  'home.art.fox': 'Uma raposa feita de ícones',
+  'home.art.fox.note': 'Fenn, montado com os glifos do conjunto.',
+  'home.art.sky': 'Uma constelação de ícones',
+  'home.art.sky.note': 'A cabeça do Fenn, traçada em estrelas.',
+  'home.art.grid': 'Uma grade explodida',
+  'home.art.grid.note': 'Grade, linhas guia, preenchimento duotone e traços, separados em camadas.',
+});

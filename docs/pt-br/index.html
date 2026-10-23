@@ -27,6 +27,7 @@
 <meta property="og:description" content="Variable, morphable and fusable open source icons with a studio in the browser.">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/">
 <link rel="stylesheet" href="../assets/landing.css">
+<link rel="stylesheet" href="../assets/scenes.css">
 <link rel="modulepreload" href="../vendor/glyphfox.js">
 <link rel="preload" href="../data/icons.json" as="fetch" crossorigin>
 </head>
@@ -58,6 +59,7 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="grid-bg" aria-hidden="true"></div>
     <div class="glow" style="width:720px;height:720px;right:-160px;top:-260px" aria-hidden="true"></div>
+    <canvas class="flow-canvas" data-flow-canvas aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="eyebrow" data-i18n="home.hero.eyebrow">Sistema de ícones open source</span>
@@ -79,13 +81,27 @@
           <div><dt data-i18n="home.stats.states">estados vivos</dt><dd>7</dd></div>
         </dl>
       </div>
-      <div class="hero-stage" aria-hidden="true">
-        <canvas id="swarm"></canvas>
-        <svg class="hero-fenn" viewBox="0 0 24 24" fill="none" stroke="url(#fenn-grad)" stroke-width=".28" stroke-linecap="round" stroke-linejoin="round">
-          <defs><linearGradient id="fenn-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd9a8"/><stop offset=".55" stop-color="#ff9442"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs>
-          <path pathLength="1" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path pathLength="1" d="M9 12h.01"/><path pathLength="1" d="M15 12h.01"/>
-        </svg>
+      <div class="hero-stage" aria-hidden="true" data-hero-flow>
         <!--art:sitting:hero-mascot--><svg class="fenn-art hero-mascot" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="fill" d="M27 17.5L36 24 44 35 46 47 42 60H21L19 44 21 30 24 22.5Z" fill="#ff7a1a" stroke="none" opacity=".16"/><path class="fill" d="M41 59L52 56 59 47 58 37 53 46 45 52Z" fill="#ff7a1a" stroke="none" opacity=".28"/><path class="fill" d="M16 3.5 21 8h6l5-4.5 .5 7 1.5 4-7 3-3 5-3-5-7-3 1.5-4z" fill="#ff7a1a" stroke="none" opacity=".28"/><path d="M16 3.5 21 8h6l5-4.5 .5 7 1.5 4-7 3-3 5-3-5-7-3 1.5-4z"/><path d="M21 13h.01"/><path d="M27 13h.01"/><path d="M27 17.5L36 24 44 35 46 47 42 60H21L19 44 21 30 24 22.5"/><path d="M21 31l4.5 4 4.5-4"/><path d="M25 41v18.5M30 43v16.5"/><path d="M37 59.5l-1-8.5 7-6"/><path d="M41 59L52 56 59 47 58 37 53 46 45 52"/><path d="M55.5 41.5l3 1.5"/></svg><!--/art-->
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="grid" data-scene="grid" aria-labelledby="grid-title">
+    <div class="sticky">
+      <div class="wrap scene-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.grid.eyebrow">A grade</span>
+          <h2 id="grid-title" class="title" data-i18n="home.grid.title">Desenhado em uma só grade.</h2>
+          <p class="lead" data-i18n="home.grid.lead">Todo ícone nasce na mesma grade de 24 por 24, com 2 px de margem, traço de 2 px e junções redondas. Linhas guia compartilhadas mantêm círculos, quadrados e formas altas no mesmo tamanho óptico, então quaisquer dois ícones combinam como letras de uma mesma fonte.</p>
+          <ul class="grid-specs">
+            <li data-i18n="home.grid.s1">Grade 24 x 24</li>
+            <li data-i18n="home.grid.s2">2 px de margem</li>
+            <li data-i18n="home.grid.s3">Traço de 2 px</li>
+            <li data-i18n="home.grid.s4">Pontas e junções redondas</li>
+          </ul>
+        </div>
+        <div class="grid-stage" data-grid-stage aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -103,7 +119,7 @@
             <div class="readout-row"><span data-i18n="axis.style">Estilo</span><b data-out="variant">outline</b></div>
           </div>
         </div>
-        <div class="axes-board" data-board></div>
+        <div class="weight-board" data-weight-board aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -140,7 +156,7 @@
         </div>
         <div class="morph-stage">
           <div class="morph-ring" aria-hidden="true"></div>
-          <div class="morph-icon" data-morph-icon></div>
+          <div class="morph-icon" data-morph-chain></div>
           <div class="morph-label" data-morph-label aria-hidden="true"></div>
         </div>
       </div>
@@ -158,6 +174,19 @@
     </div>
   </section>
 
+  <section class="scene scene-sync" id="sync" data-scene="sync" aria-labelledby="sync-title">
+    <div class="sticky">
+      <div class="wrap sync-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.sync.eyebrow">Movimento de assinatura</span>
+          <h2 id="sync-title" class="title" data-i18n="home.sync.title">Sete estados. Um só compasso.</h2>
+          <p class="lead" data-i18n="home.sync.lead">Todo estado vivo segue o mesmo relógio, então uma interface inteira pode se mover no mesmo ritmo. Role para trazer as faixas. O estúdio exporta os mesmos quadros em GIF e WebM.</p>
+        </div>
+        <div class="sync-stage" data-sync-stage aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="scene" id="modifiers" data-scene="mods" aria-labelledby="mods-title">
     <div class="sticky">
       <div class="wrap scene-grid flip">
@@ -166,7 +195,7 @@
           <h2 id="mods-title" class="title" data-i18n="home.mods.title">Selos que abrem o próprio espaço.</h2>
           <p class="lead" data-i18n="home.mods.lead">Adicione mais, check, alerta, cadeado, relógio, sincronizar e outros em qualquer canto. O ícone de baixo é recortado em volta do selo, então algumas centenas de ícones viram milhares de combinações limpas.</p>
         </div>
-        <div class="mods-board" data-mods-board></div>
+        <div class="mods-stage" data-mods-stage aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -195,7 +224,7 @@
           <p class="lead" data-i18n="home.fusion.lead">Funda de 2 a 10 ícones com sete layouts. As partes são escaladas e alinhadas à grade e, onde se sobrepõem, a de trás é recortada em volta da da frente, então as linhas nunca colidem e o resultado continua passando no lint.</p>
           <p class="fusion-caption" data-fusion-caption aria-live="off"></p>
         </div>
-        <div class="fusion-stage" data-fusion-stage aria-hidden="true"></div>
+        <div class="fusion-stage" data-fuse-stage aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -208,6 +237,21 @@
       </div>
       <div class="gallery-grid" data-gallery></div>
       <p class="center-cta reveal"><a class="btn" href="studio.html#fusion" data-i18n="home.gallery.cta">Crie a sua fusão</a></p>
+    </div>
+  </section>
+
+  <section class="section art" aria-labelledby="art-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.art.eyebrow">Feito com o conjunto</span>
+        <h2 id="art-title" class="title" data-i18n="home.art.title">Arte desenhada com os ícones.</h2>
+        <p class="lead" data-i18n="home.art.lead">Toda ilustração desta página é construída com a própria geometria dos ícones: os mesmos traços, a mesma grade e a mesma espessura.</p>
+      </div>
+      <div class="art-grid">
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="fox"></div><figcaption><b data-i18n="home.art.fox">Uma raposa feita de ícones</b><span data-i18n="home.art.fox.note">Fenn, montado com os glifos do conjunto.</span></figcaption></figure>
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="constellation"></div><figcaption><b data-i18n="home.art.sky">Uma constelação de ícones</b><span data-i18n="home.art.sky.note">A cabeça do Fenn, traçada em estrelas.</span></figcaption></figure>
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="exploded"></div><figcaption><b data-i18n="home.art.grid">Uma grade explodida</b><span data-i18n="home.art.grid.note">Grade, linhas guia, preenchimento duotone e traços, separados em camadas.</span></figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -302,5 +346,6 @@
 </footer>
 <!-- footer:end -->
 <script type="module" src="../assets/js/landing.js"></script>
+<script type="module" src="../assets/js/scenes/index.js"></script>
 </body>
 </html>
