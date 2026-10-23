@@ -62,4 +62,20 @@ describe('Fox-ify', () => {
     expect(lintBody('<path d="M0 0h30"/>')[0].rule).toBe('padding');
     expect(parsePath('M2 2h20').length).toBe(2);
   });
+
+  it('resolves percentages and units against the viewport', () => {
+    const r = foxify('<svg viewBox="0 0 24 24"><rect x="10%" y="10%" width="80%" height="80%" fill="none" stroke="#000"/></svg>');
+    expect(r.problems).toEqual([]);
+    const b = bounds(r.body);
+    expect(b.minX).toBeGreaterThanOrEqual(2);
+    expect(b.maxX).toBeLessThanOrEqual(22);
+    expect(foxify('<svg width="48px" height="48px"><circle cx="24px" cy="24px" r="18px" fill="none" stroke="#000"/></svg>').problems).toEqual([]);
+  });
+
+  it('applies the viewBox of nested svg elements', () => {
+    const r = foxify('<svg viewBox="0 0 48 48"><svg x="8" y="8" width="32" height="32" viewBox="0 0 24 24"><path d="M2 12h20" stroke="#000"/></svg></svg>', { fit: 'viewbox' });
+    const b = bounds(r.body);
+    expect(b.minX).toBeCloseTo(5, 0);
+    expect(b.maxX).toBeCloseTo(19, 0);
+  });
 });

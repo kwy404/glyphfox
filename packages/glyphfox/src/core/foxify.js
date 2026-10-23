@@ -76,7 +76,33 @@ function styleOf(el) {
 
 const isNone = (v) => v === undefined || v === null || /^(none|transparent)$/i.test(String(v).trim());
 
-function collect(el, matrix, inherited, ids, out, depth = 0) {
+const HORIZONTAL = ['x', 'width', 'cx', 'rx', 'x1', 'x2'];
+const VERTICAL = ['y', 'height', 'cy', 'ry', 'y1', 'y2'];
+
+/** A length attribute in user units: percentages of the viewport, units dropped. */
+function length(v, ref) {
+  if (v === undefined || v === null) return v;
+  const str = String(v).trim();
+  const n = parseFloat(str);
+  if (!Number.isFinite(n)) return v;
+  return String(str.endsWith('%') ? (n / 100) * ref : n);
+}
+
+function resolveLengths(attrs, [w, h]) {
+  const out = { ...attrs };
+  for (const k of HORIZONTAL) if (out[k] !== undefined) out[k] = length(out[k], w);
+  for (const k of VERTICAL) if (out[k] !== undefined) out[k] = length(out[k], h);
+  if (out.r !== undefined) out.r = length(out.r, Math.sqrt((w * w + h * h) / 2));
+  return out;
+}
+
+function viewBoxOf(v) {
+  if (!v) return null;
+  const n = String(v).trim().split(/[\s,]+/).map(Number);
+  return n.length === 4 && n.every(Number.isFinite) && n[2] > 0 && n[3] > 0 ? n : null;
+}
+
+function collect(el, matrix, inherited, ids, out, depth = 0, viewport = [24, 24]) {
   if (depth > 32) return;
   const name = localName(el.name);
   if (SKIP.has(name)) return;
@@ -91,35 +117,46 @@ function collect(el, matrix, inherited, ids, out, depth = 0) {
     if (ref) {
       const mm = mul(m, [1, 0, 0, 1, Number(el.attrs.x) || 0, Number(el.attrs.y) || 0]);
       const target = localName(ref.name) === 'symbol' ? { ...ref, name: 'g' } : ref;
-      collect(target, mm, style, ids, out, depth + 1);
+      collect(target, mm, style, ids, out, depth + 1, viewport);
     }
     return;
   }
+  let vp = viewport;
   if (name === 'svg' && depth > 0) {
-    const x = Number(el.attrs.x) || 0;
-    const y = Number(el.attrs.y) || 0;
+    // A nested viewport: position, size and its own viewBox (meet, centered).
+    const x = Number(length(el.attrs.x ?? 0, vp[0])) || 0;
+    const y = Number(length(el.attrs.y ?? 0, vp[1])) || 0;
+    const vb = viewBoxOf(el.attrs.viewBox);
+    const w = el.attrs.width !== undefined ? Number(length(el.attrs.width, vp[0])) : vb ? vb[2] : vp[0];
+    const h = el.attrs.height !== undefined ? Number(length(el.attrs.height, vp[1])) : vb ? vb[3] : vp[1];
     m = mul(m, [1, 0, 0, 1, x, y]);
+    if (vb && w > 0 && h > 0) {
+      const k = Math.min(w / vb[2], h / vb[3]);
+      m = mul(m, [k, 0, 0, k, (w - vb[2] * k) / 2 - vb[0] * k, (h - vb[3] * k) / 2 - vb[1] * k]);
+      vp = [vb[2], vb[3]];
+    } else if (w > 0 && h > 0) vp = [w, h];
   }
   if (SHAPES.has(name)) {
     if (style.visibility === 'hidden') return;
     const filled = !isNone(style.fill ?? 'black') && Number(style['fill-opacity'] ?? 1) > 0;
     const stroked = !isNone(style.stroke) && Number(style['stroke-opacity'] ?? 1) > 0;
     if (!filled && !stroked) return;
+    const attrs = resolveLengths(el.attrs, vp);
     let segs;
     try {
-      segs = shapeToSegments([name, el.attrs]);
+      segs = shapeToSegments([name, attrs]);
     } catch {
       return;
     }
     if (!segs.length) return;
-    out.push({ tag: name, attrs: el.attrs, matrix: m, segs: transformSegments(segs, m), filled, stroked });
+    out.push({ tag: name, attrs, matrix: m, segs: transformSegments(segs, m), filled, stroked });
     return;
   }
   if (name === 'text') {
     out.skippedText = (out.skippedText || 0) + 1;
     return;
   }
-  for (const c of el.children) collect(c, m, style, ids, out, depth + 1);
+  for (const c of el.children) collect(c, m, style, ids, out, depth + 1, vp);
 }
 
 function indexIds(el, ids) {
@@ -209,7 +246,9 @@ export function foxify(svgText, { snap = 0.25, fit = 'auto', padding = 2 } = {})
   const ids = new Map();
   indexIds(root, ids);
   const shapes = [];
-  collect(root, I, { fill: 'black' }, ids, shapes);
+  const rootBox = viewBoxOf(root.attrs.viewBox);
+  const rootViewport = rootBox ? [rootBox[2], rootBox[3]] : [parseFloat(root.attrs.width) || 24, parseFloat(root.attrs.height) || 24];
+  collect(root, I, { fill: 'black' }, ids, shapes, 0, rootViewport);
   const notes = [];
   if (shapes.skippedText) notes.push(`${shapes.skippedText} text element(s) skipped (convert text to paths first)`);
   if (!shapes.length) return { svg: '', body: '', problems: [{ rule: 'empty', message: 'no drawable shapes found' }], notes };
