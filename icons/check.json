@@ -9,5 +9,16 @@
     "success",
     "yes",
     "ok"
-  ]
+  ],
+  "animation": {
+    "name": "draw",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.6, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 0, "props": { "strokeDashoffset": 0 } }
+    ]
+  }
 }

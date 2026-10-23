@@ -8,5 +8,24 @@
     "bin",
     "garbage",
     "discard"
-  ]
+  ],
+  "animation": {
+    "name": "lift",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [19, 6],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" }, "easing": "ease-out" },
+      { "at": 0.35, "element": 1, "props": { "transform": "rotate(6deg)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "rotate(6deg)" }, "easing": "ease-in" },
+      { "at": 0.8, "element": 1, "props": { "transform": "rotate(-1.5deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" }, "easing": "ease-out" },
+      { "at": 0.35, "element": 2, "props": { "transform": "rotate(6deg)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "rotate(6deg)" }, "easing": "ease-in" },
+      { "at": 0.8, "element": 2, "props": { "transform": "rotate(-1.5deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

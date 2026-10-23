@@ -8,5 +8,15 @@
     "hour",
     "watch",
     "schedule"
-  ]
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(360deg)" } }
+    ]
+  }
 }

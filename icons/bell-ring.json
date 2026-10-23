@@ -8,5 +8,38 @@
     "ringing",
     "alert",
     "active"
-  ]
+  ],
+  "animation": {
+    "name": "swing",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 3],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": 0, "props": { "transform": "rotate(12deg)" } },
+      { "at": 0.32, "element": 0, "props": { "transform": "rotate(-9deg)" } },
+      { "at": 0.5, "element": 0, "props": { "transform": "rotate(5.4deg)" } },
+      { "at": 0.68, "element": 0, "props": { "transform": "rotate(-3deg)" } },
+      { "at": 0.84, "element": 0, "props": { "transform": "rotate(1.2deg)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.05, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.193, "element": 1, "props": { "transform": "rotate(18deg)" } },
+      { "at": 0.354, "element": 1, "props": { "transform": "rotate(-13.5deg)" } },
+      { "at": 0.525, "element": 1, "props": { "transform": "rotate(8.1deg)" } },
+      { "at": 0.696, "element": 1, "props": { "transform": "rotate(-4.5deg)" } },
+      { "at": 0.848, "element": 1, "props": { "transform": "rotate(1.8deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 2, "props": { "opacity": 0.15 } },
+      { "at": 0.5, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.1, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.28, "element": 3, "props": { "opacity": 0.15 } },
+      { "at": 0.55, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } }
+    ]
+  }
 }

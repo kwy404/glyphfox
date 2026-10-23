@@ -7,5 +7,18 @@
     "enlarge",
     "plus",
     "scale"
-  ]
+  ],
+  "animation": {
+    "name": "zoom",
+    "duration": 700,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [11, 11],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.4, "element": "all", "props": { "transform": "scale(1.12)" } },
+      { "at": 0.7, "element": "all", "props": { "transform": "scale(0.98)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)" } }
+    ]
+  }
 }

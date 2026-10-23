@@ -8,5 +8,21 @@
     "export",
     "forward",
     "open with"
-  ]
+  ],
+  "animation": {
+    "name": "nudge",
+    "duration": 700,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(0px, -2px)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "translate(0px, 0.3px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "translate(0px, -2px)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "translate(0px, 0.3px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

@@ -8,5 +8,18 @@
     "sort",
     "refine",
     "narrow"
-  ]
+  ],
+  "animation": {
+    "name": "squeeze",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 4],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.35, "element": "all", "props": { "transform": "scale(0.88, 1)" } },
+      { "at": 0.65, "element": "all", "props": { "transform": "scale(1.02, 1)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

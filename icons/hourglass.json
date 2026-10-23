@@ -8,5 +8,18 @@
     "loading",
     "sand",
     "timer"
-  ]
+  ],
+  "animation": {
+    "name": "flip",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 0.2, "element": "all", "props": { "transform": "rotate(20deg) scale(0.78)" } },
+      { "at": 0.5, "element": "all", "props": { "transform": "rotate(90deg) scale(0.72)" } },
+      { "at": 0.8, "element": "all", "props": { "transform": "rotate(160deg) scale(0.78)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(180deg) scale(1)" } }
+    ]
+  }
 }

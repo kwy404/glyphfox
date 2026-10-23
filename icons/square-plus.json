@@ -7,5 +7,17 @@
     "new",
     "create",
     "insert"
-  ]
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(90deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(90deg)" } }
+    ]
+  }
 }

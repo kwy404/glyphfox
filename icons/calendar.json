@@ -9,5 +9,22 @@
     "event",
     "month",
     "day"
-  ]
+  ],
+  "animation": {
+    "name": "schedule",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [8, 15],
+    "frames": [
+      { "at": 0, "element": 4, "props": { "transform": "scale(1)" } },
+      { "at": 0.3, "element": 4, "props": { "transform": "scale(0.6)" } },
+      { "at": 0.6, "element": 4, "props": { "transform": "scale(1.4)" } },
+      { "at": 1, "element": 4, "props": { "transform": "scale(1)" } },
+      { "at": 0, "element": 5, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.25, "element": 5, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.7, "element": 5, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 5, "props": { "strokeDashoffset": 0 } }
+    ]
+  }
 }
