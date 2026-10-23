@@ -1,19 +1,24 @@
 #!/usr/bin/env node
-// glyphfox contact sheet: every icon at 24 and 16 px, light and dark.
+// glyphfox contact sheets: every icon of a collection, light and dark.
 //
-//   node tools/icons/sheet.mjs [--out sheet.html] [--png sheet.png]
+//   node tools/icons/sheet.mjs [--collection NAME] [--out sheet.html] [--png sheet.png]
 //
 // Options:
-//   --out FILE        where to write the HTML (default: system temp folder)
-//   --png FILE        also render a full page PNG with one headless browser
-//   --review          review layout: 4x view on the grid, weights 1, 2 and 3
-//   --only a,b,c      only these icons
-//   --category NAME   only icons whose first category is NAME
+//   --collection NAME   base (default), display, animated or isometric
+//   --out FILE          where to write the HTML (default: system temp folder)
+//   --png FILE          also render a full page PNG with one headless browser
+//   --review            review layout: large view on the grid, weights 1, 2 and 3
+//   --only a,b,c        only these icons
+//   --category NAME     only icons whose first category is NAME (comma list allowed)
 //   --from N --count M  a slice of the sorted list (for review batches)
-//   --scale N         device scale factor for the PNG (default 1)
-//   --width N         page width in CSS pixels (default 1600)
-//   --columns N       grid columns (default 10, review 7)
-//   --slices N        also write the PNG as bands of N CSS pixels (NAME-01.png, ...)
+//   --scale N           device scale factor for the PNG (default 1)
+//   --width N           page width in CSS pixels (default 1600)
+//   --columns N         grid columns
+//   --slices N          also write the PNG as bands of N CSS pixels (NAME-01.png, ...)
+//
+// Base and isometric icons show at 24 and 16 px, display icons at 96 and 48 px,
+// and animated icons as a strip of frames sampled across one cycle (played with
+// the Web Animations API from the keyframes in the sidecar).
 //
 // The PNG is rendered with Playwright when it is installed, otherwise with a
 // local Edge or Chrome driven over the DevTools protocol (Node 22 or newer).
@@ -24,10 +29,10 @@ import { join, dirname, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawn, spawnSync } from 'node:child_process';
-import { CATEGORIES, SECONDARY_CLASS } from './svg.mjs';
+import { CATEGORIES, COLLECTIONS, SECONDARY_CLASS } from './svg.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const iconsDir = resolve(here, '..', '..', 'icons');
+const iconsRoot = resolve(here, '..', '..', 'icons');
 
 function option(name, fallback) {
   const k = process.argv.indexOf(`--${name}`);
@@ -35,19 +40,31 @@ function option(name, fallback) {
 }
 const flag = (name) => process.argv.includes(`--${name}`);
 
+const collectionName = option('collection', 'base');
+const collection = COLLECTIONS[collectionName];
+if (!collection) {
+  console.error(`unknown collection "${collectionName}" (use ${Object.keys(COLLECTIONS).join(', ')})`);
+  process.exit(1);
+}
+const GRID = collection.grid;
+const iconsDir = collection.dir ? join(iconsRoot, collection.dir) : iconsRoot;
 const review = flag('review');
-const outHtml = resolve(option('out', join(tmpdir(), 'glyphfox-sheet', review ? 'review.html' : 'sheet.html')));
+const outHtml = resolve(option('out', join(tmpdir(), 'glyphfox-sheet', `${collectionName}${review ? '-review' : ''}.html`)));
 const outPng = option('png', null);
 const scale = Number(option('scale', '1'));
 const width = Number(option('width', '1600'));
-const columns = Number(option('columns', review ? '7' : '10'));
+const defaultColumns = { base: 10, isometric: 10, display: 4, animated: 4 }[collectionName];
+const columns = Number(option('columns', review ? (collectionName === 'display' ? '3' : collectionName === 'animated' ? '2' : '7') : String(defaultColumns)));
 const sliceHeight = Number(option('slices', '0'));
+const FRAMES = [0, 1 / 6, 2 / 6, 3 / 6, 4 / 6, 5 / 6];
 
 function loadIcons() {
-  const names = readdirSync(iconsDir)
-    .filter((f) => f.endsWith('.svg'))
-    .map((f) => f.slice(0, -4))
-    .sort();
+  const names = existsSync(iconsDir)
+    ? readdirSync(iconsDir)
+        .filter((f) => f.endsWith('.svg'))
+        .map((f) => f.slice(0, -4))
+        .sort()
+    : [];
   return names.map((name) => {
     const svg = readFileSync(join(iconsDir, `${name}.svg`), 'utf8');
     let meta = { categories: ['symbols'], tags: [] };
@@ -57,36 +74,94 @@ function loadIcons() {
       // The lint reports missing or broken sidecars.
     }
     const body = svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').trim();
-    return { name, body, meta, duotone: body.includes(SECONDARY_CLASS) };
+    return { name, body, meta, duotone: body.includes(SECONDARY_CLASS), animation: meta.animation || null };
   });
 }
 
-function icon(body, size, weight = 2, cls = '') {
-  return `<svg class="${cls}" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${weight}" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+function icon(body, size, weight = 2, cls = '', extra = '') {
+  return `<svg class="${cls}"${extra} xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${GRID} ${GRID}" fill="none" stroke="currentColor" stroke-width="${weight}" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
 }
 
-function gridUnderlay() {
+function gridUnderlay(px) {
   const lines = [];
-  for (let k = 1; k < 24; k++) {
+  const w = (GRID / px) * 0.6;
+  for (let k = 1; k < GRID; k++) {
     const strong = k % 4 === 0;
     const c = strong ? '#cdd1db' : '#e4e7ee';
-    lines.push(`<line x1="${k}" y1="0" x2="${k}" y2="24" stroke="${c}" stroke-width="0.06"/>`);
-    lines.push(`<line x1="0" y1="${k}" x2="24" y2="${k}" stroke="${c}" stroke-width="0.06"/>`);
+    lines.push(`<line x1="${k}" y1="0" x2="${k}" y2="${GRID}" stroke="${c}" stroke-width="${w}"/>`);
+    lines.push(`<line x1="0" y1="${k}" x2="${GRID}" y2="${k}" stroke="${c}" stroke-width="${w}"/>`);
   }
-  return `<svg class="underlay" viewBox="0 0 24 24" width="96" height="96">${lines.join('')}<rect x="2" y="2" width="20" height="20" fill="none" stroke="#ee9a74" stroke-width="0.08"/><circle cx="12" cy="12" r="10" fill="none" stroke="#c8d6f5" stroke-width="0.06"/><rect x="3" y="3" width="18" height="18" fill="none" stroke="#c8d6f5" stroke-width="0.06"/></svg>`;
+  const p = collection.padding;
+  const live = GRID - 2 * p;
+  return `<svg class="underlay" viewBox="0 0 ${GRID} ${GRID}" width="${px}" height="${px}">${lines.join('')}<rect x="${p}" y="${p}" width="${live}" height="${live}" fill="none" stroke="#ee9a74" stroke-width="${w * 1.4}"/><circle cx="${GRID / 2}" cy="${GRID / 2}" r="${live / 2}" fill="none" stroke="#c8d6f5" stroke-width="${w}"/></svg>`;
+}
+
+function frames(ic, size, weight = 2) {
+  return FRAMES.map((t) => icon(ic.body, size, weight, 'anim', ` data-anim="${ic.name}" data-t="${t.toFixed(4)}"`)).join('');
 }
 
 function cell(ic) {
   const tag = ic.duotone ? '<span class="duo">duo</span>' : '';
+  const b = ic.body;
+  if (collectionName === 'animated') {
+    const big = review ? 64 : 40;
+    return `<figure class="cell"><div class="row light strip">${frames(ic, big)}</div><div class="row dark strip">${frames(ic, 24)}</div><figcaption>${ic.name}${tag}<span>${ic.animation ? `${ic.animation.duration} ms` : ''}</span></figcaption></figure>`;
+  }
+  if (collectionName === 'display') {
+    if (review) {
+      return `<figure class="cell"><div class="big big-display"><div class="frame" style="width:192px;height:192px">${gridUnderlay(192)}${icon(b, 192, 2, 'top')}</div></div>
+<div class="row light tall">${icon(b, 48, 1)}${icon(b, 48, 2)}${icon(b, 48, 3)}<i></i>${icon(b, 32, 2)}</div>
+<div class="row dark tall">${icon(b, 48, 2)}${icon(b, 32, 2)}<i></i>${icon(b, 48, 2, 'accent')}</div>
+<figcaption>${ic.name}${tag}</figcaption></figure>`;
+    }
+    return `<figure class="cell"><div class="tiles"><div class="tile light tall">${icon(b, 96)}${icon(b, 48)}</div><div class="tile dark tall">${icon(b, 96, 2, 'accent')}${icon(b, 48)}</div></div><figcaption>${ic.name}${tag}</figcaption></figure>`;
+  }
   if (review) {
-    const b = ic.body;
-    return `<figure class="cell"><div class="big"><div class="frame">${gridUnderlay()}${icon(b, 96, 2, 'top')}</div></div>
+    return `<figure class="cell"><div class="big"><div class="frame">${gridUnderlay(96)}${icon(b, 96, 2, 'top')}</div></div>
 <div class="row light">${icon(b, 24, 1)}${icon(b, 24, 2)}${icon(b, 24, 3)}<i></i>${icon(b, 16, 2)}${icon(b, 16, 3)}</div>
 <div class="row dark">${icon(b, 24, 2)}${icon(b, 16, 2)}<i></i>${icon(b, 24, 2, 'accent')}</div>
 <figcaption>${ic.name}${tag}</figcaption></figure>`;
   }
-  return `<figure class="cell"><div class="tiles"><div class="tile light">${icon(ic.body, 24)}${icon(ic.body, 16)}</div><div class="tile dark">${icon(ic.body, 24)}${icon(ic.body, 16)}</div></div><figcaption>${ic.name}${tag}</figcaption></figure>`;
+  return `<figure class="cell"><div class="tiles"><div class="tile light">${icon(b, 24)}${icon(b, 16)}</div><div class="tile dark">${icon(b, 24)}${icon(b, 16)}</div></div><figcaption>${ic.name}${tag}</figcaption></figure>`;
 }
+
+// Plays the sidecar keyframes with the Web Animations API and freezes each
+// frame at its sample time. Runs inside the sheet page.
+const PLAYER = `
+const data = JSON.parse(document.getElementById('anim-data').textContent);
+for (const svg of document.querySelectorAll('svg[data-anim]')) {
+  const a = data[svg.dataset.anim];
+  if (!a) continue;
+  const t = parseFloat(svg.dataset.t) * a.duration;
+  const kids = Array.from(svg.children);
+  for (const el of a.elements) {
+    const node = kids[el.index];
+    if (!node) continue;
+    const draws = el.keyframes.some((k) => k.draw !== undefined);
+    const len = draws ? node.getTotalLength() : 0;
+    if (draws) node.style.strokeDasharray = len + ' ' + len;
+    if (el.origin) {
+      node.style.transformBox = 'view-box';
+      node.style.transformOrigin = el.origin[0] + 'px ' + el.origin[1] + 'px';
+    }
+    const ease = el.easing || a.easing || 'linear';
+    const kfs = el.keyframes.map((k) => {
+      const f = { offset: k.offset, easing: k.easing || ease };
+      if (k.opacity !== undefined) f.opacity = k.opacity;
+      if (k.translate || k.rotate !== undefined || k.scale !== undefined) {
+        const tr = k.translate || [0, 0];
+        const s = k.scale === undefined ? [1, 1] : Array.isArray(k.scale) ? k.scale : [k.scale, k.scale];
+        f.transform = 'translate(' + tr[0] + 'px, ' + tr[1] + 'px) rotate(' + (k.rotate || 0) + 'deg) scale(' + s[0] + ', ' + s[1] + ')';
+      }
+      if (k.draw !== undefined) f.strokeDashoffset = (1 - k.draw) * len;
+      return f;
+    });
+    const anim = node.animate(kfs, { duration: a.duration, iterations: Infinity, delay: el.delay || 0, fill: 'both' });
+    anim.pause();
+    anim.currentTime = t;
+  }
+}
+`;
 
 function buildHtml(all) {
   let list = all;
@@ -96,7 +171,10 @@ function buildHtml(all) {
     list = want.map((n) => all.find((i) => i.name === n)).filter(Boolean);
   }
   const category = option('category', null);
-  if (category) list = list.filter((i) => i.meta.categories[0] === category);
+  if (category) {
+    const cats = category.split(',');
+    list = list.filter((i) => cats.includes(i.meta.categories[0]));
+  }
   const from = option('from', null);
   if (from !== null) list = list.slice(Number(from), Number(from) + Number(option('count', '35')));
 
@@ -109,9 +187,11 @@ function buildHtml(all) {
       if (items.length) sections.push({ title: `${c} (${items.length})`, items });
     }
     const duo = list.filter((i) => i.duotone);
-    if (duo.length) sections.push({ title: `duotone with a second color (${duo.length})`, items: duo, accent: true });
+    if (duo.length && collectionName !== 'display') sections.push({ title: `duotone with a second color (${duo.length})`, items: duo, accent: true });
   }
-  const duoCount = all.filter((i) => i.duotone).length;
+  const duoCount = list.filter((i) => i.duotone).length;
+  const sizes = { base: '24 and 16 px', isometric: '24 and 16 px', display: '96 and 48 px on the 48 grid', animated: 'six frames across one cycle' }[collectionName];
+  const titles = { base: 'glyphfox', isometric: 'glyphfox isometric', display: 'glyphfox display', animated: 'glyphfox animated' };
   const css = `
 :root{--bg:#f4f4f1;--card:#fff;--ink:#17171c;--muted:#70707b;--line:#e3e3de;--night:#141418;--night-ink:#ececf1;--accent:#e2632a}
 *{box-sizing:border-box}
@@ -125,22 +205,28 @@ h2{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;
 .cell{margin:0;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .tiles{display:grid;grid-template-columns:1fr 1fr}
 .tile{display:flex;align-items:center;justify-content:center;gap:12px;height:54px}
+.tile.tall{height:124px;gap:18px}
 .light{background:#fff;color:var(--ink)}
 .dark{background:var(--night);color:var(--night-ink)}
 figcaption{font-size:11px;color:var(--muted);padding:4px 8px;border-top:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;justify-content:space-between;gap:6px}
 .duo{color:var(--accent);font-weight:600}
 .accent-on .gf-secondary,svg.accent .gf-secondary{fill:var(--accent);opacity:.85}
 .big{display:flex;align-items:center;justify-content:center;height:112px;background:#fff}
+.big-display{height:208px}
 .frame{position:relative;width:96px;height:96px}
 .frame svg{position:absolute;left:0;top:0}
 .row{display:flex;align-items:center;justify-content:center;gap:9px;height:36px;border-top:1px solid var(--line)}
+.row.tall{height:64px;gap:14px}
+.row.strip{height:auto;padding:10px 6px;gap:6px}
 .row i{width:1px;height:18px;background:#d0d0cc}
 .row.dark i{background:#3a3a42}
 `;
   const body = sections
     .map((s) => `<section class="${s.accent ? 'accent-on' : ''}"><h2>${s.title}</h2><div class="grid">${s.items.map(cell).join('\n')}</div></section>`)
     .join('\n');
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>glyphfox icons</title><style>${css}</style></head><body><header><h1>glyphfox</h1><p>${all.length} icons, ${duoCount} duotone, 24 and 16 px, light and dark${review ? ', review at weights 1, 2 and 3' : ''}</p></header>${body}</body></html>`;
+  const animData = collectionName === 'animated' ? Object.fromEntries(list.filter((i) => i.animation).map((i) => [i.name, i.animation])) : null;
+  const script = animData ? `<script type="application/json" id="anim-data">${JSON.stringify(animData)}</script><script>${PLAYER}</script>` : '';
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${titles[collectionName]} icons</title><style>${css}</style></head><body><header><h1>${titles[collectionName]}</h1><p>${list.length} icons, ${duoCount} duotone, ${sizes}, light and dark${review ? ', review at weights 1, 2 and 3' : ''}</p></header>${body}${script}</body></html>`;
 }
 
 // ------------------------------------------------------------------ render

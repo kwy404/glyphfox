@@ -27,20 +27,41 @@ export const CATEGORIES = [
   'shapes',
   'symbols',
   'animals',
+  'gaming',
+  'space',
+  'music',
+  'food',
+  'sports',
+  'travel',
 ];
 
+// Icon collections: the base set lives in icons/, the signature collections
+// in subfolders. Each has its own grid and padding box.
+export const COLLECTIONS = {
+  base: { dir: '', grid: 24, padding: 2 },
+  display: { dir: 'display', grid: 48, padding: 4 },
+  animated: { dir: 'animated', grid: 24, padding: 2, animation: true },
+  isometric: { dir: 'isometric', grid: 24, padding: 2 },
+};
+
+// Names the packages reserve for animation classes.
+export const RESERVED_NAMES = ['spin', 'pulse', 'pop', 'wiggle', 'bounce', 'shake', 'draw'];
+
 // Root attributes, in canonical order, with their only accepted values.
-export const ROOT_ATTRS = [
-  ['xmlns', 'http://www.w3.org/2000/svg'],
-  ['width', '24'],
-  ['height', '24'],
-  ['viewBox', '0 0 24 24'],
-  ['fill', 'none'],
-  ['stroke', 'currentColor'],
-  ['stroke-width', '2'],
-  ['stroke-linecap', 'round'],
-  ['stroke-linejoin', 'round'],
-];
+export function rootAttrs(grid = GRID) {
+  return [
+    ['xmlns', 'http://www.w3.org/2000/svg'],
+    ['width', String(grid)],
+    ['height', String(grid)],
+    ['viewBox', `0 0 ${grid} ${grid}`],
+    ['fill', 'none'],
+    ['stroke', 'currentColor'],
+    ['stroke-width', '2'],
+    ['stroke-linecap', 'round'],
+    ['stroke-linejoin', 'round'],
+  ];
+}
+export const ROOT_ATTRS = rootAttrs(GRID);
 
 // Geometry attributes per element, in canonical order.
 export const ELEMENTS = {
@@ -121,8 +142,10 @@ export function parseSvg(text) {
   return { attrs: root.attrs, children };
 }
 
-export function serializeSvg(svg) {
-  const head = ROOT_ATTRS.map(([k, v]) => `${k}="${v}"`).join(' ');
+export function serializeSvg(svg, grid = GRID) {
+  const head = rootAttrs(grid)
+    .map(([k, v]) => `${k}="${v}"`)
+    .join(' ');
   const lines = [`<svg ${head}>`];
   for (const el of svg.children) lines.push(`  ${serializeElement(el)}`);
   lines.push('</svg>');
@@ -544,4 +567,175 @@ export function readIconFile(text) {
 
 export function stripBom(text) {
   return text.charCodeAt(0) === 0xfeff ? text.slice(1) : text;
+}
+
+// ---------------------------------------------------------------- animation
+//
+// Animated icons describe their motion in the JSON sidecar:
+//
+//   "animation": {
+//     "duration": 1600,              one cycle in milliseconds (200 to 10000)
+//     "iterations": "infinite",      or a whole number of cycles
+//     "easing": "ease-in-out",       default easing (optional)
+//     "elements": [
+//       {
+//         "index": 2,                element position in the SVG (0 based)
+//         "origin": [12, 12],        rotate and scale center, in grid units
+//         "delay": 0,                milliseconds (optional)
+//         "easing": "linear",        easing for this element (optional)
+//         "keyframes": [
+//           { "offset": 0, "opacity": 0, "translate": [0, 2], "rotate": 0, "scale": 1, "draw": 0 },
+//           { "offset": 1, "opacity": 1 }
+//         ]
+//       }
+//     ]
+//   }
+//
+// translate moves in grid units, rotate is in degrees, scale is a number or
+// [sx, sy], draw is the visible fraction of the stroke (0 to 1). The order
+// matches CSS: translate, then rotate and scale about the origin.
+
+const EASING_RE =
+  /^(linear|ease|ease-in|ease-out|ease-in-out|steps\(\d+(,\s*(start|end))?\)|cubic-bezier\(\s*-?[\d.]+\s*,\s*-?[\d.]+\s*,\s*-?[\d.]+\s*,\s*-?[\d.]+\s*\))$/;
+const KEYFRAME_KEYS = ['offset', 'opacity', 'translate', 'rotate', 'scale', 'draw', 'easing'];
+const ELEMENT_KEYS = ['index', 'origin', 'delay', 'easing', 'keyframes'];
+const ANIMATION_KEYS = ['duration', 'iterations', 'easing', 'elements'];
+
+const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
+const isPair = (v) => Array.isArray(v) && v.length === 2 && v.every(isNum);
+
+// Applies one keyframe transform to a point.
+export function transformPoint([x, y], kf, origin) {
+  const [ox, oy] = origin || [0, 0];
+  const s = kf.scale === undefined ? [1, 1] : Array.isArray(kf.scale) ? kf.scale : [kf.scale, kf.scale];
+  const r = ((kf.rotate || 0) * Math.PI) / 180;
+  const [tx, ty] = kf.translate || [0, 0];
+  const dx = (x - ox) * s[0];
+  const dy = (y - oy) * s[1];
+  return [ox + tx + dx * Math.cos(r) - dy * Math.sin(r), oy + ty + dx * Math.sin(r) + dy * Math.cos(r)];
+}
+
+// Returns a list of problems with an animation block.
+export function animationProblems(anim, svg, grid = GRID) {
+  const out = [];
+  if (!anim || typeof anim !== 'object' || Array.isArray(anim)) return ['animation must be an object'];
+  for (const k of Object.keys(anim)) if (!ANIMATION_KEYS.includes(k)) out.push(`animation: unknown key "${k}"`);
+  if (!Number.isInteger(anim.duration) || anim.duration < 200 || anim.duration > 10000) {
+    out.push('animation.duration must be a whole number of milliseconds from 200 to 10000');
+  }
+  if (anim.iterations !== undefined && anim.iterations !== 'infinite' && !(Number.isInteger(anim.iterations) && anim.iterations > 0 && anim.iterations <= 100)) {
+    out.push('animation.iterations must be "infinite" or a whole number from 1 to 100');
+  }
+  if (anim.easing !== undefined && !(typeof anim.easing === 'string' && EASING_RE.test(anim.easing))) out.push(`animation.easing "${anim.easing}" is not a supported easing`);
+  if (!Array.isArray(anim.elements) || !anim.elements.length) {
+    out.push('animation.elements must be a non-empty array');
+    return out;
+  }
+  const seen = new Set();
+  anim.elements.forEach((el, n) => {
+    const where = `animation.elements[${n}]`;
+    if (!el || typeof el !== 'object') {
+      out.push(`${where} must be an object`);
+      return;
+    }
+    for (const k of Object.keys(el)) if (!ELEMENT_KEYS.includes(k)) out.push(`${where}: unknown key "${k}"`);
+    if (!Number.isInteger(el.index) || el.index < 0 || el.index >= svg.children.length) {
+      out.push(`${where}.index must point at an element of the SVG`);
+      return;
+    }
+    if (seen.has(el.index)) out.push(`${where}: element ${el.index} is animated twice`);
+    seen.add(el.index);
+    const target = svg.children[el.index];
+    if (el.origin !== undefined && !(isPair(el.origin) && el.origin.every((v) => v >= 0 && v <= grid))) out.push(`${where}.origin must be [x, y] inside the grid`);
+    if (el.delay !== undefined && !(Number.isInteger(el.delay) && el.delay >= 0 && el.delay <= (anim.duration || 0))) {
+      out.push(`${where}.delay must be a whole number of milliseconds within the duration`);
+    }
+    if (el.easing !== undefined && !(typeof el.easing === 'string' && EASING_RE.test(el.easing))) out.push(`${where}.easing "${el.easing}" is not a supported easing`);
+    const kfs = el.keyframes;
+    if (!Array.isArray(kfs) || kfs.length < 2) {
+      out.push(`${where}.keyframes needs at least two keyframes`);
+      return;
+    }
+    let last = -1;
+    let animated = false;
+    let needsOrigin = false;
+    kfs.forEach((kf, m) => {
+      const w = `${where}.keyframes[${m}]`;
+      if (!kf || typeof kf !== 'object') {
+        out.push(`${w} must be an object`);
+        return;
+      }
+      for (const k of Object.keys(kf)) if (!KEYFRAME_KEYS.includes(k)) out.push(`${w}: unknown key "${k}"`);
+      if (!isNum(kf.offset) || kf.offset < 0 || kf.offset > 1 || kf.offset <= last) out.push(`${w}.offset must grow from 0 to 1`);
+      last = isNum(kf.offset) ? kf.offset : last;
+      if (kf.opacity !== undefined && !(isNum(kf.opacity) && kf.opacity >= 0 && kf.opacity <= 1)) out.push(`${w}.opacity must be from 0 to 1`);
+      if (kf.translate !== undefined && !(isPair(kf.translate) && kf.translate.every((v) => Math.abs(v) <= grid / 2))) out.push(`${w}.translate must be [dx, dy] in grid units`);
+      if (kf.rotate !== undefined && !(isNum(kf.rotate) && Math.abs(kf.rotate) <= 720)) out.push(`${w}.rotate must be degrees from -720 to 720`);
+      if (kf.scale !== undefined && !((isNum(kf.scale) && kf.scale >= 0 && kf.scale <= 3) || (isPair(kf.scale) && kf.scale.every((v) => v >= 0 && v <= 3)))) {
+        out.push(`${w}.scale must be from 0 to 3, or [sx, sy]`);
+      }
+      if (kf.draw !== undefined && !(isNum(kf.draw) && kf.draw >= 0 && kf.draw <= 1)) out.push(`${w}.draw must be from 0 to 1`);
+      if (kf.draw !== undefined && target.attrs.has('class')) out.push(`${w}: draw needs a stroke element, not the duotone layer`);
+      if (kf.easing !== undefined && !(typeof kf.easing === 'string' && EASING_RE.test(kf.easing))) out.push(`${w}.easing "${kf.easing}" is not a supported easing`);
+      if (['opacity', 'translate', 'rotate', 'scale', 'draw'].some((k) => kf[k] !== undefined)) animated = true;
+      if (kf.rotate !== undefined || kf.scale !== undefined) needsOrigin = true;
+    });
+    if (kfs[0] && kfs[0].offset !== 0) out.push(`${where}: the first keyframe needs offset 0`);
+    if (kfs[kfs.length - 1] && kfs[kfs.length - 1].offset !== 1) out.push(`${where}: the last keyframe needs offset 1`);
+    if (!animated) out.push(`${where}: the keyframes do not animate anything`);
+    if (needsOrigin && el.origin === undefined) out.push(`${where}: rotate and scale need an origin`);
+    // Every pose must keep the stroke on the canvas.
+    let box;
+    try {
+      box = elementBounds(target);
+    } catch {
+      return;
+    }
+    const corners = [
+      [box.minX, box.minY],
+      [box.maxX, box.minY],
+      [box.maxX, box.maxY],
+      [box.minX, box.maxY],
+    ];
+    for (const kf of kfs) {
+      if (!kf || typeof kf !== 'object') continue;
+      for (const p of corners) {
+        const [x, y] = transformPoint(p, kf, el.origin);
+        if (x < 1 - 1e-6 || y < 1 - 1e-6 || x > grid - 1 + 1e-6 || y > grid - 1 + 1e-6) {
+          out.push(`${where}: the keyframe at offset ${kf.offset} moves element ${el.index} off the canvas`);
+          return;
+        }
+      }
+    }
+  });
+  return out;
+}
+
+function inline(v) {
+  return Array.isArray(v) ? `[${v.map((x) => JSON.stringify(x)).join(', ')}]` : JSON.stringify(v);
+}
+
+// Canonical sidecar text: categories and tags one per line, animation keyframes
+// one per line so diffs stay readable.
+export function canonicalJson(data) {
+  const list = (key, arr) => `  "${key}": [\n${arr.map((v) => `    ${JSON.stringify(v)}`).join(',\n')}\n  ]`;
+  const parts = [list('categories', data.categories), list('tags', data.tags)];
+  if (data.animation && typeof data.animation === 'object') {
+    const a = data.animation;
+    const head = [];
+    for (const k of ['duration', 'iterations', 'easing']) if (a[k] !== undefined) head.push(`    "${k}": ${JSON.stringify(a[k])}`);
+    const els = (Array.isArray(a.elements) ? a.elements : []).map((el) => {
+      const fields = [];
+      for (const k of ['index', 'origin', 'delay', 'easing']) if (el[k] !== undefined) fields.push(`        "${k}": ${inline(el[k])}`);
+      const order = ['offset', 'opacity', 'translate', 'rotate', 'scale', 'draw', 'easing'];
+      const kfs = (Array.isArray(el.keyframes) ? el.keyframes : []).map(
+        (kf) => `          { ${order.filter((k) => kf[k] !== undefined).map((k) => `"${k}": ${inline(kf[k])}`).join(', ')} }`,
+      );
+      fields.push(`        "keyframes": [\n${kfs.join(',\n')}\n        ]`);
+      return `      {\n${fields.join(',\n')}\n      }`;
+    });
+    head.push(`    "elements": [\n${els.join(',\n')}\n    ]`);
+    parts.push(`  "animation": {\n${head.join(',\n')}\n  }`);
+  }
+  return `{\n${parts.join(',\n')}\n}\n`;
 }

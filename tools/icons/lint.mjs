@@ -1,12 +1,18 @@
 #!/usr/bin/env node
 // glyphfox icon lint. Node 20 or newer, no dependencies.
 //
-//   node tools/icons/lint.mjs            check every icon in icons/
-//   node tools/icons/lint.mjs NAME...    check only these icons
-//   node tools/icons/lint.mjs --fix      also rewrite files in canonical format
-//   node tools/icons/lint.mjs --json     print the report as JSON
+//   node tools/icons/lint.mjs                 check every collection
+//   node tools/icons/lint.mjs NAME...         check only these icons (display/NAME for a collection)
+//   node tools/icons/lint.mjs --fix           also rewrite files in canonical format
+//   node tools/icons/lint.mjs --json          print the report as JSON
 //
-// Icon format (icons/NAME.svg):
+// Collections (see COLLECTIONS in svg.mjs):
+//   icons/             base set, 24 grid, 2 px padding
+//   icons/display/     hero icons, 48 grid, 4 px padding
+//   icons/animated/    24 grid, the sidecar adds an "animation" block
+//   icons/isometric/   24 grid
+//
+// Icon format (icons/NAME.svg, shown for the 24 grid):
 //   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 //        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
 //        stroke-linejoin="round">
@@ -16,29 +22,32 @@
 // Children are empty path, circle, rect, line, polyline, polygon or ellipse elements
 // with geometry attributes only. The optional duotone layer is a single element with
 // class "gf-secondary", listed first so the strokes paint over it. Every point of the
-// geometry stays inside the padding box (2 to 22 on both axes).
-// Sidecar (icons/NAME.json): { "categories": [...], "tags": [...] }.
+// geometry stays inside the padding box.
+// Sidecar (NAME.json): { "categories": [...], "tags": [...] }, plus "animation" for
+// animated icons (the schema is documented in svg.mjs).
 // Exits with code 1 when any problem is found.
 
-import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CATEGORIES,
+  COLLECTIONS,
   ELEMENTS,
-  GRID,
-  PADDING,
-  ROOT_ATTRS,
+  RESERVED_NAMES,
   SECONDARY_CLASS,
   SECONDARY_OPACITY,
+  animationProblems,
+  canonicalJson,
   decimals,
   elementBounds,
   isNumber,
   parsePath,
   parsePoints,
   parseSvg,
-  stripBom,
+  rootAttrs,
   serializeSvg,
+  stripBom,
 } from './svg.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -53,13 +62,11 @@ const NAME_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const TAG_RE = /^[a-z0-9]+(?:[ -][a-z0-9]+)*$/;
 const MAX_DECIMALS = 2;
 const EPS = 0.001;
-const LOW = PADDING;
-const HIGH = GRID - PADDING;
 
 const problems = [];
 const report = (name, rule, message) => problems.push({ name, rule, message });
 
-function lintSvg(name, text) {
+function lintSvg(name, text, col) {
   let svg;
   try {
     svg = parseSvg(stripBom(text));
@@ -67,15 +74,17 @@ function lintSvg(name, text) {
     report(name, 'xml', err.message);
     return null;
   }
+  const low = col.padding;
+  const high = col.grid - col.padding;
 
   // Root element.
-  const expected = new Map(ROOT_ATTRS);
+  const expected = new Map(rootAttrs(col.grid));
   for (const [k, v] of svg.attrs) {
     if (k === 'transform') report(name, 'no-transform', 'the <svg> element has a transform');
     else if (!expected.has(k)) report(name, 'root', `unexpected attribute "${k}" on <svg>`);
     else if (expected.get(k) !== v) report(name, 'root', `${k}="${v}" must be ${k}="${expected.get(k)}"`);
   }
-  for (const [k, v] of ROOT_ATTRS) {
+  for (const [k, v] of expected) {
     if (!svg.attrs.has(k)) report(name, 'root', `missing ${k}="${v}" on <svg>`);
   }
 
@@ -165,11 +174,11 @@ function lintSvg(name, text) {
         }
         if (box) {
           const out = [];
-          if (box.minX < LOW - EPS) out.push(`left ${fmt(box.minX)}`);
-          if (box.minY < LOW - EPS) out.push(`top ${fmt(box.minY)}`);
-          if (box.maxX > HIGH + EPS) out.push(`right ${fmt(box.maxX)}`);
-          if (box.maxY > HIGH + EPS) out.push(`bottom ${fmt(box.maxY)}`);
-          if (out.length) report(name, 'padding', `${where} leaves the ${LOW} to ${HIGH} box (${out.join(', ')})`);
+          if (box.minX < low - EPS) out.push(`left ${fmt(box.minX)}`);
+          if (box.minY < low - EPS) out.push(`top ${fmt(box.minY)}`);
+          if (box.maxX > high + EPS) out.push(`right ${fmt(box.maxX)}`);
+          if (box.maxY > high + EPS) out.push(`bottom ${fmt(box.maxY)}`);
+          if (out.length) report(name, 'padding', `${where} leaves the ${low} to ${high} box (${out.join(', ')})`);
         }
       }
     }
@@ -183,7 +192,7 @@ function fmt(v) {
   return String(Math.round(v * 1000) / 1000);
 }
 
-function lintJson(name, text) {
+function lintJson(name, text, col, svg) {
   let data;
   try {
     data = JSON.parse(text);
@@ -195,8 +204,9 @@ function lintJson(name, text) {
     report(name, 'json', 'the sidecar must be an object');
     return null;
   }
+  const allowed = col.animation ? ['categories', 'tags', 'animation'] : ['categories', 'tags'];
   for (const k of Object.keys(data)) {
-    if (k !== 'categories' && k !== 'tags') report(name, 'json', `unknown key "${k}"`);
+    if (!allowed.includes(k)) report(name, 'json', `unknown key "${k}"`);
   }
   const { categories, tags } = data;
   if (!Array.isArray(categories) || !categories.length) {
@@ -215,11 +225,11 @@ function lintJson(name, text) {
     }
     if (new Set(tags).size !== tags.length) report(name, 'tags', 'duplicate tags');
   }
+  if (col.animation) {
+    if (data.animation === undefined) report(name, 'animation', 'animated icons need an "animation" block');
+    else if (svg) for (const p of animationProblems(data.animation, svg, col.grid)) report(name, 'animation', p);
+  }
   return data;
-}
-
-function canonicalJson(data) {
-  return JSON.stringify({ categories: data.categories, tags: data.tags }, null, 2) + '\n';
 }
 
 if (!existsSync(iconsDir)) {
@@ -227,56 +237,69 @@ if (!existsSync(iconsDir)) {
   process.exit(1);
 }
 
-const files = readdirSync(iconsDir).sort();
-const svgNames = new Set();
-const jsonNames = new Set();
-for (const f of files) {
-  const m = /^(.*)\.(svg|json)$/.exec(f);
-  if (!m) {
-    report(f, 'file', 'unexpected file in icons/ (only NAME.svg and NAME.json)');
-    continue;
-  }
-  (m[2] === 'svg' ? svgNames : jsonNames).add(m[1]);
-}
-
-const allNames = [...new Set([...svgNames, ...jsonNames])].sort();
-const lower = new Map();
-const bodies = new Map();
+const subdirs = new Set(
+  Object.values(COLLECTIONS)
+    .map((c) => c.dir)
+    .filter(Boolean),
+);
 let checked = 0;
-for (const name of allNames) {
-  if (only.size && !only.has(name)) continue;
-  checked++;
-  if (!NAME_RE.test(name)) report(name, 'name', 'names must be kebab-case: lowercase letters and digits joined by single hyphens');
-  const key = name.toLowerCase();
-  if (lower.has(key)) report(name, 'name', `name clashes with "${lower.get(key)}"`);
-  lower.set(key, name);
-  if (!svgNames.has(name)) report(name, 'file', 'missing icons/' + name + '.svg');
-  if (!jsonNames.has(name)) report(name, 'file', 'missing icons/' + name + '.json');
 
-  if (svgNames.has(name)) {
-    const path = join(iconsDir, `${name}.svg`);
-    const text = readFileSync(path, 'utf8');
-    const svg = lintSvg(name, text);
-    if (svg) {
-      const canonical = serializeSvg(svg);
-      const body = canonical.split('\n').slice(1, -2).map((l) => l.trim()).sort().join('\n');
-      if (bodies.has(body)) report(name, 'duplicate', `same geometry as "${bodies.get(body)}"`);
-      else bodies.set(body, name);
-      if (text !== canonical) {
-        if (fix) writeFileSync(path, canonical);
-        else report(name, 'format', 'not in canonical format (run with --fix)');
+for (const col of Object.values(COLLECTIONS)) {
+  const dir = col.dir ? join(iconsDir, col.dir) : iconsDir;
+  if (!existsSync(dir)) continue;
+  const prefix = col.dir ? `${col.dir}/` : '';
+  const svgNames = new Set();
+  const jsonNames = new Set();
+  for (const f of readdirSync(dir).sort()) {
+    const isDir = statSync(join(dir, f)).isDirectory();
+    if (!col.dir && isDir && subdirs.has(f)) continue;
+    const m = /^(.*)\.(svg|json)$/.exec(f);
+    if (!m || isDir) {
+      report(prefix + f, 'file', `unexpected entry in icons/${prefix} (only NAME.svg, NAME.json and the collection folders)`);
+      continue;
+    }
+    (m[2] === 'svg' ? svgNames : jsonNames).add(m[1]);
+  }
+  const lower = new Map();
+  const bodies = new Map();
+  for (const base of [...new Set([...svgNames, ...jsonNames])].sort()) {
+    const name = prefix + base;
+    if (only.size && !only.has(name) && !only.has(base)) continue;
+    checked++;
+    if (!NAME_RE.test(base)) report(name, 'name', 'names must be kebab-case: lowercase letters and digits joined by single hyphens');
+    if (RESERVED_NAMES.includes(base)) report(name, 'name', `"${base}" is reserved for an animation class`);
+    const key = base.toLowerCase();
+    if (lower.has(key)) report(name, 'name', `name clashes with "${lower.get(key)}"`);
+    lower.set(key, base);
+    if (!svgNames.has(base)) report(name, 'file', `missing icons/${prefix}${base}.svg`);
+    if (!jsonNames.has(base)) report(name, 'file', `missing icons/${prefix}${base}.json`);
+
+    let svg = null;
+    if (svgNames.has(base)) {
+      const path = join(dir, `${base}.svg`);
+      const text = readFileSync(path, 'utf8');
+      svg = lintSvg(name, text, col);
+      if (svg) {
+        const canonical = serializeSvg(svg, col.grid);
+        const body = canonical.split('\n').slice(1, -2).map((l) => l.trim()).sort().join('\n');
+        if (bodies.has(body)) report(name, 'duplicate', `same geometry as "${bodies.get(body)}"`);
+        else bodies.set(body, base);
+        if (text !== canonical) {
+          if (fix) writeFileSync(path, canonical);
+          else report(name, 'format', 'not in canonical format (run with --fix)');
+        }
       }
     }
-  }
-  if (jsonNames.has(name)) {
-    const path = join(iconsDir, `${name}.json`);
-    const text = readFileSync(path, 'utf8');
-    const data = lintJson(name, text);
-    if (data && Array.isArray(data.categories) && Array.isArray(data.tags)) {
-      const canonical = canonicalJson(data);
-      if (text !== canonical) {
-        if (fix) writeFileSync(path, canonical);
-        else report(name, 'format', 'sidecar not in canonical format (run with --fix)');
+    if (jsonNames.has(base)) {
+      const path = join(dir, `${base}.json`);
+      const text = readFileSync(path, 'utf8');
+      const data = lintJson(name, text, col, svg);
+      if (data && Array.isArray(data.categories) && Array.isArray(data.tags)) {
+        const canonical = canonicalJson(data);
+        if (text !== canonical) {
+          if (fix) writeFileSync(path, canonical);
+          else report(name, 'format', 'sidecar not in canonical format (run with --fix)');
+        }
       }
     }
   }
