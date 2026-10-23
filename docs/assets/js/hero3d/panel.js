@@ -121,8 +121,17 @@ function syncMotion() {
 
 async function exportPng(scale) {
   if (!viewer) return;
+  const buttons = $$('[data-th-png]');
+  if (buttons.some((b) => b.disabled)) return;
   const transparent = $('[data-th-alpha]').checked;
-  const blob = await viewer.toBlob(scale, { transparent });
+  for (const b of buttons) b.disabled = true;
+  let blob = null;
+  try {
+    blob = await viewer.toBlob(scale, { transparent });
+  } catch {
+    blob = null;
+  }
+  for (const b of buttons) b.disabled = false;
   if (!blob) {
     toast(t('three.error'));
     return;

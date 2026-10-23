@@ -258,6 +258,16 @@ export class Viewer {
     document.addEventListener('visibilitychange', this.onVisibility);
     this.onMotion = () => this.requestRender();
     if (motion && motion.addEventListener) motion.addEventListener('change', this.onMotion);
+    // three.js restores its own resources after a lost context; the
+    // reflection room and the backdrop texture are drawn again here.
+    this.onRestore = () => {
+      this.envRT = null;
+      this.applyLight();
+      if (this.bgTexture) this.bgTexture.dispose();
+      this.bgTexture = null;
+      this.paintBg();
+    };
+    this.canvas.addEventListener('webglcontextrestored', this.onRestore);
 
     this.applyLight();
     this.applyMaterial();
@@ -631,6 +641,7 @@ export class Viewer {
     this.ro.disconnect();
     this.io.disconnect();
     document.removeEventListener('visibilitychange', this.onVisibility);
+    this.canvas.removeEventListener('webglcontextrestored', this.onRestore);
     if (motion && motion.removeEventListener) motion.removeEventListener('change', this.onMotion);
     this.rig.dispose();
     this.clearMeshes();
