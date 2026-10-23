@@ -170,6 +170,10 @@ export interface Morph {
 export interface SearchOptions {
   limit?: number;
   category?: string;
+  /** Match synonyms in English, Portuguese, Spanish, French and German (default true). */
+  synonyms?: boolean;
+  /** en, pt, es, fr or de (pt-BR works too): a word's meaning in that language ranks first. */
+  lang?: string;
 }
 
 export declare const icons: Record<IconName, IconData<IconName>>;
@@ -215,8 +219,10 @@ export declare function fuse(icons: Array<IconSpec | IconData>, options?: FuseOp
 export declare function withModifier(icon: IconData, modifier: ModifierName, corner?: ModifierCorner, options?: { weight?: number; gap?: number }): IconData;
 /** Creates a morph between two icons. */
 export declare function createMorph(from: IconData, to: IconData, options?: { hints?: unknown; fromVariant?: Variant; toVariant?: Variant }): Morph;
-/** Ranks icons by name, tag and category. */
+/** Ranks icons by name, tag and category, with synonyms in five languages, accent folding and plurals. */
 export declare function search(query: string, options?: SearchOptions): IconData[];
+/** Ranks any list of icons (your own too) the same way as search. */
+export declare function searchIcons<T extends { name: string; tags?: string[]; categories?: string[] }>(icons: readonly T[], query: string, options?: SearchOptions): T[];
 /** Replaces <i data-glyph="..."> elements with SVG. Returns the count. */
 export declare function replaceGlyphs(root?: ParentNode | null, options?: { observe?: boolean }): number;
 /** Stroke width in grid units for size and weight (with optical compensation). */

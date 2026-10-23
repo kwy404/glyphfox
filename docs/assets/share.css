@@ -1,0 +1,193 @@
+/* glyphfox studio: shared collections (share links and live sessions). */
+
+.share-import,
+.share-live {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.share-import .side-title {
+  margin: 0 0 4px;
+}
+.share-import p,
+.share-live-head p {
+  margin: 0;
+}
+.share-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.share-tile {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xs);
+  background: var(--icon-bg);
+}
+.share-live-head .subtitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+}
+.share-live-head .subtitle svg {
+  color: var(--accent);
+}
+.share-idle,
+.share-active {
+  display: grid;
+  gap: 12px;
+  max-width: 640px;
+}
+.share-or {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+.share-hint {
+  margin: -4px 0 0;
+  font-size: 12.5px;
+}
+.share-hint[data-ok='true'] {
+  color: var(--good);
+}
+.share-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 600;
+}
+.share-status::before {
+  content: '';
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.share-status[data-phase='connected']::before {
+  background: var(--good);
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.16);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .share-status:not([data-phase='connected'])::before {
+    animation: share-pulse 1.4s ease-in-out infinite;
+  }
+}
+@keyframes share-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+.share-words .side-title,
+.share-people .side-title {
+  margin: 0 0 8px;
+}
+.share-word-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.share-word-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+}
+.share-word-list b {
+  font: 600 15px var(--mono);
+  letter-spacing: 0.01em;
+}
+.share-word-list svg {
+  flex: none;
+  color: var(--accent);
+}
+.share-n {
+  min-width: 1.2em;
+  color: var(--text-3);
+  font: 500 12px var(--mono);
+}
+.share-people ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.share-people li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.share-who {
+  display: grid;
+  gap: 1px;
+  font-size: 14px;
+}
+.share-who small {
+  color: var(--text-3);
+  font-size: 12px;
+}
+.share-who .faint {
+  font-size: 12.5px;
+}
+.share-avatar {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c, var(--accent));
+  color: #111;
+  font: 700 13px var(--font);
+}
+[data-share='live'].share-on {
+  border-color: var(--good);
+}
+.col-card {
+  position: relative;
+}
+.col-card.share-editing {
+  box-shadow: 0 0 0 2px var(--c, var(--accent));
+}
+.share-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+}
+.share-badge .share-avatar {
+  width: 22px;
+  height: 22px;
+  margin-left: -6px;
+  border: 2px solid var(--panel);
+  font-size: 11px;
+}
+.share-note {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  font-size: 13px;
+}
+.share-note[hidden],
+.share-import[hidden],
+.share-live[hidden],
+.share-idle[hidden],
+.share-active[hidden],
+.share-words[hidden],
+.share-people[hidden] {
+  display: none;
+}

@@ -48,8 +48,8 @@ describe('studio site', () => {
         for (const pair of m[1].split(';')) expect(dict.en[pair.split(':')[1]], `${page}: ${pair}`).toBeDefined();
       }
     }
-    const js = readdirSync(join(docs, 'assets', 'js'))
-      .filter((f) => f.endsWith('.js'))
+    const js = readdirSync(join(docs, 'assets', 'js'), { recursive: true })
+      .filter((f) => f.endsWith('.js') && !f.startsWith('bundle'))
       .map((f) => read(join(docs, 'assets', 'js', f)));
     for (const src of js) {
       for (const m of src.matchAll(/\bt\('([a-zA-Z0-9.]+)'/g)) expect(dict.en[m[1]], m[1]).toBeDefined();

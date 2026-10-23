@@ -76,7 +76,7 @@ export function propsFromFlags(flags) {
 const HELP = `glyphfox ${pkg.version}: original icons on a 24 grid
 
 Usage
-  glyphfox search <words...>        find icons by name, tag or category
+  glyphfox search <words...>        find icons by name, tag or category (en, pt, es, fr, de)
   glyphfox show <spec>              details, a terminal preview and the SVG
   glyphfox copy <spec>              print a snippet and copy it to the clipboard
   glyphfox fuse <a> <b> [...]       combine 2 to 10 icons into one
@@ -104,6 +104,7 @@ Options
   --from <file>     read names from a file, one per line (build)
   --out, -o <path>  write to a file or directory
   --category <c>    filter (search, list)
+  --lang <l>        en, pt, es, fr or de: that meaning of a word first (search)
   --json            machine readable output
   --print           print only, do not touch the clipboard
   --all             every icon (export)
@@ -286,7 +287,7 @@ export async function main(argv = process.argv.slice(2), io = {}) {
     switch (cmd) {
       case 'search':
       case 'find': {
-        const results = search(args.join(' '), { limit: flags.limit ? Number(flags.limit) : 30, category: flags.category });
+        const results = search(args.join(' '), { limit: flags.limit ? Number(flags.limit) : 30, category: flags.category, lang: typeof flags.lang === 'string' ? flags.lang : undefined });
         if (flags.json) io.log(JSON.stringify(results.map((r) => ({ name: r.name, categories: r.categories, tags: r.tags })), null, 2));
         else if (!results.length) io.err(`no icons match "${args.join(' ')}"`);
         else {

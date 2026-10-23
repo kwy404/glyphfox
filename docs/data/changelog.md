@@ -18,3 +18,5 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 - Icon sources: `registerIconSource(prefix, source)` makes `prefix:name` icons from other sets work in `toSvg`, every component, the web component and the CDN, with weight, animations, modifiers and Fusion on stroke icons and a fallback for filled icons.
 - The studio site: icon browser, live customization, sketch search, editor, Fox-ify, Fusion, brand kit and 3D.
 - Fenn illustrations (sitting, running, drawing, orbit) built from the icon geometry, README banners and the social preview.
+- Multilingual search: synonyms in English, Portuguese, Spanish, French and German, accent folding and simple plurals in `search()`, the new `searchIcons()`, the CLI (`--lang`) and the studio.
+- Shared collections in the studio: a share link that carries the whole collection, compressed, in its URL fragment, and live sessions where friends edit one collection together over WebRTC, paired with six words through public MQTT relays, end to end encrypted, with presence and last writer wins merging per icon.

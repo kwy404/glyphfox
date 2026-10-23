@@ -39,6 +39,10 @@ async function loadAnimations() {
   }
 }
 
+// The share controls of the collection (links and live sessions) load in their own chunk.
+let sharing = null;
+const shareModule = () => (sharing ||= import('./share/index.js'));
+
 function openInEditor(body, name) {
   show('editor');
   openBody(body, { name });
@@ -100,12 +104,18 @@ async function show(tool, payload) {
 function route() {
   const raw = decodeURIComponent(location.hash.slice(1));
   const [tool, ...rest] = raw.split('=');
+  // Share links (#share=...) and live session words (#live=...) open the collection.
+  if (tool === 'share' || tool === 'live') {
+    shareModule().then((share) => share.route(tool, rest.join('=')));
+    return show('collection');
+  }
   const known = ['editor', 'foxify', 'motion', 'fusion', 'brand', '3d', 'collection'];
   show(known.includes(tool) ? tool : 'editor', rest.join('=') || '');
 }
 
 loadIcons().then((d) => {
   data = d;
+  shareModule().then((share) => share.init(d));
   $('[data-studio-tabs]').addEventListener('click', (e) => {
     const b = e.target.closest('[data-tool]');
     if (!b) return;

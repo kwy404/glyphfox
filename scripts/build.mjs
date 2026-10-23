@@ -58,6 +58,7 @@ rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist, { recursive: true });
 cpSync(join(src, 'core'), join(dist, 'core'), { recursive: true });
 cpSync(join(src, 'native-export'), join(dist, 'native-export'), { recursive: true });
+cpSync(join(src, 'search'), join(dist, 'search'), { recursive: true });
 write(join(dist, 'core', 'index.d.ts'), readFileSync(join(src, 'types', 'core.d.ts'), 'utf8'));
 write(join(dist, 'api.js'), readFileSync(join(src, 'api.js'), 'utf8'));
 

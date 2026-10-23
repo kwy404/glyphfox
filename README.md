@@ -180,7 +180,10 @@ toSvg('cloud&lock:overlap');                 // fusion
 toSvg('menu', { morphTo: 'x', trigger: 'hover' }); // CSS only morph
 fuse(['cloud', 'lock'], { layout: 'overlap', gap: 1 }); // icon data, passes the lint
 search('arrow', { limit: 10 });
+search('lixeira');                           // trash, synonyms in five languages
 ```
+
+`search` understands everyday words in English, Portuguese, Spanish, French and German (`lixeira`, `basura`, `poubelle` and `Mülleimer` all find `trash`), ignores case and accents and handles simple plurals. Pass `lang: 'pt'` to rank a word's meaning in that language first, or `synonyms: false` to match names and tags only. `searchIcons(list, query)` ranks your own icon list the same way.
 
 Also in the package: `glyphfox/icons.json`, `glyphfox/sprite.svg` (`<use href="sprite.svg#gf-home">`), `glyphfox/styles.css` (optional animation classes), `glyphfox/core` (the engine without icon data) and `glyphfox/tools` (lint and Fox-ify).
 
@@ -303,6 +306,7 @@ Any icon takes a badge in any corner, with the base icon cut around it: a few hu
 
 ```sh
 npx glyphfox search arrow
+npx glyphfox search poubelle --lang fr          # synonyms in en, pt, es, fr and de
 npx glyphfox show file+check --variant solid     # details, terminal preview, SVG
 npx glyphfox copy heart --format jsx --size 32   # svg, jsx, vue, svelte, angular, html, tailwind, cdn, datauri
 npx glyphfox fuse cloud lock --layout overlap --format svg --out cloud-lock.svg
@@ -341,10 +345,11 @@ Every target takes names, `--from list.txt` or `--all`, plus `--size`, `--weight
 
 [kwy404.github.io/glyphfox](https://kwy404.github.io/glyphfox/) runs entirely in your browser:
 
-- browse with instant search by name, tag and category, or **draw a rough shape** to find the closest icons;
+- browse with instant search by name, tag and category, in English, Portuguese, Spanish, French or German, or **draw a rough shape** to find the closest icons;
 - customize every axis and prop live, then copy in every format or download SVG, PNG, animated SVG, GIF and WebM;
 - **morph** any pair, **fuse** 2 to 10 icons with every layout, add **modifiers**;
 - **edit** icons on the 24 grid (pen and shape tools, node editing, undo and redo, live lint) and keep a local collection;
+- **share** the collection as a link that carries every icon inside its fragment (no server), or **edit it live** with friends peer to peer: six words open a WebRTC session, end to end encrypted with a key made from the words, with presence (who is editing what) and conflict free merging;
 - **Fox-ify** any SVG into the glyphfox style with a before and after view;
 - export a **brand kit** (themed package, sprite, CSS, favicon and app icons);
 - render any icon in **3D** with lighting and material presets.
