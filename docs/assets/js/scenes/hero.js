@@ -146,8 +146,8 @@ export function hero() {
       markAccent: m[2] === 1 || rnd() < 0.08,
       fenn: [f[0], f[1]],
       fennAccent: f[2] === 1 || rnd() < 0.12,
-      tMark: 0.45 + order(mt, i % mt.length) * 1.15 + rnd() * 0.18,
-      tFenn: 3.15 + order(ft, i % ft.length) * 1.35 + rnd() * 0.15,
+      tMark: 0.3 + order(mt, i % mt.length) * 0.9 + rnd() * 0.12,
+      tFenn: 2.5 + order(ft, i % ft.length) * 1.0 + rnd() * 0.12,
       accent: rnd() < 0.18,
       seed: rnd() * Math.PI * 2,
     });
@@ -328,10 +328,10 @@ export function hero() {
     const n = Math.max(1, Math.round(dt / H_STEP));
     for (let i = 0; i < n; i++) energy = step(t - dt + ((i + 1) * dt) / n, dt / n);
     draw(t);
-    if (t > 1.6 && t < 3.3) setState('mark');
-    else if (t >= 3.3) setState('fenn');
+    if (t > 1.1 && t < 2.6) setState('mark');
+    else if (t >= 2.6) setState('fenn');
     const moving = pointer && now - pointerAt < 1200;
-    const settled = t > 6 && energy < 0.02 && !moving && Math.abs(view[0] - tilt[0]) + Math.abs(view[1] - tilt[1]) < 0.002;
+    const settled = t > 4.8 && energy < 0.02 && !moving && Math.abs(view[0] - tilt[0]) + Math.abs(view[1] - tilt[1]) < 0.002;
     calm = settled ? calm + dt : 0;
     if (visible && calm < 0.6) raf = requestAnimationFrame(loop);
   }

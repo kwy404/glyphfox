@@ -35,19 +35,19 @@
   stroke-opacity: 0.5;
   stroke-dasharray: 1 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.3s var(--ease);
+  transition: stroke-dashoffset 0.9s var(--ease);
 }
 .flow-head {
   stroke: var(--accent-2);
   stroke-width: 0.28;
   stroke-dasharray: 1 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.3s var(--ease) 0.25s;
+  transition: stroke-dashoffset 0.9s var(--ease) 0.15s;
 }
 .flow-head-fill {
   fill: var(--accent);
   opacity: 0;
-  transition: opacity 1s var(--ease) 0.5s;
+  transition: opacity 0.8s var(--ease) 0.3s;
 }
 [data-hero-flow].is-mark .flow-tile,
 [data-hero-flow].is-mark .flow-head {
@@ -65,12 +65,12 @@
   opacity: 0;
   transform: scale(0.985);
   transform-origin: 50% 60%;
-  transition: opacity 1.4s var(--ease), transform 1.6s var(--spring);
+  transition: opacity 1s var(--ease), transform 1.4s var(--spring);
 }
 [data-hero-flow].is-fenn .hero-mascot {
   opacity: 1;
   transform: none;
-  transition-delay: 1.1s;
+  transition-delay: 0.7s;
 }
 [data-hero-flow] .hero-mascot path:not(.fill) {
   stroke: var(--accent);
