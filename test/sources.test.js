@@ -5,6 +5,8 @@ import { createElement as h } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { fuse, getIcon, hasIconSource, loadIcon, normalizeIcon, parseSpec, registerIconSource, toSvg } from 'glyphfox';
 import { Icon } from 'glyphfox/react';
+import { render } from 'svelte/server';
+import * as S from 'glyphfox/svelte';
 
 const STROKE = {
   dot: { body: '<circle cx="12" cy="12" r="6"/>', tags: ['dot'] },
@@ -64,6 +66,10 @@ describe('icon sources', () => {
     expect(fused.body).toContain('<mask id="gf-k');
     expect(fused.body).toMatch(/<g mask="url\(#gf-k[^"]+\)">/);
     expect(toSvg('tst:dot&tst:bar:stack')).toContain('glyphfox-tst-dot-tst-bar-stack');
+  });
+
+  it('works in the Svelte components', () => {
+    expect(render(S.Icon, { props: { name: 'tst:dot+check' } }).body).toContain('glyphfox-tst-dot-check');
   });
 
   it('works in the components', () => {
