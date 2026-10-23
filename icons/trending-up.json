@@ -8,5 +8,20 @@
     "profit",
     "stocks",
     "rise"
-  ]
+  ],
+  "animation": {
+    "name": "draw",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.6, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 0, "element": 1, "props": { "opacity": 0 } },
+      { "at": 0.45, "element": 1, "props": { "opacity": 0 } },
+      { "at": 0.65, "element": 1, "props": { "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "opacity": 1 } }
+    ]
+  }
 }

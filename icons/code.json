@@ -8,5 +8,21 @@
     "programming",
     "html",
     "markup"
-  ]
+  ],
+  "animation": {
+    "name": "apart",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "translate(-1px, 0px)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "translate(0.15px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "translate(-0.15px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

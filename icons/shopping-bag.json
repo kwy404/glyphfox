@@ -8,5 +8,21 @@
     "purchase",
     "store",
     "shop"
-  ]
+  ],
+  "animation": {
+    "name": "swing",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 3],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": "all", "props": { "transform": "rotate(7deg)" } },
+      { "at": 0.32, "element": "all", "props": { "transform": "rotate(-5.25deg)" } },
+      { "at": 0.5, "element": "all", "props": { "transform": "rotate(3.15deg)" } },
+      { "at": 0.68, "element": "all", "props": { "transform": "rotate(-1.75deg)" } },
+      { "at": 0.84, "element": "all", "props": { "transform": "rotate(0.7deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

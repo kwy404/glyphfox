@@ -8,5 +8,34 @@
     "trim",
     "clip",
     "edit"
-  ]
+  ],
+  "animation": {
+    "name": "cut",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12.37, 12],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.25, "element": 0, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.5, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.75, "element": 0, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.25, "element": 2, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.5, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.75, "element": 2, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.25, "element": 1, "props": { "transform": "rotate(12deg)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "rotate(12deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.25, "element": 3, "props": { "transform": "rotate(12deg)" } },
+      { "at": 0.5, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.75, "element": 3, "props": { "transform": "rotate(12deg)" } },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

@@ -9,5 +9,25 @@
     "data",
     "records",
     "server"
-  ]
+  ],
+  "animation": {
+    "name": "lift",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 0, "props": { "transform": "translate(0px, -1px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 0, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": 0, "props": { "transform": "translate(0px, -0.3px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": "secondary", "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": "secondary", "props": { "transform": "translate(0px, -1px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": "secondary", "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": "secondary", "props": { "transform": "translate(0px, -0.3px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": "secondary", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": "secondary", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

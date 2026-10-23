@@ -7,5 +7,22 @@
     "experiment",
     "sample",
     "science"
-  ]
+  ],
+  "animation": {
+    "name": "slosh",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 13],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 2, "props": { "transform": "rotate(-10deg)" } },
+      { "at": 0.27, "element": 2, "props": { "transform": "rotate(10deg)" } },
+      { "at": 0.42, "element": 2, "props": { "transform": "rotate(-7deg)" } },
+      { "at": 0.57, "element": 2, "props": { "transform": "rotate(5deg)" } },
+      { "at": 0.72, "element": 2, "props": { "transform": "rotate(-2.5deg)" } },
+      { "at": 0.86, "element": 2, "props": { "transform": "rotate(1deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

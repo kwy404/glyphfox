@@ -9,5 +9,22 @@
     "chemistry",
     "science",
     "test"
-  ]
+  ],
+  "animation": {
+    "name": "slosh",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 15],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 2, "props": { "transform": "rotate(-8deg)" } },
+      { "at": 0.27, "element": 2, "props": { "transform": "rotate(8deg)" } },
+      { "at": 0.42, "element": 2, "props": { "transform": "rotate(-5.6deg)" } },
+      { "at": 0.57, "element": 2, "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.72, "element": 2, "props": { "transform": "rotate(-2deg)" } },
+      { "at": 0.86, "element": 2, "props": { "transform": "rotate(0.8deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }
