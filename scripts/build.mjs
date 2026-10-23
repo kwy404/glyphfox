@@ -85,8 +85,8 @@ write(
     .join('\n')}\n</svg>\n`,
 );
 write(join(dist, 'styles.css'), readFileSync(join(src, 'styles.css'), 'utf8'));
-// npm shows the README of the published folder: copy the root README and LICENSE.
-write(join(pkgDir, 'README.md'), readFileSync(join(root, 'README.md'), 'utf8'));
+// The package README (packages/glyphfox/README.md) is the API reference and
+// is kept by hand; the LICENSE is copied from the root.
 write(join(pkgDir, 'LICENSE'), readFileSync(join(root, 'LICENSE'), 'utf8'));
 
 const esbuild = await import('esbuild');

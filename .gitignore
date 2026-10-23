@@ -6,5 +6,4 @@ coverage/
 .DS_Store
 Thumbs.db
 /tmp/
-packages/glyphfox/README.md
 packages/glyphfox/LICENSE
