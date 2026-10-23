@@ -181,6 +181,9 @@ export async function docsFiles(root, icons, { version }) {
       if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);
     }
   }
+  // Guides, icon pages, social images, sitemaps and robots.txt (scripts/seo).
+  const { seoFiles } = await import(pathToFileURL(join(root, 'scripts', 'seo', 'index.mjs')).href);
+  Object.assign(files, await seoFiles({ root, icons, files, siteDict: dict }));
   return files;
 }
 
@@ -189,8 +192,8 @@ export async function buildDocsData(root, icons, { version, check }) {
   const files = await docsFiles(root, icons, { version });
   const changed = [];
   for (const [file, text] of Object.entries(files)) {
-    const old = existsSync(file) ? readFileSync(file, 'utf8') : null;
-    if (old === text) continue;
+    const old = existsSync(file) ? readFileSync(file) : null;
+    if (old && (Buffer.isBuffer(text) ? old.equals(text) : old.toString('utf8') === text)) continue;
     changed.push(relative(root, file).split('\\').join('/'));
     if (!check) {
       mkdirSync(dirname(file), { recursive: true });
