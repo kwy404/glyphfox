@@ -9,90 +9,42 @@
     "busy"
   ],
   "animation": {
+    "name": "spinner",
     "duration": 1000,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "delay": 0,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      },
-      {
-        "index": 1,
-        "delay": 125,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      },
-      {
-        "index": 2,
-        "delay": 250,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      },
-      {
-        "index": 3,
-        "delay": 375,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      },
-      {
-        "index": 4,
-        "delay": 500,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      },
-      {
-        "index": 5,
-        "delay": 625,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      },
-      {
-        "index": 6,
-        "delay": 750,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      },
-      {
-        "index": 7,
-        "delay": 875,
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.85, "opacity": 0.15 },
-          { "offset": 1, "opacity": 0.15 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 0.85, "element": 0, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 1, "element": 0, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0, "element": 1, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0.125, "element": 1, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 0.975, "element": 1, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 1, "element": 1, "props": { "opacity": 0.15 } },
+      { "at": 0, "element": 2, "props": { "opacity": 0.25 }, "easing": "linear" },
+      { "at": 0.1, "element": 2, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0.25, "element": 2, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 1, "element": 2, "props": { "opacity": 0.25 } },
+      { "at": 0, "element": 3, "props": { "opacity": 0.38 }, "easing": "linear" },
+      { "at": 0.225, "element": 3, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0.375, "element": 3, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 1, "element": 3, "props": { "opacity": 0.38 } },
+      { "at": 0, "element": 4, "props": { "opacity": 0.5 }, "easing": "linear" },
+      { "at": 0.35, "element": 4, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0.5, "element": 4, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 1, "element": 4, "props": { "opacity": 0.5 } },
+      { "at": 0, "element": 5, "props": { "opacity": 0.63 }, "easing": "linear" },
+      { "at": 0.475, "element": 5, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0.625, "element": 5, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 1, "element": 5, "props": { "opacity": 0.63 } },
+      { "at": 0, "element": 6, "props": { "opacity": 0.75 }, "easing": "linear" },
+      { "at": 0.6, "element": 6, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0.75, "element": 6, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 1, "element": 6, "props": { "opacity": 0.75 } },
+      { "at": 0, "element": 7, "props": { "opacity": 0.88 }, "easing": "linear" },
+      { "at": 0.725, "element": 7, "props": { "opacity": 0.15 }, "easing": "linear" },
+      { "at": 0.875, "element": 7, "props": { "opacity": 1 }, "easing": "linear" },
+      { "at": 1, "element": 7, "props": { "opacity": 0.88 } }
     ]
   }
 }

@@ -10,28 +10,15 @@
     "cogs"
   ],
   "animation": {
+    "name": "gears",
     "duration": 4000,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "origin": [8.5, 8.5],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": 360 }
-        ]
-      },
-      {
-        "index": 2,
-        "origin": [16.6, 16.6],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": -480 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(-3.5px, -3.5px) rotate(0deg) translate(3.5px, 3.5px)" }, "easing": "linear" },
+      { "at": 1, "element": 0, "props": { "transform": "translate(-3.5px, -3.5px) rotate(360deg) translate(3.5px, 3.5px)" }, "easing": "linear" },
+      { "at": 0, "element": 2, "props": { "transform": "translate(4.6px, 4.6px) rotate(0deg) translate(-4.6px, -4.6px)" }, "easing": "linear" },
+      { "at": 1, "element": 2, "props": { "transform": "translate(4.6px, 4.6px) rotate(-480deg) translate(-4.6px, -4.6px)" }, "easing": "linear" }
     ]
   }
 }

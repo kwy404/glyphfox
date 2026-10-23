@@ -9,29 +9,20 @@
     "verified"
   ],
   "animation": {
+    "name": "check-draw",
     "duration": 2000,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "keyframes": [
-          { "offset": 0, "opacity": 1, "draw": 0 },
-          { "offset": 0.4, "opacity": 1, "draw": 1 },
-          { "offset": 0.9, "opacity": 1, "draw": 1 },
-          { "offset": 1, "opacity": 0, "draw": 1 }
-        ]
-      },
-      {
-        "index": 1,
-        "keyframes": [
-          { "offset": 0, "opacity": 1, "draw": 0 },
-          { "offset": 0.45, "opacity": 1, "draw": 0 },
-          { "offset": 0.7, "opacity": 1, "draw": 1 },
-          { "offset": 0.9, "opacity": 1, "draw": 1 },
-          { "offset": 1, "opacity": 0, "draw": 1 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "opacity": 1, "strokeDashoffset": 1 } },
+      { "at": 0.4, "element": 0, "props": { "opacity": 1, "strokeDashoffset": 0 } },
+      { "at": 0.9, "element": 0, "props": { "opacity": 1, "strokeDashoffset": 0 } },
+      { "at": 1, "element": 0, "props": { "opacity": 0, "strokeDashoffset": 0 } },
+      { "at": 0, "element": 1, "props": { "opacity": 1, "strokeDashoffset": 1 } },
+      { "at": 0.45, "element": 1, "props": { "opacity": 1, "strokeDashoffset": 1 } },
+      { "at": 0.7, "element": 1, "props": { "opacity": 1, "strokeDashoffset": 0 } },
+      { "at": 0.9, "element": 1, "props": { "opacity": 1, "strokeDashoffset": 0 } },
+      { "at": 1, "element": 1, "props": { "opacity": 0, "strokeDashoffset": 0 } }
     ]
   }
 }

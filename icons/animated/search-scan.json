@@ -9,30 +9,21 @@
     "scanning"
   ],
   "animation": {
+    "name": "search-scan",
     "duration": 2000,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "keyframes": [
-          { "offset": 0, "translate": [0, 0] },
-          { "offset": 0.25, "translate": [1.5, -1] },
-          { "offset": 0.5, "translate": [0, -1.5] },
-          { "offset": 0.75, "translate": [-1.5, -1] },
-          { "offset": 1, "translate": [0, 0] }
-        ]
-      },
-      {
-        "index": 1,
-        "keyframes": [
-          { "offset": 0, "translate": [0, 0] },
-          { "offset": 0.25, "translate": [1.5, -1] },
-          { "offset": 0.5, "translate": [0, -1.5] },
-          { "offset": 0.75, "translate": [-1.5, -1] },
-          { "offset": 1, "translate": [0, 0] }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.25, "element": 0, "props": { "transform": "translate(1.5px, -1px)" } },
+      { "at": 0.5, "element": 0, "props": { "transform": "translate(0px, -1.5px)" } },
+      { "at": 0.75, "element": 0, "props": { "transform": "translate(-1.5px, -1px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.25, "element": 1, "props": { "transform": "translate(1.5px, -1px)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "translate(0px, -1.5px)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "translate(-1.5px, -1px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } }
     ]
   }
 }

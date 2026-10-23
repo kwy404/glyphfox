@@ -10,46 +10,19 @@
     "update"
   ],
   "animation": {
+    "name": "sync",
     "duration": 1400,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "origin": [12, 12],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": 360 }
-        ]
-      },
-      {
-        "index": 1,
-        "origin": [12, 12],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": 360 }
-        ]
-      },
-      {
-        "index": 2,
-        "origin": [12, 12],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": 360 }
-        ]
-      },
-      {
-        "index": 3,
-        "origin": [12, 12],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": 360 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" }, "easing": "linear" },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(360deg)" }, "easing": "linear" },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" }, "easing": "linear" },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(360deg)" }, "easing": "linear" },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" }, "easing": "linear" },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(360deg)" }, "easing": "linear" },
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" }, "easing": "linear" },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(360deg)" }, "easing": "linear" }
     ]
   }
 }

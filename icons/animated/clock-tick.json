@@ -9,28 +9,15 @@
     "schedule"
   ],
   "animation": {
+    "name": "clock-tick",
     "duration": 4000,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 1,
-        "origin": [12, 12],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": 360 }
-        ]
-      },
-      {
-        "index": 2,
-        "origin": [12, 12],
-        "easing": "linear",
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 1, "rotate": 30 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" }, "easing": "linear" },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(360deg)" }, "easing": "linear" },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" }, "easing": "linear" },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(30deg)" }, "easing": "linear" }
     ]
   }
 }

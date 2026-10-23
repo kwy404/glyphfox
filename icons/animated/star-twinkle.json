@@ -10,30 +10,19 @@
     "shine"
   ],
   "animation": {
+    "name": "star-twinkle",
     "duration": 1800,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "origin": [12, 12],
-        "keyframes": [
-          { "offset": 0, "rotate": 0, "scale": 1 },
-          { "offset": 0.3, "rotate": 6, "scale": 1.08 },
-          { "offset": 0.6, "rotate": 0, "scale": 1 },
-          { "offset": 1, "rotate": 0, "scale": 1 }
-        ]
-      },
-      {
-        "index": 1,
-        "origin": [19.5, 4.5],
-        "keyframes": [
-          { "offset": 0, "opacity": 0, "scale": 0.3 },
-          { "offset": 0.3, "opacity": 1, "scale": 1 },
-          { "offset": 0.6, "opacity": 0, "scale": 0.3 },
-          { "offset": 1, "opacity": 0, "scale": 0.3 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "rotate(6deg) scale(1.08)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(7.5px, -7.5px) scale(0.3) translate(-7.5px, 7.5px)", "opacity": 0 } },
+      { "at": 0.3, "element": 1, "props": { "transform": "translate(7.5px, -7.5px) scale(1) translate(-7.5px, 7.5px)", "opacity": 1 } },
+      { "at": 0.6, "element": 1, "props": { "transform": "translate(7.5px, -7.5px) scale(0.3) translate(-7.5px, 7.5px)", "opacity": 0 } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(7.5px, -7.5px) scale(0.3) translate(-7.5px, 7.5px)", "opacity": 0 } }
     ]
   }
 }

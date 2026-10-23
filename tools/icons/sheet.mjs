@@ -15,10 +15,11 @@
 //   --width N           page width in CSS pixels (default 1600)
 //   --columns N         grid columns
 //   --slices N          also write the PNG as bands of N CSS pixels (NAME-01.png, ...)
+//   --animations        only icons with a designed animation, as frame strips
 //
 // Base and isometric icons show at 24 and 16 px, display icons at 96 and 48 px,
-// and animated icons as a strip of frames sampled across one cycle (played with
-// the Web Animations API from the keyframes in the sidecar).
+// and animated icons as a strip of frames sampled across one run (played with
+// the Web Animations API from the timeline in the sidecar).
 //
 // The PNG is rendered with Playwright when it is installed, otherwise with a
 // local Edge or Chrome driven over the DevTools protocol (Node 22 or newer).
@@ -49,12 +50,14 @@ if (!collection) {
 const GRID = collection.grid;
 const iconsDir = collection.dir ? join(iconsRoot, collection.dir) : iconsRoot;
 const review = flag('review');
+const animationsOnly = flag('animations');
+const strips = collectionName === 'animated' || animationsOnly;
 const outHtml = resolve(option('out', join(tmpdir(), 'glyphfox-sheet', `${collectionName}${review ? '-review' : ''}.html`)));
 const outPng = option('png', null);
 const scale = Number(option('scale', '1'));
 const width = Number(option('width', '1600'));
 const defaultColumns = { base: 10, isometric: 10, display: 4, animated: 4 }[collectionName];
-const columns = Number(option('columns', review ? (collectionName === 'display' ? '3' : collectionName === 'animated' ? '2' : '7') : String(defaultColumns)));
+const columns = Number(option('columns', review ? (collectionName === 'display' ? '3' : collectionName === 'animated' || flag('animations') ? '2' : '7') : String(flag('animations') ? 4 : defaultColumns)));
 const sliceHeight = Number(option('slices', '0'));
 const FRAMES = [0, 1 / 6, 2 / 6, 3 / 6, 4 / 6, 5 / 6];
 
@@ -103,9 +106,9 @@ function frames(ic, size, weight = 2) {
 function cell(ic) {
   const tag = ic.duotone ? '<span class="duo">duo</span>' : '';
   const b = ic.body;
-  if (collectionName === 'animated') {
+  if (strips) {
     const big = review ? 64 : 40;
-    return `<figure class="cell"><div class="row light strip">${frames(ic, big)}</div><div class="row dark strip">${frames(ic, 24)}</div><figcaption>${ic.name}${tag}<span>${ic.animation ? `${ic.animation.duration} ms` : ''}</span></figcaption></figure>`;
+    return `<figure class="cell"><div class="row light strip">${frames(ic, big)}</div><div class="row dark strip">${frames(ic, 24)}</div><figcaption>${ic.name}${tag}<span>${ic.animation ? `${ic.animation.name}, ${ic.animation.duration} ms` : ''}</span></figcaption></figure>`;
   }
   if (collectionName === 'display') {
     if (review) {
@@ -125,38 +128,50 @@ function cell(ic) {
   return `<figure class="cell"><div class="tiles"><div class="tile light">${icon(b, 24)}${icon(b, 16)}</div><div class="tile dark">${icon(b, 24)}${icon(b, 16)}</div></div><figcaption>${ic.name}${tag}</figcaption></figure>`;
 }
 
-// Plays the sidecar keyframes with the Web Animations API and freezes each
+// Plays the sidecar timeline with the Web Animations API and freezes each
 // frame at its sample time. Runs inside the sheet page.
 const PLAYER = `
 const data = JSON.parse(document.getElementById('anim-data').textContent);
+const NS = 'http://www.w3.org/2000/svg';
 for (const svg of document.querySelectorAll('svg[data-anim]')) {
   const a = data[svg.dataset.anim];
   if (!a) continue;
-  const t = parseFloat(svg.dataset.t) * a.duration;
+  const t = Math.min(parseFloat(svg.dataset.t), 0.9999) * a.duration;
   const kids = Array.from(svg.children);
-  for (const el of a.elements) {
-    const node = kids[el.index];
+  const secondary = kids.find((n) => n.getAttribute('class') === 'gf-secondary');
+  const drawn = kids.filter((n) => n !== secondary);
+  const o = a.origin || [12, 12];
+  const tracks = new Map();
+  for (const f of a.frames) {
+    const key = f.element === undefined ? 'all' : String(f.element);
+    if (!tracks.has(key)) tracks.set(key, []);
+    tracks.get(key).push(f);
+  }
+  for (const [key, frames] of tracks) {
+    let node;
+    if (key === 'all') {
+      node = document.createElementNS(NS, 'g');
+      for (const n of kids) node.appendChild(n);
+      svg.appendChild(node);
+    } else if (key === 'secondary') node = secondary;
+    else node = drawn[Number(key)];
     if (!node) continue;
-    const draws = el.keyframes.some((k) => k.draw !== undefined);
-    const len = draws ? node.getTotalLength() : 0;
-    if (draws) node.style.strokeDasharray = len + ' ' + len;
-    if (el.origin) {
-      node.style.transformBox = 'view-box';
-      node.style.transformOrigin = el.origin[0] + 'px ' + el.origin[1] + 'px';
+    node.style.transformBox = 'view-box';
+    node.style.transformOrigin = o[0] + 'px ' + o[1] + 'px';
+    if (frames.some((f) => f.props.strokeDashoffset !== undefined)) {
+      node.setAttribute('pathLength', '1');
+      node.style.strokeDasharray = '1 1';
     }
-    const ease = el.easing || a.easing || 'linear';
-    const kfs = el.keyframes.map((k) => {
-      const f = { offset: k.offset, easing: k.easing || ease };
-      if (k.opacity !== undefined) f.opacity = k.opacity;
-      if (k.translate || k.rotate !== undefined || k.scale !== undefined) {
-        const tr = k.translate || [0, 0];
-        const s = k.scale === undefined ? [1, 1] : Array.isArray(k.scale) ? k.scale : [k.scale, k.scale];
-        f.transform = 'translate(' + tr[0] + 'px, ' + tr[1] + 'px) rotate(' + (k.rotate || 0) + 'deg) scale(' + s[0] + ', ' + s[1] + ')';
-      }
-      if (k.draw !== undefined) f.strokeDashoffset = (1 - k.draw) * len;
-      return f;
+    const kfs = frames.map((f) => {
+      const k = { offset: f.at, easing: f.easing || a.easing || 'ease' };
+      const p = f.props;
+      if (p.transform !== undefined) k.transform = p.transform;
+      if (p.opacity !== undefined) k.opacity = p.opacity;
+      if (p.strokeDashoffset !== undefined) k.strokeDashoffset = p.strokeDashoffset;
+      if (p.d !== undefined) k.d = 'path("' + p.d + '")';
+      return k;
     });
-    const anim = node.animate(kfs, { duration: a.duration, iterations: Infinity, delay: el.delay || 0, fill: 'both' });
+    const anim = node.animate(kfs, { duration: a.duration, iterations: 1, fill: 'both' });
     anim.pause();
     anim.currentTime = t;
   }
@@ -164,7 +179,7 @@ for (const svg of document.querySelectorAll('svg[data-anim]')) {
 `;
 
 function buildHtml(all) {
-  let list = all;
+  let list = animationsOnly ? all.filter((i) => i.animation) : all;
   const only = option('only', null);
   if (only) {
     const want = only.split(',').map((s) => s.trim());
@@ -187,10 +202,10 @@ function buildHtml(all) {
       if (items.length) sections.push({ title: `${c} (${items.length})`, items });
     }
     const duo = list.filter((i) => i.duotone);
-    if (duo.length && collectionName !== 'display') sections.push({ title: `duotone with a second color (${duo.length})`, items: duo, accent: true });
+    if (duo.length && collectionName !== 'display' && !strips) sections.push({ title: `duotone with a second color (${duo.length})`, items: duo, accent: true });
   }
   const duoCount = list.filter((i) => i.duotone).length;
-  const sizes = { base: '24 and 16 px', isometric: '24 and 16 px', display: '96 and 48 px on the 48 grid', animated: 'six frames across one cycle' }[collectionName];
+  const sizes = strips ? 'six frames across one run of the designed animation' : { base: '24 and 16 px', isometric: '24 and 16 px', display: '96 and 48 px on the 48 grid' }[collectionName];
   const titles = { base: 'glyphfox', isometric: 'glyphfox isometric', display: 'glyphfox display', animated: 'glyphfox animated' };
   const css = `
 :root{--bg:#f4f4f1;--card:#fff;--ink:#17171c;--muted:#70707b;--line:#e3e3de;--night:#141418;--night-ink:#ececf1;--accent:#e2632a}
@@ -224,7 +239,7 @@ figcaption{font-size:11px;color:var(--muted);padding:4px 8px;border-top:1px soli
   const body = sections
     .map((s) => `<section class="${s.accent ? 'accent-on' : ''}"><h2>${s.title}</h2><div class="grid">${s.items.map(cell).join('\n')}</div></section>`)
     .join('\n');
-  const animData = collectionName === 'animated' ? Object.fromEntries(list.filter((i) => i.animation).map((i) => [i.name, i.animation])) : null;
+  const animData = strips ? Object.fromEntries(list.filter((i) => i.animation).map((i) => [i.name, i.animation])) : null;
   const script = animData ? `<script type="application/json" id="anim-data">${JSON.stringify(animData)}</script><script>${PLAYER}</script>` : '';
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${titles[collectionName]} icons</title><style>${css}</style></head><body><header><h1>${titles[collectionName]}</h1><p>${list.length} icons, ${duoCount} duotone, ${sizes}, light and dark${review ? ', review at weights 1, 2 and 3' : ''}</p></header>${body}${script}</body></html>`;
 }

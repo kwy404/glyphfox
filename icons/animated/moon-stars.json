@@ -10,27 +10,18 @@
     "dark"
   ],
   "animation": {
+    "name": "moon-stars",
     "duration": 2400,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 1,
-        "origin": [17, 7],
-        "keyframes": [
-          { "offset": 0, "scale": 0.6 },
-          { "offset": 0.5, "scale": 1.15 },
-          { "offset": 1, "scale": 0.6 }
-        ]
-      },
-      {
-        "index": 2,
-        "keyframes": [
-          { "offset": 0, "opacity": 1 },
-          { "offset": 0.5, "opacity": 0.2 },
-          { "offset": 1, "opacity": 1 }
-        ]
-      }
+    "loop": true,
+    "origin": [17, 7],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "scale(0.6)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "scale(1.15)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(0.6)" } },
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.5, "element": 2, "props": { "opacity": 0.2 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } }
     ]
   }
 }

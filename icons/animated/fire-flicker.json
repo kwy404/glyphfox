@@ -10,20 +10,16 @@
     "trending"
   ],
   "animation": {
+    "name": "fire-flicker",
     "duration": 900,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "origin": [12, 22],
-        "keyframes": [
-          { "offset": 0, "rotate": 0, "scale": [1, 1] },
-          { "offset": 0.3, "rotate": -2, "scale": [0.97, 1.04] },
-          { "offset": 0.6, "rotate": 1.5, "scale": [1.02, 0.98] },
-          { "offset": 1, "rotate": 0, "scale": [1, 1] }
-        ]
-      }
+    "loop": true,
+    "origin": [12, 22],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg) scale(1, 1)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "rotate(-2deg) scale(0.97, 1.04)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "rotate(1.5deg) scale(1.02, 0.98)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg) scale(1, 1)" } }
     ]
   }
 }

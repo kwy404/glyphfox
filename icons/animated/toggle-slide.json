@@ -10,19 +10,15 @@
     "setting"
   ],
   "animation": {
+    "name": "toggle-slide",
     "duration": 1800,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 1,
-        "keyframes": [
-          { "offset": 0, "translate": [0, 0] },
-          { "offset": 0.35, "translate": [6, 0] },
-          { "offset": 0.65, "translate": [6, 0] },
-          { "offset": 1, "translate": [0, 0] }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(6px, 0px)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "translate(6px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } }
     ]
   }
 }

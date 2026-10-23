@@ -9,22 +9,18 @@
     "weather"
   ],
   "animation": {
+    "name": "thunder",
     "duration": 2000,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 1,
-        "keyframes": [
-          { "offset": 0, "opacity": 0 },
-          { "offset": 0.08, "opacity": 1 },
-          { "offset": 0.14, "opacity": 0.2 },
-          { "offset": 0.2, "opacity": 1 },
-          { "offset": 0.6, "opacity": 1 },
-          { "offset": 0.7, "opacity": 0 },
-          { "offset": 1, "opacity": 0 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "opacity": 0 } },
+      { "at": 0.08, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.14, "element": 1, "props": { "opacity": 0.2 } },
+      { "at": 0.2, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.6, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.7, "element": 1, "props": { "opacity": 0 } },
+      { "at": 1, "element": 1, "props": { "opacity": 0 } }
     ]
   }
 }

@@ -23,8 +23,8 @@
 // with geometry attributes only. The optional duotone layer is a single element with
 // class "gf-secondary", listed first so the strokes paint over it. Every point of the
 // geometry stays inside the padding box.
-// Sidecar (NAME.json): { "categories": [...], "tags": [...] }, plus "animation" for
-// animated icons (the schema is documented in svg.mjs).
+// Sidecar (NAME.json): { "categories": [...], "tags": [...] }, plus an optional
+// designed "animation" timeline (required for animated icons, schema in svg.mjs).
 // Exits with code 1 when any problem is found.
 
 import { readFileSync, readdirSync, writeFileSync, existsSync, statSync } from 'node:fs';
@@ -204,7 +204,7 @@ function lintJson(name, text, col, svg) {
     report(name, 'json', 'the sidecar must be an object');
     return null;
   }
-  const allowed = col.animation ? ['categories', 'tags', 'animation'] : ['categories', 'tags'];
+  const allowed = ['categories', 'tags', 'animation'];
   for (const k of Object.keys(data)) {
     if (!allowed.includes(k)) report(name, 'json', `unknown key "${k}"`);
   }
@@ -225,10 +225,8 @@ function lintJson(name, text, col, svg) {
     }
     if (new Set(tags).size !== tags.length) report(name, 'tags', 'duplicate tags');
   }
-  if (col.animation) {
-    if (data.animation === undefined) report(name, 'animation', 'animated icons need an "animation" block');
-    else if (svg) for (const p of animationProblems(data.animation, svg, col.grid)) report(name, 'animation', p);
-  }
+  if (col.animation && data.animation === undefined) report(name, 'animation', 'animated icons need an "animation" block');
+  else if (data.animation !== undefined && svg) for (const p of animationProblems(data.animation, svg, col.grid)) report(name, 'animation', p);
   return data;
 }
 

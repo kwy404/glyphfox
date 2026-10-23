@@ -9,32 +9,22 @@
     "trash"
   ],
   "animation": {
+    "name": "trash-lid",
     "duration": 1800,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 1,
-        "origin": [3, 8],
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 0.3, "rotate": -12 },
-          { "offset": 0.6, "rotate": -12 },
-          { "offset": 0.8, "rotate": 0 },
-          { "offset": 1, "rotate": 0 }
-        ]
-      },
-      {
-        "index": 2,
-        "origin": [3, 8],
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 0.3, "rotate": -12 },
-          { "offset": 0.6, "rotate": -12 },
-          { "offset": 0.8, "rotate": 0 },
-          { "offset": 1, "rotate": 0 }
-        ]
-      }
+    "loop": true,
+    "origin": [3, 8],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.8, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "rotate(-12deg)" } },
+      { "at": 0.8, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } }
     ]
   }
 }

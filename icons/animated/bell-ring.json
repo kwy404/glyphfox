@@ -10,39 +10,29 @@
     "alarm"
   ],
   "animation": {
+    "name": "bell-ring",
     "duration": 1600,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 0,
-        "origin": [12, 3],
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 0.1, "rotate": 12 },
-          { "offset": 0.2, "rotate": -10 },
-          { "offset": 0.3, "rotate": 7 },
-          { "offset": 0.4, "rotate": -4 },
-          { "offset": 0.5, "rotate": 2 },
-          { "offset": 0.6, "rotate": 0 },
-          { "offset": 1, "rotate": 0 }
-        ]
-      },
-      {
-        "index": 1,
-        "origin": [12, 3],
-        "delay": 60,
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 0.1, "rotate": 16 },
-          { "offset": 0.2, "rotate": -14 },
-          { "offset": 0.3, "rotate": 9 },
-          { "offset": 0.4, "rotate": -5 },
-          { "offset": 0.5, "rotate": 2 },
-          { "offset": 0.6, "rotate": 0 },
-          { "offset": 1, "rotate": 0 }
-        ]
-      }
+    "loop": true,
+    "origin": [12, 3],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.1, "element": 0, "props": { "transform": "rotate(12deg)" } },
+      { "at": 0.2, "element": 0, "props": { "transform": "rotate(-10deg)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "rotate(7deg)" } },
+      { "at": 0.4, "element": 0, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.5, "element": 0, "props": { "transform": "rotate(2deg)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.038, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.138, "element": 1, "props": { "transform": "rotate(16deg)" } },
+      { "at": 0.238, "element": 1, "props": { "transform": "rotate(-14deg)" } },
+      { "at": 0.337, "element": 1, "props": { "transform": "rotate(9deg)" } },
+      { "at": 0.438, "element": 1, "props": { "transform": "rotate(-5deg)" } },
+      { "at": 0.538, "element": 1, "props": { "transform": "rotate(2deg)" } },
+      { "at": 0.638, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } }
     ]
   }
 }

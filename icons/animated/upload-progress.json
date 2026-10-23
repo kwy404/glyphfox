@@ -10,37 +10,23 @@
     "transfer"
   ],
   "animation": {
+    "name": "upload-progress",
     "duration": 2000,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 1,
-        "keyframes": [
-          { "offset": 0, "opacity": 0, "translate": [0, 2] },
-          { "offset": 0.25, "opacity": 1, "translate": [0, 0] },
-          { "offset": 0.75, "opacity": 1, "translate": [0, -1] },
-          { "offset": 1, "opacity": 0, "translate": [0, -1] }
-        ]
-      },
-      {
-        "index": 2,
-        "keyframes": [
-          { "offset": 0, "opacity": 0, "translate": [0, 2] },
-          { "offset": 0.25, "opacity": 1, "translate": [0, 0] },
-          { "offset": 0.75, "opacity": 1, "translate": [0, -1] },
-          { "offset": 1, "opacity": 0, "translate": [0, -1] }
-        ]
-      },
-      {
-        "index": 3,
-        "keyframes": [
-          { "offset": 0, "opacity": 1, "draw": 0 },
-          { "offset": 0.8, "opacity": 1, "draw": 1 },
-          { "offset": 0.9, "opacity": 1, "draw": 1 },
-          { "offset": 1, "opacity": 0, "draw": 1 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 2px)", "opacity": 0 } },
+      { "at": 0.25, "element": 1, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.75, "element": 1, "props": { "transform": "translate(0px, -1px)", "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, -1px)", "opacity": 0 } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 2px)", "opacity": 0 } },
+      { "at": 0.25, "element": 2, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 0.75, "element": 2, "props": { "transform": "translate(0px, -1px)", "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, -1px)", "opacity": 0 } },
+      { "at": 0, "element": 3, "props": { "opacity": 1, "strokeDashoffset": 1 } },
+      { "at": 0.8, "element": 3, "props": { "opacity": 1, "strokeDashoffset": 0 } },
+      { "at": 0.9, "element": 3, "props": { "opacity": 1, "strokeDashoffset": 0 } },
+      { "at": 1, "element": 3, "props": { "opacity": 0, "strokeDashoffset": 0 } }
     ]
   }
 }

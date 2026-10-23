@@ -10,23 +10,18 @@
     "explore"
   ],
   "animation": {
+    "name": "compass-swing",
     "duration": 2400,
-    "iterations": "infinite",
     "easing": "ease-in-out",
-    "elements": [
-      {
-        "index": 1,
-        "origin": [12, 12],
-        "keyframes": [
-          { "offset": 0, "rotate": 0 },
-          { "offset": 0.15, "rotate": 40 },
-          { "offset": 0.3, "rotate": -25 },
-          { "offset": 0.45, "rotate": 15 },
-          { "offset": 0.6, "rotate": -8 },
-          { "offset": 0.75, "rotate": 4 },
-          { "offset": 1, "rotate": 0 }
-        ]
-      }
+    "loop": true,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": 1, "props": { "transform": "rotate(40deg)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(-25deg)" } },
+      { "at": 0.45, "element": 1, "props": { "transform": "rotate(15deg)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "rotate(-8deg)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "rotate(4deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } }
     ]
   }
 }

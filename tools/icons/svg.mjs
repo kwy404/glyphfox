@@ -571,162 +571,254 @@ export function stripBom(text) {
 
 // ---------------------------------------------------------------- animation
 //
-// Animated icons describe their motion in the JSON sidecar:
+// Designed animations live in the JSON sidecar as a frame timeline, the
+// format packages/glyphfox/src/core/timeline.js plays:
 //
 //   "animation": {
-//     "duration": 1600,              one cycle in milliseconds (200 to 10000)
-//     "iterations": "infinite",      or a whole number of cycles
-//     "easing": "ease-in-out",       default easing (optional)
-//     "elements": [
-//       {
-//         "index": 2,                element position in the SVG (0 based)
-//         "origin": [12, 12],        rotate and scale center, in grid units
-//         "delay": 0,                milliseconds (optional)
-//         "easing": "linear",        easing for this element (optional)
-//         "keyframes": [
-//           { "offset": 0, "opacity": 0, "translate": [0, 2], "rotate": 0, "scale": 1, "draw": 0 },
-//           { "offset": 1, "opacity": 1 }
-//         ]
-//       }
+//     "name": "swing",               kebab-case name of the motion
+//     "duration": 900,               one run in milliseconds (200 to 10000)
+//     "easing": "ease-in-out",       timing between frames (optional)
+//     "loop": false,                 true, false or a number of runs (optional)
+//     "origin": [12, 3],             transform origin in grid units (optional, default [12, 12])
+//     "frames": [
+//       { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+//       { "at": 0.3, "element": 0, "props": { "transform": "rotate(12deg)" }, "easing": "ease-out" },
+//       { "at": 1, "element": 0, "props": { "transform": "rotate(0deg)" } }
 //     ]
 //   }
 //
-// translate moves in grid units, rotate is in degrees, scale is a number or
-// [sx, sy] (negative flips), draw is the visible fraction of the stroke (0 to 1). The order
-// matches CSS: translate, then rotate and scale about the origin.
+// element is the index of a drawn element (the duotone layer is not counted),
+// "all" for the whole icon or "secondary" for the duotone layer. props takes
+// transform (translate in px, which are grid units, rotate in deg, scale),
+// opacity, strokeDashoffset (0 drawn to 1 hidden, the element is drawn with
+// pathLength 1) and d (path data with the same commands as the element). A
+// frame easing applies from that frame to the next one. Every track starts at
+// 0, ends at 1 and keeps the same transform functions in every frame, so CSS,
+// the Web Animations API and frame export all interpolate it the same way.
 
 const EASING_RE =
-  /^(linear|ease|ease-in|ease-out|ease-in-out|steps\(\d+(,\s*(start|end))?\)|cubic-bezier\(\s*-?[\d.]+\s*,\s*-?[\d.]+\s*,\s*-?[\d.]+\s*,\s*-?[\d.]+\s*\))$/;
-const KEYFRAME_KEYS = ['offset', 'opacity', 'translate', 'rotate', 'scale', 'draw', 'easing'];
-const ELEMENT_KEYS = ['index', 'origin', 'delay', 'easing', 'keyframes'];
-const ANIMATION_KEYS = ['duration', 'iterations', 'easing', 'elements'];
+  /^(linear|ease|ease-in|ease-out|ease-in-out|steps\(\d+(,\s*(start|end|jump-start|jump-end|jump-none|jump-both))?\)|cubic-bezier\(\s*-?[\d.]+\s*,\s*-?[\d.]+\s*,\s*-?[\d.]+\s*,\s*-?[\d.]+\s*\))$/;
+const TIMELINE_KEYS = ['name', 'duration', 'easing', 'loop', 'origin', 'frames'];
+const FRAME_KEYS = ['at', 'element', 'props', 'easing'];
+const PROP_KEYS = ['transform', 'opacity', 'strokeDashoffset', 'd'];
+const NAME_RE = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
+const LEN = '-?(?:\\d+\\.?\\d*|\\.\\d+)';
+const FN_RE = new RegExp(`\\s*(translate|rotate|scale)\\(([^()]*)\\)\\s*`, 'y');
+const PX_RE = new RegExp(`^${LEN}px$`);
+const DEG_RE = new RegExp(`^${LEN}deg$`);
+const NUM_RE = new RegExp(`^${LEN}$`);
 
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 const isPair = (v) => Array.isArray(v) && v.length === 2 && v.every(isNum);
 
-// Applies one keyframe transform to a point.
-export function transformPoint([x, y], kf, origin) {
-  const [ox, oy] = origin || [0, 0];
-  const s = kf.scale === undefined ? [1, 1] : Array.isArray(kf.scale) ? kf.scale : [kf.scale, kf.scale];
-  const r = ((kf.rotate || 0) * Math.PI) / 180;
-  const [tx, ty] = kf.translate || [0, 0];
-  const dx = (x - ox) * s[0];
-  const dy = (y - oy) * s[1];
-  return [ox + tx + dx * Math.cos(r) - dy * Math.sin(r), oy + ty + dx * Math.sin(r) + dy * Math.cos(r)];
+// Reads a CSS transform made of translate(), rotate() and scale().
+export function parseTransform(text) {
+  const list = [];
+  let pos = 0;
+  const s = String(text);
+  while (pos < s.length) {
+    FN_RE.lastIndex = pos;
+    const m = FN_RE.exec(s);
+    if (!m) throw new Error(`cannot read transform "${s}"`);
+    const fn = m[1];
+    const args = m[2].split(',').map((a) => a.trim());
+    let vals;
+    if (fn === 'translate') {
+      if (args.length < 1 || args.length > 2 || !args.every((a) => PX_RE.test(a))) throw new Error(`translate() takes one or two px lengths in "${s}"`);
+      vals = [parseFloat(args[0]), args.length > 1 ? parseFloat(args[1]) : 0];
+    } else if (fn === 'rotate') {
+      if (args.length !== 1 || !DEG_RE.test(args[0])) throw new Error(`rotate() takes an angle in deg in "${s}"`);
+      vals = [parseFloat(args[0])];
+    } else {
+      if (args.length < 1 || args.length > 2 || !args.every((a) => NUM_RE.test(a))) throw new Error(`scale() takes one or two numbers in "${s}"`);
+      vals = [parseFloat(args[0]), args.length > 1 ? parseFloat(args[1]) : parseFloat(args[0])];
+    }
+    list.push({ fn, vals, arity: args.length });
+    pos = FN_RE.lastIndex;
+  }
+  if (!list.length) throw new Error('empty transform');
+  return list;
 }
 
-// Returns a list of problems with an animation block.
+const mul = (a, b) => [
+  a[0] * b[0] + a[2] * b[1],
+  a[1] * b[0] + a[3] * b[1],
+  a[0] * b[2] + a[2] * b[3],
+  a[1] * b[2] + a[3] * b[3],
+  a[0] * b[4] + a[2] * b[5] + a[4],
+  a[1] * b[4] + a[3] * b[5] + a[5],
+];
+const IDENTITY = [1, 0, 0, 1, 0, 0];
+
+// Matrix of a parsed transform applied about an origin, as CSS does with
+// transform-box: view-box.
+export function transformMatrix(list, origin = [GRID / 2, GRID / 2]) {
+  let m = [1, 0, 0, 1, origin[0], origin[1]];
+  for (const { fn, vals } of list) {
+    if (fn === 'translate') m = mul(m, [1, 0, 0, 1, vals[0], vals[1]]);
+    else if (fn === 'rotate') {
+      const r = (vals[0] * Math.PI) / 180;
+      m = mul(m, [Math.cos(r), Math.sin(r), -Math.sin(r), Math.cos(r), 0, 0]);
+    } else m = mul(m, [vals[0], 0, 0, vals[1], 0, 0]);
+  }
+  return mul(m, [1, 0, 0, 1, -origin[0], -origin[1]]);
+}
+
+const applyMatrix = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
+
+// Value of one numeric or transform property of a track at progress t
+// (linear between frames, enough for the canvas check).
+function trackValue(frames, key, t) {
+  const withP = frames.filter((f) => f.props && f.props[key] !== undefined);
+  if (!withP.length) return undefined;
+  let i = 0;
+  while (i < withP.length - 2 && t > withP[i + 1].at) i++;
+  const a = withP[i];
+  const b = withP[Math.min(i + 1, withP.length - 1)];
+  const span = b.at - a.at;
+  const u = span > 0 ? Math.max(0, Math.min(1, (t - a.at) / span)) : 0;
+  if (key === 'transform') {
+    const la = a.parsed;
+    const lb = b.parsed;
+    if (!la || !lb) return null;
+    return la.map((fa, k) => ({ fn: fa.fn, vals: fa.vals.map((v, j) => v + (lb[k].vals[j] - v) * u) }));
+  }
+  return a.props[key] + (b.props[key] - a.props[key]) * u;
+}
+
+// Returns a list of problems with an animation timeline.
 export function animationProblems(anim, svg, grid = GRID) {
   const out = [];
   if (!anim || typeof anim !== 'object' || Array.isArray(anim)) return ['animation must be an object'];
-  for (const k of Object.keys(anim)) if (!ANIMATION_KEYS.includes(k)) out.push(`animation: unknown key "${k}"`);
+  for (const k of Object.keys(anim)) if (!TIMELINE_KEYS.includes(k)) out.push(`animation: unknown key "${k}"`);
+  if (typeof anim.name !== 'string' || !NAME_RE.test(anim.name)) out.push('animation.name must be a kebab-case name');
   if (!Number.isInteger(anim.duration) || anim.duration < 200 || anim.duration > 10000) {
     out.push('animation.duration must be a whole number of milliseconds from 200 to 10000');
   }
-  if (anim.iterations !== undefined && anim.iterations !== 'infinite' && !(Number.isInteger(anim.iterations) && anim.iterations > 0 && anim.iterations <= 100)) {
-    out.push('animation.iterations must be "infinite" or a whole number from 1 to 100');
-  }
   if (anim.easing !== undefined && !(typeof anim.easing === 'string' && EASING_RE.test(anim.easing))) out.push(`animation.easing "${anim.easing}" is not a supported easing`);
-  if (!Array.isArray(anim.elements) || !anim.elements.length) {
-    out.push('animation.elements must be a non-empty array');
+  if (anim.loop !== undefined && typeof anim.loop !== 'boolean' && !(Number.isInteger(anim.loop) && anim.loop >= 1 && anim.loop <= 100)) {
+    out.push('animation.loop must be true, false or a whole number of runs from 1 to 100');
+  }
+  if (anim.origin !== undefined && !(isPair(anim.origin) && anim.origin.every((v) => v >= 0 && v <= grid))) out.push('animation.origin must be [x, y] inside the grid');
+  const origin = isPair(anim.origin) ? anim.origin : [grid / 2, grid / 2];
+  if (!Array.isArray(anim.frames) || !anim.frames.length) {
+    out.push('animation.frames must be a non-empty array');
     return out;
   }
-  const seen = new Set();
-  anim.elements.forEach((el, n) => {
-    const where = `animation.elements[${n}]`;
-    if (!el || typeof el !== 'object') {
+  const drawn = svg.children.filter((c) => !c.attrs.has('class'));
+  const secondary = svg.children.find((c) => c.attrs.has('class'));
+  const tracks = new Map();
+  anim.frames.forEach((fr, n) => {
+    const where = `animation.frames[${n}]`;
+    if (!fr || typeof fr !== 'object' || Array.isArray(fr)) {
       out.push(`${where} must be an object`);
       return;
     }
-    for (const k of Object.keys(el)) if (!ELEMENT_KEYS.includes(k)) out.push(`${where}: unknown key "${k}"`);
-    if (!Number.isInteger(el.index) || el.index < 0 || el.index >= svg.children.length) {
-      out.push(`${where}.index must point at an element of the SVG`);
+    for (const k of Object.keys(fr)) if (!FRAME_KEYS.includes(k)) out.push(`${where}: unknown key "${k}"`);
+    if (!isNum(fr.at) || fr.at < 0 || fr.at > 1) out.push(`${where}.at must be a number from 0 to 1`);
+    else if (decimals(String(fr.at)) > 3) out.push(`${where}.at has more than 3 decimals`);
+    let key;
+    if (fr.element === 'all' || fr.element === 'secondary') key = fr.element;
+    else if (Number.isInteger(fr.element) && fr.element >= 0 && fr.element < drawn.length) key = fr.element;
+    else {
+      out.push(`${where}.element must be the index of a drawn element, "all" or "secondary"`);
       return;
     }
-    if (seen.has(el.index)) out.push(`${where}: element ${el.index} is animated twice`);
-    seen.add(el.index);
-    const target = svg.children[el.index];
-    if (el.origin !== undefined && !(isPair(el.origin) && el.origin.every((v) => v >= 0 && v <= grid))) out.push(`${where}.origin must be [x, y] inside the grid`);
-    if (el.delay !== undefined && !(Number.isInteger(el.delay) && el.delay >= 0 && el.delay <= (anim.duration || 0))) {
-      out.push(`${where}.delay must be a whole number of milliseconds within the duration`);
-    }
-    if (el.easing !== undefined && !(typeof el.easing === 'string' && EASING_RE.test(el.easing))) out.push(`${where}.easing "${el.easing}" is not a supported easing`);
-    const kfs = el.keyframes;
-    if (!Array.isArray(kfs) || kfs.length < 2) {
-      out.push(`${where}.keyframes needs at least two keyframes`);
+    if (key === 'secondary' && !secondary) out.push(`${where}: the icon has no duotone layer`);
+    if (fr.easing !== undefined && !(typeof fr.easing === 'string' && EASING_RE.test(fr.easing))) out.push(`${where}.easing "${fr.easing}" is not a supported easing`);
+    const props = fr.props;
+    if (!props || typeof props !== 'object' || Array.isArray(props) || !Object.keys(props).length) {
+      out.push(`${where}.props must be an object with at least one property`);
       return;
     }
-    let last = -1;
-    let animated = false;
-    let needsOrigin = false;
-    kfs.forEach((kf, m) => {
-      const w = `${where}.keyframes[${m}]`;
-      if (!kf || typeof kf !== 'object') {
-        out.push(`${w} must be an object`);
-        return;
+    for (const k of Object.keys(props)) if (!PROP_KEYS.includes(k)) out.push(`${where}.props: unknown property "${k}" (use ${PROP_KEYS.join(', ')})`);
+    const entry = { at: fr.at, props, parsed: null, where };
+    if (props.transform !== undefined) {
+      try {
+        entry.parsed = parseTransform(props.transform);
+      } catch (err) {
+        out.push(`${where}.props.transform: ${err.message}`);
       }
-      for (const k of Object.keys(kf)) if (!KEYFRAME_KEYS.includes(k)) out.push(`${w}: unknown key "${k}"`);
-      if (!isNum(kf.offset) || kf.offset < 0 || kf.offset > 1 || kf.offset <= last) out.push(`${w}.offset must grow from 0 to 1`);
-      last = isNum(kf.offset) ? kf.offset : last;
-      if (kf.opacity !== undefined && !(isNum(kf.opacity) && kf.opacity >= 0 && kf.opacity <= 1)) out.push(`${w}.opacity must be from 0 to 1`);
-      if (kf.translate !== undefined && !(isPair(kf.translate) && kf.translate.every((v) => Math.abs(v) <= grid / 2))) out.push(`${w}.translate must be [dx, dy] in grid units`);
-      if (kf.rotate !== undefined && !(isNum(kf.rotate) && Math.abs(kf.rotate) <= 720)) out.push(`${w}.rotate must be degrees from -720 to 720`);
-      if (kf.scale !== undefined && !((isNum(kf.scale) && Math.abs(kf.scale) <= 3) || (isPair(kf.scale) && kf.scale.every((v) => Math.abs(v) <= 3)))) {
-        out.push(`${w}.scale must be from -3 to 3, or [sx, sy] (negative values flip)`);
-      }
-      if (kf.draw !== undefined && !(isNum(kf.draw) && kf.draw >= 0 && kf.draw <= 1)) out.push(`${w}.draw must be from 0 to 1`);
-      if (kf.draw !== undefined && target.attrs.has('class')) out.push(`${w}: draw needs a stroke element, not the duotone layer`);
-      if (kf.easing !== undefined && !(typeof kf.easing === 'string' && EASING_RE.test(kf.easing))) out.push(`${w}.easing "${kf.easing}" is not a supported easing`);
-      if (['opacity', 'translate', 'rotate', 'scale', 'draw'].some((k) => kf[k] !== undefined)) animated = true;
-      if (kf.rotate !== undefined || kf.scale !== undefined) needsOrigin = true;
-    });
-    if (kfs[0] && kfs[0].offset !== 0) out.push(`${where}: the first keyframe needs offset 0`);
-    if (kfs[kfs.length - 1] && kfs[kfs.length - 1].offset !== 1) out.push(`${where}: the last keyframe needs offset 1`);
-    if (!animated) out.push(`${where}: the keyframes do not animate anything`);
-    if (needsOrigin && el.origin === undefined) out.push(`${where}: rotate and scale need an origin`);
-    // Every pose, including the ones between keyframes, must keep the stroke
-    // on the canvas (1 grid unit of margin for the stroke).
-    let points;
-    try {
-      points = elementPoints(target);
-    } catch {
-      return;
     }
-    const valid = kfs.filter((kf) => kf && typeof kf === 'object' && isNum(kf.offset));
-    const poses = [];
-    for (let k = 0; k < valid.length; k++) {
-      poses.push(valid[k]);
-      if (k + 1 < valid.length) for (let s = 1; s < 8; s++) poses.push(lerpPose(valid[k], valid[k + 1], s / 8));
+    if (props.opacity !== undefined && !(isNum(props.opacity) && props.opacity >= 0 && props.opacity <= 1)) out.push(`${where}.props.opacity must be from 0 to 1`);
+    if (props.strokeDashoffset !== undefined) {
+      if (!(isNum(props.strokeDashoffset) && props.strokeDashoffset >= 0 && props.strokeDashoffset <= 1)) out.push(`${where}.props.strokeDashoffset must be from 0 (drawn) to 1 (hidden)`);
+      if (typeof key !== 'number') out.push(`${where}: strokeDashoffset needs a drawn element`);
     }
-    for (const kf of poses) {
-      for (const p of points) {
-        const [x, y] = transformPoint(p, kf, el.origin);
-        if (x < 1 - 1e-6 || y < 1 - 1e-6 || x > grid - 1 + 1e-6 || y > grid - 1 + 1e-6) {
-          out.push(`${where}: the pose near offset ${Math.round(kf.offset * 100) / 100} moves element ${el.index} off the canvas`);
-          return;
+    if (props.d !== undefined) {
+      const target = typeof key === 'number' ? drawn[key] : key === 'secondary' ? secondary : null;
+      if (!target || target.name !== 'path') out.push(`${where}: d needs a path element`);
+      else {
+        try {
+          const a = parsePath(String(props.d)).segments.map((s) => s.type).join('');
+          const b = parsePath(target.attrs.get('d')).segments.map((s) => s.type).join('');
+          if (a !== b) out.push(`${where}.props.d must use the same commands as the element`);
+          const box = elementBounds({ name: 'path', attrs: new Map([['d', String(props.d)]]) });
+          if (box.minX < 1 - 1e-6 || box.minY < 1 - 1e-6 || box.maxX > grid - 1 + 1e-6 || box.maxY > grid - 1 + 1e-6) out.push(`${where}.props.d leaves the canvas`);
+        } catch (err) {
+          out.push(`${where}.props.d: ${err.message}`);
         }
       }
     }
+    if (!tracks.has(key)) tracks.set(key, []);
+    tracks.get(key).push(entry);
   });
-  return out;
-}
-
-// A pose between two keyframes (linear, for the canvas check).
-function lerpPose(a, b, t) {
-  const mix = (x, y) => x + (y - x) * t;
-  const pair = (v, def) => (v === undefined ? def : Array.isArray(v) ? v : [v, v]);
-  const ta = pair(a.translate, [0, 0]);
-  const tb = pair(b.translate, ta);
-  const sa = pair(a.scale, [1, 1]);
-  const sb = pair(b.scale, sa);
-  const ra = a.rotate || 0;
-  const rb = b.rotate === undefined ? ra : b.rotate;
-  return {
-    offset: mix(a.offset, b.offset),
-    translate: [mix(ta[0], tb[0]), mix(ta[1], tb[1])],
-    scale: [mix(sa[0], sb[0]), mix(sa[1], sb[1])],
-    rotate: mix(ra, rb),
+  // tracks: ordered, complete and interpolable
+  for (const [key, frames] of tracks) {
+    const label = typeof key === 'number' ? `element ${key}` : `"${key}"`;
+    for (let i = 1; i < frames.length; i++) if (!(frames[i].at > frames[i - 1].at)) out.push(`${label}: frames must be listed in growing "at" order`);
+    if (frames[0].at !== 0) out.push(`${label}: the first frame needs at 0`);
+    if (frames[frames.length - 1].at !== 1) out.push(`${label}: the last frame needs at 1`);
+    const shapes = frames.filter((f) => f.parsed).map((f) => f.parsed.map((p) => `${p.fn}/${p.arity}`).join(' '));
+    if (new Set(shapes).size > 1) out.push(`${label}: every frame needs the same transform functions (${[...new Set(shapes)].join(' | ')})`);
+    for (const p of PROP_KEYS) {
+      const withP = frames.filter((f) => f.props[p] !== undefined);
+      if (withP.length && (withP[0].at !== 0 || withP[withP.length - 1].at !== 1)) out.push(`${label}: ${p} needs a value at 0 and at 1`);
+    }
+    if (frames.length < 2) out.push(`${label}: a track needs at least two frames`);
+  }
+  if (out.length) return out;
+  // Every visible pose, including the ones between frames, keeps the stroke on
+  // the canvas (one grid unit of margin). Nearly transparent poses may leave it.
+  const times = [...new Set(anim.frames.map((f) => f.at))].sort((a, b) => a - b);
+  const samples = [];
+  for (let i = 0; i < times.length; i++) {
+    samples.push(times[i]);
+    if (i + 1 < times.length) for (let s = 1; s < 8; s++) samples.push(times[i] + ((times[i + 1] - times[i]) * s) / 8);
+  }
+  const pose = (k, t) => {
+    const frames = tracks.get(k);
+    if (!frames) return { m: IDENTITY, o: 1 };
+    const tf = trackValue(frames, 'transform', t);
+    const o = trackValue(frames, 'opacity', t);
+    return { m: tf ? transformMatrix(tf, origin) : IDENTITY, o: o === undefined ? 1 : o };
   };
+  const targets = drawn.map((el, i) => ({ el, key: i }));
+  if (secondary) targets.push({ el: secondary, key: 'secondary' });
+  for (const { el, key } of targets) {
+    if (!tracks.has(key) && !tracks.has('all')) continue;
+    let points;
+    try {
+      points = elementPoints(el);
+    } catch {
+      continue;
+    }
+    for (const t of samples) {
+      const all = pose('all', t);
+      const own = pose(key, t);
+      if (all.o * own.o < 0.35) continue;
+      const m = mul(all.m, own.m);
+      const off = points.some((p) => {
+        const [x, y] = applyMatrix(m, p);
+        return x < 1 - 1e-6 || y < 1 - 1e-6 || x > grid - 1 + 1e-6 || y > grid - 1 + 1e-6;
+      });
+      if (off) {
+        out.push(`the pose near at ${Math.round(t * 100) / 100} moves ${typeof key === 'number' ? `element ${key}` : 'the duotone layer'} off the canvas`);
+        return out;
+      }
+    }
+  }
+  return out;
 }
 
 // Points along the outline of one element, for pose checks.
@@ -748,7 +840,24 @@ export function elementPoints(el) {
       const y = num('y');
       const w = num('width');
       const h = num('height');
-      pts.push([x, y], [x + w, y], [x + w, y + h], [x, y + h]);
+      const rx = Math.min(num('rx', num('ry')), w / 2);
+      const ry = Math.min(num('ry', num('rx')), h / 2);
+      if (!rx || !ry) {
+        pts.push([x, y], [x + w, y], [x + w, y + h], [x, y + h]);
+        break;
+      }
+      // rounded corners: quarter ellipses around the four corner centers
+      for (const [cx, cy, a0] of [
+        [x + w - rx, y + ry, -90],
+        [x + w - rx, y + h - ry, 0],
+        [x + rx, y + h - ry, 90],
+        [x + rx, y + ry, 180],
+      ]) {
+        for (let k = 0; k <= 8; k++) {
+          const a = ((a0 + (90 * k) / 8) * Math.PI) / 180;
+          pts.push([cx + rx * Math.cos(a), cy + ry * Math.sin(a)]);
+        }
+      }
       break;
     }
     case 'line':
@@ -788,7 +897,7 @@ function inline(v) {
   return Array.isArray(v) ? `[${v.map((x) => JSON.stringify(x)).join(', ')}]` : JSON.stringify(v);
 }
 
-// Canonical sidecar text: categories and tags one per line, animation keyframes
+// Canonical sidecar text: categories and tags one per line, animation frames
 // one per line so diffs stay readable.
 export function canonicalJson(data) {
   const list = (key, arr) => `  "${key}": [\n${arr.map((v) => `    ${JSON.stringify(v)}`).join(',\n')}\n  ]`;
@@ -796,18 +905,20 @@ export function canonicalJson(data) {
   if (data.animation && typeof data.animation === 'object') {
     const a = data.animation;
     const head = [];
-    for (const k of ['duration', 'iterations', 'easing']) if (a[k] !== undefined) head.push(`    "${k}": ${JSON.stringify(a[k])}`);
-    const els = (Array.isArray(a.elements) ? a.elements : []).map((el) => {
+    for (const k of ['name', 'duration', 'easing', 'loop', 'origin']) if (a[k] !== undefined) head.push(`    "${k}": ${inline(a[k])}`);
+    const frames = (Array.isArray(a.frames) ? a.frames : []).map((fr) => {
       const fields = [];
-      for (const k of ['index', 'origin', 'delay', 'easing']) if (el[k] !== undefined) fields.push(`        "${k}": ${inline(el[k])}`);
-      const order = ['offset', 'opacity', 'translate', 'rotate', 'scale', 'draw', 'easing'];
-      const kfs = (Array.isArray(el.keyframes) ? el.keyframes : []).map(
-        (kf) => `          { ${order.filter((k) => kf[k] !== undefined).map((k) => `"${k}": ${inline(kf[k])}`).join(', ')} }`,
-      );
-      fields.push(`        "keyframes": [\n${kfs.join(',\n')}\n        ]`);
-      return `      {\n${fields.join(',\n')}\n      }`;
+      for (const k of ['at', 'element']) if (fr && fr[k] !== undefined) fields.push(`"${k}": ${JSON.stringify(fr[k])}`);
+      if (fr && fr.props && typeof fr.props === 'object') {
+        const keys = [...PROP_KEYS.filter((k) => fr.props[k] !== undefined), ...Object.keys(fr.props).filter((k) => !PROP_KEYS.includes(k))];
+        fields.push(`"props": { ${keys.map((k) => `"${k}": ${JSON.stringify(fr.props[k])}`).join(', ')} }`);
+      }
+      if (fr && fr.easing !== undefined) fields.push(`"easing": ${JSON.stringify(fr.easing)}`);
+      for (const k of Object.keys(fr || {})) if (!FRAME_KEYS.includes(k)) fields.push(`"${k}": ${JSON.stringify(fr[k])}`);
+      return `      { ${fields.join(', ')} }`;
     });
-    head.push(`    "elements": [\n${els.join(',\n')}\n    ]`);
+    head.push(`    "frames": [\n${frames.join(',\n')}\n    ]`);
+    for (const k of Object.keys(a)) if (!TIMELINE_KEYS.includes(k)) head.push(`    "${k}": ${JSON.stringify(a[k])}`);
     parts.push(`  "animation": {\n${head.join(',\n')}\n  }`);
   }
   return `{\n${parts.join(',\n')}\n}\n`;
