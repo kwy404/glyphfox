@@ -164,6 +164,8 @@ export async function docsFiles(root, icons, { version }) {
       icons: icons.map((ic) => [ic.name, ic.body, ic.tags, ic.categories, ic.solid]),
     }) + '\n';
   files[join(root, 'docs', 'data', 'changelog.md')] = readFileSync(join(root, 'CHANGELOG.md'), 'utf8');
+  // Designed animations, loaded by the studio's Motion tool when it opens.
+  files[join(root, 'docs', 'data', 'animations.json')] = JSON.stringify(Object.fromEntries(icons.filter((ic) => ic.animation).map((ic) => [ic.name, ic.animation]))) + '\n';
   files[join(root, 'docs', 'vendor', 'glyphfox.js')] = await engineBundle(root);
   const docs = join(root, 'docs');
   // Hashed CSS and bundled page scripts (see assets.mjs).

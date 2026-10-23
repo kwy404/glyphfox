@@ -682,3 +682,122 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Motion */
+
+.tool-motion {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 360px;
+  gap: 16px;
+  align-items: start;
+}
+.mo-controls,
+.mo-keyframe,
+.mo-stage-card {
+  display: grid;
+  gap: 14px;
+}
+.mo-keyframe {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.mo-keyframe[hidden] {
+  display: none;
+}
+.mo-stage {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) center / 24px 24px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) center / 24px 24px,
+    var(--icon-bg);
+  color: var(--text);
+}
+.mo-stage svg {
+  width: min(240px, 60%);
+  height: auto;
+}
+.mo-transport {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mo-transport input {
+  flex: 1;
+  min-width: 0;
+}
+.mo-transport output {
+  min-width: 64px;
+  text-align: right;
+  font: 500 12px var(--mono);
+  color: var(--text-2);
+}
+.mo-timeline {
+  display: grid;
+  gap: 6px;
+  outline-offset: 4px;
+}
+.mo-row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+.mo-name {
+  font: 500 12px var(--mono);
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mo-lane {
+  position: relative;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-2);
+  cursor: copy;
+}
+.mo-lane::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--gf-head, 0%);
+  width: 2px;
+  background: var(--accent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.mo-key {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid var(--text-2);
+  border-radius: 3px;
+  background: var(--panel);
+  transform: rotate(45deg);
+  cursor: grab;
+  touch-action: none;
+}
+.mo-key.on {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.mo-out {
+  display: grid;
+  gap: 14px;
+}
+.mo-out pre {
+  max-height: 340px;
+  overflow: auto;
+}
+@media (max-width: 1100px) {
+  .tool-motion {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

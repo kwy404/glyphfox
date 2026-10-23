@@ -25,6 +25,20 @@ function renderCollection() {
     .join('');
 }
 
+// Designed animations live in data/animations.json, loaded with the Motion tool.
+async function loadAnimations() {
+  try {
+    const root = location.pathname.replace(/(pt-br\/)?[^/]*$/, '');
+    const list = await fetch(`${root}data/animations.json`).then((r) => r.json());
+    for (const [name, animation] of Object.entries(list)) {
+      const icon = gf.lookupIcon(name);
+      if (icon && !icon.animation) icon.animation = animation;
+    }
+  } catch {
+    // the editor still works without them
+  }
+}
+
 function openInEditor(body, name) {
   show('editor');
   openBody(body, { name });
@@ -65,6 +79,13 @@ async function show(tool, payload) {
     }
     if (payload) fusion.loadSpec(payload);
   }
+  if (tool === 'motion' && !ready.motion) {
+    ready.motion = true;
+    const { initMotion } = await import('./motion.js');
+    await loadAnimations();
+    initMotion();
+  }
+  if (tool !== 'motion' && ready.motion) import('./motion.js').then((m) => m.stopMotion());
   if (tool === 'brand' && !ready.brand) {
     const { initBrand } = await import('./brand.js');
     initBrand(data);
@@ -79,7 +100,7 @@ async function show(tool, payload) {
 function route() {
   const raw = decodeURIComponent(location.hash.slice(1));
   const [tool, ...rest] = raw.split('=');
-  const known = ['editor', 'foxify', 'fusion', 'brand', '3d', 'collection'];
+  const known = ['editor', 'foxify', 'motion', 'fusion', 'brand', '3d', 'collection'];
   show(known.includes(tool) ? tool : 'editor', rest.join('=') || '');
 }
 

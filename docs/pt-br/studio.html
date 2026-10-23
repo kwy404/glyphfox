@@ -26,13 +26,13 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/studio.html">
 <meta property="og:title" content="glyphfox studio">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/studio.html">
-<link rel="stylesheet" href="../assets/studio.7f67bebf.css">
+<link rel="stylesheet" href="../assets/studio.fde7ee8c.css">
 <link rel="preload" href="../data/icons.json" as="fetch" crossorigin>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"}}</script>
-<link rel="modulepreload" href="../assets/js/bundle/studio.2KA5SUBA.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.YROI5YLJ.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.HOVSZSSQ.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.UY57LOO4.js">
+<link rel="modulepreload" href="../assets/js/bundle/studio.6GGOAPP2.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.UXMWXSC7.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.MWVCSPCD.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.FKAMOZ5D.js">
 </head>
 <body class="studio-page">
 <!-- header:start -->
@@ -66,6 +66,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
         <button type="button" role="tab" id="tab-editor" aria-controls="panel-editor" data-tool="editor" aria-selected="true"><!--gf:pencil:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-pencil" aria-hidden="true"><path d="M15 4l5 5L9 20H4v-5Z"/><path d="M12 7l5 5"/></svg><!--/gf--><span data-i18n="tool.editor">Editor</span></button>
         <button type="button" role="tab" id="tab-foxify" aria-controls="panel-foxify" data-tool="foxify" aria-selected="false"><!--gf:sparkles:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><!--/gf--><span>Fox-ify</span></button>
         <button type="button" role="tab" id="tab-fusion" aria-controls="panel-fusion" data-tool="fusion" aria-selected="false"><!--gf:layers:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-layers" aria-hidden="true"><path d="M12 2.5l9 5-9 5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg><!--/gf--><span data-i18n="tool.fusion">Fusão</span></button>
+        <button type="button" role="tab" id="tab-motion" aria-controls="panel-motion" data-tool="motion" aria-selected="false"><!--gf:activity:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-activity" aria-hidden="true"><path d="M2 12h4.5l2-4.5 4 10 3.5-12 2 6.5H22"/></svg><!--/gf--><span data-i18n="tool.motion">Movimento</span></button>
         <button type="button" role="tab" id="tab-brand" aria-controls="panel-brand" data-tool="brand" aria-selected="false"><!--gf:palette:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-palette" aria-hidden="true"><path d="M12 2a10 10 0 1 0 1.5 19.89c1.18-.18 1.66-1.6 .95-2.55-.95-1.27-.05-3.09 1.54-3.09H19a3 3 0 0 0 3-3C22 7.03 17.52 2 12 2Z"/><path d="M6.1 11.1a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M10.5 7a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M15.6 10.1a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><!--/gf--><span data-i18n="tool.brand">Kit de marca</span></button>
         <button type="button" role="tab" id="tab-3d" aria-controls="panel-3d" data-tool="3d" aria-selected="false"><!--gf:cube:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cube" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7Z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v10"/></svg><!--/gf--><span>3D</span></button>
         <button type="button" role="tab" id="tab-collection" aria-controls="panel-collection" data-tool="collection" aria-selected="false"><!--gf:folder:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/><path d="M2 11h20"/></svg><!--/gf--><span data-i18n="studio.collection">Coleção</span> <small class="badge" data-col-count>0</small></button>
@@ -175,6 +176,56 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <button class="btn small primary" type="button" data-fu-act="save" data-i18n="editor.save">Salvar na coleção</button>
           <button class="btn small" type="button" data-fu-act="edit" data-i18n="icons.openEditor">Abrir no editor</button>
           <button class="btn small" type="button" data-fu-act="download" data-i18n="editor.download">Baixar SVG</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool" id="panel-motion" role="tabpanel" aria-labelledby="tab-motion" data-panel="motion" hidden>
+    <div class="wrap tool-motion">
+      <div class="card pad mo-controls">
+        <h2 class="subtitle" data-i18n="tool.motion">Movimento</h2>
+        <p class="muted" data-i18n="motion.lead">Uma linha do tempo por elemento do ícone. Clique numa faixa para criar um quadro-chave, arraste para mover e exporte o resultado para todos os pacotes.</p>
+        <label class="field"><span data-i18n="home.mp.base">Ícone</span><input class="input" list="fu-names" data-mo="icon" value="heartbeat" spellcheck="false"></label>
+        <div class="row2">
+          <label class="field"><span data-i18n="motion.duration">Duração (ms)</span><input class="input" type="number" min="50" max="20000" step="50" value="900" data-mo="duration"></label>
+          <label class="field"><span data-i18n="motion.easing">Aceleração</span><select class="input" data-mo="easing"></select></label>
+        </div>
+        <label class="field check"><input type="checkbox" checked data-mo="loop"> <span data-i18n="motion.loop">Repetir</span></label>
+        <div class="hero-actions">
+          <button class="btn small" type="button" data-mo-act="reset" data-i18n="motion.reset">Começar da animação do ícone</button>
+          <button class="btn small" type="button" data-mo-act="clear" data-i18n="editor.clear">Limpar</button>
+        </div>
+        <div class="mo-keyframe" data-mo-keyframe hidden>
+          <h3 class="side-title" data-i18n="motion.keyframe">Quadro-chave</h3>
+          <label class="field"><span data-i18n="motion.at">Posição (%)</span><input class="input" type="number" min="0" max="100" step="1" data-mk="at"></label>
+          <label class="field"><span>transform</span><input class="input" data-mk="transform" placeholder="rotate(12deg) scale(1.1)" spellcheck="false"></label>
+          <div class="row2">
+            <label class="field"><span>opacity</span><input class="input" type="number" min="0" max="1" step="0.05" data-mk="opacity"></label>
+            <label class="field"><span>strokeDashoffset</span><input class="input" type="number" min="0" max="1" step="0.05" data-mk="dash"></label>
+          </div>
+          <label class="field"><span data-i18n="motion.easing">Aceleração</span><select class="input" data-mk="easing"></select></label>
+          <button class="btn small" type="button" data-mo-act="delete" data-i18n="motion.delete">Apagar o quadro-chave</button>
+        </div>
+      </div>
+      <div class="card pad mo-stage-card">
+        <div class="mo-stage" data-mo-stage></div>
+        <div class="mo-transport">
+          <button class="icon-btn" type="button" data-mo-act="play" aria-pressed="false" aria-label="Play"></button>
+          <input type="range" min="0" max="1000" value="0" data-mo="scrub" aria-label="Tempo" data-i18n-attr="aria-label:motion.time">
+          <output data-mo-time>0 ms</output>
+        </div>
+        <div class="mo-timeline" data-mo-timeline tabindex="0" aria-label="Linha do tempo" data-i18n-attr="aria-label:motion.timeline"></div>
+      </div>
+      <div class="card pad mo-out">
+        <div class="tabs" role="tablist" aria-label="Formats" data-mo-formats></div>
+        <div data-mo-code></div>
+        <div class="hero-actions">
+          <button class="btn small primary" type="button" data-mo-act="copy" data-i18n="action.copy">Copiar</button>
+          <button class="btn small" type="button" data-mo-act="json" data-i18n="motion.json">JSON do ícone</button>
+          <button class="btn small" type="button" data-mo-act="svg" data-i18n="motion.svg">SVG animado</button>
+          <button class="btn small" type="button" data-mo-act="gif">GIF</button>
+          <button class="btn small" type="button" data-mo-act="webm">WebM</button>
         </div>
       </div>
     </div>
@@ -297,6 +348,6 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/studio.2KA5SUBA.js"></script>
+<script type="module" src="../assets/js/bundle/studio.6GGOAPP2.js"></script>
 </body>
 </html>
