@@ -1,5 +1,5 @@
-// Studio router: tabs with hash links (#editor, #foxify, #fusion=cloud&lock,
-// #brand, #3d, #collection) and the collection view.
+// Studio router: tabs with hash links (#editor, #foxify, #sketch, #motion,
+// #fusion=cloud&lock, #brand, #3d, #collection) and the collection view.
 
 import { $, $$, download, gf, loadIcons, t, toast } from './app.js';
 import * as collection from './collection.js';
@@ -83,6 +83,7 @@ async function show(tool, payload) {
     }
     if (payload) fusion.loadSpec(payload);
   }
+  if (tool === 'sketch' && !ready.sketch) ready.sketch = import('./labs/sketch-ui.js').then((m) => m.initSketch(data, { openInEditor }));
   if (tool === 'motion' && !ready.motion) {
     ready.motion = true;
     const { initMotion } = await import('./motion.js');
@@ -91,7 +92,7 @@ async function show(tool, payload) {
   }
   if (tool !== 'motion' && ready.motion) import('./motion.js').then((m) => m.stopMotion());
   if (tool === 'brand' && !ready.brand) {
-    const { initBrand } = await import('./brand.js');
+    const { initBrand } = await import('./labs/brand-kit.js');
     initBrand(data);
     ready.brand = true;
   }
@@ -109,7 +110,7 @@ function route() {
     shareModule().then((share) => share.route(tool, rest.join('=')));
     return show('collection');
   }
-  const known = ['editor', 'foxify', 'motion', 'fusion', 'brand', '3d', 'collection'];
+  const known = ['editor', 'foxify', 'sketch', 'motion', 'fusion', 'brand', '3d', 'collection'];
   show(known.includes(tool) ? tool : 'editor', rest.join('=') || '');
 }
 

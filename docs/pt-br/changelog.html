@@ -27,8 +27,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <meta property="og:title" content="glyphfox changelog">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/changelog.html">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
-<link rel="modulepreload" href="../assets/js/bundle/app.75XQFXPT.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.6JH46KWY.js">
+<link rel="modulepreload" href="../assets/js/bundle/app.VKOG6TSI.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.EKCEKE4N.js">
 </head>
 <body>
 <!-- header:start -->
@@ -84,6 +84,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <li>Glyph script: a tiny text language for icons (circle, ellipse, rect with radius, line, polyline, polygon, arc, path, group, mirror x or y, repeat around a center) with errors at the line and column, compiled to SVG that passes the icon lint. In <code>glyphfox/script</code>, the <code>glyphfox script file.gfs</code> command and a live playground in the studio Labs page.</li>
 <li><code>glyphfox scan [dir]</code>: finds the icons a project uses in JS, TS, JSX, Vue, Svelte, Angular templates and HTML, builds the minimal subset as a sprite or an ES module and flags icons without an accessible label where one is needed.</li>
 <li>Exports in <code>glyphfox/export</code>, the CLI and the studio Labs page: an animated favicon (a canvas runtime with a static fallback), CSS cursors (PNG at 32 and 64 px with a hotspot), plotter output (single line SVG ordered for minimal pen travel, and G-code with feed rates and pen up and down commands) and STL from an extruded icon (thickness and bevel).</li>
+<li>Sketch search in the studio: the 24 closest icons appear while you draw, ranked in the page against a compact shape index built by <code>scripts/labs/sketch-index.mjs</code> (32 by 32 stroke masks expanded into distance fields, stroke direction histograms and Zernike moments).</li>
+<li>The brand kit previews the whole set themed and exports one zip with themed SVG files, a sprite, CSS variables, a favicon set (ico, 16, 32, 180, 192 and 512 PNGs), app icons and a package.json skeleton.</li>
 </ul>
 <!-- log:end -->
 </div>
@@ -135,6 +137,6 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/app.75XQFXPT.js"></script>
+<script type="module" src="../assets/js/bundle/app.VKOG6TSI.js"></script>
 </body>
 </html>

@@ -1,6 +1,8 @@
-// Copy of the Labs page (glyph script playground and the export panels) in
+// Copy of the Labs page (glyph script playground and the export panels) and
+// of the studio labs tools (sketch search and the brand kit export), in
 // English and Portuguese (Brazil). Merged into the site dictionary by
-// ../i18n.js, so the build localizes labs.html like every other page.
+// ../i18n.js, so the build localizes labs.html and the studio like every
+// other page.
 
 export const labs = {
   en: {
@@ -123,6 +125,25 @@ export const labs = {
     'labs.stl.file': 'File size',
     'labs.stl.drag': 'Drag the model to turn it, or use the arrow keys.',
     'labs.stl.canvas': 'STL preview, drag or use the arrow keys to turn it',
+    'sketch.lead': 'Draw a rough shape. The 24 closest icons appear while you draw, ranked in this page against a shape index of the whole set.',
+    'sketch.hint': 'Draw in the box to search.',
+    'sketch.more': 'Keep drawing, the shape is still too small to match.',
+    'sketch.empty': 'A circle, an arrow, a house, a heart: any rough shape works.',
+    'sketch.result': 'The {n} closest icons, ranked in {ms} ms',
+    'sketch.loading': 'Loading the shape index',
+    'sketch.failed': 'The shape index could not be loaded.',
+    'sketch.view': 'Open in Icons',
+    'sketch.note': 'Your strokes stay on this device: nothing is uploaded, the sketch is compared with a precomputed index of every icon.',
+    'brand.dl.kit': 'Brand kit (.zip)',
+    'brand.count': 'All {n} icons, themed',
+    'brand.preview': 'Preview of the themed set',
+    'brand.contents': 'Inside the zip',
+    'brand.contents.svg': 'svg/ with every icon as a themed SVG file',
+    'brand.contents.sprite': 'sprite.svg and icons.css with the brand CSS variables',
+    'brand.contents.favicon': 'favicon/ with favicon.ico, PNGs at 16, 32, 180, 192 and 512, maskable icons and a web manifest',
+    'brand.contents.app': 'app/ with store icons and an Android adaptive foreground',
+    'brand.contents.package': 'package.json, index.js and typings, ready to publish',
+    'brand.building': 'Building the brand kit',
   },
   'pt-BR': {
     'footer.labs': 'Labs',
@@ -244,5 +265,24 @@ export const labs = {
     'labs.stl.file': 'Tamanho do arquivo',
     'labs.stl.drag': 'Arraste o modelo para girar, ou use as setas do teclado.',
     'labs.stl.canvas': 'Prévia do STL, arraste ou use as setas para girar',
+    'sketch.lead': 'Desenhe uma forma aproximada. Os 24 ícones mais parecidos aparecem enquanto você desenha, ordenados na própria página com um índice de formas do conjunto todo.',
+    'sketch.hint': 'Desenhe no quadro para buscar.',
+    'sketch.more': 'Continue desenhando, a forma ainda é pequena demais para comparar.',
+    'sketch.empty': 'Um círculo, uma seta, uma casa, um coração: qualquer forma aproximada serve.',
+    'sketch.result': 'Os {n} ícones mais parecidos, ordenados em {ms} ms',
+    'sketch.loading': 'Carregando o índice de formas',
+    'sketch.failed': 'Não foi possível carregar o índice de formas.',
+    'sketch.view': 'Abrir em Ícones',
+    'sketch.note': 'Os seus traços ficam neste aparelho: nada é enviado, o desenho é comparado com um índice pré-calculado de todos os ícones.',
+    'brand.dl.kit': 'Kit de marca (.zip)',
+    'brand.count': 'Todos os {n} ícones, com a sua marca',
+    'brand.preview': 'Prévia do conjunto com a sua marca',
+    'brand.contents': 'Dentro do zip',
+    'brand.contents.svg': 'svg/ com cada ícone num arquivo SVG temático',
+    'brand.contents.sprite': 'sprite.svg e icons.css com as variáveis CSS da marca',
+    'brand.contents.favicon': 'favicon/ com favicon.ico, PNGs em 16, 32, 180, 192 e 512, ícones maskable e um manifesto web',
+    'brand.contents.app': 'app/ com ícones para as lojas e a camada da frente do ícone adaptativo do Android',
+    'brand.contents.package': 'package.json, index.js e tipos, pronto para publicar',
+    'brand.building': 'Montando o kit de marca',
   },
 };
