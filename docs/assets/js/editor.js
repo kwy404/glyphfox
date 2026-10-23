@@ -615,6 +615,9 @@ function action(name) {
   }
 }
 
+/** Id of the collection icon open in the editor, or null. */
+export const editingId = () => editing;
+
 /** Opens a body (or an icon spec) in the editor. */
 export function openBody(body, { name = 'my-icon', tags = [], category, id = null } = {}) {
   setBody(body);

@@ -6,6 +6,7 @@ import * as collection from './collection.js';
 import { initEditor, openBody } from './editor.js';
 import { initFoxify } from './foxify-ui.js';
 import { initFusion, loadSpec } from './fusion-ui.js';
+import * as share from './share/index.js';
 
 const ready = {};
 let data = null;
@@ -78,12 +79,14 @@ async function show(tool, payload) {
 function route() {
   const raw = decodeURIComponent(location.hash.slice(1));
   const [tool, ...rest] = raw.split('=');
+  if (share.route(tool, rest.join('='))) return show('collection');
   const known = ['editor', 'foxify', 'fusion', 'brand', '3d', 'collection'];
   show(known.includes(tool) ? tool : 'editor', rest.join('=') || '');
 }
 
 loadIcons().then((d) => {
   data = d;
+  share.init(d);
   $('[data-studio-tabs]').addEventListener('click', (e) => {
     const b = e.target.closest('[data-tool]');
     if (!b) return;
