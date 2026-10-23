@@ -259,12 +259,12 @@ export class Viewer {
     this.onMotion = () => this.requestRender();
     if (motion && motion.addEventListener) motion.addEventListener('change', this.onMotion);
     // three.js restores its own resources after a lost context; the
-    // reflection room and the backdrop texture are drawn again here.
+    // reflection room and the backdrop texture are drawn again here (the old
+    // ones belong to the lost context, so they are dropped, not deleted).
     this.onRestore = () => {
       this.envRT = null;
-      this.applyLight();
-      if (this.bgTexture) this.bgTexture.dispose();
       this.bgTexture = null;
+      this.applyLight();
       this.paintBg();
     };
     this.canvas.addEventListener('webglcontextrestored', this.onRestore);

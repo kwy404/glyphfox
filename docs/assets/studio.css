@@ -584,6 +584,9 @@
 .th-unknown {
   color: var(--accent-text);
 }
+.th-controls .field[hidden] {
+  display: none;
+}
 .th-chips {
   display: flex;
   flex-wrap: wrap;

@@ -40,6 +40,8 @@ function stageClasses() {
   const stage = $('[data-th-stage]');
   stage.classList.toggle('is-transparent', state.background === 'transparent');
   stage.classList.toggle('is-light', isLightBackground(state.background));
+  // The plate color only matters for the duotone style.
+  $('[data-th="secondary"]').closest('.field').hidden = state.variant !== 'duotone';
 }
 
 function paintSwatches() {
@@ -86,6 +88,7 @@ function loadSource() {
   if (found.variant && ['outline', 'duotone', 'solid'].includes(found.variant) && found.variant !== state.variant) {
     state.variant = found.variant;
     pressed($('[data-th-seg="variant"]'), state.variant);
+    stageClasses();
   }
   const icon = current;
   // Keep a link to this icon in the address bar (#3d=cloud&lock:overlap).
