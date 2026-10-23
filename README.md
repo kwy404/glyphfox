@@ -31,6 +31,8 @@ Original open source icons on a 24 grid that do more than sit still. Every icon 
 - [Name syntax](#name-syntax)
 - [Variable axes](#variable-axes) · [Morph](#morph) · [Fusion](#fusion) · [Living states](#living-states) · [Modifiers](#modifiers)
 - [CLI](#cli)
+- [Glyph script](#glyph-script)
+- [Scan and exports](#scan-and-exports)
 - [The studio](#the-studio)
 - [Icon rules](#icon-rules)
 
@@ -307,9 +309,57 @@ npx glyphfox build home search file+check --type sprite --out public/icons
 npx glyphfox build --from icons.txt --type package --name @acme/icons --out acme-icons
 npx glyphfox lint my-icon.svg
 npx glyphfox foxify any-icon.svg --out fox.svg
+npx glyphfox script sun.gfs --out sun.svg        # glyph script to an icon
+npx glyphfox scan src --type esm --out src/icons.js
+npx glyphfox favicon bell --animate shake --out public/favicon
+npx glyphfox cursor cursor --hotspot tl --out public/cursors
+npx glyphfox plot heart --format gcode --feed 1200 --pen-up "M5" --pen-down "M3 S30"
+npx glyphfox stl heart --thickness 3 --bevel 0.6 --out heart.stl
 ```
 
-`build` makes a sprite, a CSS file with mask classes, or a small package (`package.json`, ESM exports, types, sprite and SVG files) from a list of names. Every command takes the shared props as flags (`--weight 1.5 --corners sharp --variant duotone`).
+`build` makes a sprite, a CSS file with mask classes, or a small package (`package.json`, ESM exports, types, sprite and SVG files) from a list of names. Every command takes the shared props as flags (`--weight 1.5 --corners sharp --variant duotone`). The export commands (`favicon`, `cursor`, `plot`, `stl`) take an icon spec, a `.gfs` glyph script or an `.svg` file.
+
+## Glyph script
+
+Draw icons as text. A `.gfs` file holds one command per line and compiles to an SVG that passes the icon lint: transforms are baked into the coordinates and every error points at its line and column.
+
+```
+# sun.gfs
+circle 12 12 4
+repeat 8 around 12 12 {
+  line 12 2 12 4.5
+}
+```
+
+Shapes: `circle cx cy r`, `ellipse cx cy rx ry`, `rect x y w h radius r`, `line x1 y1 x2 y2`, `polyline` and `polygon` with x y pairs, `arc`, `dot x y` and `path "M4 12h16"`. Blocks: `group` (`move`, `rotate`, `scale`), `mirror x` or `mirror y`, `repeat n around cx cy` and `duotone` for the secondary layer. `let r = 4` names a value and `#` starts a comment. The studio Labs page has a live playground with examples.
+
+```js
+import { compileScript } from 'glyphfox/script';
+
+const { ok, svg, icon, errors } = compileScript(source); // errors: [{ message, line, column }]
+```
+
+## Scan and exports
+
+`glyphfox scan [dir]` lists the icons a project uses in JS, TS, JSX, Vue, Svelte, Angular templates and HTML (components, data imports, `toSvg` specs, `<glyph-fox>`, `<gf-icon>`, `data-glyph`, Tailwind classes and sprite references), suggests a name for unknown icons, flags icons that need an accessible label (an icon alone in a button or a link without `aria-label`, text or a `title`) and writes the minimal subset as a sprite (`--type sprite`) or an ES module for `registerIcons` and `provideGlyphFox` (`--type esm`). `--strict` fails on accessibility findings, for CI.
+
+The exporters run in Node and in the browser, from the CLI, from `glyphfox/export` and in the studio Labs page:
+
+| Command | Output |
+| --- | --- |
+| `favicon` | an animated tab icon: a small runtime that plays the frames through a canvas, with `favicon.svg` and `favicon-32.png` as the static fallback |
+| `cursor` | a CSS cursor: PNG at 32 and 64 px with a halo, a hotspot and the `image-set()` CSS |
+| `plot` | pen plotters: a single line SVG (strokes only, ordered for minimal pen travel) or G-code with feed rates and pen up and down commands |
+| `stl` | 3D printing: the icon extruded with a thickness and a chamfer or round bevel, as a watertight binary or ASCII STL |
+
+```js
+import { iconHeart } from 'glyphfox';
+import { cursorKit, toGcode, toStl } from 'glyphfox/export';
+
+const stl = toStl(iconHeart, { thickness: 3, bevel: 0.6 }); // Uint8Array
+const { css, files } = cursorKit(iconHeart, { hotspot: 'center' });
+const gcode = toGcode(iconHeart, { feed: 1200, penUp: 'M5', penDown: 'M3 S30' });
+```
 
 ## The studio
 
@@ -321,7 +371,8 @@ npx glyphfox foxify any-icon.svg --out fox.svg
 - **edit** icons on the 24 grid (pen and shape tools, node editing, undo and redo, live lint) and keep a local collection;
 - **Fox-ify** any SVG into the glyphfox style with a before and after view;
 - export a **brand kit** (themed package, sprite, CSS, favicon and app icons);
-- render any icon in **3D** with lighting and material presets.
+- render any icon in **3D** with lighting and material presets;
+- in **Labs**, write icons in glyph script with a live preview, and export an animated favicon, a CSS cursor, plotter SVG and G-code or an STL.
 
 ## Icon rules
 

@@ -1,6 +1,8 @@
 // Site copy in English and Portuguese (Brazil). The build writes the
 // Portuguese pages in docs/pt-br/ from these strings; scripts use t(key).
 
+import { labs } from './labs/i18n.js';
+
 export const dict = {
   en: {
     'nav.skip': 'Skip to content',
@@ -617,3 +619,7 @@ Object.assign(dict['pt-BR'], {
   'log.lead': 'Todas as versões, da mais nova para a mais antiga. As mesmas notas ficam no CHANGELOG.md do repositório.',
   'log.loading': 'Carregando as novidades',
 });
+
+// The Labs page keeps its copy next to its scripts.
+Object.assign(dict.en, labs.en);
+Object.assign(dict['pt-BR'], labs['pt-BR']);

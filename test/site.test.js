@@ -19,7 +19,7 @@ const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js'
 
 describe('studio site', () => {
   it('has every page in English and Portuguese', () => {
-    for (const p of ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html']) {
+    for (const p of ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html']) {
       expect(existsSync(join(docs, p)), p).toBe(true);
       expect(existsSync(join(docs, 'pt-br', p)), p).toBe(true);
       expect(read(join(docs, 'pt-br', p))).toContain('<html lang="pt-BR">');
@@ -48,7 +48,8 @@ describe('studio site', () => {
         for (const pair of m[1].split(';')) expect(dict.en[pair.split(':')[1]], `${page}: ${pair}`).toBeDefined();
       }
     }
-    const js = readdirSync(join(docs, 'assets', 'js')).map((f) => read(join(docs, 'assets', 'js', f)));
+    const scripts = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? scripts(join(dir, e.name)) : e.name.endsWith('.js') ? [join(dir, e.name)] : []));
+    const js = scripts(join(docs, 'assets', 'js')).map(read);
     for (const src of js) {
       for (const m of src.matchAll(/\bt\('([a-zA-Z0-9.]+)'/g)) expect(dict.en[m[1]], m[1]).toBeDefined();
       for (const m of src.matchAll(/\bt\(`([a-zA-Z0-9.]+)\.\$\{/g)) expect(Object.keys(dict.en).some((k) => k.startsWith(m[1] + '.')), m[1]).toBe(true);

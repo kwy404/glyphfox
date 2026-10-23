@@ -71,6 +71,9 @@
 <li>Packages: <code>glyphfox</code> (core, icons, <code>toSvg</code>, <code>icons.json</code>, <code>sprite.svg</code>, runtime), <code>glyphfox/react</code>, <code>glyphfox/vue</code>, <code>glyphfox/svelte</code>, <code>glyphfox/web</code> with a single file CDN build, <code>glyphfox/tailwind</code> (v3 and v4), <code>glyphfox/core</code>, <code>glyphfox/tools</code> and <code>glyphfox-angular</code>.</li>
 <li>The <code>glyphfox</code> CLI: search, show with a terminal preview, copy in nine formats, fuse, morph, build subsets (sprite, CSS masks, package), lint and Fox-ify.</li>
 <li>The studio site: icon browser, live customization, sketch search, editor, Fox-ify, Fusion, brand kit and 3D.</li>
+<li>Glyph script: a tiny text language for icons (circle, ellipse, rect with radius, line, polyline, polygon, arc, path, group, mirror x or y, repeat around a center) with errors at the line and column, compiled to SVG that passes the icon lint. In <code>glyphfox/script</code>, the <code>glyphfox script file.gfs</code> command and a live playground in the studio Labs page.</li>
+<li><code>glyphfox scan [dir]</code>: finds the icons a project uses in JS, TS, JSX, Vue, Svelte, Angular templates and HTML, builds the minimal subset as a sprite or an ES module and flags icons without an accessible label where one is needed.</li>
+<li>Exports in <code>glyphfox/export</code>, the CLI and the studio Labs page: an animated favicon (a canvas runtime with a static fallback), CSS cursors (PNG at 32 and 64 px with a hotspot), plotter output (single line SVG ordered for minimal pen travel, and G-code with feed rates and pen up and down commands) and STL from an extruded icon (thickness and bevel).</li>
 </ul>
 <!-- log:end -->
 </div>
@@ -93,6 +96,7 @@
           <li><a href="studio.html" data-i18n="nav.studio">Estúdio</a></li>
           <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusão</a></li>
           <li><a href="studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+          <li><a href="labs.html" data-i18n="footer.labs">Labs</a></li>
         </ul>
       </div>
       <div>

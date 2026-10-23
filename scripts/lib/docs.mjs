@@ -1,7 +1,8 @@
 // Generated files of the studio site in docs/ (committed, served by GitHub
-// Pages): the icon data, the engine bundle, the changelog, the shared head,
-// header and footer of every page, inline icons, the Fenn illustrations,
-// and the Portuguese pages in docs/pt-br/ built from docs/assets/js/i18n.js.
+// Pages): the icon data, the engine and Labs bundles, the changelog, the
+// shared head, header and footer of every page, inline icons, the Fenn
+// illustrations, and the Portuguese pages in docs/pt-br/ built from
+// docs/assets/js/i18n.js.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -9,9 +10,9 @@ import { pathToFileURL } from 'node:url';
 
 const SITE = 'https://kwy404.github.io/glyphfox/';
 const PARTIALS = ['head', 'header', 'footer'];
-const LOCALIZED = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
+const LOCALIZED = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html'];
 
-async function engineBundle(root) {
+async function engineBundle(root, entry = 'studio.js', banner = '/*! glyphfox engine for the studio | MIT | Alexandre Kohler */') {
   const esbuild = await import('esbuild');
   // The studio loads icon data itself, so the on demand loader of the
   // package (one chunk per icon) is replaced by a stub.
@@ -25,7 +26,7 @@ async function engineBundle(root) {
     },
   };
   const result = await esbuild.build({
-    entryPoints: [join(root, 'packages', 'glyphfox', 'src', 'studio.js')],
+    entryPoints: [join(root, 'packages', 'glyphfox', 'src', entry)],
     plugins: [noLoader],
     bundle: true,
     format: 'esm',
@@ -36,7 +37,7 @@ async function engineBundle(root) {
     legalComments: 'none',
     logLevel: 'error',
   });
-  return `/*! glyphfox engine for the studio | MIT | Alexandre Kohler */\n${result.outputFiles[0].text}`;
+  return `${banner}\n${result.outputFiles[0].text}`;
 }
 
 function withPartials(root, html, page) {
@@ -164,6 +165,7 @@ export async function docsFiles(root, icons, { version }) {
     }) + '\n';
   files[join(root, 'docs', 'data', 'changelog.md')] = readFileSync(join(root, 'CHANGELOG.md'), 'utf8');
   files[join(root, 'docs', 'vendor', 'glyphfox.js')] = await engineBundle(root);
+  files[join(root, 'docs', 'vendor', 'glyphfox-labs.js')] = await engineBundle(root, 'labs.js', '/*! glyphfox labs: glyph script and exporters for the studio | MIT | Alexandre Kohler */');
   const docs = join(root, 'docs');
   const api = await import(pathToFileURL(join(root, 'packages', 'glyphfox', 'dist', 'index.js')).href);
   const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js')).href + `?v=${Date.now()}`);
