@@ -705,7 +705,8 @@
 .th-stage.ready .th-hint {
   opacity: 1;
 }
-.th-stage.is-light .th-hint {
+.th-stage.is-light .th-hint,
+:root[data-theme='light'] .th-stage.is-transparent .th-hint {
   color: rgba(20, 16, 10, 0.55);
 }
 .th-out {

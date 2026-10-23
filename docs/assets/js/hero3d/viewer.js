@@ -408,20 +408,22 @@ export class Viewer {
         // A light tint so the backdrop still shows through in every channel,
         // and a faint inner glow so the glass reads on dark backdrops too.
         return new T.MeshPhysicalMaterial({
-          color: c.clone().lerp(white, 0.55),
+          color: c.clone().lerp(white, 0.7),
           metalness: 0,
-          roughness: 0.12,
+          roughness: 0.16,
           transmission: 1,
           thickness: this.settings.depth * 0.6,
           ior: 1.45,
-          attenuationColor: c.clone().lerp(white, 0.35),
+          attenuationColor: c.clone().lerp(white, 0.4),
           attenuationDistance: 5,
           specularIntensity: 1,
           clearcoat: 1,
           clearcoatRoughness: 0.04,
+          iridescence: 0.3,
+          iridescenceIOR: 1.3,
           emissive: c,
-          emissiveIntensity: 0.15,
-          envMapIntensity: 1.6,
+          emissiveIntensity: 0.1,
+          envMapIntensity: 2,
           dispersion: 1,
         });
       case 'neon':

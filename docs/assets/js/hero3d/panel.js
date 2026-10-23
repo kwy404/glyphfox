@@ -88,6 +88,8 @@ function loadSource() {
     pressed($('[data-th-seg="variant"]'), state.variant);
   }
   const icon = current;
+  // Keep a link to this icon in the address bar (#3d=cloud&lock:overlap).
+  if (location.hash.startsWith('#3d')) history.replaceState(null, '', `#3d=${encodeURIComponent(state.icon)}`);
   if (viewer) {
     viewer.set(settings());
     viewer.setSource((variant) => iconParts(icon, variant));
