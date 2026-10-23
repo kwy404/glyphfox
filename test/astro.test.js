@@ -1,21 +1,29 @@
 // glyphfox/astro components rendered on the server with the Astro Container
 // API (the .astro files are compiled by test/stubs/astro-plugin.js).
 import { beforeAll, describe, expect, it } from 'vitest';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import * as A from 'glyphfox/astro';
-import FileDeep from 'glyphfox/astro/icons/file';
 import { iconNames } from 'glyphfox';
 import { componentName } from '../packages/glyphfox/dist/core/formats.js';
 import { STATIC_PROP_CASES, checkDefault } from './fixtures/props.js';
 
-const comp = (name) => A[componentName(name)];
+// Astro 7 runs on Node 22.12 and newer: older runtimes skip the suite, so
+// Astro and the .astro files load only inside it.
+const [major, minor] = process.versions.node.split('.').map(Number);
+const supported = major > 22 || (major === 22 && minor >= 12);
+
+let A;
+let FileDeep;
 let container;
-beforeAll(async () => {
-  container = await AstroContainer.create();
-});
+const comp = (name) => A[componentName(name)];
 const ssr = (C, props = {}) => container.renderToString(C, { props });
 
-describe('glyphfox/astro', () => {
+describe.skipIf(!supported)('glyphfox/astro', () => {
+  beforeAll(async () => {
+    const { experimental_AstroContainer: AstroContainer } = await import('astro/container');
+    A = await import('glyphfox/astro');
+    FileDeep = (await import('glyphfox/astro/icons/file')).default;
+    container = await AstroContainer.create();
+  });
+
   it('exports one component per icon, named NameIcon', () => {
     for (const n of iconNames) expect(comp(n), n).toBeTruthy();
   });
