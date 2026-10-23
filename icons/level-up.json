@@ -8,5 +8,30 @@
     "progress",
     "boost",
     "experience"
-  ]
+  ],
+  "animation": {
+    "name": "rise",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "translate(0px, -1.5px)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "translate(0px, 0.22px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(0px, -1.5px)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "translate(0px, 0.22px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(-6.5px, -4.5px) rotate(0deg) scale(1) translate(6.5px, 4.5px)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "translate(-6.5px, -4.5px) rotate(20deg) scale(0.85) translate(6.5px, 4.5px)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "translate(-6.5px, -4.5px) rotate(-10deg) scale(1.1) translate(6.5px, 4.5px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(-6.5px, -4.5px) rotate(0deg) scale(1) translate(6.5px, 4.5px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(6.5px, 6px) rotate(0deg) scale(1) translate(-6.5px, -6px)" } },
+      { "at": 0.15, "element": 3, "props": { "transform": "translate(6.5px, 6px) rotate(0deg) scale(1) translate(-6.5px, -6px)" } },
+      { "at": 0.405, "element": 3, "props": { "transform": "translate(6.5px, 6px) rotate(20deg) scale(0.85) translate(-6.5px, -6px)" } },
+      { "at": 0.703, "element": 3, "props": { "transform": "translate(6.5px, 6px) rotate(-10deg) scale(1.1) translate(-6.5px, -6px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(6.5px, 6px) rotate(0deg) scale(1) translate(-6.5px, -6px)" } }
+    ]
+  }
 }

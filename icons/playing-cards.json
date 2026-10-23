@@ -8,5 +8,25 @@
     "casino",
     "deck",
     "game"
-  ]
+  ],
+  "animation": {
+    "name": "fan",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(2.5px, 8px) rotate(0deg) translate(-2.5px, -8px)" } },
+      { "at": 0.4, "element": 0, "props": { "transform": "translate(2.5px, 8px) rotate(8deg) translate(-2.5px, -8px)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "translate(2.5px, 8px) rotate(8deg) translate(-2.5px, -8px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(2.5px, 8px) rotate(0deg) translate(-2.5px, -8px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(2.5px, 8px) rotate(0deg) translate(-2.5px, -8px)" } },
+      { "at": 0.4, "element": 2, "props": { "transform": "translate(2.5px, 8px) rotate(8deg) translate(-2.5px, -8px)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "translate(2.5px, 8px) rotate(8deg) translate(-2.5px, -8px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(2.5px, 8px) rotate(0deg) translate(-2.5px, -8px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(-2px, 8px) rotate(0deg) translate(2px, -8px)" } },
+      { "at": 0.4, "element": 1, "props": { "transform": "translate(-2px, 8px) rotate(-4deg) translate(2px, -8px)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "translate(-2px, 8px) rotate(-4deg) translate(2px, -8px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(-2px, 8px) rotate(0deg) translate(2px, -8px)" } }
+    ]
+  }
 }
