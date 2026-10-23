@@ -7,5 +7,37 @@
     "position",
     "pan",
     "arrows"
-  ]
+  ],
+  "animation": {
+    "name": "stretch",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "scale(1, 1.11)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "scale(1, 0.98)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "scale(1.11, 1)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "scale(0.98, 1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "translate(0px, -1px)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "translate(0px, 0.15px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 3, "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.65, "element": 3, "props": { "transform": "translate(-0.15px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 4, "props": { "transform": "translate(0px, 1px)" } },
+      { "at": 0.65, "element": 4, "props": { "transform": "translate(0px, -0.15px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 5, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 5, "props": { "transform": "translate(-1px, 0px)" } },
+      { "at": 0.65, "element": 5, "props": { "transform": "translate(0.15px, 0px)" } },
+      { "at": 1, "element": 5, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

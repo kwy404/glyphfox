@@ -5,5 +5,17 @@
   "tags": [
     "diagonal",
     "northwest"
-  ]
+  ],
+  "animation": {
+    "name": "nudge",
+    "duration": 700,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": "all", "props": { "transform": "translate(-1.5px, -1.5px)" } },
+      { "at": 0.65, "element": "all", "props": { "transform": "translate(0.22px, 0.22px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }
