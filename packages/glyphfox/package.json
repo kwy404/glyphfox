@@ -1,0 +1,155 @@
+{
+  "name": "glyphfox",
+  "version": "0.0.0",
+  "description": "Variable, morphable and fusable open source icons on a 24 grid, with React, Vue, Svelte, web component, Tailwind and CLI.",
+  "license": "MIT",
+  "author": "Alexandre Kohler (https://github.com/kwy404)",
+  "homepage": "https://kwy404.github.io/glyphfox/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwy404/glyphfox.git",
+    "directory": "packages/glyphfox"
+  },
+  "bugs": "https://github.com/kwy404/glyphfox/issues",
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "variable-icons",
+    "morph",
+    "react",
+    "vue",
+    "svelte",
+    "web-components",
+    "tailwindcss"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "./dist/web/index.js",
+    "./dist/web/glyphfox.min.js",
+    "./dist/runtime/auto.js",
+    "*.css"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/web/glyphfox.min.js",
+  "jsdelivr": "./dist/web/glyphfox.min.js",
+  "bin": {
+    "glyphfox": "./bin/glyphfox.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "react": ">=16.8",
+    "svelte": "^5.0.0",
+    "tailwindcss": ">=3.0.0",
+    "vue": "^3.2.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "default": "./dist/icons/*.js"
+    },
+    "./icons.json": "./dist/icons.json",
+    "./sprite.svg": "./dist/sprite.svg",
+    "./styles.css": "./dist/styles.css",
+    "./runtime": {
+      "types": "./dist/runtime/auto.d.ts",
+      "default": "./dist/runtime/auto.js"
+    },
+    "./tools": {
+      "types": "./dist/tools.d.ts",
+      "default": "./dist/tools.js"
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/react/index.d.ts",
+        "default": "./dist/react/index.js"
+      },
+      "require": {
+        "types": "./dist/react/index.d.cts",
+        "default": "./dist/react/index.cjs"
+      }
+    },
+    "./react/icons/*": {
+      "types": "./dist/react/icons/*.d.ts",
+      "default": "./dist/react/icons/*.js"
+    },
+    "./vue": {
+      "import": {
+        "types": "./dist/vue/index.d.ts",
+        "default": "./dist/vue/index.js"
+      },
+      "require": {
+        "types": "./dist/vue/index.d.cts",
+        "default": "./dist/vue/index.cjs"
+      }
+    },
+    "./vue/icons/*": {
+      "types": "./dist/vue/icons/*.d.ts",
+      "default": "./dist/vue/icons/*.js"
+    },
+    "./svelte": {
+      "types": "./dist/svelte/index.d.ts",
+      "svelte": "./dist/svelte/index.js",
+      "default": "./dist/svelte/index.js"
+    },
+    "./svelte/icons/*": {
+      "types": "./dist/svelte/icons/*.svelte.d.ts",
+      "svelte": "./dist/svelte/icons/*.svelte",
+      "default": "./dist/svelte/icons/*.svelte"
+    },
+    "./web": {
+      "types": "./dist/web/index.d.ts",
+      "default": "./dist/web/index.js"
+    },
+    "./web/element": {
+      "types": "./dist/web/element.d.ts",
+      "default": "./dist/web/element.js"
+    },
+    "./web/cdn": "./dist/web/glyphfox.min.js",
+    "./tailwind": {
+      "import": {
+        "types": "./dist/tailwind/index.d.ts",
+        "default": "./dist/tailwind/index.js"
+      },
+      "require": {
+        "types": "./dist/tailwind/index.d.cts",
+        "default": "./dist/tailwind/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  }
+}

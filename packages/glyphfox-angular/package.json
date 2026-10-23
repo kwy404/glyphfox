@@ -1,0 +1,23 @@
+{
+  "name": "glyphfox-angular",
+  "version": "0.0.0",
+  "description": "glyphfox icons for Angular: a standalone component and an icon registry provider.",
+  "license": "MIT",
+  "author": "Alexandre Kohler (https://github.com/kwy404)",
+  "homepage": "https://kwy404.github.io/glyphfox/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwy404/glyphfox.git",
+    "directory": "packages/glyphfox-angular"
+  },
+  "bugs": "https://github.com/kwy404/glyphfox/issues",
+  "keywords": ["icons", "svg", "angular", "glyphfox", "variable-icons"],
+  "peerDependencies": {
+    "@angular/core": ">=17.0.0"
+  },
+  "dependencies": {
+    "glyphfox": "0.0.0",
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

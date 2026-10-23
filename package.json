@@ -1,0 +1,48 @@
+{
+  "name": "glyphfox-repo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "glyphfox monorepo: icons, packages and the studio site",
+  "workspaces": [
+    "packages/glyphfox",
+    "packages/glyphfox-angular"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:angular": "node scripts/build-angular.mjs",
+    "lint:icons": "node tools/icons/lint.mjs",
+    "check:text": "node scripts/check-text.mjs",
+    "check:docs": "node scripts/build.mjs --check",
+    "test": "vitest run",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@angular/common": "^21.2.25",
+    "@angular/compiler": "^21.2.25",
+    "@angular/compiler-cli": "^21.2.25",
+    "@angular/core": "^21.2.25",
+    "@angular/platform-browser": "^21.2.25",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tailwindcss/node": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "esbuild": "^0.28.2",
+    "happy-dom": "^21.0.4",
+    "ng-packagr": "^21.2.7",
+    "postcss": "^8.5.31",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "rxjs": "^7.8.2",
+    "svelte": "^5.57.2",
+    "tailwindcss": "^4.3.3",
+    "tailwindcss3": "npm:tailwindcss@^3.4.19",
+    "tslib": "^2.8.1",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.5",
+    "vitest": "^4.1.12",
+    "vue": "^3.5.44"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

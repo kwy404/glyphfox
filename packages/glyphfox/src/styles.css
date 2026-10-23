@@ -1,0 +1,72 @@
+/* glyphfox base styles (optional). Icons work without this file; it adds
+   layout defaults and animation classes you can put on any element. */
+
+.glyphfox {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+@keyframes gf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes gf-pulse {
+  50% {
+    transform: scale(0.88);
+    opacity: 0.5;
+  }
+}
+@keyframes gf-pop {
+  0% {
+    transform: scale(0.55);
+    opacity: 0;
+  }
+}
+@keyframes gf-wiggle {
+  18% { transform: rotate(-13deg); }
+  36% { transform: rotate(11deg); }
+  54% { transform: rotate(-7deg); }
+  72% { transform: rotate(4deg); }
+  88% { transform: rotate(-1.5deg); }
+}
+@keyframes gf-bounce {
+  28% { transform: translateY(-18%); }
+  50% { transform: translateY(0); }
+  66% { transform: translateY(-7%); }
+  82% { transform: translateY(0); }
+}
+@keyframes gf-shake {
+  8% { transform: rotate(15deg); }
+  18% { transform: rotate(-13deg); }
+  28% { transform: rotate(10deg); }
+  38% { transform: rotate(-8deg); }
+  48% { transform: rotate(5deg); }
+  58% { transform: rotate(-3deg); }
+  68% { transform: rotate(1.5deg); }
+  78% { transform: rotate(0); }
+}
+
+.gf-spin { animation: gf-spin 1s linear infinite; }
+.gf-pulse { animation: gf-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.gf-pop { animation: gf-pop 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.gf-wiggle { animation: gf-wiggle 0.72s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+.gf-bounce { animation: gf-bounce 0.9s cubic-bezier(0.33, 0, 0.25, 1) both; }
+.gf-shake { animation: gf-shake 0.95s ease-in-out both; transform-origin: 50% 10%; }
+
+[dir='rtl'] .gf-rtl,
+.gf-rtl:dir(rtl) {
+  transform: scaleX(-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gf-spin,
+  .gf-pulse,
+  .gf-pop,
+  .gf-wiggle,
+  .gf-bounce,
+  .gf-shake {
+    animation: none;
+  }
+}
