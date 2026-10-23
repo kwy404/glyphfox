@@ -7,8 +7,9 @@ import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
 import { nodesToString } from '../core/nodes.js';
 import { bool, renderIcon, strokeWidth } from '../core/render.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
+import { attachTriggers } from '../core/player.js';
 
-export { bool, fuse, morphFrame, morphGoal, registerIcons, strokeWidth, tween };
+export { attachTriggers, bool, fuse, morphFrame, morphGoal, registerIcons, strokeWidth, tween };
 
 export const EMPTY = { name: 'empty', body: '', tags: [], categories: [] };
 

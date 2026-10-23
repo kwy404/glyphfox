@@ -21,7 +21,8 @@ const src = join(pkgDir, 'src');
 const dist = join(pkgDir, 'dist');
 
 const t0 = Date.now();
-const { icons, problems } = readIcons(join(root, 'icons'));
+const { icons, problems, warnings = [] } = readIcons(join(root, 'icons'));
+for (const w of warnings) console.warn(`warning: ${w}`);
 if (problems.length) {
   for (const p of problems) console.error(p);
   if (!args.has('--skip-invalid')) {

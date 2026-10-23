@@ -1,12 +1,13 @@
 // glyphfox for React: icon components with the shared props, Icon, Fusion,
 // MorphIcon and the useMorph hook. Works with React 16.8 and newer.
 
-import { createElement, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { createElement, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { fuse } from '../core/compose.js';
 import { morphFrame, morphGoal, splitProps, tween } from '../core/controller.js';
 import { componentName } from '../core/formats.js';
 import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
 import { bool, renderIcon, strokeWidth } from '../core/render.js';
+import { attachTriggers } from '../core/player.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
 
 export { registerIcons };
@@ -120,7 +121,7 @@ function useGlyph(icon, allProps, ref) {
   const frame = morphFrame(icon, drawTarget && drawTarget.icon, p, { variant: glyph.variant, targetVariant: drawTarget && drawTarget.variant });
 
   const handlers = {};
-  if (trigger === 'click' && (glyph.animate || glyph.morphTo)) {
+  if (trigger === 'click' && (glyph.animate || glyph.animation || glyph.morphTo)) {
     handlers.onClick = (e) => {
       if (onClick) onClick(e);
       setToggled((t) => !t);
@@ -141,10 +142,31 @@ function useGlyph(icon, allProps, ref) {
     if (onMouseLeave) handlers.onMouseLeave = onMouseLeave;
   }
 
+  // Triggers that need a script run on the trigger engine; hover, focus and
+  // press take the animation over from the CSS (gf-js) for a smooth reverse.
+  const own = useRef(null);
+  const setRef = useCallback(
+    (node) => {
+      own.current = node;
+      if (typeof ref === 'function') ref(node);
+      else if (ref) ref.current = node;
+    },
+    [ref],
+  );
+  const animated = (glyph.animate || glyph.animation) && !bool(glyph.disabled);
+  const takeover = animated && ['hover', 'focus', 'press'].includes(trigger);
+  const engine = animated && (takeover || trigger === 'inView');
+  const animKey = typeof glyph.animation === 'object' && glyph.animation ? JSON.stringify(glyph.animation) : glyph.animation;
+  useEffect(() => {
+    if (!engine || !own.current) return undefined;
+    return attachTriggers(own.current, glyph, icon);
+  }, [engine, trigger, animKey, glyph.animate, glyph.duration, glyph.delay, glyph.loop, glyph.triggerParent, icon]);
+
   const labelled = svgRest['aria-label'] !== undefined || svgRest['aria-labelledby'] !== undefined;
   const decorative = glyph.decorative !== undefined ? glyph.decorative : glyph.title ? false : !labelled;
-  const [, attrs, kids] = renderIcon(frame.icon, { ...glyph, variant: frame.variant, morphTo: undefined, class: className, run, decorative });
-  const props = { ...mapAttrs(attrs), ...svgRest, ...handlers, ref };
+  const cls = takeover ? (className ? `${className} gf-js` : 'gf-js') : className;
+  const [, attrs, kids] = renderIcon(frame.icon, { ...glyph, variant: frame.variant, morphTo: undefined, class: cls, run, decorative });
+  const props = { ...mapAttrs(attrs), ...svgRest, ...handlers, ref: setRef };
   if (style !== undefined) props.style = style;
   return createElement('svg', props, ...kids.map((c, i) => toElement(c, i)), children);
 }

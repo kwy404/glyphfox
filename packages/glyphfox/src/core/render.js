@@ -2,7 +2,8 @@
 // node tree ['svg', attrs, children] that each framework turns into its own
 // elements; toSvg serializes it to a string.
 
-import { ANIMATIONS, animationCss, frameState } from './animate.js';
+import { ANIMATIONS, TRIGGERS, animationCss, frameState } from './animate.js';
+import { iconAnimation, sampleTimeline, stateStyle, timelineCss, usesDash } from './timeline.js';
 import { normalizeCorner, withModifier } from './compose.js';
 import { pairOpacity, pairPoints, pointsToPath, prepareMorph } from './morph.js';
 import { hash, iconNodes, nodesToString, splitLayers } from './nodes.js';
@@ -36,6 +37,9 @@ export const PROPS = [
   'morphTo',
   'title',
   'decorative',
+  'animation',
+  'triggerParent',
+  'disabled',
 ];
 
 export const DEFAULTS = Object.freeze({
@@ -52,6 +56,8 @@ export const DEFAULTS = Object.freeze({
   active: false,
   delay: 0,
   modifierCorner: 'bottom-right',
+  triggerParent: false,
+  disabled: false,
 });
 
 const RTL_CSS = '[dir=rtl] .gf-rtl,.gf-rtl:dir(rtl){transform:scaleX(-1)}';
@@ -239,15 +245,54 @@ export function renderIcon(icon, props = {}) {
     ({ fills, strokes } = variantLayers(ic, variant, ctx));
   }
 
-  let anim = o.animate && ANIMATIONS[o.animate] ? String(o.animate) : null;
+  // disabled stops every animation; a designed animation (the icon's own
+  // timeline, or one passed as an object or JSON) wins over the presets.
+  const disabled = bool(o.disabled);
+  const timeline = !disabled && o.animation !== undefined && o.animation !== null && o.animation !== false && o.animation !== 'false' ? iconAnimation(icon, o.animation) : null;
+  let anim = !disabled && !timeline && o.animate && ANIMATIONS[o.animate] ? String(o.animate) : null;
   if (anim === 'draw' && (filled || ic.filled === true)) anim = 'pop';
-  const trigger = ['mount', 'hover', 'click', 'state'].includes(o.trigger) ? o.trigger : 'mount';
+  const trigger = TRIGGERS.includes(o.trigger) ? o.trigger : 'mount';
   const frame = typeof o.frame === 'number' && Number.isFinite(o.frame) ? o.frame : null;
   const classes = [];
   let css = '';
   let content;
-  if (anim) {
-    const spec = { animate: anim, trigger, duration: o.duration, delay: o.delay, loop: o.loop, count: strokes.length };
+  if (timeline) {
+    const tracks = new Map(timeline.tracks.map((tr) => [tr.element, tr]));
+    const states = frame !== null ? new Map(sampleTimeline(timeline, frame, { duration: o.duration, delay: o.delay, loop: o.loop }).map((st) => [st.element, st])) : null;
+    const dressed = (node, key, extraClass) => {
+      const tr = tracks.get(key);
+      if (!tr) return node;
+      const [tag, a, ch] = node;
+      const attrs = { ...a };
+      if (extraClass) attrs.class = a.class ? `${a.class} ${extraClass}` : extraClass;
+      if (usesDash(tr)) {
+        attrs.pathLength = '1';
+        attrs['stroke-dasharray'] = '1 1';
+      }
+      if (states) {
+        const st = states.get(key);
+        const style = stateStyle(st, timeline.origin);
+        if (style) attrs.style = style;
+        if (st.d !== undefined && tag === 'path') attrs.d = st.d;
+      }
+      return ch === undefined ? [tag, attrs] : [tag, attrs, ch];
+    };
+    const strokeNodes = strokes.map((n, i) => dressed(n, String(i), `gf-e${i}`));
+    const fillNodes = fills.map((n) => (n[1] && typeof n[1].class === 'string' && n[1].class.includes('gf-secondary') ? dressed(n, 'secondary') : n));
+    if (!states) {
+      const tc = timelineCss(timeline, { trigger, triggerParent: o.triggerParent, duration: o.duration, delay: o.delay, loop: o.loop });
+      classes.push(tc.className);
+      css += tc.css;
+      if (trigger === 'state' && bool(o.active)) classes.push('gf-on');
+    }
+    const group = { class: 'gf-anim' };
+    if (states && states.has('all')) {
+      const style = stateStyle(states.get('all'), timeline.origin);
+      if (style) group.style = style;
+    }
+    content = [['g', group, [...fillNodes, ...strokeNodes]]];
+  } else if (anim) {
+    const spec = { animate: anim, trigger, triggerParent: o.triggerParent, duration: o.duration, delay: o.delay, loop: o.loop, count: strokes.length };
     let groupAttrs = { class: 'gf-anim' };
     let strokeNodes = strokes;
     if (frame !== null) {
@@ -278,7 +323,7 @@ export function renderIcon(icon, props = {}) {
   if (tf) content = [['g', { transform: tf }, content]];
 
   const attrs = rootAttrs(ic, o, sw, classes);
-  if (anim && trigger === 'click' && (o.run === '1' || o.run === '2' || o.run === 1 || o.run === 2)) attrs['data-gf-run'] = String(o.run);
+  if ((anim || timeline) && trigger === 'click' && (o.run === '1' || o.run === '2' || o.run === 1 || o.run === 2)) attrs['data-gf-run'] = String(o.run);
   if (bool(o.mirrorRtl)) css += RTL_CSS;
   const children = [];
   if (o.title) children.push(['title', {}, String(o.title)]);

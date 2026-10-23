@@ -27,10 +27,13 @@ export const ATTRIBUTES = {
   morphTo: 'morph-to',
   title: 'title',
   decorative: 'decorative',
+  animation: 'animation',
+  triggerParent: 'trigger-parent',
+  disabled: 'disabled',
 };
 
 const NUMBERS = new Set(['secondaryOpacity', 'weight', 'rotate', 'duration', 'delay']);
-const BOOLEANS = new Set(['absoluteWeight', 'flipX', 'flipY', 'mirrorRtl', 'active', 'decorative']);
+const BOOLEANS = new Set(['absoluteWeight', 'flipX', 'flipY', 'mirrorRtl', 'active', 'decorative', 'triggerParent', 'disabled']);
 
 /** Reads props from an attribute getter (returns null for missing attributes). */
 export function propsFromAttributes(get, prefix = '') {
@@ -45,6 +48,9 @@ export function propsFromAttributes(get, prefix = '') {
       if (v !== '' && Number.isFinite(n)) props[prop] = n;
     } else if (BOOLEANS.has(prop)) {
       props[prop] = bool(v);
+    } else if (prop === 'animation') {
+      // An empty attribute selects the icon's own animation; JSON is a timeline.
+      props.animation = v === '' ? true : v === 'false' ? false : v;
     } else if (prop === 'loop') {
       const n = Number(v);
       props.loop = v !== '' && Number.isFinite(n) && n >= 1 ? n : bool(v);

@@ -6,6 +6,7 @@ import { ATTRIBUTES, propsFromAttributes } from '../core/attributes.js';
 import { morphFrame, morphGoal, tween } from '../core/controller.js';
 import { loadIcon, lookupIcon } from '../core/lookup.js';
 import { nodesToString } from '../core/nodes.js';
+import { attachTriggers } from '../core/player.js';
 import { bool, renderIcon, strokeWidth } from '../core/render.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
 
@@ -45,7 +46,7 @@ export class GlyphFoxElement extends Base {
     this._queued = false;
     this._onClick = () => {
       const p = this._props();
-      if ((p.trigger || 'mount') === 'click' && (p.animate || p.morphTo)) {
+      if ((p.trigger || 'mount') === 'click' && (p.animate || p.animation || p.morphTo)) {
         this._toggled = !this._toggled;
         this._run = this._run === '1' ? '2' : '1';
         this._update();
@@ -79,6 +80,9 @@ export class GlyphFoxElement extends Base {
     this.removeEventListener('mouseleave', this._onLeave);
     this._cancel();
     this._cancelName();
+    if (this._detach) this._detach();
+    this._detach = null;
+    this._markup = null;
   }
 
   attributeChangedCallback(attr, oldValue, newValue) {
@@ -174,12 +178,17 @@ export class GlyphFoxElement extends Base {
     const node = renderIcon(icon, { ...p, variant, morphTo: undefined, run: this._run, decorative });
     const markup = nodesToString(node);
     const old = this._shadow.lastElementChild;
-    if (old && old.tagName.toLowerCase() === 'svg' && old.outerHTML === markup) return;
+    if (old && old.tagName.toLowerCase() === 'svg' && this._markup === markup) return;
     const tpl = this._shadow.ownerDocument.createElement('template');
     tpl.innerHTML = markup;
     const svg = tpl.content.firstElementChild;
     if (old && old.tagName.toLowerCase() === 'svg') old.replaceWith(svg);
     else this._shadow.appendChild(svg);
+    this._markup = markup;
+    // Triggers that need a script (inView, and hover, focus and press with
+    // the smooth reverse) run on the Web Animations API.
+    if (this._detach) this._detach();
+    this._detach = this.isConnected ? attachTriggers(svg, p, base ? base.icon : null) : null;
   }
 }
 

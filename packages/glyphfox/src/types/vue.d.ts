@@ -5,7 +5,7 @@ import type { IconData, IconProps, IconSpec, Layout, Variant } from '../index.js
  * The shared props for Vue. Icon specs are plain strings here: Vue's prop
  * inference cannot expand the full icon name union.
  */
-export type VueIconProps = Omit<IconProps, 'morphTo'> & { morphTo?: string | IconData | null };
+export type VueIconProps = Omit<IconProps, 'morphTo' | 'animation'> & { morphTo?: string | IconData | null; animation?: boolean | string | object };
 export type GlyphComponent = DefineComponent<VueIconProps>;
 
 export declare const glyphProps: Record<keyof IconProps, unknown>;

@@ -68,6 +68,18 @@ export const PROP_CASES = [
     },
   },
   { prop: 'decorative', icon: 'file', props: { title: 'Document', decorative: true }, check: (h) => expect(svgOpen(h)).toContain('aria-hidden="true"') },
+  {
+    prop: 'animation',
+    icon: 'heart',
+    props: { animation: '{"name":"beat","duration":640,"frames":[{"at":0,"element":0,"props":{"transform":"scale(1)"}},{"at":0.5,"element":0,"props":{"transform":"scale(1.2)"}},{"at":1,"element":0,"props":{"transform":"scale(1)"}}]}' },
+    check: (h) => {
+      expect(h).toMatch(/@keyframes gf-t[0-9a-z]+-0\{0%\{transform:scale\(1\)\}50%\{transform:scale\(1\.2\)\}/);
+      expect(h).toContain('class="gf-e0"');
+      expect(h).toMatch(/\.gf-e0\{animation:gf-t[0-9a-z]+-0 640ms/);
+    },
+  },
+  { prop: 'triggerParent', icon: 'heart', props: { animate: 'pop', trigger: 'hover', triggerParent: true }, check: (h) => expect(h).toMatch(/:is\(a,button[^)]*\):hover \.gf-a[0-9a-z]+/) },
+  { prop: 'disabled', icon: 'heart', props: { animate: 'pop', disabled: true }, check: (h) => expect(h).not.toContain('<style') },
 ];
 
 /** Plain use must stay simple: 24 px, outline, round, hidden from assistive technology. */

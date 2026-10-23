@@ -12,10 +12,16 @@ import { componentName, dataName } from '../packages/glyphfox/dist/core/formats.
 const root = resolve('.');
 const dist = join(root, 'packages', 'glyphfox', 'dist');
 const require = createRequire(import.meta.url);
-const sources = readdirSync(join(root, 'icons'))
-  .filter((f) => f.endsWith('.svg'))
-  .map((f) => f.slice(0, -4))
-  .sort();
+const svgNames = (dir) =>
+  existsSync(dir)
+    ? readdirSync(dir)
+        .filter((f) => f.endsWith('.svg'))
+        .map((f) => f.slice(0, -4))
+    : [];
+// The base set plus the animated signature icons whose names are free.
+const base = svgNames(join(root, 'icons'));
+const sources = [...new Set([...base, ...svgNames(join(root, 'icons', 'animated'))])].sort();
+const sourceFile = (name) => (base.includes(name) ? join(root, 'icons', `${name}.svg`) : join(root, 'icons', 'animated', `${name}.svg`));
 const { icons, problems } = readIcons(join(root, 'icons'));
 
 describe('build', () => {
@@ -51,7 +57,7 @@ describe('build', () => {
   it('keeps the icon rules after optimization', () => {
     for (const icon of icons) {
       expect(lintBody(icon.body), icon.name).toEqual([]);
-      const src = readFileSync(join(root, 'icons', `${icon.name}.svg`), 'utf8');
+      const src = readFileSync(sourceFile(icon.name), 'utf8');
       const before = parseBody(src.replace(/^[\s\S]*?<svg[^>]*>|<\/svg>\s*$/g, ''));
       const after = parseBody(icon.body);
       expect(after.length, icon.name).toBe(before.length);

@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { minifyPath, nodeBounds, parsePath, serializePath, shapeToSegments } from '../../packages/glyphfox/src/core/geometry.js';
 import { attrNum, nodesToString, parseBody } from '../../packages/glyphfox/src/core/nodes.js';
 import { analyzeSolid } from '../../packages/glyphfox/src/core/solid.js';
+import { normalizeTimeline } from '../../packages/glyphfox/src/core/timeline.js';
 
 export const ROOT = {
   xmlns: 'http://www.w3.org/2000/svg',
@@ -131,6 +132,17 @@ export function readIcon(dir, name) {
     categories: meta.categories,
     solid: solid ? [solid.fill, solid.knock] : null,
   };
+  // A designed animation (frame timeline per element) from the sidecar.
+  if (meta.animation !== undefined) {
+    const list = Array.isArray(meta.animation) ? meta.animation : [meta.animation];
+    const bad = list.findIndex((a) => !normalizeTimeline(a));
+    if (bad >= 0) problems.push(`${name}: animation #${bad + 1} has no valid frames`);
+    else {
+      const count = primary.length;
+      for (const a of list) for (const f of a.frames) if (Number.isInteger(f.element) && f.element >= count) problems.push(`${name}: animation "${a.name || ''}" targets element ${f.element}, the icon has ${count}`);
+      data.animation = meta.animation;
+    }
+  }
   // The optimizer must keep the geometry: compare bounds before and after.
   const before = nodes.map((n) => nodeBounds(n));
   const after = optimized.map((n) => nodeBounds(n));
@@ -154,5 +166,25 @@ export function readIcons(dir) {
     if (r.data) icons.push(r.data);
     problems.push(...r.problems);
   }
-  return { icons, problems };
+  // The animated signature icons (icons/animated) join the set with their
+  // designed animations; a name taken by the base set is skipped with a note.
+  const animatedDir = join(dir, 'animated');
+  const warnings = [];
+  if (existsSync(animatedDir)) {
+    const taken = new Set(icons.map((ic) => ic.name));
+    const animated = [...new Set(readdirSync(animatedDir).filter((f) => f.endsWith('.svg')).map((f) => f.slice(0, -4)))].sort();
+    for (const name of animated) {
+      if (taken.has(name)) {
+        warnings.push(`animated/${name}: the name is taken by icons/${name}.svg, rename the animated icon`);
+        continue;
+      }
+      const r = readIcon(animatedDir, name);
+      if (r.data) {
+        if (!r.data.tags.includes('animated')) r.data.tags = [...r.data.tags, 'animated'];
+        icons.push(r.data);
+      } else warnings.push(...r.problems.map((p) => `animated/${p}`));
+    }
+    icons.sort((a, b) => a.name.localeCompare(b.name));
+  }
+  return { icons, problems, warnings };
 }

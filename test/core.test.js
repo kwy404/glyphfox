@@ -164,9 +164,9 @@ describe('search and metadata', () => {
   });
 
   it('exports the prop list in documentation order', () => {
-    expect(PROPS).toHaveLength(23);
+    expect(PROPS).toHaveLength(26);
     expect(PROPS[0]).toBe('size');
-    expect(PROPS[PROPS.length - 1]).toBe('decorative');
+    expect(PROPS[PROPS.length - 1]).toBe('disabled');
     expect(new Set(PROP_CASES.map((c) => c.prop)).size).toBe(PROPS.length);
     for (const c of PROP_CASES) expect(PROPS).toContain(c.prop);
   });

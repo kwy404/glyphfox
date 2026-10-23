@@ -13,6 +13,8 @@ import { analyzeSolid } from './core/solid.js';
 import { replaceGlyphs as replaceWith } from './core/runtime.js';
 import { hasIconSource, loadIcon, lookupIcon, registerIconSource } from './core/lookup.js';
 import { normalizeIcon } from './core/external.js';
+import { attachTriggers } from './core/player.js';
+import { normalizeTimeline, sampleTimeline, timelineCss } from './core/timeline.js';
 
 export { icons };
 export const iconNames = Object.keys(icons);
@@ -124,6 +126,7 @@ export {
   VARIANTS,
   analyzeSolid,
   animationLength,
+  attachTriggers,
   componentName,
   createMorph,
   dataName,
@@ -132,6 +135,7 @@ export {
   isComposite,
   loadIcon,
   normalizeIcon,
+  normalizeTimeline,
   nodesToString,
   parseBody,
   parseSpec,
@@ -139,9 +143,11 @@ export {
   registerIconSource,
   renderIcon,
   renderToString,
+  sampleTimeline,
   sizeToPx,
   snippet,
   strokeWidth,
+  timelineCss,
   toDataUri,
   withModifier,
 };

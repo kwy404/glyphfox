@@ -10,8 +10,8 @@ import {
   booleanAttribute,
   inject,
 } from '@angular/core';
-import { bool, fuse, loadIcon, lookupIcon, morphFrame, morphGoal, nodesToString, parseSpec, registerIcons, renderIcon, resolveSpec, strokeWidth, tween } from 'glyphfox/core';
-import type { AnimationName, IconData, IconProps, Layout, ModifierCorner, ModifierName, Trigger, Variant } from 'glyphfox';
+import { attachTriggers, bool, fuse, loadIcon, lookupIcon, morphFrame, morphGoal, nodesToString, parseSpec, registerIcons, renderIcon, resolveSpec, strokeWidth, tween } from 'glyphfox/core';
+import type { AnimationName, AnimationTimeline, IconData, IconProps, Layout, ModifierCorner, ModifierName, Trigger, Variant } from 'glyphfox';
 import { GLYPHFOX_CONFIG } from './provider';
 
 const EMPTY: IconData = { name: 'empty', body: '', tags: [], categories: [] };
@@ -95,6 +95,12 @@ export class GlyphFoxIcon implements OnChanges, OnInit, OnDestroy {
   @Input() morphTo?: string | IconData | null;
   @Input() title?: string;
   @Input({ transform: (v: unknown) => (v === undefined || v === null ? undefined : booleanAttribute(v)) }) decorative?: boolean;
+  /** The icon's own designed animation (true or its name), or a timeline object or JSON. */
+  @Input() animation?: string | boolean | AnimationTimeline;
+  /** Hover, focus and press of the closest link or button also play the icon. */
+  @Input({ transform: booleanAttribute }) triggerParent?: boolean;
+  /** Stops every animation. */
+  @Input({ transform: booleanAttribute }) disabled?: boolean;
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly renderer = inject(Renderer2);
@@ -136,12 +142,14 @@ export class GlyphFoxIcon implements OnChanges, OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed = true;
     this.cancel();
+    this.detach();
+    this.markup = '';
   }
 
   /** @internal */
   onClick(): void {
     const p = this.props();
-    if ((p.trigger || 'mount') === 'click' && (p.animate || p.morphTo)) {
+    if ((p.trigger || 'mount') === 'click' && (p.animate || p.animation || p.morphTo)) {
       this.toggled = !this.toggled;
       this.run = this.run === '1' ? '2' : '1';
       this.update();
@@ -179,6 +187,9 @@ export class GlyphFoxIcon implements OnChanges, OnInit, OnDestroy {
       morphTo: this.morphTo,
       title: this.title,
       decorative: this.decorative,
+      animation: this.animation,
+      triggerParent: this.triggerParent,
+      disabled: this.disabled,
     };
     const out: Record<string, unknown> = { ...this.defaults };
     for (const k of Object.keys(own)) if (own[k] !== undefined) out[k] = own[k];
@@ -250,7 +261,22 @@ export class GlyphFoxIcon implements OnChanges, OnInit, OnDestroy {
     const el = this.host.nativeElement;
     const labelled = !!(el.getAttribute && (el.getAttribute('aria-label') || el.getAttribute('aria-labelledby')));
     const decorative = props.decorative !== undefined ? props.decorative : props.title ? false : !labelled;
-    const node = renderIcon(frame.icon, { ...props, variant: frame.variant, morphTo: undefined, run: this.run, decorative });
-    this.renderer.setProperty(el, 'innerHTML', nodesToString(node));
+    // Triggers that need a script run on the trigger engine; hover, focus and
+    // press take the animation over from the CSS (gf-js) for a smooth reverse.
+    const animated = !!((props.animate || props.animation) && !bool(props.disabled));
+    const trig = props.trigger || 'mount';
+    const takeover = animated && ['hover', 'focus', 'press'].includes(trig);
+    const node = renderIcon(frame.icon, { ...props, variant: frame.variant, morphTo: undefined, run: this.run, decorative, class: takeover ? 'gf-js' : undefined });
+    const markup = nodesToString(node);
+    if (markup === this.markup) return;
+    this.markup = markup;
+    this.renderer.setProperty(el, 'innerHTML', markup);
+    this.detach();
+    this.detach = () => {};
+    const svg = el.querySelector ? el.querySelector('svg') : null;
+    if (svg && animated && (takeover || trig === 'inView')) this.detach = attachTriggers(svg, props, base ? base.icon : null);
   }
+
+  private detach: () => void = () => {};
+  private markup = '';
 }

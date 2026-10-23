@@ -1,6 +1,6 @@
 <script>
   import { untrack } from 'svelte';
-  import { EMPTY, bool, loadAll, morphFrame, morphGoal, resolveNow, strokeWidth, tween, view } from './glyph.js';
+  import { EMPTY, attachTriggers, bool, loadAll, morphFrame, morphGoal, resolveNow, strokeWidth, tween, view } from './glyph.js';
 
   let {
     icon = undefined,
@@ -29,6 +29,9 @@
     morphTo = undefined,
     title = undefined,
     decorative = undefined,
+    animation = undefined,
+    triggerParent = undefined,
+    disabled = undefined,
     class: className = undefined,
     style = undefined,
     onclick = undefined,
@@ -47,7 +50,7 @@
   let p = $state(initialProgress());
   let last = null;
 
-  const glyph = $derived({ size, color, secondaryColor, secondaryOpacity, weight, absoluteWeight, corners, variant, rotate, flipX, flipY, mirrorRtl, animate, trigger, active, duration, delay, loop, modifier, modifierCorner, title });
+  const glyph = $derived({ size, color, secondaryColor, secondaryOpacity, weight, absoluteWeight, corners, variant, rotate, flipX, flipY, mirrorRtl, animate, trigger, active, duration, delay, loop, modifier, modifierCorner, title, animation, triggerParent, disabled });
   const sw = $derived(strokeWidth(glyph));
   const base = $derived.by(() => {
     void version;
@@ -86,12 +89,24 @@
     const frame = morphFrame(baseIcon, drawTarget && drawTarget.icon, p, { variant: v, targetVariant: drawTarget && drawTarget.variant });
     const labelled = rest['aria-label'] !== undefined || rest['aria-labelledby'] !== undefined;
     const dec = decorative !== undefined ? decorative : title ? false : !labelled;
-    return view(frame.icon, { ...glyph, variant: frame.variant, class: className, run, decorative: dec });
+    const cls = takeover ? (className ? `${className} gf-js` : 'gf-js') : className;
+    return view(frame.icon, { ...glyph, variant: frame.variant, class: cls, run, decorative: dec });
+  });
+
+  // Triggers that need a script run on the trigger engine.
+  let svgEl = $state(null);
+  const takeover = $derived(!!((animate || animation) && !bool(disabled) && ['hover', 'focus', 'press'].includes(trig)));
+  const engine = $derived(takeover || !!((animate || animation) && !bool(disabled) && trig === 'inView'));
+  $effect(() => {
+    if (!svgEl || !engine) return undefined;
+    const g = glyph;
+    const icon = base.value ? base.value.icon : null;
+    return untrack(() => attachTriggers(svgEl, g, icon));
   });
 
   function handleClick(e) {
     if (onclick) onclick(e);
-    if (trig === 'click' && (animate || morphTo)) {
+    if (trig === 'click' && (animate || animation || morphTo)) {
       toggled = !toggled;
       run = run === '1' ? '2' : '1';
     }
@@ -106,4 +121,4 @@
   }
 </script>
 
-<svg {...out.attrs} {...rest} {style} onclick={handleClick} onmouseenter={handleEnter} onmouseleave={handleLeave}>{@html out.inner}{#if children}{@render children()}{/if}</svg>
+<svg bind:this={svgEl} {...out.attrs} {...rest} {style} onclick={handleClick} onmouseenter={handleEnter} onmouseleave={handleLeave}>{@html out.inner}{#if children}{@render children()}{/if}</svg>

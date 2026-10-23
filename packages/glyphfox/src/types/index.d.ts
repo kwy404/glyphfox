@@ -7,7 +7,39 @@ export type IconName = /*ICON_NAMES*/;
 export type Variant = 'outline' | 'duotone' | 'solid';
 export type Corners = 'round' | 'sharp';
 export type AnimationName = 'draw' | 'pop' | 'wiggle' | 'spin' | 'pulse' | 'bounce' | 'shake';
-export type Trigger = 'mount' | 'hover' | 'click' | 'state';
+export type Trigger = 'mount' | 'hover' | 'click' | 'focus' | 'press' | 'inView' | 'loop' | 'state';
+
+/** One keyframe of a designed animation. */
+export interface AnimationFrame {
+  /** Position in the timeline, 0 to 1. */
+  at: number;
+  /** Index of a drawn element, "all" for the whole icon or "secondary" for the duotone layer. Default "all". */
+  element?: number | 'all' | 'secondary';
+  /** Timing function from this frame to the next. */
+  easing?: string;
+  props: {
+    /** CSS transform in grid units, for example "rotate(12deg)" or "translate(0px, -2px) scale(1.1)". */
+    transform?: string;
+    opacity?: number;
+    /** The element is drawn with pathLength 1: 1 hides it and 0 shows it. */
+    strokeDashoffset?: number;
+    /** Path data (paths only). */
+    d?: string;
+  };
+}
+
+/** A designed animation: a frame timeline per element, read from the icon's JSON sidecar or passed as a prop. */
+export interface AnimationTimeline {
+  name?: string;
+  /** Milliseconds, default 800. */
+  duration?: number;
+  /** CSS timing function, default ease. */
+  easing?: string;
+  loop?: boolean | number;
+  /** Transform origin on the 24 grid, default [12, 12]. */
+  origin?: [number, number];
+  frames: AnimationFrame[];
+}
 export type ModifierName = 'plus' | 'minus' | 'check' | 'x' | 'alert' | 'lock' | 'clock' | 'sync' | 'arrow-up' | 'arrow-down' | 'dot';
 export type ModifierCorner = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'tl' | 'tr' | 'bl' | 'br';
 export type Layout = 'overlap' | 'side' | 'stack' | 'grid' | 'orbit' | 'badge' | 'inside';
@@ -27,6 +59,8 @@ export interface IconData<N extends string = string> {
   categories: string[];
   /** Indices of the fill shapes and knockout lines of the solid style (null when no shape is closed). */
   solid?: [number[], number[]] | null;
+  /** The icon's designed animation (or several), from its JSON sidecar. */
+  animation?: AnimationTimeline | AnimationTimeline[];
   /** Set on icons from filled sets: shapes keep their own fill, the style axis and the draw animation fall back. */
   filled?: boolean;
 }
@@ -97,6 +131,12 @@ export interface IconProps {
   title?: string;
   /** Hides the icon from assistive technology. Defaults to true when there is no title. */
   decorative?: boolean;
+  /** The icon's own designed animation: true (or "") for its first one, a name, or a timeline object or JSON. Wins over animate. */
+  animation?: boolean | string | AnimationTimeline;
+  /** Hover, focus and press of the closest link or button (or a .gf-trigger ancestor) also play the icon. */
+  triggerParent?: boolean;
+  /** Stops every animation. */
+  disabled?: boolean;
 }
 
 export interface SvgOptions extends IconProps {
@@ -195,5 +235,23 @@ export declare function nodesToString(node: IconNode | IconNode[]): string;
 export declare function analyzeSolid(nodes: IconNode[]): { fill: number[]; knock: number[] } | null;
 export declare function frameState(spec: { animate: AnimationName; duration?: number; delay?: number; loop?: boolean | number; count?: number }, t: number): unknown;
 export declare function animationLength(spec: { animate: AnimationName; duration?: number; delay?: number; loop?: boolean | number }): number;
+
+/** A timeline normalized into tracks of keyframes per element. */
+export interface NormalizedTimeline {
+  name: string;
+  duration: number;
+  easing: string;
+  loop: boolean | number;
+  origin: [number, number];
+  tracks: Array<{ element: string; keyframes: Array<Record<string, unknown> & { offset: number }> }>;
+}
+/** Plays the animations of a rendered icon for the triggers that need a script (inView, and hover, focus and press with a smooth reverse). Returns a function that detaches it. */
+export declare function attachTriggers(svg: Element, props?: IconProps, icon?: IconData | null): () => void;
+/** Validates a designed animation (object or JSON). Null when it has no usable frame. */
+export declare function normalizeTimeline(timeline: AnimationTimeline | string): NormalizedTimeline | null;
+/** State of every track at a time in ms, for frame export. */
+export declare function sampleTimeline(timeline: NormalizedTimeline, t: number, options?: { duration?: number; delay?: number; loop?: boolean | number }): Array<{ element: string; transform?: string; opacity?: number; strokeDashoffset?: number; d?: string }>;
+/** Scoped CSS that plays a timeline with a trigger. */
+export declare function timelineCss(timeline: NormalizedTimeline, options?: { trigger?: Trigger; triggerParent?: boolean; duration?: number; delay?: number; loop?: boolean | number }): { className: string; css: string };
 
 /*ICON_EXPORTS*/

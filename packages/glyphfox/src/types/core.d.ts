@@ -1,5 +1,5 @@
 // glyphfox/core: the rendering engine without icon data.
-import type { AnimationName, FuseOptions, IconData, IconNode, IconSource, IconProps, IconSpec, Layout, ModifierCorner, ModifierName, Morph, SvgOptions, Trigger, Variant } from '../index.js';
+import type { AnimationName, AnimationTimeline, FuseOptions, IconData, IconNode, IconSource, IconProps, IconSpec, Layout, ModifierCorner, ModifierName, Morph, SvgOptions, Trigger, Variant } from '../index.js';
 
 export declare const PROPS: Array<keyof IconProps>;
 export declare const DEFAULTS: Readonly<Partial<IconProps>>;
@@ -46,3 +46,21 @@ export declare function componentName(name: string): string;
 export declare function snippet(format: string, spec: string, props?: IconProps, options?: { svg?: string; version?: string }): string;
 export declare function toDataUri(svg: string): string;
 export declare function analyzeSolid(nodes: IconNode[]): { fill: number[]; knock: number[] } | null;
+
+/** A timeline normalized into tracks of keyframes per element. */
+export interface NormalizedTimeline {
+  name: string;
+  duration: number;
+  easing: string;
+  loop: boolean | number;
+  origin: [number, number];
+  tracks: Array<{ element: string; keyframes: Array<Record<string, unknown> & { offset: number }> }>;
+}
+/** Plays the animations of a rendered icon for the triggers that need a script (inView, and hover, focus and press with a smooth reverse). Returns a function that detaches it. */
+export declare function attachTriggers(svg: Element, props?: IconProps, icon?: IconData | null): () => void;
+/** Validates a designed animation (object or JSON). Null when it has no usable frame. */
+export declare function normalizeTimeline(timeline: AnimationTimeline | string): NormalizedTimeline | null;
+/** State of every track at a time in ms, for frame export. */
+export declare function sampleTimeline(timeline: NormalizedTimeline, t: number, options?: { duration?: number; delay?: number; loop?: boolean | number }): Array<{ element: string; transform?: string; opacity?: number; strokeDashoffset?: number; d?: string }>;
+/** Scoped CSS that plays a timeline with a trigger. */
+export declare function timelineCss(timeline: NormalizedTimeline, options?: { trigger?: Trigger; triggerParent?: boolean; duration?: number; delay?: number; loop?: boolean | number }): { className: string; css: string };

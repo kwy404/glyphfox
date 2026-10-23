@@ -1,12 +1,13 @@
 // glyphfox for Vue 3: icon components with the shared props, Icon, Fusion,
 // MorphIcon and the useMorph composable.
 
-import { computed, defineComponent, h, isRef, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
+import { computed, defineComponent, h, isRef, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import { fuse } from '../core/compose.js';
 import { morphFrame, morphGoal, tween } from '../core/controller.js';
 import { componentName } from '../core/formats.js';
 import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
 import { bool, renderIcon, strokeWidth } from '../core/render.js';
+import { attachTriggers } from '../core/player.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
 
 export { registerIcons };
@@ -41,6 +42,9 @@ export const glyphProps = {
   morphTo: { type: [String, Object], default: undefined },
   title: S,
   decorative: B,
+  animation: { type: [String, Boolean, Object], default: undefined },
+  triggerParent: B,
+  disabled: B,
 };
 
 const GLYPH_KEYS = Object.keys(glyphProps);
@@ -123,7 +127,23 @@ function useGlyph(props, attrs, slots, getIcon) {
   onMounted(() => {
     mounted.value = true;
   });
-  onBeforeUnmount(() => cancel());
+  // Triggers that need a script run on the trigger engine.
+  const el = ref(null);
+  let detach = () => {};
+  const engineOn = () => {
+    const g = glyph.value;
+    return !!((g.animate || g.animation) && !bool(g.disabled) && ['hover', 'focus', 'press', 'inView'].includes(trigger.value));
+  };
+  const reattach = () => {
+    detach();
+    detach = el.value && engineOn() ? attachTriggers(el.value, glyph.value, getIcon()) : () => {};
+  };
+  onMounted(reattach);
+  watch(() => [trigger.value, glyph.value.animate, JSON.stringify(glyph.value.animation ?? null), glyph.value.duration, glyph.value.delay, glyph.value.loop, glyph.value.triggerParent, glyph.value.disabled, getIcon()], () => nextTick(reattach));
+  onBeforeUnmount(() => {
+    cancel();
+    detach();
+  });
   const goal = computed(() => (target.value[0] ? morphGoal(trigger.value, { active: bool(glyph.value.active), hovered: hovered.value, toggled: toggled.value, mounted: mounted.value }) : 0));
   watch([goal, () => target.value[0] && target.value[0].icon], () => {
     cancel();
@@ -145,9 +165,10 @@ function useGlyph(props, attrs, slots, getIcon) {
     const frame = morphFrame(getIcon(), drawTarget && drawTarget.icon, p.value, { variant: g.variant, targetVariant: drawTarget && drawTarget.variant });
     const labelled = attrs['aria-label'] !== undefined || attrs['aria-labelledby'] !== undefined;
     const decorative = g.decorative !== undefined ? g.decorative : g.title ? false : !labelled;
-    const [, rootAttrs, kids] = renderIcon(frame.icon, { ...g, variant: frame.variant, morphTo: undefined, run: run.value, decorative });
-    const data = { ...rootAttrs };
-    if (trigger.value === 'click' && (g.animate || g.morphTo)) data.onClick = onClick;
+    const takeover = (g.animate || g.animation) && !bool(g.disabled) && ['hover', 'focus', 'press'].includes(trigger.value);
+    const [, rootAttrs, kids] = renderIcon(frame.icon, { ...g, variant: frame.variant, morphTo: undefined, run: run.value, decorative, class: takeover ? 'gf-js' : undefined });
+    const data = { ...rootAttrs, ref: el };
+    if (trigger.value === 'click' && (g.animate || g.animation || g.morphTo)) data.onClick = onClick;
     if (trigger.value === 'hover' && g.morphTo) {
       data.onMouseenter = () => {
         hovered.value = true;
