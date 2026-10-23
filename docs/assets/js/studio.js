@@ -4,8 +4,6 @@
 import { $, $$, download, gf, loadIcons, t, toast } from './app.js';
 import * as collection from './collection.js';
 import { initEditor, openBody } from './editor.js';
-import { initFoxify } from './foxify-ui.js';
-import { initFusion, loadSpec } from './fusion-ui.js';
 
 const ready = {};
 let data = null;
@@ -53,16 +51,19 @@ async function show(tool, payload) {
       }
     }
   }
+  // The tools load when they are first opened.
   if (tool === 'foxify' && !ready.foxify) {
-    initFoxify({ openInEditor });
     ready.foxify = true;
+    const { initFoxify } = await import('./foxify-ui.js');
+    initFoxify({ openInEditor });
   }
   if (tool === 'fusion') {
+    const fusion = await import('./fusion-ui.js');
     if (!ready.fusion) {
-      initFusion(data, { openInEditor });
       ready.fusion = true;
+      fusion.initFusion(data, { openInEditor });
     }
-    if (payload) loadSpec(payload);
+    if (payload) fusion.loadSpec(payload);
   }
   if (tool === 'brand' && !ready.brand) {
     const { initBrand } = await import('./brand.js');

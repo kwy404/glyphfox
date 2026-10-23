@@ -31,7 +31,9 @@ let dataPromise = null;
 /** Loads docs/data/icons.json once and registers every icon with the engine. */
 export function loadIcons() {
   if (!dataPromise) {
-    dataPromise = fetch(new URL('../../data/icons.json', import.meta.url))
+    // The site root, from any page (the scripts are bundled into assets/js/dist).
+    const root = location.pathname.replace(/(pt-br\/)?[^/]*$/, '');
+    dataPromise = fetch(new URL(`${root}data/icons.json`, location.origin))
       .then((r) => r.json())
       .then((d) => {
         const icons = d.icons.map(([name, body, tags, categories, solid]) => ({ name, body, tags, categories, solid }));
@@ -289,12 +291,38 @@ function setupCopyButtons() {
   });
 }
 
+// Site updates: a new service worker waits and takes over on the next
+// navigation, so a page never mixes old and new files; the next page says so.
+function setupUpdates() {
+  if (!('serviceWorker' in navigator)) return;
+  try {
+    if (sessionStorage.getItem('gf-updated')) {
+      sessionStorage.removeItem('gf-updated');
+      setTimeout(() => toast(t('sw.updated')), 600);
+    }
+  } catch {
+    // storage blocked
+  }
+  window.addEventListener('pagehide', () => {
+    navigator.serviceWorker.getRegistration().then((reg) => {
+      if (!reg || !reg.waiting) return;
+      reg.waiting.postMessage('skip-waiting');
+      try {
+        sessionStorage.setItem('gf-updated', '1');
+      } catch {
+        // storage blocked
+      }
+    });
+  });
+}
+
 export function start() {
   setupTheme();
   setupNav();
   setupReveal();
   setupCopyButtons();
   highlightAll();
+  setupUpdates();
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });

@@ -48,7 +48,9 @@ describe('studio site', () => {
         for (const pair of m[1].split(';')) expect(dict.en[pair.split(':')[1]], `${page}: ${pair}`).toBeDefined();
       }
     }
-    const js = readdirSync(join(docs, 'assets', 'js')).map((f) => read(join(docs, 'assets', 'js', f)));
+    const js = readdirSync(join(docs, 'assets', 'js'))
+      .filter((f) => f.endsWith('.js'))
+      .map((f) => read(join(docs, 'assets', 'js', f)));
     for (const src of js) {
       for (const m of src.matchAll(/\bt\('([a-zA-Z0-9.]+)'/g)) expect(dict.en[m[1]], m[1]).toBeDefined();
       for (const m of src.matchAll(/\bt\(`([a-zA-Z0-9.]+)\.\$\{/g)) expect(Object.keys(dict.en).some((k) => k.startsWith(m[1] + '.')), m[1]).toBe(true);
@@ -58,7 +60,7 @@ describe('studio site', () => {
   it('translates the Portuguese pages', () => {
     const pt = read(join(docs, 'pt-br', 'index.html'));
     expect(pt).toContain(dict['pt-BR']['home.hero.title1']);
-    expect(pt).toContain('href="../assets/site.css"');
+    expect(pt).toMatch(/href="\.\.\/assets\/site\.[0-9a-f]{8}\.css"/);
     expect(pt).toContain('hreflang="en"');
     expect(read(join(docs, 'pt-br', 'icons.html'))).toContain(`placeholder="${dict['pt-BR']['icons.search']}"`);
   });

@@ -3,9 +3,10 @@
 // header and footer of every page, inline icons, the Fenn illustrations,
 // and the Portuguese pages in docs/pt-br/ built from docs/assets/js/i18n.js.
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { buildAssets, precacheList, serviceWorker, sha256, staleAssets, withAssets } from './assets.mjs';
 
 const SITE = 'https://kwy404.github.io/glyphfox/';
 const PARTIALS = ['head', 'header', 'footer'];
@@ -165,6 +166,10 @@ export async function docsFiles(root, icons, { version }) {
   files[join(root, 'docs', 'data', 'changelog.md')] = readFileSync(join(root, 'CHANGELOG.md'), 'utf8');
   files[join(root, 'docs', 'vendor', 'glyphfox.js')] = await engineBundle(root);
   const docs = join(root, 'docs');
+  // Hashed CSS and bundled page scripts (see assets.mjs).
+  const assets = await buildAssets(root, { vendor: files[join(docs, 'vendor', 'glyphfox.js')] });
+  Object.assign(files, assets.files);
+  lastOutputs = assets.outputs;
   const api = await import(pathToFileURL(join(root, 'packages', 'glyphfox', 'dist', 'index.js')).href);
   const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js')).href + `?v=${Date.now()}`);
   if (existsSync(docs)) {
@@ -172,17 +177,31 @@ export async function docsFiles(root, icons, { version }) {
       if (!f.endsWith('.html')) continue;
       const file = join(docs, f);
       if (f === '404.html') {
-        files[file] = withArt(root, readFileSync(file, 'utf8'));
+        files[file] = withAssets(withArt(root, readFileSync(file, 'utf8')), assets);
         continue;
       }
-      let html = withChangelog(root, withArt(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api)));
+      let html = withAssets(withChangelog(root, withArt(root, withGlyphs(withPartials(root, readFileSync(file, 'utf8'), f), api))), assets);
       html = withAlternates(html, f, 'en');
       files[file] = html;
       if (LOCALIZED.includes(f)) files[join(docs, 'pt-br', f)] = localize(html, f, dict['pt-BR']);
     }
   }
+  // The service worker precaches the pages, the hashed assets and the data;
+  // the manifest keeps the SHA-256 of every precached file.
+  const precache = precacheList(docs, assets.outputs, files);
+  const manifest = {};
+  for (const p of precache) {
+    if (p === './') continue;
+    const abs = join(docs, p);
+    manifest[p] = sha256(files[abs] !== undefined ? files[abs] : readFileSync(abs));
+  }
+  const swVersion = sha256(JSON.stringify(manifest)).slice(0, 12);
+  files[join(docs, 'assets', 'manifest.json')] = JSON.stringify({ version: swVersion, files: manifest }, null, 1) + '\n';
+  files[join(docs, 'sw.js')] = serviceWorker(precache, swVersion);
   return files;
 }
+
+let lastOutputs = [];
 
 /** Writes (or with check: compares) the docs files. Returns the changed paths. */
 export async function buildDocsData(root, icons, { version, check }) {
@@ -196,6 +215,11 @@ export async function buildDocsData(root, icons, { version, check }) {
       mkdirSync(dirname(file), { recursive: true });
       writeFileSync(file, text);
     }
+  }
+  // Hashed files of earlier builds that no page references any more.
+  for (const stale of staleAssets(join(root, 'docs'), lastOutputs)) {
+    changed.push(relative(root, stale).split('\\').join('/'));
+    if (!check) rmSync(stale);
   }
   return changed;
 }
