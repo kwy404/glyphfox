@@ -665,7 +665,7 @@
     font-size: 13px;
   }
   .editor {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .ed-tools {
     position: static;
@@ -676,7 +676,7 @@
   .tool-fusion,
   .tool-brand,
   .tool-three {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .fox-compare {
     grid-template-columns: 1fr 1fr;

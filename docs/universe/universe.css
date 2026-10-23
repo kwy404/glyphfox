@@ -473,6 +473,8 @@
 }
 .uv-credits {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  overflow-wrap: anywhere;
   gap: 6px;
   margin: 0;
   padding-left: 18px;
@@ -522,5 +524,11 @@
   }
   .uv-grid {
     height: 70vh;
+  }
+}
+
+@media (max-width: 560px) {
+  .uv-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

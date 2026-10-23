@@ -408,7 +408,7 @@
     contain-intrinsic-size: 84px 96px;
   }
   .sketch-panel {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .sketch-canvas {
     width: 100%;

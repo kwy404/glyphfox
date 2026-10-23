@@ -113,7 +113,7 @@
     min-height: 0;
   }
   .hero-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .hero-stage {
     order: -1;
@@ -158,7 +158,7 @@
   }
   .scene-grid,
   .scene-grid.flip {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
   .scene-grid.flip > :first-child {
@@ -268,9 +268,13 @@
 }
 @media (max-width: 900px) {
   .play {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'controls' 'grid' 'code';
     padding: 18px;
+  }
+  .play-controls,
+  .play-controls > * {
+    min-width: 0;
   }
   .play-grid {
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
@@ -434,6 +438,7 @@
 }
 .mp-controls {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   align-content: start;
 }
@@ -448,7 +453,7 @@
 }
 @media (max-width: 900px) {
   .mp {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 18px;
   }
   .mp-preview .big svg {
@@ -580,7 +585,7 @@
 }
 @media (max-width: 560px) {
   .studio-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -600,7 +605,7 @@
 }
 @media (max-width: 900px) {
   .fw-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
