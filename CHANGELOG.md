@@ -8,6 +8,7 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 
 - 165 more base icons for health, accessibility, faces, gestures, education, science, transport, buildings, the household, tools, clothing, weather, currencies, files, folders, devices and arrows, each with categories, tags and a designed animation.
 - 22 display icons on the 48 grid and 19 isometric icons. glyphfox now has 993 icons: 770 base, 90 brand, 43 animated, 60 display and 30 isometric.
+- A set picker on the Icons page: choose glyphfox or any of the 245 open license sets, each with its count, license and preview, search one set or all of them, and give set icons weight, corners, color, rotation and motion. The URL keeps the chosen set.
 
 ## [1.1.0] - 2026-10-23
 

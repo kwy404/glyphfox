@@ -8,6 +8,7 @@ Tous les changements notables de glyphfox sont consignés ici. Le format suit [K
 
 - 165 icônes de base en plus pour la santé, l'accessibilité, les visages, les gestes, l'éducation, la science, les transports, les bâtiments, la maison, les outils, les vêtements, la météo, les devises, les fichiers, les dossiers, les appareils et les flèches, chacune avec ses catégories, ses tags et une animation dessinée.
 - 22 icônes d'affichage sur la grille de 48 et 19 icônes isométriques. glyphfox compte maintenant 993 icônes : 770 de base, 90 de marques, 43 animées, 60 d'affichage et 30 isométriques.
+- Un sélecteur de jeux sur la page Icônes : choisissez glyphfox ou l'un des 245 jeux sous licence ouverte, chacun avec son nombre d'icônes, sa licence et un aperçu, cherchez dans un jeu ou dans tous et donnez à leurs icônes l'épaisseur, les coins, la couleur, la rotation et l'animation. L'URL garde le jeu choisi.
 
 ## [1.1.0] - 2026-10-23
 
