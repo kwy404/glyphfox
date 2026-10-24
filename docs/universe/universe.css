@@ -591,6 +591,17 @@
 .uv-app .uv-grid {
   height: calc(100vh - var(--sticky) - 103px);
 }
+/* One column on tablets and phones: the side and detail panels are static, not viewport high. */
+@media (max-width: 1180px) {
+  .uv-app .uv-detail {
+    max-height: none;
+  }
+}
+@media (max-width: 760px) {
+  .uv-app .uv-side {
+    height: auto;
+  }
+}
 
 /* Sets gallery */
 
@@ -925,6 +936,9 @@
 @media (max-width: 640px) {
   .gx-controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .gx-controls .field:has(.seg) {
+    grid-column: 1 / -1;
   }
   .gx-grid {
     grid-template-columns: minmax(0, 1fr);

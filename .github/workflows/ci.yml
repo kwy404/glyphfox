@@ -63,3 +63,34 @@ jobs:
           node-version: 20
       - name: Node 20 loads the package
         run: node scripts/smoke-package.mjs
+
+  e2e:
+    name: Browser smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Playwright version
+        id: playwright
+        run: echo "version=$(node -p "require('playwright-core/package.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Cache the browser
+        id: browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}-chromium-shell
+      - name: Install Chromium
+        if: steps.browser.outputs.cache-hit != 'true'
+        run: npx playwright-core install --with-deps --only-shell chromium
+      - name: Install the system libraries of Chromium
+        if: steps.browser.outputs.cache-hit == 'true'
+        run: npx playwright-core install-deps chromium
+      - name: Pages in five languages, on desktop and phone
+        run: npm run e2e
