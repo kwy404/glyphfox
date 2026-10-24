@@ -200,7 +200,7 @@ Many icons carry their own animation in their JSON sidecar, a frame timeline per
 
 Any ancestor with the `gf-trigger` class plays the icons inside it (`.gf-trigger:hover`), and `triggerParent` makes the closest link or button do the same. A disabled parent (`:disabled`, `aria-disabled="true"`) or the `disabled` prop stops every animation, and `prefers-reduced-motion: reduce` keeps icons still.
 
-The CSS inside the SVG needs no script. In the components and the web component, `attachTriggers(svg, props, icon)` (exported for custom renderers) runs `inView` and takes `hover`, `focus` and `press` over on the Web Animations API, so leaving plays the animation back from where it is and loops finish their round.
+The CSS inside the SVG needs no script. In the React, Vue, Svelte, Solid, Preact and Lit components and in the web component, `attachTriggers(svg, props, icon)` (exported for custom renderers) runs `inView` and takes `hover`, `focus` and `press` over on the Web Animations API, so leaving plays the animation back from where it is and loops finish their round.
 
 ## Icon sources
 

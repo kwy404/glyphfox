@@ -11,6 +11,7 @@ import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
 import { nodesToString } from '../core/nodes.js';
 import { PROPS, bool, renderIcon, strokeWidth } from '../core/render.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
+import { attachTriggers } from '../core/player.js';
 
 export { registerIcons };
 
@@ -66,6 +67,8 @@ function Glyph(props, getIcon, getVariant) {
   });
   const sw = createMemo(() => strokeWidth(glyph()));
   const trigger = () => glyph().trigger || 'mount';
+  const animated = () => !!(glyph().animate || glyph().animation) && !bool(glyph().disabled);
+  const takeover = () => animated() && ['hover', 'focus', 'press'].includes(trigger());
   const target = resolvedList(
     () => [glyph().morphTo],
     () => sw(),
@@ -97,9 +100,30 @@ function Glyph(props, getIcon, getVariant) {
     const frame = morphFrame(getIcon(), drawTarget && drawTarget.icon, p(), { variant, targetVariant: drawTarget && drawTarget.variant });
     const labelled = rest['aria-label'] !== undefined || rest['aria-labelledby'] !== undefined;
     const decorative = g.decorative !== undefined ? g.decorative : g.title ? false : !labelled;
-    const cls = [own.class, own.className].filter(Boolean).join(' ') || undefined;
+    const cls = [own.class, own.className, takeover() ? 'gf-js' : ''].filter(Boolean).join(' ') || undefined;
     const [, attrs, kids] = renderIcon(frame.icon, { ...g, variant: frame.variant, morphTo: undefined, class: cls, run: run(), decorative });
     return { attrs, inner: nodesToString(kids) };
+  });
+
+  // Triggers that need a script run on the trigger engine, as in React;
+  // hover, focus and press take the animation over from the CSS (gf-js).
+  // Effects only run in the browser, after the <svg> exists.
+  let svg = null;
+  const setRef = (el) => {
+    svg = el;
+    if (typeof rest.ref === 'function') rest.ref(el);
+  };
+  const engineKey = createMemo(() => {
+    const g = glyph();
+    if (!animated() || !(takeover() || trigger() === 'inView')) return '';
+    return JSON.stringify([trigger(), g.animate, g.animation, g.duration, g.delay, g.loop, g.triggerParent]);
+  });
+  createEffect(() => {
+    const key = engineKey();
+    const icon = getIcon();
+    if (!key || !svg) return;
+    const stop = untrack(() => attachTriggers(svg, glyph(), icon));
+    onCleanup(stop);
   });
 
   const onClick = (e) => {
@@ -122,7 +146,7 @@ function Glyph(props, getIcon, getVariant) {
     Dynamic,
     mergeProps(rest, () => {
       const v = view();
-      const out = { ...v.attrs, component: 'svg', innerHTML: v.inner, onClick, onMouseEnter, onMouseLeave };
+      const out = { ...v.attrs, component: 'svg', innerHTML: v.inner, onClick, onMouseEnter, onMouseLeave, ref: setRef };
       if (own.style !== undefined) out.style = own.style;
       return out;
     }),

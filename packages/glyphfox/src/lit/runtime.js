@@ -11,6 +11,7 @@ import { morphFrame, morphGoal, tween } from '../core/controller.js';
 import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
 import { bool, renderToString, strokeWidth } from '../core/render.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
+import { attachTriggers } from '../core/player.js';
 
 export { registerIcons };
 
@@ -34,6 +35,16 @@ for (const [prop, attr] of Object.entries(ATTRIBUTES)) {
     attribute: attr,
     converter: { fromAttribute: (value) => (value === null ? undefined : propsFromAttributes((a) => (a === attr ? value : null))[prop]) },
   };
+}
+
+const NOOP = () => {};
+const TAKEOVER = ['hover', 'focus', 'press'];
+
+/** True when the trigger engine plays the icon (inView, and hover, focus and press taking over from the CSS). */
+function engineMode(p) {
+  if (!(p.animate || p.animation) || bool(p.disabled)) return null;
+  const trigger = p.trigger || 'mount';
+  return TAKEOVER.includes(trigger) ? 'takeover' : trigger === 'inView' ? 'view' : null;
 }
 
 const raf = (cb) => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(cb) : setTimeout(cb, 16));
@@ -71,6 +82,9 @@ export class GlyphElement extends LitElement {
     this._mounted = false;
     this._last = null;
     this._cancel = () => {};
+    this._svg = null;
+    this._engineKey = '';
+    this._stopEngine = NOOP;
     this._onClick = () => {
       const p = this.glyphProps();
       if ((p.trigger || 'mount') === 'click' && (p.animate || p.animation || p.morphTo)) {
@@ -94,6 +108,7 @@ export class GlyphElement extends LitElement {
     this.addEventListener('click', this._onClick);
     this.addEventListener('mouseenter', this._onEnter);
     this.addEventListener('mouseleave', this._onLeave);
+    if (this.hasUpdated) this.wireEngine();
   }
 
   disconnectedCallback() {
@@ -102,6 +117,24 @@ export class GlyphElement extends LitElement {
     this.removeEventListener('mouseenter', this._onEnter);
     this.removeEventListener('mouseleave', this._onLeave);
     this._cancel();
+    this._stopEngine();
+    this._stopEngine = NOOP;
+    this._svg = null;
+    this._engineKey = '';
+  }
+
+  /** Attaches the trigger engine to the rendered <svg> (again when it or the trigger props change). */
+  wireEngine() {
+    const p = this.glyphProps();
+    const svg = engineMode(p) && this.renderRoot ? this.renderRoot.querySelector('svg') : null;
+    const res = svg ? this.base(strokeWidth(p)) : null;
+    const icon = res ? res.icon : null;
+    const key = svg ? JSON.stringify([p.trigger, p.animate, p.animation, p.duration, p.delay, p.loop, p.triggerParent, icon && icon.name]) : '';
+    if (svg === this._svg && key === this._engineKey) return;
+    this._stopEngine();
+    this._svg = svg;
+    this._engineKey = key;
+    this._stopEngine = svg ? attachTriggers(svg, p, icon) : NOOP;
   }
 
   /** The shared props currently set on the element. */
@@ -144,6 +177,7 @@ export class GlyphElement extends LitElement {
   }
 
   updated() {
+    this.wireEngine();
     const p = this.glyphProps();
     const target = p.morphTo ? this.resolve(p.morphTo, strokeWidth(p)) : null;
     const goal = target ? morphGoal(p.trigger || 'mount', { active: bool(p.active), hovered: this._hovered, toggled: this._toggled, mounted: this._mounted }) : 0;
@@ -170,7 +204,8 @@ export class GlyphElement extends LitElement {
     const variant = p.variant ?? (res && res.variant);
     const frame = morphFrame(res ? res.icon : EMPTY, drawTarget && drawTarget.icon, this._p, { variant, targetVariant: drawTarget && drawTarget.variant });
     const decorative = p.decorative !== undefined ? p.decorative : !p.title;
-    return unsafeHTML(renderToString(frame.icon, { ...p, variant: frame.variant, morphTo: undefined, run: this._run, decorative }));
+    const cls = engineMode(p) === 'takeover' ? 'gf-js' : undefined;
+    return unsafeHTML(renderToString(frame.icon, { ...p, variant: frame.variant, morphTo: undefined, run: this._run, decorative, class: cls }));
   }
 }
 
