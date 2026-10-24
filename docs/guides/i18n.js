@@ -9,6 +9,7 @@
 // page is translated, here or in the site strings.
 
 import es from './i18n/es.js';
+import fr from './i18n/fr.js';
 import ptBR from './i18n/pt-br.js';
 
 export const dict = {
@@ -132,4 +133,5 @@ export const dict = {
   },
   'pt-BR': ptBR,
   es,
+  fr,
 };

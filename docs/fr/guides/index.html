@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="seo.guides.title">Guides des icônes pour React, Vue, Svelte et plus : glyphfox</title>
+<meta name="description" content="Guides pas à pas des icônes glyphfox avec React, Next.js, Vue, Nuxt, Angular, Svelte, Astro et HTML, plus Tailwind, l'animation, l'accessibilité et le SSR." data-i18n-attr="content:seo.guides.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/fr/guides/">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/">
+<meta property="og:title" content="Guides des icônes pour React, Vue, Svelte et plus : glyphfox">
+<meta property="og:description" content="Guides pas à pas des icônes glyphfox avec React, Next.js, Vue, Nuxt, Angular, Svelte, Astro et HTML, plus Tailwind, l'animation, l'accessibilité et le SSR.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/fr/guides/">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:title" content="Guides des icônes pour React, Vue, Svelte et plus : glyphfox">
+<meta name="twitter:description" content="Guides pas à pas des icônes glyphfox avec React, Next.js, Vue, Nuxt, Angular, Svelte, Astro et HTML, plus Tailwind, l'animation, l'accessibilité et le SSR.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta name="twitter:image:alt" content="glyphfox: icons that move, morph and fuse">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://kwy404.github.io/glyphfox/fr/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/fr/guides/"}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copié dans le presse-papiers" data-theme-light="Passer au thème clair" data-theme-dark="Passer au thème sombre">
+<a class="skip" href="#main" data-i18n="nav.skip">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icônes</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Nouveautés</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" aria-current="page" data-i18n="seo.allGuides">Tous les guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit et web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML et CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Thèmes</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Icônes animées</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibilité</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Rendu côté serveur</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Fil d'Ariane" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Accueil</a></li><li aria-current="page" data-i18n="seo.crumb.guides">Guides</li></ol></nav>
+<header class="docs-hero">
+<h1 class="title" data-i18n="seo.guides.h1">Guides</h1>
+<p class="lead" data-i18n="seo.guides.lead">Installez glyphfox dans votre stack, découvrez les props qui comptent dans ce contexte et évitez les problèmes que d'autres ont déjà rencontrés. Tous les exemples fonctionnent avec les paquets actuels.</p>
+</header>
+<section id="frameworks">
+<h2 data-i18n="seo.group.frameworks">Frameworks</h2>
+<p data-i18n="seo.guides.frameworks">Un guide par framework, de l'installation au rendu côté serveur.</p>
+<ul class="guide-cards"><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">Icônes React</strong><span data-i18n="guide.react.description">Icônes React avec glyphfox : installation, composants SVG compatibles avec le tree shaking, props, icônes par nom, modificateurs, Fusion, morph, refs et TypeScript.</span></a></li><li><a href="nextjs.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-route" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg><strong data-i18n="guide.nextjs.h1">Icônes dans Next.js</strong><span data-i18n="guide.nextjs.description">Icônes Next.js avec glyphfox : frontière client pour l'App Router, SVG sans JavaScript dans les Server Components, Pages Router et icônes par nom côté serveur.</span></a></li><li><a href="vue.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-layers" aria-hidden="true"><path d="M12 2.5l9 5-9 5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg><strong data-i18n="guide.vue.h1">Icônes Vue 3</strong><span data-i18n="guide.vue.description">Icônes Vue 3 avec glyphfox : installation, composants compatibles avec le tree shaking, props dans les templates, morph via useMorph, fusion, icônes vides à éviter.</span></a></li><li><a href="nuxt.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-mountain" aria-hidden="true"><path d="M2 20L9 6l5.5 9.5L17 11l5 9Z"/></svg><strong data-i18n="guide.nuxt.h1">Icônes dans Nuxt</strong><span data-i18n="guide.nuxt.description">Icônes Nuxt en SSR avec glyphfox : composants importés, noms enregistrés dans un plugin, wrapper auto-importé, morphs synchronisés et aucune icône vide.</span></a></li><li><a href="angular.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-shield" aria-hidden="true"><path d="M12 2l8 3v6.5c0 4.8-3.3 8.6-8 10.5-4.7-1.9-8-5.7-8-10.5V5Z"/></svg><strong data-i18n="guide.angular.h1">Icônes Angular</strong><span data-i18n="guide.angular.description">Icônes Angular avec glyphfox et le composant standalone gf-icon : provideGlyphFox, inputs, fusion, modificateurs, routes lazy, SSR et applications zoneless.</span></a></li><li><a href="svelte.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-flame" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-4-2.5-6.5-4.5-9-.5 2.5-1.5 4-3.5 5 .3-3-1-6-3.5-8.5C7.5 6.5 5 9.5 5 15a7 7 0 0 0 7 7Z"/></svg><strong data-i18n="guide.svelte.h1">Icônes Svelte 5</strong><span data-i18n="guide.svelte.description">Icônes Svelte 5 avec glyphfox : installation, import des composants, props avec les runes, morph avec MorphIcon et morphStore, fusion d'icônes et bundles légers.</span></a></li><li><a href="sveltekit.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-rocket" aria-hidden="true"><path d="M12 2c3 2.5 4.5 6 4.5 10v5h-9v-5c0-4 1.5-7.5 4.5-10Z"/><path d="M11 9.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7.5 13L4.5 16v4l3-2.5"/><path d="M16.5 13l3 3v4l-3-2.5"/><path d="M10 20.5l2 1.5 2-1.5"/></svg><strong data-i18n="guide.sveltekit.h1">Icônes dans SvelteKit</strong><span data-i18n="guide.sveltekit.description">Icônes SvelteKit avec glyphfox en SSR et prérendu : mise en place, layout racine pour les noms, endpoints SVG, adapter-static, hydratation et pièges courants.</span></a></li><li><a href="solid.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cube" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7Z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v10"/></svg><strong data-i18n="guide.solid.h1">Icônes dans SolidJS</strong><span data-i18n="guide.solid.description">Icônes SolidJS et SolidStart : deux options glyphfox dès aujourd'hui, l'élément glyph-fox avec attr: ou un petit composant sur le core compatible avec le tree shaking.</span></a></li><li><a href="preact.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkle" aria-hidden="true"><path d="M12 2Q13.2 10.8 22 12Q13.2 13.2 12 22Q10.8 13.2 2 12Q10.8 10.8 12 2Z"/></svg><strong data-i18n="guide.preact.h1">Icônes Preact</strong><span data-i18n="guide.preact.description">Icônes Preact avec glyphfox : les composants React via preact/compat avec Vite, webpack, esbuild et TypeScript, ou l'élément glyph-fox sans compat.</span></a></li><li><a href="qwik.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-zap" aria-hidden="true"><path d="M13.5 2L4 14h7l-1.5 8L20 10h-7Z"/></svg><strong data-i18n="guide.qwik.h1">Icônes dans Qwik</strong><span data-i18n="guide.qwik.description">Icônes Qwik rendues côté serveur avec glyphfox : aucun JavaScript, rien à reprendre côté client, et l'élément glyph-fox seulement là où une icône doit réagir.</span></a></li><li><a href="astro.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-planet" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M2.6 15.42A10 3.5-20 0 1 3.12 13.49"/><path d="M19.76 7.44A10 3.5-20 0 1 21.4 8.58"/><path d="M21.4 8.58A10 3.5-20 0 1 2.6 15.42"/></svg><strong data-i18n="guide.astro.h1">Icônes dans Astro</strong><span data-i18n="guide.astro.description">Icônes Astro avec glyphfox : rendu au build sans JavaScript côté client, composant Icon.astro, îles ou élément personnalisé pour l'animation.</span></a></li><li><a href="react-native.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-smartphone" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg><strong data-i18n="guide.react-native.h1">Icônes dans React Native</strong><span data-i18n="guide.react-native.description">Icônes glyphfox dans React Native avec react-native-svg : SvgXml, imports par icône pour Metro, couleur, épaisseur, fusions, frames de morph et accessibilité.</span></a></li><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Icônes dans Lit et les web components</strong><span data-i18n="guide.web-components.description">Utilisez l'élément glyph-fox dans Lit et les web components : enregistrez toutes les icônes ou une partie, liez les attributs, stylisez-le, restez accessible.</span></a></li><li><a href="html-cdn.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><strong data-i18n="guide.html-cdn.h1">Icônes en HTML pur depuis un CDN</strong><span data-i18n="guide.html-cdn.description">Ajoutez glyphfox à toute page HTML via une balise script : élément glyph-fox, placeholders data-glyph, API globale, version figée, quand créer un sous-ensemble.</span></a></li></ul>
+</section>
+<section id="topics">
+<h2 data-i18n="seo.group.topics">Thèmes</h2>
+<p data-i18n="seo.guides.topics">Des guides valables pour tous les frameworks.</p>
+<ul class="guide-cards"><li><a href="tailwind.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-wind" aria-hidden="true"><path d="M3 10h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg><strong data-i18n="guide.tailwind.h1">Icônes Tailwind CSS</strong><span data-i18n="guide.tailwind.description">Icônes Tailwind CSS v3 et v4 avec glyphfox : installation, classes gf, styles et épaisseurs après la barre oblique, badges, fusions, animations et options.</span></a></li><li><a href="animated-icons.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><strong data-i18n="guide.animated-icons.h1">Icônes animées</strong><span data-i18n="guide.animated-icons.description">Icônes animées avec glyphfox : préréglages draw, pop, spin et shake, déclencheurs hover, click et state, morphs entre icônes, même en CSS pur, et mouvement réduit.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Icônes accessibles</strong><span data-i18n="guide.accessibility.description">Rendez vos icônes glyphfox accessibles : décoratives par défaut, titres et libellés, boutons sans texte, icônes d'état, contraste, mouvement réduit et RTL.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking des icônes</strong><span data-i18n="guide.tree-shaking.description">Tree shaking des icônes glyphfox (Vite, webpack, Rollup, esbuild) : tailles de bundle mesurées, ce qui l'empêche, icônes chargées par nom, sous-ensembles fixes.</span></a></li><li><a href="svg-sprite.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-grid" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><strong data-i18n="guide.svg-sprite.h1">Sprites SVG</strong><span data-i18n="guide.svg-sprite.description">Utilisez les icônes glyphfox en sprite SVG : id de symbole, références use, règle de même origine, sprite inline, sous-ensembles CLI, limites du CSS et cache.</span></a></li><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Rendu côté serveur</strong><span data-i18n="guide.ssr.description">Rendez les icônes SVG glyphfox côté serveur : sortie par paquet, enregistrement des icônes par nom, chaînes toSvg, hydratation, animations et web component.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Des icônes originales sur une grille de 24 qui changent d'épaisseur, se transforment, fusionnent et prennent vie. Libres et open source sous licence MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produit</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icônes</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Toutes les icônes par catégorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marque</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Développeurs</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Nouveautés</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projet</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licence MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Créé par</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn le renard est dessiné sur la même grille que les icônes.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>
