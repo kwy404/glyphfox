@@ -191,7 +191,7 @@ export function createGallery({ catalog, onOpen }) {
   function setCompare(on) {
     compare = on;
     $('[data-gx-compare]').setAttribute('aria-pressed', String(on));
-    for (const l of $('.gx-pick', grid)) l.hidden = !on;
+    for (const l of $$('.gx-pick', grid)) l.hidden = !on;
     for (const a of $$('[data-view-link]')) a.setAttribute('aria-current', String(a.dataset.viewLink === (on ? 'compare' : 'gallery')));
     renderCompare();
   }

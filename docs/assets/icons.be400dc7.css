@@ -108,6 +108,7 @@
 }
 .cats .set-item {
   display: grid;
+  justify-content: stretch;
   height: auto;
   text-transform: none;
   gap: 4px;
@@ -136,6 +137,7 @@
 .set-item-top {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 8px;
   font-size: 13.5px;
   font-weight: 600;

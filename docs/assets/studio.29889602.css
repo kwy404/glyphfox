@@ -195,6 +195,7 @@
 }
 .ed-stage-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
@@ -202,6 +203,7 @@
 }
 .ed-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 .ed-canvas {
