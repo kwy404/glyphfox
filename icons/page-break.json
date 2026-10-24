@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "text",
+    "files"
+  ],
+  "tags": [
+    "separator",
+    "divider",
+    "section break",
+    "horizontal rule",
+    "split"
+  ],
+  "animation": {
+    "name": "apart",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "translate(0px, -1px)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "translate(0px, 0.15px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "translate(0px, 1px)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "translate(0px, -0.15px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
+}

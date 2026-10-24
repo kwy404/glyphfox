@@ -2,6 +2,12 @@
 
 Tous les changements notables de glyphfox sont consignés ici. Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet applique la [gestion sémantique de version](https://semver.org/lang/fr/).
 
+## [Non publié]
+
+### Ajouts
+
+- 41 nouvelles icônes de base pour la mise en forme du texte, les graphiques et les mathématiques, chacune avec ses catégories, ses mots clés et une animation conçue pour elle : le jeu compte désormais 605 icônes de base, 43 animées, 38 grand format et 11 isométriques.
+
 ## [1.0.0] - 2026-10-23
 
 ### Ajouts

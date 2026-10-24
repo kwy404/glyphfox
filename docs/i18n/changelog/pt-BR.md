@@ -2,6 +2,12 @@
 
 Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [Não lançado]
+
+### Adicionado
+
+- 41 novos ícones base para formatação de texto, gráficos e matemática, cada um com categorias, tags e uma animação própria: o conjunto agora tem 605 ícones base, 43 animados, 38 de destaque e 11 isométricos.
+
 ## [1.0.0] - 2026-10-23
 
 ### Adicionado

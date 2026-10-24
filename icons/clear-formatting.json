@@ -1,0 +1,35 @@
+{
+  "categories": [
+    "text"
+  ],
+  "tags": [
+    "remove format",
+    "plain text",
+    "reset style",
+    "clean"
+  ],
+  "animation": {
+    "name": "shake",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 2, "props": { "transform": "translate(-1px, 0px)" } },
+      { "at": 0.27, "element": 2, "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.42, "element": 2, "props": { "transform": "translate(-0.7px, 0px)" } },
+      { "at": 0.57, "element": 2, "props": { "transform": "translate(0.5px, 0px)" } },
+      { "at": 0.72, "element": 2, "props": { "transform": "translate(-0.25px, 0px)" } },
+      { "at": 0.86, "element": 2, "props": { "transform": "translate(0.1px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": 3, "props": { "transform": "translate(-1px, 0px)" } },
+      { "at": 0.27, "element": 3, "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.42, "element": 3, "props": { "transform": "translate(-0.7px, 0px)" } },
+      { "at": 0.57, "element": 3, "props": { "transform": "translate(0.5px, 0px)" } },
+      { "at": 0.72, "element": 3, "props": { "transform": "translate(-0.25px, 0px)" } },
+      { "at": 0.86, "element": 3, "props": { "transform": "translate(0.1px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
+}
