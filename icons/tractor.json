@@ -1,0 +1,27 @@
+{
+  "categories": [
+    "travel",
+    "nature"
+  ],
+  "tags": [
+    "farm",
+    "agriculture",
+    "vehicle",
+    "field",
+    "machine"
+  ],
+  "animation": {
+    "name": "drive",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.2, "element": "all", "props": { "transform": "translate(0px, -0.75px)" } },
+      { "at": 0.4, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.6, "element": "all", "props": { "transform": "translate(0px, -0.4px)" } },
+      { "at": 0.8, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
+}

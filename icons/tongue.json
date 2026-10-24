@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "people"
+  ],
+  "tags": [
+    "silly",
+    "playful",
+    "face",
+    "emotion",
+    "tease"
+  ],
+  "animation": {
+    "name": "wiggle",
+    "duration": 700,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 12],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": "all", "props": { "transform": "rotate(-8deg)" } },
+      { "at": 0.27, "element": "all", "props": { "transform": "rotate(8deg)" } },
+      { "at": 0.42, "element": "all", "props": { "transform": "rotate(-5.6deg)" } },
+      { "at": 0.57, "element": "all", "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.72, "element": "all", "props": { "transform": "rotate(-2deg)" } },
+      { "at": 0.86, "element": "all", "props": { "transform": "rotate(0.8deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}

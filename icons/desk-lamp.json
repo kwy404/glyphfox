@@ -1,0 +1,27 @@
+{
+  "categories": [
+    "maps",
+    "symbols"
+  ],
+  "tags": [
+    "lamp",
+    "light",
+    "study",
+    "desk",
+    "reading"
+  ],
+  "animation": {
+    "name": "flash",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 3, "props": { "opacity": 0.2 } },
+      { "at": 0.3, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 3, "props": { "opacity": 0.2 } },
+      { "at": 0.6, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } }
+    ]
+  }
+}

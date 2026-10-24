@@ -1,0 +1,34 @@
+{
+  "categories": [
+    "files",
+    "people"
+  ],
+  "tags": [
+    "diploma",
+    "award",
+    "education",
+    "credential",
+    "achievement"
+  ],
+  "animation": {
+    "name": "beat",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [17, 15],
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "scale(1)" } },
+      { "at": 0.15, "element": 3, "props": { "transform": "scale(1.15)" } },
+      { "at": 0.3, "element": 3, "props": { "transform": "scale(1)" } },
+      { "at": 0.45, "element": 3, "props": { "transform": "scale(1.09)" } },
+      { "at": 0.7, "element": 3, "props": { "transform": "scale(1)" } },
+      { "at": 1, "element": 3, "props": { "transform": "scale(1)" } },
+      { "at": 0, "element": 4, "props": { "transform": "scale(1)" } },
+      { "at": 0.15, "element": 4, "props": { "transform": "scale(1.15)" } },
+      { "at": 0.3, "element": 4, "props": { "transform": "scale(1)" } },
+      { "at": 0.45, "element": 4, "props": { "transform": "scale(1.09)" } },
+      { "at": 0.7, "element": 4, "props": { "transform": "scale(1)" } },
+      { "at": 1, "element": 4, "props": { "transform": "scale(1)" } }
+    ]
+  }
+}

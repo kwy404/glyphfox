@@ -1,0 +1,25 @@
+{
+  "categories": [
+    "people",
+    "interface"
+  ],
+  "tags": [
+    "palm",
+    "stop",
+    "halt",
+    "gesture",
+    "raise hand"
+  ],
+  "animation": {
+    "name": "pop",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "scale(0.94)" } },
+      { "at": 0.6, "element": "all", "props": { "transform": "scale(1.06)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)" } }
+    ]
+  }
+}

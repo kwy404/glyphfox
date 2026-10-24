@@ -1,0 +1,30 @@
+{
+  "categories": [
+    "people",
+    "communication"
+  ],
+  "tags": [
+    "hello",
+    "goodbye",
+    "greeting",
+    "gesture",
+    "hi"
+  ],
+  "animation": {
+    "name": "wiggle",
+    "duration": 700,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [10, 21],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 0, "props": { "transform": "rotate(-8deg)" } },
+      { "at": 0.27, "element": 0, "props": { "transform": "rotate(8deg)" } },
+      { "at": 0.42, "element": 0, "props": { "transform": "rotate(-5.6deg)" } },
+      { "at": 0.57, "element": 0, "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.72, "element": 0, "props": { "transform": "rotate(-2deg)" } },
+      { "at": 0.86, "element": 0, "props": { "transform": "rotate(0.8deg)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}

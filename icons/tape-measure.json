@@ -1,0 +1,28 @@
+{
+  "categories": [
+    "interface"
+  ],
+  "tags": [
+    "measure",
+    "length",
+    "ruler",
+    "tool",
+    "size"
+  ],
+  "animation": {
+    "name": "extend",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.4, "element": 2, "props": { "transform": "translate(0.5px, 0px)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "translate(0.5px, 0px)" }, "easing": "ease-in-out" },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.4, "element": 3, "props": { "transform": "translate(0.5px, 0px)" } },
+      { "at": 0.6, "element": 3, "props": { "transform": "translate(0.5px, 0px)" }, "easing": "ease-in-out" },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
+}

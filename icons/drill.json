@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "interface",
+    "devices"
+  ],
+  "tags": [
+    "power drill",
+    "tool",
+    "construction",
+    "diy",
+    "screw"
+  ],
+  "animation": {
+    "name": "shake",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": "all", "props": { "transform": "translate(-0.6px, 0px)" } },
+      { "at": 0.27, "element": "all", "props": { "transform": "translate(0.6px, 0px)" } },
+      { "at": 0.42, "element": "all", "props": { "transform": "translate(-0.42px, 0px)" } },
+      { "at": 0.57, "element": "all", "props": { "transform": "translate(0.3px, 0px)" } },
+      { "at": 0.72, "element": "all", "props": { "transform": "translate(-0.15px, 0px)" } },
+      { "at": 0.86, "element": "all", "props": { "transform": "translate(0.06px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
+}

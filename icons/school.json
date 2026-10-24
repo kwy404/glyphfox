@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "maps",
+    "people"
+  ],
+  "tags": [
+    "education",
+    "building",
+    "class",
+    "learn",
+    "academy"
+  ],
+  "animation": {
+    "name": "swing",
+    "duration": 1100,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 5],
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": 3, "props": { "transform": "rotate(10deg)" } },
+      { "at": 0.32, "element": 3, "props": { "transform": "rotate(-7.5deg)" } },
+      { "at": 0.5, "element": 3, "props": { "transform": "rotate(4.5deg)" } },
+      { "at": 0.68, "element": 3, "props": { "transform": "rotate(-2.5deg)" } },
+      { "at": 0.84, "element": 3, "props": { "transform": "rotate(1deg)" } },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}
