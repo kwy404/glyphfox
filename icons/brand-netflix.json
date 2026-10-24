@@ -1,0 +1,23 @@
+{
+  "categories": [
+    "social"
+  ],
+  "tags": [
+    "netflix",
+    "social",
+    "logo",
+    "brand"
+  ],
+  "animation": {
+    "name": "draw",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.1, "element": 0, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.64, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 0, "props": { "strokeDashoffset": 0 } }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 {
- "version": "7203bbb9421b",
+ "version": "b4e8686b6fa6",
  "files": {
   "index.html": "9a483fd8de1be9f82c9cac0570f61af2bb8fd57351498eed4720cf6d3dbcf90d",
   "icons.html": "8b052e0c099bccf2ca8c0d5d5105aa40b5ac9f5a9a1ea53bc441c034bfa09e9c",
@@ -26,7 +26,7 @@
   "de/studio.html": "f7fdd0c435877a37447e02fdca32a5ce467ad5cba4f53e36ea8bff99233ee100",
   "de/docs.html": "dd393adf5ead8086ee928ea37d8ec43410e8a37c8c7002b04bf8b6b613993882",
   "de/changelog.html": "9d9c2794dd794e44c4c42e3573024c958c3eedeb9f4dd612c1cc9dc0bfe4dc10",
-  "data/icons.json": "aec159429c382804f22d3068bfc0b2dcf692b2e87235187fc86d4213ec2ff7f6",
+  "data/icons.json": "269419720eed2237ac38fb2651d8a2d844868f8d7700dcb4c8ec4c46c396736d",
   "assets/favicon.svg": "1265caf2798632ed7badf1d7ea5ba2f8537423f161447935c40974521ab2021b",
   "assets/site.40e6a878.css": "40e6a878cdff358f1fc225c1a7e69af9fe6e755dd35bfcf04383f37b0b1b4dd9",
   "assets/landing.64b67dcd.css": "64b67dcdd1e62e6d1f7a67b7de9381da1fd4cb2db2b4faa36bf24c3e4a774c0d",
