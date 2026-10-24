@@ -10,6 +10,8 @@
 // It also adds structured data and og:description to the site pages.
 // English is always written; another language is written for a page once
 // docs/guides/i18n.js (and the site strings) translate every key it uses.
+// A language that only docs/guides/i18n.js has gets its header and footer
+// from there and links to the English site pages.
 
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -166,7 +168,9 @@ export async function seoFiles({ root, icons, files, siteDict }) {
   const guides = await loadGuides(root, icons);
   const seoDict = { ...seoStrings, en: { ...seoStrings.en } };
   for (const g of guides) Object.assign(seoDict.en, guideStrings(g));
-  const langs = Object.keys(siteDict);
+  // The site languages, then the languages that only the page strings have.
+  const siteLangs = Object.keys(siteDict);
+  const langs = [...siteLangs, ...Object.keys(seoStrings).filter((l) => !siteLangs.includes(l))];
   const names = new Set(icons.map((i) => i.name));
   const partials = loadPartials(root, api);
   const cache = new Map();
@@ -184,7 +188,9 @@ export async function seoFiles({ root, icons, files, siteDict }) {
     ...icons.map((ic) => ({ path: `icons/${ic.name}.html`, nav: 'icons', keys: iconPageKeys(ic, api), build: (c) => iconPage(ic, c) })),
   ];
   const avail = new Map(pages.map((p) => [p.path, langs.filter((l) => covers(l, p.keys, seoDict, siteDict))]));
-  const available = (target, lang) => (SITE_PAGES.includes(target) ? langs.includes(lang) : (avail.get(target) || []).includes(lang));
+  const available = (target, lang) => (SITE_PAGES.includes(target) ? siteLangs.includes(lang) : (avail.get(target) || []).includes(lang));
+  // Header and footer strings per language: the site strings, else the page strings.
+  const chrome = Object.fromEntries(langs.map((l) => [l, siteDict[l] || seoDict[l]]));
 
   const out = {};
   for (const p of pages) {
@@ -192,7 +198,7 @@ export async function seoFiles({ root, icons, files, siteDict }) {
       const t = translator(lang, seoDict, siteDict);
       const page = p.build({ t, api, icons, names, svg, socialUrl });
       Object.assign(page, { lang, alternates: avail.get(p.path), nav: p.nav });
-      out[join(docs, langDir(lang) + p.path)] = shell(page, { partials, t, siteDict, available });
+      out[join(docs, langDir(lang) + p.path)] = shell(page, { partials, t, siteDict: chrome, available });
     }
   }
   out[join(docs, 'guides', 'page.js')] = clientScript(api);

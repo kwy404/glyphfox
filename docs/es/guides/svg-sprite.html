@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/svg-sprite.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sprites SVG: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.svg-sprite.title">Iconos en sprite SVG con glyphfox: use, símbolos y subconjuntos</title>
+<meta name="description" content="Iconos de glyphfox en sprite SVG: ids de símbolo, referencias use, regla del mismo origen, sprites en línea, subconjuntos con la CLI, límites de estilo y caché." data-i18n-attr="content:guide.svg-sprite.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/guides/svg-sprite.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/svg-sprite.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/svg-sprite.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/svg-sprite.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/svg-sprite.html">
+<meta property="og:title" content="Iconos en sprite SVG con glyphfox: use, símbolos y subconjuntos">
+<meta property="og:description" content="Iconos de glyphfox en sprite SVG: ids de símbolo, referencias use, regla del mismo origen, sprites en línea, subconjuntos con la CLI, límites de estilo y caché.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/guides/svg-sprite.html">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:title" content="Iconos en sprite SVG con glyphfox: use, símbolos y subconjuntos">
+<meta name="twitter:description" content="Iconos de glyphfox en sprite SVG: ids de símbolo, referencias use, regla del mismo origen, sprites en línea, subconjuntos con la CLI, límites de estilo y caché.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/svg-sprite.png">
+<meta name="twitter:image:alt" content="Sprites SVG: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://kwy404.github.io/glyphfox/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://kwy404.github.io/glyphfox/es/guides/"},{"@type":"ListItem","position":3,"name":"Sprites SVG","item":"https://kwy404.github.io/glyphfox/es/guides/svg-sprite.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuándo es mejor un sprite que los componentes?","acceptedAnswer":{"@type":"Answer","text":"En sitios estáticos o renderizados en el servidor sin un framework de JavaScript, y en páginas que repiten muchos iconos: los símbolos se descargan una vez y cada uso ocupa unos pocos bytes de marcado. Los componentes ganan cuando los iconos cambian con el estado, se transforman, se animan o necesitan un segundo color, porque un sprite queda fijado en tiempo de compilación."}},{"@type":"Question","name":"¿Puedo hacer referencia directamente al sprite de jsDelivr?","acceptedAnswer":{"@type":"Answer","text":"No con use, porque los navegadores bloquean las referencias externas a otros orígenes. Descarga el archivo e insértalo en la página, como se muestra más arriba, o cópialo a tu propio servidor."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copiado al portapapeles" data-theme-light="Cambiar al tema claro" data-theme-dark="Cambiar al tema oscuro">
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/svg-sprite.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guías" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Todas las guías</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit y web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML y CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Temas</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Iconos animados</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accesibilidad</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" aria-current="page" class="on" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Renderizado en el servidor</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Ruta de navegación" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Inicio</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guías</a></li><li aria-current="page" data-i18n="guide.svg-sprite.short">Sprites SVG</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.topics">Temas</span>
+<h1 class="title" data-i18n="guide.svg-sprite.h1">Sprites SVG</h1>
+<p class="lead" data-i18n="guide.svg-sprite.lead">Un sprite es un único archivo SVG con un símbolo por icono. Las páginas hacen referencia a los símbolos con <code>&lt;use&gt;</code>, el navegador descarga el archivo y lo guarda en caché una sola vez, y no se ejecuta nada de JavaScript.</p>
+<nav class="toc" aria-label="En esta página" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.svg-sprite.install.h">Obtén el sprite</a></li><li><a href="#use" data-i18n="guide.svg-sprite.use.h">Haz referencia a un símbolo</a></li><li><a href="#origin" data-i18n="guide.svg-sprite.origin.h">Solo desde el mismo origen</a></li><li><a href="#inline" data-i18n="guide.svg-sprite.inline.h">Incrusta el sprite en la página</a></li><li><a href="#subset" data-i18n="guide.svg-sprite.subset.h">Genera un subconjunto con la CLI</a></li><li><a href="#props" data-i18n="guide.svg-sprite.props.h">Opciones de compilación</a></li><li><a href="#styling" data-i18n="guide.svg-sprite.styling.h">Qué puede cambiar CSS y qué no</a></li><li><a href="#a11y" data-i18n="guide.svg-sprite.a11y.h">Accesibilidad</a></li><li><a href="#caching" data-i18n="guide.svg-sprite.caching.h">Caché</a></li><li><a href="#pitfalls" data-i18n="guide.svg-sprite.pitfalls.h">Errores comunes</a></li><li><a href="#faq" data-i18n="seo.faq">Preguntas frecuentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.svg-sprite.install.h">Obtén el sprite</h2>
+<p data-i18n="guide.svg-sprite.install.p">El paquete incluye un sprite con todos los iconos en <code>glyphfox/sprite.svg</code>. Cada icono es un <code>&lt;symbol&gt;</code> cuyo id es <code>gf-</code> más el nombre del icono, con su propio <code>viewBox</code> y la configuración de trazo del conjunto.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span>
+cp node_modules/<span class="tok-k">glyphfox</span>/dist/sprite.svg public/icons/sprite.svg</pre></div>
+<div class="code"><div class="code-head"><span>sprite.svg</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;svg</span> <span class="tok-a">xmlns</span>=<span class="tok-s">"http://www.w3.org/2000/svg"</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;symbol</span> <span class="tok-a">id</span>=<span class="tok-s">"gf-home"</span> <span class="tok-a">viewBox</span>=<span class="tok-s">"0 0 24 24"</span> <span class="tok-a">fill</span>=<span class="tok-s">"none"</span> <span class="tok-a">stroke</span>=<span class="tok-s">"currentColor"</span> <span class="tok-a">stroke-width</span>=<span class="tok-s">"2"</span> <span class="tok-a">stroke-linecap</span>=<span class="tok-s">"round"</span> <span class="tok-a">stroke-linejoin</span>=<span class="tok-s">"round"</span><span class="tok-t">&gt;</span>...<span class="tok-t">&lt;/symbol</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;symbol</span> <span class="tok-a">id</span>=<span class="tok-s">"gf-search"</span> <span class="tok-a">viewBox</span>=<span class="tok-s">"0 0 24 24"</span> ...<span class="tok-t">&gt;</span>...<span class="tok-t">&lt;/symbol</span><span class="tok-t">&gt;</span>
+...
+<span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.svg-sprite.install.bundler">Si usas un bundler, puedes dejar que sea él quien copie el archivo y le añada un hash de contenido al nombre. En Vite, el sufijo <code>?url</code> devuelve la URL final del recurso:</p>
+<div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> spriteUrl <span class="tok-k">from</span> <span class="tok-s">'glyphfox/sprite.svg?url'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> icon = (name) =<span class="tok-t">&gt;</span>
+  <span class="tok-s">`&lt;svg class="icon" width="24" height="24" aria-hidden="true"&gt;&lt;use href="${spriteUrl}#gf-${name}"&gt;&lt;/use&gt;&lt;/svg&gt;`</span>;</pre></div>
+<p data-i18n="guide.svg-sprite.install.size">El sprite completo reúne los 419 iconos en 117.9 KB, o 15.7 KB con gzip. Un sprite con los 30 iconos que usa la estructura base de una app típica ocupa 7.5 KB, 1.3 KB con gzip; la CLI lo genera por ti, como se muestra más abajo.</p>
+</section>
+<section id="use">
+<h2 data-i18n="guide.svg-sprite.use.h">Haz referencia a un símbolo</h2>
+<p data-i18n="guide.svg-sprite.use.p">Escribe un <code>svg</code> exterior con el tamaño que quieras y un elemento <code>use</code> que apunte al símbolo. El símbolo aporta su propio <code>viewBox</code>, así que el elemento exterior solo necesita ancho y alto.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-k">class</span>=<span class="tok-s">"btn"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;svg</span> <span class="tok-k">class</span>=<span class="tok-s">"icon"</span> <span class="tok-a">width</span>=<span class="tok-s">"20"</span> <span class="tok-a">height</span>=<span class="tok-s">"20"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;use</span> <span class="tok-a">href</span>=<span class="tok-s">"/icons/sprite.svg#gf-download"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/use</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span>
+  Download
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span></pre></div>
+<div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="css" data-done="1"><span class="tok-t">.icon</span> {
+  <span class="tok-a">width</span>: <span class="tok-n">1.25em</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">1.25em</span>;
+  <span class="tok-a">flex-shrink</span>: <span class="tok-n">0</span>;
+  <span class="tok-a">vertical-align</span>: -<span class="tok-n">0.2em</span>;
+}
+<span class="tok-t">.btn</span>:hover <span class="tok-t">.icon</span> {
+  <span class="tok-a">color</span>: <span class="tok-n">#ff7a1a</span>;
+}</pre></div>
+<p data-i18n="guide.svg-sprite.use.color">Los símbolos dibujan con <code>stroke="currentColor"</code>, y <code>color</code> se hereda en el contenido de <code>use</code>, así que el icono sigue el color de texto de su padre y cualquier <code>color</code> que definas en el <code>svg</code> exterior. El ancho y el alto definidos en CSS prevalecen sobre los atributos, lo que permite que el tamaño siga al tamaño de fuente.</p>
+</section>
+<section id="origin">
+<h2 data-i18n="guide.svg-sprite.origin.h">Solo desde el mismo origen</h2>
+<p data-i18n="guide.svg-sprite.origin.p">Los navegadores solo siguen una referencia <code>use</code> a un archivo que esté en el mismo origen que la página. Un sprite alojado en una CDN como jsDelivr, o en otro subdominio de tu sitio, no muestra nada, y las cabeceras CORS no cambian eso. Sirve el sprite desde tu propio origen, o descárgalo una vez e insértalo en la página:</p>
+<div class="code"><div class="code-head"><span>inline-sprite.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-c">// jsDelivr sends CORS headers, so fetch works where &lt;use&gt; across origins does not.</span>
+<span class="tok-k">const</span> res = <span class="tok-k">await</span> fetch(<span class="tok-s">'https://cdn.jsdelivr.net/npm/glyphfox@1/dist/sprite.svg'</span>);
+<span class="tok-k">const</span> holder = document.createElement(<span class="tok-s">'div'</span>);
+holder.setAttribute(<span class="tok-s">'aria-hidden'</span>, <span class="tok-s">'true'</span>);
+holder.style.cssText = <span class="tok-s">'position:absolute;width:0;height:0;overflow:hidden'</span>;
+holder.innerHTML = <span class="tok-k">await</span> res.text();
+document.body.prepend(holder);
+
+<span class="tok-c">// now &lt;use href="#gf-home"&gt;&lt;/use&gt; works anywhere on the page</span></pre></div>
+</section>
+<section id="inline">
+<h2 data-i18n="guide.svg-sprite.inline.h">Incrusta el sprite en la página</h2>
+<p data-i18n="guide.svg-sprite.inline.p">Un sprite en línea son los mismos símbolos colocados una sola vez en el HTML, normalmente justo después de <code>&lt;body&gt;</code>. Las referencias usan entonces solo el fragmento, <code>#gf-home</code>, no hay ninguna solicitud extra y los iconos se renderizan con el primer pintado. La contrapartida es que cada página vuelve a llevar los símbolos, así que incrusta un subconjunto pequeño y no el conjunto completo.</p>
+<div class="code"><div class="code-head"><span>layout.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;body</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;svg</span> <span class="tok-a">xmlns</span>=<span class="tok-s">"http://www.w3.org/2000/svg"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span>
+       <span class="tok-a">style</span>=<span class="tok-s">"position:absolute;width:0;height:0;overflow:hidden"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;symbol</span> <span class="tok-a">id</span>=<span class="tok-s">"gf-home"</span> <span class="tok-a">viewBox</span>=<span class="tok-s">"0 0 24 24"</span> <span class="tok-a">fill</span>=<span class="tok-s">"none"</span> <span class="tok-a">stroke</span>=<span class="tok-s">"currentColor"</span> <span class="tok-a">stroke-width</span>=<span class="tok-s">"2"</span> <span class="tok-a">stroke-linecap</span>=<span class="tok-s">"round"</span> <span class="tok-a">stroke-linejoin</span>=<span class="tok-s">"round"</span><span class="tok-t">&gt;</span>...<span class="tok-t">&lt;/symbol</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;symbol</span> <span class="tok-a">id</span>=<span class="tok-s">"gf-search"</span> <span class="tok-a">viewBox</span>=<span class="tok-s">"0 0 24 24"</span> ...<span class="tok-t">&gt;</span>...<span class="tok-t">&lt;/symbol</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span>
+
+  <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;svg</span> <span class="tok-k">class</span>=<span class="tok-s">"icon"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;use</span> <span class="tok-a">href</span>=<span class="tok-s">"#gf-home"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/use</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span> Home<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/body</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.svg-sprite.inline.hide">Oculta el sprite con tamaño cero y posicionamiento absoluto, no con <code>display:none</code>. Algunos navegadores dejan de renderizar las máscaras que están dentro de un SVG oculto, y el estilo sólido usa máscaras para recortar sus líneas interiores.</p>
+</section>
+<section id="subset">
+<h2 data-i18n="guide.svg-sprite.subset.h">Genera un subconjunto con la CLI</h2>
+<p data-i18n="guide.svg-sprite.subset.p"><code>glyphfox build</code> genera un sprite solo con los iconos que indiques, renderizados con las props que pases. Los nombres pueden venir de la línea de comandos o de un archivo con un nombre por línea; en el archivo se permiten espacios, comas y comentarios con <code>#</code>.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build home search settings bell user <span class="tok-a">--type</span> sprite <span class="tok-a">--out</span> public/icons
+<span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build <span class="tok-a">--from</span> icons.txt <span class="tok-a">--type</span> sprite <span class="tok-a">--weight</span> 1.5 <span class="tok-a">--out</span> public/icons
+<span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build <span class="tok-a">--from</span> icons.txt <span class="tok-a">--type</span> sprite <span class="tok-a">--variant</span> solid <span class="tok-a">--out</span> public/icons/solid</pre></div>
+<div class="code"><div class="code-head"><span>icons.txt</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-c"># app shell</span>
+home, search, settings, bell, user
+menu x chevron<span class="tok-a">-down</span>
+
+<span class="tok-c"># badges and fusions work too</span>
+file+check
+cloud&amp;lock:overlap</pre></div>
+<p data-i18n="guide.svg-sprite.subset.ids">Los nombres simples conservan su id: <code>home</code> pasa a ser <code>gf-home</code>. Las especificaciones con insignia o fusión reciben un id con los signos reemplazados: <code>file+check</code> pasa a ser <code>gf-file_check</code>, y <code>cloud&amp;lock:overlap</code>, <code>gf-cloud__lock-overlap</code>. Abre el archivo generado una vez para copiar los ids que necesites.</p>
+<p data-i18n="guide.svg-sprite.subset.size">Generar el sprite al tamaño en que lo muestras también te da la compensación óptica de los componentes: <code>--size 16</code> escribe el trazo ligeramente más grueso que glyphfox usa para los iconos de 16 píxeles, así que un sprite para tablas densas tiene el mismo peso visual que el resto de la interfaz.</p>
+<p data-i18n="guide.svg-sprite.subset.css">El mismo comando con <code>--type css</code> genera en su lugar una hoja de estilos con clases de máscara (<code>&lt;span class="gf gf-home"&gt;</code>), para sitios que quieren clases de icono sin Tailwind CSS. La <a href="tailwind.html">guía de Tailwind CSS</a> explica cómo se comportan los iconos de máscara.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.svg-sprite.props.h">Opciones de compilación</h2>
+<p data-i18n="guide.svg-sprite.props.p">Un sprite es estático, así que las props compartidas se convierten en flags de compilación. Estas son las que importan en un sprite; cada flag significa lo mismo que la prop del mismo nombre en la <a href="../../docs.html#props">tabla de props</a>.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.svg-sprite.props.table.h1">Flag</th><th data-i18n="guide.svg-sprite.props.table.h2">Efecto en los símbolos</th></tr></thead><tbody>
+<tr><td data-i18n="guide.svg-sprite.props.table.r1c1"><code>--type sprite</code></td><td data-i18n="guide.svg-sprite.props.table.r1c2">genera <code>sprite.svg</code> (el tipo predeterminado); <code>css</code> y <code>package</code> son los otros tipos</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r2c1"><code>--out DIR</code></td><td data-i18n="guide.svg-sprite.props.table.r2c2">directorio de salida; por defecto, el directorio actual</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r3c1"><code>--from FILE</code></td><td data-i18n="guide.svg-sprite.props.table.r3c2">lee los nombres de un archivo</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r4c1"><code>--weight N</code></td><td data-i18n="guide.svg-sprite.props.table.r4c2">peso del trazo de 1 a 3, escrito en cada símbolo</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r5c1"><code>--size N</code></td><td data-i18n="guide.svg-sprite.props.table.r5c2">el tamaño en píxeles al que lo muestras, para la compensación óptica del trazo por debajo de 24</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r6c1"><code>--corners sharp</code></td><td data-i18n="guide.svg-sprite.props.table.r6c2">uniones y extremos rectos</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r7c1"><code>--variant duotone</code>, <code>--variant solid</code></td><td data-i18n="guide.svg-sprite.props.table.r7c2">el estilo de todos los símbolos</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r8c1"><code>--color C</code>, <code>--secondary-color C</code></td><td data-i18n="guide.svg-sprite.props.table.r8c2">colores fijos en lugar de <code>currentColor</code></td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r9c1"><code>--secondary-opacity N</code></td><td data-i18n="guide.svg-sprite.props.table.r9c2">opacidad de la capa duotone o del relleno sólido</td></tr>
+<tr><td data-i18n="guide.svg-sprite.props.table.r10c1"><code>--rotate DEG</code>, <code>--flip-x</code>, <code>--flip-y</code></td><td data-i18n="guide.svg-sprite.props.table.r10c2">fija en los símbolos una rotación o un reflejo</td></tr>
+</tbody></table></div>
+</section>
+<section id="styling">
+<h2 data-i18n="guide.svg-sprite.styling.h">Qué puede cambiar CSS y qué no</h2>
+<p data-i18n="guide.svg-sprite.styling.p">Lo que dibuja <code>use</code> es una copia del símbolo. El CSS aplicado al <code>svg</code> exterior o al elemento <code>use</code> solo llega a esa copia por herencia, y por eso funciona <code>color</code>. Con las propiedades que define el propio símbolo no ocurre lo mismo: cada símbolo lleva <code>stroke-width</code>, <code>stroke-linecap</code> y <code>stroke-linejoin</code> como atributos, y estos prevalecen sobre cualquier valor heredado desde fuera. Definir <code>stroke-width</code> en <code>.icon</code> no tiene ningún efecto.</p>
+<p data-i18n="guide.svg-sprite.styling.p2">Decide el peso, las esquinas y el estilo al generar el sprite, y genera dos sprites si necesitas dos pesos. Cuando necesites controlar por instancia el peso, un segundo color o el movimiento, renderiza en su lugar SVG en línea con un componente o con <code>toSvg</code>.</p>
+<p data-i18n="guide.svg-sprite.styling.motion">Las animaciones del icono completo siguen funcionando, porque actúan sobre el elemento exterior: <code>.icon.spin { animation: spin 1s linear infinite }</code> hace girar un icono del sprite como a cualquier otro elemento.</p>
+</section>
+<section id="a11y">
+<h2 data-i18n="guide.svg-sprite.a11y.h">Accesibilidad</h2>
+<p data-i18n="guide.svg-sprite.a11y.p">Un icono de sprite es un <code>svg</code> exterior que escribes tú, así que te corresponde a ti definir su semántica. Oculta los iconos decorativos con <code>aria-hidden="true"</code>. Para un icono que transmite significado por sí solo, convierte el elemento exterior en una imagen con nombre:</p>
+<div class="code"><div class="code-head"><span>status.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;svg</span> <span class="tok-k">class</span>=<span class="tok-s">"icon"</span> <span class="tok-a">role</span>=<span class="tok-s">"img"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Payment failed"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;use</span> <span class="tok-a">href</span>=<span class="tok-s">"/icons/sprite.svg#gf-circle-alert"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/use</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.svg-sprite.a11y.more">Los botones que solo contienen un icono necesitan la etiqueta en el propio botón, como se explica en la <a href="accessibility.html">guía de accesibilidad</a>.</p>
+</section>
+<section id="caching">
+<h2 data-i18n="guide.svg-sprite.caching.h">Caché</h2>
+<p data-i18n="guide.svg-sprite.caching.p">Un sprite externo es una única solicitud que comparten todas las páginas. Sírvelo con una caché de larga duración y un hash de contenido en el nombre del archivo, como <code>sprite.3f9a1c.svg</code>, para que cada build nuevo cambie la URL en lugar de tener que esperar a que caduquen las cachés. Los bundlers lo hacen por ti cuando importas el archivo. Cada URL de sprite distinta se descarga una vez por página, sin importar cuántos iconos hagan referencia a ella.</p>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.svg-sprite.pitfalls.h">Errores comunes</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.svg-sprite.pitfalls.list.1.t">Un sprite en otro origen</dt><dd data-i18n="guide.svg-sprite.pitfalls.list.1.d">Un <code>use</code> externo que apunta a una CDN o a otro subdominio muestra una caja vacía; el navegador solo informa de la solicitud bloqueada en la consola. Aloja el archivo en el origen de la página o incrústalo en ella.</dd></div><div><dt data-i18n="guide.svg-sprite.pitfalls.list.2.t">Capas duotone en el sprite completo</dt><dd data-i18n="guide.svg-sprite.pitfalls.list.2.d">Los 42 iconos que tienen una capa duotone dibujada a mano la conservan en <code>glyphfox/sprite.svg</code>, como un relleno translúcido del color actual. Si quieres contornos puros, genera un subconjunto: el estilo predeterminado <code>outline</code> omite la capa, y <code>--variant duotone</code> la conserva.</dd></div><div><dt data-i18n="guide.svg-sprite.pitfalls.list.3.t">Máscaras en sprites ocultos o externos</dt><dd data-i18n="guide.svg-sprite.pitfalls.list.3.d">Los símbolos de estilo sólido usan una <code>mask</code> para recortar sus líneas interiores. Las máscaras pueden no renderizarse cuando el sprite está oculto con <code>display:none</code>, y la compatibilidad con máscaras dentro de un archivo de sprite externo varía entre navegadores. Prueba el estilo sólido en los navegadores que necesitas cubrir, o incrusta ese sprite.</dd></div><div><dt data-i18n="guide.svg-sprite.pitfalls.list.4.t">Estados vivos en un sprite</dt><dd data-i18n="guide.svg-sprite.pitfalls.list.4.d">Los presets como <code>spin</code> o <code>draw</code> están acotados a una clase del <code>svg</code> raíz, que un símbolo no conserva, así que <code>--animate</code> no tiene ningún efecto visible en un sprite. Anima el elemento exterior con tu propio CSS o usa SVG en línea.</dd></div><div><dt data-i18n="guide.svg-sprite.pitfalls.list.5.t">Ids en conflicto</dt><dd data-i18n="guide.svg-sprite.pitfalls.list.5.d">Un sprite en línea añade a la página ids como <code>gf-home</code>. Dos sprites en línea con el mismo icono, o un elemento propio con el mismo id, vuelven ambiguas las referencias. Incrusta un solo sprite por página.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Preguntas frecuentes</h2>
+<h3 data-i18n="guide.svg-sprite.faq.when.q">¿Cuándo es mejor un sprite que los componentes?</h3>
+<p data-i18n="guide.svg-sprite.faq.when.a">En sitios estáticos o renderizados en el servidor sin un framework de JavaScript, y en páginas que repiten muchos iconos: los símbolos se descargan una vez y cada uso ocupa unos pocos bytes de marcado. Los componentes ganan cuando los iconos cambian con el estado, se transforman, se animan o necesitan un segundo color, porque un sprite queda fijado en tiempo de compilación.</p>
+<h3 data-i18n="guide.svg-sprite.faq.cdn.q">¿Puedo hacer referencia directamente al sprite de jsDelivr?</h3>
+<p data-i18n="guide.svg-sprite.faq.cdn.a">No con <code>use</code>, porque los navegadores bloquean las referencias externas a otros orígenes. Descarga el archivo e insértalo en la página, como se muestra más arriba, o cópialo a tu propio servidor.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Iconos de esta guía</h2>
+<ul class="icon-links"><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/download.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-download" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>download</span></a></li><li><a href="../../icons/circle-alert.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-circle-alert" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v5"/><path d="M12 16.5h.01"/></svg><span>circle-alert</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guías relacionadas</h2>
+<ul class="guide-cards"><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking de iconos</strong><span data-i18n="guide.tree-shaking.description">Tree shaking de iconos de glyphfox en Vite, webpack, Rollup y esbuild: mediciones del bundle, qué lo impide, iconos cargados por nombre y subconjuntos fijos.</span></a></li><li><a href="html-cdn.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><strong data-i18n="guide.html-cdn.h1">Iconos en HTML plano desde una CDN</strong><span data-i18n="guide.html-cdn.description">Añade glyphfox a cualquier página HTML con un solo script: elemento glyph-fox, placeholders data-glyph, API global, versión fija y cuándo crear un subconjunto.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Iconos accesibles</strong><span data-i18n="guide.accessibility.description">Iconos accesibles con glyphfox: decorativos por defecto, títulos y etiquetas, botones solo con icono, iconos de estado, contraste, movimiento reducido y RTL.</span></a></li><li><a href="tailwind.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-wind" aria-hidden="true"><path d="M3 10h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg><strong data-i18n="guide.tailwind.h1">Iconos para Tailwind CSS</strong><span data-i18n="guide.tailwind.description">Iconos de glyphfox como clases de Tailwind CSS v3 y v4: instalación, sintaxis gf, estilos y pesos tras la barra, insignias, fusiones, animaciones y opciones.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de peso, se transforman, se fusionan y cobran vida. Libres y de código abierto bajo la licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Todos los iconos por categoría</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guías</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Hecho por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

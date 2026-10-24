@@ -8,6 +8,7 @@
 // writes that language's version of a page as soon as every string of the
 // page is translated, here or in the site strings.
 
+import es from './i18n/es.js';
 import ptBR from './i18n/pt-br.js';
 
 export const dict = {
@@ -130,4 +131,5 @@ export const dict = {
     'seo.cat.animals': 'animals',
   },
   'pt-BR': ptBR,
+  es,
 };

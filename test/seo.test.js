@@ -21,6 +21,7 @@ const all = [...guidePages, ...iconPages, ...indexPages];
 const LANGS = [
   ['en', ''],
   ['pt-BR', 'pt-br/'],
+  ['es', 'es/'],
 ];
 const jsonLd = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
 

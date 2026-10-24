@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/preact.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Iconos en Preact: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.preact.title">Iconos para Preact con glyphfox mediante preact/compat</title>
+<meta name="description" content="Usa iconos SVG de glyphfox en Preact: componentes de React mediante preact/compat con Vite, webpack, esbuild y TypeScript, o el elemento glyph-fox sin compat." data-i18n-attr="content:guide.preact.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/guides/preact.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/preact.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/preact.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/preact.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/preact.html">
+<meta property="og:title" content="Iconos para Preact con glyphfox mediante preact/compat">
+<meta property="og:description" content="Usa iconos SVG de glyphfox en Preact: componentes de React mediante preact/compat con Vite, webpack, esbuild y TypeScript, o el elemento glyph-fox sin compat.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/guides/preact.html">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:title" content="Iconos para Preact con glyphfox mediante preact/compat">
+<meta name="twitter:description" content="Usa iconos SVG de glyphfox en Preact: componentes de React mediante preact/compat con Vite, webpack, esbuild y TypeScript, o el elemento glyph-fox sin compat.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/preact.png">
+<meta name="twitter:image:alt" content="Iconos en Preact: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://kwy404.github.io/glyphfox/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://kwy404.github.io/glyphfox/es/guides/"},{"@type":"ListItem","position":3,"name":"Preact","item":"https://kwy404.github.io/glyphfox/es/guides/preact.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Necesito preact/compat para usar glyphfox?","acceptedAnswer":{"@type":"Answer","text":"Solo para los componentes de glyphfox/react. El elemento \u003cglyph-fox> y toSvg de glyphfox funcionan en Preact puro sin él."}},{"@type":"Question","name":"¿Los componentes se renderizan con preact-render-to-string?","acceptedAnswer":{"@type":"Answer","text":"Sí. Mediante compat se renderizan en el servidor como cualquier componente de React, y el SVG queda en el HTML. Los iconos renderizados por nombre con Icon necesitan tener antes sus datos registrados, como se describe en la guía de renderizado en el servidor."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copiado al portapapeles" data-theme-light="Cambiar al tema claro" data-theme-dark="Cambiar al tema oscuro">
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/preact.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guías" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Todas las guías</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" aria-current="page" class="on" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit y web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML y CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Temas</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Iconos animados</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accesibilidad</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Renderizado en el servidor</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Ruta de navegación" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Inicio</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guías</a></li><li aria-current="page" data-i18n="guide.preact.short">Preact</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.preact.h1">Iconos en Preact</h1>
+<p class="lead" data-i18n="guide.preact.lead">Preact ejecuta los componentes de React de glyphfox mediante preact/compat sin cambiar el código. Si tu aplicación no carga compat, el web component glyph-fox funciona con Preact puro.</p>
+<nav class="toc" aria-label="En esta página" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.preact.install.h">Instalación</a></li><li><a href="#how" data-i18n="guide.preact.how.h">Cómo funcionan los componentes en Preact</a></li><li><a href="#vite" data-i18n="guide.preact.vite.h">Vite</a></li><li><a href="#bundlers" data-i18n="guide.preact.bundlers.h">webpack y esbuild</a></li><li><a href="#typescript" data-i18n="guide.preact.typescript.h">TypeScript</a></li><li><a href="#usage" data-i18n="guide.preact.usage.h">Usa los componentes</a></li><li><a href="#element" data-i18n="guide.preact.element.h">Sin compat: el web component</a></li><li><a href="#size" data-i18n="guide.preact.size.h">Qué opción es más ligera</a></li><li><a href="#props" data-i18n="guide.preact.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.preact.pitfalls.h">Errores comunes</a></li><li><a href="#faq" data-i18n="seo.faq">Preguntas frecuentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.preact.install.h">Instalación</h2>
+<p data-i18n="guide.preact.install.p">Instala glyphfox junto a Preact. <code>preact/compat</code> forma parte del paquete <code>preact</code>, así que no hay que agregar una segunda dependencia.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.preact.install.p2">Tienes dos formas de renderizar iconos, y ambas comparten el mismo motor de renderizado y las mismas props:</p>
+<ul class="list"><li data-i18n="guide.preact.install.list.1"><strong>Los componentes</strong> de <code>glyphfox/react</code>, que Preact ejecuta mediante compat. Es la mejor opción si tu aplicación ya define un alias para React o usa otros paquetes de React.</li><li data-i18n="guide.preact.install.list.2"><strong>El web component</strong> <code>&lt;glyph-fox&gt;</code>, que no necesita compat en absoluto. Es la mejor opción si quieres mantener Preact ligero y solo necesitas iconos.</li></ul>
+</section>
+<section id="how">
+<h2 data-i18n="guide.preact.how.h">Cómo funcionan los componentes en Preact</h2>
+<p data-i18n="guide.preact.how.p">El punto de entrada de React importa exactamente seis cosas de <code>react</code>: <code>createElement</code>, <code>forwardRef</code>, <code>useState</code>, <code>useEffect</code>, <code>useMemo</code> y <code>useRef</code>. compat las implementa todas, así que, en cuanto el bundler resuelve <code>react</code> a <code>preact/compat</code>, los componentes se renderizan con el propio renderizador de Preact, en el mismo árbol y con los mismos hooks que el resto de tu aplicación.</p>
+<p data-i18n="guide.preact.how.p2">Los atributos SVG se crean con los nombres de React, como <code>strokeWidth</code> y <code>strokeLinecap</code>, y compat los vuelve a convertir en <code>stroke-width</code> y <code>stroke-linecap</code> en el elemento. Las animaciones de estados vivos son un elemento <code>&lt;style&gt;</code> dentro del SVG, definido mediante <code>dangerouslySetInnerHTML</code>, que Preact también admite.</p>
+</section>
+<section id="vite">
+<h2 data-i18n="guide.preact.vite.h">Vite</h2>
+<p data-i18n="guide.preact.vite.p">El preset oficial de Preact para Vite ya redirige <code>react</code>, <code>react-dom</code> y el runtime de JSX a compat mediante alias. No hace falta nada más:</p>
+<div class="code"><div class="code-head"><span>vite.config.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { defineConfig } <span class="tok-k">from</span> <span class="tok-s">'vite'</span>;
+<span class="tok-k">import</span> preact <span class="tok-k">from</span> <span class="tok-s">'@preact/preset-vite'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> defineConfig({
+  plugins: [preact()],
+});</pre></div>
+</section>
+<section id="bundlers">
+<h2 data-i18n="guide.preact.bundlers.h">webpack y esbuild</h2>
+<p data-i18n="guide.preact.bundlers.p">Con webpack, agrega los alias a <code>resolve.alias</code>. glyphfox solo necesita <code>react</code>, pero crear alias para todo el conjunto mantiene cualquier otro paquete de React de tu aplicación en la misma instancia de Preact:</p>
+<div class="code"><div class="code-head"><span>webpack.config.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1">module.exports = {
+  resolve: {
+    alias: {
+      react: <span class="tok-s">'preact/compat'</span>,
+      <span class="tok-s">'react-dom/test-utils'</span>: <span class="tok-s">'preact/test-utils'</span>,
+      <span class="tok-s">'react-dom'</span>: <span class="tok-s">'preact/compat'</span>,
+      <span class="tok-s">'react/jsx-runtime'</span>: <span class="tok-s">'preact/jsx-runtime'</span>,
+    },
+  },
+};</pre></div>
+<p data-i18n="guide.preact.bundlers.p2">esbuild tiene la misma opción. Activa a la vez la división de código; si no, esbuild incrusta todos los módulos de iconos a los que puede llegar el cargador bajo demanda (la <a href="tree-shaking.html">guía de tree shaking</a> explica por qué):</p>
+<div class="code"><div class="code-head"><span>build.mjs</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> * as esbuild <span class="tok-k">from</span> <span class="tok-s">'esbuild'</span>;
+
+<span class="tok-k">await</span> esbuild.build({
+  entryPoints: [<span class="tok-s">'src/main.jsx'</span>],
+  bundle: <span class="tok-k">true</span>,
+  splitting: <span class="tok-k">true</span>,
+  format: <span class="tok-s">'esm'</span>,
+  outdir: <span class="tok-s">'dist'</span>,
+  jsx: <span class="tok-s">'automatic'</span>,
+  jsxImportSource: <span class="tok-s">'preact'</span>,
+  alias: { react: <span class="tok-s">'preact/compat'</span>, <span class="tok-s">'react-dom'</span>: <span class="tok-s">'preact/compat'</span> },
+});</pre></div>
+</section>
+<section id="typescript">
+<h2 data-i18n="guide.preact.typescript.h">TypeScript</h2>
+<p data-i18n="guide.preact.typescript.p">Las declaraciones de <code>glyphfox/react</code> están escritas sobre los tipos de React (<code>ForwardRefExoticComponent</code>, <code>SVGProps</code>). Redirige <code>react</code> a compat en <code>paths</code> para que se resuelvan con los tipos de Preact. Si el verificador de tipos sigue mostrando problemas dentro de los archivos de declaración de las dependencias, deja activado <code>skipLibCheck</code>, como hace la mayoría de las plantillas de Preact:</p>
+<div class="code"><div class="code-head"><span>tsconfig.json</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1">{
+  <span class="tok-s">"compilerOptions"</span>: {
+    <span class="tok-s">"jsx"</span>: <span class="tok-s">"react-jsx"</span>,
+    <span class="tok-s">"jsxImportSource"</span>: <span class="tok-s">"preact"</span>,
+    <span class="tok-s">"skipLibCheck"</span>: <span class="tok-k">true</span>,
+    <span class="tok-s">"paths"</span>: {
+      <span class="tok-s">"react"</span>: [<span class="tok-s">"./node_modules/preact/compat/"</span>],
+      <span class="tok-s">"react-dom"</span>: [<span class="tok-s">"./node_modules/preact/compat/"</span>]
+    }
+  }
+}</pre></div>
+</section>
+<section id="usage">
+<h2 data-i18n="guide.preact.usage.h">Usa los componentes</h2>
+<p data-i18n="guide.preact.usage.p">Importa los iconos por su nombre y usa los hooks de Preact a su alrededor como siempre. Todo lo que explica la <a href="react.html">guía de React</a> es aplicable: <code>Icon</code> con la sintaxis de nombres, <code>Fusion</code>, <code>MorphIcon</code>, <code>useMorph</code>, los modificadores y las refs.</p>
+<div class="code"><div class="code-head"><span>Card.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { useState } <span class="tok-k">from</span> <span class="tok-s">'preact/hooks'</span>;
+<span class="tok-k">import</span> { HeartIcon, MorphIcon, Fusion } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Card() {
+  <span class="tok-k">const</span> [liked, setLiked] = useState(<span class="tok-k">false</span>);
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;article</span> <span class="tok-a">className</span>=<span class="tok-s">"card"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={() =<span class="tok-t">&gt;</span> setLiked(!liked)} <span class="tok-a">aria-pressed</span>={liked}<span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;HeartIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"pop"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">active</span>={liked} <span class="tok-a">variant</span>={liked ? <span class="tok-s">'solid'</span> : <span class="tok-s">'outline'</span>} <span class="tok-t">/&gt;</span>
+        Like
+      <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">name</span>={liked ? <span class="tok-s">'check'</span> : <span class="tok-s">'plus'</span>} <span class="tok-a">duration</span>={<span class="tok-n">250</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Fusion</span> <span class="tok-a">icons</span>={[<span class="tok-s">'user'</span>, <span class="tok-s">'shield'</span>]} <span class="tok-a">layout</span>=<span class="tok-s">"badge"</span> <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/article</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.preact.usage.p1">Las refs pasan por el <code>forwardRef</code> de compat, así que <code>ref</code> en un icono apunta al elemento <code>&lt;svg&gt;</code> renderizado, listo para <code>getBoundingClientRect()</code> o la API Web Animations. Los controladores de eventos como <code>onClick</code> y los atributos como <code>data-*</code> llegan directamente al elemento, exactamente igual que en React.</p>
+<p data-i18n="guide.preact.usage.p2">Con signals, pasa el valor y no la signal. Preact desenvuelve las signals enlazadas a atributos del DOM, pero un componente de icono recibe el propio objeto signal y lee sus props como valores simples, así que no leería el valor correcto ni se actualizaría cuando cambie la signal:</p>
+<div class="code"><div class="code-head"><span>Status.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { signal } <span class="tok-k">from</span> <span class="tok-s">'@preact/signals'</span>;
+<span class="tok-k">import</span> { CloudIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">const</span> syncing = signal(<span class="tok-k">false</span>);
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Status() {
+  <span class="tok-k">return</span> <span class="tok-t">&lt;CloudIcon</span> <span class="tok-a">modifier</span>={syncing.value ? <span class="tok-s">'sync'</span> : <span class="tok-k">undefined</span>} <span class="tok-t">/&gt;</span>;
+}</pre></div>
+</section>
+<section id="element">
+<h2 data-i18n="guide.preact.element.h">Sin compat: el web component</h2>
+<p data-i18n="guide.preact.element.p">El custom element <code>&lt;glyph-fox&gt;</code> renderiza los mismos iconos con las mismas props, como atributos en kebab-case. Importa <code>glyphfox/web</code> una vez para definirlo con todos los iconos, o defínelo tú mismo y registra solo los iconos que usas:</p>
+<div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { defineGlyphFox } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/web/element'</span>;
+<span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> { iconHome, iconSearch, iconMenu, iconX } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+registerIcons([iconHome, iconSearch, iconMenu, iconX]);
+defineGlyphFox();</pre></div>
+<div class="code"><div class="code-head"><span>Header.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { useState } <span class="tok-k">from</span> <span class="tok-s">'preact/hooks'</span>;
+<span class="tok-k">import</span> <span class="tok-s">'./icons.js'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Header() {
+  <span class="tok-k">const</span> [open, setOpen] = useState(<span class="tok-k">false</span>);
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;header</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"home"</span> <span class="tok-a">size</span>=<span class="tok-s">"20"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"search"</span> <span class="tok-a">weight</span>=<span class="tok-s">"1.5"</span> <span class="tok-a">title</span>=<span class="tok-s">"Search"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={() =<span class="tok-t">&gt;</span> setOpen(!open)} <span class="tok-a">aria-expanded</span>={open} <span class="tok-a">aria-label</span>=<span class="tok-s">"Menu"</span><span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>={open ? <span class="tok-s">'x'</span> : <span class="tok-s">'menu'</span>} morph<span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;/header</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.preact.element.p2">Preact asigna como atributos las props desconocidas de los custom elements, que es lo que escucha el elemento, así que los valores dinámicos como <code>name={open ? 'x' : 'menu'}</code> funcionan y el atributo <code>morph</code> anima cada cambio. En TypeScript, agrega <code>glyph-fox</code> a <code>JSX.IntrinsicElements</code> de Preact en un archivo de declaración, tal como describe la documentación de Preact para cualquier custom element.</p>
+<p data-i18n="guide.preact.element.p3">Los atributos, el tamaño dentro del shadow DOM y el renderizado en el servidor del elemento se explican en la <a href="web-components.html">guía de web components</a>.</p>
+</section>
+<section id="size">
+<h2 data-i18n="guide.preact.size.h">Qué opción es más ligera</h2>
+<p data-i18n="guide.preact.size.p">Las dos opciones incluyen el mismo motor (renderizado, ejes, modificadores, fusión y morph), así que los iconos cuestan más o menos lo mismo elijas la que elijas. La verdadera diferencia es compat: si tu aplicación ya lo carga para otros paquetes, los componentes no agregan nada nuevo; si no, el web component te lo ahorra. En ambos casos, importa solo los iconos que usas, como se muestra arriba.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.preact.props.h">Props</h2>
+<p data-i18n="guide.preact.props.p">Los componentes aceptan estas props. En <code>&lt;glyph-fox&gt;</code>, las mismas props son atributos en kebab-case (<code>secondary-color</code>, <code>flip-x</code>, <code>morph-to</code>), además de <code>name</code>, <code>layout</code>, <code>gap</code> y <code>morph</code>.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="docs.type">Tipo</th><th data-i18n="docs.default">Por defecto</th><th data-i18n="docs.desc">Descripción</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Ancho y alto; los números son píxeles.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Color principal.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color de la capa duotone y del relleno sólido.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacidad de la capa duotone o del relleno sólido.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Trazo de 1 a 3 en la cuadrícula de 24, con compensación óptica por debajo de 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Mantiene el trazo en weight píxeles a cualquier tamaño.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Uniones y extremos redondeados o rectos.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Eje de estilo; solid se obtiene de las formas cerradas.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotación en grados.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Refleja en horizontal.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Refleja en vertical.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Refleja en layouts de derecha a izquierda.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>ninguno</td><td data-i18n="prop.animate">Preset de estado vivo.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Cuándo se reproduce la animación o el morph.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">El estado para el disparador state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>según el preset</td><td data-i18n="prop.duration">Duración de la animación o del morph.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Retraso de la animación o del morph.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repite sin fin o un número de veces (spin y pulse se repiten por defecto).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>ninguno</td><td data-i18n="prop.modifier">Insignia con hueco de recorte automático.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Esquina de la insignia.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>ninguno</td><td data-i18n="prop.morphTo">Destino del morph; el disparador decide cuándo se muestra.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>ninguno</td><td data-i18n="prop.title">Nombre accesible: title, role img y aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true sin title</td><td data-i18n="prop.decorative">Oculta el icono a las tecnologías de apoyo.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.preact.pitfalls.h">Errores comunes</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.preact.pitfalls.list.1.t">Falta el alias</dt><dd data-i18n="guide.preact.pitfalls.list.1.d">Sin el alias, el bundler resuelve <code>react</code> al paquete real de React (o no lo encuentra). Entonces los iconos llaman a hooks de otro renderizador, lo que se manifiesta como errores de llamada a hook no válida o iconos que nunca se actualizan. Comprueba que <code>react</code> se resuelve a <code>preact/compat</code>.</dd></div><div><dt data-i18n="guide.preact.pitfalls.list.2.t"><code>class</code> en lugar de <code>className</code></dt><dd data-i18n="guide.preact.pitfalls.list.2.d">Los componentes combinan <code>className</code> con sus propias clases <code>glyphfox glyphfox-NAME</code>. Una prop <code>class</code> no se combina y esas clases pueden reemplazarla, así que usa <code>className</code> en los componentes de icono.</dd></div><div><dt data-i18n="guide.preact.pitfalls.list.3.t">Dos copias de Preact</dt><dd data-i18n="guide.preact.pitfalls.list.3.d">compat debe resolverse al mismo <code>preact</code> que usa tu aplicación. Una copia duplicada en <code>node_modules</code> rompe los hooks igual que la falta del alias; elimina el duplicado con tu gestor de paquetes.</dd></div><div><dt data-i18n="guide.preact.pitfalls.list.4.t">Signals como props</dt><dd data-i18n="guide.preact.pitfalls.list.4.d">Pasa <code>signal.value</code> a los componentes de icono. El objeto signal en sí no se desenvuelve en los componentes.</dd></div><div><dt data-i18n="guide.preact.pitfalls.list.5.t">Elementos vacíos antes de la definición</dt><dd data-i18n="guide.preact.pitfalls.list.5.d"><code>&lt;glyph-fox&gt;</code> solo se dibuja después de que <code>defineGlyphFox()</code> se haya ejecutado en el navegador. Con HTML prerenderizado, dale al elemento un tamaño en CSS para que el diseño no se desplace mientras carga el script.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Preguntas frecuentes</h2>
+<h3 data-i18n="guide.preact.faq.compat.q">¿Necesito preact/compat para usar glyphfox?</h3>
+<p data-i18n="guide.preact.faq.compat.a">Solo para los componentes de <code>glyphfox/react</code>. El elemento <code>&lt;glyph-fox&gt;</code> y <code>toSvg</code> de <code>glyphfox</code> funcionan en Preact puro sin él.</p>
+<h3 data-i18n="guide.preact.faq.ssr.q">¿Los componentes se renderizan con preact-render-to-string?</h3>
+<p data-i18n="guide.preact.faq.ssr.a">Sí. Mediante compat se renderizan en el servidor como cualquier componente de React, y el SVG queda en el HTML. Los iconos renderizados por nombre con <code>Icon</code> necesitan tener antes sus datos registrados, como se describe en la <a href="ssr.html">guía de renderizado en el servidor</a>.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Iconos de esta guía</h2>
+<ul class="icon-links"><li><a href="../../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/></svg><span>cloud</span></a></li><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guías relacionadas</h2>
+<ul class="guide-cards"><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">Iconos para React</strong><span data-i18n="guide.react.description">Iconos SVG en React con glyphfox: instalación, componentes con tree shaking, cada prop, iconos por nombre, modificadores, Fusión, morph, refs y TypeScript.</span></a></li><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Iconos en Lit y web components</strong><span data-i18n="guide.web-components.description">Usa el custom element glyph-fox en Lit y web components nativos: registra todos los iconos SVG o un subconjunto, enlaza atributos, dale estilo y hazlo accesible.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking de iconos</strong><span data-i18n="guide.tree-shaking.description">Tree shaking de iconos de glyphfox en Vite, webpack, Rollup y esbuild: mediciones del bundle, qué lo impide, iconos cargados por nombre y subconjuntos fijos.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de peso, se transforman, se fusionan y cobran vida. Libres y de código abierto bajo la licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Todos los iconos por categoría</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guías</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Hecho por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

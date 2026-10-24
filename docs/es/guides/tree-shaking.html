@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/tree-shaking.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tree shaking de iconos: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.tree-shaking.title">Tree shaking de iconos con glyphfox: qué se incluye y por qué</title>
+<meta name="description" content="Tree shaking de iconos de glyphfox en Vite, webpack, Rollup y esbuild: mediciones del bundle, qué lo impide, iconos cargados por nombre y subconjuntos fijos." data-i18n-attr="content:guide.tree-shaking.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/guides/tree-shaking.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/tree-shaking.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/tree-shaking.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/tree-shaking.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/tree-shaking.html">
+<meta property="og:title" content="Tree shaking de iconos con glyphfox: qué se incluye y por qué">
+<meta property="og:description" content="Tree shaking de iconos de glyphfox en Vite, webpack, Rollup y esbuild: mediciones del bundle, qué lo impide, iconos cargados por nombre y subconjuntos fijos.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/guides/tree-shaking.html">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:title" content="Tree shaking de iconos con glyphfox: qué se incluye y por qué">
+<meta name="twitter:description" content="Tree shaking de iconos de glyphfox en Vite, webpack, Rollup y esbuild: mediciones del bundle, qué lo impide, iconos cargados por nombre y subconjuntos fijos.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/tree-shaking.png">
+<meta name="twitter:image:alt" content="Tree shaking de iconos: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://kwy404.github.io/glyphfox/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://kwy404.github.io/glyphfox/es/guides/"},{"@type":"ListItem","position":3,"name":"Tree shaking","item":"https://kwy404.github.io/glyphfox/es/guides/tree-shaking.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Por qué la salida de mi build contiene cientos de archivos diminutos?","acceptedAnswer":{"@type":"Answer","text":"Con webpack o esbuild, son los chunks diferidos del cargador bajo demanda, uno por icono, preparados porque un nombre podría solicitarse como cadena en tiempo de ejecución. Se quedan en el servidor salvo que una página renderice un nombre que no se importó, así que no les cuestan nada a los usuarios. Si registras tus nombres con registerIcons, nunca se solicitan. Un build de producción de Vite no los crea, como se explica en iconos solicitados por nombre."}},{"@type":"Question","name":"¿Cuánto cuesta cada icono adicional?","acceptedAnswer":{"@type":"Answer","text":"En la medición anterior, unos 0.2 KB con gzip por icono, además del runtime compartido de unos 28 KB con gzip. El runtime se paga una sola vez, así que el segundo icono sale mucho más barato que el primero."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copiado al portapapeles" data-theme-light="Cambiar al tema claro" data-theme-dark="Cambiar al tema oscuro">
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/tree-shaking.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guías" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Todas las guías</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit y web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML y CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Temas</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Iconos animados</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accesibilidad</a>
+<a href="tree-shaking.html" aria-current="page" class="on" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Renderizado en el servidor</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Ruta de navegación" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Inicio</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guías</a></li><li aria-current="page" data-i18n="guide.tree-shaking.short">Tree shaking</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.topics">Temas</span>
+<h1 class="title" data-i18n="guide.tree-shaking.h1">Tree shaking de iconos</h1>
+<p class="lead" data-i18n="guide.tree-shaking.lead">Importa los iconos que usas y el resto del conjunto se queda fuera de tu bundle. Esta guía muestra qué hace que esto funcione, qué lo rompe sin que te des cuenta y cómo quedan las cifras en un build real.</p>
+<nav class="toc" aria-label="En esta página" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#setup" data-i18n="guide.tree-shaking.setup.h">Qué necesitas</a></li><li><a href="#how" data-i18n="guide.tree-shaking.how.h">Cómo funciona</a></li><li><a href="#sizes" data-i18n="guide.tree-shaking.sizes.h">Tamaños medidos</a></li><li><a href="#chunks" data-i18n="guide.tree-shaking.chunks.h">Iconos solicitados por nombre</a></li><li><a href="#subset" data-i18n="guide.tree-shaking.subset.h">Distribuye un subconjunto fijo</a></li><li><a href="#check" data-i18n="guide.tree-shaking.check.h">Comprueba tu propio bundle</a></li><li><a href="#pitfalls" data-i18n="guide.tree-shaking.pitfalls.h">Errores comunes</a></li><li><a href="#faq" data-i18n="seo.faq">Preguntas frecuentes</a></li></ol></nav>
+</header>
+<section id="setup">
+<h2 data-i18n="guide.tree-shaking.setup.h">Qué necesitas</h2>
+<p data-i18n="guide.tree-shaking.setup.p">Cualquier bundler que aplique tree shaking a módulos ES: Vite, Rollup, webpack 5 o Rspack en modo producción, Parcel, o esbuild con el empaquetado y la división de código activados. No hay nada que configurar. Usa importaciones con nombre desde los puntos de entrada ESM:</p>
+<div class="code"><div class="code-head"><span>App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { HomeIcon, SearchIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+<span class="tok-k">import</span> { iconHome } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;            <span class="tok-c">// icon data, also tree shaken</span>
+<span class="tok-k">import</span> { renderToString } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>; <span class="tok-c">// the engine without icon data</span></pre></div>
+<p data-i18n="guide.tree-shaking.setup.p2">Lo mismo se aplica a <code>glyphfox/vue</code>, que se compila exactamente igual que el punto de entrada de React, y a los componentes de Svelte, que también son un archivo por icono. Los servidores de desarrollo no aplican tree shaking, así que evalúa el tamaño solo en builds de producción.</p>
+</section>
+<section id="how">
+<h2 data-i18n="guide.tree-shaking.how.h">Cómo funciona</h2>
+<p data-i18n="guide.tree-shaking.how.p">Tres características del paquete permiten que un bundler descarte todos los iconos que no importas.</p>
+<ol class="list"><li data-i18n="guide.tree-shaking.how.list.1"><strong>Un módulo por icono.</strong> El build escribe cada icono en su propio archivo, y el índice de cada punto de entrada solo los reexporta. Un bundler puede seguir la única reexportación que usas e ignorar las demás.</li><li data-i18n="guide.tree-shaking.how.list.2"><strong>Llamadas puras.</strong> Cada componente se crea con <code>/*#__PURE__*/ createIcon(icon)</code>, lo que indica al minificador que la llamada no tiene ningún efecto que merezca conservarse cuando su resultado no se usa.</li><li data-i18n="guide.tree-shaking.how.list.3"><strong>Efectos secundarios declarados.</strong> El campo <code>sideEffects</code> de <code>package.json</code> enumera los únicos archivos que hacen algo al importarse. Cualquier otro módulo se puede omitir por completo cuando no se usa ninguna de sus exportaciones.</li></ol>
+<div class="code"><div class="code-head"><span>glyphfox/dist/react/icons/home.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { createIcon } <span class="tok-k">from</span> <span class="tok-s">'../runtime.js'</span>;
+<span class="tok-k">import</span> icon <span class="tok-k">from</span> <span class="tok-s">'../../icons/home.js'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> HomeIcon = <span class="tok-c">/*#__PURE__*/</span> createIcon(icon);
+<span class="tok-k">export</span> <span class="tok-k">default</span> HomeIcon;</pre></div>
+<div class="code"><div class="code-head"><span>glyphfox/package.json</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-s">"sideEffects"</span>: [
+  <span class="tok-s">"./dist/web/index.js"</span>,
+  <span class="tok-s">"./dist/web/glyphfox.min.js"</span>,
+  <span class="tok-s">"./dist/runtime/auto.js"</span>,
+  <span class="tok-s">"*.css"</span>
+]</pre></div>
+<p data-i18n="guide.tree-shaking.how.p2">Los archivos con efectos secundarios son los que están pensados para hacer algo al importarse: <code>glyphfox/web</code> define el custom element con todos los iconos, el archivo de la CDN prepara todo lo necesario para una página sin build y <code>glyphfox/runtime</code> reemplaza los elementos <code>data-glyph</code>.</p>
+</section>
+<section id="sizes">
+<h2 data-i18n="guide.tree-shaking.sizes.h">Tamaños medidos</h2>
+<p data-i18n="guide.tree-shaking.sizes.p">Una medición de ejemplo del build actual, hecha con esbuild 0.28: ESM minificado con división de código, contando solo los chunks que se cargan al inicio y con React marcado como externo. Tómala como una referencia de proporciones, no como una promesa; tu bundler y tu propio código harán variar las cifras.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.tree-shaking.sizes.table.h1">Qué importa la app</th><th data-i18n="guide.tree-shaking.sizes.table.h2">Minificado</th><th data-i18n="guide.tree-shaking.sizes.table.h3">Gzip</th></tr></thead><tbody>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r1c1">Un icono de React más el runtime compartido</td><td data-i18n="guide.tree-shaking.sizes.table.r1c2">76.0 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r1c3">27.6 KB</td></tr>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r2c1">10 iconos de React</td><td data-i18n="guide.tree-shaking.sizes.table.r2c2">79.3 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r2c3">29.7 KB</td></tr>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r3c1">50 iconos de React</td><td data-i18n="guide.tree-shaking.sizes.table.r3c2">90.9 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r3c3">37.9 KB</td></tr>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r4c1"><code>import * as Icons</code> con una clave dinámica (todos los iconos)</td><td data-i18n="guide.tree-shaking.sizes.table.r4c2">214.7 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r4c3">no medido</td></tr>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r5c1"><code>renderToString</code> de <code>glyphfox/core</code> más un icono</td><td data-i18n="guide.tree-shaking.sizes.table.r5c2">37.4 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r5c3">15.2 KB</td></tr>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r6c1"><code>toSvg</code> desde el punto de entrada principal <code>glyphfox</code></td><td data-i18n="guide.tree-shaking.sizes.table.r6c2">153.8 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r6c3">45.0 KB</td></tr>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r7c1">El archivo de la CDN <code>glyphfox.min.js</code>, sin paso de compilación</td><td data-i18n="guide.tree-shaking.sizes.table.r7c2">216.4 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r7c3">62.4 KB</td></tr>
+<tr><td data-i18n="guide.tree-shaking.sizes.table.r8c1"><code>sprite.svg</code> con todos los iconos</td><td data-i18n="guide.tree-shaking.sizes.table.r8c2">117.9 KB</td><td data-i18n="guide.tree-shaking.sizes.table.r8c3">15.7 KB</td></tr>
+</tbody></table></div>
+<p data-i18n="guide.tree-shaking.sizes.p2">Destacan dos cosas. El runtime es la parte fija: el renderizado, los tres ejes, los modificadores, la fusión, el morph y los presets de animación son comunes a todos los iconos y cuestan lo mismo para un icono que para cincuenta. Cada icono adicional sale barato: de media, unos 0.2 KB con gzip entre los builds de 10 y de 50 iconos. Un build de prueba con Vite 8.3.5 lo corroboró: el chunk de entrada con <code>HomeIcon</code> ocupó 81.5 KB minificado y 27.7 KB con gzip.</p>
+</section>
+<section id="chunks">
+<h2 data-i18n="guide.tree-shaking.chunks.h">Iconos solicitados por nombre</h2>
+<p data-i18n="guide.tree-shaking.chunks.p"><code>Icon</code> con un nombre, <code>morphTo</code> y <code>Fusion</code> aceptan nombres como cadenas. Cuando un nombre no se ha importado en ninguna parte, el motor lo carga bajo demanda desde la carpeta de iconos:</p>
+<div class="code"><div class="code-head"><span>glyphfox/dist/core/lookup.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">let</span> loader = (name) =<span class="tok-t">&gt;</span> <span class="tok-k">import</span>(<span class="tok-s">`../icons/${name}.js`</span>).then((m) =<span class="tok-t">&gt;</span> m.<span class="tok-k">default</span>);</pre></div>
+<p data-i18n="guide.tree-shaking.chunks.p2">Lo que ocurre con esa importación depende del bundler. webpack (y, por tanto, Next.js) y esbuild no pueden saber qué nombres se van a pedir, así que preparan un chunk para cada archivo que coincide: uno por icono, de unos cientos de bytes cada uno, que solo se descarga cuando una página renderiza un nombre que no se importó. Vite no transforma las importaciones dinámicas dentro de <code>node_modules</code>: su build de producción no emite chunks de iconos y mantiene la importación tal como está escrita, así que un nombre que no se importó ni se registró queda vacío en producción, aunque funciona en desarrollo, donde la dependencia está preempaquetada.</p>
+<p data-i18n="guide.tree-shaking.chunks.vite">Si una app realmente necesita cualquier nombre en tiempo de ejecución, como un selector de iconos, vuelve a activar la transformación para glyphfox. Vite emitirá entonces los chunks por icono y mostrará un aviso <code>INEFFECTIVE_DYNAMIC_IMPORT</code> por cada icono que también se importe directamente, algo inofensivo:</p>
+<div class="code"><div class="code-head"><span>vite.config.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">export</span> <span class="tok-k">default</span> {
+  build: {
+    dynamicImportVarsOptions: { exclude: [/node_modules\/(?!glyphfox\/)/] },
+  },
+};</pre></div>
+<p data-i18n="guide.tree-shaking.chunks.p3">Cuando conoces los nombres de antemano, registra sus datos y no se descargará nada en tiempo de ejecución, con cualquier bundler. Si sirves tú mismo los datos de los iconos, sustituye el cargador; el predeterminado sigue en el código, así que webpack sigue emitiendo los chunks, pero la app no los solicitará:</p>
+<div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { registerIcons, setIconLoader } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> { iconSettings, iconUsers } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+registerIcons([iconSettings, iconUsers]);
+
+<span class="tok-c">// optional: load other names from one JSON file you host (a copy of glyphfox/icons.json)</span>
+<span class="tok-k">let</span> all;
+setIconLoader(<span class="tok-k">async</span> (name) =<span class="tok-t">&gt;</span> {
+  all ??= <span class="tok-k">await</span> fetch(<span class="tok-s">'/icons.json'</span>).then((r) =<span class="tok-t">&gt;</span> r.json());
+  <span class="tok-k">return</span> all[name] ?? <span class="tok-k">null</span>;
+});</pre></div>
+</section>
+<section id="subset">
+<h2 data-i18n="guide.tree-shaking.subset.h">Distribuye un subconjunto fijo</h2>
+<p data-i18n="guide.tree-shaking.subset.p">Las páginas sin bundler, los paquetes de sistemas de diseño y las apps nativas suelen buscar una lista fija de iconos con props fijas. La CLI genera exactamente eso, a partir de nombres en la línea de comandos o de un archivo con un nombre por línea:</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-c"># a sprite with only these icons</span>
+<span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build home search file+check <span class="tok-a">--type</span> sprite <span class="tok-a">--out</span> public/icons
+
+<span class="tok-c"># a CSS file with one mask class per icon</span>
+<span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build home search bell <span class="tok-a">--type</span> css <span class="tok-a">--out</span> public/icons
+
+<span class="tok-c"># a small package of SVG strings, with the props baked in</span>
+<span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build <span class="tok-a">--from</span> icons.txt <span class="tok-a">--type</span> package <span class="tok-a">--name</span> @acme/icons <span class="tok-a">--weight</span> 1.5 <span class="tok-a">--out</span> acme<span class="tok-a">-icons</span></pre></div>
+<p data-i18n="guide.tree-shaking.subset.p2">Un sprite o un archivo CSS de subconjunto no contiene ningún motor, lo que supera a cualquier bundle cuando los iconos no cambian nunca. En las páginas que cargan el archivo de la CDN, un subconjunto suele ser el mayor ahorro individual: el archivo completo incluye todos los iconos por comodidad. La <a href="svg-sprite.html">guía de sprites SVG</a> y la <a href="html-cdn.html">guía de HTML y CDN</a> explican ambas configuraciones.</p>
+</section>
+<section id="check">
+<h2 data-i18n="guide.tree-shaking.check.h">Comprueba tu propio bundle</h2>
+<p data-i18n="guide.tree-shaking.check.p">Los datos de los iconos conservan sus claves <code>name</code> y <code>body</code> tras la minificación, lo que permite hacer un recuento rápido sin ningún analizador. En un build de Vite, los iconos que importas directamente están en el chunk de entrada, junto al marcador de posición llamado <code>empty</code> que el runtime dibuja mientras se carga un nombre:</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npx</span> vite build
+grep <span class="tok-a">-ohE</span> <span class="tok-s">'name:["`][a-z0-9-]+["`],body'</span> dist/assets/index-*.js | grep <span class="tok-a">-v</span> empty | sort <span class="tok-a">-u</span> | wc <span class="tok-a">-l</span></pre></div>
+<p data-i18n="guide.tree-shaking.check.p2">El número debería coincidir con los iconos que importas. Si se acerca al tamaño del conjunto completo, alguno de los patrones descritos más abajo lo está arrastrando todo. Otros bundlers pueden mover los módulos compartidos a chunks separados, así que con ellos haz el mismo recuento en todos los archivos que la página carga al inicio y deja fuera los chunks de iconos de carga diferida.</p>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.tree-shaking.pitfalls.h">Errores comunes</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.tree-shaking.pitfalls.list.1.t"><code>import *</code> con una clave dinámica</dt><dd data-i18n="guide.tree-shaking.pitfalls.list.1.d"><code>Icons[name]</code> sobre una importación de namespace obliga al bundler a conservar todos los iconos. En su lugar, renderiza <code>&lt;Icon name={name} /&gt;</code>, que solo carga los nombres que encuentra.</dd></div><div><dt data-i18n="guide.tree-shaking.pitfalls.list.2.t"><code>require</code> de CommonJS</dt><dd data-i18n="guide.tree-shaking.pitfalls.list.2.d"><code>require('glyphfox/react')</code> se resuelve al <code>index.cjs</code> empaquetado, un único archivo con todos los iconos que ningún bundler puede dividir. Asegúrate de que el código de tu app usa <code>import</code> para que se elija el build ESM.</dd></div><div><dt data-i18n="guide.tree-shaking.pitfalls.list.3.t"><code>toSvg</code> en el cliente</dt><dd data-i18n="guide.tree-shaking.pitfalls.list.3.d"><code>toSvg</code> recibe nombres, así que necesita el registro completo y arrastra consigo todos los iconos. En el código del navegador, usa <code>renderToString</code> de <code>glyphfox/core</code> con datos de iconos importados. En el servidor, el tamaño no importa.</dd></div><div><dt data-i18n="guide.tree-shaking.pitfalls.list.4.t">esbuild sin división de código</dt><dd data-i18n="guide.tree-shaking.pitfalls.list.4.d">Sin <code>splitting: true</code>, esbuild incrusta todos los módulos a los que puede llegar el cargador dinámico: un solo icono ocupó 201 KB minificado en un único archivo, en lugar de 76 KB. Lo mismo ocurre con cualquier salida que incruste las importaciones dinámicas, como un build de biblioteca IIFE o UMD.</dd></div><div><dt data-i18n="guide.tree-shaking.pitfalls.list.5.t"><code>glyphfox/web</code> para unos pocos iconos</dt><dd data-i18n="guide.tree-shaking.pitfalls.list.5.d">Ese punto de entrada define a propósito el elemento con el conjunto completo. Para un subconjunto, usa <code>defineGlyphFox</code> de <code>glyphfox/web/element</code> y <code>registerIcons</code>.</dd></div><div><dt data-i18n="guide.tree-shaking.pitfalls.list.6.t">Evaluar el tamaño en desarrollo</dt><dd data-i18n="guide.tree-shaking.pitfalls.list.6.d">Los servidores de desarrollo cargan todos los módulos de un archivo barrel. Las importaciones profundas como <code>glyphfox/react/icons/home</code> agilizan el desarrollo, pero lo que cuenta para el tamaño es el build de producción.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Preguntas frecuentes</h2>
+<h3 data-i18n="guide.tree-shaking.faq.files.q">¿Por qué la salida de mi build contiene cientos de archivos diminutos?</h3>
+<p data-i18n="guide.tree-shaking.faq.files.a">Con webpack o esbuild, son los chunks diferidos del cargador bajo demanda, uno por icono, preparados porque un nombre podría solicitarse como cadena en tiempo de ejecución. Se quedan en el servidor salvo que una página renderice un nombre que no se importó, así que no les cuestan nada a los usuarios. Si registras tus nombres con <code>registerIcons</code>, nunca se solicitan. Un build de producción de Vite no los crea, como se explica en <a href="#chunks">iconos solicitados por nombre</a>.</p>
+<h3 data-i18n="guide.tree-shaking.faq.cost.q">¿Cuánto cuesta cada icono adicional?</h3>
+<p data-i18n="guide.tree-shaking.faq.cost.a">En la medición anterior, unos 0.2 KB con gzip por icono, además del runtime compartido de unos 28 KB con gzip. El runtime se paga una sola vez, así que el segundo icono sale mucho más barato que el primero.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Iconos de esta guía</h2>
+<ul class="icon-links"><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/users.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-users" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 21a7 5.5 0 0 1 14 0Z"/><path d="M14.78 4.05A3 3 0 0 1 19.5 6.5A3 3 0 0 1 15.85 9.43"/><path d="M17.4 15.57A5.5 5.5 0 0 1 22 21"/></svg><span>users</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guías relacionadas</h2>
+<ul class="guide-cards"><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">Iconos para React</strong><span data-i18n="guide.react.description">Iconos SVG en React con glyphfox: instalación, componentes con tree shaking, cada prop, iconos por nombre, modificadores, Fusión, morph, refs y TypeScript.</span></a></li><li><a href="svg-sprite.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-grid" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><strong data-i18n="guide.svg-sprite.h1">Sprites SVG</strong><span data-i18n="guide.svg-sprite.description">Iconos de glyphfox en sprite SVG: ids de símbolo, referencias use, regla del mismo origen, sprites en línea, subconjuntos con la CLI, límites de estilo y caché.</span></a></li><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Renderizado en el servidor</strong><span data-i18n="guide.ssr.description">Iconos SVG de glyphfox en el servidor: qué genera cada paquete, registro de iconos usados por nombre, cadenas toSvg, hidratación, animaciones y web component.</span></a></li><li><a href="html-cdn.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><strong data-i18n="guide.html-cdn.h1">Iconos en HTML plano desde una CDN</strong><span data-i18n="guide.html-cdn.description">Añade glyphfox a cualquier página HTML con un solo script: elemento glyph-fox, placeholders data-glyph, API global, versión fija y cuándo crear un subconjunto.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de peso, se transforman, se fusionan y cobran vida. Libres y de código abierto bajo la licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Todos los iconos por categoría</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guías</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Hecho por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

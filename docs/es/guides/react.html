@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/react.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Iconos para React: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.react.title">Iconos para React con glyphfox: componentes SVG y props</title>
+<meta name="description" content="Iconos SVG en React con glyphfox: instalación, componentes con tree shaking, cada prop, iconos por nombre, modificadores, Fusión, morph, refs y TypeScript." data-i18n-attr="content:guide.react.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/guides/react.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/react.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/react.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/react.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/react.html">
+<meta property="og:title" content="Iconos para React con glyphfox: componentes SVG y props">
+<meta property="og:description" content="Iconos SVG en React con glyphfox: instalación, componentes con tree shaking, cada prop, iconos por nombre, modificadores, Fusión, morph, refs y TypeScript.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/guides/react.html">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:title" content="Iconos para React con glyphfox: componentes SVG y props">
+<meta name="twitter:description" content="Iconos SVG en React con glyphfox: instalación, componentes con tree shaking, cada prop, iconos por nombre, modificadores, Fusión, morph, refs y TypeScript.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/react.png">
+<meta name="twitter:image:alt" content="Iconos para React: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://kwy404.github.io/glyphfox/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://kwy404.github.io/glyphfox/es/guides/"},{"@type":"ListItem","position":3,"name":"React","item":"https://kwy404.github.io/glyphfox/es/guides/react.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Puedo usar mis propios iconos con las mismas props?","acceptedAnswer":{"@type":"Answer","text":"Sí. createIcon(data) de glyphfox/react recibe datos de icono (name, body, tags, categories) y devuelve un componente con todas las props compartidas, incluidos el peso, los estilos duotone y solid, los modificadores y el morph. Dibuja el icono en el editor del Estudio o convierte un SVG existente con Fox-ify para que siga las mismas reglas de cuadrícula y trazo."}},{"@type":"Question","name":"¿Cómo defino un tamaño o un peso predeterminado para todos los iconos?","acceptedAnswer":{"@type":"Answer","text":"El paquete de React no tiene proveedor, así que lo habitual es un pequeño componente envoltorio como const NavIcon = (props) => \u003cIcon size={20} weight={1.75} {...props} />. El color no necesita nada: los iconos siguen el color CSS de su elemento padre."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copiado al portapapeles" data-theme-light="Cambiar al tema claro" data-theme-dark="Cambiar al tema oscuro">
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/react.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guías" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Todas las guías</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" aria-current="page" class="on" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit y web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML y CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Temas</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Iconos animados</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accesibilidad</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Renderizado en el servidor</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Ruta de navegación" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Inicio</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guías</a></li><li aria-current="page" data-i18n="guide.react.short">React</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.react.h1">Iconos para React</h1>
+<p class="lead" data-i18n="guide.react.lead">Cada icono de glyphfox es un componente de React que renderiza SVG en línea. Las mismas props sirven para todos los iconos, no hace falta ningún proveedor y los componentes que no importas nunca llegan a tu bundle.</p>
+<nav class="toc" aria-label="En esta página" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.react.install.h">Instalación</a></li><li><a href="#first" data-i18n="guide.react.first.h">Renderiza tus primeros iconos</a></li><li><a href="#axes" data-i18n="guide.react.axes.h">Tamaño, color, peso y estilo</a></li><li><a href="#names" data-i18n="guide.react.names.h">Iconos por nombre</a></li><li><a href="#compose" data-i18n="guide.react.compose.h">Modificadores y fusiones</a></li><li><a href="#motion" data-i18n="guide.react.motion.h">Morph y estados vivos</a></li><li><a href="#dom" data-i18n="guide.react.dom.h">Refs, className, style y eventos</a></li><li><a href="#types" data-i18n="guide.react.types.h">TypeScript</a></li><li><a href="#imports" data-i18n="guide.react.imports.h">Importaciones y tamaño del bundle</a></li><li><a href="#props" data-i18n="guide.react.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.react.pitfalls.h">Errores comunes</a></li><li><a href="#faq" data-i18n="seo.faq">Preguntas frecuentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.react.install.h">Instalación</h2>
+<p data-i18n="guide.react.install.p">Los componentes de React están en el paquete principal <code>glyphfox</code>, bajo el punto de entrada <code>glyphfox/react</code>. React es una peer dependency opcional: el paquete funciona con React 16.8 y versiones posteriores porque solo necesita hooks y <code>forwardRef</code>, y su conjunto de pruebas se ejecuta con React 19.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.react.install.p2">No hay que importar ninguna hoja de estilos ni agregar ningún plugin de compilación. El paquete incluye compilaciones ESM y CommonJS con declaraciones de tipos, así que Vite, webpack, Rspack, esbuild y Parcel lo usan tal cual.</p>
+</section>
+<section id="first">
+<h2 data-i18n="guide.react.first.h">Renderiza tus primeros iconos</h2>
+<p data-i18n="guide.react.first.p">Cada icono se exporta con su nombre en PascalCase y el sufijo <code>Icon</code>: <code>home</code> se convierte en <code>HomeIcon</code>, <code>arrow-right</code> en <code>ArrowRightIcon</code> y <code>message-circle</code> en <code>MessageCircleIcon</code>. Busca un nombre en el <a href="../../icons.html">explorador de iconos</a>; la página de cada icono, como la de <a href="../../icons/arrow-right.html">arrow right</a>, también muestra la línea de importación.</p>
+<div class="code"><div class="code-head"><span>Toolbar.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { HomeIcon, SearchIcon, BellIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Toolbar() {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;nav</span> <span class="tok-a">className</span>=<span class="tok-s">"toolbar"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;HomeIcon</span> <span class="tok-t">/&gt;</span> Home<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Search"</span><span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;SearchIcon</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;BellIcon</span> <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/nav</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react.first.p2">Sin props, un icono mide 24 por 24 píxeles, se dibuja con <code>stroke="currentColor"</code> (así toma el color del texto de su elemento padre) y se marca con <code>aria-hidden="true"</code>, porque la mayoría de los iconos aparecen junto a una etiqueta visible. Dale un <code>title</code> cuando el icono sea lo único que transmite el significado; la <a href="accessibility.html">guía de accesibilidad</a> explica los patrones.</p>
+</section>
+<section id="axes">
+<h2 data-i18n="guide.react.axes.h">Tamaño, color, peso y estilo</h2>
+<p data-i18n="guide.react.axes.p">Cada icono se renderiza según tres ejes: peso, esquinas y estilo. Son props normales, así que pueden variar según el estado, los temas o los breakpoints, como cualquier otro valor.</p>
+<div class="code"><div class="code-head"><span>Axes.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { FolderIcon, SearchIcon, ArrowRightIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Axes() {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;SearchIcon</span> <span class="tok-a">size</span>={<span class="tok-n">32</span>} <span class="tok-a">color</span>=<span class="tok-s">"#ff7a1a"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;SearchIcon</span> <span class="tok-a">weight</span>={<span class="tok-n">1</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;SearchIcon</span> <span class="tok-a">weight</span>={<span class="tok-n">3</span>} <span class="tok-a">corners</span>=<span class="tok-s">"sharp"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;SearchIcon</span> <span class="tok-a">size</span>={<span class="tok-n">16</span>} <span class="tok-a">weight</span>={<span class="tok-n">1.5</span>} absoluteWeight <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;FolderIcon</span> <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-a">secondaryColor</span>=<span class="tok-s">"#ff7a1a"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;FolderIcon</span> <span class="tok-a">variant</span>=<span class="tok-s">"solid"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;ArrowRightIcon</span> <span class="tok-a">rotate</span>={<span class="tok-n">90</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;ArrowRightIcon</span> mirrorRtl <span class="tok-t">/&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<ul class="list"><li data-i18n="guide.react.axes.list.1"><code>size</code> acepta un número de píxeles o cualquier longitud CSS en forma de cadena, como <code>"1.25em"</code>.</li><li data-i18n="guide.react.axes.list.2"><code>weight</code> va de 1 a 3 en la cuadrícula de 24. Por debajo de 24 píxeles, el trazo se compensa ópticamente, hasta un 30 por ciento más grueso en los tamaños más pequeños, para que un icono de 16 píxeles conserve la misma presencia que uno de 24. <code>absoluteWeight</code> desactiva esa compensación y mantiene el trazo exactamente en <code>weight</code> píxeles.</li><li data-i18n="guide.react.axes.list.3"><code>variant="duotone"</code> usa la segunda capa dibujada a mano si el icono la tiene o, si no, un relleno translúcido de sus formas cerradas. <code>variant="solid"</code> rellena las formas cerradas y recorta las líneas interiores como espacio negativo.</li><li data-i18n="guide.react.axes.list.4"><code>mirrorRtl</code> refleja los iconos direccionales cuando se renderizan dentro de <code>dir="rtl"</code>, así que el mismo marcado funciona en ambas direcciones.</li></ul>
+</section>
+<section id="names">
+<h2 data-i18n="guide.react.names.h">Iconos por nombre</h2>
+<p data-i18n="guide.react.names.p">Cuando el icono viene de los datos, como un campo de un CMS, una tabla de rutas o una preferencia del usuario, renderízalo con <code>Icon</code> y un nombre. La prop <code>name</code> acepta la sintaxis de nombres completa que comparten todos los paquetes de glyphfox, así que los modificadores, las fusiones y los estilos funcionan a partir de una sola cadena.</p>
+<div class="code"><div class="code-head"><span>MenuItem.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Icon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> MenuItem({ item }) {
+  <span class="tok-c">// item.icon could be "settings", "file+check@tr", "cloud&amp;lock:overlap" or "heart/solid"</span>
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;li</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>={item.icon} <span class="tok-a">size</span>={<span class="tok-n">18</span>} <span class="tok-t">/&gt;</span>
+      {item.label}
+    <span class="tok-t">&lt;/li</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react.names.p2">Los nombres que no se han importado en ninguna parte se cargan bajo demanda con una importación dinámica. webpack y esbuild la dividen en un pequeño chunk por icono y, hasta que llega ese chunk, <code>Icon</code> renderiza un SVG vacío del tamaño correcto, para que el diseño no dé saltos. Una compilación de producción de Vite deja esa importación intacta dentro de <code>node_modules</code>, por lo que, en ese caso, el nombre se queda vacío (la <a href="tree-shaking.html#chunks">guía de tree shaking</a> da los detalles). En todos los bundlers la solución es la misma: registra una vez, al arrancar, los datos de los nombres que renderizas a partir de cadenas, y se dibujan de forma síncrona, desde el primer renderizado y también en el servidor:</p>
+<div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+<span class="tok-k">import</span> { iconSettings, iconFile, iconCloud, iconLock } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+registerIcons([iconSettings, iconFile, iconCloud, iconLock]);</pre></div>
+<p data-i18n="guide.react.names.p3">Las exportaciones de datos (<code>iconSettings</code>, <code>iconArrowRight</code>...) vienen del punto de entrada principal <code>glyphfox</code> y, como los componentes, son compatibles con tree shaking: importar una ocupa unos pocos cientos de bytes. Importar un componente como <code>SettingsIcon</code> también registra sus datos.</p>
+</section>
+<section id="compose">
+<h2 data-i18n="guide.react.compose.h">Modificadores y fusiones</h2>
+<p data-i18n="guide.react.compose.p">Un modificador es una pequeña insignia en una esquina de cualquier icono: <code>plus</code>, <code>minus</code>, <code>check</code>, <code>x</code>, <code>alert</code>, <code>lock</code>, <code>clock</code>, <code>sync</code>, <code>arrow-up</code>, <code>arrow-down</code> o <code>dot</code>. El icono de debajo se recorta alrededor de la insignia dejando un hueco de recorte, así que las líneas nunca se tocan, sea cual sea el peso.</p>
+<div class="code"><div class="code-head"><span>Status.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { FileIcon, CloudIcon, Fusion } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Status({ saved, syncing }) {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;FileIcon</span> <span class="tok-a">modifier</span>={saved ? <span class="tok-s">'check'</span> : <span class="tok-k">undefined</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;CloudIcon</span> <span class="tok-a">modifier</span>={syncing ? <span class="tok-s">'sync'</span> : <span class="tok-k">undefined</span>} <span class="tok-a">modifierCorner</span>=<span class="tok-s">"top-right"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Fusion</span> <span class="tok-a">icons</span>={[<span class="tok-s">'cloud'</span>, <span class="tok-s">'lock'</span>]} <span class="tok-a">layout</span>=<span class="tok-s">"overlap"</span> <span class="tok-a">gap</span>={<span class="tok-n">1</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Fusion</span> <span class="tok-a">icons</span>={[<span class="tok-s">'shield'</span>, <span class="tok-s">'heart'</span>]} <span class="tok-a">layout</span>=<span class="tok-s">"inside"</span> <span class="tok-t">/&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react.compose.p2"><code>Fusion</code> combina de 2 a 10 iconos en un icono nuevo que sigue cumpliendo las reglas de los iconos: un único peso, la cuadrícula de 24 y el margen interior. Las disposiciones son <code>overlap</code>, <code>side</code>, <code>stack</code>, <code>grid</code>, <code>orbit</code>, <code>badge</code> e <code>inside</code>; <code>gap</code> define el hueco de recorte en unidades de la cuadrícula, y <code>scale</code> y <code>offsets</code> ajustan con precisión cada parte. Fusion acepta todas las props compartidas, así que un icono fusionado puede ser duotone, estar animado o llevar una etiqueta, como cualquier otro.</p>
+</section>
+<section id="motion">
+<h2 data-i18n="guide.react.motion.h">Morph y estados vivos</h2>
+<p data-i18n="guide.react.motion.p">Tres herramientas se encargan del movimiento. <code>MorphIcon</code> se transforma cada vez que cambia su <code>name</code>. <code>morphTo</code>, en cualquier icono, lo transforma hacia un destino cuando se activa su <code>trigger</code>. <code>animate</code> reproduce un preset (draw, pop, wiggle, spin, pulse, bounce o shake) al montarse, al pasar el puntero por encima, al hacer clic o mientras <code>active</code> sea true.</p>
+<div class="code"><div class="code-head"><span>Motion.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { MorphIcon, MenuIcon, BellIcon, HeartIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Motion({ open, copied, hasNews, liked }) {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">name</span>={copied ? <span class="tok-s">'check'</span> : <span class="tok-s">'copy'</span>} <span class="tok-a">duration</span>={<span class="tok-n">300</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;MenuIcon</span> <span class="tok-a">morphTo</span>={open ? <span class="tok-s">'x'</span> : <span class="tok-k">undefined</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;BellIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"shake"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">active</span>={hasNews} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;HeartIcon</span> <span class="tok-a">animate</span>=<span class="tok-s">"pop"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"click"</span> <span class="tok-a">variant</span>={liked ? <span class="tok-s">'solid'</span> : <span class="tok-s">'outline'</span>} <span class="tok-t">/&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react.motion.p2">Para un renderizador propio, <code>useMorph(name, { duration })</code> devuelve los datos del icono en el fotograma actual, que puedes pasar a <code>Icon</code> mediante su prop <code>icon</code> o a tu propio código de dibujo. Todas las animaciones respetan <code>prefers-reduced-motion</code>. La <a href="animated-icons.html">guía de iconos animados</a> repasa los presets, los disparadores y los pares de morph ajustados a mano.</p>
+<div class="code"><div class="code-head"><span>CustomMorph.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Icon, useMorph } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> PlayButton({ playing }) {
+  <span class="tok-k">const</span> frame = useMorph(playing ? <span class="tok-s">'pause'</span> : <span class="tok-s">'play'</span>, { duration: <span class="tok-n">250</span> });
+  <span class="tok-k">return</span> frame ? <span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={frame.icon} <span class="tok-a">variant</span>={frame.variant} <span class="tok-a">size</span>={<span class="tok-n">28</span>} <span class="tok-t">/&gt;</span> : <span class="tok-k">null</span>;
+}</pre></div>
+</section>
+<section id="dom">
+<h2 data-i18n="guide.react.dom.h">Refs, className, style y eventos</h2>
+<p data-i18n="guide.react.dom.p">Los componentes se crean con <code>forwardRef</code>, así que una ref apunta al elemento <code>&lt;svg&gt;</code> renderizado. <code>className</code> se agrega después de las clases integradas <code>glyphfox glyphfox-NAME</code>, <code>style</code> se pasa tal cual, y cualquier otro atributo SVG o controlador de eventos (<code>onClick</code>, <code>data-*</code>, <code>aria-*</code>, <code>id</code>) va directamente al elemento.</p>
+<div class="code"><div class="code-head"><span>Like.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { useRef } <span class="tok-k">from</span> <span class="tok-s">'react'</span>;
+<span class="tok-k">import</span> { HeartIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Like({ onLike }) {
+  <span class="tok-k">const</span> ref = useRef(<span class="tok-k">null</span>);
+  <span class="tok-k">const</span> like = () =<span class="tok-t">&gt;</span> {
+    ref.current?.animate([{ transform: <span class="tok-s">'scale(1)'</span> }, { transform: <span class="tok-s">'scale(1.25)'</span> }, { transform: <span class="tok-s">'scale(1)'</span> }], <span class="tok-n">240</span>);
+    onLike();
+  };
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={like}<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;HeartIcon</span> <span class="tok-a">ref</span>={ref} <span class="tok-a">className</span>=<span class="tok-s">"like-icon"</span> <span class="tok-a">style</span>={{ color: <span class="tok-s">'var(--accent)'</span> }} <span class="tok-t">/&gt;</span>
+      Like
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react.dom.p2">Un <code>aria-label</code> pasado de esta forma también marca el icono como significativo: el componente cambia automáticamente de <code>aria-hidden</code> a <code>role="img"</code>.</p>
+</section>
+<section id="types">
+<h2 data-i18n="guide.react.types.h">TypeScript</h2>
+<p data-i18n="guide.react.types.p">Los tipos vienen incluidos en el paquete. <code>GlyphIconComponent</code> es el tipo de todos los componentes de icono, <code>GlyphProps</code> son sus props (las props compartidas más todos los atributos SVG) y <code>IconName</code>, del punto de entrada principal, es la unión de todos los nombres de iconos, lo que te da autocompletado en <code>Icon</code> y en tus propios datos.</p>
+<div class="code"><div class="code-head"><span>nav.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> <span class="tok-k">type</span> { IconName } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+<span class="tok-k">import</span> { Icon, HomeIcon, SettingsIcon, <span class="tok-k">type</span> GlyphIconComponent } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">type</span> NavItem = { label: string; href: string; icon: GlyphIconComponent };
+<span class="tok-k">const</span> items: NavItem[] = [
+  { label: <span class="tok-s">'Home'</span>, href: <span class="tok-s">'/'</span>, icon: HomeIcon },
+  { label: <span class="tok-s">'Settings'</span>, href: <span class="tok-s">'/settings'</span>, icon: SettingsIcon },
+];
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Nav() {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;nav</span><span class="tok-t">&gt;</span>
+      {items.map(({ label, href, icon: ItemIcon }) =<span class="tok-t">&gt;</span> (
+        <span class="tok-t">&lt;a</span> <span class="tok-a">key</span>={href} <span class="tok-a">href</span>={href}<span class="tok-t">&gt;</span>
+          <span class="tok-t">&lt;ItemIcon</span> <span class="tok-a">size</span>={<span class="tok-n">18</span>} <span class="tok-t">/&gt;</span> {label}
+        <span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+      ))}
+    <span class="tok-t">&lt;/nav</span><span class="tok-t">&gt;</span>
+  );
+}
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Badge({ name }: { name: IconName }) {
+  <span class="tok-k">return</span> <span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>={name} <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-t">/&gt;</span>;
+}</pre></div>
+</section>
+<section id="imports">
+<h2 data-i18n="guide.react.imports.h">Importaciones y tamaño del bundle</h2>
+<p data-i18n="guide.react.imports.p">Las importaciones con nombre de <code>glyphfox/react</code> son compatibles con tree shaking: cada icono es un módulo propio, creado con una llamada anotada como pura, y el paquete declara qué archivos tienen efectos secundarios. Las importaciones profundas como <code>glyphfox/react/icons/home</code> cargan directamente un único módulo de icono, lo que ayuda a las herramientas que no hacen tree shaking y evita que los servidores de desarrollo procesen el índice completo.</p>
+<div class="code"><div class="code-head"><span>deep-imports.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { HomeIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react/icons/home'</span>;
+<span class="tok-k">import</span> FileIcon <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react/icons/file'</span>; <span class="tok-c">// default export works too</span></pre></div>
+<p data-i18n="guide.react.imports.p2">La <a href="tree-shaking.html">guía de tree shaking</a> analiza, con mediciones, qué rompe el tree shaking, cuánto cuesta el runtime compartido y por qué la salida de la compilación contiene un chunk diminuto por icono.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.react.props.h">Props</h2>
+<p data-i18n="guide.react.props.p">Todos los componentes de icono, <code>Icon</code>, <code>Fusion</code> y <code>MorphIcon</code> aceptan las mismas props. Tienen el mismo nombre y significado en Vue, Svelte, Angular, el web component y <code>toSvg</code>, así que un valor copiado del <a href="../../studio.html">Estudio</a> funciona en todas partes.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="docs.type">Tipo</th><th data-i18n="docs.default">Por defecto</th><th data-i18n="docs.desc">Descripción</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Ancho y alto; los números son píxeles.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Color principal.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color de la capa duotone y del relleno sólido.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacidad de la capa duotone o del relleno sólido.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Trazo de 1 a 3 en la cuadrícula de 24, con compensación óptica por debajo de 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Mantiene el trazo en weight píxeles a cualquier tamaño.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Uniones y extremos redondeados o rectos.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Eje de estilo; solid se obtiene de las formas cerradas.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotación en grados.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Refleja en horizontal.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Refleja en vertical.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Refleja en layouts de derecha a izquierda.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>ninguno</td><td data-i18n="prop.animate">Preset de estado vivo.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Cuándo se reproduce la animación o el morph.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">El estado para el disparador state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>según el preset</td><td data-i18n="prop.duration">Duración de la animación o del morph.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Retraso de la animación o del morph.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repite sin fin o un número de veces (spin y pulse se repiten por defecto).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>ninguno</td><td data-i18n="prop.modifier">Insignia con hueco de recorte automático.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Esquina de la insignia.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>ninguno</td><td data-i18n="prop.morphTo">Destino del morph; el disparador decide cuándo se muestra.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>ninguno</td><td data-i18n="prop.title">Nombre accesible: title, role img y aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true sin title</td><td data-i18n="prop.decorative">Oculta el icono a las tecnologías de apoyo.</td></tr>
+</tbody></table></div>
+<p data-i18n="guide.react.props.p2"><code>Icon</code> y <code>MorphIcon</code> también aceptan <code>name</code> (cualquier forma de la sintaxis de nombres) o <code>icon</code> (datos de icono). <code>Fusion</code> acepta <code>icons</code>, <code>layout</code>, <code>gap</code>, <code>scale</code> y <code>offsets</code>.</p>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.react.pitfalls.h">Errores comunes</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.react.pitfalls.list.1.t"><code>Icon</code> se renderiza vacío al principio</dt><dd data-i18n="guide.react.pitfalls.list.1.d">Un nombre que todavía no está registrado se carga con una importación dinámica, así que el primer renderizado (y el renderizado en el servidor) es un SVG vacío. Importa el componente o llama a <code>registerIcons</code> con los datos de cada nombre que renderices mediante una cadena.</dd></div><div><dt data-i18n="guide.react.pitfalls.list.2.t">Server Components de Next.js</dt><dd data-i18n="guide.react.pitfalls.list.2.d">Los componentes usan hooks y el paquete no tiene la directiva <code>"use client"</code>, así que un Server Component no puede renderizarlos directamente. La <a href="nextjs.html">guía de Next.js</a> muestra la solución de un solo archivo y una opción sin JavaScript.</dd></div><div><dt data-i18n="guide.react.pitfalls.list.3.t">Colorear con <code>fill</code></dt><dd data-i18n="guide.react.pitfalls.list.3.d">Los iconos son trazos sobre <code>fill="none"</code>. Si pasas <code>fill</code>, se rellenan todas las formas, y eso rara vez es lo que quieres. Usa <code>color</code> (o la propiedad CSS <code>color</code> en un elemento padre) para el trazo y <code>variant="solid"</code> para las formas rellenas.</dd></div><div><dt data-i18n="guide.react.pitfalls.list.4.t">El CSS global anula el peso</dt><dd data-i18n="guide.react.pitfalls.list.4.d">Una regla de una hoja de estilos como <code>svg { stroke-width: 1.5 }</code> tiene prioridad sobre el atributo SVG que lleva el eje de peso, incluida su compensación óptica. Limita el alcance de esas reglas o usa la prop <code>weight</code>.</dd></div><div><dt data-i18n="guide.react.pitfalls.list.5.t">Los tamaños relativos se saltan la compensación óptica</dt><dd data-i18n="guide.react.pitfalls.list.5.d">La compensación necesita conocer el tamaño en píxeles. Con <code>size="1em"</code>, el trazo se queda en el peso sin compensar, lo que puede verse fino con tamaños de texto pequeños; pasa un número de píxeles donde importe o un <code>weight</code> un poco más alto.</dd></div><div><dt data-i18n="guide.react.pitfalls.list.6.t">Llamar a <code>createIcon</code> durante el renderizado</dt><dd data-i18n="guide.react.pitfalls.list.6.d"><code>createIcon(data)</code> convierte tus propios datos de icono en un componente con todas las props. Llámalo una sola vez a nivel de módulo: si lo llamas dentro de un componente, crea un tipo de componente nuevo en cada renderizado y vuelve a montar el SVG.</dd></div><div><dt data-i18n="guide.react.pitfalls.list.7.t"><code>import *</code> con una clave dinámica</dt><dd data-i18n="guide.react.pitfalls.list.7.d"><code>Icons[name]</code> sobre una importación de espacio de nombres mantiene todos los iconos en el bundle. Usa en su lugar <code>Icon</code> con un nombre, que solo carga lo que se renderiza.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Preguntas frecuentes</h2>
+<h3 data-i18n="guide.react.faq.own.q">¿Puedo usar mis propios iconos con las mismas props?</h3>
+<p data-i18n="guide.react.faq.own.a">Sí. <code>createIcon(data)</code> de <code>glyphfox/react</code> recibe datos de icono (<code>name</code>, <code>body</code>, <code>tags</code>, <code>categories</code>) y devuelve un componente con todas las props compartidas, incluidos el peso, los estilos duotone y solid, los modificadores y el morph. Dibuja el icono en el <a href="../../studio.html">editor del Estudio</a> o convierte un SVG existente con Fox-ify para que siga las mismas reglas de cuadrícula y trazo.</p>
+<h3 data-i18n="guide.react.faq.defaults.q">¿Cómo defino un tamaño o un peso predeterminado para todos los iconos?</h3>
+<p data-i18n="guide.react.faq.defaults.a">El paquete de React no tiene proveedor, así que lo habitual es un pequeño componente envoltorio como <code>const NavIcon = (props) =&gt; &lt;Icon size={20} weight={1.75} {...props} /&gt;</code>. El color no necesita nada: los iconos siguen el <code>color</code> CSS de su elemento padre.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Iconos de esta guía</h2>
+<ul class="icon-links"><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../../icons/folder.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/></svg><span>folder</span></a></li><li><a href="../../icons/arrow-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-arrow-right" aria-hidden="true"><path d="M4 12h16"/><path d="M14 6l6 6-6 6"/></svg><span>arrow-right</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/></svg><span>cloud</span></a></li><li><a href="../../icons/lock.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-lock" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/></svg><span>lock</span></a></li><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guías relacionadas</h2>
+<ul class="guide-cards"><li><a href="nextjs.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-route" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg><strong data-i18n="guide.nextjs.h1">Iconos en Next.js</strong><span data-i18n="guide.nextjs.description">Iconos SVG en Next.js con glyphfox: límite de cliente en el App Router, SVG sin JavaScript en Server Components, Pages Router e iconos por nombre en el servidor.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking de iconos</strong><span data-i18n="guide.tree-shaking.description">Tree shaking de iconos de glyphfox en Vite, webpack, Rollup y esbuild: mediciones del bundle, qué lo impide, iconos cargados por nombre y subconjuntos fijos.</span></a></li><li><a href="animated-icons.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><strong data-i18n="guide.animated-icons.h1">Iconos animados</strong><span data-i18n="guide.animated-icons.description">Iconos animados con glyphfox: presets draw, pop, spin y shake, disparadores hover, click y state, morphs entre iconos y solo con CSS, y movimiento reducido.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Iconos accesibles</strong><span data-i18n="guide.accessibility.description">Iconos accesibles con glyphfox: decorativos por defecto, títulos y etiquetas, botones solo con icono, iconos de estado, contraste, movimiento reducido y RTL.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de peso, se transforman, se fusionan y cobran vida. Libres y de código abierto bajo la licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Todos los iconos por categoría</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guías</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Hecho por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>
