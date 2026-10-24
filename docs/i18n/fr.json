@@ -6,6 +6,7 @@
   "nav.studio": "Studio",
   "nav.docs": "Docs",
   "nav.changelog": "Nouveautés",
+  "nav.universe": "Univers",
   "nav.github": "glyphfox sur GitHub",
   "nav.menu": "Menu",
   "lang.label": "Langue",
@@ -578,5 +579,8 @@
   "home.art.sky.note": "La tête de Fenn, tracée en étoiles.",
   "home.art.grid": "Une grille éclatée",
   "home.art.grid.note": "Grille, lignes de construction, remplissage duotone et traits, séparés.",
-  "docs.native": "Android, iOS, Flutter"
+  "docs.native": "Android, iOS, Flutter",
+  "icons.universe.label": "Autres jeux",
+  "icons.universe.count": "414 952 icônes dans 245 jeux",
+  "icons.universe.open": "Parcourir tous les jeux d'icônes sous licence libre dans glyphfox universe"
 }

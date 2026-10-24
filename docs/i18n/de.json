@@ -6,6 +6,7 @@
   "nav.studio": "Studio",
   "nav.docs": "Docs",
   "nav.changelog": "Neuigkeiten",
+  "nav.universe": "Universum",
   "nav.github": "glyphfox auf GitHub",
   "nav.menu": "Menü",
   "lang.label": "Sprache",
@@ -578,5 +579,8 @@
   "home.art.sky.note": "Der Kopf von Fenn, in Sternen nachgezeichnet.",
   "home.art.grid": "Ein Raster in Explosionsansicht",
   "home.art.grid.note": "Raster, Hilfslinien, Duotone-Füllung und Striche, auseinandergezogen.",
-  "docs.native": "Android, iOS, Flutter"
+  "docs.native": "Android, iOS, Flutter",
+  "icons.universe.label": "Weitere Sets",
+  "icons.universe.count": "414.952 Icons in 245 Sets",
+  "icons.universe.open": "Alle Icon Sets mit offener Lizenz in glyphfox universe durchsuchen"
 }

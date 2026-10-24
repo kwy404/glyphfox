@@ -6,6 +6,7 @@
   "nav.studio": "Studio",
   "nav.docs": "Docs",
   "nav.changelog": "Changelog",
+  "nav.universe": "Universe",
   "nav.github": "glyphfox on GitHub",
   "nav.menu": "Menu",
   "lang.label": "Language",
@@ -578,5 +579,8 @@
   "home.art.sky.note": "Fenn's head, traced in stars.",
   "home.art.grid": "An exploded grid",
   "home.art.grid.note": "Grid, keylines, duotone fill and strokes, pulled apart.",
-  "docs.native": "Android, iOS, Flutter"
+  "docs.native": "Android, iOS, Flutter",
+  "icons.universe.label": "Other sets",
+  "icons.universe.count": "414,952 icons in 245 sets",
+  "icons.universe.open": "Browse every open license icon set in glyphfox universe"
 }
