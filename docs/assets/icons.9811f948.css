@@ -17,6 +17,31 @@
   padding: 24px 12px 24px 20px;
   border-right: 1px solid var(--line);
 }
+.cats-universe {
+  display: grid;
+  gap: 3px;
+  margin: 0 0 20px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s var(--ease), background 0.15s var(--ease);
+}
+.cats-universe:hover,
+.cats-universe:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.cats-universe-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+.cats-universe-count {
+  font: 500 11.5px var(--mono);
+  color: var(--text-3);
+}
 .cats-title {
   font: 600 11px var(--mono);
   letter-spacing: 0.14em;
@@ -377,6 +402,13 @@
   }
   .cats-title {
     display: none;
+  }
+  .cats-universe {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 10px;
+    padding: 8px 12px;
   }
   .cats ul {
     display: flex;

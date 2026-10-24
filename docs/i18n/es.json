@@ -6,6 +6,7 @@
   "nav.studio": "Estudio",
   "nav.docs": "Docs",
   "nav.changelog": "Novedades",
+  "nav.universe": "Universo",
   "nav.github": "glyphfox en GitHub",
   "nav.menu": "Menú",
   "lang.label": "Idioma",
@@ -577,5 +578,8 @@
   "home.art.sky.note": "La cabeza de Fenn, trazada con estrellas.",
   "home.art.grid": "Una cuadrícula despiezada",
   "home.art.grid.note": "Cuadrícula, líneas guía, relleno duotono y trazos, separados.",
-  "docs.native": "Android, iOS, Flutter"
+  "docs.native": "Android, iOS, Flutter",
+  "icons.universe.label": "Otros conjuntos",
+  "icons.universe.count": "414.952 iconos en 245 conjuntos",
+  "icons.universe.open": "Explorar todos los conjuntos de iconos de licencia abierta en glyphfox universe"
 }
