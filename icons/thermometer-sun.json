@@ -1,0 +1,23 @@
+{
+  "categories": [
+    "weather"
+  ],
+  "tags": [
+    "hot",
+    "heat",
+    "summer",
+    "temperature",
+    "warm"
+  ],
+  "animation": {
+    "name": "spin",
+    "duration": 1600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [17.5, 9],
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(360deg)" } }
+    ]
+  }
+}

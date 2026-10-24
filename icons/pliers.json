@@ -1,0 +1,28 @@
+{
+  "categories": [
+    "interface"
+  ],
+  "tags": [
+    "tool",
+    "grip",
+    "pinch",
+    "repair",
+    "electrician"
+  ],
+  "animation": {
+    "name": "apart",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 3, "props": { "transform": "translate(-0.7px, 0px)" } },
+      { "at": 0.65, "element": 3, "props": { "transform": "translate(0.105px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 4, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 4, "props": { "transform": "translate(0.7px, 0px)" } },
+      { "at": 0.65, "element": 4, "props": { "transform": "translate(-0.105px, 0px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
+}

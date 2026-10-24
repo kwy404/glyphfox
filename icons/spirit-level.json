@@ -1,0 +1,25 @@
+{
+  "categories": [
+    "interface"
+  ],
+  "tags": [
+    "level",
+    "bubble",
+    "balance",
+    "align",
+    "construction"
+  ],
+  "animation": {
+    "name": "tilt",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 12],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.35, "element": "all", "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.6, "element": "all", "props": { "transform": "rotate(4deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}

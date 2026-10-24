@@ -1,0 +1,30 @@
+{
+  "categories": [
+    "weather",
+    "travel"
+  ],
+  "tags": [
+    "wind",
+    "airport",
+    "direction",
+    "breeze",
+    "gust"
+  ],
+  "animation": {
+    "name": "sway",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [4, 9],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(6deg)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "rotate(-3.6deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "rotate(6deg)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "rotate(-3.6deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}

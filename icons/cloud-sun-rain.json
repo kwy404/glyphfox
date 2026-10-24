@@ -1,0 +1,25 @@
+{
+  "categories": [
+    "weather"
+  ],
+  "tags": [
+    "showers",
+    "mixed",
+    "forecast",
+    "rain",
+    "sunny spells"
+  ],
+  "animation": {
+    "name": "fall",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 }, "easing": "ease-in" },
+      { "at": 0.182, "element": 3, "props": { "transform": "translate(0px, 1.5px)", "opacity": 0 } },
+      { "at": 0.187, "element": 3, "props": { "transform": "translate(0px, -1.5px)", "opacity": 0 }, "easing": "ease-out" },
+      { "at": 0.39, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)", "opacity": 1 } }
+    ]
+  }
+}

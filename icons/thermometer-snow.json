@@ -1,0 +1,23 @@
+{
+  "categories": [
+    "weather"
+  ],
+  "tags": [
+    "cold",
+    "freezing",
+    "winter",
+    "temperature",
+    "frost"
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [18, 9],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(60deg)" } }
+    ]
+  }
+}
