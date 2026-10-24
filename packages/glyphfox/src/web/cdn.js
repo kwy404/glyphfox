@@ -3,11 +3,13 @@
 
 import * as api from '../api.js';
 import { icons } from '../registry.js';
+import { collectionIcons } from '../collections.js';
 import { registerIcons } from '../core/lookup.js';
 import { GlyphFoxElement, defineGlyphFox } from './element.js';
 import * as smartElements from '../smart/web.js'; // smart icons hook (src/smart)
 
 registerIcons(icons);
+registerIcons(collectionIcons);
 defineGlyphFox();
 smartElements.defineSmartElements();
 

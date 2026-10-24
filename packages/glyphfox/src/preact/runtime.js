@@ -3,12 +3,13 @@
 // `ref` reaches the <svg> element.
 
 import { h } from 'preact';
-import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { fuse } from '../core/compose.js';
 import { morphFrame, morphGoal, splitProps, tween } from '../core/controller.js';
 import { componentName } from '../core/formats.js';
 import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
 import { bool, renderIcon, strokeWidth } from '../core/render.js';
+import { attachTriggers } from '../core/player.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
 
 export { registerIcons };
@@ -128,11 +129,32 @@ function useGlyph(icon, allProps) {
     if (onMouseLeave) handlers.onMouseLeave = onMouseLeave;
   }
 
+  // Triggers that need a script run on the trigger engine, as in React;
+  // hover, focus and press take the animation over from the CSS (gf-js).
+  const own = useRef(null);
+  const userRef = svgRest.ref;
+  const setRef = useCallback(
+    (node) => {
+      own.current = node;
+      if (typeof userRef === 'function') userRef(node);
+      else if (userRef) userRef.current = node;
+    },
+    [userRef],
+  );
+  const animated = (glyph.animate || glyph.animation) && !bool(glyph.disabled);
+  const takeover = animated && ['hover', 'focus', 'press'].includes(trigger);
+  const engine = animated && (takeover || trigger === 'inView');
+  const animKey = typeof glyph.animation === 'object' && glyph.animation ? JSON.stringify(glyph.animation) : glyph.animation;
+  useEffect(() => {
+    if (!engine || !own.current) return undefined;
+    return attachTriggers(own.current, glyph, icon);
+  }, [engine, trigger, animKey, glyph.animate, glyph.duration, glyph.delay, glyph.loop, glyph.triggerParent, icon]);
+
   const labelled = svgRest['aria-label'] !== undefined || svgRest['aria-labelledby'] !== undefined;
   const decorative = glyph.decorative !== undefined ? glyph.decorative : glyph.title ? false : !labelled;
-  const extra = [cls, className].filter(Boolean).join(' ') || undefined;
+  const extra = [cls, className, takeover ? 'gf-js' : ''].filter(Boolean).join(' ') || undefined;
   const [, attrs, kids] = renderIcon(frame.icon, { ...glyph, variant: frame.variant, morphTo: undefined, class: extra, run, decorative });
-  const props = { ...clean(attrs), ...svgRest, ...handlers };
+  const props = { ...clean(attrs), ...svgRest, ...handlers, ref: setRef };
   if (style !== undefined) props.style = style;
   return h('svg', props, ...kids.map((c, i) => toVNode(c, i)), children);
 }

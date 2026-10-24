@@ -66,8 +66,8 @@ function optimizeNode(node) {
   }
 }
 
-/** Checks one icon and returns { data, problems }. */
-export function readIcon(dir, name) {
+/** Checks one icon and returns { data, problems }. The grid is 24, or 48 for the display collection. */
+export function readIcon(dir, name, { grid = 24 } = {}) {
   const problems = [];
   const fail = (msg) => problems.push(`${name}: ${msg}`);
   if (!NAME_RE.test(name)) fail('names must be kebab-case');
@@ -88,7 +88,9 @@ export function readIcon(dir, name) {
     fail(err.message);
     return { data: null, problems };
   }
-  for (const [k, v] of Object.entries(ROOT)) if (root.attrs[k] !== v) fail(`root ${k} must be "${v}"`);
+  const rootRules = grid === 24 ? ROOT : { ...ROOT, width: String(grid), height: String(grid), viewBox: `0 0 ${grid} ${grid}` };
+  const pad = (2 * grid) / 24;
+  for (const [k, v] of Object.entries(rootRules)) if (root.attrs[k] !== v) fail(`root ${k} must be "${v}"`);
   for (const k of Object.keys(root.attrs)) if (!(k in ROOT)) fail(`unexpected root attribute "${k}"`);
   if (/<!--|<!\[CDATA|<\?/.test(root.body)) fail('comments and processing instructions are not allowed');
   const nodes = parseBody(root.body);
@@ -113,7 +115,7 @@ export function readIcon(dir, name) {
     try {
       if (tag === 'path') parsePath(a.d || '');
       const b = nodeBounds(node);
-      if (b.minX < 2 - 0.001 || b.minY < 2 - 0.001 || b.maxX > 22 + 0.001 || b.maxY > 22 + 0.001) fail(`${where} leaves the 2 to 22 padding box`);
+      if (b.minX < pad - 0.001 || b.minY < pad - 0.001 || b.maxX > grid - pad + 0.001 || b.maxY > grid - pad + 0.001) fail(`${where} leaves the ${pad} to ${grid - pad} padding box`);
     } catch (err) {
       fail(`${where} ${err.message}`);
     }
@@ -124,7 +126,8 @@ export function readIcon(dir, name) {
   if (problems.length) return { data: null, problems };
   const optimized = nodes.map(optimizeNode);
   const primary = optimized.filter((n) => n[1].class !== 'gf-secondary');
-  const solid = analyzeSolid(primary);
+  // Solid fills are cut for the 24 grid; other grids stay outline only.
+  const solid = grid === 24 ? analyzeSolid(primary) : null;
   const data = {
     name,
     body: nodesToString(optimized),
@@ -187,4 +190,35 @@ export function readIcons(dir) {
     icons.sort((a, b) => a.name.localeCompare(b.name));
   }
   return { icons, problems, warnings };
+}
+
+/** The signature collections shipped in the package: icons/<id>, drawn on their grid. */
+export const COLLECTIONS = [
+  ['display', 48],
+  ['isometric', 24],
+];
+
+/**
+ * Reads the collections of icons/ (see COLLECTIONS). Icons are named
+ * "id/name" and carry `grid` when it is not 24: [{ id, grid, icons }].
+ */
+export function readCollections(dir) {
+  const collections = [];
+  const problems = [];
+  for (const [id, grid] of COLLECTIONS) {
+    const sub = join(dir, id);
+    if (!existsSync(sub)) continue;
+    const names = [...new Set(readdirSync(sub).filter((f) => f.endsWith('.svg')).map((f) => f.slice(0, -4)))].sort();
+    const icons = [];
+    for (const name of names) {
+      const r = readIcon(sub, name, { grid });
+      problems.push(...r.problems.map((p) => `${id}/${p}`));
+      if (!r.data) continue;
+      const data = { ...r.data, name: `${id}/${name}` };
+      if (grid !== 24) data.grid = grid;
+      icons.push(data);
+    }
+    collections.push({ id, grid, icons });
+  }
+  return { collections, problems };
 }

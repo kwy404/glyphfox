@@ -49,7 +49,10 @@ export type Format = 'svg' | 'jsx' | 'vue' | 'svelte' | 'angular' | 'html' | 'ta
  * An icon spec: a name, or the composition syntax shared by every package:
  * "file+check@tr" (modifier), "cloud&lock:overlap" (fusion), "heart/solid" (style).
  */
-export type IconSpec = IconName | (string & {});
+/** Names of the collection icons (glyphfox/collections): "display/calendar-clock", "isometric/cube". */
+export type CollectionIconName = /*COLLECTION_NAMES*/;
+
+export type IconSpec = IconName | CollectionIconName | (string & {});
 
 /** Icon data: the markup inside <svg>, tags and categories. */
 export interface IconData<N extends string = string> {
@@ -63,6 +66,8 @@ export interface IconData<N extends string = string> {
   animation?: AnimationTimeline | AnimationTimeline[];
   /** Set on icons from filled sets: shapes keep their own fill, the style axis and the draw animation fall back. */
   filled?: boolean;
+  /** Drawing grid when it is not 24 (48 for the display collection). Weight is measured in units of this grid. */
+  grid?: number;
 }
 
 /** Icon data as an icon source returns it, before it is normalized onto the 24 grid. */
@@ -194,7 +199,11 @@ export declare const FORMATS: Format[];
 export declare const MORPH_PAIRS: Array<[string, string]>;
 
 /** Icon data for a name, or null. Prefixed names come from a registered icon source. */
-export declare function getIcon(name: IconName | (string & {})): IconData | null;
+export declare function getIcon(name: IconName | CollectionIconName | (string & {})): IconData | null;
+/** The collections shipped with the package and their grids. */
+export declare const COLLECTIONS: Readonly<{ display: 48; isometric: 24 }>;
+/** Drawing grid of an icon: 24, or its grid. */
+export declare function gridOfIcon(icon: IconData): number;
 /** Registers the source of "prefix:name" icons for every package and the web component. Pass null to remove it. */
 export declare function registerIconSource(prefix: string, source: IconSource | null): void;
 /** True when a source is registered for the prefix. */

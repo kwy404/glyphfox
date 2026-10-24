@@ -1,17 +1,18 @@
 // Public API of the glyphfox core package.
 
 import { icons } from './registry.js';
+import { collectionIcons } from './collections.js';
 import { ANIMATION_NAMES, ANIMATIONS, TRIGGERS, animationLength, frameState } from './core/animate.js';
 import { propsFromAttributes, ATTRIBUTES } from './core/attributes.js';
 import { CORNERS, LAYOUTS, MODIFIER_NAMES, fuse as fuseIcons, withModifier } from './core/compose.js';
 import { FORMATS, componentName, dataName, snippet, toDataUri } from './core/formats.js';
 import { MORPH_PAIRS, createMorph } from './core/morph.js';
-import { CORNER_STYLES, DEFAULTS, PROPS, VARIANTS, renderIcon, renderToString, sizeToPx, strokeWidth } from './core/render.js';
+import { CORNER_STYLES, DEFAULTS, PROPS, VARIANTS, gridOfIcon, renderIcon, renderToString, sizeToPx, strokeWidth } from './core/render.js';
 import { isComposite, parseSpec, resolveSpec } from './core/spec.js';
 import { nodesToString, parseBody } from './core/nodes.js';
 import { analyzeSolid } from './core/solid.js';
 import { replaceGlyphs as replaceWith } from './core/runtime.js';
-import { hasIconSource, loadIcon, lookupIcon, registerIconSource } from './core/lookup.js';
+import { COLLECTIONS, hasIconSource, loadIcon, lookupIcon, registerIconSource } from './core/lookup.js';
 import { normalizeIcon } from './core/external.js';
 import { attachTriggers } from './core/player.js';
 import { normalizeTimeline, sampleTimeline, timelineCss } from './core/timeline.js';
@@ -22,11 +23,13 @@ export const iconNames = Object.keys(icons);
 export const categories = [...new Set(iconNames.flatMap((n) => icons[n].categories))].sort();
 
 /**
- * Icon data for a plain name, or null. Prefixed names ("mdi:home") come from
+ * Icon data for a plain name, or null. Collection names ("display/calendar-clock")
+ * come from glyphfox/collections. Prefixed names ("mdi:home") come from
  * a registered icon source once they are loaded (see registerIconSource).
  */
 export function getIcon(name) {
   if (Object.prototype.hasOwnProperty.call(icons, name)) return icons[name];
+  if (Object.prototype.hasOwnProperty.call(collectionIcons, name)) return collectionIcons[name];
   return typeof name === 'string' && name.indexOf(':') > 0 ? lookupIcon(name) : null;
 }
 
@@ -92,6 +95,7 @@ export {
   ANIMATIONS,
   ANIMATION_NAMES,
   ATTRIBUTES,
+  COLLECTIONS,
   CORNERS,
   CORNER_STYLES,
   DEFAULTS,
@@ -110,6 +114,7 @@ export {
   dataName,
   frameState,
   hasIconSource,
+  gridOfIcon,
   isComposite,
   loadIcon,
   normalizeIcon,

@@ -95,14 +95,36 @@ export function bool(v) {
   return s !== 'false' && s !== '0' && s !== 'no';
 }
 
-function transformFor(rotate, flipX, flipY) {
+function transformFor(rotate, flipX, flipY, grid = 24) {
   const parts = [];
   const r = Number(rotate) || 0;
-  if (r % 360) parts.push(`rotate(${round3(r)} 12 12)`);
-  if (flipX && flipY) parts.push('matrix(-1 0 0 -1 24 24)');
-  else if (flipX) parts.push('matrix(-1 0 0 1 24 0)');
-  else if (flipY) parts.push('matrix(1 0 0 -1 0 24)');
+  const c = grid / 2;
+  if (r % 360) parts.push(`rotate(${round3(r)} ${c} ${c})`);
+  if (flipX && flipY) parts.push(`matrix(-1 0 0 -1 ${grid} ${grid})`);
+  else if (flipX) parts.push(`matrix(-1 0 0 1 ${grid} 0)`);
+  else if (flipY) parts.push(`matrix(1 0 0 -1 0 ${grid})`);
   return parts.join(' ');
+}
+
+/**
+ * Drawing grid of an icon: 24, or the `grid` of a collection icon (48 for
+ * the display collection). Weight is measured in units of that grid.
+ */
+export function gridOfIcon(icon) {
+  const g = Number(icon && icon.grid);
+  return Number.isFinite(g) && g > 0 ? g : 24;
+}
+
+/**
+ * Props for an icon drawn on another grid: the size defaults to the grid,
+ * the stroke is compensated for the size the grid is drawn at, and the
+ * 24 grid composition (modifier badges and morphs) is left out.
+ */
+function gridProps(o, grid) {
+  const size = o.size === undefined || o.size === null || o.size === '' ? grid : o.size;
+  const px = sizeToPx(size);
+  const sw = strokeWidth({ size: px ? (px * 24) / grid : size, weight: o.weight, absoluteWeight: o.absoluteWeight });
+  return { o: { ...o, size, modifier: undefined, morphTo: undefined }, sw };
 }
 
 const modCache = new WeakMap();
@@ -183,13 +205,13 @@ function safeName(name) {
     .replace(/^-+|-+$/g, '');
 }
 
-function rootAttrs(icon, o, sw, extraClasses) {
+function rootAttrs(icon, o, sw, extraClasses, grid = 24) {
   const sharp = o.corners === 'sharp';
   const attrs = {
     xmlns: 'http://www.w3.org/2000/svg',
     width: String(o.size ?? 24),
     height: String(o.size ?? 24),
-    viewBox: '0 0 24 24',
+    viewBox: `0 0 ${grid} ${grid}`,
     fill: 'none',
     stroke: 'currentColor',
     'stroke-width': String(sw),
@@ -218,8 +240,11 @@ function rootAttrs(icon, o, sw, extraClasses) {
  */
 export function renderIcon(icon, props = {}) {
   if (!icon || typeof icon.body !== 'string') throw new TypeError('renderIcon expects an icon data object');
-  const o = directionProps(icon, props); // smart icons hook (src/smart/locale.js)
-  const sw = strokeWidth(o);
+  const grid = gridOfIcon(icon);
+  let o = directionProps(icon, props); // smart icons hook (src/smart/locale.js)
+  let sw;
+  if (grid === 24) sw = strokeWidth(o);
+  else ({ o, sw } = gridProps(o, grid));
   // Filled icons (from filled sets) keep their own paint: the style axis has
   // nothing to change and the draw animation falls back to pop.
   const filled = icon.filled === true;
@@ -293,7 +318,7 @@ export function renderIcon(icon, props = {}) {
     }
     content = [['g', group, [...fillNodes, ...strokeNodes]]];
   } else if (anim) {
-    const spec = { animate: anim, trigger, triggerParent: o.triggerParent, duration: o.duration, delay: o.delay, loop: o.loop, count: strokes.length };
+    const spec = { animate: anim, trigger, triggerParent: o.triggerParent, duration: o.duration, delay: o.delay, loop: o.loop, count: strokes.length, grid };
     let groupAttrs = { class: 'gf-anim' };
     let strokeNodes = strokes;
     if (frame !== null) {
@@ -320,10 +345,10 @@ export function renderIcon(icon, props = {}) {
     content = [...fills, ...strokes];
   }
   if (defs.length) content.unshift(['defs', {}, defs]);
-  const tf = transformFor(o.rotate, bool(o.flipX), bool(o.flipY));
+  const tf = transformFor(o.rotate, bool(o.flipX), bool(o.flipY), grid);
   if (tf) content = [['g', { transform: tf }, content]];
 
-  const attrs = rootAttrs(ic, o, sw, classes);
+  const attrs = rootAttrs(ic, o, sw, classes, grid);
   if ((anim || timeline) && trigger === 'click' && (o.run === '1' || o.run === '2' || o.run === 1 || o.run === 2)) attrs['data-gf-run'] = String(o.run);
   if (bool(o.mirrorRtl)) css += RTL_CSS;
   const children = [];

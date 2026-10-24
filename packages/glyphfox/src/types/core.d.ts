@@ -31,6 +31,10 @@ export declare function isComposite(spec: unknown): boolean;
 export declare function resolveSpec(spec: IconSpec | IconData, lookup: (name: string) => IconData | null, options?: { weight?: number; gap?: number }): { icon: IconData; variant?: Variant };
 export declare function registerIcons(icons: IconData[] | Record<string, IconData>): void;
 export declare function lookupIcon(name: string): IconData | null;
+/** The collections shipped with the package and their grids. */
+export declare const COLLECTIONS: Readonly<{ display: 48; isometric: 24 }>;
+/** Drawing grid of an icon: 24, or its grid. */
+export declare function gridOfIcon(icon: IconData): number;
 export declare function loadIcon(name: string): Promise<IconData | null>;
 export declare function setIconLoader(loader: (name: string) => Promise<IconData | null>): void;
 export declare function registerIconSource(prefix: string, source: IconSource | null): void;

@@ -5,8 +5,10 @@
 
 import { cpSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { writeCollectionComponents, writeSvelteCollections } from './collections.mjs';
 
-export async function buildFrameworks({ dist, src, icons, version, write, esbuild, componentName }) {
+export async function buildFrameworks({ dist, src, icons, collections = [], version, write, esbuild, componentName }) {
+  const shared = { dist, collections, write, componentName };
   const read = (p) => readFileSync(join(src, p), 'utf8');
   const types = (file, components) => read(join('types', file)).replace('/*COMPONENTS*/', components);
   const bundle = (entry, outfile, options = {}) =>
@@ -34,7 +36,11 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
   // React and Vue also ship a CJS bundle.
   for (const fw of ['react', 'vue']) {
     const smart = `export * from '../smart/${fw}.js'; // smart icons hook (src/smart)\n`;
-    const { dir, d } = iconModules(fw, fw === 'react' ? 'GlyphIconComponent' : 'GlyphComponent', fw === 'react' ? "'use client';\n" : '', smart);
+    const t = fw === 'react' ? 'GlyphIconComponent' : 'GlyphComponent';
+    const directive = fw === 'react' ? "'use client';\n" : '';
+    const { dir, d } = iconModules(fw, t, directive, smart);
+    // Collection components: <fw>/icons/<id>/<name> and <fw>/collections.
+    writeCollectionComponents(shared, fw, t, directive);
     write(join(dir, 'index.d.cts'), d);
     await bundle(join(dir, 'index.js'), join(dir, 'index.cjs'), { external: [fw] });
   }
@@ -93,6 +99,7 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
       ].join('\n'),
     );
     write(join(dir, 'index.d.ts'), types('svelte.d.ts', icons.map((ic) => `export declare const ${componentName(ic.name)}: Component<GlyphProps>;`).join('\n')));
+    writeSvelteCollections(shared);
   }
 
   // Web component.
@@ -102,7 +109,7 @@ export async function buildFrameworks({ dist, src, icons, version, write, esbuil
     write(join(dir, 'element.d.ts'), read(join('types', 'web.d.ts')));
     write(
       join(dir, 'index.js'),
-      "import { icons } from '../registry.js';\nimport { registerIcons } from '../core/lookup.js';\nimport { GlyphFoxElement, defineGlyphFox } from './element.js';\nimport { defineSmartElements } from '../smart/web.js'; // smart icons hook (src/smart)\n\nregisterIcons(icons);\ndefineGlyphFox();\ndefineSmartElements();\n\nexport { GlyphFoxElement, defineGlyphFox };\nexport * from '../smart/web.js';\n",
+      "import { icons } from '../registry.js';\nimport { collectionIcons } from '../collections.js';\nimport { registerIcons } from '../core/lookup.js';\nimport { GlyphFoxElement, defineGlyphFox } from './element.js';\nimport { defineSmartElements } from '../smart/web.js'; // smart icons hook (src/smart)\n\nregisterIcons(icons);\nregisterIcons(collectionIcons);\ndefineGlyphFox();\ndefineSmartElements();\n\nexport { GlyphFoxElement, defineGlyphFox };\nexport * from '../smart/web.js';\n",
     );
     write(join(dir, 'index.d.ts'), read(join('types', 'web.d.ts')) + "export * from '../smart/web.js'; // smart icons hook (src/smart)\n");
     write(join(dir, 'cdn.js'), read(join('web', 'cdn.js')));

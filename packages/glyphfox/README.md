@@ -20,6 +20,8 @@ No runtime dependencies. React, Vue, Svelte and Tailwind CSS are optional peer d
 | --- | --- |
 | `glyphfox` | Icon data, `toSvg`, `fuse`, `search`, morph and composition helpers, icon sources |
 | `glyphfox/icons/<name>` | One icon as data (`export default`), for the smallest bundles |
+| `glyphfox/collections` | The display (48 grid) and isometric collections: `display`, `isometric`, `collections`, `collectionIcons` |
+| `glyphfox/react/collections`, `glyphfox/vue/collections`, `glyphfox/svelte/collections` | Components of both collections (`DisplayCalendarClockIcon`, `IsometricCubeIcon`), also as deep imports `glyphfox/react/icons/display/<name>` |
 | `glyphfox/core` | The rendering engine without icon data (integrations, custom renderers) |
 | `glyphfox/react` | `<NameIcon>` components, `Icon`, `Fusion`, `MorphIcon`, `useMorph` |
 | `glyphfox/vue` | The same components for Vue 3, `useMorph` |
@@ -202,7 +204,7 @@ Many icons carry their own animation in their JSON sidecar, a frame timeline per
 
 Any ancestor with the `gf-trigger` class plays the icons inside it (`.gf-trigger:hover`), and `triggerParent` makes the closest link or button do the same. A disabled parent (`:disabled`, `aria-disabled="true"`) or the `disabled` prop stops every animation, and `prefers-reduced-motion: reduce` keeps icons still.
 
-The CSS inside the SVG needs no script. In the components and the web component, `attachTriggers(svg, props, icon)` (exported for custom renderers) runs `inView` and takes `hover`, `focus` and `press` over on the Web Animations API, so leaving plays the animation back from where it is and loops finish their round.
+The CSS inside the SVG needs no script. In the React, Vue, Svelte, Solid, Preact and Lit components and in the web component, `attachTriggers(svg, props, icon)` (exported for custom renderers) runs `inView` and takes `hover`, `focus` and `press` over on the Web Animations API, so leaving plays the animation back from where it is and loops finish their round.
 
 ## Icon sources
 
@@ -272,6 +274,10 @@ Every component passes other attributes (class, style, events) to the `<svg>`.
 ## glyphfox/tools
 
 `lintSvg(svg)` and `lintBody(body)` check the icon rules and return `{ rule, message }` problems; `canonicalSvg(body)` writes an icon file; `foxify(svg, { snap, fit, padding })` converts any SVG to the glyphfox style and returns `{ svg, body, problems, notes }`.
+
+## Collections
+
+`display/NAME` (60 icons on the 48 grid) and `isometric/NAME` (30 icons on the 24 grid) resolve in `getIcon`, `toSvg`, `toNode`, the web component, the CDN build and the `Icon` component of every framework. Their data comes from `glyphfox/collections`; display icons carry `grid: 48` and `gridOfIcon(icon)` returns the grid of any icon. Display icons default to 48 px and weight is measured in units of their grid. They stay outline: the solid and duotone styles fall back to outline, the `modifier` and `morphTo` props are ignored, and a fusion or a `+modifier` spec with a display icon throws. Isometric icons support everything the base set does.
 
 ## License
 

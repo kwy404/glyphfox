@@ -39,6 +39,7 @@ Original open source icons on a 24 grid that do more than sit still. Every icon 
 - [Scan and exports](#scan-and-exports)
 - [The studio](#the-studio)
 - [Social icons](#social-icons)
+- [Collections](#collections): display (48 grid) and isometric
 - [Icon rules](#icon-rules)
 
 ## Install
@@ -651,6 +652,40 @@ The same names work everywhere: `<glyph-fox name="brand-instagram">`, `toSvg('br
 Networks, each with the `brand-` prefix: airbnb, amazon, apple, apple-music, apple-podcasts, bandcamp, behance, bereal, bilibili, bitbucket, blogger, bluesky, clubhouse, codepen, dailymotion, deezer, dev-to, deviantart, discord, dribbble, facebook, figma, flickr, github, gitlab, goodreads, google, google-meet, hacker-news, hashnode, imdb, instagram, kakaotalk, kick, ko-fi, kwai, lemon8, letterboxd, line, linkedin, mastodon, medium, meetup, messenger, microsoft, microsoft-teams, netflix, nextdoor, notion, patreon, pinterest, product-hunt, qq, quora, reddit, roblox, rumble, signal, skype, slack, snapchat, soundcloud, spotify, stack-overflow, steam, strava, substack, telegram, threads, tidal, tiktok, tinder, trello, tripadvisor, tumblr, twitch, twitter, viber, vimeo, vk, vsco, wechat, weibo, whatsapp, wordpress, x, xing, yelp, youtube, zoom.
 
 Brand icons are trademarks of their owners and must be used under each brand's guidelines.
+
+## Collections
+
+Two signature collections ship with the package next to the base set:
+
+| Collection | Icons | Grid | Names |
+| --- | --- | --- | --- |
+| `display` | 60 | 48 by 48 | `display/calendar-clock`, `display/rocket-launch`, ... |
+| `isometric` | 30 | 24 by 24 | `isometric/cube`, `isometric/server`, ... |
+
+Display icons are drawn on a 48 grid for empty states, onboarding and large tiles; isometric icons are drawn in isometric projection on the usual 24 grid. Write their names as `display/NAME` and `isometric/NAME` wherever a name is taken:
+
+```js
+import { toSvg } from 'glyphfox';
+import { display, isometric, collections } from 'glyphfox/collections';
+
+toSvg('display/calendar-clock', { size: 96, weight: 3, color: '#e11d48' });
+toSvg('isometric/cube', { variant: 'solid' });
+display['calendar-clock'].grid; // 48
+```
+
+```html
+<glyph-fox name="display/calendar-clock" size="64"></glyph-fox>
+<i data-glyph="isometric/cube"></i>
+```
+
+```jsx
+import { DisplayCalendarClockIcon, IsometricCubeIcon } from 'glyphfox/react/collections';
+import RocketLaunch from 'glyphfox/react/icons/display/rocket-launch';
+```
+
+Vue and Svelte have the same components in `glyphfox/vue/collections` and `glyphfox/svelte/collections` (and deep imports such as `glyphfox/svelte/icons/isometric/cube`). The default entries (`glyphfox/react`, `glyphfox/vue`, `glyphfox/svelte`) do not include them, so they stay as small as before; the `Icon` component of every framework loads a collection name on demand. The web component and the CDN build carry both collections.
+
+Size, color, weight, rotation, flips and the animation presets work on both collections. Display icons default to 48 px and measure weight in units of their 48 grid, so weight 2 keeps the drawn stroke and the optical compensation starts below 48 px. The solid and duotone styles, modifier badges, fusion and morphs are cut for the 24 grid, so display icons stay outline (a style falls back to outline, a modifier prop is ignored, and a fusion or a `+modifier` spec with a display icon throws). Isometric icons support every feature of the base set. The base set lists (the exported names, `search`, the sprite and the Tailwind classes) leave both collections out.
 
 ## Icon rules
 

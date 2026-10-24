@@ -15,6 +15,10 @@ const shared = (globalThis[Symbol.for('glyphfox.lookup')] ||= { registry: new Ma
 const { registry, pending, sources } = shared;
 
 const PREFIX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+/** The collections shipped with the package and their grids. Their icons are named "id/name". */
+export const COLLECTIONS = Object.freeze({ display: 48, isometric: 24 });
+const COLLECTION_NAME = /^(display|isometric)\/([a-z0-9]+(?:-[a-z0-9]+)*)$/;
 const NAME = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
 
 /** Registers icon data objects (an array or a name keyed record). */
@@ -77,7 +81,9 @@ export function lookupIcon(name) {
   return icon ? fromSource(key, icon) : null;
 }
 
-let loader = (name) => import(`../icons/${name}.js`).then((m) => m.default);
+// One import pattern per folder, so bundlers split each icon into its own
+// chunk. Kept on one line: the studio build swaps this line for a stub.
+let loader = (name, c = COLLECTION_NAME.exec(name)) => (!c ? import(`../icons/${name}.js`) : c[1] === 'display' ? import(`../icons/display/${c[2]}.js`) : import(`../icons/isometric/${c[2]}.js`)).then((m) => m.default);
 
 /** Replaces the loader used for names that are not registered. */
 export function setIconLoader(fn) {
@@ -104,7 +110,7 @@ export function loadIcon(name) {
     }
     return p;
   }
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key)) return Promise.resolve(null);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(key) && !COLLECTION_NAME.test(key)) return Promise.resolve(null);
   let p = pending.get(key);
   if (!p) {
     p = Promise.resolve()

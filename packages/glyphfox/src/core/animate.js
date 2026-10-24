@@ -200,7 +200,7 @@ function keyframes(name, suffix) {
  * Builds the scoped stylesheet for an animation. Returns { className, css }
  * or null when `animate` is not a known preset.
  */
-export function animationCss({ animate, trigger = 'mount', triggerParent = false, duration, delay, loop, count = 1 } = {}) {
+export function animationCss({ animate, trigger = 'mount', triggerParent = false, duration, delay, loop, count = 1, grid = 24 } = {}) {
   const p = ANIMATIONS[animate];
   if (!p) return null;
   const trig = TRIGGERS.includes(trigger) ? trigger : 'mount';
@@ -210,7 +210,8 @@ export function animationCss({ animate, trigger = 'mount', triggerParent = false
   const iter = it === Infinity ? 'infinite' : String(it);
   const n = animate === 'draw' ? Math.max(1, count | 0) : 0;
   const tp = triggerParent === true || triggerParent === 'true' || triggerParent === '';
-  const cls = 'gf-a' + hash([animate, trig, dur, del, iter, n, tp ? 'p' : ''].join('|'));
+  const k = Number(grid) > 0 && Number(grid) !== 24 ? Number(grid) / 24 : 1;
+  const cls = 'gf-a' + hash([animate, trig, dur, del, iter, n, tp ? 'p' : '', k === 1 ? '' : grid].join('|'));
   const scopes = triggerScopes(cls, trig, tp);
   let css = '';
   scopes.forEach((_, k) => {
@@ -218,7 +219,7 @@ export function animationCss({ animate, trigger = 'mount', triggerParent = false
   });
   if (animate !== 'draw') {
     const o = p.origin || [12, 12];
-    css += `.${cls} .gf-anim{transform-box:view-box;transform-origin:${o[0]}px ${o[1]}px}`;
+    css += `.${cls} .gf-anim{transform-box:view-box;transform-origin:${o[0] * k}px ${o[1] * k}px}`;
   }
   scopes.forEach((sels, k) => {
     const suf = k ? '-r' : '';
@@ -281,7 +282,7 @@ function progressAt(t, del, dur, it, alternate) {
  * returns { transform, opacity } as SVG attribute values; for draw it returns
  * { draw: [{ offset, opacity }], fill } for each stroke element.
  */
-export function frameState({ animate, duration, delay, loop, count = 1 } = {}, t = 0) {
+export function frameState({ animate, duration, delay, loop, count = 1, grid = 24 } = {}, t = 0) {
   const p = ANIMATIONS[animate];
   if (!p) return null;
   const dur = ms(duration, p.duration);
@@ -304,7 +305,8 @@ export function frameState({ animate, duration, delay, loop, count = 1 } = {}, t
   }
   const prog = progressAt(t, del, dur, it, false);
   const v = sampleFrames(p, prog);
-  const [ox, oy] = p.origin || [12, 12];
+  const k = Number(grid) > 0 ? Number(grid) / 24 : 1;
+  const [ox, oy] = (p.origin || [12, 12]).map((v) => v * k);
   const parts = [`translate(${r4(ox)} ${r4(oy + (v.y || 0))})`];
   if (v.r) parts.push(`rotate(${r4(v.r)})`);
   if (v.s !== undefined && v.s !== 1) parts.push(`scale(${r4(v.s)})`);

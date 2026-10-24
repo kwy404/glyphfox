@@ -9,8 +9,9 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readIcons } from './lib/icons.mjs';
+import { readCollections, readIcons } from './lib/icons.mjs';
 import { buildFrameworks } from './lib/frameworks.mjs';
+import { writeCollectionData } from './lib/collections.mjs';
 import { buildDocsData } from './lib/docs.mjs';
 import { componentName, dataName } from '../packages/glyphfox/src/core/formats.js';
 
@@ -22,6 +23,9 @@ const dist = join(pkgDir, 'dist');
 
 const t0 = Date.now();
 const { icons, problems, warnings = [] } = readIcons(join(root, 'icons'));
+// The display (48 grid) and isometric collections, named "id/name".
+const { collections, problems: collectionProblems } = readCollections(join(root, 'icons'));
+problems.push(...collectionProblems);
 for (const w of warnings) console.warn(`warning: ${w}`);
 if (problems.length) {
   for (const p of problems) console.error(p);
@@ -85,7 +89,10 @@ write(
 );
 const types = readFileSync(join(src, 'types', 'index.d.ts'), 'utf8')
   .replace('/*ICON_NAMES*/', icons.map((ic) => json(ic.name)).join(' | '))
+  .replace('/*COLLECTION_NAMES*/', collections.flatMap((c) => c.icons.map((ic) => json(ic.name))).join(' | ') || 'never')
   .replace('/*ICON_EXPORTS*/', icons.map((ic) => `export declare const ${dataName(ic.name)}: IconData<${json(ic.name)}>;`).join('\n'));
+// Collections (glyphfox/collections), see lib/collections.mjs.
+writeCollectionData({ dist, collections, write });
 write(join(dist, 'index.d.ts'), types);
 write(join(dist, 'index.d.cts'), types);
 write(join(dist, 'icons.json'), JSON.stringify(Object.fromEntries(icons.map((ic) => [ic.name, ic])), null, 0) + '\n');
@@ -111,7 +118,7 @@ await esbuild.build({
   logLevel: 'error',
 });
 
-await buildFrameworks({ root, dist, src, icons, version, write, esbuild, componentName, dataName });
+await buildFrameworks({ root, dist, src, icons, collections, version, write, esbuild, componentName, dataName });
 const changed = await buildDocsData(root, icons, { version, check: false });
 
 const count = (dir) => {
