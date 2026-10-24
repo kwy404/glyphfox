@@ -7,7 +7,7 @@
 // from the string files in docs/i18n/. See scripts/lib/i18n.mjs and
 // docs/I18N.md.
 
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { buildAssets, precacheList, serviceWorker, sha256, staleAssets, withAssets } from './assets.mjs';
@@ -156,6 +156,40 @@ function pageOf(docs, file, i18n) {
   return { lang, page: lang.dir ? rel.slice(lang.dir.length + 1) : rel };
 }
 
+/**
+ * The signature collections of icons/ that are not in the package (display,
+ * on the 48 grid, and isometric), for the glyphfox set of the icon browser:
+ * { id: { grid, icons: [[name, body, tags, categories]] } }.
+ */
+export function collectionsData(root) {
+  const out = {};
+  for (const [id, grid] of [
+    ['display', 48],
+    ['isometric', 24],
+  ]) {
+    const dir = join(root, 'icons', id);
+    if (!existsSync(dir)) continue;
+    const names = readdirSync(dir)
+      .filter((f) => f.endsWith('.svg'))
+      .map((f) => f.slice(0, -4))
+      .sort();
+    out[id] = {
+      grid,
+      icons: names.map((name) => {
+        const body = readFileSync(join(dir, `${name}.svg`), 'utf8')
+          .replace(/^[\s\S]*?<svg\b[^>]*>/, '')
+          .replace(/<\/svg>\s*$/, '')
+          .replace(/>\s+</g, '><')
+          .trim();
+        const sidecar = join(dir, `${name}.json`);
+        const meta = existsSync(sidecar) ? JSON.parse(readFileSync(sidecar, 'utf8')) : {};
+        return [name, body, meta.tags || [], meta.categories || []];
+      }),
+    };
+  }
+  return out;
+}
+
 export async function docsFiles(root, icons, { version }) {
   const files = {};
   files[join(root, 'docs', 'data', 'icons.json')] =
@@ -164,6 +198,8 @@ export async function docsFiles(root, icons, { version }) {
       count: icons.length,
       icons: icons.map((ic) => [ic.name, ic.body, ic.tags, ic.categories, ic.solid]),
     }) + '\n';
+  // Loaded by the icon browser with the glyphfox set.
+  files[join(root, 'docs', 'data', 'collections.json')] = JSON.stringify(collectionsData(root)) + '\n';
   files[join(root, 'docs', 'data', 'changelog.md')] = readFileSync(join(root, 'CHANGELOG.md'), 'utf8');
   // Designed animations, loaded by the studio's Motion tool when it opens.
   files[join(root, 'docs', 'data', 'animations.json')] = JSON.stringify(Object.fromEntries(icons.filter((ic) => ic.animation).map((ic) => [ic.name, ic.animation]))) + '\n';
