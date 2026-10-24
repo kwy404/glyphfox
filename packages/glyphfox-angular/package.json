@@ -1,6 +1,6 @@
 {
   "name": "glyphfox-angular",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "glyphfox icons for Angular: a standalone component and an icon registry provider.",
   "license": "MIT",
   "author": "Alexandre Kohler (https://github.com/kwy404)",
@@ -16,7 +16,7 @@
     "@angular/core": ">=17.0.0"
   },
   "dependencies": {
-    "glyphfox": "0.0.0",
+    "glyphfox": "^1.0.0",
     "tslib": "^2.3.0"
   },
   "sideEffects": false

@@ -242,9 +242,9 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
         <div class="mo-keyframe" data-mo-keyframe hidden>
           <h3 class="side-title" data-i18n="motion.keyframe">Quadro-chave</h3>
           <label class="field"><span data-i18n="motion.at">Posição (%)</span><input class="input" type="number" min="0" max="100" step="1" data-mk="at"></label>
-          <label class="field"><span>transform</span><input class="input" data-mk="transform" placeholder="rotate(12deg) scale(1.1)" spellcheck="false"></label>
+          <label class="field"><span translate="no">transform</span><input class="input" data-mk="transform" placeholder="rotate(12deg) scale(1.1)" spellcheck="false"></label>
           <div class="row2">
-            <label class="field"><span>opacity</span><input class="input" type="number" min="0" max="1" step="0.05" data-mk="opacity"></label>
+            <label class="field"><span translate="no">opacity</span><input class="input" type="number" min="0" max="1" step="0.05" data-mk="opacity"></label>
             <label class="field"><span>strokeDashoffset</span><input class="input" type="number" min="0" max="1" step="0.05" data-mk="dash"></label>
           </div>
           <label class="field"><span data-i18n="motion.easing">Aceleração</span><select class="input" data-mk="easing"></select></label>
@@ -254,14 +254,14 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
       <div class="card pad mo-stage-card">
         <div class="mo-stage" data-mo-stage></div>
         <div class="mo-transport">
-          <button class="icon-btn" type="button" data-mo-act="play" aria-pressed="false" aria-label="Play"></button>
+          <button class="icon-btn" type="button" data-mo-act="play" aria-pressed="false" aria-label="Tocar" data-i18n-attr="aria-label:motion.play"></button>
           <input type="range" min="0" max="1000" value="0" data-mo="scrub" aria-label="Tempo" data-i18n-attr="aria-label:motion.time">
-          <output data-mo-time>0 ms</output>
+          <output data-mo-time translate="no">0 ms</output>
         </div>
         <div class="mo-timeline" data-mo-timeline tabindex="0" aria-label="Linha do tempo" data-i18n-attr="aria-label:motion.timeline"></div>
       </div>
       <div class="card pad mo-out">
-        <div class="tabs" role="tablist" aria-label="Formats" data-mo-formats></div>
+        <div class="tabs" role="tablist" aria-label="Formatos" data-i18n-attr="aria-label:icons.formats" data-mo-formats></div>
         <div data-mo-code></div>
         <div class="hero-actions">
           <button class="btn small primary" type="button" data-mo-act="copy" data-i18n="action.copy">Copiar</button>
@@ -375,7 +375,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
             <p class="faint small-note" data-i18n="three.embed.lead">Cole em qualquer página. O SVG de dentro dá a forma e fica como alternativa sem WebGL. Adicione o atributo controls para o visitante poder girar.</p>
             <div data-th-embed></div>
           </div>
-          <p class="faint small-note th-note"><span data-i18n="three.note">O three.js é carregado do jsDelivr quando você abre esta aba.</span> <span class="mono">three@<span data-th-version>0.186.1</span></span></p>
+          <p class="faint small-note th-note"><span data-i18n="three.note">O three.js é carregado do jsDelivr quando você abre esta aba.</span> <span class="mono" translate="no">three@<span data-th-version>0.186.1</span></span></p>
         </div>
       </div>
     </div>
@@ -427,7 +427,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
         <h2 data-i18n="footer.developers">Desenvolvedores</h2>
         <ul>
           <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
-          <li><a href="guides/" data-i18n="footer.guides">Guias</a></li>
+          <li><a href="../guides/" data-i18n="footer.guides">Guias</a></li>
           <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
           <li><a href="../frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
           <li><a href="docs.html#cli">CLI</a></li>

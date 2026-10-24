@@ -75,7 +75,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
   <div class="log-body">
 <!-- log:start -->
 <p>Alle nennenswerten Änderungen an glyphfox werden hier dokumentiert. Das Format basiert auf <a href="https://keepachangelog.com/de/1.1.0/">Keep a Changelog</a>, und das Projekt hält sich an <a href="https://semver.org/lang/de/">Semantic Versioning</a>.</p>
-<h2>Unveröffentlicht</h2>
+<h2>1.0.0 - 2026-10-23</h2>
 <h3>Hinzugefügt</h3>
 <ul>
 <li>Das Icon-Set: eigens gezeichnete Icons auf einem 24er-Raster mit Kategorien und Tags, geprüft vom Icon-Lint.</li>
@@ -86,8 +86,20 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 <li>Modifikatoren: die Badges plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down und dot in einer beliebigen Ecke, mit Aussparungen.</li>
 <li>23 gemeinsame Props mit denselben Namen in React, Vue, Svelte, Angular und der Web Component.</li>
 <li>Pakete: <code>glyphfox</code> (Kern, Icons, <code>toSvg</code>, <code>icons.json</code>, <code>sprite.svg</code>, Runtime), <code>glyphfox/react</code>, <code>glyphfox/vue</code>, <code>glyphfox/svelte</code>, <code>glyphfox/web</code> mit einem CDN-Build als einzelne Datei, <code>glyphfox/tailwind</code> (v3 und v4), <code>glyphfox/core</code>, <code>glyphfox/tools</code> und <code>glyphfox-angular</code>.</li>
+<li>Framework-Pakete mit denselben Props, vom Build erzeugt, tree-shakebar und typisiert: <code>glyphfox/solid</code>, <code>glyphfox/preact</code>, <code>glyphfox/qwik</code> (für Qwik 2), <code>glyphfox/lit</code> (Lit-Elemente), <code>glyphfox/astro</code> (.astro-Komponenten), <code>glyphfox/native</code> (React Native mit react-native-svg, lebendige Zustände Bild für Bild abgetastet) und <code>glyphfox/ember</code> (Helper), jeweils mit einer optionalen Peer-Abhängigkeit.</li>
+<li><code>glyphfox/react/server</code>: <code>Icon</code> und <code>Fusion</code> ohne Hooks für React Server Components, die kein JavaScript ausliefern; die Module von <code>glyphfox/react</code> sind mit <code>'use client'</code> markiert.</li>
+<li>Anleitungen und Rezepte für Next.js App Router, Nuxt, SvelteKit, Remix, Alpine und htmx, im README und in der Dokumentation unter <code>frameworks/</code>.</li>
 <li>Die CLI <code>glyphfox</code>: search, show mit Vorschau im Terminal, copy in neun Formaten, fuse, morph, build für Teilmengen (Sprite, CSS-Masken, Paket), lint und Fox-ify.</li>
+<li>Icon-Quellen: <code>registerIconSource(prefix, source)</code> lässt <code>prefix:name</code>-Icons aus anderen Sets in <code>toSvg</code>, in jeder Komponente, im Web Component und im CDN funktionieren, mit Strichstärke, Animationen, Modifikatoren und Fusion bei Strich-Icons und einem Fallback für gefüllte Icons.</li>
 <li>Die Studio-Website: Icon-Browser, Live-Anpassung, Skizzensuche, Editor, Fox-ify, Fusion, Marken-Kit und 3D.</li>
+<li>Fenn-Illustrationen (sitzend, laufend, zeichnend, im Orbit) aus der Geometrie der Icons, die README-Banner und die Vorschau für soziale Netzwerke.</li>
+<li>Mehrsprachige Suche: Synonyme auf Englisch, Portugiesisch, Spanisch, Französisch und Deutsch, Suche ohne Akzente und einfache Pluralformen in <code>search()</code>, im neuen <code>searchIcons()</code>, in der CLI (<code>--lang</code>) und im Studio.</li>
+<li>Geteilte Sammlungen im Studio: ein Link, der die ganze Sammlung komprimiert im URL-Fragment trägt, und Live-Sitzungen, in denen Freunde eine Sammlung gemeinsam über WebRTC bearbeiten, gekoppelt mit sechs Wörtern über öffentliche MQTT-Relays, Ende-zu-Ende-verschlüsselt, mit Anwesenheit und Zusammenführung pro Icon, bei der die letzte Änderung gewinnt.</li>
+<li>Glyph script: eine kleine Textsprache für Icons (circle, ellipse, rect mit Radius, line, polyline, polygon, arc, path, group, Spiegelung in x oder y, Wiederholung um einen Mittelpunkt) mit Fehlern an Zeile und Spalte, kompiliert zu SVG, das den Icon-Lint besteht. In <code>glyphfox/script</code>, im Befehl <code>glyphfox script file.gfs</code> und in einem Live-Playground auf der Labs-Seite des Studios.</li>
+<li><code>glyphfox scan [dir]</code>: findet die Icons, die ein Projekt in JS, TS, JSX, Vue, Svelte, Angular-Templates und HTML nutzt, baut die minimale Teilmenge als Sprite oder ES-Modul und markiert Icons ohne zugängliche Beschriftung, wo eine nötig ist.</li>
+<li>Exporte in <code>glyphfox/export</code>, in der CLI und auf der Labs-Seite des Studios: ein animiertes Favicon (eine Canvas-Laufzeit mit statischem Fallback), CSS-Cursor (PNG in 32 und 64 px mit Hotspot), Plotter-Ausgabe (einlinige SVG, für minimale Stiftwege sortiert, und G-Code mit Vorschüben und Befehlen zum Heben und Senken des Stifts) und STL aus einem extrudierten Icon (Dicke und Fase).</li>
+<li>Skizzensuche im Studio: Die 24 ähnlichsten Icons erscheinen, während du zeichnest, direkt auf der Seite sortiert anhand eines kompakten Formindex aus <code>scripts/labs/sketch-index.mjs</code> (Strichmasken von 32 mal 32, zu Distanzfeldern erweitert, Histogramme der Strichrichtung und Zernike-Momente).</li>
+<li>Das Marken-Kit zeigt das ganze Set im Markendesign als Vorschau und exportiert ein Zip mit angepassten SVG-Dateien, einem Sprite, CSS-Variablen, einem Favicon-Satz (ico und PNGs in 16, 32, 180, 192 und 512), App-Icons und einem package.json-Gerüst.</li>
 <li>Die Studio-Website auf Englisch, Portugiesisch (Brasilien), Spanisch, Französisch und Deutsch: statische Seiten pro Sprache mit hreflang-Tags, ein Sprachmenü in Kopf- und Fußzeile und die Sprache des Browsers beim ersten Besuch.</li>
 </ul>
 <!-- log:end -->
@@ -119,7 +131,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
         <h2 data-i18n="footer.developers">Entwicklung</h2>
         <ul>
           <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
-          <li><a href="../guides/" data-i18n="footer.guides">Anleitungen (auf Englisch)</a></li>
+          <li><a href="../guides/" data-i18n="footer.guides">Anleitungen</a></li>
           <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
           <li><a href="../frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
           <li><a href="docs.html#cli">CLI</a></li>

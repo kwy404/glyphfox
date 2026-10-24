@@ -75,6 +75,8 @@ export function markdown(md) {
   let list = false;
   for (const raw of md.split(/\r?\n/)) {
     const line = raw.trimEnd();
+    // Link reference definitions ([1.0.0]: https://...) are not shown.
+    if (/^\[[^\]]+\]:\s/.test(line)) continue;
     const li = /^\s*[-*] (.*)$/.exec(line);
     if (li) {
       if (!list) {

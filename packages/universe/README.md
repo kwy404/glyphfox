@@ -85,7 +85,7 @@ Search matches icon names, Iconify aliases, set categories and upstream tags: Lu
 
 ## Caching
 
-In the browser every download is kept in the Cache Storage API (cache `glyphfox-universe`), so a set loaded once is not downloaded again on the next visit, even offline. Only exact versioned jsDelivr URLs are stored (`@iconify-json/mdi@1.2.3/icons.json`, `glyphfox-universe@0.1.0/dist/index.json`), which never change; when the catalog pins a new version of a set, that version is fetched once and the old entry is dropped. Where Cache Storage is missing or refused (private windows, insecure origins), the memory cache keeps working: the most recent `maxSets` sets stay in memory. Turn the persistent cache off with `configure({ persist: false })` and empty it with `clear()`.
+In the browser every download is kept in the Cache Storage API (cache `glyphfox-universe`), so a set loaded once is not downloaded again on the next visit, even offline. Only exact versioned jsDelivr URLs are stored (`@iconify-json/mdi@1.2.3/icons.json`, `glyphfox-universe@1.0.0/dist/index.json`), which never change; when the catalog pins a new version of a set, that version is fetched once and the old entry is dropped. Where Cache Storage is missing or refused (private windows, insecure origins), the memory cache keeps working: the most recent `maxSets` sets stay in memory. Turn the persistent cache off with `configure({ persist: false })` and empty it with `clear()`.
 
 ## Offline builds
 
