@@ -15,6 +15,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-ff7a1a" alt="MIT license"></a>
 </p>
 
+<p align="center"><a href="https://kwy404.github.io/glyphfox/#film"><img src="docs/assets/film/glyphfox-1.0-poster.webp" width="880" alt="Watch the glyphfox 1.0 film (2:32)"></a><br><sub><a href="https://kwy404.github.io/glyphfox/#film">Watch the 1.0 film, 2:32</a></sub></p>
+
 # glyphfox
 
 Original open source icons on a 24 grid that do more than sit still. Every icon is **variable** (weight, corners and style axes), **morphs** into any other icon, **fuses** with other icons into new ones that still pass the rules, takes **modifier badges** in any corner and comes with **living states** (draw, pop, wiggle, spin, pulse, bounce, shake). One set of props works the same in React (Server Components included), Vue, Svelte, Angular, Solid, Preact, Qwik, Lit, Astro, React Native, Ember, the `<glyph-fox>` web component, Tailwind CSS, the CDN and the CLI.
