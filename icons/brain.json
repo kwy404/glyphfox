@@ -1,0 +1,25 @@
+{
+  "categories": [
+    "people",
+    "symbols"
+  ],
+  "tags": [
+    "mind",
+    "think",
+    "neurology",
+    "intelligence",
+    "idea"
+  ],
+  "animation": {
+    "name": "pulse",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "scale(0.88)" } },
+      { "at": 0.6, "element": "all", "props": { "transform": "scale(1.12)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)" } }
+    ]
+  }
+}

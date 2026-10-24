@@ -6,7 +6,7 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 
 ### Added
 
-- 41 new base icons for text formatting, charts and math, each with categories, tags and a designed animation: the set now has 605 base icons, 43 animated, 38 display and 11 isometric icons.
+- 82 new base icons for text formatting, charts, math, health, accessibility, faces and gestures, education and science, each with categories, tags and a designed animation: the set now has 646 base icons, 43 animated, 38 display and 11 isometric icons.
 
 ## [1.0.0] - 2026-10-23
 

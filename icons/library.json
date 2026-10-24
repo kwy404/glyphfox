@@ -1,0 +1,26 @@
+{
+  "categories": [
+    "text",
+    "maps"
+  ],
+  "tags": [
+    "books",
+    "bookshelf",
+    "reading",
+    "education",
+    "collection"
+  ],
+  "animation": {
+    "name": "sway",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [14.5, 19],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "rotate(5deg)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "rotate(-3deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}
