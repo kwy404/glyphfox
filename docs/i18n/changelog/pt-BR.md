@@ -2,6 +2,12 @@
 
 Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [Não lançado]
+
+### Adicionado
+
+- A categoria `social` com 90 ícones de marca chamados `brand-NAME`, como `brand-instagram`, `brand-whatsapp`, `brand-x`, `brand-tiktok` e `brand-github`: contornos do logo de cada rede desenhados na grade de 24 com as regras dos ícones, com o nome da rede, os nomes antigos, social, logo e brand como tags, cada um com uma animação pop ou draw. Os ícones de marca são marcas registradas dos seus donos e devem ser usados de acordo com as diretrizes de cada marca.
+
 ## [1.0.0] - 2026-10-23
 
 ### Adicionado
@@ -30,4 +36,5 @@ Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segu
 - O kit de marca mostra uma prévia do conjunto todo com a sua marca e exporta um zip com arquivos SVG temáticos, um sprite, variáveis CSS, um conjunto de favicons (ico e PNGs em 16, 32, 180, 192 e 512), ícones de app e um esqueleto de package.json.
 - O site do estúdio em inglês, português (Brasil), espanhol, francês e alemão: páginas estáticas por idioma com tags hreflang, um menu de idiomas no cabeçalho e no rodapé e o idioma do navegador escolhido na primeira visita.
 
+[Não lançado]: https://github.com/kwy404/glyphfox/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0

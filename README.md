@@ -36,6 +36,7 @@ Original open source icons on a 24 grid that do more than sit still. Every icon 
 - [Glyph script](#glyph-script)
 - [Scan and exports](#scan-and-exports)
 - [The studio](#the-studio)
+- [Social icons](#social-icons)
 - [Icon rules](#icon-rules)
 
 ## Install
@@ -626,6 +627,28 @@ Every target takes names, `--from list.txt` or `--all`, plus `--size`, `--weight
 - render any icon, fusion or modifier in **3D**: the strokes become bevelled solids in matte clay, glossy plastic, brushed metal, glass or neon under five lighting setups, with orbit controls and a turntable, exported as PNG at 1x, 2x or 4x (transparent if you like) or embedded on any page with `<glyphfox-3d>`.
 - in **Labs**, write icons in glyph script with a live preview, and export an animated favicon, a CSS cursor, plotter SVG and G-code or an STL.
 - read the whole site in English, Português (Brasil), Español, Français or Deutsch, picked from your browser on the first visit ([how the site is translated](docs/I18N.md)).
+
+## Social icons
+
+The `social` category holds brand icons for the networks and services people link to most. Each one is named `brand-NAME`, drawn from scratch as an outline of the logo on the same 24 grid and stroke as the rest of the set, tagged with the network name, its old names, `social`, `logo` and `brand`, and animated with a pop or a draw.
+
+```jsx
+import { BrandInstagramIcon } from 'glyphfox/react';
+
+export function Follow() {
+  return (
+    <a href="https://www.instagram.com/yourname" aria-label="Instagram">
+      <BrandInstagramIcon size={20} />
+    </a>
+  );
+}
+```
+
+The same names work everywhere: `<glyph-fox name="brand-instagram">`, `toSvg('brand-instagram')`, the Tailwind class `gf-brand-instagram` and `npx glyphfox copy brand-instagram`.
+
+Networks, each with the `brand-` prefix: airbnb, amazon, apple, apple-music, apple-podcasts, bandcamp, behance, bereal, bilibili, bitbucket, blogger, bluesky, clubhouse, codepen, dailymotion, deezer, dev-to, deviantart, discord, dribbble, facebook, figma, flickr, github, gitlab, goodreads, google, google-meet, hacker-news, hashnode, imdb, instagram, kakaotalk, kick, ko-fi, kwai, lemon8, letterboxd, line, linkedin, mastodon, medium, meetup, messenger, microsoft, microsoft-teams, netflix, nextdoor, notion, patreon, pinterest, product-hunt, qq, quora, reddit, roblox, rumble, signal, skype, slack, snapchat, soundcloud, spotify, stack-overflow, steam, strava, substack, telegram, threads, tidal, tiktok, tinder, trello, tripadvisor, tumblr, twitch, twitter, viber, vimeo, vk, vsco, wechat, weibo, whatsapp, wordpress, x, xing, yelp, youtube, zoom.
+
+Brand icons are trademarks of their owners and must be used under each brand's guidelines.
 
 ## Icon rules
 

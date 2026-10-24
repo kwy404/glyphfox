@@ -2,6 +2,12 @@
 
 Tous les changements notables de glyphfox sont consignés ici. Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet applique la [gestion sémantique de version](https://semver.org/lang/fr/).
 
+## [Non publié]
+
+### Ajouts
+
+- La catégorie `social` avec 90 icônes de marque nommées `brand-NAME`, comme `brand-instagram`, `brand-whatsapp`, `brand-x`, `brand-tiktok` et `brand-github` : les contours du logo de chaque réseau dessinés sur la grille de 24 avec les règles des icônes, avec le nom du réseau, ses anciens noms, social, logo et brand comme tags, chacune avec une animation pop ou draw. Les icônes de marque sont des marques déposées de leurs propriétaires et doivent être utilisées selon les règles de chaque marque.
+
 ## [1.0.0] - 2026-10-23
 
 ### Ajouts
@@ -30,4 +36,5 @@ Tous les changements notables de glyphfox sont consignés ici. Le format suit [K
 - Le kit de marque prévisualise tout le jeu aux couleurs de la marque et exporte un zip avec des fichiers SVG personnalisés, un sprite, des variables CSS, un jeu de favicons (ico et PNG en 16, 32, 180, 192 et 512), des icônes d'application et un squelette de package.json.
 - Le site du studio en anglais, portugais (Brésil), espagnol, français et allemand : des pages statiques par langue avec les balises hreflang, un menu des langues dans l'en-tête et le pied de page, et la langue du navigateur choisie dès la première visite.
 
+[Non publié]: https://github.com/kwy404/glyphfox/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0

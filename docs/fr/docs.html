@@ -92,6 +92,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
     <a href="#cli">CLI</a>
     <a href="../native.html" data-i18n="docs.native">Android, iOS, Flutter</a>
     <a href="#rules" data-i18n="docs.rules">Règles des icônes</a>
+    <a href="#social" data-i18n="docs.social">Icônes sociales</a>
     <a href="../smart.html" data-i18n="docs.smart">Icônes intelligentes</a>
   </nav>
 
@@ -337,6 +338,17 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
     <section id="rules">
       <h2 data-i18n="docs.rules">Règles des icônes</h2>
       <p data-i18n="docs.rules.p">Uniquement des dessins originaux, sur une grille de 24 sur 24 : viewBox 0 0 24 24, aucun remplissage, stroke currentColor, épaisseur de trait 2, extrémités et angles arrondis, marge de 2 px, aucune transformation, et aucun remplissage hormis un calque duotone facultatif avec la classe gf-secondary. Les sources se trouvent dans icons/NAME.svg, avec un fichier annexe NAME.json pour les catégories et les étiquettes, et tools/icons/lint.mjs les vérifie.</p>
+    </section>
+
+    <section id="social">
+      <h2 data-i18n="docs.social">Icônes sociales</h2>
+      <p data-i18n="docs.social.p">La catégorie <code>social</code> réunit les icônes de marque des réseaux vers lesquels on renvoie le plus, d'Instagram, WhatsApp, Facebook, X, TikTok et YouTube à GitHub, Discord, Spotify et Steam. Chacune s'appelle <code>brand-NAME</code>, est dessinée comme le contour du logo sur la même grille et avec le même trait que le reste du jeu, et porte comme tags le nom du réseau, ses anciens noms, social, logo et brand.</p>
+      <div class="code"><div class="code-head"><span translate="no">App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js">import { BrandInstagramIcon } from 'glyphfox/react';
+
+&lt;a href="https://www.instagram.com/yourname" aria-label="Instagram"&gt;
+  &lt;BrandInstagramIcon size={20} /&gt;
+&lt;/a&gt;</pre></div>
+      <p data-i18n="docs.social.tm">Les icônes de marque sont des marques déposées de leurs propriétaires et doivent être utilisées selon les règles de chaque marque.</p>
     </section>
   </main>
 </div>

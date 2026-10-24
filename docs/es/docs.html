@@ -92,6 +92,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
     <a href="#cli">CLI</a>
     <a href="../native.html" data-i18n="docs.native">Android, iOS, Flutter</a>
     <a href="#rules" data-i18n="docs.rules">Reglas de iconos</a>
+    <a href="#social" data-i18n="docs.social">Iconos sociales</a>
     <a href="../smart.html" data-i18n="docs.smart">Iconos inteligentes</a>
   </nav>
 
@@ -337,6 +338,17 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
     <section id="rules">
       <h2 data-i18n="docs.rules">Reglas de iconos</h2>
       <p data-i18n="docs.rules.p">Solo dibujos originales, en una cuadrícula de 24 por 24: viewBox 0 0 24 24, sin relleno, stroke currentColor, grosor de trazo 2, remates y uniones redondeados, 2 px de margen, sin transformaciones y sin rellenos salvo una capa duotono opcional con la clase gf-secondary. Los archivos fuente están en icons/NAME.svg, con un NAME.json complementario para categorías y etiquetas, y tools/icons/lint.mjs los revisa.</p>
+    </section>
+
+    <section id="social">
+      <h2 data-i18n="docs.social">Iconos sociales</h2>
+      <p data-i18n="docs.social.p">La categoría <code>social</code> reúne iconos de marca de las redes que más se enlazan, de Instagram, WhatsApp, Facebook, X, TikTok y YouTube a GitHub, Discord, Spotify y Steam. Cada uno se llama <code>brand-NAME</code>, está dibujado como el contorno del logo en la misma cuadrícula y con el mismo trazo que el resto del conjunto, y lleva como etiquetas el nombre de la red, sus nombres anteriores, social, logo y brand.</p>
+      <div class="code"><div class="code-head"><span translate="no">App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { BrandInstagramIcon } from 'glyphfox/react';
+
+&lt;a href="https://www.instagram.com/yourname" aria-label="Instagram"&gt;
+  &lt;BrandInstagramIcon size={20} /&gt;
+&lt;/a&gt;</pre></div>
+      <p data-i18n="docs.social.tm">Los iconos de marca son marcas registradas de sus propietarios y deben usarse según las pautas de cada marca.</p>
     </section>
   </main>
 </div>
