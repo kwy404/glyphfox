@@ -23,6 +23,7 @@ const LANGS = [
   ['pt-BR', 'pt-br/'],
   ['es', 'es/'],
   ['fr', 'fr/'],
+  ['de', 'de/'],
 ];
 const jsonLd = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
 

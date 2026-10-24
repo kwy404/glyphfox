@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/accessibility.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Barrierefreie Icons: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.accessibility.title">Barrierefreie SVG-Icons mit glyphfox: Labels und Kontrast</title>
+<meta name="description" content="Barrierefreie Icons mit glyphfox: standardmäßig dekorativ, Titel und Labels, reine Icon-Buttons, Status-Icons, Kontrast, reduzierte Bewegung und RTL-Layouts." data-i18n-attr="content:guide.accessibility.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/de/guides/accessibility.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/accessibility.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/accessibility.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/accessibility.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/accessibility.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/accessibility.html">
+<meta property="og:title" content="Barrierefreie SVG-Icons mit glyphfox: Labels und Kontrast">
+<meta property="og:description" content="Barrierefreie Icons mit glyphfox: standardmäßig dekorativ, Titel und Labels, reine Icon-Buttons, Status-Icons, Kontrast, reduzierte Bewegung und RTL-Layouts.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/de/guides/accessibility.html">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:title" content="Barrierefreie SVG-Icons mit glyphfox: Labels und Kontrast">
+<meta name="twitter:description" content="Barrierefreie Icons mit glyphfox: standardmäßig dekorativ, Titel und Labels, reine Icon-Buttons, Status-Icons, Kontrast, reduzierte Bewegung und RTL-Layouts.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/accessibility.png">
+<meta name="twitter:image:alt" content="Barrierefreie Icons: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://kwy404.github.io/glyphfox/de/"},{"@type":"ListItem","position":2,"name":"Leitfäden","item":"https://kwy404.github.io/glyphfox/de/guides/"},{"@type":"ListItem","position":3,"name":"Barrierefreiheit","item":"https://kwy404.github.io/glyphfox/de/guides/accessibility.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Sollte jedes Icon einen Titel haben?","acceptedAnswer":{"@type":"Answer","text":"Nein. Die meisten Icons stehen neben Text oder in einem beschrifteten Bedienelement, und ein Titel stört dort nur. Einen Titel brauchen Icons, die allein stehen und Informationen tragen, etwa ein Status-Icon in einer Tabellenzelle."}},{"@type":"Question","name":"Reicht aria-hidden für dekorative Icons aus?","acceptedAnswer":{"@type":"Answer","text":"Ja. aria-hidden=\"true\", das glyphfox standardmäßig setzt, entfernt das Icon aus dem Accessibility-Tree. SVG-Icons sind nicht fokussierbar, es gibt also nichts weiter zu verbergen."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="In die Zwischenablage kopiert" data-theme-light="Zum hellen Design wechseln" data-theme-dark="Zum dunklen Design wechseln">
+<a class="skip" href="#main" data-i18n="nav.skip">Zum Inhalt springen</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Doku</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/accessibility.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Leitfäden" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Alle Leitfäden</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit und Web Components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML und CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Themen</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animierte Icons</a>
+<a href="accessibility.html" aria-current="page" class="on" data-i18n="guide.accessibility.short">Barrierefreiheit</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree-Shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG-Sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Serverseitiges Rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Brotkrumennavigation" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Startseite</a></li><li><a href="./" data-i18n="seo.crumb.guides">Leitfäden</a></li><li aria-current="page" data-i18n="guide.accessibility.short">Barrierefreiheit</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.topics">Themen</span>
+<h1 class="title" data-i18n="guide.accessibility.h1">Barrierefreie Icons</h1>
+<p class="lead" data-i18n="guide.accessibility.lead">Die meisten Icons stehen neben einer Beschriftung und sollten assistive Technologien nicht stören; einige wenige tragen für sich allein Bedeutung und brauchen einen Namen. glyphfox löst den ersten Fall standardmäßig richtig und erledigt den zweiten mit einer einzigen Prop.</p>
+<nav class="toc" aria-label="Auf dieser Seite" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#defaults" data-i18n="guide.accessibility.defaults.h">Standardmäßig dekorativ</a></li><li><a href="#title" data-i18n="guide.accessibility.title.h">Icons, die Bedeutung tragen</a></li><li><a href="#controls" data-i18n="guide.accessibility.controls.h">Buttons und Links nur mit Icon</a></li><li><a href="#status" data-i18n="guide.accessibility.status.h">Status, Farbe und Kontrast</a></li><li><a href="#motion" data-i18n="guide.accessibility.motion.h">Bewegung</a></li><li><a href="#rtl" data-i18n="guide.accessibility.rtl.h">Layouts von rechts nach links</a></li><li><a href="#others" data-i18n="guide.accessibility.others.h">Masken, Sprites, das Element und Angular</a></li><li><a href="#testing" data-i18n="guide.accessibility.testing.h">Testen</a></li><li><a href="#props" data-i18n="guide.accessibility.props.h">Props, auf die es hier ankommt</a></li><li><a href="#pitfalls" data-i18n="guide.accessibility.pitfalls.h">Stolperfallen</a></li><li><a href="#faq" data-i18n="seo.faq">Häufige Fragen</a></li></ol></nav>
+</header>
+<section id="defaults">
+<h2 data-i18n="guide.accessibility.defaults.h">Standardmäßig dekorativ</h2>
+<p data-i18n="guide.accessibility.defaults.p">Jedes glyphfox-Icon wird mit <code>aria-hidden="true"</code> gerendert, sofern Sie ihm keinen Namen geben. Screenreader überspringen es, und genau das wollen Sie bei einem Icon neben sichtbarem Text: Der Text sagt bereits, was das Bedienelement tut, und ein zusätzliches „Bild“ in der Ansage stört nur.</p>
+<div class="code"><div class="code-head"><span>output.html</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-c">&lt;!-- &lt;DownloadIcon /&gt; next to a label --&gt;</span>
+<span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;svg</span> <span class="tok-k">class</span>=<span class="tok-s">"glyphfox glyphfox-download"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span> ...<span class="tok-t">&gt;</span>...<span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span>
+  Download
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.accessibility.defaults.p2">Dieser Standard gilt überall: für die React-, Vue-, Svelte- und Angular-Komponenten, das <code>glyph-fox</code>-Element, die Runtime für reines HTML und die Strings aus <code>toSvg</code>. Sie ändern ihn nur, wenn ein Icon der einzige Träger seiner Bedeutung ist.</p>
+</section>
+<section id="title">
+<h2 data-i18n="guide.accessibility.title.h">Icons, die Bedeutung tragen</h2>
+<p data-i18n="guide.accessibility.title.p">Übergeben Sie <code>title</code>, und das Icon wird zu einem Bild mit Namen. Der Renderer ergänzt drei Dinge: ein <code>&lt;title&gt;</code>-Element als erstes Kind, <code>role="img"</code> und <code>aria-label</code> mit demselben Text. So wird der Name in allen Browsern und Screenreadern einheitlich bereitgestellt.</p>
+<div class="code"><div class="code-head"><span>Status.jsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { CircleCheckIcon, TriangleAlertIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> SyncStatus({ ok }) {
+  <span class="tok-k">return</span> ok
+    ? <span class="tok-t">&lt;CircleCheckIcon</span> <span class="tok-a">title</span>=<span class="tok-s">"Synced"</span> <span class="tok-a">color</span>=<span class="tok-s">"#15803d"</span> <span class="tok-t">/&gt;</span>
+    : <span class="tok-t">&lt;TriangleAlertIcon</span> <span class="tok-a">title</span>=<span class="tok-s">"Sync failed"</span> <span class="tok-a">color</span>=<span class="tok-s">"#b91c1c"</span> <span class="tok-t">/&gt;</span>;
+}</pre></div>
+<div class="code"><div class="code-head"><span>output.html</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;svg</span> <span class="tok-k">class</span>=<span class="tok-s">"glyphfox glyphfox-circle-check"</span> <span class="tok-a">role</span>=<span class="tok-s">"img"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Synced"</span> ...<span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;title</span><span class="tok-t">&gt;</span>Synced<span class="tok-t">&lt;/title</span><span class="tok-t">&gt;</span>
+  ...
+<span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.accessibility.title.label">In React, Vue und Svelte können Sie <code>aria-label</code> oder <code>aria-labelledby</code> auch direkt an die Komponente übergeben. Die Attribute landen auf dem <code>svg</code>, und das Icon ist automatisch nicht mehr dekorativ, ohne das <code>&lt;title&gt;</code>-Element und dessen Tooltip beim Hovern. <code>decorative</code> übersteuert die automatische Wahl in beide Richtungen: <code>decorative</code> verbirgt ein Icon selbst mit Titel, <code>decorative={false}</code> macht es zugänglich.</p>
+<p data-i18n="guide.accessibility.title.words">Benennen Sie, was das Icon an dieser Stelle bedeutet, nicht, was es darstellt. Für ein <a href="../../icons/trash.html">trash</a>-Icon lautet der Name „Entwurf löschen“, nicht „Mülleimer“; für <a href="../../icons/circle-check.html">circle check</a> in einer Liste von Zahlungen lautet er „Bezahlt“.</p>
+</section>
+<section id="controls">
+<h2 data-i18n="guide.accessibility.controls.h">Buttons und Links nur mit Icon</h2>
+<p data-i18n="guide.accessibility.controls.p">Ist ein Icon der einzige Inhalt eines Buttons oder Links, benennen Sie das Bedienelement, nicht das Icon. Das Bedienelement erhält den Fokus und wird vom Screenreader angesagt; das Icon darin bleibt dekorativ.</p>
+<div class="code"><div class="code-head"><span>Toolbar.jsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { XIcon, SettingsIcon, SearchIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Toolbar({ onClose }) {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Close dialog"</span> <span class="tok-a">onClick</span>={onClose}<span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;XIcon</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+      <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/settings"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Settings"</span><span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;SettingsIcon</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"submit"</span><span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;SearchIcon</span> <span class="tok-t">/&gt;</span>
+        <span class="tok-t">&lt;span</span> <span class="tok-a">className</span>=<span class="tok-s">"visually-hidden"</span><span class="tok-t">&gt;</span>Search the docs<span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.accessibility.controls.hidden">Visuell verborgener Text, das dritte Muster, wird von den Übersetzungsfunktionen der Browser übersetzt, die Attribute oft auslassen; bevorzugen Sie ihn auf mehrsprachigen Websites. Eine typische <code>visually-hidden</code>-Klasse beschneidet das Element auf ein Pixel, ohne es aus dem Accessibility-Tree zu entfernen.</p>
+<div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="css" data-done="1"><span class="tok-t">.visually-hidden</span> {
+  <span class="tok-a">position</span>: absolute;
+  <span class="tok-a">width</span>: <span class="tok-n">1px</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">1px</span>;
+  <span class="tok-a">margin</span>: -<span class="tok-n">1px</span>;
+  <span class="tok-a">padding</span>: <span class="tok-n">0</span>;
+  <span class="tok-a">overflow</span>: hidden;
+  <span class="tok-a">clip</span>: rect(<span class="tok-n">0</span> <span class="tok-n">0</span> <span class="tok-n">0</span> <span class="tok-n">0</span>);
+  <span class="tok-a">white-space</span>: nowrap;
+  <span class="tok-a">border</span>: <span class="tok-n">0</span>;
+}</pre></div>
+<p data-i18n="guide.accessibility.controls.state">Toggle-Buttons brauchen ihren Zustand, keinen neuen Namen. Ein Menü-Button, der von <code>menu</code> zu <code>x</code> morpht, behält sein Label und setzt <code>aria-expanded</code>; ein Play-Button, der zu <code>pause</code> morpht, ändert sein Label oder verwendet <code>aria-pressed</code>. Der Morph ist die visuelle Hälfte dieser Änderung; der <a href="animated-icons.html">Leitfaden zu animierten Icons</a> zeigt beide Hälften zusammen.</p>
+</section>
+<section id="status">
+<h2 data-i18n="guide.accessibility.status.h">Status, Farbe und Kontrast</h2>
+<p data-i18n="guide.accessibility.status.p">Farbe allein darf keine Bedeutung tragen (WCAG 1.4.1). Verwenden Sie für unterschiedliche Zustände unterschiedliche Formen, etwa <code>circle-check</code>, <code>circle-alert</code> und <code>circle-x</code>, und kombinieren Sie sie nach Möglichkeit mit Text. Auch Badges helfen: <code>file+check</code> und <code>file+alert</code> unterscheiden sich in der Form, nicht nur in der Farbe.</p>
+<p data-i18n="guide.accessibility.status.contrast">Icons, die zum Verständnis der Seite oder zum Auffinden eines Bedienelements nötig sind, müssen gegenüber ihrem Hintergrund einen Kontrast von 3 zu 1 erreichen (WCAG 1.4.11, Nicht-Text-Kontrast). Messen Sie die Strichfarbe, denn sie zeichnet die Form; die halbtransparente Duotone-Ebene ist eine Dekoration darüber. Dekorative Icons neben Text fallen nicht unter die Regel, geringer Kontrast macht sie aber trotzdem schwerer erfassbar.</p>
+<p data-i18n="guide.accessibility.status.weight">Dünne Striche wirken heller, als ihre Farbe vermuten lässt, weil das Antialiasing sie mit dem Hintergrund vermischt. glyphfox gleicht das unter 24 Pixeln aus, indem es den Strich um bis zu 30 Prozent kräftiger macht; bei 14 oder 16 Pixeln in einer gedämpften Farbe hält eine Strichstärke (<code>weight</code>) von 2,25 oder 2,5 die Icons lesbar. <code>absoluteWeight</code> schaltet die Kompensation ab, setzen Sie es bei kleinen Größen daher mit Bedacht ein.</p>
+</section>
+<section id="motion">
+<h2 data-i18n="guide.accessibility.motion.h">Bewegung</h2>
+<p data-i18n="guide.accessibility.motion.p">Jeder lebendige Zustand und jeder Morph berücksichtigt <code>prefers-reduced-motion: reduce</code>: Presets werden nicht abgespielt, CSS-Morphs wechseln ohne Übergang, und Komponenten-Morphs springen direkt zu ihrer Endform. Der Endzustand bleibt sichtbar, es gehen also keine Informationen verloren.</p>
+<p data-i18n="guide.accessibility.motion.p2">Inhalte, die sich länger als fünf Sekunden von selbst bewegen, brauchen eine Möglichkeit zum Pausieren (WCAG 2.2.2). Koppeln Sie Endlosanimationen wie <code>spin</code> an den Vorgang, den sie anzeigen, und stoppen Sie sie, wenn er endet. Vermeiden Sie außerdem endlos laufende Blickfänger wie eine Glocke, die unaufhörlich wackelt.</p>
+</section>
+<section id="rtl">
+<h2 data-i18n="guide.accessibility.rtl.h">Layouts von rechts nach links</h2>
+<p data-i18n="guide.accessibility.rtl.p">In arabischen, hebräischen oder persischen Oberflächen müssen Icons, die in Leserichtung zeigen, gespiegelt werden: Zurück- und Vorwärtspfeile, Chevrons in Breadcrumbs, Antworten und Rückgängigmachen. <code>mirrorRtl</code> fügt eine Klasse hinzu, die das Icon spiegelt, sobald es sich innerhalb von <code>dir="rtl"</code> befindet, sodass dasselbe Markup in beiden Richtungen funktioniert.</p>
+<div class="code"><div class="code-head"><span>Pager.jsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { ChevronLeftIcon, ChevronRightIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Pager({ onPrev, onNext }) {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;nav</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Pagination"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={onPrev}<span class="tok-t">&gt;</span><span class="tok-t">&lt;ChevronLeftIcon</span> mirrorRtl <span class="tok-t">/&gt;</span> Previous<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={onNext}<span class="tok-t">&gt;</span>Next <span class="tok-t">&lt;ChevronRightIcon</span> mirrorRtl <span class="tok-t">/&gt;</span><span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;/nav</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.accessibility.rtl.not">Spiegeln Sie keine Icons, deren Richtung nicht dem Text folgt: Mediensteuerungen wie <code>play</code> und <code>fast-forward</code> zeigen weiterhin nach rechts, eine <code>clock</code> dreht sich weiter im Uhrzeigersinn, ein <code>check</code> bleibt, wie er ist, und <code>rotate-cw</code> bedeutet weiterhin im Uhrzeigersinn.</p>
+</section>
+<section id="others">
+<h2 data-i18n="guide.accessibility.others.h">Masken, Sprites, das Element und Angular</h2>
+<ul class="list"><li data-i18n="guide.accessibility.others.list.1"><strong>Tailwind-CSS-Klassen</strong> rendern ein leeres Element mit einer Maske, das überhaupt keine Semantik hat. Ergänzen Sie <code>aria-hidden="true"</code> und geben Sie dem Bedienelement ein visuell verborgenes Label. Im Hochkontrastmodus von Windows kann ein Masken-Icon verschwinden; die Lösung steht im <a href="tailwind.html">Tailwind-CSS-Leitfaden</a>.</li><li data-i18n="guide.accessibility.others.list.2">Bei <strong>SVG-Sprites</strong> liegt das äußere <code>svg</code> bei Ihnen: Ergänzen Sie <code>aria-hidden="true"</code> für ein dekoratives Icon oder <code>role="img"</code> und <code>aria-label</code> für ein bedeutungstragendes. Beispiele finden Sie im <a href="svg-sprite.html">Sprite-Leitfaden</a>.</li><li data-i18n="guide.accessibility.others.list.3"><strong>Das <code>glyph-fox</code>-Element und die Angular-Komponente <code>gf-icon</code></strong> rendern das <code>svg</code> innerhalb des Host-Elements. Ein <code>aria-label</code> am Host macht das innere <code>svg</code> zwar zu einem Bild, benennt es aber nicht, und ein Label an einem generischen Element wird nicht zuverlässig angesagt. Verwenden Sie <code>title</code> als Attribut oder Input; damit wird das innere <code>svg</code> benannt.</li></ul>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-c">&lt;!-- names the inner svg: role img, aria-label and a title --&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"circle-alert"</span> <span class="tok-a">title</span>=<span class="tok-s">"Payment failed"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+
+<span class="tok-c">&lt;!-- Angular --&gt;</span>
+<span class="tok-t">&lt;gf-icon</span> <span class="tok-a">name</span>=<span class="tok-s">"circle-alert"</span> <span class="tok-a">title</span>=<span class="tok-s">"Payment failed"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/gf-icon</span><span class="tok-t">&gt;</span></pre></div>
+</section>
+<section id="testing">
+<h2 data-i18n="guide.accessibility.testing.h">Testen</h2>
+<ol class="list"><li data-i18n="guide.accessibility.testing.list.1">Öffnen Sie den Accessibility-Tree in den Devtools Ihres Browsers und wählen Sie das Bedienelement aus: Sein Name sollte das von Ihnen geschriebene Label sein, und dekorative Icons sollten gar nicht erscheinen.</li><li data-i18n="guide.accessibility.testing.list.2">Navigieren Sie mit einem Screenreader: VoiceOver unter macOS und iOS, NVDA unter Windows, TalkBack unter Android. Achten Sie auf doppelt angesagte Namen und auf alles, was nur als „Bild“ angesagt wird.</li><li data-i18n="guide.accessibility.testing.list.3">Emulieren Sie <code>prefers-reduced-motion</code> und <code>forced-colors</code> in den Rendering-Werkzeugen der Chromium-Devtools und prüfen Sie, ob die Icons sichtbar bleiben und sich nicht bewegen.</li><li data-i18n="guide.accessibility.testing.list.4">Prüfen Sie den Kontrast bedeutungstragender Icons mit einer Farbpipette gegen den tatsächlichen Hintergrund, auch in Hover- und Fokus-Zuständen.</li></ol>
+</section>
+<section id="props">
+<h2 data-i18n="guide.accessibility.props.h">Props, auf die es hier ankommt</h2>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="docs.type">Typ</th><th data-i18n="docs.default">Standard</th><th data-i18n="docs.desc">Beschreibung</th></tr></thead><tbody>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Hauptfarbe.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Strichstärke von 1 bis 3 im 24er-Raster, unter 24 px optisch ausgeglichen.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Hält den Strich bei jeder Größe auf weight Pixeln.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">In Layouts von rechts nach links spiegeln.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>keiner</td><td data-i18n="prop.title">Zugänglicher Name: title, role img und aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true ohne title</td><td data-i18n="prop.decorative">Verbirgt das Icon vor assistiven Technologien.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.accessibility.pitfalls.h">Stolperfallen</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.accessibility.pitfalls.list.1.t">Bedienelement und Icon gleichzeitig benennen</dt><dd data-i18n="guide.accessibility.pitfalls.list.1.d">Ein <code>title</code> an einem Icon in einem Button, der bereits ein Label hat, führt dazu, dass Screenreader beides ansagen, und das <code>&lt;title&gt;</code>-Element erscheint zusätzlich als Tooltip beim Hovern. Benennen Sie nur eines: das Bedienelement.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.2.t">Ein Bild ohne Namen</dt><dd data-i18n="guide.accessibility.pitfalls.list.2.d"><code>decorative={false}</code> ohne <code>title</code> und ohne <code>aria-label</code> macht ein Bild ohne Namen zugänglich, das Screenreader als „Bild“ oder mit seinem Dateinamen ansagen. Geben Sie jedem zugänglich gemachten Icon einen Namen.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.3.t">Zustände, die nur das Icon zeigt</dt><dd data-i18n="guide.accessibility.pitfalls.list.3.d">Ein Morph von <code>copy</code> zu <code>check</code> ist für einen Screenreader unsichtbar. Geben Sie das Ergebnis als Text bekannt: Ändern Sie das Label des Buttons, oder schreiben Sie „Kopiert“ in eine Live-Region mit <code>role="status"</code>.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.4.t">Tooltips aus Titeln</dt><dd data-i18n="guide.accessibility.pitfalls.list.4.d">Der Browser-Tooltip aus <code>&lt;title&gt;</code> erscheint nur beim Hovern mit der Maus, nie bei Fokus oder Berührung. Legen Sie dort keine Informationen ab, die nicht auch auf anderem Weg verfügbar sind.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.5.t">Labels am Host-Element</dt><dd data-i18n="guide.accessibility.pitfalls.list.5.d">Verwenden Sie bei <code>glyph-fox</code> und <code>gf-icon</code> lieber <code>title</code> als <code>aria-label</code>, wie oben beschrieben.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Häufige Fragen</h2>
+<h3 data-i18n="guide.accessibility.faq.every-icon.q">Sollte jedes Icon einen Titel haben?</h3>
+<p data-i18n="guide.accessibility.faq.every-icon.a">Nein. Die meisten Icons stehen neben Text oder in einem beschrifteten Bedienelement, und ein Titel stört dort nur. Einen Titel brauchen Icons, die allein stehen und Informationen tragen, etwa ein Status-Icon in einer Tabellenzelle.</p>
+<h3 data-i18n="guide.accessibility.faq.aria-hidden.q">Reicht aria-hidden für dekorative Icons aus?</h3>
+<p data-i18n="guide.accessibility.faq.aria-hidden.a">Ja. <code>aria-hidden="true"</code>, das glyphfox standardmäßig setzt, entfernt das Icon aus dem Accessibility-Tree. SVG-Icons sind nicht fokussierbar, es gibt also nichts weiter zu verbergen.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in diesem Leitfaden</h2>
+<ul class="icon-links"><li><a href="../../icons/download.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-download" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>download</span></a></li><li><a href="../../icons/circle-check.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-circle-check" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12l3 3 6-6"/></svg><span>circle-check</span></a></li><li><a href="../../icons/triangle-alert.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-triangle-alert" aria-hidden="true"><path d="M13.91 4.2L21.7 17.7A2.2 2.2 0 0 1 19.8 21L4.2 21A2.2 2.2 0 0 1 2.3 17.7L10.09 4.2A2.2 2.2 0 0 1 13.91 4.2Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span>triangle-alert</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/chevron-left.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chevron-left" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>chevron-left</span></a></li><li><a href="../../icons/chevron-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chevron-right" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>chevron-right</span></a></li><li><a href="../../icons/circle-alert.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-circle-alert" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v5"/><path d="M12 16.5h.01"/></svg><span>circle-alert</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Verwandte Leitfäden</h2>
+<ul class="guide-cards"><li><a href="animated-icons.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><strong data-i18n="guide.animated-icons.h1">Animierte Icons</strong><span data-i18n="guide.animated-icons.description">Animierte Icons mit glyphfox: Presets draw, pop, spin und shake, Auslöser hover, click und state, Morphing zwischen Icons, reine CSS-Morphs, reduzierte Bewegung.</span></a></li><li><a href="tailwind.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-wind" aria-hidden="true"><path d="M3 10h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg><strong data-i18n="guide.tailwind.h1">Tailwind-CSS-Icons</strong><span data-i18n="guide.tailwind.description">glyphfox-Icons als Klassen in Tailwind CSS v3 und v4: Einrichtung, gf-Syntax, Stile und Strichstärken per Schrägstrich, Badges, Fusionen, Animationen, Optionen.</span></a></li><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Icons in Lit und Web Components</strong><span data-i18n="guide.web-components.description">SVG-Icons in Lit und Web Components mit dem Custom Element glyph-fox: alle oder ausgewählte Icons registrieren, Attribute binden, stylen, barrierefrei halten.</span></a></li><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">React-Icons</strong><span data-i18n="guide.react.description">React-Icons mit glyphfox: Installation, tree-shakable SVG-Komponenten, alle Props, Icons per Name, Modifier, Fusion, Morphing, Refs und TypeScript-Typen.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Originale Icons im 24er-Raster, die ihre Strichstärke ändern, morphen, verschmelzen und lebendig werden. Kostenlos und Open Source unter der MIT-Lizenz.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produkt</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Alle Icons nach Kategorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Brand-Kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Entwickler</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Doku</a></li>
+          <li><a href="./" data-i18n="footer.guides">Leitfäden</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projekt</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT-Lizenz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Erstellt von</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, der Fuchs, ist im selben Raster gezeichnet wie die Icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

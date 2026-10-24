@@ -8,6 +8,7 @@
 // writes that language's version of a page as soon as every string of the
 // page is translated, here or in the site strings.
 
+import de from './i18n/de.js';
 import es from './i18n/es.js';
 import fr from './i18n/fr.js';
 import ptBR from './i18n/pt-br.js';
@@ -134,4 +135,5 @@ export const dict = {
   'pt-BR': ptBR,
   es,
   fr,
+  de,
 };
