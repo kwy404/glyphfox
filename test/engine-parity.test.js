@@ -8,7 +8,7 @@
 // runner resolves solid-js to the server build.
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync, rmdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, rmdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { join, resolve } from 'node:path';
 import { h, render as preactRender } from 'preact';
@@ -38,8 +38,13 @@ async function solidBrowser() {
   const heart = resolve('packages/glyphfox/dist/solid/icons/heart.js').split('\\').join('/');
   writeFileSync(entry, `export { HeartIcon } from ${JSON.stringify(heart)};\nexport { createComponent } from 'solid-js';\nexport { render } from 'solid-js/web';\n`);
   const cli = createRequire(import.meta.url).resolve('esbuild/bin/esbuild');
-  const args = [cli, entry, '--bundle', '--format=esm', '--platform=browser', '--conditions=browser', `--outfile=${join(dir, 'kit.js')}`, '--log-level=error'];
-  execFileSync(process.execPath, args, { env: { ...process.env, NODE_PATH: resolve('node_modules') } });
+  // npm keeps bin/esbuild as a Node launcher on Windows and swaps in the
+  // native binary elsewhere, so only the launcher goes through node.
+  const launcher = readFileSync(cli).subarray(0, 2).toString() === '#!';
+  const args = [entry, '--bundle', '--format=esm', '--platform=browser', '--conditions=browser', `--outfile=${join(dir, 'kit.js')}`, '--log-level=error'];
+  const env = { ...process.env, NODE_PATH: resolve('node_modules') };
+  if (launcher) execFileSync(process.execPath, [cli, ...args], { env });
+  else execFileSync(cli, args, { env });
   solidKit = await import(/* @vite-ignore */ join(dir, 'kit.js').split('\\').join('/'));
   rmSync(dir, { recursive: true, force: true });
   try {
