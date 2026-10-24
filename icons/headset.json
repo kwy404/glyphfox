@@ -1,0 +1,26 @@
+{
+  "categories": [
+    "music"
+  ],
+  "tags": [
+    "headset",
+    "headphones",
+    "microphone",
+    "call",
+    "gaming"
+  ],
+  "animation": {
+    "name": "beat",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.15, "element": "all", "props": { "transform": "scale(1.05)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.45, "element": "all", "props": { "transform": "scale(1.03)" } },
+      { "at": 0.7, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)" } }
+    ]
+  }
+}

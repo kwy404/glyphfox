@@ -8,5 +8,22 @@
     "peak",
     "flag",
     "climb"
-  ]
+  ],
+  "animation": {
+    "name": "wave",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [9, 8],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 1, "props": { "transform": "rotate(-10deg)" } },
+      { "at": 0.27, "element": 1, "props": { "transform": "rotate(10deg)" } },
+      { "at": 0.42, "element": 1, "props": { "transform": "rotate(-7deg)" } },
+      { "at": 0.57, "element": 1, "props": { "transform": "rotate(5deg)" } },
+      { "at": 0.72, "element": 1, "props": { "transform": "rotate(-2.5deg)" } },
+      { "at": 0.86, "element": 1, "props": { "transform": "rotate(1deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

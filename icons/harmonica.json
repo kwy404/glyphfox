@@ -8,5 +8,40 @@
     "mouth organ",
     "folk",
     "instrument"
-  ]
+  ],
+  "animation": {
+    "name": "play",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.2, "element": 1, "props": { "opacity": 0.15 } },
+      { "at": 0.5, "element": 1, "props": { "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.08, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.216, "element": 2, "props": { "opacity": 0.15 } },
+      { "at": 0.42, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.76, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.16, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.296, "element": 3, "props": { "opacity": 0.15 } },
+      { "at": 0.5, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.84, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.24, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.376, "element": 4, "props": { "opacity": 0.15 } },
+      { "at": 0.58, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.92, "element": 4, "props": { "opacity": 1 } },
+      { "at": 1, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.32, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.456, "element": 5, "props": { "opacity": 0.15 } },
+      { "at": 0.66, "element": 5, "props": { "opacity": 1 } },
+      { "at": 1, "element": 5, "props": { "opacity": 1 } }
+    ]
+  }
 }

@@ -8,5 +8,30 @@
     "beach",
     "tropical",
     "vacation"
-  ]
+  ],
+  "animation": {
+    "name": "sway",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [14, 10],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "rotate(3.6deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "rotate(3.6deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 3, "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.65, "element": 3, "props": { "transform": "rotate(3.6deg)" } },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 4, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 4, "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.65, "element": 4, "props": { "transform": "rotate(3.6deg)" } },
+      { "at": 1, "element": 4, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

@@ -8,5 +8,20 @@
     "pattern",
     "match",
     "wildcard"
-  ]
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [15, 9],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(60deg)" } },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(60deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(60deg)" } }
+    ]
+  }
 }

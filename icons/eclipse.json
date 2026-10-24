@@ -8,5 +8,18 @@
     "corona",
     "sun",
     "moon"
-  ]
+  ],
+  "animation": {
+    "name": "twinkle",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [17.95, 7.05],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(25deg) scale(0.85)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "rotate(-12.5deg) scale(1.1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg) scale(1)" } }
+    ]
+  }
 }

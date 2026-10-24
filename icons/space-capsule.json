@@ -8,5 +8,21 @@
     "landing",
     "return",
     "spacecraft"
-  ]
+  ],
+  "animation": {
+    "name": "descend",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 2],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": "all", "props": { "transform": "rotate(8deg)" } },
+      { "at": 0.32, "element": "all", "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.5, "element": "all", "props": { "transform": "rotate(3.6deg)" } },
+      { "at": 0.68, "element": "all", "props": { "transform": "rotate(-2deg)" } },
+      { "at": 0.84, "element": "all", "props": { "transform": "rotate(0.8deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

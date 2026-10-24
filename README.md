@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://kwy404.github.io/glyphfox/">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/kwy404/glyphfox@main/assets/banner-dark.png">
-      <img src="https://cdn.jsdelivr.net/gh/kwy404/glyphfox@main/assets/banner-light.png" alt="glyphfox: icons that move, morph and fuse" width="880">
+      <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.png">
+      <img src="assets/banner-light.png" alt="glyphfox: icons that move, morph and fuse" width="880">
     </picture>
   </a>
 </p>

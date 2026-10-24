@@ -8,5 +8,19 @@
     "camping",
     "outdoors",
     "flame"
-  ]
+  ],
+  "animation": {
+    "name": "flicker",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 17],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.25, "element": 0, "props": { "transform": "scale(0.94, 1.06)" } },
+      { "at": 0.5, "element": 0, "props": { "transform": "scale(1.04, 0.95)" } },
+      { "at": 0.75, "element": 0, "props": { "transform": "scale(0.96, 1.04)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

@@ -1,0 +1,24 @@
+{
+  "categories": [
+    "sports"
+  ],
+  "tags": [
+    "jump rope",
+    "skipping",
+    "cardio",
+    "workout",
+    "fitness"
+  ],
+  "animation": {
+    "name": "skip",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 9],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.5, "element": 2, "props": { "transform": "scale(1, -0.5)" } },
+      { "at": 1, "element": 2, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
+}

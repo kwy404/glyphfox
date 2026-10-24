@@ -8,5 +8,18 @@
     "winners",
     "first place",
     "leaderboard"
-  ]
+  ],
+  "animation": {
+    "name": "twinkle",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 4.25],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "rotate(25deg) scale(0.85)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "rotate(-12.5deg) scale(1.1)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg) scale(1)" } }
+    ]
+  }
 }

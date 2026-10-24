@@ -8,5 +8,31 @@
     "electronic",
     "music",
     "knobs"
-  ]
+  ],
+  "animation": {
+    "name": "tweak",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [14, 7.25],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 2, "props": { "opacity": 0.2 } },
+      { "at": 0.3, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 2, "props": { "opacity": 0.2 } },
+      { "at": 0.6, "element": 2, "props": { "opacity": 1 } },
+      { "at": 1, "element": 2, "props": { "opacity": 1 } },
+      { "at": 0, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.277, "element": 3, "props": { "opacity": 0.2 } },
+      { "at": 0.405, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0.533, "element": 3, "props": { "opacity": 0.2 } },
+      { "at": 0.66, "element": 3, "props": { "opacity": 1 } },
+      { "at": 1, "element": 3, "props": { "opacity": 1 } },
+      { "at": 0, "element": 4, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.4, "element": 4, "props": { "transform": "scale(0.4, 1)" } },
+      { "at": 0.8, "element": 4, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 4, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

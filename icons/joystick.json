@@ -8,5 +8,34 @@
     "game",
     "stick",
     "retro"
-  ]
+  ],
+  "animation": {
+    "name": "play",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(0deg) translate(0px, -4px)" } },
+      { "at": 0.12, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(-12deg) translate(0px, -4px)" } },
+      { "at": 0.27, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(12deg) translate(0px, -4px)" } },
+      { "at": 0.42, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(-8.4deg) translate(0px, -4px)" } },
+      { "at": 0.57, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(6deg) translate(0px, -4px)" } },
+      { "at": 0.72, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(-3deg) translate(0px, -4px)" } },
+      { "at": 0.86, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(1.2deg) translate(0px, -4px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 4px) rotate(0deg) translate(0px, -4px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(0deg) translate(0px, -4px)" } },
+      { "at": 0.12, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(-12deg) translate(0px, -4px)" } },
+      { "at": 0.27, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(12deg) translate(0px, -4px)" } },
+      { "at": 0.42, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(-8.4deg) translate(0px, -4px)" } },
+      { "at": 0.57, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(6deg) translate(0px, -4px)" } },
+      { "at": 0.72, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(-3deg) translate(0px, -4px)" } },
+      { "at": 0.86, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(1.2deg) translate(0px, -4px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 4px) rotate(0deg) translate(0px, -4px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(5px, 4px) scale(1) translate(-5px, -4px)" } },
+      { "at": 0.3, "element": 3, "props": { "transform": "translate(5px, 4px) scale(1) translate(-5px, -4px)" } },
+      { "at": 0.51, "element": 3, "props": { "transform": "translate(5px, 4px) scale(0.7) translate(-5px, -4px)" } },
+      { "at": 0.755, "element": 3, "props": { "transform": "translate(5px, 4px) scale(1.09) translate(-5px, -4px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(5px, 4px) scale(1) translate(-5px, -4px)" } }
+    ]
+  }
 }

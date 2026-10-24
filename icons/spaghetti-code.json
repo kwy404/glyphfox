@@ -8,5 +8,30 @@
     "legacy",
     "pasta",
     "mess"
-  ]
+  ],
+  "animation": {
+    "name": "twirl",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [15, 8],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 2, "props": { "transform": "rotate(-15deg)" } },
+      { "at": 0.27, "element": 2, "props": { "transform": "rotate(15deg)" } },
+      { "at": 0.42, "element": 2, "props": { "transform": "rotate(-10.5deg)" } },
+      { "at": 0.57, "element": 2, "props": { "transform": "rotate(7.5deg)" } },
+      { "at": 0.72, "element": 2, "props": { "transform": "rotate(-3.75deg)" } },
+      { "at": 0.86, "element": 2, "props": { "transform": "rotate(1.5deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 3, "props": { "transform": "rotate(-15deg)" } },
+      { "at": 0.27, "element": 3, "props": { "transform": "rotate(15deg)" } },
+      { "at": 0.42, "element": 3, "props": { "transform": "rotate(-10.5deg)" } },
+      { "at": 0.57, "element": 3, "props": { "transform": "rotate(7.5deg)" } },
+      { "at": 0.72, "element": 3, "props": { "transform": "rotate(-3.75deg)" } },
+      { "at": 0.86, "element": 3, "props": { "transform": "rotate(1.5deg)" } },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

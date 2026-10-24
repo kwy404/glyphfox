@@ -8,5 +8,26 @@
     "beacon",
     "harbor",
     "sea"
-  ]
+  ],
+  "animation": {
+    "name": "beam",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 5, "props": { "opacity": 0.2 } },
+      { "at": 0.3, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 5, "props": { "opacity": 0.2 } },
+      { "at": 0.6, "element": 5, "props": { "opacity": 1 } },
+      { "at": 1, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.277, "element": 6, "props": { "opacity": 0.2 } },
+      { "at": 0.405, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.533, "element": 6, "props": { "opacity": 0.2 } },
+      { "at": 0.66, "element": 6, "props": { "opacity": 1 } },
+      { "at": 1, "element": 6, "props": { "opacity": 1 } }
+    ]
+  }
 }

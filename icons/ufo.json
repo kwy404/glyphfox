@@ -8,5 +8,28 @@
     "alien",
     "sci-fi",
     "abduction"
-  ]
+  ],
+  "animation": {
+    "name": "hover",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.5, "element": "all", "props": { "transform": "translate(0px, -1px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 5, "props": { "opacity": 0.2 } },
+      { "at": 0.3, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 5, "props": { "opacity": 0.2 } },
+      { "at": 0.6, "element": 5, "props": { "opacity": 1 } },
+      { "at": 1, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 6, "props": { "opacity": 0.2 } },
+      { "at": 0.3, "element": 6, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 6, "props": { "opacity": 0.2 } },
+      { "at": 0.6, "element": 6, "props": { "opacity": 1 } },
+      { "at": 1, "element": 6, "props": { "opacity": 1 } }
+    ]
+  }
 }

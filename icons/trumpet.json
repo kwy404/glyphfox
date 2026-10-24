@@ -8,5 +8,20 @@
     "horn",
     "jazz",
     "fanfare"
-  ]
+  ],
+  "animation": {
+    "name": "blow",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [2.5, 11],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.15, "element": "all", "props": { "transform": "scale(1.05)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.45, "element": "all", "props": { "transform": "scale(1.03)" } },
+      { "at": 0.7, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)" } }
+    ]
+  }
 }

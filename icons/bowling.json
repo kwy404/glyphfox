@@ -8,5 +8,30 @@
     "ball",
     "strike",
     "alley"
-  ]
+  ],
+  "animation": {
+    "name": "wobble",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [19, 22],
+    "frames": [
+      { "at": 0, "element": 4, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 4, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.27, "element": 4, "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.42, "element": 4, "props": { "transform": "rotate(-2.8deg)" } },
+      { "at": 0.57, "element": 4, "props": { "transform": "rotate(2deg)" } },
+      { "at": 0.72, "element": 4, "props": { "transform": "rotate(-1deg)" } },
+      { "at": 0.86, "element": 4, "props": { "transform": "rotate(0.4deg)" } },
+      { "at": 1, "element": 4, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 5, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.12, "element": 5, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.27, "element": 5, "props": { "transform": "rotate(4deg)" } },
+      { "at": 0.42, "element": 5, "props": { "transform": "rotate(-2.8deg)" } },
+      { "at": 0.57, "element": 5, "props": { "transform": "rotate(2deg)" } },
+      { "at": 0.72, "element": 5, "props": { "transform": "rotate(-1deg)" } },
+      { "at": 0.86, "element": 5, "props": { "transform": "rotate(0.4deg)" } },
+      { "at": 1, "element": 5, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

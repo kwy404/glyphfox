@@ -8,5 +8,22 @@
     "parasol",
     "sand",
     "summer"
-  ]
+  ],
+  "animation": {
+    "name": "sway",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [13.66, 20.83],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 0, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.65, "element": 0, "props": { "transform": "rotate(2.4deg)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "rotate(2.4deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

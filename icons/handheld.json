@@ -8,5 +8,22 @@
     "game",
     "retro",
     "device"
-  ]
+  ],
+  "animation": {
+    "name": "press",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 4, "props": { "transform": "translate(2px, 6px) scale(1) translate(-2px, -6px)" } },
+      { "at": 0.3, "element": 4, "props": { "transform": "translate(2px, 6px) scale(0.6) translate(-2px, -6px)" } },
+      { "at": 0.65, "element": 4, "props": { "transform": "translate(2px, 6px) scale(1.12) translate(-2px, -6px)" } },
+      { "at": 1, "element": 4, "props": { "transform": "translate(2px, 6px) scale(1) translate(-2px, -6px)" } },
+      { "at": 0, "element": 5, "props": { "transform": "translate(4px, 3.5px) scale(1) translate(-4px, -3.5px)" } },
+      { "at": 0.15, "element": 5, "props": { "transform": "translate(4px, 3.5px) scale(1) translate(-4px, -3.5px)" } },
+      { "at": 0.405, "element": 5, "props": { "transform": "translate(4px, 3.5px) scale(0.6) translate(-4px, -3.5px)" } },
+      { "at": 0.703, "element": 5, "props": { "transform": "translate(4px, 3.5px) scale(1.12) translate(-4px, -3.5px)" } },
+      { "at": 1, "element": 5, "props": { "transform": "translate(4px, 3.5px) scale(1) translate(-4px, -3.5px)" } }
+    ]
+  }
 }
