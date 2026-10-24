@@ -34,11 +34,30 @@ function markTargets(n) {
   return [...tile.map((p) => [...p, 0]), ...head.map((p) => [...p, 1]), ...eyes.map((p) => [...p, 1])];
 }
 
-/** Target points of Fenn sitting, read from the mascot drawing in the page. */
+/** Target points of Fenn sitting, read from the mascot drawing in the page and scaled to stage units (0 to 64). */
 function fennTargets(svgEl, n) {
+  const [vx, vy, vw] = (svgEl.getAttribute('viewBox') || '0 0 64 64').trim().split(/[\s,]+/).map(Number);
+  const s = 64 / (vw || 64);
   const strokes = [...svgEl.querySelectorAll('path:not(.fill)')].map((p) => p.getAttribute('d')).filter((d) => d && !/h\.0\d/.test(d));
   const eyes = [...svgEl.querySelectorAll('path:not(.fill)')].map((p) => p.getAttribute('d')).filter((d) => d && /h\.0\d/.test(d));
-  const polys = strokes.flatMap((d, i) => polylines(d).map((p) => ({ ...p, head: i === 0 })));
+  const groups = strokes.map((d) => polylines(d));
+  // The head is the stroke drawn highest in the picture, wherever it sits in the markup.
+  const meanY = (g) => {
+    let sum = 0;
+    let count = 0;
+    for (const p of g) {
+      for (const q of p.points) {
+        sum += q[1];
+        count++;
+      }
+    }
+    return count ? sum / count : Infinity;
+  };
+  let headIndex = 0;
+  groups.forEach((g, i) => {
+    if (meanY(g) < meanY(groups[headIndex])) headIndex = i;
+  });
+  const polys = groups.flatMap((g, i) => g.map((p) => ({ ...p, head: i === headIndex })));
   const eyeCount = eyes.length * 4;
   let total = 0;
   for (const p of polys) total += gf.geometry.polylineLength(p.points);
@@ -48,14 +67,14 @@ function fennTargets(svgEl, n) {
     const k = Math.max(2, Math.round(((n - eyeCount) * len) / total));
     const pts = gf.geometry.resample(p.points, k + (p.closed ? 1 : 0));
     if (p.closed) pts.pop();
-    for (const q of pts) out.push([q[0], q[1], p.head ? 1 : 0]);
+    for (const q of pts) out.push([(q[0] - vx) * s, (q[1] - vy) * s, p.head ? 1 : 0]);
   }
   for (const d of eyes) {
     const m = /M\s*([\d.]+)[ ,]([\d.]+)/.exec(d);
     if (!m) continue;
     for (let i = 0; i < 4; i++) {
       const a = (i * Math.PI) / 2 + 0.4;
-      out.push([Number(m[1]) + Math.cos(a) * 0.45, Number(m[2]) + Math.sin(a) * 0.45, 1]);
+      out.push([(Number(m[1]) - vx) * s + Math.cos(a) * 0.45, (Number(m[2]) - vy) * s + Math.sin(a) * 0.45, 1]);
     }
   }
   return out;
