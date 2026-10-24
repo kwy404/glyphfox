@@ -74,10 +74,23 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 <!-- header:end -->
 <main id="main" class="browser">
   <aside class="cats" aria-label="Categorías" data-i18n-attr="aria-label:icons.categories">
-    <a class="cats-universe" href="universe.html" title="Explorar todos los conjuntos de iconos de licencia abierta en glyphfox universe" data-i18n-attr="title:icons.universe.open">
-      <span class="cats-universe-label" data-i18n="icons.universe.label">Otros conjuntos</span>
-      <span class="cats-universe-count"><span data-universe="total" data-num="414952">414.952</span> <span data-i18n="icons.universe.iconsIn">iconos en</span> <span data-universe="sets" data-num="245">245</span> <span data-i18n="icons.universe.sets">conjuntos</span></span>
-    </a>
+    <div class="set-picker" data-set-picker>
+      <h2 class="cats-title" id="set-title" data-i18n="icons.set.title">Conjunto de iconos</h2>
+      <button class="set-current" type="button" aria-expanded="false" aria-controls="set-panel" aria-describedby="set-title" data-set-toggle>
+        <span class="set-current-name" data-set-name translate="no">glyphfox</span>
+        <span class="set-current-meta" data-set-meta data-i18n="icons.set.ours">Nuestros propios iconos, con las colecciones display e isométrica</span>
+        <!--gf:chevron-down:16:set-chev--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chevron-down set-chev" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg><!--/gf-->
+      </button>
+      <a class="cats-universe" href="universe.html" title="Explorar todos los conjuntos de iconos de licencia abierta en glyphfox universe" data-i18n-attr="title:icons.universe.open" data-set-more>
+        <span class="cats-universe-label" data-i18n="icons.universe.label">Otros conjuntos</span>
+        <span class="cats-universe-count"><span data-universe="total" data-num="414952">414.952</span> <span data-i18n="icons.universe.iconsIn">iconos en</span> <span data-universe="sets" data-num="245">245</span> <span data-i18n="icons.universe.sets">conjuntos</span></span>
+      </a>
+      <div class="set-panel" id="set-panel" data-set-panel hidden>
+        <input class="input set-filter" type="search" data-set-filter placeholder="Filtrar conjuntos por nombre o licencia" aria-label="Filtrar conjuntos por nombre o licencia" data-i18n-attr="placeholder:icons.set.filter;aria-label:icons.set.filter" autocomplete="off" spellcheck="false">
+        <div class="set-list" data-set-list aria-live="polite"></div>
+        <a class="set-gallery" href="universe.html#gallery" data-i18n="icons.set.gallery">Comparar conjuntos en la galería</a>
+      </div>
+    </div>
     <h2 class="cats-title" data-i18n="icons.categories">Categorías</h2>
     <ul data-cats></ul>
   </aside>
@@ -90,6 +103,10 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
           <!--gf:search:18:search-icon--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search search-icon" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M7.62 10.09A3.5 3.5 0 0 1 10.09 7.62"/></svg><!--/gf-->
           <input class="input" type="search" data-search placeholder="Buscar iconos, etiquetas, categorías" aria-label="Buscar iconos, etiquetas, categorías" data-i18n-attr="placeholder:icons.search;aria-label:icons.search" autocomplete="off" spellcheck="false">
           <kbd aria-hidden="true">/</kbd>
+        </div>
+        <div class="seg scope-seg" role="group" aria-label="Buscar en" data-i18n-attr="aria-label:icons.scope" data-scope>
+          <button type="button" value="set" aria-pressed="true" data-i18n="icons.scope.set">Este conjunto</button>
+          <button type="button" value="all" aria-pressed="false" data-i18n="icons.scope.all">Todos los conjuntos</button>
         </div>
         <button class="btn small" type="button" data-sketch-toggle aria-expanded="false" aria-controls="sketch" aria-label="Dibuja para buscar" data-i18n-attr="aria-label:icons.sketch"><!--gf:pencil:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-pencil" aria-hidden="true"><path d="M15 4l5 5L9 20H4v-5Z"/><path d="M12 7l5 5"/></svg><!--/gf--><span data-i18n="icons.sketch">Dibuja para buscar</span></button>
       </div>
@@ -106,6 +123,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
       <p class="result-line" aria-live="polite" data-result></p>
     </div>
     <div class="icon-grid" data-grid role="listbox" aria-label="Iconos" data-i18n-attr="aria-label:icons.title" tabindex="0"></div>
+    <div class="set-grid" data-sgrid role="listbox" aria-label="Iconos" data-i18n-attr="aria-label:icons.title" tabindex="0" hidden><div class="set-layer" data-slayer></div></div>
     <div class="empty" data-empty hidden><!--art:drawing:empty-art--><svg class="fenn-art empty-art" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M97 58L93 90M115 58L119 90"/><rect x="88" y="12" width="36" height="46" rx="4"/><path d="M94 12v46" stroke-width=".6" stroke-opacity=".2"/><path d="M100 12v46" stroke-width=".6" stroke-opacity=".2"/><path d="M106 12v46" stroke-width=".6" stroke-opacity=".2"/><path d="M112 12v46" stroke-width=".6" stroke-opacity=".2"/><path d="M118 12v46" stroke-width=".6" stroke-opacity=".2"/><path d="M88 17.75h36" stroke-width=".6" stroke-opacity=".2"/><path d="M88 23.5h36" stroke-width=".6" stroke-opacity=".2"/><path d="M88 29.25h36" stroke-width=".6" stroke-opacity=".2"/><path d="M88 35h36" stroke-width=".6" stroke-opacity=".2"/><path d="M88 40.75h36" stroke-width=".6" stroke-opacity=".2"/><path d="M88 46.5h36" stroke-width=".6" stroke-opacity=".2"/><path d="M88 52.25h36" stroke-width=".6" stroke-opacity=".2"/><g stroke="#ff7a1a" class="accent"><path d="M106 44.28l-7.97-7.96A5.04 5.04 0 1 1 106 30.31a5.04 5.04 0 1 1 7.97 6.01z"/></g><ellipse class="fill" cx="42" cy="89.5" rx="40" ry="2.4" fill="#ff7a1a" stroke="none" opacity=".1"/><path class="fill" d="M73 25.5C76.5 31 80 42 78 53L77 88H40C28 88 22 78 24 66c2-16 12-30 27-41.4l7.5 3.15 4.5 7.5 4.5-7.5z" fill="#ff7a1a" stroke="none" opacity="0.16"/><path class="fill" d="M54 88c2-11-4-21-16-25-8-3-12.5-1.5-14 3-2 12 4 22 16 22z" fill="#ff7a1a" stroke="none" opacity="0.3"/><path class="fill" d="M40 88C22 90 6 82 5 64l.6-7.5 9.2-5C14 60 17 68 26 74c4 6 8 12 14 14z" fill="#ff7a1a" stroke="none" opacity="0.3"/><path d="M40 88C22 90 6 82 5 64 4 52 10 44 17 41c-3 11-2 25 9 33"/><path d="M5.6 56.5l9.2-5"/><path d="M73 25.5C76.5 31 80 42 78 53L77 88H40C28 88 22 78 24 66c2-16 12-30 27-41.4"/><path d="M69 57V88"/><path d="M54 88c2-11-4-21-16-25"/><path d="M74.5 40 71 43l-3.5-3" stroke-opacity=".5"/><path d="M75 49c6 2 11 0 14-6"/><path class="fill" d="M51 6.75l7.5 6.75h9L75 6.75l.75 10.5 2.25 6-10.5 4.5L63 35.25l-4.5-7.5L48 23.25l2.25-6z" fill="#ff7a1a" stroke="none" opacity=".3"/><path d="M51 6.75l7.5 6.75h9L75 6.75l.75 10.5 2.25 6-10.5 4.5L63 35.25l-4.5-7.5L48 23.25l2.25-6z"/><path d="M58.5 21h.02"/><path d="M67.5 21h.02"/><g><path d="M92.1 43.4l-3.5-3.5 7.7-7.7h3.5v3.5z"/><path d="M94.2 41.3l-3.5-3.5"/></g></svg><!--/art--><p data-i18n="icons.empty">Ningún icono coincide. Prueba con otra palabra o dibújalo.</p></div>
   </section>
 
@@ -122,6 +140,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
     <div class="insp-head">
       <h2 class="insp-name" data-insp-name data-i18n="home.mp.base">Icono</h2>
       <p class="insp-meta faint" data-insp-meta></p>
+      <div class="insp-license" data-insp-license hidden></div>
     </div>
 
     <details class="insp-group" open>
@@ -130,7 +149,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
         <label class="field"><span><span data-i18n="axis.weight">Grosor</span><output data-o="weight">2</output></span><input type="range" name="weight" min="1" max="3" step="0.05" value="2"></label>
         <label class="field"><span><span data-i18n="axis.size">Tamaño</span><output data-o="size">24</output></span><input type="range" name="size" min="12" max="96" step="1" value="24"></label>
         <div class="field"><span data-i18n="axis.corners">Esquinas</span><div class="seg" role="group" data-seg="corners"><button type="button" value="round" aria-pressed="true" data-i18n="corners.round">Redondas</button><button type="button" value="sharp" aria-pressed="false" data-i18n="corners.sharp">Rectas</button></div></div>
-        <div class="field"><span data-i18n="axis.style">Estilo</span><div class="seg" role="group" data-seg="variant"><button type="button" value="outline" aria-pressed="true" data-i18n="variant.outline">Contorno</button><button type="button" value="duotone" aria-pressed="false" data-i18n="variant.duotone">Duotono</button><button type="button" value="solid" aria-pressed="false" data-i18n="variant.solid">Sólido</button></div></div>
+        <div class="field" data-kinds="gf coll"><span data-i18n="axis.style">Estilo</span><div class="seg" role="group" data-seg="variant"><button type="button" value="outline" aria-pressed="true" data-i18n="variant.outline">Contorno</button><button type="button" value="duotone" aria-pressed="false" data-i18n="variant.duotone">Duotono</button><button type="button" value="solid" aria-pressed="false" data-i18n="variant.solid">Sólido</button></div></div>
         <div class="row2">
           <label class="field"><span data-i18n="axis.color">Color</span><input type="color" name="color" value="#f5f5f6"></label>
           <label class="field"><span data-i18n="icons.secondary">Secundario</span><input type="color" name="secondaryColor" value="#ff7a1a"></label>
@@ -146,15 +165,15 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
     <details class="insp-group">
       <summary data-i18n="icons.more">Modificador, movimiento y morph</summary>
       <div class="insp-form">
-        <div class="row2">
+        <div class="row2" data-kinds="gf coll">
           <label class="field"><span data-i18n="home.mp.modifier">Modificador</span><select class="input" data-extra="modifier"><option value="" data-i18n="mods.none">ninguno</option></select></label>
           <label class="field"><span data-i18n="home.mp.corner">Esquina</span><select class="input" data-extra="modifierCorner" translate="no"><option value="bottom-right">bottom-right</option><option value="bottom-left">bottom-left</option><option value="top-right">top-right</option><option value="top-left">top-left</option></select></label>
         </div>
         <div class="row2">
           <label class="field"><span data-i18n="icons.animate">Animación</span><select class="input" data-extra="animate"><option value="" data-i18n="mods.none">ninguno</option></select></label>
-          <label class="field"><span data-i18n="icons.trigger">Disparador</span><select class="input" data-extra="trigger" translate="no"><option value="mount">mount</option><option value="hover">hover</option><option value="click">click</option><option value="state">state</option></select></label>
+          <label class="field" data-kinds="gf coll"><span data-i18n="icons.trigger">Disparador</span><select class="input" data-extra="trigger" translate="no"><option value="mount">mount</option><option value="hover">hover</option><option value="click">click</option><option value="state">state</option></select></label>
         </div>
-        <label class="field"><span data-i18n="icons.morphTo">Transformar en</span><input class="input" list="icon-names" data-extra="morphTo" placeholder="x, check, heart/solid" translate="no"></label>
+        <label class="field" data-kinds="gf coll"><span data-i18n="icons.morphTo">Transformar en</span><input class="input" list="icon-names" data-extra="morphTo" placeholder="x, check, heart/solid" translate="no"></label>
         <datalist id="icon-names" data-names></datalist>
         <button class="btn small" type="button" data-replay><!--gf:play:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-play" aria-hidden="true"><path d="M7 4v16l12-8Z"/></svg><!--/gf--><span data-i18n="icons.replay">Reproducir</span></button>
       </div>
@@ -169,12 +188,12 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
       <div class="dl-row">
         <button class="btn small" type="button" data-dl="svg">SVG</button>
         <span class="png-group"><button class="btn small" type="button" data-dl="png">PNG</button><select class="input small-select" data-png-size aria-label="Tamaño del PNG" data-i18n-attr="aria-label:icons.pngSize"><option>64</option><option>128</option><option selected>256</option><option>512</option><option>1024</option></select></span>
-        <button class="btn small" type="button" data-dl="anim" data-i18n="icons.dl.anim">SVG animado</button>
-        <button class="btn small" type="button" data-dl="gif">GIF</button>
-        <button class="btn small" type="button" data-dl="webm">WebM</button>
+        <button class="btn small" type="button" data-kinds="gf coll" data-dl="anim" data-i18n="icons.dl.anim">SVG animado</button>
+        <button class="btn small" type="button" data-kinds="gf coll" data-dl="gif">GIF</button>
+        <button class="btn small" type="button" data-kinds="gf coll" data-dl="webm">WebM</button>
       </div>
-      <p class="faint small-note" data-i18n="icons.dl.note">GIF y WebM usan la animación elegida arriba (draw si no eliges ninguna).</p>
-      <div class="dl-row">
+      <p class="faint small-note" data-kinds="gf coll" data-i18n="icons.dl.note">GIF y WebM usan la animación elegida arriba (draw si no eliges ninguna).</p>
+      <div class="dl-row" data-kinds="gf">
         <a class="btn small ghost" data-open-editor href="studio.html#editor" data-i18n="icons.openEditor">Abrir en el editor</a>
         <a class="btn small ghost" data-open-fusion href="studio.html#fusion" data-i18n="icons.fuse">Fusionar con otros</a>
       </div>
