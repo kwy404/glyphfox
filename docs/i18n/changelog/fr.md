@@ -2,6 +2,23 @@
 
 Tous les changements notables de glyphfox sont consignés ici. Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet applique la [gestion sémantique de version](https://semver.org/lang/fr/).
 
+## [1.3.0] - 2026-10-24
+
+### Ajouts
+
+- Les collections d'affichage (60 icônes sur la grille de 48) et isométrique (30 icônes) sont dans le paquet : `display/NOM` et `isometric/NOM` fonctionnent dans `toSvg`, `getIcon`, le web component et le build CDN, leurs données sont dans `glyphfox/collections` et les composants React, Vue et Svelte viennent de `glyphfox/<framework>/collections`.
+- Solid, Preact et Lit utilisent le même moteur de déclencheurs : inView, survol, focus, press, `triggerParent` et les timelines image par image fonctionnent comme dans React, Vue et Svelte.
+- Les 860 icônes de base ont maintenant chacune une animation dessinée pour elle.
+- Le film de l'accueil se lit dans le lecteur de glyphfox : le bouton lecture se transforme en pause, la timeline a des chapitres et des aperçus en miniature, avec sous-titres, vitesse, picture in picture, plein écran et raccourcis clavier.
+- Les pages export natif, icônes intelligentes et frameworks (la vue générale et les recettes Next.js, Nuxt, Remix, SvelteKit, Alpine.js et htmx) en portugais, espagnol, français et allemand.
+- Un test dans le navigateur (`npm run e2e`), avec son propre job en CI, qui ouvre toutes les pages principales dans les cinq langues sur ordinateur et sur téléphone.
+- Des formulaires de demande d'icône et de bug et un guide de contribution.
+
+### Corrections
+
+- La galerie et la comparaison de l'univers renvoyaient une erreur et la comparaison ne s'affichait jamais.
+- Sur téléphone, le sélecteur de jeux, le studio, Labs, la page des icônes intelligentes et celle de l'univers ne coupent plus le contenu et ne défilent plus de côté.
+
 ## [1.2.0] - 2026-10-23
 
 ### Ajouts
@@ -50,6 +67,7 @@ Tous les changements notables de glyphfox sont consignés ici. Le format suit [K
 - Le kit de marque prévisualise tout le jeu aux couleurs de la marque et exporte un zip avec des fichiers SVG personnalisés, un sprite, des variables CSS, un jeu de favicons (ico et PNG en 16, 32, 180, 192 et 512), des icônes d'application et un squelette de package.json.
 - Le site du studio en anglais, portugais (Brésil), espagnol, français et allemand : des pages statiques par langue avec les balises hreflang, un menu des langues dans l'en-tête et le pied de page, et la langue du navigateur choisie dès la première visite.
 
+[1.3.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.3.0
 [1.2.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.2.0
 [1.1.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.1.0
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0

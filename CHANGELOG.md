@@ -2,6 +2,23 @@
 
 All notable changes to glyphfox are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-10-24
+
+### Added
+
+- The display (60 icons on the 48 grid) and isometric (30 icons) collections ship in the package: `display/NAME` and `isometric/NAME` work in `toSvg`, `getIcon`, the web component and the CDN build, their data is in `glyphfox/collections`, and React, Vue and Svelte components come from `glyphfox/<framework>/collections`.
+- Solid, Preact and Lit run the shared trigger engine, so inView, hover, focus, press, `triggerParent` and frame timelines play there as in React, Vue and Svelte.
+- Every one of the 860 base icons now plays a designed animation made for it.
+- The film on the home page plays in glyphfox's own player: play morphs into pause, the timeline has chapters and thumbnail previews, and it has captions, speed, picture in picture, fullscreen and keyboard shortcuts.
+- The native exports, smart icons and framework pages (the overview and the Next.js, Nuxt, Remix, SvelteKit, Alpine.js and htmx recipes) in Portuguese (Brazil), Spanish, French and German.
+- A browser smoke test (`npm run e2e`) in its own CI job that opens every main page in the five languages on desktop and phone.
+- Icon request and bug report forms and a contributing guide.
+
+### Fixed
+
+- The universe gallery and compare views threw an error, so the comparison never rendered.
+- On phones the set picker, the studio, Labs, the smart icons page and the universe page no longer cut off content or scroll sideways.
+
 ## [1.2.0] - 2026-10-23
 
 ### Added
@@ -50,6 +67,7 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 - The brand kit previews the whole set themed and exports one zip with themed SVG files, a sprite, CSS variables, a favicon set (ico, 16, 32, 180, 192 and 512 PNGs), app icons and a package.json skeleton.
 - The studio site in English, Portuguese (Brazil), Spanish, French and German: static pages per language with hreflang tags, a language menu in the header and the footer, and the language of the browser picked on the first visit.
 
+[1.3.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.3.0
 [1.2.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.2.0
 [1.1.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.1.0
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0

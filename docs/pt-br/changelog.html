@@ -76,6 +76,22 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
   <div class="log-body">
 <!-- log:start -->
 <p>Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segue o <a href="https://keepachangelog.com/pt-BR/1.1.0/">Keep a Changelog</a> e o projeto usa <a href="https://semver.org/lang/pt-BR/">Versionamento Semântico</a>.</p>
+<h2>1.3.0 - 2026-10-24</h2>
+<h3>Adicionado</h3>
+<ul>
+<li>As coleções de destaque (60 ícones na grade de 48) e isométrica (30 ícones) agora vêm no pacote: <code>display/NOME</code> e <code>isometric/NOME</code> funcionam no <code>toSvg</code>, no <code>getIcon</code>, no web component e no build do CDN, os dados ficam em <code>glyphfox/collections</code> e os componentes de React, Vue e Svelte vêm de <code>glyphfox/&lt;framework&gt;/collections</code>.</li>
+<li>Solid, Preact e Lit usam o mesmo motor de gatilhos, então inView, hover, foco, press, <code>triggerParent</code> e as linhas do tempo por quadros funcionam como no React, Vue e Svelte.</li>
+<li>Todos os 860 ícones base agora têm uma animação desenhada para eles.</li>
+<li>O filme da página inicial toca no player próprio do glyphfox: o play se transforma em pausa, a linha do tempo tem capítulos e prévias em miniatura, e há legendas, velocidade, picture in picture, tela cheia e atalhos de teclado.</li>
+<li>As páginas de exportação nativa, ícones inteligentes e frameworks (a visão geral e as receitas de Next.js, Nuxt, Remix, SvelteKit, Alpine.js e htmx) em português, espanhol, francês e alemão.</li>
+<li>Um teste de navegador (<code>npm run e2e</code>), com job próprio no CI, que abre todas as páginas principais nos cinco idiomas no computador e no celular.</li>
+<li>Formulários de pedido de ícone e de bug e um guia de contribuição.</li>
+</ul>
+<h3>Corrigido</h3>
+<ul>
+<li>A galeria e a comparação do universo davam erro, e a comparação nunca aparecia.</li>
+<li>No celular, o seletor de coleções, o estúdio, o Labs, a página de ícones inteligentes e a do universo não cortam mais conteúdo nem rolam para o lado.</li>
+</ul>
 <h2>1.2.0 - 2026-10-23</h2>
 <h3>Adicionado</h3>
 <ul>

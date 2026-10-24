@@ -76,6 +76,22 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
   <div class="log-body">
 <!-- log:start -->
 <p>Tous les changements notables de glyphfox sont consignés ici. Le format suit <a href="https://keepachangelog.com/fr/1.1.0/">Keep a Changelog</a> et le projet applique la <a href="https://semver.org/lang/fr/">gestion sémantique de version</a>.</p>
+<h2>1.3.0 - 2026-10-24</h2>
+<h3>Ajouts</h3>
+<ul>
+<li>Les collections d'affichage (60 icônes sur la grille de 48) et isométrique (30 icônes) sont dans le paquet : <code>display/NOM</code> et <code>isometric/NOM</code> fonctionnent dans <code>toSvg</code>, <code>getIcon</code>, le web component et le build CDN, leurs données sont dans <code>glyphfox/collections</code> et les composants React, Vue et Svelte viennent de <code>glyphfox/&lt;framework&gt;/collections</code>.</li>
+<li>Solid, Preact et Lit utilisent le même moteur de déclencheurs : inView, survol, focus, press, <code>triggerParent</code> et les timelines image par image fonctionnent comme dans React, Vue et Svelte.</li>
+<li>Les 860 icônes de base ont maintenant chacune une animation dessinée pour elle.</li>
+<li>Le film de l'accueil se lit dans le lecteur de glyphfox : le bouton lecture se transforme en pause, la timeline a des chapitres et des aperçus en miniature, avec sous-titres, vitesse, picture in picture, plein écran et raccourcis clavier.</li>
+<li>Les pages export natif, icônes intelligentes et frameworks (la vue générale et les recettes Next.js, Nuxt, Remix, SvelteKit, Alpine.js et htmx) en portugais, espagnol, français et allemand.</li>
+<li>Un test dans le navigateur (<code>npm run e2e</code>), avec son propre job en CI, qui ouvre toutes les pages principales dans les cinq langues sur ordinateur et sur téléphone.</li>
+<li>Des formulaires de demande d'icône et de bug et un guide de contribution.</li>
+</ul>
+<h3>Corrections</h3>
+<ul>
+<li>La galerie et la comparaison de l'univers renvoyaient une erreur et la comparaison ne s'affichait jamais.</li>
+<li>Sur téléphone, le sélecteur de jeux, le studio, Labs, la page des icônes intelligentes et celle de l'univers ne coupent plus le contenu et ne défilent plus de côté.</li>
+</ul>
 <h2>1.2.0 - 2026-10-23</h2>
 <h3>Ajouts</h3>
 <ul>

@@ -2,6 +2,23 @@
 
 Alle nennenswerten Änderungen an glyphfox werden hier dokumentiert. Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), und das Projekt hält sich an [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.3.0] - 2026-10-24
+
+### Hinzugefügt
+
+- Die Display-Sammlung (60 Icons im 48er-Raster) und die isometrische Sammlung (30 Icons) sind im Paket: `display/NAME` und `isometric/NAME` funktionieren in `toSvg`, `getIcon`, der Web Component und dem CDN-Build, ihre Daten liegen in `glyphfox/collections`, und die Komponenten für React, Vue und Svelte kommen aus `glyphfox/<framework>/collections`.
+- Solid, Preact und Lit nutzen dieselbe Trigger-Engine, daher laufen inView, Hover, Fokus, Press, `triggerParent` und Frame-Timelines dort wie in React, Vue und Svelte.
+- Alle 860 Basis-Icons spielen jetzt eine eigens gestaltete Animation.
+- Der Film auf der Startseite läuft im eigenen Player von glyphfox: Play verwandelt sich in Pause, die Zeitleiste hat Kapitel und Vorschaubilder, dazu Untertitel, Geschwindigkeit, Bild im Bild, Vollbild und Tastenkürzel.
+- Die Seiten zu nativen Exporten, Smart Icons und Frameworks (die Übersicht und die Rezepte für Next.js, Nuxt, Remix, SvelteKit, Alpine.js und htmx) auf Portugiesisch, Spanisch, Französisch und Deutsch.
+- Ein Browser-Test (`npm run e2e`) mit eigenem CI-Job, der jede Hauptseite in den fünf Sprachen auf Desktop und Smartphone öffnet.
+- Formulare für Icon-Wünsche und Fehlerberichte und ein Leitfaden für Beiträge.
+
+### Behoben
+
+- Die Galerie und der Vergleich im Universum warfen einen Fehler, der Vergleich erschien nie.
+- Auf Smartphones schneiden die Set-Auswahl, das Studio, Labs, die Smart-Icons-Seite und die Universum-Seite keinen Inhalt mehr ab und scrollen nicht mehr seitlich.
+
 ## [1.2.0] - 2026-10-23
 
 ### Hinzugefügt
@@ -50,6 +67,7 @@ Alle nennenswerten Änderungen an glyphfox werden hier dokumentiert. Das Format 
 - Das Marken-Kit zeigt das ganze Set im Markendesign als Vorschau und exportiert ein Zip mit angepassten SVG-Dateien, einem Sprite, CSS-Variablen, einem Favicon-Satz (ico und PNGs in 16, 32, 180, 192 und 512), App-Icons und einem package.json-Gerüst.
 - Die Studio-Website auf Englisch, Portugiesisch (Brasilien), Spanisch, Französisch und Deutsch: statische Seiten pro Sprache mit hreflang-Tags, ein Sprachmenü in Kopf- und Fußzeile und die Sprache des Browsers beim ersten Besuch.
 
+[1.3.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.3.0
 [1.2.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.2.0
 [1.1.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.1.0
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0

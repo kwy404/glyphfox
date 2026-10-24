@@ -1,6 +1,6 @@
 {
   "name": "glyphfox",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Variable, morphable and fusable open source icons on a 24 grid, with React, Vue, Svelte, Solid, Preact, Qwik, Lit, Astro, React Native, Ember, web component, Tailwind and CLI.",
   "license": "MIT",
   "author": "Alexandre Kohler (https://github.com/kwy404)",

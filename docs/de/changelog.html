@@ -76,6 +76,22 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
   <div class="log-body">
 <!-- log:start -->
 <p>Alle nennenswerten Änderungen an glyphfox werden hier dokumentiert. Das Format basiert auf <a href="https://keepachangelog.com/de/1.1.0/">Keep a Changelog</a>, und das Projekt hält sich an <a href="https://semver.org/lang/de/">Semantic Versioning</a>.</p>
+<h2>1.3.0 - 2026-10-24</h2>
+<h3>Hinzugefügt</h3>
+<ul>
+<li>Die Display-Sammlung (60 Icons im 48er-Raster) und die isometrische Sammlung (30 Icons) sind im Paket: <code>display/NAME</code> und <code>isometric/NAME</code> funktionieren in <code>toSvg</code>, <code>getIcon</code>, der Web Component und dem CDN-Build, ihre Daten liegen in <code>glyphfox/collections</code>, und die Komponenten für React, Vue und Svelte kommen aus <code>glyphfox/&lt;framework&gt;/collections</code>.</li>
+<li>Solid, Preact und Lit nutzen dieselbe Trigger-Engine, daher laufen inView, Hover, Fokus, Press, <code>triggerParent</code> und Frame-Timelines dort wie in React, Vue und Svelte.</li>
+<li>Alle 860 Basis-Icons spielen jetzt eine eigens gestaltete Animation.</li>
+<li>Der Film auf der Startseite läuft im eigenen Player von glyphfox: Play verwandelt sich in Pause, die Zeitleiste hat Kapitel und Vorschaubilder, dazu Untertitel, Geschwindigkeit, Bild im Bild, Vollbild und Tastenkürzel.</li>
+<li>Die Seiten zu nativen Exporten, Smart Icons und Frameworks (die Übersicht und die Rezepte für Next.js, Nuxt, Remix, SvelteKit, Alpine.js und htmx) auf Portugiesisch, Spanisch, Französisch und Deutsch.</li>
+<li>Ein Browser-Test (<code>npm run e2e</code>) mit eigenem CI-Job, der jede Hauptseite in den fünf Sprachen auf Desktop und Smartphone öffnet.</li>
+<li>Formulare für Icon-Wünsche und Fehlerberichte und ein Leitfaden für Beiträge.</li>
+</ul>
+<h3>Behoben</h3>
+<ul>
+<li>Die Galerie und der Vergleich im Universum warfen einen Fehler, der Vergleich erschien nie.</li>
+<li>Auf Smartphones schneiden die Set-Auswahl, das Studio, Labs, die Smart-Icons-Seite und die Universum-Seite keinen Inhalt mehr ab und scrollen nicht mehr seitlich.</li>
+</ul>
 <h2>1.2.0 - 2026-10-23</h2>
 <h3>Hinzugefügt</h3>
 <ul>
