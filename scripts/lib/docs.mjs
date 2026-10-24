@@ -139,10 +139,15 @@ function withArt(root, html) {
   });
 }
 
-/** One page in one language: strings, changelog, links, alternates and the language menus. */
+/** Numbers marked data-num="1234" are written in the format of the language (1,234, 1.234, 1 234). */
+export function withNumbers(html, code) {
+  return html.replace(/(<([a-zA-Z][\w-]*)\b[^>]*\sdata-num="(-?\d+(?:\.\d+)?)"[^>]*>)[^<]*(<\/\2>)/g, (m, open, tag, n, close) => `${open}${Number(n).toLocaleString(code)}${close}`);
+}
+
+/** One page in one language: strings, numbers, changelog, links, alternates and the language menus. */
 function renderPage(html, page, lang, ctx) {
   const { root, i18n, localized } = ctx;
-  let out = translate(html, i18n.strings[lang.code], lang.code);
+  let out = withNumbers(translate(html, i18n.strings[lang.code], lang.code), lang.code);
   out = withChangelog(root, out, changelogFile(root, lang, i18n.def));
   if (lang !== i18n.def) out = moveLinks(out, page, langPath(lang, page), (p) => (localized.has(p) ? langPath(lang, p) : p));
   out = withAlternates(out, page, lang, localized.has(page) ? i18n.languages : [i18n.def], i18n.def);

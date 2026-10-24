@@ -3,15 +3,15 @@
 // jsDelivr (glyphfox-universe), icon sets load on demand per set
 // (@iconify-json/<prefix> on jsDelivr), only for the cells on screen.
 
-import { $, $$, copy, codeBlock } from '../assets/js/app.js';
+import { $, $$, copy, codeBlock, lang, siteRoot, t } from '../assets/js/app.js';
 import * as U from './runtime.js';
 import { createGallery } from './gallery.js';
 
 const params = new URLSearchParams(location.search);
 const LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
-const fmt = (n) => Number(n).toLocaleString('en-US');
+const fmt = (n) => Number(n).toLocaleString(lang);
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const KIND = { 'public-domain': 'Public domain', permissive: 'Permissive', attribution: 'Attribution', 'share-alike': 'Share alike' };
+const kind = (k) => t(`icons.kind.${k}`);
 
 const els = {
   grid: $('[data-grid]'),
@@ -55,8 +55,9 @@ async function dataUrl() {
   if (params.get('data')) return new URL(params.get('data'), location.href).href;
   if (LOCAL) {
     try {
-      const r = await fetch('universe-data/catalog.json', { method: 'HEAD' });
-      if (r.ok) return new URL('universe-data/', location.href).href;
+      const local = new URL(`${siteRoot()}universe-data/`, location.origin).href;
+      const r = await fetch(`${local}catalog.json`, { method: 'HEAD' });
+      if (r.ok) return local;
     } catch {
       // no local data, use the CDN
     }
@@ -211,7 +212,9 @@ function update() {
   state.ids = index.searchIds(state.query, filters());
   const ms = performance.now() - t0;
   const n = state.ids.length;
-  els.result.textContent = state.query ? `${fmt(n)} icon${n === 1 ? '' : 's'} for "${state.query}" in ${ms < 1 ? '<1' : Math.round(ms)} ms` : `${fmt(n)} icon${n === 1 ? '' : 's'}${state.set ? ` in ${info.get(state.set)?.name || state.set}` : ' in every set'}`;
+  const time = ms < 1 ? '<1' : String(Math.round(ms));
+  if (state.query) els.result.textContent = t('universe.result.query', { n: fmt(n), q: state.query, ms: time });
+  else els.result.textContent = state.set ? t('icons.result.set', { n: fmt(n), set: info.get(state.set)?.name || state.set }) : t('universe.result.all', { n: fmt(n) });
   els.grid.scrollTop = 0;
   for (const b of pool) delete b.dataset.key;
   layout();
@@ -235,7 +238,7 @@ function counts() {
 
 function renderSets() {
   const f = els.setFilter.value.trim().toLowerCase();
-  const items = [`<li><button type="button" data-set="" aria-pressed="${!state.set}"><span>All sets</span><small>${fmt(catalog.total)}</small></button></li>`];
+  const items = [`<li><button type="button" data-set="" aria-pressed="${!state.set}"><span>${esc(t('icons.scope.all'))}</span><small>${fmt(catalog.total)}</small></button></li>`];
   for (const s of catalog.list) {
     if (s.cdn === false) continue;
     if (f && !s.name.toLowerCase().includes(f) && !s.prefix.includes(f)) continue;
@@ -255,14 +258,16 @@ async function select(id, focus = true) {
   els.name.textContent = fullName(e);
   const tags = [...index.categoriesOf(e.prefix, e.index), ...index.tagsOf(e.prefix, e.index)].slice(0, 10);
   const aliases = index.aliasesOf(e.prefix, e.index);
-  els.meta.innerHTML = `${esc(set.name)} by ${set.author.url ? `<a href="${esc(set.author.url)}">${esc(set.author.name)}</a>` : esc(set.author.name)}. ${esc(e.style)}${e.brand ? ', brand' : ''}${e.stroke ? ', stroke based' : ''}${tags.length ? `. Tags: ${esc(tags.join(', '))}` : ''}${aliases.length ? `. Aliases: ${esc(aliases.slice(0, 6).join(', '))}` : ''}`;
+  const author = set.author.url ? `<a href="${esc(set.author.url)}">${esc(set.author.name)}</a>` : esc(set.author.name);
+  const style = [t(`icons.style.${['outline', 'solid', 'duotone', 'color'].includes(e.style) ? e.style : 'outline'}`), e.brand ? t('universe.style.brand') : '', e.stroke ? t('icons.meta.stroke') : ''].filter(Boolean).join(', ');
+  els.meta.innerHTML = `${t('icons.meta.by', { set: esc(set.name), author })}. ${esc(style)}${tags.length ? `. ${esc(t('universe.meta.tags', { list: tags.join(', ') }))}` : ''}${aliases.length ? `. ${esc(t('icons.meta.aliases', { list: aliases.slice(0, 6).join(', ') }))}` : ''}`;
   const lic = set.license;
   const attribution = lic.attribution ? U.attributionLine(set) : '';
-  els.license.innerHTML = `<div class="uv-badges"><a class="uv-badge" href="${esc(lic.url || '#sets')}">${esc(lic.title)}</a><span class="uv-badge">${esc(KIND[lic.kind])}</span>${lic.attribution ? '<span class="uv-badge warn">Attribution required</span>' : ''}${e.brand ? '<span class="uv-badge warn">Trademark</span>' : ''}</div>${
-    attribution ? `<div class="uv-attrib"><p>${esc(attribution)}</p><button class="btn small" type="button" data-copy-attrib>Copy attribution</button></div>` : ''
-  }${e.brand ? `<p class="faint">${esc(U.TRADEMARK_NOTICE)}</p>` : ''}`;
+  els.license.innerHTML = `<div class="uv-badges"><a class="uv-badge" href="${esc(lic.url || '#sets')}">${esc(lic.title)}</a><span class="uv-badge">${esc(kind(lic.kind))}</span>${lic.attribution ? `<span class="uv-badge warn">${esc(t('icons.license.attribution'))}</span>` : ''}${e.brand ? `<span class="uv-badge warn">${esc(t('icons.license.trademark'))}</span>` : ''}</div>${
+    attribution ? `<div class="uv-attrib"><p lang="en">${esc(attribution)}</p><button class="btn small" type="button" data-copy-attrib>${esc(t('icons.license.copy'))}</button></div>` : ''
+  }${e.brand ? `<p class="faint">${esc(t('universe.trademarks.text'))}</p>` : ''}`;
   const btn = $('[data-copy-attrib]', els.license);
-  if (btn) btn.addEventListener('click', () => copy(attribution, 'Attribution copied'));
+  if (btn) btn.addEventListener('click', () => copy(attribution, t('icons.license.copied')));
   $('[data-weight-field]').classList.toggle('off', !e.stroke);
   $('[data-weight-field] input').disabled = !e.stroke;
   $('[data-corners-field]').classList.toggle('off', !e.stroke);
@@ -274,7 +279,7 @@ async function select(id, focus = true) {
     state.icon = icon;
     paint();
   } catch (err) {
-    els.preview.textContent = 'This set needs a local install.';
+    els.preview.textContent = t('icons.set.local');
     els.snippet.innerHTML = '';
   }
   if (focus) els.name.scrollIntoView({ block: 'nearest' });
@@ -321,7 +326,7 @@ function snippet() {
     case 'vue':
       return [`<script setup>\nimport { Icon } from 'glyphfox/vue';\nimport 'glyphfox-universe/glyphfox';\n</script>\n${html ? html.trim() + '\n' : ''}\n<template>\n  <Icon name="${name}"${props('vue')} />\n</template>`, 'js', 'Vue'];
     case 'web':
-      return [`<script type="module">\n  import 'glyphfox/web';\n  import 'glyphfox-universe/glyphfox';\n</script>${html}\n\n<glyph-fox name="${name}"${props('web')}></glyph-fox>`, 'js', 'Web component'];
+      return [`<script type="module">\n  import 'glyphfox/web';\n  import 'glyphfox-universe/glyphfox';\n</script>${html}\n\n<glyph-fox name="${name}"${props('web')}></glyph-fox>`, 'js', t('universe.format.web')];
     case 'cdn':
       return [`<span id="icon"></span>${html}\n<script type="module">\n  import { toSvg } from 'https://cdn.jsdelivr.net/npm/glyphfox-universe@${version}/+esm';\n  document.getElementById('icon').innerHTML = await toSvg('${name}', ${JSON.stringify(svgOptions())});\n</script>`, 'js', 'CDN'];
     default:
@@ -340,14 +345,14 @@ function paint() {
 
 function setupDetail() {
   els.form.addEventListener('input', (ev) => {
-    const t = ev.target;
-    if (t.name === 'size') state.opts.size = Number(t.value);
-    if (t.name === 'weight') state.opts.weight = Number(t.value);
-    if (t.name === 'rotate') state.opts.rotate = Number(t.value);
-    if (t.name === 'color') state.opts.color = t.value;
+    const el = ev.target;
+    if (el.name === 'size') state.opts.size = Number(el.value);
+    if (el.name === 'weight') state.opts.weight = Number(el.value);
+    if (el.name === 'rotate') state.opts.rotate = Number(el.value);
+    if (el.name === 'color') state.opts.color = el.value;
     for (const k of ['size', 'weight', 'rotate']) {
       const out = $(`[data-o="${k}"]`);
-      if (out) out.textContent = k === 'weight' && state.opts.weight == null ? 'native' : String(state.opts[k]);
+      if (out) out.textContent = k === 'weight' && state.opts.weight == null ? t('universe.native') : String(state.opts[k]);
     }
     paint();
   });
@@ -382,11 +387,11 @@ function setupDetail() {
 }
 
 function setupControls() {
-  let t = 0;
+  let timer = 0;
   els.search.value = state.query;
   els.search.addEventListener('input', () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
       state.query = els.search.value.trim();
       update();
     }, 60);
@@ -465,7 +470,7 @@ function toViews(smooth) {
 
 async function ensureIndex() {
   if (!index) {
-    els.result.textContent = 'Loading the search index';
+    els.result.textContent = t('universe.app.loading');
     index = await U.loadIndex();
   }
   update();
@@ -508,9 +513,9 @@ async function start() {
     await route(Boolean(location.hash && location.hash !== '#sets'));
   } catch (err) {
     console.error(err);
-    els.result.textContent = 'The icon data is not reachable';
+    els.result.textContent = t('universe.app.error');
     els.note.hidden = false;
-    els.note.textContent = 'The catalog and the search index load from jsDelivr, from the published glyphfox-universe package. The table below lists every set with its count and license.';
+    els.note.textContent = t('universe.app.errorNote');
   }
 }
 

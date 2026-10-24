@@ -73,6 +73,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/studio.html"/>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/de/universe.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/universe.html"/>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/docs.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/docs.html"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/docs.html"/>
@@ -136,6 +145,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/studio.html"/>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/es/universe.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/universe.html"/>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/fr/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/"/>
@@ -188,6 +206,15 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/studio.html"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/studio.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/studio.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/fr/universe.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/universe.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/frameworks/</loc>
@@ -286,6 +313,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/studio.html"/>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/universe.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/universe.html"/>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/smart.html</loc>
   </url>
   <url>
@@ -299,5 +335,11 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/universe.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/universe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/universe.html"/>
   </url>
 </urlset>

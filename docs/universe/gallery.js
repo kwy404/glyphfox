@@ -4,15 +4,14 @@
 // style, which renders through the glyphfox engine where the drawing allows),
 // hover motion, and a compare view of 2 to 4 sets side by side.
 
-import { gf } from '../assets/js/app.js';
+import { gf, lang, t } from '../assets/js/app.js';
 import * as U from './runtime.js';
 
-const KIND = { 'public-domain': 'Public domain', permissive: 'Permissive', attribution: 'Attribution', 'share-alike': 'Share alike' };
 const KIND_ORDER = ['public-domain', 'permissive', 'attribution', 'share-alike'];
 const STYLE_NAMES = ['outline', 'solid', 'duotone', 'color'];
 const COMPARE = 10;
 const MAX_PICK = 4;
-const fmt = (n) => Number(n).toLocaleString('en-US');
+const fmt = (n) => Number(n).toLocaleString(lang);
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -96,17 +95,17 @@ export function createGallery({ catalog, onOpen }) {
     const tags = ['outline', 'solid', 'duotone', 'color', 'brand'].filter((k) => hasStyle(s, k));
     return `<div class="gx-top"><h3><a href="#set=${esc(s.prefix)}">${esc(s.name)}</a></h3><span class="gx-n">${fmt(s.total)}</span></div>
       <p class="gx-by">${esc(s.author.name)} <span aria-hidden="true">/</span> <code>${esc(s.prefix)}</code></p>
-      <div class="gx-badges"><span class="uv-badge lic" title="${esc(KIND[s.license.kind])}">${esc(s.license.title)}</span>${tags.map((t) => `<span class="uv-badge">${t}</span>`).join('')}${
-        s.strokeWidth ? '<span class="uv-badge draw" title="Stroke based: the weight axis and the draw animation apply">weight and draw</span>' : ''
+      <div class="gx-badges"><span class="uv-badge lic" title="${esc(t(`icons.kind.${s.license.kind}`))}">${esc(s.license.title)}</span>${tags.map((tag) => `<span class="uv-badge">${esc(t(`universe.style.${tag}`))}</span>`).join('')}${
+        s.strokeWidth ? `<span class="uv-badge draw" title="${esc(t('universe.gallery.strokeTitle'))}">${esc(t('universe.style.stroke'))}</span>` : ''
       }</div>
       <div class="gx-strip" aria-hidden="true"></div>
-      <label class="gx-pick"${compare ? '' : ' hidden'}><input type="checkbox" data-pick="${esc(s.prefix)}"${picked.includes(s.prefix) ? ' checked' : ''}> Compare</label>`;
+      <label class="gx-pick"${compare ? '' : ' hidden'}><input type="checkbox" data-pick="${esc(s.prefix)}"${picked.includes(s.prefix) ? ' checked' : ''}> ${esc(t('universe.gallery.pick'))}</label>`;
   }
 
   function visibleSets() {
-    const t = filters.text.toLowerCase();
+    const text = filters.text.toLowerCase();
     let list = catalog.list.filter((s) => s.cdn !== false && previews && previews.sets[s.prefix] && previews.sets[s.prefix].icons.length);
-    if (t) list = list.filter((s) => s.name.toLowerCase().includes(t) || s.prefix.includes(t) || s.author.name.toLowerCase().includes(t));
+    if (text) list = list.filter((s) => s.name.toLowerCase().includes(text) || s.prefix.includes(text) || s.author.name.toLowerCase().includes(text));
     if (filters.styles.size) list = list.filter((s) => [...filters.styles].some((st) => hasStyle(s, st)));
     if (filters.kinds.size) list = list.filter((s) => filters.kinds.has(s.license.kind));
     const bySize = (a, b) => b.total - a.total || a.name.localeCompare(b.name);
@@ -118,7 +117,7 @@ export function createGallery({ catalog, onOpen }) {
 
   function renderGrid() {
     const list = visibleSets();
-    $('[data-gx-count]').textContent = `${fmt(list.length)} sets, ${fmt(list.reduce((n, s) => n + s.total, 0))} icons`;
+    $('[data-gx-count]').textContent = t('universe.gallery.count', { sets: fmt(list.length), n: fmt(list.reduce((n, s) => n + s.total, 0)) });
     const keep = new Set(list.map((s) => s.prefix));
     for (const [prefix, card] of cards) {
       if (!keep.has(prefix)) {
@@ -149,7 +148,7 @@ export function createGallery({ catalog, onOpen }) {
       paintCard(card);
     }
     note.hidden = list.length > 0;
-    note.textContent = list.length ? '' : 'No set matches these filters.';
+    note.textContent = list.length ? '' : t('universe.gallery.none');
   }
 
   function repaint() {
@@ -162,7 +161,7 @@ export function createGallery({ catalog, onOpen }) {
     panel.hidden = !compare;
     if (!compare) return;
     if (picked.length < 2) {
-      panel.innerHTML = `<div class="gx-cmp"><div class="gx-cmp-head"><p>Pick 2 to ${MAX_PICK} sets below to see the same concepts side by side${picked.length ? ` (${picked.length} picked)` : ''}.</p></div></div>`;
+      panel.innerHTML = `<div class="gx-cmp"><div class="gx-cmp-head"><p>${esc(t('universe.compare.pick', { max: MAX_PICK }))}${picked.length ? ` ${esc(t('universe.compare.picked', { n: picked.length }))}` : ''}</p></div></div>`;
       return;
     }
     const concepts = previews.concepts.slice(0, COMPARE);
@@ -173,7 +172,7 @@ export function createGallery({ catalog, onOpen }) {
           .map((p) => {
             const set = previews.sets[p];
             const entry = set && set.icons.find((e) => e[3] === k);
-            if (!entry) return '<td><span class="gx-ic none" title="no match"></span><small>none</small></td>';
+            if (!entry) return `<td><span class="gx-ic none" title="${esc(t('universe.compare.noMatch'))}"></span><small>${esc(t('mods.none'))}</small></td>`;
             const { svg, stroke } = iconSvg(p, entry, set.box, Math.max(32, opts.size + 8));
             return `<td><span class="gx-ic ${stroke ? 's' : 'f'}">${svg}</span><small>${esc(entry[0])}</small></td>`;
           })
@@ -181,7 +180,7 @@ export function createGallery({ catalog, onOpen }) {
         return `<tr><th scope="row">${esc(c)}</th>${cells}</tr>`;
       })
       .join('');
-    panel.innerHTML = `<div class="gx-cmp"><div class="gx-cmp-head"><p>The same concepts in ${picked.length} sets, matched by name, alias and tag synonyms.</p><button class="btn small ghost" type="button" data-gx-clear>Clear</button></div><table><thead><tr><th scope="col">Concept</th>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+    panel.innerHTML = `<div class="gx-cmp"><div class="gx-cmp-head"><p>${esc(t('universe.compare.lead', { n: picked.length }))}</p><button class="btn small ghost" type="button" data-gx-clear>${esc(t('icons.sketch.clear'))}</button></div><table><thead><tr><th scope="col">${esc(t('universe.compare.concept'))}</th>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
   }
 
   function syncHash() {
@@ -221,12 +220,12 @@ export function createGallery({ catalog, onOpen }) {
     }
     const form = $('[data-gx-controls]');
     form.addEventListener('input', (e) => {
-      const t = e.target;
-      if (t.name === 'color') opts.color = t.value;
-      if (t.name === 'size') opts.size = Number(t.value);
-      if (t.name === 'weight') opts.weight = Number(t.value);
+      const el = e.target;
+      if (el.name === 'color') opts.color = el.value;
+      if (el.name === 'size') opts.size = Number(el.value);
+      if (el.name === 'weight') opts.weight = Number(el.value);
       $('[data-gx-o="size"]').textContent = String(opts.size);
-      $('[data-gx-o="weight"]').textContent = opts.weight == null ? 'native' : String(opts.weight);
+      $('[data-gx-o="weight"]').textContent = opts.weight == null ? t('universe.native') : String(opts.weight);
       repaint();
     });
     for (const b of $$('[data-gx-corners] button')) {
@@ -240,17 +239,17 @@ export function createGallery({ catalog, onOpen }) {
     sw.addEventListener('click', () => {
       opts.glyphfox = !opts.glyphfox;
       sw.setAttribute('aria-checked', String(opts.glyphfox));
-      $('span', sw).textContent = opts.glyphfox ? 'On' : 'Off';
+      $('span', sw).textContent = opts.glyphfox ? t('universe.on') : t('universe.off');
       repaint();
     });
     $('[data-gx-reset]').addEventListener('click', () => {
       Object.assign(opts, { color: '', size: 24, weight: null, corners: '', glyphfox: false });
       form.reset();
       $('[data-gx-o="size"]').textContent = '24';
-      $('[data-gx-o="weight"]').textContent = 'native';
+      $('[data-gx-o="weight"]').textContent = t('universe.native');
       for (const x of $$('[data-gx-corners] button')) x.setAttribute('aria-pressed', String(x.value === ''));
       sw.setAttribute('aria-checked', 'false');
-      $('span', sw).textContent = 'Off';
+      $('span', sw).textContent = t('universe.off');
       repaint();
     });
     $('[data-gx-compare]').addEventListener('click', () => {
@@ -305,13 +304,13 @@ export function createGallery({ catalog, onOpen }) {
       setupControls();
     }
     if (!previews) {
-      grid.innerHTML = '<p class="uv-note">Loading the previews</p>';
+      grid.innerHTML = `<p class="uv-note">${esc(t('universe.gallery.loading'))}</p>`;
       try {
         previews = await U.loadPreviews();
       } catch {
         grid.innerHTML = '';
         note.hidden = false;
-        note.textContent = 'The previews load from jsDelivr, from the published glyphfox-universe package.';
+        note.textContent = t('universe.gallery.error');
         return;
       }
       grid.innerHTML = '';
