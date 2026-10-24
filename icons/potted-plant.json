@@ -1,0 +1,34 @@
+{
+  "categories": [
+    "nature",
+    "maps"
+  ],
+  "tags": [
+    "plant",
+    "houseplant",
+    "pot",
+    "decor",
+    "green"
+  ],
+  "animation": {
+    "name": "sway",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 14],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "rotate(2.4deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 2, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.65, "element": 2, "props": { "transform": "rotate(2.4deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 3, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": 3, "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.65, "element": 3, "props": { "transform": "rotate(2.4deg)" } },
+      { "at": 1, "element": 3, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}

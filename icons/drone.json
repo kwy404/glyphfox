@@ -1,0 +1,24 @@
+{
+  "categories": [
+    "devices",
+    "travel"
+  ],
+  "tags": [
+    "quadcopter",
+    "aerial",
+    "camera",
+    "fly",
+    "uav"
+  ],
+  "animation": {
+    "name": "float",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px) rotate(0deg)" } },
+      { "at": 0.5, "element": "all", "props": { "transform": "translate(0px, -1px) rotate(-4deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px) rotate(0deg)" } }
+    ]
+  }
+}

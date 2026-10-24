@@ -1,0 +1,26 @@
+{
+  "categories": [
+    "maps",
+    "symbols"
+  ],
+  "tags": [
+    "lamp",
+    "light",
+    "living room",
+    "furniture",
+    "home"
+  ],
+  "animation": {
+    "name": "sway",
+    "duration": 1400,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 21],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.65, "element": "all", "props": { "transform": "rotate(2.4deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
+}

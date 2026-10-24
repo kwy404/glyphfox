@@ -1,0 +1,27 @@
+{
+  "categories": [
+    "devices",
+    "food"
+  ],
+  "tags": [
+    "oven",
+    "kitchen",
+    "appliance",
+    "heat",
+    "cook"
+  ],
+  "animation": {
+    "name": "glow",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.15, "element": 1, "props": { "opacity": 0.2 } },
+      { "at": 0.3, "element": 1, "props": { "opacity": 1 } },
+      { "at": 0.45, "element": 1, "props": { "opacity": 0.2 } },
+      { "at": 0.6, "element": 1, "props": { "opacity": 1 } },
+      { "at": 1, "element": 1, "props": { "opacity": 1 } }
+    ]
+  }
+}
