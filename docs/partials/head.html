@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--lang:detect--><!--/lang-->
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#07070a">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -10,7 +11,8 @@
 <meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse" data-i18n-attr="content:home.meta.title">
 <meta name="twitter:card" content="summary_large_image">
 <script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
-if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location.pathname.replace(/(pt-br\/)?[^/]*$/,'');navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}</script>
+if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new URL('..',document.querySelector('link[rel=icon]').href).pathname;navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}catch(e){}}</script>
+<!--lang:strings--><!--/lang-->

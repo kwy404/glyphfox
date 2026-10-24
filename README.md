@@ -625,6 +625,7 @@ Every target takes names, `--from list.txt` or `--all`, plus `--size`, `--weight
 - export a **brand kit** (themed package, sprite, CSS, favicon and app icons);
 - render any icon, fusion or modifier in **3D**: the strokes become bevelled solids in matte clay, glossy plastic, brushed metal, glass or neon under five lighting setups, with orbit controls and a turntable, exported as PNG at 1x, 2x or 4x (transparent if you like) or embedded on any page with `<glyphfox-3d>`.
 - in **Labs**, write icons in glyph script with a live preview, and export an animated favicon, a CSS cursor, plotter SVG and G-code or an STL.
+- read the whole site in English, Português (Brasil), Español, Français or Deutsch, picked from your browser on the first visit ([how the site is translated](docs/I18N.md)).
 
 ## Icon rules
 
@@ -637,6 +638,7 @@ npm install
 npm run build          # icons/ to packages/glyphfox/dist and docs/data
 npm run build:angular  # packages/glyphfox-angular/dist (ng-packagr)
 npm run typecheck
+npm run check:i18n     # every page translated in every language
 npm test
 npm run serve          # the studio on http://localhost:4173
 ```

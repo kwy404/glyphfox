@@ -3,20 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--lang:detect--><!--/lang-->
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#07070a">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/site.2fa4695b.css">
+<link rel="stylesheet" href="../assets/site.40e6a878.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="glyphfox">
 <meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse">
+<meta property="og:image:alt" content="glyphfox: icons that move, morph and fuse" data-i18n-attr="content:home.meta.title">
 <meta name="twitter:card" content="summary_large_image">
 <script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
-if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location.pathname.replace(/(pt-br\/)?[^/]*$/,'');navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}</script>
+if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new URL('..',document.querySelector('link[rel=icon]').href).pathname;navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}catch(e){}}</script>
+<!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Switch to the light theme","theme.dark":"Switch to the dark theme","toast.copied":"Copied to the clipboard","toast.downloaded":"Download started","toast.saved":"Saved to your collection","action.copy":"Copy","corners.round":"Round","corners.sharp":"Sharp","variant.outline":"Outline","variant.duotone":"Duotone","variant.solid":"Solid","mods.none":"none","corner.topLeft":"Top left","corner.topRight":"Top right","corner.bottomLeft":"Bottom left","corner.bottomRight":"Bottom right","cat.animals":"animals","cat.arrows":"arrows","cat.commerce":"commerce","cat.communication":"communication","cat.data":"data","cat.development":"development","cat.devices":"devices","cat.files":"files","cat.finance":"finance","cat.interface":"interface","cat.maps":"maps","cat.media":"media","cat.nature":"nature","cat.navigation":"navigation","cat.people":"people","cat.security":"security","cat.shapes":"shapes","cat.symbols":"symbols","cat.text":"text","cat.weather":"weather","error.rasterize":"Could not turn the SVG into an image","error.video":"This browser cannot record video","home.morph.filled":"filled","home.gallery.orbit":"ten icon orbit","icons.all":"All","icons.result.count":"{n} icons","icons.result.sketch":"Closest {n} icons for your sketch","icons.dl.drawHint":"No animation picked, using draw","editor.download":"Download SVG","editor.lint.ok":"Passes every icon rule.","editor.lint.empty":"Draw something to start.","editor.ctx.button":"Save","editor.imported":"Imported and normalized to the grid","editor.tool.select":"Select and edit nodes","editor.tool.pen":"Pen","editor.tool.line":"Line","editor.tool.polyline":"Polyline","editor.tool.rect":"Rectangle","editor.tool.rrect":"Rounded rectangle","editor.tool.circle":"Circle","editor.tool.ellipse":"Ellipse","editor.tool.arc":"Arc","editor.hint.select":"Click a shape to select it, drag to move, drag the handles to edit nodes. Arrows nudge, Delete removes, Ctrl+D duplicates.","editor.hint.pen":"Click to add corners, drag to make curves. Click the first point to close, Enter or a double click to finish.","editor.hint.line":"Drag from the start to the end.","editor.hint.polyline":"Click to add points, Enter or a double click to finish.","editor.hint.rect":"Drag from one corner to the other.","editor.hint.rrect":"Drag from one corner to the other. Drag the round handle to change the radius.","editor.hint.circle":"Drag from the center outwards.","editor.hint.ellipse":"Drag the bounding box.","editor.hint.arc":"Click the start, click the end, then move to bend the arc and click to place it.","foxify.before":"Before","foxify.waiting":"Paste an SVG, drop a file or try a sample.","foxify.nothing":"Nothing to draw in that SVG","foxify.note.text":"Text elements skipped: {n} (convert text to paths first)","foxify.note.scaled":"The drawing was scaled into the 2 to 22 padding box","foxify.note.enlarged":"The drawing was enlarged to the padding box","foxify.note.filled":"Filled shapes turned into outlines: {n}","fusion.need":"Add at least two icons.","fusion.lint.ok":"The fused icon passes every icon rule.","fusion.remove":"Remove {name}","brand.favicon16":"favicon","brand.maskable":"maskable","three.error":"three.js could not load. Check the connection and try again.","three.canvas":"Icon rendered in 3D. Drag or use the arrow keys to orbit, plus and minus to zoom.","collection.empty.short":"The collection is empty","collection.edit":"Edit","collection.delete":"Delete","collection.deleted":"Removed from the collection","sw.updated":"glyphfox was updated to the latest version.","motion.all":"Whole icon","motion.secondary":"Duotone layer","motion.element":"Element","motion.inherit":"Timeline easing","motion.unknown":"There is no icon with that name","motion.nowebm":"This browser cannot record video","motion.play":"Play","motion.pause":"Pause","three.size":"1x is {w} by {h} pixels, 4x is four times that.","three.nogl":"This browser cannot draw WebGL 2, so the 3D view is not available here.","labs.source.missing":"Your glyph script does not compile yet, so the icon below is used.","labs.source.unknown":"Unknown icon \"{name}\". Try a name from the list.","labs.error":"Could not export: {message}","labs.script.ok":"Compiles to a lint clean icon.","labs.script.status.ok":"{lines} lines, {shapes} elements, lint clean","labs.script.status.bad":"{n} to fix before the icon can be exported","labs.script.stale":"Showing the last version that compiled.","labs.script.jump":"Go to line {line}, column {column}","labs.example.custom":"Your script","labs.example.sun":"Sun","labs.example.flower":"Flower","labs.example.fox-face":"Fox face","labs.example.card":"Card","labs.example.gauge":"Gauge","labs.example.gear":"Gear","labs.example.bolt":"Bolt","labs.example.bubble":"Chat bubble","labs.favicon.tab":"Animate this tab","labs.favicon.tabStop":"Stop the tab animation","labs.favicon.reduced":"Reduced motion is on, so the preview stays still. The runtime does the same for your visitors.","labs.cursor.hotspotAt":"Hotspot at {x}, {y} px","labs.hotspot.center":"Center","labs.hotspot.topLeft":"Top left","labs.hotspot.topRight":"Top right","labs.hotspot.bottomLeft":"Bottom left","labs.hotspot.bottomRight":"Bottom right","labs.hotspot.custom":"Custom","labs.plotter.strokes":"Strokes","labs.plotter.draw":"Drawing","labs.plotter.travel":"Pen up travel","labs.plotter.saved":"{p}% less travel than the source order","labs.plotter.more":"{n} more lines in the file","labs.stl.triangles":"Triangles","labs.stl.watertight":"Watertight","labs.stl.yes":"yes","labs.stl.no":"no","labs.stl.volume":"Volume","labs.stl.file":"File size","sketch.hint":"Draw in the box to search.","sketch.more":"Keep drawing, the shape is still too small to match.","sketch.empty":"A circle, an arrow, a house, a heart: any rough shape works.","sketch.result":"The {n} closest icons, ranked in {ms} ms","sketch.loading":"Loading the shape index","sketch.failed":"The shape index could not be loaded.","brand.count":"All {n} icons, themed","brand.building":"Building the brand kit"}</script><!--/lang-->
 <title>Lightbulb icon, free SVG and components: glyphfox</title>
 <meta name="description" content="The lightbulb icon from glyphfox, free under the MIT license. See it at every size, weight and style, then copy it as SVG, React, Vue, Svelte, Angular or Tailwind.">
 <link rel="canonical" href="https://kwy404.github.io/glyphfox/icons/lightbulb.html">
@@ -37,21 +39,21 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
 <a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="../" aria-label="glyphfox home">
+    <a class="brand" href="../" aria-label="glyphfox home" data-i18n-attr="aria-label:nav.home">
       <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
-      <span>glyph<b>fox</b></span>
+      <span translate="no">glyph<b>fox</b></span>
     </a>
-    <nav class="nav" id="site-nav" aria-label="Main">
+    <nav class="nav" id="site-nav" aria-label="Main" data-i18n-attr="aria-label:nav.main">
       <a href="../icons.html" data-nav="icons" aria-current="page" data-i18n="nav.icons">Icons</a>
       <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
       <a href="../docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
       <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="../pt-br/" hreflang="pt-BR" data-lang-switch aria-label="PT, ler em português">PT</a>
-      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
-      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
-      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+      <!--lang:menu--><!--/lang-->
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch to the light theme" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
     </div>
   </div>
 </header>
@@ -154,9 +156,9 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../" aria-label="glyphfox home">
+        <a class="brand" href="../" aria-label="glyphfox home" data-i18n-attr="aria-label:nav.home">
           <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
-          <span>glyph<b>fox</b></span>
+          <span translate="no">glyph<b>fox</b></span>
         </a>
         <p data-i18n="footer.about">Original icons on a 24 grid that change weight, morph, fuse and come alive. Free and open source under the MIT license.</p>
       </div>
@@ -190,6 +192,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){var gfBase=location
           <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
         </ul>
       </div>
+      <!--lang:list--><!--/lang-->
     </div>
     <div class="footer-base">
       <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>

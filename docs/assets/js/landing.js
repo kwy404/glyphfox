@@ -395,7 +395,7 @@ function morphScene() {
   if (!host) return;
   const pairs = gf.MORPH_PAIRS.map(([a, b]) => [a, b]).filter(([a, b]) => has(a) && has(b));
   if (!pairs.length) return;
-  list.innerHTML = pairs.map(([a, b]) => `<li>${a} <span aria-hidden="true">&#8594;</span> ${b.replace('/solid', ' filled')}</li>`).join('');
+  list.innerHTML = pairs.map(([a, b]) => `<li>${a} <span aria-hidden="true">&#8594;</span> ${b.replace('/solid', ` ${t('home.morph.filled')}`)}</li>`).join('');
   const items = $$('li', list);
   const resolved = pairs.map(([a, b]) => {
     const A = gf.resolveSpec(a, gf.lookupIcon);
@@ -415,7 +415,7 @@ function morphScene() {
     if (key !== last) {
       last = key;
       host.innerHTML = gf.renderToString(f.icon, { size: 240, weight: 1.5, variant: f.variant, secondaryOpacity: f.variant === 'solid' ? 1 : undefined });
-      label.textContent = `${r.a} → ${r.b.replace('/solid', ' filled')}`;
+      label.textContent = `${r.a} → ${r.b.replace('/solid', ` ${t('home.morph.filled')}`)}`;
       items.forEach((li, j) => li.classList.toggle('on', j === i));
     }
   });
@@ -518,12 +518,12 @@ function modsPlayground() {
   baseHost.innerHTML = bases.map((b) => `<button class="chip" type="button" value="${b}" aria-pressed="${b === state.base}">${svg(b, { size: 14 })}${b}</button>`).join('');
   modHost.innerHTML = ['none', ...gf.MODIFIER_NAMES].map((m) => `<button class="chip" type="button" value="${m}" aria-pressed="${m === state.mod}">${m === 'none' ? t('mods.none') : m}</button>`).join('');
   cornerHost.innerHTML = [
-    ['top-left', 'tl'],
-    ['top-right', 'tr'],
-    ['bottom-left', 'bl'],
-    ['bottom-right', 'br'],
+    ['top-left', 'tl', 'corner.topLeft'],
+    ['top-right', 'tr', 'corner.topRight'],
+    ['bottom-left', 'bl', 'corner.bottomLeft'],
+    ['bottom-right', 'br', 'corner.bottomRight'],
   ]
-    .map(([c, s]) => `<button type="button" value="${c}" aria-pressed="${c === state.corner}" aria-label="${c}">${s}</button>`)
+    .map(([c, s, key]) => `<button type="button" value="${c}" aria-pressed="${c === state.corner}" aria-label="${t(key)}" title="${t(key)}">${s}</button>`)
     .join('');
   const render = () => {
     const spec = state.mod === 'none' ? state.base : `${state.base}+${state.mod}@${{ 'top-left': 'tl', 'top-right': 'tr', 'bottom-left': 'bl', 'bottom-right': 'br' }[state.corner]}`;

@@ -1,7 +1,7 @@
 // Icon browser: search, categories, sketch search, live axes, inspector with
 // copy in every format and downloads (SVG, PNG, animated SVG, GIF, WebM).
 
-import { $, $$, FORMAT_LABELS, codeBlock, copy, download, gf, lang, loadIcons, svg, t, toast } from './app.js';
+import { $, $$, FORMAT_LABELS, category, codeBlock, copy, download, gf, lang, loadIcons, svg, t, toast } from './app.js';
 import { animatedSvg, animationGif, animationWebm, bakeColor, svgToPng } from './exporters.js';
 import { rank, sketchPad } from './sketch.js';
 
@@ -74,9 +74,9 @@ function updateGridWeight() {
 function renderCats() {
   const counts = new Map();
   for (const i of data.icons) for (const c of i.categories) counts.set(c, (counts.get(c) || 0) + 1);
-  const cats = [...counts.keys()].sort();
+  const cats = [...counts.keys()].sort((a, b) => category(a).localeCompare(category(b), document.documentElement.lang));
   $('[data-cats]').innerHTML = [`<li><button type="button" data-cat="" aria-pressed="${!state.cat}">${t('icons.all')}<small>${data.icons.length}</small></button></li>`]
-    .concat(cats.map((c) => `<li><button type="button" data-cat="${c}" aria-pressed="${state.cat === c}">${c}<small>${counts.get(c)}</small></button></li>`))
+    .concat(cats.map((c) => `<li><button type="button" data-cat="${c}" aria-pressed="${state.cat === c}">${category(c)}<small>${counts.get(c)}</small></button></li>`))
     .join('');
 }
 
@@ -128,7 +128,7 @@ function renderInspector() {
   const props = allProps();
   $('[data-preview]').innerHTML = svg(s, { ...props, size: 150 });
   $('[data-insp-name]').textContent = s;
-  $('[data-insp-meta]').textContent = `${icon.categories.join(', ')} / ${icon.tags.join(', ')}`;
+  $('[data-insp-meta]').textContent = `${icon.categories.map(category).join(', ')} / ${icon.tags.join(', ')}`;
   renderSnippet();
   const editor = $('[data-open-editor]');
   editor.href = `studio.html#editor=${encodeURIComponent(s)}`;

@@ -3,7 +3,7 @@
 // undo and redo, SVG import (normalized by Fox-ify), live lint, previews
 // in context and the local collection.
 
-import { $, $$, copy, download, gf, svg, t, toast } from './app.js';
+import { $, $$, category, copy, download, gf, svg, t, toast } from './app.js';
 import * as collection from './collection.js';
 
 const G = gf.geometry;
@@ -626,7 +626,7 @@ export function openBody(body, { name = 'my-icon', tags = [], category, id = nul
   $('[data-ed-tags]').value = tags.join(', ');
   if (category) {
     const sel = $('[data-ed-cat]');
-    if (![...sel.options].some((o) => o.value === category)) sel.insertAdjacentHTML('beforeend', `<option>${category}</option>`);
+    if (![...sel.options].some((o) => o.value === category)) sel.insertAdjacentHTML('beforeend', `<option value="${category}">${category}</option>`);
     sel.value = category;
   }
   history = [];
@@ -648,7 +648,7 @@ export function importSvgText(text) {
 export function initEditor(data) {
   el = $('[data-ed-canvas]');
   categories = [...new Set(data.icons.flatMap((i) => i.categories))].sort();
-  $('[data-ed-cat]').innerHTML = categories.map((c) => `<option ${c === 'shapes' ? 'selected' : ''}>${c}</option>`).join('');
+  $('[data-ed-cat]').innerHTML = categories.map((c) => `<option value="${c}"${c === 'shapes' ? ' selected' : ''}>${category(c)}</option>`).join('');
   $('[data-ed-tools]').innerHTML = TOOLS.map(([name, key, icon, label]) => `<button type="button" data-tool="${name}" aria-pressed="false" aria-label="${t(label)} (${key})" title="${t(label)} (${key})">${gf.lookupIcon(icon) ? svg(icon, { size: 20 }) : name[0].toUpperCase()}<kbd>${key}</kbd></button>`).join('');
   buildGrid();
   $('[data-ed-tools]').addEventListener('click', (e) => {

@@ -172,10 +172,10 @@ self.addEventListener('fetch', (event) => {
 `;
 }
 
-/** Lists the precache entries: main pages, hashed assets, data and icons. */
-export function precacheList(docs, outputs, written = {}) {
+/** Lists the precache entries: main pages (in every language folder), hashed assets, data and icons. */
+export function precacheList(docs, outputs, written = {}, dirs = ['pt-br']) {
   const exists = (p) => existsSync(join(docs, p)) || written[join(docs, p)] !== undefined;
-  const fixed = [...PAGES, ...PAGES.map((p) => `pt-br/${p}`), 'data/icons.json', 'assets/favicon.svg'].filter(exists);
+  const fixed = [...PAGES, ...dirs.flatMap((d) => PAGES.map((p) => `${d}/${p}`)), 'data/icons.json', 'assets/favicon.svg'].filter(exists);
   return [...new Set(['./', ...fixed, ...outputs])];
 }
 

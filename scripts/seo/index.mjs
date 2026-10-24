@@ -159,7 +159,7 @@ function enrichSitePage(html, rel, lang, available) {
   return out;
 }
 
-export async function seoFiles({ root, icons, files, siteDict }) {
+export async function seoFiles({ root, icons, files, siteDict, sitePages = SITE_PAGES }) {
   const docs = join(root, 'docs');
   const api = await import(pathToFileURL(join(root, 'packages', 'glyphfox', 'dist', 'index.js')).href);
   const { dict: seoStrings } = await import(pathToFileURL(join(docs, 'guides', 'i18n.js')).href + `?v=${Date.now()}`);
@@ -184,7 +184,7 @@ export async function seoFiles({ root, icons, files, siteDict }) {
     ...icons.map((ic) => ({ path: `icons/${ic.name}.html`, nav: 'icons', keys: iconPageKeys(ic, api), build: (c) => iconPage(ic, c) })),
   ];
   const avail = new Map(pages.map((p) => [p.path, langs.filter((l) => covers(l, p.keys, seoDict, siteDict))]));
-  const available = (target, lang) => (SITE_PAGES.includes(target) ? langs.includes(lang) : (avail.get(target) || []).includes(lang));
+  const available = (target, lang) => (sitePages.includes(target) ? langs.includes(lang) : (avail.get(target) || []).includes(lang));
 
   const out = {};
   for (const p of pages) {

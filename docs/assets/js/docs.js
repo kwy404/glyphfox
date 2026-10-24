@@ -56,7 +56,7 @@ function demos() {
   const morph = $('[data-demo="morph"]');
   if (morph) {
     const pairs = gf.MORPH_PAIRS.filter(([a, b]) => has(a) && has(b)).slice(0, 6);
-    morph.innerHTML = pairs.map(([a, b], i) => figure(svg(a, { size: 40 }), `${a} / ${b.replace('/solid', ' filled')}`, `class="clickable" data-pair="${i}" tabindex="0" role="button"`)).join('');
+    morph.innerHTML = pairs.map(([a, b], i) => figure(svg(a, { size: 40 }), `${a} / ${b.replace('/solid', ` ${t('home.morph.filled')}`)}`, `class="clickable" data-pair="${i}" tabindex="0" role="button"`)).join('');
     for (const fig of $$('[data-pair]', morph)) {
       const [a, b] = pairs[Number(fig.dataset.pair)];
       const A = gf.resolveSpec(a, gf.lookupIcon);

@@ -2,23 +2,37 @@
 // navigation, copy and download helpers, code highlighting and reveals.
 
 import * as gf from '../../vendor/glyphfox.js';
-import { dict } from './i18n.js';
 
 export { gf };
 
 /** Display names of the copy formats. */
 export const FORMAT_LABELS = { svg: 'SVG', jsx: 'JSX', vue: 'Vue', svelte: 'Svelte', angular: 'Angular', html: 'Web', tailwind: 'Tailwind', cdn: 'CDN', datauri: 'Data URI' };
 
-export const lang = document.documentElement.lang === 'pt-BR' ? 'pt-BR' : 'en';
+/** Language of the page; the build writes one copy of each page per language (docs/I18N.md). */
+export const lang = document.documentElement.lang || 'en';
 export const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const $ = (sel, root = document) => root.querySelector(sel);
 export const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+// The strings the scripts need, written into each page by the build from docs/i18n/<lang>.json.
+let strings = {};
+try {
+  strings = JSON.parse(document.getElementById('gf-strings')?.textContent || '{}');
+} catch {
+  strings = {};
+}
+
 /** Translated string for a key, with {name} placeholders. */
 export function t(key, vars) {
-  let s = (dict[lang] && dict[lang][key]) ?? dict.en[key] ?? key;
+  let s = strings[key] ?? key;
   if (vars) for (const k of Object.keys(vars)) s = s.split(`{${k}}`).join(String(vars[k]));
   return s;
+}
+
+/** Display name of an icon category (the data keeps the English id). */
+export function category(id) {
+  const s = t(`cat.${id}`);
+  return s === `cat.${id}` ? id : s;
 }
 
 /** Link to a page in the current language. */
@@ -284,6 +298,34 @@ function setupReveal() {
   for (const el of els) io.observe(el);
 }
 
+// Language menu: remembers the choice (the head script reads it on English
+// pages) and closes on Escape or a click outside.
+function setupLanguage() {
+  const remember = (e) => {
+    const a = e.target.closest && e.target.closest('a[data-set-lang]');
+    if (!a) return;
+    try {
+      localStorage.setItem('gf-lang', a.dataset.setLang);
+    } catch {
+      // private mode
+    }
+  };
+  document.addEventListener('click', remember);
+  document.addEventListener('auxclick', remember);
+  const menus = $$('[data-lang-menu]');
+  if (!menus.length) return;
+  document.addEventListener('click', (e) => {
+    for (const m of menus) if (m.open && !m.contains(e.target)) m.open = false;
+  });
+  for (const m of menus) {
+    m.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !m.open) return;
+      m.open = false;
+      m.querySelector('summary').focus();
+    });
+  }
+}
+
 function setupCopyButtons() {
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-copy]');
@@ -320,6 +362,7 @@ export function start() {
   setupTheme();
   setupNav();
   setupReveal();
+  setupLanguage();
   setupCopyButtons();
   highlightAll();
   setupUpdates();

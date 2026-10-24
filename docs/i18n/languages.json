@@ -1,0 +1,7 @@
+[
+  { "code": "en", "dir": "", "name": "English", "short": "EN", "og": "en_US" },
+  { "code": "pt-BR", "dir": "pt-br", "name": "Português (Brasil)", "short": "PT", "og": "pt_BR" },
+  { "code": "es", "dir": "es", "name": "Español", "short": "ES", "og": "es_ES" },
+  { "code": "fr", "dir": "fr", "name": "Français", "short": "FR", "og": "fr_FR" },
+  { "code": "de", "dir": "de", "name": "Deutsch", "short": "DE", "og": "de_DE" }
+]

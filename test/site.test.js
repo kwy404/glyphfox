@@ -3,27 +3,33 @@
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { iconNames } from 'glyphfox';
 import { componentName, dataName } from '../packages/glyphfox/dist/core/formats.js';
+import { checkI18n, hasWords, segments } from '../scripts/lib/i18n-check.mjs';
+import { moveLinks, translate } from '../scripts/lib/i18n.mjs';
 
 const docs = resolve('docs');
-const pages = [
-  ...readdirSync(docs)
-    .filter((f) => f.endsWith('.html'))
-    .map((f) => join(docs, f)),
-  ...readdirSync(join(docs, 'pt-br')).map((f) => join(docs, 'pt-br', f)),
-  ...readdirSync(join(docs, 'frameworks')).map((f) => join(docs, 'frameworks', f)),
-];
 const read = (f) => readFileSync(f, 'utf8');
-const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js')).href);
+const languages = JSON.parse(read(join(docs, 'i18n', 'languages.json')));
+const strings = Object.fromEntries(languages.map((l) => [l.code, JSON.parse(read(join(docs, 'i18n', `${l.code}.json`)))]));
+const localized = languages.filter((l) => l.dir);
+const PAGES = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html', 'native.html', 'smart.html'];
+const htmlIn = (dir) => (existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.html')).map((f) => join(dir, f)) : []);
+const pages = [
+  ...htmlIn(docs),
+  ...htmlIn(join(docs, 'frameworks')),
+  ...localized.flatMap((l) => [...htmlIn(join(docs, l.dir)), ...htmlIn(join(docs, l.dir, 'frameworks'))]),
+];
 
 describe('studio site', () => {
-  it('has every page in English and Portuguese', () => {
-    for (const p of ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html']) {
-      expect(existsSync(join(docs, p)), p).toBe(true);
-      expect(existsSync(join(docs, 'pt-br', p)), p).toBe(true);
-      expect(read(join(docs, 'pt-br', p))).toContain('<html lang="pt-BR">');
+  it('has every page in every language', () => {
+    expect(languages.map((l) => l.code)).toEqual(['en', 'pt-BR', 'es', 'fr', 'de']);
+    for (const p of PAGES) {
+      expect(read(join(docs, p)), p).toContain('<html lang="en">');
+      for (const l of localized) {
+        expect(existsSync(join(docs, l.dir, p)), `${l.dir}/${p}`).toBe(true);
+        expect(read(join(docs, l.dir, p)), `${l.dir}/${p}`).toContain(`<html lang="${l.code}">`);
+      }
     }
     expect(existsSync(join(docs, '404.html'))).toBe(true);
   });
@@ -36,7 +42,10 @@ describe('studio site', () => {
       expect(html, p).toContain(`<link rel="canonical" href="https://kwy404.github.io/glyphfox/frameworks/${p === 'index' ? '' : p + '.html'}">`);
     }
     expect(read(join(docs, 'docs.html'))).toContain('href="frameworks/index.html"');
-    expect(read(join(docs, 'pt-br', 'docs.html'))).toContain('href="../frameworks/index.html"');
+    for (const l of localized) {
+      expect(read(join(docs, l.dir, 'docs.html')), l.code).toContain('href="frameworks/index.html"');
+      expect(read(join(docs, l.dir, 'frameworks', 'index.html')), l.code).toContain(`<html lang="${l.code}">`);
+    }
   });
 
   it('only links to files that exist', () => {
@@ -50,31 +59,93 @@ describe('studio site', () => {
     }
   });
 
-  it('has the same keys in both languages and every key used exists', () => {
-    const en = Object.keys(dict.en).sort();
-    expect(Object.keys(dict['pt-BR']).sort()).toEqual(en);
-    for (const page of pages.filter((p) => !p.includes('pt-br'))) {
+  it('has the same keys in every language and every key used exists', () => {
+    const en = Object.keys(strings.en);
+    for (const l of languages) expect(Object.keys(strings[l.code]), l.code).toEqual(en);
+    for (const page of [...pages.filter((p) => dirname(p) === docs), ...['head', 'header', 'footer'].map((n) => join(docs, 'partials', `${n}.html`))]) {
       const html = read(page);
-      for (const m of html.matchAll(/data-i18n="([^"]+)"/g)) expect(dict.en[m[1]], `${page}: ${m[1]}`).toBeDefined();
+      for (const m of html.matchAll(/data-i18n="([^"]+)"/g)) expect(strings.en[m[1]], `${page}: ${m[1]}`).toBeDefined();
       for (const m of html.matchAll(/data-i18n-attr="([^"]+)"/g)) {
-        for (const pair of m[1].split(';')) expect(dict.en[pair.split(':')[1]], `${page}: ${pair}`).toBeDefined();
+        for (const pair of m[1].split(';')) expect(strings.en[pair.split(':')[1]], `${page}: ${pair}`).toBeDefined();
       }
     }
     const js = readdirSync(join(docs, 'assets', 'js'), { recursive: true })
       .filter((f) => f.endsWith('.js') && !f.startsWith('bundle'))
       .map((f) => read(join(docs, 'assets', 'js', f)));
     for (const src of js) {
-      for (const m of src.matchAll(/\bt\('([a-zA-Z0-9.]+)'/g)) expect(dict.en[m[1]], m[1]).toBeDefined();
-      for (const m of src.matchAll(/\bt\(`([a-zA-Z0-9.]+)\.\$\{/g)) expect(Object.keys(dict.en).some((k) => k.startsWith(m[1] + '.')), m[1]).toBe(true);
+      for (const m of src.matchAll(/\bt\('([a-zA-Z0-9.]+)'/g)) expect(strings.en[m[1]], m[1]).toBeDefined();
+      for (const m of src.matchAll(/\bt\(`([a-zA-Z0-9.]+)\.\$\{/g)) expect(Object.keys(strings.en).some((k) => k.startsWith(m[1] + '.')), m[1]).toBe(true);
     }
   });
 
-  it('translates the Portuguese pages', () => {
-    const pt = read(join(docs, 'pt-br', 'index.html'));
-    expect(pt).toContain(dict['pt-BR']['home.hero.title1']);
-    expect(pt).toMatch(/href="\.\.\/assets\/site\.[0-9a-f]{8}\.css"/);
-    expect(pt).toContain('hreflang="en"');
-    expect(read(join(docs, 'pt-br', 'icons.html'))).toContain(`placeholder="${dict['pt-BR']['icons.search']}"`);
+  it('translates the pages, the titles and the descriptions', () => {
+    for (const l of localized) {
+      const s = strings[l.code];
+      const home = read(join(docs, l.dir, 'index.html'));
+      expect(home, l.code).toContain(`<title data-i18n="home.meta.title">${s['home.meta.title']}</title>`);
+      expect(home, l.code).toContain(`<meta name="description" content="${s['home.meta.description']}"`);
+      expect(home, l.code).toContain(s['home.hero.title1']);
+      expect(home, l.code).toMatch(/href="\.\.\/assets\/site\.[0-9a-f]{8}\.css"/);
+      expect(read(join(docs, l.dir, 'icons.html')), l.code).toContain(`placeholder="${s['icons.search']}"`);
+      expect(read(join(docs, l.dir, 'changelog.html')), l.code).not.toContain('All notable changes');
+    }
+  });
+
+  it('declares the canonical page and the alternates of every language', () => {
+    for (const p of PAGES) {
+      const path = p === 'index.html' ? '' : p;
+      for (const l of languages) {
+        const html = read(join(docs, l.dir, p));
+        expect(html, `${l.code} ${p}`).toContain(`<link rel="canonical" href="https://kwy404.github.io/glyphfox/${l.dir ? l.dir + '/' : ''}${path}">`);
+        for (const a of languages) expect(html).toContain(`<link rel="alternate" hreflang="${a.code}" href="https://kwy404.github.io/glyphfox/${a.dir ? a.dir + '/' : ''}${path}">`);
+        expect(html).toContain(`<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/${path}">`);
+        expect(html).toContain(`<meta property="og:locale" content="${l.og}">`);
+      }
+    }
+  });
+
+  it('has a language switcher in the header and the footer and detects the first visit', () => {
+    for (const p of PAGES) {
+      for (const l of languages) {
+        const html = read(join(docs, l.dir, p));
+        const menu = /<details class="lang-menu" data-lang-menu>[\s\S]*?<\/details>/.exec(html);
+        expect(menu, `${l.code} ${p}`).not.toBeNull();
+        expect(menu[0]).toContain(`aria-label="${strings[l.code]['lang.label']}: ${l.name}"`);
+        const footer = /<div class="footer-langs">[\s\S]*?<\/div>/.exec(html)[0];
+        for (const a of languages) {
+          const target = join(docs, a.dir, p);
+          for (const block of [menu[0], footer]) {
+            const link = new RegExp(`<a href="([^"]+)" hreflang="${a.code}" lang="${a.code}" data-set-lang="${a.code}"(?: aria-current="page")?>`).exec(block);
+            expect(link, `${l.code} ${p} -> ${a.code}`).not.toBeNull();
+            expect(resolve(dirname(join(docs, l.dir, p)), link[1])).toBe(target);
+          }
+        }
+        expect(html).toMatch(/<!--lang:detect--><script>\(function\(c,d,u\)/);
+        expect(html).toContain('<script type="application/json" id="gf-strings">');
+      }
+    }
+  });
+
+  it('finds English left outside code in another language', async () => {
+    expect(hasWords('Copy the install command')).toBe(true);
+    expect(hasWords('SVG, PNG, GIF')).toBe(false);
+    expect(hasWords('file+check@tr arrow-right useMorph 2.00')).toBe(false);
+    const texts = segments('<html lang="es"><p>Hola <code>npm i glyphfox</code></p><p translate="no">mount</p><a lang="en" href="#">English</a><button aria-label="Copiar">x</button></html>', 'es').map((s) => s.text);
+    expect(texts).toEqual(['Hola', 'Copiar', 'x']);
+    const { problems } = await checkI18n(resolve('.'));
+    expect(problems).toEqual([]);
+  });
+
+  it('rebases links for pages in subfolders and translations', () => {
+    expect(moveLinks('<a href="icons.html"></a><img src="assets/a.svg">', 'index.html', 'guides/react.html')).toBe('<a href="../icons.html"></a><img src="../assets/a.svg">');
+    expect(moveLinks('<a href="../icons.html#x"></a><link href="../assets/site.css">', 'guides/react.html', 'fr/guides/react.html', (p) => (p === 'icons.html' ? 'fr/icons.html' : p))).toBe('<a href="../icons.html#x"></a><link href="../../assets/site.css">');
+    expect(translate('<html lang="en"><p data-i18n="a">A</p><input data-i18n-attr="placeholder:b" placeholder="B"></html>', { a: 'Á', b: 'B "c"' }, 'es')).toBe('<html lang="es"><p data-i18n="a">Á</p><input data-i18n-attr="placeholder:b" placeholder="B &quot;c&quot;"></html>');
+  });
+
+  it('localizes the 404 page from the address, the choice or the browser', () => {
+    const html = read(join(docs, '404.html'));
+    expect(html).toContain('<title data-i18n="nf.title">');
+    for (const l of languages) expect(html).toContain(JSON.stringify(strings[l.code]['nf.lead']));
   });
 
   it('credits the author on every page', () => {

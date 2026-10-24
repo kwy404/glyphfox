@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="de">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--lang:detect--><script>(function(c,d,u){try{var k='gf-lang',s=localStorage.getItem(k);if(!s||!u[s]){s='';var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length&&!s;i++){var p=String(n[i]).toLowerCase();for(var l in u){var q=l.toLowerCase();if(p===q||p.split('-')[0]===q.split('-')[0]){s=l;break}}}s=s||d;localStorage.setItem(k,s)}if(c===d&&s!==d&&u[s])location.replace(u[s]+location.search+location.hash)}catch(e){}})("de","en",{"en":"../index.html","pt-BR":"../pt-br/index.html","es":"../es/index.html","fr":"../fr/index.html","de":"index.html"})</script><!--/lang-->
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.40e6a878.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: Icons, die sich bewegen, verwandeln und verschmelzen" data-i18n-attr="content:home.meta.title">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new URL('..',document.querySelector('link[rel=icon]').href).pathname;navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}catch(e){}}</script>
+<!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Zum hellen Design wechseln","theme.dark":"Zum dunklen Design wechseln","toast.copied":"In die Zwischenablage kopiert","toast.downloaded":"Download gestartet","toast.saved":"In deiner Sammlung gespeichert","action.copy":"Kopieren","corners.round":"Rund","corners.sharp":"Eckig","variant.outline":"Kontur","variant.duotone":"Duotone","variant.solid":"Gefüllt","mods.none":"ohne","corner.topLeft":"Oben links","corner.topRight":"Oben rechts","corner.bottomLeft":"Unten links","corner.bottomRight":"Unten rechts","cat.animals":"Tiere","cat.arrows":"Pfeile","cat.commerce":"Handel","cat.communication":"Kommunikation","cat.data":"Daten","cat.development":"Entwicklung","cat.devices":"Geräte","cat.files":"Dateien","cat.finance":"Finanzen","cat.interface":"Oberfläche","cat.maps":"Karten","cat.media":"Medien","cat.nature":"Natur","cat.navigation":"Navigation","cat.people":"Personen","cat.security":"Sicherheit","cat.shapes":"Formen","cat.symbols":"Symbole","cat.text":"Text","cat.weather":"Wetter","error.rasterize":"Das SVG konnte nicht in ein Bild umgewandelt werden","error.video":"Dieser Browser kann keine Videos aufnehmen","home.morph.filled":"gefüllt","home.gallery.orbit":"Orbit aus zehn Icons","icons.all":"Alle","icons.result.count":"{n} Icons","icons.result.sketch":"Die {n} ähnlichsten Icons zu deiner Skizze","icons.dl.drawHint":"Keine Animation gewählt, draw wird verwendet","editor.download":"SVG herunterladen","editor.lint.ok":"Erfüllt alle Icon-Regeln.","editor.lint.empty":"Zeichne etwas, um loszulegen.","editor.ctx.button":"Speichern","editor.imported":"Importiert und ans Raster angepasst","editor.tool.select":"Auswählen und Knoten bearbeiten","editor.tool.pen":"Zeichenstift","editor.tool.line":"Linie","editor.tool.polyline":"Polylinie","editor.tool.rect":"Rechteck","editor.tool.rrect":"Abgerundetes Rechteck","editor.tool.circle":"Kreis","editor.tool.ellipse":"Ellipse","editor.tool.arc":"Bogen","editor.hint.select":"Klicke auf eine Form, um sie auszuwählen, ziehe sie zum Verschieben und ziehe an den Griffen, um Knoten zu bearbeiten. Pfeiltasten verschieben die Form schrittweise, Entf löscht sie, Strg+D dupliziert sie.","editor.hint.pen":"Klicke, um Ecken zu setzen, und ziehe, um Kurven zu formen. Ein Klick auf den ersten Punkt schließt den Pfad, Eingabetaste oder Doppelklick beendet ihn.","editor.hint.line":"Ziehe vom Anfang bis zum Ende.","editor.hint.polyline":"Klicke, um Punkte hinzuzufügen. Eingabetaste oder Doppelklick beendet die Linie.","editor.hint.rect":"Ziehe von einer Ecke zur gegenüberliegenden.","editor.hint.rrect":"Ziehe von einer Ecke zur gegenüberliegenden. Ziehe am runden Griff, um den Radius zu ändern.","editor.hint.circle":"Ziehe von der Mitte nach außen.","editor.hint.ellipse":"Ziehe den Begrenzungsrahmen auf.","editor.hint.arc":"Klicke auf den Anfang, dann auf das Ende, bewege anschließend den Zeiger, um den Bogen zu biegen, und klicke zum Platzieren.","foxify.before":"Vorher","foxify.waiting":"Füge ein SVG ein, lege eine Datei ab oder probiere ein Beispiel aus.","foxify.nothing":"In diesem SVG gibt es nichts zu zeichnen","foxify.note.text":"Übersprungene Textelemente: {n} (wandle Text zuerst in Pfade um)","foxify.note.scaled":"Die Zeichnung wurde in den Innenbereich von 2 bis 22 eingepasst","foxify.note.enlarged":"Die Zeichnung wurde auf den Innenbereich vergrößert","foxify.note.filled":"Gefüllte Formen in Konturen umgewandelt: {n}","fusion.need":"Füge mindestens zwei Icons hinzu.","fusion.lint.ok":"Das verschmolzene Icon erfüllt alle Icon-Regeln.","fusion.remove":"{name} entfernen","brand.favicon16":"Favicon","brand.maskable":"maskierbar","three.error":"three.js konnte nicht geladen werden. Prüfe die Verbindung und versuche es erneut.","three.canvas":"In 3D gerendertes Icon. Ziehe oder nutze die Pfeiltasten, um es zu drehen, und Plus und Minus zum Zoomen.","collection.empty.short":"Die Sammlung ist leer","collection.edit":"Bearbeiten","collection.delete":"Löschen","collection.deleted":"Aus der Sammlung entfernt","sw.updated":"glyphfox wurde auf die neueste Version aktualisiert.","motion.all":"Ganzes Icon","motion.secondary":"Duotone-Ebene","motion.element":"Element","motion.inherit":"Beschleunigung der Zeitleiste","motion.unknown":"Es gibt kein Icon mit diesem Namen","motion.nowebm":"Dieser Browser kann keine Videos aufnehmen","motion.play":"Abspielen","motion.pause":"Pausieren","three.size":"1x sind {w} mal {h} Pixel, 4x das Vierfache.","three.nogl":"Dieser Browser unterstützt WebGL 2 nicht, daher ist die 3D-Ansicht hier nicht verfügbar.","labs.source.missing":"Dein glyph script lässt sich noch nicht kompilieren, daher wird das Icon unten verwendet.","labs.source.unknown":"Unbekanntes Icon „{name}“. Versuche es mit einem Namen aus der Liste.","labs.error":"Export fehlgeschlagen: {message}","labs.script.ok":"Kompiliert zu einem Icon ohne Lint-Fehler.","labs.script.status.ok":"{lines} Zeilen, {shapes} Elemente, keine Lint-Fehler","labs.script.status.bad":"{n} zu beheben, bevor das Icon exportiert werden kann","labs.script.stale":"Angezeigt wird die zuletzt kompilierte Version.","labs.script.jump":"Zu Zeile {line}, Spalte {column} springen","labs.example.custom":"Dein Skript","labs.example.sun":"Sonne","labs.example.flower":"Blume","labs.example.fox-face":"Fuchskopf","labs.example.card":"Kreditkarte","labs.example.gauge":"Tachometer","labs.example.gear":"Zahnrad","labs.example.bolt":"Blitz","labs.example.bubble":"Sprechblase","labs.favicon.tab":"Diesen Tab animieren","labs.favicon.tabStop":"Tab-Animation beenden","labs.favicon.reduced":"Reduzierte Bewegung ist aktiviert, daher bleibt die Vorschau unbewegt. Die Runtime macht das bei deinen Besuchern genauso.","labs.cursor.hotspotAt":"Hotspot bei {x}, {y} px","labs.hotspot.center":"Mitte","labs.hotspot.topLeft":"Oben links","labs.hotspot.topRight":"Oben rechts","labs.hotspot.bottomLeft":"Unten links","labs.hotspot.bottomRight":"Unten rechts","labs.hotspot.custom":"Benutzerdefiniert","labs.plotter.strokes":"Striche","labs.plotter.draw":"Zeichenweg","labs.plotter.travel":"Leerfahrt","labs.plotter.saved":"{p} % weniger Leerfahrt als in der ursprünglichen Reihenfolge","labs.plotter.more":"{n} weitere Zeilen in der Datei","labs.stl.triangles":"Dreiecke","labs.stl.watertight":"Wasserdicht","labs.stl.yes":"ja","labs.stl.no":"nein","labs.stl.volume":"Volumen","labs.stl.file":"Dateigröße","sketch.hint":"Zeichne in das Feld, um zu suchen.","sketch.more":"Zeichne weiter, die Form ist noch zu klein für einen Vergleich.","sketch.empty":"Ein Kreis, ein Pfeil, ein Haus, ein Herz: Jede grobe Form funktioniert.","sketch.result":"Die {n} ähnlichsten Icons, sortiert in {ms} ms","sketch.loading":"Formindex wird geladen","sketch.failed":"Der Formindex konnte nicht geladen werden.","brand.count":"Alle {n} Icons, an deine Marke angepasst","brand.building":"Marken-Kit wird erstellt"}</script><!--/lang-->
+<!-- head:end -->
+<title data-i18n="home.meta.title">glyphfox: Icons, die sich bewegen, verwandeln und verschmelzen</title>
+<meta name="description" content="Eigens gezeichnete Open-Source-Icons mit variablen Achsen für Strichstärke, Ecken und Stil, einer Morph-Engine, Fusion, Modifikatoren und lebendigen Zuständen. Für React, Vue, Svelte, Angular, Web Components und Tailwind, dazu eine CLI." data-i18n-attr="content:home.meta.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/de/">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/">
+<meta property="og:title" content="glyphfox: Icons, die sich bewegen, verwandeln und verschmelzen" data-i18n-attr="content:home.meta.title">
+<meta property="og:description" content="Variable Open-Source-Icons zum Verwandeln und Verschmelzen, mit einem Studio im Browser." data-i18n-attr="content:home.meta.og">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/de/">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<link rel="stylesheet" href="../assets/landing.64b67dcd.css">
+<link rel="stylesheet" href="../assets/scenes.065bdd8c.css">
+<link rel="preload" href="../data/icons.json" as="fetch" crossorigin>
+<link rel="modulepreload" href="../assets/js/bundle/landing.K6QOA6RE.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.JIJI3A2A.js">
+<link rel="modulepreload" href="../assets/js/bundle/scenes.5SC4MODC.js">
+<!-- seo:start -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"glyphfox","description":"Eigens gezeichnete Open-Source-Icons mit variablen Achsen für Strichstärke, Ecken und Stil, einer Morph-Engine, Fusion, Modifikatoren und lebendigen Zuständen. Für React, Vue, Svelte, Angular, Web Components und Tailwind, dazu eine CLI.","url":"https://kwy404.github.io/glyphfox/","codeRepository":"https://github.com/kwy404/glyphfox","programmingLanguage":["JavaScript","TypeScript"],"runtimePlatform":"Node.js","license":"https://opensource.org/licenses/MIT","keywords":"icons, svg icons, icon library, react, vue, svelte, angular, web components, tailwind css","inLanguage":"de","image":"https://kwy404.github.io/glyphfox/og.png","author":{"@type":"Person","name":"Alexandre Kohler","url":"https://github.com/kwy404","sameAs":["https://github.com/kwy404","https://www.linkedin.com/in/alexandre-silva-173687256/"]}}</script>
+<!-- seo:end -->
+</head>
+<body class="landing">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Zum Inhalt springen</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="glyphfox-Startseite" data-i18n-attr="aria-label:nav.home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span translate="no">glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label:nav.main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Neuigkeiten</a>
+    </nav>
+    <div class="header-actions">
+      <!--lang:menu--><details class="lang-menu" data-lang-menu><summary class="icon-btn" aria-label="Sprache: Deutsch" title="Sprache"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><span>DE</span></summary><ul class="lang-list"><li><a href="../index.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="../pt-br/index.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="../es/index.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/index.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="index.html" hreflang="de" lang="de" data-set-lang="de" aria-current="page">Deutsch</a></li></ul></details><!--/lang-->
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Zum hellen Design wechseln" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox auf GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menü" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="glow" style="width:720px;height:720px;right:-160px;top:-260px" aria-hidden="true"></div>
+    <canvas class="flow-canvas" data-flow-canvas aria-hidden="true"></canvas>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-i18n="home.hero.eyebrow">Open-Source-Icon-System</span>
+        <h1 id="hero-title" class="display"><span data-i18n="home.hero.title1">Icons, die sich bewegen,</span> <span class="grad" data-i18n="home.hero.title2">verwandeln und verschmelzen.</span></h1>
+        <p class="lead" data-i18n="home.hero.lead">Eigens gezeichnete Icons auf einem 24er-Raster mit variablen Achsen für Strichstärke, Ecken und Stil, einer Morph-Engine, Fusion, Modifikator-Badges und lebendigen Zuständen. Dieselben Props in React, Vue, Svelte, Angular, Web Components, Tailwind und der CLI.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="icons.html"><span data-i18n="home.hero.browse">Icons entdecken</span></a>
+          <a class="btn" href="studio.html"><span data-i18n="home.hero.studio">Studio öffnen</span></a>
+        </div>
+        <div class="install" role="group" aria-label="Installationsbefehl" data-i18n-attr="aria-label:home.install.label">
+          <span translate="no">npm i glyphfox</span>
+          <button type="button" data-copy="npm i glyphfox" aria-label="Installationsbefehl kopieren" data-i18n-attr="aria-label:home.install.copy"><!--gf:copy:16--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.259" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-copy" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><!--/gf--></button>
+        </div>
+        <dl class="hero-stats">
+          <div><dt data-i18n="home.stats.icons">Icons</dt><dd data-count>0</dd></div>
+          <div><dt data-i18n="home.stats.axes">Achsen</dt><dd>3</dd></div>
+          <div><dt data-i18n="home.stats.layouts">Fusions-Layouts</dt><dd>7</dd></div>
+          <div><dt data-i18n="home.stats.modifiers">Modifikatoren</dt><dd>11</dd></div>
+          <div><dt data-i18n="home.stats.states">lebendige Zustände</dt><dd>7</dd></div>
+        </dl>
+      </div>
+      <div class="hero-stage" aria-hidden="true" data-hero-flow>
+        <!--art:sitting:hero-mascot--><svg class="fenn-art hero-mascot" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse class="fill" cx="54" cy="89.5" rx="40" ry="2.4" fill="#ff7a1a" stroke="none" opacity=".1"/><path class="fill" d="M23 25.5C19.5 31 16 42 18 53l1 35H56c12 0 18-10 16-22C70 50 60 36 45 24.6l-7.5 3.15L33 35.25l-4.5-7.5z" fill="#ff7a1a" stroke="none" opacity="0.16"/><path class="fill" d="M42 88c-2-11 4-21 16-25 8-3 12.5-1.5 14 3 2 12-4 22-16 22z" fill="#ff7a1a" stroke="none" opacity="0.3"/><path class="fill" d="M56 88c18 2 34-6 35-24l-.6-7.5-9.2-5C82 60 79 68 70 74c-4 6-8 12-14 14z" fill="#ff7a1a" stroke="none" opacity="0.3"/><path d="M56 88c18 2 34-6 35-24 1-12-5-20-12-23 3 11 2 25-9 33"/><path d="M90.4 56.5l-9.2-5"/><path d="M23 25.5C19.5 31 16 42 18 53l1 35H56c12 0 18-10 16-22C70 50 60 36 45 24.6"/><path d="M27 57V88"/><path d="M42 88c-2-11 4-21 16-25"/><path d="M21.5 40 25 43l3.5-3" stroke-opacity=".5"/><path class="fill" d="M21 6.75l7.5 6.75h9L45 6.75l.75 10.5 2.25 6-10.5 4.5L33 35.25l-4.5-7.5L18 23.25l2.25-6z" fill="#ff7a1a" stroke="none" opacity=".3"/><path d="M21 6.75l7.5 6.75h9L45 6.75l.75 10.5 2.25 6-10.5 4.5L33 35.25l-4.5-7.5L18 23.25l2.25-6z"/><path d="M28.5 21h.02"/><path d="M37.5 21h.02"/></svg><!--/art-->
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="grid" data-scene="grid" aria-labelledby="grid-title">
+    <div class="sticky">
+      <div class="wrap scene-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.grid.eyebrow">Das Raster</span>
+          <h2 id="grid-title" class="title" data-i18n="home.grid.title">Auf einem einzigen Raster gezeichnet.</h2>
+          <p class="lead" data-i18n="home.grid.lead">Jedes Icon entsteht auf demselben Raster von 24 mal 24, mit 2 px Innenabstand, 2 px Strichstärke und runden Verbindungen. Gemeinsame Hilfslinien bringen Kreise, Quadrate und hohe Formen auf dieselbe optische Größe, sodass zwei beliebige Icons zusammenpassen wie Buchstaben einer Schrift.</p>
+          <ul class="grid-specs">
+            <li data-i18n="home.grid.s1">Raster 24 x 24</li>
+            <li data-i18n="home.grid.s2">Innenabstand 2 px</li>
+            <li data-i18n="home.grid.s3">Strichstärke 2 px</li>
+            <li data-i18n="home.grid.s4">Runde Linienenden und Verbindungen</li>
+          </ul>
+        </div>
+        <div class="grid-stage" data-grid-stage aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="axes" data-scene="axes" aria-labelledby="axes-title">
+    <div class="sticky">
+      <div class="wrap scene-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.axes.eyebrow">Variable Icons</span>
+          <h2 id="axes-title" class="title" data-i18n="home.axes.title">Ein Icon. Jede Strichstärke.</h2>
+          <p class="lead" data-i18n="home.axes.lead">Jedes Icon wird entlang dreier Achsen gerendert: Strichstärke von 1 bis 3 mit optischem Ausgleich bei kleinen Größen, runde oder eckige Ecken sowie die Stile Kontur, Duotone und Gefüllt, erzeugt aus seinen geschlossenen Formen.</p>
+          <div class="readout" aria-live="off">
+            <div class="readout-row"><span data-i18n="axis.weight">Strichstärke</span><b data-out="weight">2.00</b><i class="bar"><i data-bar="weight"></i></i></div>
+            <div class="readout-row"><span data-i18n="axis.corners">Ecken</span><b data-out="corners" data-i18n="corners.round">Rund</b></div>
+            <div class="readout-row"><span data-i18n="axis.style">Stil</span><b data-out="variant" data-i18n="variant.outline">Kontur</b></div>
+          </div>
+        </div>
+        <div class="weight-board" data-weight-board aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section playground" aria-labelledby="play-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.play.eyebrow">Achsen live</span>
+        <h2 id="play-title" class="title" data-i18n="home.play.title">Fein abstimmen.</h2>
+        <p class="lead" data-i18n="home.play.lead">Bewege die Schieberegler. Jede Komponente in jedem Framework akzeptiert dieselben Props.</p>
+      </div>
+      <div class="play card reveal">
+        <form class="play-controls" data-play>
+          <label class="field"><span><span data-i18n="axis.weight">Strichstärke</span><output data-o="weight">2</output></span><input type="range" name="weight" min="1" max="3" step="0.05" value="2"></label>
+          <label class="field"><span><span data-i18n="axis.size">Größe</span><output data-o="size">40</output></span><input type="range" name="size" min="16" max="64" step="1" value="40"></label>
+          <div class="field"><span data-i18n="axis.corners">Ecken</span><div class="seg" role="group" data-seg="corners"><button type="button" value="round" aria-pressed="true" data-i18n="corners.round">Rund</button><button type="button" value="sharp" aria-pressed="false" data-i18n="corners.sharp">Eckig</button></div></div>
+          <div class="field"><span data-i18n="axis.style">Stil</span><div class="seg" role="group" data-seg="variant"><button type="button" value="outline" aria-pressed="true" data-i18n="variant.outline">Kontur</button><button type="button" value="duotone" aria-pressed="false" data-i18n="variant.duotone">Duotone</button><button type="button" value="solid" aria-pressed="false" data-i18n="variant.solid">Gefüllt</button></div></div>
+          <label class="field color-field"><span data-i18n="axis.color">Farbe</span><input type="color" name="color" value="#ff7a1a"></label>
+        </form>
+        <div class="play-grid" data-play-grid></div>
+        <div class="play-code" data-play-code></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="morph" data-scene="morph" aria-labelledby="morph-title">
+    <div class="sticky">
+      <div class="wrap scene-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.morph.eyebrow">Morph-Engine</span>
+          <h2 id="morph-title" class="title" data-i18n="home.morph.title">Alles wird zu allem.</h2>
+          <p class="lead" data-i18n="home.morph.lead">Pfade werden normalisiert, neu abgetastet, einander zugeordnet und interpoliert, sodass sich jedes Icon in jedes andere verwandeln lässt. Von Hand abgestimmte Paare lassen die alltäglichen Übergänge bewusst gestaltet wirken.</p>
+          <ol class="pair-list" data-pairs></ol>
+        </div>
+        <div class="morph-stage">
+          <div class="morph-ring" aria-hidden="true"></div>
+          <div class="morph-icon" data-morph-chain></div>
+          <div class="morph-label" data-morph-label aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section living" aria-labelledby="living-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.living.eyebrow">Lebendige Zustände</span>
+        <h2 id="living-title" class="title" data-i18n="home.living.title">Icons, die sich zu bewegen wissen.</h2>
+        <p class="lead" data-i18n="home.living.lead">Animationen, die das Icon verstehen: draw zeichnet die Striche nacheinander nach, shake schwingt von oben wie eine Glocke. Löse sie bei mount, hover, click oder über eine state-Prop aus. Reduzierte Bewegung wird immer berücksichtigt.</p>
+      </div>
+      <div class="living-grid" data-living></div>
+    </div>
+  </section>
+
+  <section class="scene scene-sync" id="sync" data-scene="sync" aria-labelledby="sync-title">
+    <div class="sticky">
+      <div class="wrap sync-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.sync.eyebrow">Bewegung mit Handschrift</span>
+          <h2 id="sync-title" class="title" data-i18n="home.sync.title">Sieben Zustände. Ein Takt.</h2>
+          <p class="lead" data-i18n="home.sync.lead">Jeder lebendige Zustand folgt derselben Uhr, sodass sich eine ganze Oberfläche im Gleichtakt bewegen kann. Scrolle, um die Spuren hereinzuholen. Das Studio exportiert dieselben Einzelbilder als GIF und WebM.</p>
+        </div>
+        <div class="sync-stage" data-sync-stage aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="modifiers" data-scene="mods" aria-labelledby="mods-title">
+    <div class="sticky">
+      <div class="wrap scene-grid flip">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.mods.eyebrow">Modifikatoren</span>
+          <h2 id="mods-title" class="title" data-i18n="home.mods.title">Badges, die sich ihren Platz selbst freischneiden.</h2>
+          <p class="lead" data-i18n="home.mods.lead">Füge plus, check, alert, lock, clock, sync und mehr in einer beliebigen Ecke hinzu. Das Icon darunter wird um das Badge herum beschnitten, sodass einige Hundert Icons Tausende saubere Kombinationen ergeben.</p>
+        </div>
+        <div class="mods-stage" data-mods-stage aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section mods-play" aria-labelledby="mp-title">
+    <div class="wrap">
+      <div class="card mp reveal">
+        <div class="mp-preview" data-mp-preview></div>
+        <div class="mp-controls">
+          <h2 id="mp-title" class="subtitle" data-i18n="home.mp.title">Modifikatoren ausprobieren</h2>
+          <div class="field"><span data-i18n="home.mp.base">Icon</span><div class="chips" data-mp-base></div></div>
+          <div class="field"><span data-i18n="home.mp.modifier">Modifikator</span><div class="chips" data-mp-mod></div></div>
+          <div class="field"><span data-i18n="home.mp.corner">Ecke</span><div class="seg" role="group" data-mp-corner></div></div>
+          <div data-mp-code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="fusion" data-scene="fusion" aria-labelledby="fusion-title">
+    <div class="sticky">
+      <div class="wrap scene-grid">
+        <div class="scene-copy">
+          <span class="eyebrow" data-i18n="home.fusion.eyebrow">Fusion</span>
+          <h2 id="fusion-title" class="title" data-i18n="home.fusion.title">Zwei Icons. Eine neue Glyphe.</h2>
+          <p class="lead" data-i18n="home.fusion.lead">Verschmilz 2 bis 10 Icons mit sieben Layouts. Die Teile werden skaliert und am Raster ausgerichtet, und wo sie sich überlappen, wird das hintere um das vordere herum beschnitten. So kollidieren Linien nie, und das Ergebnis besteht weiterhin die Lint-Prüfung.</p>
+          <p class="fusion-caption" data-fusion-caption aria-live="off"></p>
+        </div>
+        <div class="fusion-stage" data-fuse-stage aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gallery" aria-labelledby="gallery-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.gallery.eyebrow">Fusionsgalerie</span>
+        <h2 id="gallery-title" class="title" data-i18n="home.gallery.title">Neue Icons, schon im Set enthalten.</h2>
+      </div>
+      <div class="gallery-grid" data-gallery></div>
+      <p class="center-cta reveal"><a class="btn" href="studio.html#fusion" data-i18n="home.gallery.cta">Eigene Fusion erstellen</a></p>
+    </div>
+  </section>
+
+  <section class="section art" aria-labelledby="art-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.art.eyebrow">Aus dem Set entstanden</span>
+        <h2 id="art-title" class="title" data-i18n="home.art.title">Kunst, gezeichnet mit den Icons.</h2>
+        <p class="lead" data-i18n="home.art.lead">Jede Illustration auf dieser Seite entsteht aus der Geometrie der Icons selbst: dieselben Pfade, dasselbe Raster und derselbe Strich.</p>
+      </div>
+      <div class="art-grid">
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="fox"></div><figcaption><b data-i18n="home.art.fox">Ein Fuchs aus Icons</b><span data-i18n="home.art.fox.note">Fenn, als Mosaik aus den Glyphen des Sets gelegt.</span></figcaption></figure>
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="constellation"></div><figcaption><b data-i18n="home.art.sky">Ein Sternbild aus Icons</b><span data-i18n="home.art.sky.note">Der Kopf von Fenn, in Sternen nachgezeichnet.</span></figcaption></figure>
+        <figure class="card art-card reveal"><div class="art-canvas" data-art-piece="exploded"></div><figcaption><b data-i18n="home.art.grid">Ein Raster in Explosionsansicht</b><span data-i18n="home.art.grid.note">Raster, Hilfslinien, Duotone-Füllung und Striche, auseinandergezogen.</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section studio-teaser" aria-labelledby="studio-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.studio.eyebrow">Das Studio</span>
+        <h2 id="studio-title" class="title" data-i18n="home.studio.title">Eine komplette Icon-Werkstatt in deinem Browser.</h2>
+        <p class="lead" data-i18n="home.studio.lead">Kein Konto, kein Server. Alles läuft auf deinem Gerät, und deine Sammlung bleibt in deinem Browser.</p>
+      </div>
+      <div class="studio-cards" data-studio-cards>
+        <a class="card studio-card reveal" href="studio.html#editor"><div class="art" data-art="editor"></div><h3 data-i18n="tool.editor">Editor</h3><p data-i18n="tool.editor.desc">Zeichne auf dem 24er-Raster mit Zeichenstift, Formwerkzeugen, Knotenbearbeitung, Rückgängig-Funktion und Live-Lint.</p></a>
+        <a class="card studio-card reveal" href="studio.html#foxify"><div class="art" data-art="foxify"></div><h3>Fox-ify</h3><p data-i18n="tool.foxify.desc">Lege ein beliebiges SVG ab und erhalte es im glyphfox-Stil zurück, mit Vorher-nachher-Ansicht.</p></a>
+        <a class="card studio-card reveal" href="icons.html#sketch"><div class="art" data-art="sketch"></div><h3 data-i18n="tool.sketch">Skizzensuche</h3><p data-i18n="tool.sketch.desc">Zeichne eine grobe Form und finde die ähnlichsten Icons, direkt auf der Seite.</p></a>
+        <a class="card studio-card reveal" href="studio.html#fusion"><div class="art" data-art="fusion"></div><h3 data-i18n="tool.fusion">Fusion</h3><p data-i18n="tool.fusion.desc">Kombiniere bis zu zehn Icons, verschiebe und skaliere Teile und passe die Aussparung an.</p></a>
+        <a class="card studio-card reveal" href="studio.html#brand"><div class="art" data-art="brand"></div><h3 data-i18n="tool.brand">Marken-Kit</h3><p data-i18n="tool.brand.desc">Wähle Farbe, Strichstärke, Ecken und Stil. Exportiere ein angepasstes Paket, Sprite, CSS, Favicon und App-Icons.</p></a>
+        <a class="card studio-card reveal" href="studio.html#3d"><div class="art" data-art="3d"></div><h3 data-i18n="tool.3d">3D-Hero</h3><p data-i18n="tool.3d.desc">Extrudiere jedes Icon in 3D, mit Voreinstellungen für Licht und Material, und exportiere ein PNG.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section frameworks" aria-labelledby="fw-title">
+    <div class="wrap fw-grid">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="home.fw.eyebrow">Überall</span>
+        <h2 id="fw-title" class="title" data-i18n="home.fw.title">Dieselben Props. Jeder Stack.</h2>
+        <p class="lead" data-i18n="home.fw.lead">Tree-Shaking-fähige Komponenten, ein Custom Element, das mit einem einzigen Script-Tag funktioniert, ein Tailwind-Plugin für v3 und v4 und eine CLI, die nur die Icons erzeugt, die du brauchst.</p>
+        <p><a class="btn" href="docs.html" data-i18n="home.fw.docs">Dokumentation lesen</a></p>
+      </div>
+      <div class="card fw-card reveal">
+        <div class="tabs" role="tablist" data-fw-tabs></div>
+        <div data-fw-code></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta" aria-labelledby="cta-title">
+    <div class="glow" style="width:640px;height:640px;left:50%;top:50%;transform:translate(-50%,-50%)" aria-hidden="true"></div>
+    <div class="wrap cta-inner reveal">
+      <!--art:orbit:cta-art--><svg class="fenn-art cta-art" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="48" r="38" stroke-width="1" stroke-dasharray="2 4" stroke-opacity=".45"/><circle cx="48" cy="48" r="24" fill="#ff7a1a" stroke="none" opacity=".08" class="fill"/><g stroke-width="2.2"><path class="fill" d="M36 33.75l7.5 6.75h9L60 33.75l.75 10.5 2.25 6-10.5 4.5L48 62.25l-4.5-7.5L33 50.25l2.25-6z" fill="#ff7a1a" stroke="none" opacity=".3"/><path d="M36 33.75l7.5 6.75h9L60 33.75l.75 10.5 2.25 6-10.5 4.5L48 62.25l-4.5-7.5L33 50.25l2.25-6z"/><path d="M43.5 48h.02"/><path d="M52.5 48h.02"/></g><circle cx="48" cy="10" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke="#ff7a1a" class="accent" stroke-width="1.6"><path d="M48.73 6.04l.84 1.88a.35 .35 0 0 0 .28 .21l2.05 .21a.8 .8 0 0 1 .45 1.39l-1.53 1.38a.35 .35 0 0 0-.1 .33l.42 2.02a.8 .8 0 0 1-1.18 .85l-1.78-1.02a.35 .35 0 0 0-.35 0l-1.78 1.02a.8 .8 0 0 1-1.19-.85l.43-2.02a.35 .35 0 0 0-.11-.33L43.65 9.73a.8 .8 0 0 1 .45-1.39l2.05-.21a.35 .35 0 0 0 .28-.21l.84-1.88a.8 .8 0 0 1 1.46 0z"/></g><circle cx="74.87" cy="21.13" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke-width="1.6"><path d="M74.87 25.07l-3.79-3.79a2.4 2.4 0 1 1 3.79-2.86 2.4 2.4 0 1 1 3.8 2.86z"/></g><circle cx="86" cy="48" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke-width="1.6"><path d="M82 50c.6-.6 1-1.45 1-2.5v-1a3 3 0 0 1 6 0v1c0 1.05 .4 1.9 1 2.5z"/><path d="M85 52a1 1 0 0 0 2 0"/></g><circle cx="74.87" cy="74.87" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke="#ff7a1a" class="accent" stroke-width="1.6"><path d="M77.5 78.62H72a2 2 0 0 1-.45-3.95 3 3 0 1 1 5.95-.55 2.25 2.25 0 0 1 0 4.5z"/><path d="M73.27 73.91a1.25 1.25 0 0 1 1.23-1.04"/></g><circle cx="48" cy="86" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke-width="1.6"><path d="M45 87.5a1.5 1.5 0 0 1 0 3 1.5 1.5 0 0 1 0-3z"/><path d="M50.5 86.5a1.5 1.5 0 0 1 0 3 1.5 1.5 0 0 1 0-3z"/><path d="M46.5 89V82.75L52 81.5V88"/></g><circle cx="21.13" cy="74.87" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke-width="1.6"><path d="M16.13 72.87a1 1 0 0 1 1-1h1.5l.75-1.25h3.5l.75 1.25h1.5a1 1 0 0 1 1 1v5.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1z"/><path d="M21.13 73.87a1.75 1.75 0 0 1 0 3.5 1.75 1.75 0 0 1 0-3.5z"/></g><circle cx="10" cy="48" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke="#ff7a1a" class="accent" stroke-width="1.6"><path d="M9 44.5q.48 3.52 4 4-3.52 .48-4 4-.48-3.52-4-4 3.52-.48 4-4z"/><path d="M13.5 43q.18 1.32 1.5 1.5-1.32 .18-1.5 1.5-.18-1.32-1.5-1.5 1.32-.18 1.5-1.5z"/></g><circle cx="21.13" cy="21.13" r="9" stroke-width="1" stroke-opacity=".25"/><g stroke-width="1.6"><path d="M17.13 19.13h8a.5 .5 0 0 1 .5 .5v1a.5 .5 0 0 1-.5 .5h-8a.5 .5 0 0 1-.5-.5v-1a.5 .5 0 0 1 .5-.5z"/><path d="M17.63 21.13h7v4a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/><path d="M21.13 19.13v7"/><path d="M21.13 19.13c-.5-1.5-1.5-2.25-2.25-2.25a1.13 1.13 0 0 0 0 2.25z"/><path d="M21.13 19.13c.5-1.5 1.5-2.25 2.25-2.25a1.13 1.13 0 0 1 0 2.25z"/></g></svg><!--/art-->
+      <h2 id="cta-title" class="title" data-i18n="home.cta.title">Bring deine Oberfläche in Bewegung.</h2>
+      <div class="hero-actions">
+        <a class="btn primary" href="icons.html" data-i18n="home.hero.browse">Icons entdecken</a>
+        <a class="btn" href="https://github.com/kwy404/glyphfox" data-i18n="home.cta.github">Stern auf GitHub geben</a>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="glyphfox-Startseite" data-i18n-attr="aria-label:nav.home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span translate="no">glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Eigens gezeichnete Icons auf einem 24er-Raster, die ihre Strichstärke ändern, sich verwandeln, verschmelzen und lebendig werden. Kostenlos und Open Source unter der MIT-Lizenz.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produkt</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">Alle Icons nach Kategorie</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Marken-Kit</a></li>
+          <li><a href="labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Entwicklung</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="../guides/" data-i18n="footer.guides">Anleitungen (auf Englisch)</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Neuigkeiten</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projekt</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT-Lizenz</a></li>
+        </ul>
+      </div>
+      <!--lang:list--><div class="footer-langs"><h2>Sprache</h2><ul><li><a href="../index.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="../pt-br/index.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="../es/index.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/index.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="index.html" hreflang="de" lang="de" data-set-lang="de" aria-current="page">Deutsch</a></li></ul></div><!--/lang-->
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Erstellt von</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, der Fuchs, ist auf demselben Raster gezeichnet wie die Icons.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="../assets/js/bundle/landing.K6QOA6RE.js"></script>
+<script type="module" src="../assets/js/bundle/scenes.5SC4MODC.js"></script>
+</body>
+</html>
