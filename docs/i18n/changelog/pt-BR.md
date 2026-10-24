@@ -2,6 +2,13 @@
 
 Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.2.0] - 2026-10-23
+
+### Adicionado
+
+- Mais 165 ícones base para saúde, acessibilidade, rostos, gestos, educação, ciência, transporte, prédios, casa, ferramentas, roupas, clima, moedas, arquivos, pastas, dispositivos e setas, cada um com categorias, tags e uma animação desenhada.
+- 22 ícones de destaque na grade de 48 e 19 ícones isométricos. O glyphfox agora tem 993 ícones: 770 base, 90 de marcas, 43 animados, 60 de destaque e 30 isométricos.
+
 ## [1.1.0] - 2026-10-23
 
 ### Adicionado
@@ -42,5 +49,6 @@ Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segu
 - O kit de marca mostra uma prévia do conjunto todo com a sua marca e exporta um zip com arquivos SVG temáticos, um sprite, variáveis CSS, um conjunto de favicons (ico e PNGs em 16, 32, 180, 192 e 512), ícones de app e um esqueleto de package.json.
 - O site do estúdio em inglês, português (Brasil), espanhol, francês e alemão: páginas estáticas por idioma com tags hreflang, um menu de idiomas no cabeçalho e no rodapé e o idioma do navegador escolhido na primeira visita.
 
+[1.2.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.2.0
 [1.1.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.1.0
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0

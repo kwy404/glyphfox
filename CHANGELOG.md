@@ -2,6 +2,13 @@
 
 All notable changes to glyphfox are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-10-23
+
+### Added
+
+- 165 more base icons for health, accessibility, faces, gestures, education, science, transport, buildings, the household, tools, clothing, weather, currencies, files, folders, devices and arrows, each with categories, tags and a designed animation.
+- 22 display icons on the 48 grid and 19 isometric icons. glyphfox now has 993 icons: 770 base, 90 brand, 43 animated, 60 display and 30 isometric.
+
 ## [1.1.0] - 2026-10-23
 
 ### Added
@@ -42,5 +49,6 @@ All notable changes to glyphfox are documented here. The format follows [Keep a 
 - The brand kit previews the whole set themed and exports one zip with themed SVG files, a sprite, CSS variables, a favicon set (ico, 16, 32, 180, 192 and 512 PNGs), app icons and a package.json skeleton.
 - The studio site in English, Portuguese (Brazil), Spanish, French and German: static pages per language with hreflang tags, a language menu in the header and the footer, and the language of the browser picked on the first visit.
 
+[1.2.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.2.0
 [1.1.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.1.0
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0
