@@ -17,6 +17,11 @@ const guidePages = guides.map((g) => join(docs, 'guides', `${g.slug}.html`));
 const iconPages = icons.map((i) => join(docs, 'icons', `${i.name}.html`));
 const indexPages = [join(docs, 'guides', 'index.html'), join(docs, 'icons', 'index.html')];
 const all = [...guidePages, ...iconPages, ...indexPages];
+// Languages of the guides: [html lang, folder below docs/].
+const LANGS = [
+  ['en', ''],
+  ['pt-BR', 'pt-br/'],
+];
 const jsonLd = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
 
 describe('search pages', () => {
@@ -92,6 +97,34 @@ describe('search pages', () => {
     }
   });
 
+  it('writes every guide in every language with its canonical and hreflang links', () => {
+    const site = 'https://kwy404.github.io/glyphfox/';
+    const paths = [...guides.map((g) => `guides/${g.slug}.html`), 'guides/index.html'];
+    for (const path of paths) {
+      const url = (dir) => site + (dir + path).replace(/index\.html$/, '');
+      const titleOf = (html) => /<title[^>]*>([^<]+)<\/title>/.exec(html)[1];
+      const english = titleOf(read(join(docs, path)));
+      for (const [lang, dir] of LANGS) {
+        const f = join(docs, dir + path);
+        expect(existsSync(f), f).toBe(true);
+        const html = read(f);
+        expect(html, f).toContain(`<html lang="${lang}">`);
+        expect(html, f).toContain(`<link rel="canonical" href="${url(dir)}">`);
+        expect(html, f).toContain(`<meta property="og:url" content="${url(dir)}">`);
+        for (const [l, d] of LANGS) expect(html, `${f}: ${l}`).toContain(`<link rel="alternate" hreflang="${l}" href="${url(d)}">`);
+        expect(html, f).toContain(`<link rel="alternate" hreflang="x-default" href="${url('')}">`);
+        if (lang !== 'en') expect(titleOf(html), f).not.toBe(english);
+        const body = html.replace(/<pre[\s\S]*?<\/pre>/g, '');
+        for (const m of body.matchAll(/\s(?:href|src)="([^"#?]+)(?:[#?][^"]*)?"/g)) {
+          if (/^(https?:|mailto:|data:)/.test(m[1])) continue;
+          let target = join(dirname(f), m[1]);
+          if (existsSync(target) && statSync(target).isDirectory()) target = join(target, 'index.html');
+          expect(existsSync(target), `${f}: ${m[1]}`).toBe(true);
+        }
+      }
+    }
+  });
+
   it('lists every page in a sitemap index split by type', () => {
     const index = read(join(docs, 'sitemap.xml'));
     for (const t of ['pages', 'guides', 'icons']) expect(index).toContain(`sitemap-${t}.xml`);
@@ -100,7 +133,7 @@ describe('search pages', () => {
     expect(locs).toContain('https://kwy404.github.io/glyphfox/');
     expect(locs).toContain('https://kwy404.github.io/glyphfox/pt-br/docs.html');
     expect(locs.filter((l) => l.includes('/icons/')).length).toBe(icons.length + 1);
-    expect(locs.filter((l) => l.includes('/guides/')).length).toBe(guides.length + 1);
+    expect(locs.filter((l) => l.includes('/guides/')).length).toBe((guides.length + 1) * LANGS.length);
     expect(locs.some((l) => l.endsWith('404.html'))).toBe(false);
     expect(read(join(docs, 'robots.txt'))).toContain('Sitemap: https://kwy404.github.io/glyphfox/sitemap.xml');
     expect(pageType('pt-br/guides/react.html')).toBe('guides');

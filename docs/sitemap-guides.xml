@@ -2,65 +2,254 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/accessibility.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/accessibility.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/accessibility.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/angular.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/angular.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/angular.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/angular.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/animated-icons.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/animated-icons.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/animated-icons.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/animated-icons.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/astro.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/astro.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/astro.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/astro.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/html-cdn.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/html-cdn.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/html-cdn.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/html-cdn.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/nextjs.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/nextjs.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/nextjs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/nextjs.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/nuxt.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/nuxt.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/nuxt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/nuxt.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/preact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/preact.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/preact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/preact.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/qwik.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/qwik.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/qwik.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/qwik.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/react-native.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/react-native.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/react-native.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/react-native.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/react.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/react.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/react.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/react.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/solid.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/solid.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/solid.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/solid.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/ssr.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/ssr.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/ssr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/ssr.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/svelte.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/svelte.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/svelte.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/svelte.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/sveltekit.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/sveltekit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/sveltekit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/sveltekit.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/svg-sprite.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/svg-sprite.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/svg-sprite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/svg-sprite.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/tailwind.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/tailwind.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/tailwind.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/tailwind.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/tree-shaking.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/tree-shaking.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/tree-shaking.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/tree-shaking.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/vue.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/vue.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/vue.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/vue.html"/>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/guides/web-components.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/web-components.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/web-components.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/web-components.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/accessibility.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/accessibility.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/angular.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/angular.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/angular.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/angular.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/animated-icons.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/animated-icons.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/animated-icons.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/animated-icons.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/astro.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/astro.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/astro.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/astro.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/html-cdn.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/html-cdn.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/html-cdn.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/html-cdn.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/nextjs.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/nextjs.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/nextjs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/nextjs.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/nuxt.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/nuxt.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/nuxt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/nuxt.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/preact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/preact.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/preact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/preact.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/qwik.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/qwik.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/qwik.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/qwik.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/react-native.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/react-native.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/react-native.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/react-native.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/react.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/react.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/react.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/react.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/solid.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/solid.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/solid.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/solid.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/ssr.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/ssr.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/ssr.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/ssr.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/svelte.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/svelte.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/svelte.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/svelte.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/sveltekit.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/sveltekit.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/sveltekit.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/sveltekit.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/svg-sprite.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/svg-sprite.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/svg-sprite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/svg-sprite.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/tailwind.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/tailwind.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/tailwind.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/tailwind.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/tree-shaking.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/tree-shaking.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/tree-shaking.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/tree-shaking.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/vue.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/vue.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/vue.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/vue.html"/>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/pt-br/guides/web-components.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/web-components.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/web-components.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/web-components.html"/>
   </url>
 </urlset>

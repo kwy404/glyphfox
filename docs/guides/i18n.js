@@ -3,9 +3,12 @@
 // docs/guides/content/*.js and is keyed guide.SLUG.ID (titles: guide.SLUG.title,
 // headings: guide.SLUG.SECTION.h, list items: guide.SLUG.ID.N, pitfalls:
 // guide.SLUG.ID.N.t and .d, table cells: guide.SLUG.ID.rROW.cCOL, questions:
-// guide.SLUG.faq.ID.q and .a). Add a language as dict['pt-BR'] = { ... } with
-// any of those keys: the build (scripts/seo) writes that language's version
-// of a page as soon as every string of the page is translated.
+// guide.SLUG.faq.ID.q and .a). Every other language lives in i18n/LANG.js
+// with any of those keys and is added to dict below: the build (scripts/seo)
+// writes that language's version of a page as soon as every string of the
+// page is translated, here or in the site strings.
+
+import ptBR from './i18n/pt-br.js';
 
 export const dict = {
   en: {
@@ -126,4 +129,5 @@ export const dict = {
     'seo.cat.symbols': 'symbols',
     'seo.cat.animals': 'animals',
   },
+  'pt-BR': ptBR,
 };

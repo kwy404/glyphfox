@@ -12,7 +12,9 @@ const pages = [
   ...readdirSync(docs)
     .filter((f) => f.endsWith('.html'))
     .map((f) => join(docs, f)),
-  ...readdirSync(join(docs, 'pt-br')).map((f) => join(docs, 'pt-br', f)),
+  ...readdirSync(join(docs, 'pt-br'))
+    .filter((f) => f.endsWith('.html'))
+    .map((f) => join(docs, 'pt-br', f)),
 ];
 const read = (f) => readFileSync(f, 'utf8');
 const { dict } = await import(pathToFileURL(join(docs, 'assets', 'js', 'i18n.js')).href);

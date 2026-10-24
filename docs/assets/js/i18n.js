@@ -120,7 +120,7 @@ export const dict = {
     'footer.license': 'Licença MIT',
     'footer.made': 'Feito por',
     'footer.fenn': 'Fenn, a raposa, é desenhada na mesma grade dos ícones.',
-    'footer.guides': 'Guias (em inglês)',
+    'footer.guides': 'Guias',
     'footer.allIcons': 'Todos os ícones por categoria',
     'toast.copied': 'Copiado para a área de transferência',
     'toast.downloaded': 'Download iniciado',
