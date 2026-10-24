@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--lang:detect--><script>(function(c,d,u){try{var k='gf-lang',s=localStorage.getItem(k);if(!s||!u[s]){s='';var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length&&!s;i++){var p=String(n[i]).toLowerCase();for(var l in u){var q=l.toLowerCase();if(p===q||p.split('-')[0]===q.split('-')[0]){s=l;break}}}s=s||d;localStorage.setItem(k,s)}if(c===d&&s!==d&&u[s])location.replace(u[s]+location.search+location.hash)}catch(e){}})("pt-BR","en",{"en":"../smart.html","pt-BR":"smart.html","es":"../es/smart.html","fr":"../fr/smart.html","de":"../de/smart.html"})</script><!--/lang-->
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.40e6a878.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: ícones que se movem, se transformam e se fundem" data-i18n-attr="content:home.meta.title">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new URL('..',document.querySelector('link[rel=icon]').href).pathname;navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}catch(e){}}</script>
+<!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Mudar para o tema claro","theme.dark":"Mudar para o tema escuro","toast.copied":"Copiado para a área de transferência","toast.downloaded":"Download iniciado","toast.saved":"Salvo na sua coleção","action.copy":"Copiar","corners.round":"Redondos","corners.sharp":"Retos","variant.outline":"Contorno","variant.duotone":"Duotone","variant.solid":"Sólido","mods.none":"nenhum","corner.topLeft":"Superior esquerdo","corner.topRight":"Superior direito","corner.bottomLeft":"Inferior esquerdo","corner.bottomRight":"Inferior direito","cat.animals":"animais","cat.arrows":"setas","cat.commerce":"comércio","cat.communication":"comunicação","cat.data":"dados","cat.development":"desenvolvimento","cat.devices":"dispositivos","cat.files":"arquivos","cat.finance":"finanças","cat.interface":"interface","cat.maps":"mapas","cat.media":"mídia","cat.nature":"natureza","cat.navigation":"navegação","cat.people":"pessoas","cat.security":"segurança","cat.shapes":"formas","cat.social":"redes sociais","cat.symbols":"símbolos","cat.text":"texto","cat.weather":"clima","error.rasterize":"Não foi possível transformar o SVG em imagem","error.video":"Este navegador não consegue gravar vídeo","home.morph.filled":"preenchido","home.gallery.orbit":"órbita de dez ícones","icons.all":"Todos","icons.sketch.clear":"Limpar","icons.result.count":"{n} ícones","icons.result.sketch":"Os {n} ícones mais parecidos com o seu desenho","icons.dl.drawHint":"Nenhuma animação escolhida, usando draw","editor.download":"Baixar SVG","editor.lint.ok":"Passa em todas as regras de ícone.","editor.lint.empty":"Desenhe algo para começar.","editor.ctx.button":"Salvar","editor.imported":"Importado e ajustado à grade","editor.tool.select":"Selecionar e editar nós","editor.tool.pen":"Caneta","editor.tool.line":"Linha","editor.tool.polyline":"Polilinha","editor.tool.rect":"Retângulo","editor.tool.rrect":"Retângulo arredondado","editor.tool.circle":"Círculo","editor.tool.ellipse":"Elipse","editor.tool.arc":"Arco","editor.hint.select":"Clique numa forma para selecionar, arraste para mover e arraste as alças para editar os nós. As setas movem, Delete apaga e Ctrl+D duplica.","editor.hint.pen":"Clique para criar cantos e arraste para fazer curvas. Clique no primeiro ponto para fechar, Enter ou clique duplo para terminar.","editor.hint.line":"Arraste do início até o fim.","editor.hint.polyline":"Clique para adicionar pontos, Enter ou clique duplo para terminar.","editor.hint.rect":"Arraste de um canto até o outro.","editor.hint.rrect":"Arraste de um canto até o outro. Arraste a alça redonda para mudar o raio.","editor.hint.circle":"Arraste do centro para fora.","editor.hint.ellipse":"Arraste a caixa delimitadora.","editor.hint.arc":"Clique no início, clique no fim, depois mova para curvar o arco e clique para fixar.","foxify.before":"Antes","foxify.waiting":"Cole um SVG, solte um arquivo ou teste um exemplo.","foxify.nothing":"Nada para desenhar nesse SVG","foxify.note.text":"Elementos de texto ignorados: {n} (converta o texto em traços antes)","foxify.note.scaled":"O desenho foi reduzido para caber na área de 2 a 22","foxify.note.enlarged":"O desenho foi ampliado até a área útil","foxify.note.filled":"Formas preenchidas que viraram contorno: {n}","fusion.need":"Adicione pelo menos dois ícones.","fusion.lint.ok":"O ícone fundido passa em todas as regras de ícone.","fusion.remove":"Remover {name}","brand.favicon16":"favicon","brand.maskable":"maskable","three.error":"Não foi possível carregar o three.js. Verifique a conexão e tente de novo.","three.canvas":"Ícone renderizado em 3D. Arraste ou use as setas para girar, mais e menos para aproximar.","collection.empty.short":"A coleção está vazia","collection.edit":"Editar","collection.delete":"Apagar","collection.deleted":"Removido da coleção","sw.updated":"O glyphfox foi atualizado para a versão mais recente.","motion.all":"Ícone inteiro","motion.secondary":"Camada duotone","motion.element":"Elemento","motion.inherit":"Aceleração da linha do tempo","motion.unknown":"Não existe ícone com esse nome","motion.nowebm":"Este navegador não grava vídeo","motion.play":"Tocar","motion.pause":"Pausar","three.size":"1x tem {w} por {h} pixels, 4x é quatro vezes isso.","three.nogl":"Este navegador não desenha WebGL 2, então a vista 3D não está disponível aqui.","labs.source.missing":"O seu glyph script ainda não compila, então o ícone abaixo é usado.","labs.source.unknown":"Ícone \"{name}\" desconhecido. Tente um nome da lista.","labs.error":"Não foi possível exportar: {message}","labs.script.ok":"Compila para um ícone limpo no lint.","labs.script.status.ok":"{lines} linhas, {shapes} elementos, lint limpo","labs.script.status.bad":"{n} para corrigir antes de exportar o ícone","labs.script.stale":"Mostrando a última versão que compilou.","labs.script.jump":"Ir para a linha {line}, coluna {column}","labs.example.custom":"Seu script","labs.example.sun":"Sol","labs.example.flower":"Flor","labs.example.fox-face":"Rosto de raposa","labs.example.card":"Cartão","labs.example.gauge":"Medidor","labs.example.gear":"Engrenagem","labs.example.bolt":"Raio","labs.example.bubble":"Balão de conversa","labs.favicon.tab":"Animar esta aba","labs.favicon.tabStop":"Parar a animação da aba","labs.favicon.reduced":"O movimento reduzido está ligado, então a prévia fica parada. O runtime faz o mesmo para os seus visitantes.","labs.cursor.hotspotAt":"Hotspot em {x}, {y} px","labs.hotspot.center":"Centro","labs.hotspot.topLeft":"Topo à esquerda","labs.hotspot.topRight":"Topo à direita","labs.hotspot.bottomLeft":"Base à esquerda","labs.hotspot.bottomRight":"Base à direita","labs.hotspot.custom":"Personalizado","labs.plotter.strokes":"Traços","labs.plotter.draw":"Desenho","labs.plotter.travel":"Deslocamento com a caneta erguida","labs.plotter.saved":"{p}% menos deslocamento que a ordem original","labs.plotter.more":"mais {n} linhas no arquivo","labs.stl.triangles":"Triângulos","labs.stl.watertight":"Malha fechada","labs.stl.yes":"sim","labs.stl.no":"não","labs.stl.volume":"Volume","labs.stl.file":"Tamanho do arquivo","sketch.hint":"Desenhe no quadro para buscar.","sketch.more":"Continue desenhando, a forma ainda é pequena demais para comparar.","sketch.empty":"Um círculo, uma seta, uma casa, um coração: qualquer forma aproximada serve.","sketch.result":"Os {n} ícones mais parecidos, ordenados em {ms} ms","sketch.loading":"Carregando o índice de formas","sketch.failed":"Não foi possível carregar o índice de formas.","brand.count":"Todos os {n} ícones, com a sua marca","brand.building":"Montando o kit de marca","icons.set.ours":"Nossos próprios ícones, com as coleções display e isométrica","icons.scope.all":"Todos os conjuntos","icons.set.meta":"{n} ícones, {license}","icons.set.local":"Fora da CDN: instale o pacote para usar","icons.set.none":"Nenhum conjunto corresponde.","icons.result.loading":"Carregando os conjuntos de ícones","icons.result.error":"Não foi possível carregar os conjuntos de ícones. Verifique a conexão e tente de novo.","icons.result.set":"{n} ícones em {set}","icons.result.inSet":"{n} ícones em {set} em {ms} ms","icons.result.inAll":"{n} ícones em todos os conjuntos em {ms} ms, glyphfox primeiro","icons.coll.title":"Coleções","icons.coll.display":"Display","icons.coll.isometric":"Isométrica","icons.coll.note":"Esta coleção ainda não está no pacote npm: copie o SVG ou baixe o arquivo.","icons.license.credit":"crédito","icons.license.attribution":"Atribuição obrigatória","icons.license.trademark":"Marca registrada","icons.license.copy":"Copiar atribuição","icons.license.copied":"Atribuição copiada","icons.meta.by":"{set} por {author}","icons.meta.stroke":"baseado em traço","icons.meta.aliases":"Apelidos: {list}","icons.style.outline":"contorno","icons.style.solid":"sólido","icons.style.duotone":"duotone","icons.style.color":"colorido","icons.kind.public-domain":"Domínio público","icons.kind.permissive":"Permissiva","icons.kind.attribution":"Atribuição","icons.kind.share-alike":"Compartilha igual","icons.group.material":"Material","icons.group.ui24":"Interface, 24 px","icons.group.ui16":"Interface, 16 e 32 px","icons.group.uiOther":"Interface, outras grades","icons.group.uiColor":"Interface colorida","icons.group.logos":"Logotipos","icons.group.programming":"Programação","icons.group.emoji":"Emoji","icons.group.flags":"Bandeiras e mapas","icons.group.thematic":"Temáticos","icons.group.other":"Outros conjuntos","icons.group.archive":"Arquivados ou sem manutenção","universe.gallery.count":"{sets} conjuntos, {n} ícones","universe.gallery.none":"Nenhum conjunto corresponde a estes filtros.","universe.gallery.pick":"Comparar","universe.gallery.strokeTitle":"Baseado em traço: o eixo de peso e a animação de desenho funcionam","universe.gallery.loading":"Carregando as prévias","universe.gallery.error":"As prévias vêm do jsDelivr, do pacote glyphfox-universe publicado.","universe.compare.pick":"Escolha de 2 a {max} conjuntos abaixo para ver os mesmos conceitos lado a lado.","universe.compare.picked":"(escolhidos: {n})","universe.compare.noMatch":"sem correspondência","universe.compare.lead":"Os mesmos conceitos em {n} conjuntos, combinados por nome, apelido e sinônimos de tags.","universe.compare.concept":"Conceito","universe.native":"nativo","universe.on":"Ligado","universe.off":"Desligado","universe.style.outline":"Contorno","universe.style.solid":"Sólido","universe.style.duotone":"Duotone","universe.style.color":"Colorido","universe.style.brand":"Marca","universe.style.stroke":"Peso e desenho","universe.app.loading":"Carregando o índice de busca","universe.app.error":"Os dados dos ícones não estão acessíveis","universe.app.errorNote":"O catálogo e o índice de busca vêm do jsDelivr, do pacote glyphfox-universe publicado. A tabela abaixo lista todos os conjuntos com a contagem e a licença.","universe.result.query":"{n} ícones para \"{q}\" em {ms} ms","universe.result.all":"{n} ícones em todos os conjuntos","universe.meta.tags":"Tags: {list}","universe.format.web":"Componente web","universe.trademarks.text":"Ícones de marcas e logotipos mostram marcas registradas dos seus donos. As licenças dos ícones cobrem os desenhos, não as marcas: use um logotipo só para se referir à marca, siga as diretrizes de marca do dono e não sugira um endosso."}</script><!--/lang-->
+<!-- head:end -->
+<title data-i18n="smart.meta.title">Ícones inteligentes: glyphfox</title>
+<meta name="description" content="Ícones inteligentes do glyphfox: bateria, sinal, wifi, volume, progresso, termômetro, calendário, relógio, arquivo e selo desenhados a partir de dados, moeda definida pela localidade, espelhamento automático da direita para a esquerda, traço mais pesado para mais contraste, um StatusIcon com morph e animações escalonadas com IconGroup." data-i18n-attr="content:smart.meta.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/pt-br/smart.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/smart.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/smart.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/smart.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/smart.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/smart.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/smart.html">
+<meta property="og:title" content="Ícones inteligentes do glyphfox" data-i18n-attr="content:smart.meta.ogTitle">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/smart.html">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<link rel="stylesheet" href="../assets/docs.4063d59a.css">
+<link rel="stylesheet" href="../assets/smart.e725de87.css">
+<link rel="modulepreload" href="../assets/js/bundle/smart.YJPCGGOX.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.KXTQTQD4.js">
+<!-- seo:start -->
+<meta property="og:description" content="Ícones inteligentes do glyphfox: bateria, sinal, wifi, volume, progresso, termômetro, calendário, relógio, arquivo e selo desenhados a partir de dados, moeda definida pela localidade, espelhamento automático da direita para a esquerda, traço mais pesado para mais contraste, um StatusIcon com morph e animações escalonadas com IconGroup.">
+<!-- seo:end -->
+</head>
+<body class="docs-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Pular para o conteúdo</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Página inicial do glyphfox" data-i18n-attr="aria-label:nav.home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span translate="no">glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Principal" data-i18n-attr="aria-label:nav.main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Ícones</a>
+      <a href="universe.html" data-nav="universe" data-i18n="nav.universe">Universo</a>
+      <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Estúdio</a>
+      <a href="docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novidades</a>
+    </nav>
+    <div class="header-actions">
+      <!--lang:menu--><details class="lang-menu" data-lang-menu><summary class="icon-btn" aria-label="Idioma: Português (Brasil)" title="Idioma"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><span>PT</span></summary><ul class="lang-list"><li><a href="../smart.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="smart.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR" aria-current="page">Português (Brasil)</a></li><li><a href="../es/smart.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/smart.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/smart.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></details><!--/lang-->
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Mudar para o tema claro" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox no GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<div class="wrap docs-layout">
+  <nav class="docs-nav" aria-label="Ícones inteligentes" data-i18n-attr="aria-label:docs.smart">
+    <p class="docs-nav-title" data-i18n="docs.smart">Ícones inteligentes</p>
+    <a href="#data" data-i18n="smart.nav.data">Ícones de dados</a>
+    <a href="#time" data-i18n="smart.nav.time">Calendário e relógio</a>
+    <a href="#files" data-i18n="smart.nav.files">Arquivos e selos</a>
+    <p class="docs-nav-title" data-i18n="smart.nav.locale">Sensíveis à localidade</p>
+    <a href="#currency" data-i18n="smart.nav.currency">Moeda</a>
+    <a href="#rtl" data-i18n="smart.nav.rtl">Da direita para a esquerda</a>
+    <a href="#contrast" data-i18n="smart.nav.contrast">Mais contraste</a>
+    <p class="docs-nav-title" data-i18n="tool.motion">Movimento</p>
+    <a href="#status">StatusIcon</a>
+    <a href="#group">IconGroup</a>
+    <p class="docs-nav-title" data-i18n="docs.reference">Referência</p>
+    <a href="#packages" data-i18n="smart.nav.packages">Todos os pacotes</a>
+    <a href="#options" data-i18n="smart.nav.options">Opções</a>
+    <a href="docs.html" data-i18n="smart.nav.allDocs">Toda a documentação</a>
+  </nav>
+
+  <main id="main" class="docs-main">
+    <header class="docs-hero">
+      <span class="eyebrow" data-i18n="docs.smart">Ícones inteligentes</span>
+      <h1 class="title" data-i18n="smart.hero.title">Ícones que mostram dados, acompanham o leitor e informam o status</h1>
+      <p class="lead" data-i18n="smart.hero.lead">Ícones de bateria, sinal, wifi, volume, progresso, termômetro, calendário, relógio, arquivo e selo desenhados a partir de um valor, uma data ou uma contagem. Um símbolo de moeda que vem da localidade, setas que se invertem em layouts da direita para a esquerda e linhas que ficam mais grossas quando o leitor pede mais contraste. Um ícone de status que faz morph de carregando para concluído, e grupos que animam em onda.</p>
+    </header>
+
+    <section id="data">
+      <h2 data-i18n="smart.nav.data">Ícones de dados</h2>
+      <p data-i18n="smart.data.p">Todo ícone de dados é desenhado na mesma grade de 24, com o mesmo traço, as mesmas pontas e a mesma margem do resto do conjunto, então as props size, color, weight, corners, variant, animate e title funcionam como sempre. O <code>value</code> vai de 0 a 1. Um valor acima de 1 sem <code>max</code> é lido como porcentagem, e <code>min</code> com <code>max</code> mapeiam valores reais, como uma temperatura.</p>
+      <div class="smart-controls">
+        <label class="field"><span data-i18n="smart.data.value">Valor <output data-smart-o="value">64%</output></span><input type="range" min="0" max="100" step="1" value="64" data-smart="value"></label>
+        <div class="seg" role="group" aria-label="Bateria" data-i18n-attr="aria-label:smart.data.battery">
+          <button type="button" aria-pressed="false" data-smart="charging" data-i18n="smart.data.charging">Carregando</button>
+        </div>
+      </div>
+      <div class="demo" data-demo="data"></div>
+      <div class="code"><div class="code-head"><span>Status.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { SmartIcon } from 'glyphfox/react';
+
+export function DeviceStatus({ battery, charging, signal, volume, upload }) {
+  return (
+    &lt;&gt;
+      &lt;SmartIcon kind="battery" value={battery} charging={charging} title="auto" /&gt;
+      &lt;SmartIcon kind="signal" value={signal} max={4} /&gt;
+      &lt;SmartIcon kind="wifi" value={0.66} /&gt;
+      &lt;SmartIcon kind="volume" value={volume} muted={volume === 0} /&gt;
+      &lt;SmartIcon kind="progress" value={upload} label /&gt;
+      &lt;SmartIcon kind="thermometer" value={21.5} min={-10} max={40} unit="°C" /&gt;
+    &lt;/&gt;
+  );
+}</pre></div>
+      <p data-i18n="smart.data.classes">Cada ícone leva classes para o seu estado (<code>gf-low</code>, <code>gf-full</code>, <code>gf-charging</code>, <code>gf-muted</code>, <code>gf-hot</code>, <code>gf-cold</code>), e barras e arcos apagados levam <code>gf-off</code>, para que uma folha de estilo possa colori-los. <code>title="auto"</code> dá ao ícone um nome acessível que descreve os dados, como "Battery 64%", com os números formatados para a localidade.</p>
+    </section>
+
+    <section id="time">
+      <h2 data-i18n="smart.nav.time">Calendário e relógio</h2>
+      <p data-i18n="smart.time.p">O calendário mostra o dia de hoje por padrão, ou a <code>date</code> que você passar (um Date, um timestamp ou "2026-10-23"), com os dígitos do <code>locale</code>. O relógio mostra a hora atual, ou um <code>time</code> informado ("09:30", "18:45:10" ou um Date); <code>seconds</code> adiciona o ponteiro dos segundos. Com <code>tick</code>, o relógio e o calendário acompanham a hora real, atualizando uma vez por segundo, por minuto ou à meia-noite.</p>
+      <div class="demo" data-demo="time"></div>
+      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;glyph-fox-smart kind="calendar" tick&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="calendar" date="2026-12-25" locale="ar-EG"&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="clock" tick seconds&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="clock" time="09:30"&gt;&lt;/glyph-fox-smart&gt;</pre></div>
+    </section>
+
+    <section id="files">
+      <h2 data-i18n="smart.nav.files">Arquivos e selos</h2>
+      <p data-i18n="smart.files.p">O ícone de arquivo mostra a extensão (até quatro letras) a partir de <code>ext</code> ou de um <code>filename</code>. O selo coloca uma contagem de notificações no sino, ou em qualquer ícone passado em <code>icon</code>, com o mesmo recorte que os modificadores usam. Contagens acima de <code>max</code> (99) aparecem como "99+", 0 esconde a bolha e <code>dot</code> mostra um ponto. <code>badgeColor</code> colore a bolha; o número é recortado dela, então fica legível em qualquer fundo.</p>
+      <div class="smart-controls">
+        <label class="field"><span data-i18n="smart.files.ext">Extensão</span><input class="input" value="pdf" maxlength="8" spellcheck="false" data-smart="ext"></label>
+        <div class="field"><span data-i18n="smart.files.count">Contagem <output data-smart-o="count">3</output></span>
+          <div class="seg" role="group" aria-label="Contagem" data-i18n-attr="aria-label:smart.files.countLabel">
+            <button type="button" data-smart="minus" aria-label="Menos notificações" data-i18n-attr="aria-label:smart.files.fewer">-</button>
+            <button type="button" data-smart="plus" aria-label="Mais notificações" data-i18n-attr="aria-label:smart.files.more">+</button>
+            <button type="button" data-smart="many">120</button>
+          </div>
+        </div>
+      </div>
+      <div class="demo" data-demo="files"></div>
+      <div class="code"><div class="code-head"><span>Inbox.vue</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script setup&gt;
+import { SmartIcon } from 'glyphfox/vue';
+defineProps({ unread: Number, file: String });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;SmartIcon kind="badge" :count="unread" badge-color="#e5484d" /&gt;
+  &lt;SmartIcon kind="badge" icon="mail" :count="unread" :max="9" /&gt;
+  &lt;SmartIcon kind="file" :filename="file" :size="32" /&gt;
+&lt;/template&gt;</pre></div>
+    </section>
+
+    <section id="currency">
+      <h2 data-i18n="smart.nav.currency">Moeda</h2>
+      <p data-i18n="smart.currency.p"><code>kind="currency"</code> escolhe o símbolo pela localidade: a região define a moeda e o <code>Intl.NumberFormat</code> fornece o símbolo, que é desenhado como R$, euro, iene (também para o yuan), libra, dólar (também para pesos e outros dólares) ou o sinal genérico de moeda. Passe <code>currency="EUR"</code> para escolher a moeda você mesmo. Sem localidade, o ícone usa o idioma do documento e, depois, o idioma do navegador.</p>
+      <div class="demo" data-demo="currency"></div>
+      <div class="code"><div class="code-head"><span>Price.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script&gt;
+  import { SmartIcon } from 'glyphfox/svelte';
+  let { locale } = $props();
+&lt;/script&gt;
+
+&lt;SmartIcon kind="currency" {locale} title="auto" /&gt;
+&lt;SmartIcon kind="currency" currency="JPY" /&gt;</pre></div>
+    </section>
+
+    <section id="rtl">
+      <h2 data-i18n="smart.nav.rtl">Da direita para a esquerda</h2>
+      <p data-i18n="smart.rtl.p">Ícones direcionais (setas, chevrons, desfazer e refazer, responder, enviar, entrar e sair, listas, recuo) agora se espelham sozinhos em layouts da direita para a esquerda, em todos os pacotes: eles levam a classe <code>gf-rtl</code> e uma regra que os inverte sob <code>dir="rtl"</code>. Com uma prop <code>locale</code> ou <code>dir</code>, a decisão segue essa localidade em vez da página, então um widget em árabe numa página em inglês continua apontando para o lado certo. <code>mirrorRtl={false}</code> desliga isso, e <code>registerDirectional(['my-arrow'])</code> adiciona os seus próprios ícones. Controles de mídia como play e avançar nunca se espelham.</p>
+      <div class="smart-rows" data-demo="rtl"></div>
+      <div class="code"><div class="code-head"><span>Pager.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { ChevronRightIcon, SmartIcon } from 'glyphfox/react';
+
+// Follows the page: points left inside dir="rtl".
+&lt;ChevronRightIcon /&gt;
+
+// Follows a locale, whatever the page direction.
+&lt;SmartIcon name="chevron-right" locale="ar" /&gt;</pre></div>
+      <ul class="smart-list" data-demo="directional"></ul>
+    </section>
+
+    <section id="contrast">
+      <h2 data-i18n="smart.nav.contrast">Mais contraste</h2>
+      <p data-i18n="smart.contrast.p">Quando o leitor pede mais contraste (<code>prefers-contrast: more</code>), os ícones inteligentes desenham as linhas meio passo de peso mais grossas, deixam os rótulos mais em negrito e realçam as partes apagadas. A regra vai dentro do SVG, então também funciona em markup renderizado no servidor e em arquivos exportados. <code>contrast="more"</code> aplica o reforço sempre e <code>contrast="off"</code> nunca aplica.</p>
+      <div class="demo" data-demo="contrast"></div>
+    </section>
+
+    <section id="status">
+      <h2>StatusIcon</h2>
+      <p data-i18n="smart.status.p">Um ícone para os quatro estados de uma tarefa: <code>idle</code>, <code>loading</code>, <code>success</code> e <code>error</code>. Cada mudança faz morph com o motor de morph do glyphfox (o círculo se abre no spinner, o spinner se fecha em volta do check), e loading gira depois que o morph termina. <code>duration</code> define a duração do morph, <code>spinDuration</code> a do giro, e com movimento reduzido o ícone salta direto para o novo estado.</p>
+      <div class="smart-controls">
+        <div class="seg" role="group" aria-label="Estado" data-smart="states" data-i18n-attr="aria-label:smart.status.state">
+          <button type="button" aria-pressed="true" data-state="idle" translate="no">idle</button>
+          <button type="button" aria-pressed="false" data-state="loading" translate="no">loading</button>
+          <button type="button" aria-pressed="false" data-state="success" translate="no">success</button>
+          <button type="button" aria-pressed="false" data-state="error" translate="no">error</button>
+        </div>
+        <div class="smart-row"><button class="btn small primary" type="button" data-smart="run" data-i18n="smart.status.run">Executar uma tarefa</button></div>
+      </div>
+      <div class="demo" data-demo="status"></div>
+      <div class="code"><div class="code-head"><span>SaveButton.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { StatusIcon } from 'glyphfox/react';
+
+export function SaveButton({ state, onSave }) {
+  return (
+    &lt;button onClick={onSave} aria-busy={state === 'loading'}&gt;
+      &lt;StatusIcon state={state} title="auto" /&gt; Save
+    &lt;/button&gt;
+  );
+}</pre></div>
+      <p data-i18n="smart.status.css">Sem JavaScript, <code>statusSvg('success', { from: 'loading' })</code> devolve um SVG que faz morph ao carregar, só com CSS.</p>
+    </section>
+
+    <section id="group">
+      <h2>IconGroup</h2>
+      <p data-i18n="smart.group.p">Um grupo toca uma animação de estado vivo em todos os seus ícones, com um <code>stagger</code> entre eles. Gatilhos: <code>mount</code>, <code>hover</code> (o grupo inteiro), <code>click</code> (repete a cada clique) e <code>state</code> (toca enquanto <code>active</code>). <code>from="end"</code> ou <code>"center"</code> muda a ordem da onda. Filhos que definem a própria animação ou o próprio atraso mantêm os seus; <code>icons</code> renderiza nomes, dados de ícone ou itens inteligentes para você.</p>
+      <div class="smart-controls">
+        <div class="seg" role="group" aria-label="Animação" data-smart="presets" data-i18n-attr="aria-label:smart.group.preset"></div>
+        <div class="smart-row"><button class="btn small primary" type="button" data-smart="replay" data-i18n="smart.group.replay">Repetir</button></div>
+      </div>
+      <div class="smart-group" data-demo="group"></div>
+      <p class="smart-caption" data-i18n="smart.group.hover">Passe o mouse sobre a linha abaixo.</p>
+      <div class="smart-group" data-demo="group-hover"></div>
+      <div class="code"><div class="code-head"><span>Toolbar.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { IconGroup, HomeIcon, SearchIcon, BellIcon } from 'glyphfox/react';
+
+&lt;IconGroup animate="pop" stagger={70}&gt;
+  &lt;HomeIcon /&gt;
+  &lt;SearchIcon /&gt;
+  &lt;BellIcon animate="shake" /&gt;
+&lt;/IconGroup&gt;
+
+&lt;IconGroup icons={['home', 'search', { kind: 'battery', value: 0.8 }]} animate="draw" trigger="hover" /&gt;</pre></div>
+    </section>
+
+    <section id="packages">
+      <h2 data-i18n="smart.nav.packages">Todos os pacotes</h2>
+      <p data-i18n="smart.packages.p">As mesmas três peças vêm em React, Vue e Svelte (<code>SmartIcon</code>, <code>StatusIcon</code>, <code>IconGroup</code>), como custom elements e como funções simples no core.</p>
+      <div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;script src="https://cdn.jsdelivr.net/npm/glyphfox@1"&gt;&lt;/script&gt;
+
+&lt;glyph-fox-smart kind="battery" value="0.4" charging&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart kind="currency" locale="pt-BR"&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-smart name="arrow-right" locale="he"&gt;&lt;/glyph-fox-smart&gt;
+&lt;glyph-fox-status state="loading"&gt;&lt;/glyph-fox-status&gt;
+&lt;glyph-fox-group animate="pop" stagger="80" trigger="hover"&gt;
+  &lt;glyph-fox name="home"&gt;&lt;/glyph-fox&gt;
+  &lt;glyph-fox name="search"&gt;&lt;/glyph-fox&gt;
+&lt;/glyph-fox-group&gt;</pre></div>
+      <div class="code"><div class="code-head"><span>server.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { smartSvg, statusSvg, groupSvg, currencyInfo, isRtlLocale } from 'glyphfox';
+
+smartSvg('battery', { value: 0.42, size: 32, title: 'auto' });
+smartSvg('calendar', { date: '2026-10-23', locale: 'pt-BR' });
+smartSvg('badge', { count: 12, icon: 'mail' });
+smartSvg('arrow-right', { locale: 'ar' });          // any icon, mirrored
+statusSvg('success', { from: 'loading' });          // CSS only morph
+groupSvg(['home', 'file', { kind: 'wifi', value: 1 }], { animate: 'pop', stagger: 80 });
+currencyInfo({ locale: 'ja-JP' });                  // { currency: 'JPY', symbol: '￥', glyph: 'yen', ... }
+isRtlLocale('fa-IR');                               // true</pre></div>
+      <p data-i18n="smart.packages.data"><code>smartIcon(kind, options)</code> devolve dados de ícone simples, então um ícone inteligente também pode alimentar o <code>renderIcon</code>, um renderizador próprio ou o motor de morph. Em <code>glyphfox/core</code>, as mesmas funções resolvem os nomes a partir dos ícones que você registrar.</p>
+    </section>
+
+    <section id="options">
+      <h2 data-i18n="smart.nav.options">Opções</h2>
+      <p data-i18n="smart.options.p">Além de todas as props compartilhadas. Os atributos usam kebab-case (<code>badge-color</code>).</p>
+      <div class="table-wrap"><table class="props">
+        <thead><tr><th data-i18n="smart.options.option">Opção</th><th data-i18n="smart.options.kinds">Tipos</th><th data-i18n="docs.desc">Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>kind</code></td><td data-i18n="smart.options.all">todos</td><td data-i18n="smart.options.kind">battery, signal, wifi, volume, progress, thermometer, calendar, clock, file, badge ou currency. Sem kind, <code>name</code> renderiza qualquer ícone com os comportamentos de localidade e contraste.</td></tr>
+          <tr><td><code>value</code>, <code>min</code>, <code>max</code></td><td translate="no">battery, signal, wifi, volume, progress, thermometer</td><td data-i18n="smart.options.value">O nível: de 0 a 1, uma porcentagem ou um valor real entre min e max.</td></tr>
+          <tr><td><code>charging</code></td><td translate="no">battery</td><td data-i18n="smart.options.charging">Desenha um raio recortado no nível.</td></tr>
+          <tr><td><code>muted</code></td><td translate="no">volume</td><td data-i18n="smart.options.muted">O alto-falante mudo (também com valor 0).</td></tr>
+          <tr><td><code>label</code></td><td translate="no">progress</td><td data-i18n="smart.options.label"><code>true</code> mostra a porcentagem dentro do anel; uma string mostra até quatro caracteres.</td></tr>
+          <tr><td><code>unit</code></td><td translate="no">thermometer</td><td data-i18n="smart.options.unit">Unidade da descrição acessível, como "°C".</td></tr>
+          <tr><td><code>date</code></td><td translate="no">calendar</td><td data-i18n="smart.options.date">Um Date, um timestamp ou "YYYY-MM-DD". Padrão: hoje.</td></tr>
+          <tr><td><code>time</code>, <code>seconds</code></td><td translate="no">clock</td><td data-i18n="smart.options.time">"HH:MM", "HH:MM:SS", um Date ou { hours, minutes }. Padrão: agora. seconds adiciona o ponteiro dos segundos.</td></tr>
+          <tr><td><code>tick</code></td><td translate="no">clock, calendar</td><td data-i18n="smart.options.tick">Acompanha a hora real (quando não há time nem date).</td></tr>
+          <tr><td><code>ext</code>, <code>filename</code></td><td translate="no">file</td><td data-i18n="smart.options.ext">O rótulo da extensão, até quatro caracteres.</td></tr>
+          <tr><td><code>count</code>, <code>max</code>, <code>dot</code></td><td translate="no">badge</td><td data-i18n="smart.options.count">A contagem, o maior número exibido antes do "+" (99) e um ponto no lugar do número.</td></tr>
+          <tr><td><code>icon</code>, <code>badgeColor</code></td><td translate="no">badge</td><td data-i18n="smart.options.icon">O ícone sob a bolha (padrão: bell) e a cor da bolha.</td></tr>
+          <tr><td><code>currency</code></td><td translate="no">currency</td><td data-i18n="smart.options.currency">Um código ISO no lugar da moeda da localidade.</td></tr>
+          <tr><td><code>locale</code>, <code>dir</code></td><td data-i18n="smart.options.all">todos</td><td data-i18n="smart.options.locale">Símbolos, dígitos e datas; também decide o espelhamento dos ícones direcionais.</td></tr>
+          <tr><td><code>contrast</code></td><td data-i18n="smart.options.all">todos</td><td data-i18n="smart.options.contrast"><code>auto</code> (padrão) segue prefers-contrast: more, <code>more</code> sempre aumenta o peso, <code>off</code> nunca.</td></tr>
+          <tr><td><code>title="auto"</code></td><td data-i18n="smart.options.all">todos</td><td data-i18n="smart.options.title">Um nome acessível que descreve os dados ou o estado.</td></tr>
+          <tr><td><code>state</code>, <code>spinDuration</code></td><td>StatusIcon</td><td data-i18n="smart.options.state">idle, loading, success ou error; a duração de uma volta do giro.</td></tr>
+          <tr><td><code>animate</code>, <code>stagger</code>, <code>delay</code>, <code>from</code>, <code>trigger</code>, <code>active</code>, <code>icons</code></td><td>IconGroup</td><td data-i18n="smart.options.group">A animação, o atraso entre os ícones (60 ms), o atraso inicial, a ordem da onda, o gatilho, o estado e os ícones a renderizar.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+  </main>
+</div>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Página inicial do glyphfox" data-i18n-attr="aria-label:nav.home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span translate="no">glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Ícones originais em uma grade de 24 que mudam de peso, se transformam, se fundem e ganham vida. Livre e de código aberto sob a licença MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produto</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Ícones</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">Todos os ícones por categoria</a></li>
+          <li><a href="universe.html" data-i18n="nav.universe">Universo</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Estúdio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusão</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+          <li><a href="labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desenvolvedores</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="../guides/" data-i18n="footer.guides">Guias</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Novidades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projeto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licença MIT</a></li>
+        </ul>
+      </div>
+      <!--lang:list--><div class="footer-langs"><h2>Idioma</h2><ul><li><a href="../smart.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="smart.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR" aria-current="page">Português (Brasil)</a></li><li><a href="../es/smart.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/smart.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/smart.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></div><!--/lang-->
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Feito por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, a raposa, é desenhada na mesma grade dos ícones.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="../assets/js/bundle/smart.YJPCGGOX.js"></script>
+</body>
+</html>

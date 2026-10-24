@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- head:start -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--lang:detect--><script>(function(c,d,u){try{var k='gf-lang',s=localStorage.getItem(k);if(!s||!u[s]){s='';var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length&&!s;i++){var p=String(n[i]).toLowerCase();for(var l in u){var q=l.toLowerCase();if(p===q||p.split('-')[0]===q.split('-')[0]){s=l;break}}}s=s||d;localStorage.setItem(k,s)}if(c===d&&s!==d&&u[s])location.replace(u[s]+location.search+location.hash)}catch(e){}})("es","en",{"en":"../native.html","pt-BR":"../pt-br/native.html","es":"native.html","fr":"../fr/native.html","de":"../de/native.html"})</script><!--/lang-->
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.40e6a878.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="glyphfox: iconos que se mueven, se transforman y se fusionan" data-i18n-attr="content:home.meta.title">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}
+if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new URL('..',document.querySelector('link[rel=icon]').href).pathname;navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}catch(e){}}</script>
+<!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Cambiar al tema claro","theme.dark":"Cambiar al tema oscuro","toast.copied":"Copiado al portapapeles","toast.downloaded":"Descarga iniciada","toast.saved":"Guardado en tu colección","action.copy":"Copiar","corners.round":"Redondas","corners.sharp":"Rectas","variant.outline":"Contorno","variant.duotone":"Duotono","variant.solid":"Sólido","mods.none":"ninguno","corner.topLeft":"Superior izquierda","corner.topRight":"Superior derecha","corner.bottomLeft":"Inferior izquierda","corner.bottomRight":"Inferior derecha","cat.animals":"animales","cat.arrows":"flechas","cat.commerce":"comercio","cat.communication":"comunicación","cat.data":"datos","cat.development":"desarrollo","cat.devices":"dispositivos","cat.files":"archivos","cat.finance":"finanzas","cat.interface":"interfaz","cat.maps":"mapas","cat.media":"multimedia","cat.nature":"naturaleza","cat.navigation":"navegación","cat.people":"personas","cat.security":"seguridad","cat.shapes":"formas","cat.social":"redes sociales","cat.symbols":"símbolos","cat.text":"texto","cat.weather":"clima","error.rasterize":"No se pudo convertir el SVG en imagen","error.video":"Este navegador no puede grabar video","home.morph.filled":"relleno","home.gallery.orbit":"órbita de diez iconos","icons.all":"Todos","icons.sketch.clear":"Borrar","icons.result.count":"{n} iconos","icons.result.sketch":"Los {n} iconos más parecidos a tu boceto","icons.dl.drawHint":"Sin animación elegida: se usa draw","editor.download":"Descargar SVG","editor.lint.ok":"Cumple todas las reglas de iconos.","editor.lint.empty":"Dibuja algo para empezar.","editor.ctx.button":"Guardar","editor.imported":"Importado y ajustado a la cuadrícula","editor.tool.select":"Seleccionar y editar nodos","editor.tool.pen":"Pluma","editor.tool.line":"Línea","editor.tool.polyline":"Polilínea","editor.tool.rect":"Rectángulo","editor.tool.rrect":"Rectángulo redondeado","editor.tool.circle":"Círculo","editor.tool.ellipse":"Elipse","editor.tool.arc":"Arco","editor.hint.select":"Haz clic en una forma para seleccionarla, arrástrala para moverla y arrastra los controles para editar los nodos. Las flechas la desplazan, Delete la elimina y Ctrl+D la duplica.","editor.hint.pen":"Haz clic para añadir esquinas y arrastra para crear curvas. Haz clic en el primer punto para cerrar; Enter o doble clic para terminar.","editor.hint.line":"Arrastra desde el inicio hasta el final.","editor.hint.polyline":"Haz clic para añadir puntos; Enter o doble clic para terminar.","editor.hint.rect":"Arrastra de una esquina a la otra.","editor.hint.rrect":"Arrastra de una esquina a la otra. Arrastra el control redondo para cambiar el radio.","editor.hint.circle":"Arrastra desde el centro hacia fuera.","editor.hint.ellipse":"Arrastra el cuadro delimitador.","editor.hint.arc":"Haz clic en el inicio y luego en el final; después mueve el cursor para curvar el arco y haz clic para fijarlo.","foxify.before":"Antes","foxify.waiting":"Pega un SVG, suelta un archivo o prueba un ejemplo.","foxify.nothing":"No hay nada que dibujar en ese SVG","foxify.note.text":"Elementos de texto omitidos: {n} (convierte antes el texto en trazados)","foxify.note.scaled":"El dibujo se redujo para caber en el área útil de 2 a 22","foxify.note.enlarged":"El dibujo se amplió hasta el área útil","foxify.note.filled":"Formas rellenas convertidas en contornos: {n}","fusion.need":"Añade al menos dos iconos.","fusion.lint.ok":"El icono fusionado cumple todas las reglas de iconos.","fusion.remove":"Quitar {name}","brand.favicon16":"favicon","brand.maskable":"enmascarable","three.error":"three.js no se pudo cargar. Revisa la conexión y vuelve a intentarlo.","three.canvas":"Icono renderizado en 3D. Arrastra o usa las flechas para girarlo, y las teclas más y menos para hacer zoom.","collection.empty.short":"La colección está vacía","collection.edit":"Editar","collection.delete":"Eliminar","collection.deleted":"Eliminado de la colección","sw.updated":"glyphfox se actualizó a la versión más reciente.","motion.all":"Icono completo","motion.secondary":"Capa duotono","motion.element":"Elemento","motion.inherit":"Aceleración de la línea de tiempo","motion.unknown":"No hay ningún icono con ese nombre","motion.nowebm":"Este navegador no puede grabar video","motion.play":"Reproducir","motion.pause":"Pausar","three.size":"1x mide {w} por {h} píxeles y 4x, el cuádruple.","three.nogl":"Este navegador no admite WebGL 2, así que la vista 3D no está disponible aquí.","labs.source.missing":"Tu glyph script aún no compila, así que se usa el icono de abajo.","labs.source.unknown":"Icono \"{name}\" desconocido. Prueba con un nombre de la lista.","labs.error":"No se pudo exportar: {message}","labs.script.ok":"Compila en un icono sin errores de lint.","labs.script.status.ok":"{lines} líneas, {shapes} elementos, sin errores de lint","labs.script.status.bad":"{n} por corregir antes de poder exportar el icono","labs.script.stale":"Se muestra la última versión que se pudo compilar.","labs.script.jump":"Ir a la línea {line}, columna {column}","labs.example.custom":"Tu script","labs.example.sun":"Sol","labs.example.flower":"Flor","labs.example.fox-face":"Cara de zorro","labs.example.card":"Tarjeta","labs.example.gauge":"Medidor","labs.example.gear":"Engranaje","labs.example.bolt":"Rayo","labs.example.bubble":"Burbuja de chat","labs.favicon.tab":"Animar esta pestaña","labs.favicon.tabStop":"Detener la animación de la pestaña","labs.favicon.reduced":"El movimiento reducido está activado, así que la vista previa queda en pausa. El runtime hace lo mismo para tus visitantes.","labs.cursor.hotspotAt":"Punto activo en {x}, {y} px","labs.hotspot.center":"Centro","labs.hotspot.topLeft":"Superior izquierda","labs.hotspot.topRight":"Superior derecha","labs.hotspot.bottomLeft":"Inferior izquierda","labs.hotspot.bottomRight":"Inferior derecha","labs.hotspot.custom":"Personalizado","labs.plotter.strokes":"Trazos","labs.plotter.draw":"Dibujo","labs.plotter.travel":"Desplazamiento con la pluma levantada","labs.plotter.saved":"{p} % menos desplazamiento que con el orden original","labs.plotter.more":"{n} líneas más en el archivo","labs.stl.triangles":"Triángulos","labs.stl.watertight":"Malla cerrada","labs.stl.yes":"sí","labs.stl.no":"no","labs.stl.volume":"Volumen","labs.stl.file":"Tamaño del archivo","sketch.hint":"Dibuja en el recuadro para buscar.","sketch.more":"Sigue dibujando, la forma aún es demasiado pequeña para compararla.","sketch.empty":"Un círculo, una flecha, una casa, un corazón: cualquier forma aproximada sirve.","sketch.result":"Los {n} iconos más parecidos, ordenados en {ms} ms","sketch.loading":"Cargando el índice de formas","sketch.failed":"No se pudo cargar el índice de formas.","brand.count":"Los {n} iconos, con tu marca","brand.building":"Generando el kit de marca","icons.set.ours":"Nuestros propios iconos, con las colecciones display e isométrica","icons.scope.all":"Todos los conjuntos","icons.set.meta":"{n} iconos, {license}","icons.set.local":"No está en la CDN: instala su paquete para usarlo","icons.set.none":"Ningún conjunto coincide.","icons.result.loading":"Cargando los conjuntos de iconos","icons.result.error":"No se pudieron cargar los conjuntos de iconos. Revisa la conexión e inténtalo de nuevo.","icons.result.set":"{n} iconos en {set}","icons.result.inSet":"{n} iconos en {set} en {ms} ms","icons.result.inAll":"{n} iconos en todos los conjuntos en {ms} ms, glyphfox primero","icons.coll.title":"Colecciones","icons.coll.display":"Display","icons.coll.isometric":"Isométrica","icons.coll.note":"Esta colección aún no está en el paquete npm: copia el SVG o descárgalo.","icons.license.credit":"crédito","icons.license.attribution":"Atribución obligatoria","icons.license.trademark":"Marca registrada","icons.license.copy":"Copiar atribución","icons.license.copied":"Atribución copiada","icons.meta.by":"{set} de {author}","icons.meta.stroke":"basado en trazo","icons.meta.aliases":"Alias: {list}","icons.style.outline":"contorno","icons.style.solid":"sólido","icons.style.duotone":"duotono","icons.style.color":"a color","icons.kind.public-domain":"Dominio público","icons.kind.permissive":"Permisiva","icons.kind.attribution":"Atribución","icons.kind.share-alike":"Compartir igual","icons.group.material":"Material","icons.group.ui24":"Interfaz, 24 px","icons.group.ui16":"Interfaz, 16 y 32 px","icons.group.uiOther":"Interfaz, otras cuadrículas","icons.group.uiColor":"Interfaz a color","icons.group.logos":"Logotipos","icons.group.programming":"Programación","icons.group.emoji":"Emoji","icons.group.flags":"Banderas y mapas","icons.group.thematic":"Temáticos","icons.group.other":"Otros conjuntos","icons.group.archive":"Archivados o sin mantenimiento","universe.gallery.count":"{sets} conjuntos, {n} iconos","universe.gallery.none":"Ningún conjunto coincide con estos filtros.","universe.gallery.pick":"Comparar","universe.gallery.strokeTitle":"Basado en trazo: el eje de grosor y la animación de dibujo se aplican","universe.gallery.loading":"Cargando las vistas previas","universe.gallery.error":"Las vistas previas se cargan desde jsDelivr, del paquete glyphfox-universe publicado.","universe.compare.pick":"Elige de 2 a {max} conjuntos abajo para ver los mismos conceptos uno al lado del otro.","universe.compare.picked":"(elegidos: {n})","universe.compare.noMatch":"sin coincidencia","universe.compare.lead":"Los mismos conceptos en {n} conjuntos, emparejados por nombre, alias y sinónimos de etiquetas.","universe.compare.concept":"Concepto","universe.native":"nativo","universe.on":"Activado","universe.off":"Desactivado","universe.style.outline":"Contorno","universe.style.solid":"Sólido","universe.style.duotone":"Duotono","universe.style.color":"Color","universe.style.brand":"Marca","universe.style.stroke":"Grosor y trazo","universe.app.loading":"Cargando el índice de búsqueda","universe.app.error":"Los datos de los iconos no están disponibles","universe.app.errorNote":"El catálogo y el índice de búsqueda se cargan desde jsDelivr, del paquete glyphfox-universe publicado. La tabla de abajo lista todos los conjuntos con su cantidad y su licencia.","universe.result.query":"{n} iconos para \"{q}\" en {ms} ms","universe.result.all":"{n} iconos en todos los conjuntos","universe.meta.tags":"Etiquetas: {list}","universe.format.web":"Componente web","universe.trademarks.text":"Los iconos de marcas y logotipos muestran marcas registradas de sus dueños. Las licencias de los iconos cubren los dibujos, no las marcas: usa un logotipo solo para referirte a su marca, sigue las pautas de marca de su dueño y no sugieras un respaldo."}</script><!--/lang-->
+<!-- head:end -->
+<title data-i18n="native.meta.title">Exportaciones nativas: glyphfox</title>
+<meta name="description" content="Exporta los iconos de glyphfox como XML VectorDrawable para Android, código ImageVector para Jetpack Compose, un catálogo de assets de iOS con helpers para SwiftUI y assets SVG para Flutter con un archivo de constantes Dart y un widget GlyphFoxIcon." data-i18n-attr="content:native.meta.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/native.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/native.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/native.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/native.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/native.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/native.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/native.html">
+<meta property="og:title" content="Exportaciones nativas de glyphfox" data-i18n-attr="content:native.meta.og">
+<meta property="og:description" content="Exporta los iconos de glyphfox como XML VectorDrawable para Android, código ImageVector para Jetpack Compose, un catálogo de assets de iOS con helpers para SwiftUI y assets SVG para Flutter con un archivo de constantes Dart y un widget GlyphFoxIcon." data-i18n-attr="content:native.meta.description">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/native.html">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<link rel="stylesheet" href="../assets/docs.4063d59a.css">
+<link rel="modulepreload" href="../assets/js/bundle/docs.XQJ3O5TU.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.KXTQTQD4.js">
+</head>
+<body class="docs-page">
+<!-- header:start -->
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="inicio de glyphfox" data-i18n-attr="aria-label:nav.home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span translate="no">glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Principal" data-i18n-attr="aria-label:nav.main">
+      <a href="icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="universe.html" data-nav="universe" data-i18n="nav.universe">Universo</a>
+      <a href="studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="docs.html" data-nav="docs" data-i18n="nav.docs">Docs</a>
+      <a href="changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <!--lang:menu--><details class="lang-menu" data-lang-menu><summary class="icon-btn" aria-label="Idioma: Español" title="Idioma"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><span>ES</span></summary><ul class="lang-list"><li><a href="../native.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="../pt-br/native.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="native.html" hreflang="es" lang="es" data-set-lang="es" aria-current="page">Español</a></li><li><a href="../fr/native.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/native.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></details><!--/lang-->
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar al tema claro" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox en GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menú" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<!-- header:end -->
+<div class="wrap docs-layout">
+  <nav class="docs-nav" aria-label="Exportaciones nativas" data-i18n-attr="aria-label:native.hero.title">
+    <p class="docs-nav-title" data-i18n="native.hero.title">Exportaciones nativas</p>
+    <a href="#overview" data-i18n="native.overview">Resumen</a>
+    <a translate="no" href="#android">Android</a>
+    <a translate="no" href="#compose">Jetpack Compose</a>
+    <a href="#ios" data-i18n="native.ios">Catálogo de assets de iOS</a>
+    <a translate="no" href="#swiftui">SwiftUI</a>
+    <a translate="no" href="#flutter">Flutter</a>
+    <p class="docs-nav-title" data-i18n="docs.reference">Referencia</p>
+    <a href="#options" data-i18n="native.options">Opciones</a>
+    <a href="#names" data-i18n="native.names">Nombres y colores</a>
+    <a href="docs.html" data-i18n="native.allDocs">Toda la documentación</a>
+  </nav>
+
+  <main id="main" class="docs-main">
+    <header class="docs-hero">
+      <span class="eyebrow" data-i18n="docs.eyebrow">Documentación</span>
+      <h1 class="title" data-i18n="native.hero.title">Exportaciones nativas</h1>
+      <p class="lead" data-i18n="native.hero.lead">Un solo comando convierte los iconos de glyphfox en assets vectoriales de verdad para Android, Jetpack Compose, iOS, SwiftUI y Flutter. El grosor, las esquinas, el duotono, los modificadores y las fusiones se exportan como paths simples, y los trazos siguen siendo trazos.</p>
+    </header>
+
+    <section id="overview">
+      <h2 data-i18n="native.overview">Resumen</h2>
+      <div class="code"><div class="code-head"><span data-i18n="docs.code.terminal">terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh">npx glyphfox export android home search file+check --out app/src/main/res
+npx glyphfox export compose --from icons.txt --package com.acme.icons --out app/src/main/java
+npx glyphfox export ios home search --out MyApp/Assets.xcassets
+npx glyphfox export swiftui home search --out MyApp
+npx glyphfox export flutter home search --out .
+npx glyphfox export android --all --weight 1.5 --corners sharp --out app/src/main/res</pre></div>
+      <p data-i18n="native.overview.p">Pasa nombres de iconos o cualquier spec de la <a href="docs.html#syntax">sintaxis de nombres</a>, un archivo de lista con <code>--from</code> (un nombre por línea, <code>#</code> inicia un comentario) o <code>--all</code> para todo el conjunto. La geometría es la misma que dibujan los paquetes web, así que las mismas specs se ven igual en todas partes:</p>
+      <div class="demo">
+        <figure><!--gf:heart:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><!--/gf--><figcaption translate="no">heart</figcaption></figure>
+        <figure><!--gf:bell/duotone:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><!--/gf--><figcaption translate="no">bell/duotone</figcaption></figure>
+        <figure><!--gf:file+check:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file-check" aria-hidden="true"><path d="M20 10.77V8L14 2H6C4.89 2 4 2.9 4 4V20c0 1.11 .89 2 2 2h5.8"/><path d="M14.2 18.2l2.5 2.5 4.5-5.5"/></svg><!--/gf--><figcaption translate="no">file+check</figcaption></figure>
+        <figure><!--gf:cloud&lock:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud-lock" aria-hidden="true"><path d="M8.2 16.88H5.61c-1.73 0-3.19-1.3-3.38-3.02-.2-1.72 .93-3.31 2.62-3.7-.35-1.9 .4-3.84 1.94-5C8.34 4 10.4 3.81 12.13 4.67c1.28 .63 2.21 1.76 2.61 3.08"/><path d="M7.77 8.86A2.13 2.13 0 0 1 9.86 7.1"/><rect x="11.2" y="15.4" width="9.6" height="6" rx="1.2"/><path d="M13.6 15.4V13a2.4 2.4 0 0 1 4.8 0v2.4"/><path d="M15.4 18.1a.6 .6 0 1 0 1.2 0 .6 .6 0 1 0-1.2 0zm.6 0h.01"/><path d="M16 18.1v1.2"/></svg><!--/gf--><figcaption translate="no">cloud&amp;lock</figcaption></figure>
+        <figure><!--gf:user+plus@tl:40--><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-user-plus-tl" aria-hidden="true"><path d="M11.51 3.03C11.67 3.01 11.84 3 12 3c2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4-.8 0-1.55-.24-2.18-.64"/><path d="M4 21a8 6 0 0 1 16 0z"/><path d="M10 15.2l2 2.3 2-2.3"/><path d="M5.5 2V9M2 5.5H9"/></svg><!--/gf--><figcaption translate="no">user+plus@tl</figcaption></figure>
+      </div>
+      <div class="table-wrap">
+        <table class="props">
+          <thead><tr><th data-i18n="native.th.target">Destino</th><th data-i18n="native.th.writes">Escribe en --out</th><th data-i18n="native.th.use">Úsalo como</th></tr></thead>
+          <tbody>
+            <tr><td><code>android</code></td><td><code>drawable/gf_NAME.xml</code></td><td><code>@drawable/gf_home</code>, <code>R.drawable.gf_home</code></td></tr>
+            <tr><td><code>compose</code></td><td data-i18n="native.out.compose"><code>PACKAGE/GlyphFox.kt</code> y <code>PACKAGE/NAME.kt</code></td><td><code>Icon(GlyphFox.Home, null)</code></td></tr>
+            <tr><td><code>ios</code></td><td><code>GlyphFox.xcassets/gf-NAME.imageset</code></td><td><code>UIImage(named: "gf-home")</code></td></tr>
+            <tr><td><code>swiftui</code></td><td data-i18n="native.out.swiftui"><code>GlyphFox.swift</code> y el catálogo</td><td><code>Image(glyphfox: .home)</code></td></tr>
+            <tr><td><code>flutter</code></td><td data-i18n="native.out.flutter"><code>assets/glyphfox/NAME.svg</code> y <code>lib/glyphfox.dart</code></td><td><code>GlyphFoxIcon(GlyphFoxIcons.home)</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="android">
+      <h2 translate="no">Android</h2>
+      <p data-i18n="native.android.p">Un VectorDrawable por icono en <code>drawable/</code>, así que apunta <code>--out</code> a <code>app/src/main/res</code>. Los trazos conservan su grosor en unidades del viewport, sus remates y uniones redondeados o rectos, y nunca reciben relleno, así que escalan con el drawable exactamente como el SVG. El color es un tinte: <code>?attr/colorControlNormal</code> por defecto, así que los iconos siguen el tema como los iconos Material.</p>
+      <div class="code"><div class="code-head"><span translate="no">res/drawable/gf_heart.xml</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal"&gt;
+    &lt;path
+        android:pathData="M12,19.89 L4.41,12.3 A4.8,4.8,0,1,1,12,6.58 A4.8,4.8,0,1,1,19.59,12.3 Z"
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" /&gt;
+&lt;/vector&gt;</pre></div>
+      <div class="code"><div class="code-head"><span translate="no">layout.xml</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">&lt;ImageView
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:src="@drawable/gf_heart"
+    android:contentDescription="@string/favorite" /&gt;</pre></div>
+      <p data-i18n="native.android.color">Pasa un atributo de tema o un recurso de color en <code>--color</code> (<code>?attr/colorPrimary</code>, <code>@color/brand</code>) para usarlo como tinte, o un color hex (<code>#ff7a1a</code>) para fijar el color en los paths sin tinte. Las capas duotono son paths rellenos con <code>fillAlpha</code>, <code>--mirror-rtl</code> activa <code>android:autoMirrored</code>, y la rotación y los volteos se convierten en un grupo alrededor del centro.</p>
+    </section>
+
+    <section id="compose">
+      <h2 translate="no">Jetpack Compose</h2>
+      <p data-i18n="native.compose.p"><code>GlyphFox.kt</code> declara el objeto <code>GlyphFox</code> y cada icono es una propiedad de extensión <code>ImageVector</code> sobre él, construida en el primer uso y guardada en caché, en su propio archivo. Los archivos van a la carpeta del paquete dentro de <code>--out</code>, así que apunta esa opción a la raíz del código fuente Kotlin.</p>
+      <div class="code"><div class="code-head"><span translate="no">com/acme/icons/Heart.kt</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">package com.acme.icons
+
+val GlyphFox.Heart: ImageVector
+    get() {
+        if (_heart != null) {
+            return _heart!!
+        }
+        _heart = ImageVector.Builder(
+            name = "GlyphFox.Heart",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f,
+        ).apply {
+            path(
+                stroke = SolidColor(Color.Black),
+                strokeLineWidth = 2f,
+                strokeLineCap = StrokeCap.Round,
+                strokeLineJoin = StrokeJoin.Round,
+            ) {
+                moveTo(12f, 19.89f)
+                lineTo(4.41f, 12.3f)
+                arcTo(4.8f, 4.8f, 0f, true, true, 12f, 6.58f)
+                arcTo(4.8f, 4.8f, 0f, true, true, 19.59f, 12.3f)
+                close()
+            }
+        }.build()
+        return _heart!!
+    }
+
+private var _heart: ImageVector? = null</pre></div>
+      <div class="code"><div class="code-head"><span translate="no">Screen.kt</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import com.acme.icons.GlyphFox
+import com.acme.icons.Heart
+
+Icon(GlyphFox.Heart, contentDescription = "Favorite")
+Icon(GlyphFox.Heart, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+Image(GlyphFox.Heart, contentDescription = null) // keeps the exported color
+
+GlyphFox.all.forEach { (name, vector) -&gt; Icon(vector, contentDescription = name) }</pre></div>
+      <p data-i18n="native.compose.names">Cada propiedad se importa por nombre, como los iconos Material. <code>GlyphFox.all</code> asocia cada nombre exportado con su vector para selectores y vistas previas. Con la reducción de código activada, R8 elimina los iconos que una app nunca usa, salvo que lea <code>GlyphFox.all</code>.</p>
+    </section>
+
+    <section id="ios">
+      <h2 data-i18n="native.ios">Catálogo de assets de iOS</h2>
+      <p data-i18n="native.ios.p">Un image set por icono con el SVG, Preserve Vector Data y Render As Template Image, así que los iconos se ven nítidos a cualquier tamaño y toman el color de tinte. Apunta <code>--out</code> a un catálogo existente como <code>MyApp/Assets.xcassets</code> para añadirle los image sets (su propio <code>Contents.json</code> se conserva), o a una carpeta para obtener <code>GlyphFox.xcassets</code>.</p>
+      <div class="code"><div class="code-head"><span translate="no">gf-heart.imageset/Contents.json</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">{
+  "images" : [
+    {
+      "filename" : "gf-heart.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}</pre></div>
+      <div class="code"><div class="code-head"><span translate="no">ViewController.swift</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">let heart = UIImageView(image: UIImage(named: "gf-heart"))
+heart.tintColor = .systemOrange</pre></div>
+      <p data-i18n="native.ios.color">Los archivos SVG llevan colores concretos (negro por defecto), que el renderizado como plantilla sustituye por el tinte. Con un <code>--color</code> hex, el catálogo pasa al renderizado original para que se vea el color; <code>--rendering template</code> u <code>original</code> elige uno de forma explícita, y <code>--mirror-rtl</code> marca los image sets para que se reflejen en layouts de derecha a izquierda.</p>
+    </section>
+
+    <section id="swiftui">
+      <h2 translate="no">SwiftUI</h2>
+      <p data-i18n="native.swiftui.p"><code>glyphfox export swiftui</code> escribe el mismo catálogo de assets y además <code>GlyphFox.swift</code>: un enum con un case por image set, <code>Image(glyphfox:)</code> y <code>UIImage.glyphfox(_:)</code> para UIKit.</p>
+      <div class="code"><div class="code-head"><span translate="no">GlyphFox.swift</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">public enum GlyphFox: String, CaseIterable, Sendable {
+    case heart = "gf-heart"
+    case `repeat` = "gf-repeat"
+}
+
+public extension Image {
+    init(glyphfox icon: GlyphFox, bundle: Bundle? = nil) {
+        self = Image(icon.rawValue, bundle: bundle).renderingMode(.template)
+    }
+}</pre></div>
+      <div class="code"><div class="code-head"><span translate="no">ContentView.swift</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">Label { Text("Favorites") } icon: { Image(glyphfox: .heart) }
+
+Image(glyphfox: .heart)
+    .resizable()
+    .frame(width: 32, height: 32)
+    .foregroundStyle(.orange)
+    .accessibilityLabel("Favorite")
+
+ForEach(GlyphFox.allCases, id: \.self) { Image(glyphfox: $0) }</pre></div>
+      <p data-i18n="native.swiftui.bundle">Pasa <code>bundle: .module</code> cuando el catálogo esté en un paquete Swift.</p>
+    </section>
+
+    <section id="flutter">
+      <h2 translate="no">Flutter</h2>
+      <p data-i18n="native.flutter.p">Archivos SVG en <code>assets/glyphfox/</code> y <code>lib/glyphfox.dart</code> con una constante por icono y un pequeño widget <code>GlyphFoxIcon</code> sobre flutter_svg. Apunta <code>--out</code> a la carpeta de la app y luego añade el paquete y los assets a <code>pubspec.yaml</code>:</p>
+      <div class="code"><div class="code-head"><span translate="no">pubspec.yaml</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh">dependencies:
+  flutter_svg: ^2.0.0
+
+flutter:
+  assets:
+    - assets/glyphfox/</pre></div>
+      <div class="code"><div class="code-head"><span translate="no">main.dart</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'glyphfox.dart';
+
+Row(children: [
+  const GlyphFoxIcon(GlyphFoxIcons.heart),
+  GlyphFoxIcon(GlyphFoxIcons.heart, size: 32, color: Colors.orange, semanticLabel: 'Favorite'),
+  SvgPicture.asset(GlyphFoxIcons.heart), // the exported colors, no tint
+])</pre></div>
+      <p data-i18n="native.flutter.widget"><code>GlyphFoxIcon</code> sigue al <code>IconTheme</code> que lo rodea en tamaño y color, como hace <code>Icon</code>, tiñe todo el dibujo (la capa duotono conserva su opacidad) y es decorativo salvo que reciba un <code>semanticLabel</code>. <code>GlyphFoxIcons.values</code> lista todas las rutas exportadas, y <code>--assets</code> cambia la carpeta de los SVG.</p>
+    </section>
+
+    <section id="options">
+      <h2 data-i18n="native.options">Opciones</h2>
+      <div class="table-wrap">
+        <table class="props">
+          <thead><tr><th data-i18n="native.th.option">Opción</th><th data-i18n="native.th.targets">Destinos</th><th data-i18n="docs.default">Por defecto</th><th data-i18n="docs.desc">Descripción</th></tr></thead>
+          <tbody>
+            <tr><td><code>specs</code></td><td data-i18n="native.opt.all">todos</td><td></td><td data-i18n="native.opt.specs">Nombres o specs como <code>file+check@tr</code>, <code>cloud&amp;lock:side</code> o <code>heart/duotone</code>.</td></tr>
+            <tr><td><code>--from</code></td><td data-i18n="native.opt.all">todos</td><td></td><td data-i18n="native.opt.from">Un archivo de lista: un nombre por línea o separados por comas, <code>#</code> inicia un comentario.</td></tr>
+            <tr><td><code>--all</code></td><td data-i18n="native.opt.all">todos</td><td></td><td data-i18n="native.opt.everyIcon">Todos los iconos del conjunto.</td></tr>
+            <tr><td><code>--out</code></td><td data-i18n="native.opt.all">todos</td><td><code>.</code></td><td data-i18n="native.opt.out">La carpeta del proyecto: <code>res</code> para android, la raíz del código fuente Kotlin para compose, una carpeta o un catálogo <code>.xcassets</code> para ios y swiftui, la carpeta de la app para flutter.</td></tr>
+            <tr><td><code>--size</code></td><td data-i18n="native.opt.all">todos</td><td><code>24</code></td><td data-i18n="native.opt.size">Tamaño en dp, puntos o píxeles lógicos. Por debajo de 24 el trazo se compensa ópticamente, como en la web.</td></tr>
+            <tr><td><code>--weight</code></td><td data-i18n="native.opt.all">todos</td><td><code>2</code></td><td data-i18n="native.opt.weight">Grosor del trazo de 1 a 3 en la cuadrícula de 24.</td></tr>
+            <tr><td><code>--absolute-weight</code></td><td data-i18n="native.opt.all">todos</td><td></td><td data-i18n="native.opt.absoluteWeight">Mantiene el trazo en unidades de grosor al tamaño de exportación.</td></tr>
+            <tr><td><code>--corners</code></td><td data-i18n="native.opt.all">todos</td><td><code>round</code></td><td data-i18n="native.opt.corners"><code>round</code> o <code>sharp</code> (remates cuadrados y uniones en inglete).</td></tr>
+            <tr><td><code>--variant</code></td><td data-i18n="native.opt.all">todos</td><td><code>outline</code></td><td data-i18n="native.opt.variant"><code>outline</code> o <code>duotone</code>. El estilo sólido recorta líneas con máscaras, que VectorDrawable e ImageVector no pueden dibujar, así que se rechaza.</td></tr>
+            <tr><td><code>--color</code></td><td data-i18n="native.opt.all">todos</td><td data-i18n="native.opt.tint">tinte</td><td data-i18n="native.opt.color">Un color hex fijado en los archivos. Android también acepta un atributo de tema o un recurso de color, que se usa como tinte.</td></tr>
+            <tr><td><code>--secondary-color</code>, <code>--secondary-opacity</code></td><td data-i18n="native.opt.all">todos</td><td data-i18n="native.opt.secondaryDefault">el color, <code>0.3</code></td><td data-i18n="native.opt.secondary">Color y opacidad de la capa duotono.</td></tr>
+            <tr><td><code>--rotate</code>, <code>--flip-x</code>, <code>--flip-y</code></td><td data-i18n="native.opt.all">todos</td><td></td><td data-i18n="native.opt.transform">Una transformación alrededor del centro de la cuadrícula.</td></tr>
+            <tr><td><code>--mirror-rtl</code></td><td data-i18n="native.opt.all">todos</td><td></td><td data-i18n="native.opt.mirror">Refleja el icono en layouts de derecha a izquierda (<code>autoMirrored</code>, <code>autoMirror</code>, la dirección del image set).</td></tr>
+            <tr><td><code>--modifier</code>, <code>--modifier-corner</code></td><td data-i18n="native.opt.all">todos</td><td></td><td data-i18n="native.opt.modifier">La misma insignia en todos los iconos, como <code>file+check</code>.</td></tr>
+            <tr><td><code>--prefix</code></td><td translate="no">android, ios, swiftui</td><td><code>gf_</code>, <code>gf-</code></td><td data-i18n="native.opt.prefix">Prefijo de los nombres de los drawables o de los image sets.</td></tr>
+            <tr><td><code>--package</code></td><td translate="no">compose</td><td><code>glyphfox</code></td><td data-i18n="native.opt.package">Paquete Kotlin, que también es la carpeta dentro de <code>--out</code>.</td></tr>
+            <tr><td><code>--rendering</code></td><td translate="no">ios, swiftui</td><td><code>template</code></td><td data-i18n="native.opt.rendering"><code>template</code> u <code>original</code>; original es el valor por defecto con un <code>--color</code> hex.</td></tr>
+            <tr><td><code>--assets</code></td><td translate="no">flutter</td><td><code>assets/glyphfox</code></td><td data-i18n="native.opt.assets">Carpeta de los archivos SVG y de las rutas de las constantes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="names">
+      <h2 data-i18n="native.names">Nombres y colores</h2>
+      <p data-i18n="native.names.p">Una spec se convierte en un nombre en cada plataforma: <code>file+check@tr</code> es <code>gf_file_check_tr</code> en Android, <code>GlyphFox.FileCheckTr</code> en Compose, <code>gf-file-check-tr</code> en el catálogo y <code>fileCheckTr</code> en Swift y Dart. Dos specs que acaban con el mismo nombre se rechazan, y las palabras clave se escapan (<code>repeat</code> pasa a ser <code>`repeat`</code> en Swift).</p>
+      <p data-i18n="native.names.color">Sin <code>--color</code>, cada destino sigue el tinte de la plataforma: <code>colorControlNormal</code>, <code>LocalContentColor</code>, el foreground style de SwiftUI o <code>IconTheme</code>. Con un color hex, el color queda fijado y se mantiene: Android quita el tinte, el catálogo renderiza el original y <code>GlyphFoxIcon</code> conserva los colores exportados salvo que reciba un <code>color</code>. <code>Icon()</code> de Compose siempre tiñe, así que usa <code>Image()</code> o <code>tint = Color.Unspecified</code> para ver el color fijado.</p>
+    </section>
+  </main>
+</div>
+<!-- footer:start -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="inicio de glyphfox" data-i18n-attr="aria-label:nav.home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span translate="no">glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de grosor, se transforman, se fusionan y cobran vida. Gratis y de código abierto, con licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="../icons/" data-i18n="footer.allIcons">Todos los iconos por categoría</a></li>
+          <li><a href="universe.html" data-i18n="nav.universe">Universo</a></li>
+          <li><a href="studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+          <li><a href="labs.html" data-i18n="footer.labs">Labs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="../guides/" data-i18n="footer.guides">Guías</a></li>
+          <li><a href="docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="frameworks/index.html" data-i18n="footer.frameworks">Frameworks</a></li>
+          <li><a href="docs.html#cli">CLI</a></li>
+          <li><a href="changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+      <!--lang:list--><div class="footer-langs"><h2>Idioma</h2><ul><li><a href="../native.html" hreflang="en" lang="en" data-set-lang="en">English</a></li><li><a href="../pt-br/native.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="native.html" hreflang="es" lang="es" data-set-lang="es" aria-current="page">Español</a></li><li><a href="../fr/native.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/native.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></div><!--/lang-->
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Creado por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<!-- footer:end -->
+<script type="module" src="../assets/js/bundle/docs.XQJ3O5TU.js"></script>
+</body>
+</html>

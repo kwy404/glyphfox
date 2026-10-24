@@ -13,9 +13,7 @@ const read = (f) => readFileSync(f, 'utf8');
 const languages = JSON.parse(read(join(docs, 'i18n', 'languages.json')));
 const strings = Object.fromEntries(languages.map((l) => [l.code, JSON.parse(read(join(docs, 'i18n', `${l.code}.json`)))]));
 const localized = languages.filter((l) => l.dir);
-const PAGES = ['index.html', 'icons.html', 'universe.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html'];
-// Pages that are written in English only for now.
-const ENGLISH_ONLY = ['native.html', 'smart.html'];
+const PAGES = ['index.html', 'icons.html', 'universe.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html', 'native.html', 'smart.html'];
 const htmlIn = (dir) => (existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.html')).map((f) => join(dir, f)) : []);
 const pages = [
   ...htmlIn(docs),
@@ -36,22 +34,21 @@ describe('studio site', () => {
     expect(existsSync(join(docs, '404.html'))).toBe(true);
   });
 
-  it('has the framework guide and every recipe', () => {
+  it('has the framework guide and every recipe in every language', () => {
     for (const p of ['index', 'nextjs', 'nuxt', 'sveltekit', 'remix', 'alpine', 'htmx']) {
       const html = read(join(docs, 'frameworks', `${p}.html`));
       expect(html, p).toContain('<html lang="en">');
       expect(html, p).toMatch(/href="\.\.\/assets\/site\.[0-9a-f]{8}\.css"/);
       expect(html, p).toContain(`<link rel="canonical" href="https://kwy404.github.io/glyphfox/frameworks/${p === 'index' ? '' : p + '.html'}">`);
+      for (const l of localized) {
+        const own = read(join(docs, l.dir, 'frameworks', `${p}.html`));
+        expect(own, `${l.dir}/${p}`).toContain(`<html lang="${l.code}">`);
+        expect(own, `${l.dir}/${p}`).toMatch(/href="\.\.\/\.\.\/assets\/site\.[0-9a-f]{8}\.css"/);
+        expect(own, `${l.dir}/${p}`).toContain(`<link rel="canonical" href="https://kwy404.github.io/glyphfox/${l.dir}/frameworks/${p === 'index' ? '' : p + '.html'}">`);
+      }
     }
     expect(read(join(docs, 'docs.html'))).toContain('href="frameworks/index.html"');
-    for (const l of localized) {
-      expect(read(join(docs, l.dir, 'docs.html')), l.code).toContain('href="../frameworks/index.html"');
-      expect(existsSync(join(docs, l.dir, 'frameworks')), l.code).toBe(false);
-    }
-    for (const p of ENGLISH_ONLY) {
-      expect(read(join(docs, p)), p).toContain('<html lang="en">');
-      for (const l of localized) expect(existsSync(join(docs, l.dir, p)), `${l.dir}/${p}`).toBe(false);
-    }
+    for (const l of localized) expect(read(join(docs, l.dir, 'docs.html')), l.code).toContain('href="frameworks/index.html"');
   });
 
   it('only links to files that exist', () => {
