@@ -137,6 +137,7 @@ export const dict = {
     'seo.cat.food': 'food',
     'seo.cat.sports': 'sports',
     'seo.cat.travel': 'travel',
+    'seo.cat.social': 'social',
   },
   'pt-BR': ptBR,
   es,

@@ -6,7 +6,7 @@ glyphfox is an open source icon library and icon studio by Alexandre Kohler (kwy
 
 - Original icons only, drawn for this set on a 24 by 24 grid: viewBox "0 0 24 24", fill "none", stroke "currentColor", stroke-width 2, round caps and joins, 2 px padding, consistent optical size. Never copy or trace another icon set.
 - Source files: icons/NAME.svg (kebab-case names) and icons/NAME.json with { "categories": [...], "tags": [...] }.
-- Target for 1.0: at least 400 icons across these categories: arrows, interface, navigation, files, communication, media, devices, development, data, commerce, finance, weather, nature, maps, people, security, text, shapes, brands-free generic symbols (no third party logos), animals (including a fox).
+- Target for 1.0: at least 400 icons across these categories: arrows, interface, navigation, files, communication, media, devices, development, data, commerce, finance, weather, nature, maps, people, security, text, shapes, generic symbols (no third party logos), animals (including a fox). Brand icons (third party logos, named `brand-NAME`) live only in the social category.
 - Every icon must pass the lint: valid SVG, only the allowed attributes, stays inside the padding box, no transforms, no fills except an optional duotone layer marked with class "gf-secondary".
 - Duotone: an icon may add one secondary layer (class "gf-secondary", fill currentColor with opacity) so it can take a second color.
 
