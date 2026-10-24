@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/tailwind.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icônes Tailwind CSS: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.tailwind.title">Icônes Tailwind CSS en classes utilitaires avec glyphfox</title>
+<meta name="description" content="Icônes Tailwind CSS v3 et v4 avec glyphfox : installation, classes gf, styles et épaisseurs après la barre oblique, badges, fusions, animations et options." data-i18n-attr="content:guide.tailwind.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/fr/guides/tailwind.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/tailwind.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/tailwind.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/tailwind.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/tailwind.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/tailwind.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/tailwind.html">
+<meta property="og:title" content="Icônes Tailwind CSS en classes utilitaires avec glyphfox">
+<meta property="og:description" content="Icônes Tailwind CSS v3 et v4 avec glyphfox : installation, classes gf, styles et épaisseurs après la barre oblique, badges, fusions, animations et options.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/fr/guides/tailwind.html">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:title" content="Icônes Tailwind CSS en classes utilitaires avec glyphfox">
+<meta name="twitter:description" content="Icônes Tailwind CSS v3 et v4 avec glyphfox : installation, classes gf, styles et épaisseurs après la barre oblique, badges, fusions, animations et options.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/tailwind.png">
+<meta name="twitter:image:alt" content="Icônes Tailwind CSS: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://kwy404.github.io/glyphfox/fr/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/fr/guides/"},{"@type":"ListItem","position":3,"name":"Tailwind CSS","item":"https://kwy404.github.io/glyphfox/fr/guides/tailwind.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Le plugin fonctionne-t-il avec Tailwind CSS v3 et v4 ?","acceptedAnswer":{"@type":"Answer","text":"Oui, c'est le même plugin. En v4, déclarez-le avec @plugin \"glyphfox/tailwind\" dans votre CSS et écrivez les badges et les fusions entre crochets ; en v3, ajoutez require('glyphfox/tailwind') à plugins, version dans laquelle les formes courtes fonctionnent aussi."}},{"@type":"Question","name":"Puis-je utiliser les classes d'icônes dans React, Vue ou Svelte ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Les classes sont du CSS standard : elles fonctionnent donc dans n'importe quel template, y compris dans les pages rendues côté serveur et les pages statiques. Utilisez plutôt les composants du framework si vous avez besoin de deux couleurs, de l'animation draw, du morph ou d'un nom accessible sur l'icône elle-même."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copié dans le presse-papiers" data-theme-light="Passer au thème clair" data-theme-dark="Passer au thème sombre">
+<a class="skip" href="#main" data-i18n="nav.skip">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icônes</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Nouveautés</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/tailwind.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Tous les guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit et web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML et CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Thèmes</p>
+<a href="tailwind.html" aria-current="page" class="on" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Icônes animées</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibilité</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Rendu côté serveur</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Fil d'Ariane" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Accueil</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.tailwind.short">Tailwind CSS</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.topics">Thèmes</span>
+<h1 class="title" data-i18n="guide.tailwind.h1">Icônes Tailwind CSS</h1>
+<p class="lead" data-i18n="guide.tailwind.lead">Le plugin Tailwind de glyphfox fait de chaque icône une classe utilitaire. Les icônes sont rendues sous forme de masque CSS rempli avec <code>currentColor</code>, si bien que les utilitaires de couleur de texte, de taille de police et d'opacité que vous utilisez déjà les mettent aussi en forme.</p>
+<nav class="toc" aria-label="Sur cette page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.tailwind.install.h">Installation</a></li><li><a href="#first" data-i18n="guide.tailwind.first.h">Vos premières classes d'icônes</a></li><li><a href="#axes" data-i18n="guide.tailwind.axes.h">Styles, coins et épaisseur après la barre oblique</a></li><li><a href="#compose" data-i18n="guide.tailwind.compose.h">Badges et fusions</a></li><li><a href="#animate" data-i18n="guide.tailwind.animate.h">Classes d'animation</a></li><li><a href="#options" data-i18n="guide.tailwind.options.h">Options du plugin</a></li><li><a href="#props" data-i18n="guide.tailwind.props.h">Référence des classes</a></li><li><a href="#a11y" data-i18n="guide.tailwind.a11y.h">Accessibilité</a></li><li><a href="#size" data-i18n="guide.tailwind.size.h">Ce que le plugin ajoute à votre CSS</a></li><li><a href="#pitfalls" data-i18n="guide.tailwind.pitfalls.h">Pièges courants</a></li><li><a href="#faq" data-i18n="seo.faq">Questions fréquentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.tailwind.install.h">Installation</h2>
+<p data-i18n="guide.tailwind.install.p">Le plugin est livré dans le paquet principal, sous <code>glyphfox/tailwind</code>. Tailwind CSS est une dépendance peer facultative, et le même plugin fonctionne avec Tailwind CSS v3 et v4.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.tailwind.install.v4">Avec Tailwind CSS v4, déclarez le plugin dans la feuille de style qui importe Tailwind :</p>
+<div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="css" data-done="1"><span class="tok-k">@import</span> <span class="tok-s">"tailwindcss"</span>;
+<span class="tok-k">@plugin</span> <span class="tok-s">"glyphfox/tailwind"</span>;</pre></div>
+<p data-i18n="guide.tailwind.install.v3">Avec Tailwind CSS v3, ajoutez-le au tableau <code>plugins</code> de votre fichier de configuration :</p>
+<div class="code"><div class="code-head"><span>tailwind.config.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1">module.exports = {
+  content: [<span class="tok-s">'./src/**/*.{html,js,jsx,ts,tsx,vue,svelte}'</span>],
+  plugins: [require(<span class="tok-s">'glyphfox/tailwind'</span>)],
+};</pre></div>
+<p data-i18n="guide.tailwind.install.p2">Rien d'autre n'est nécessaire : ni fichier de police, ni sprite, ni JavaScript dans le navigateur. Le plugin lit les données des icônes au moment du build et génère une règle CSS pour chaque classe d'icône qu'il trouve dans vos fichiers source.</p>
+</section>
+<section id="first">
+<h2 data-i18n="guide.tailwind.first.h">Vos premières classes d'icônes</h2>
+<p data-i18n="guide.tailwind.first.p">Une classe d'icône se compose du préfixe <code>gf-</code> suivi du nom de l'icône. Placez-la sur un élément en ligne vide, généralement un <code>span</code>. La classe fait de l'élément un bloc en ligne de <code>1em</code> sur <code>1em</code>, l'aligne sur la ligne de base du texte et le peint dans la couleur actuelle du texte.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;button</span> <span class="tok-k">class</span>=<span class="tok-s">"inline-flex items-center gap-2 text-sm text-zinc-200"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-download"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+  Download
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-home text-2xl text-orange-500"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-heart text-4xl text-rose-500 opacity-80"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.tailwind.first.size">Comme la boîte est un carré de <code>1em</code>, ce sont les utilitaires de taille de texte qui dimensionnent l'icône : <code>text-sm</code> donne une icône de 14 pixels, <code>text-2xl</code> une icône de 24 pixels. Dans un bouton, l'icône suit le texte du bouton sans classe supplémentaire, ce qui préserve les proportions entre l'icône et le libellé à chaque point de rupture.</p>
+<p data-i18n="guide.tailwind.first.color">La couleur provient de <code>color</code> : les utilitaires <code>text-*</code>, les variantes <code>hover:</code> et <code>dark:</code> ainsi que les couleurs héritées s'appliquent donc toutes. Sous le capot, l'icône est la couleur d'arrière-plan de l'élément, définie sur <code>currentColor</code> et vue à travers un masque qui reprend la forme de l'icône. C'est pourquoi les utilitaires de couleur de texte la colorent et <code>opacity-*</code> l'estompe, comme n'importe quel autre élément.</p>
+<p data-i18n="guide.tailwind.first.names">Tous les noms de l'<a href="../../icons.html">explorateur d'icônes</a> fonctionnent, par exemple <a href="../../icons/arrow-right.html">arrow-right</a>, <a href="../../icons/settings.html">settings</a> ou <a href="../../icons/bell-ring.html">bell-ring</a>. Une classe dont le nom n'existe pas ne produit aucun CSS : une faute de frappe se traduit donc par un espace vide plutôt que par un style cassé.</p>
+</section>
+<section id="axes">
+<h2 data-i18n="guide.tailwind.axes.h">Styles, coins et épaisseur après la barre oblique</h2>
+<p data-i18n="guide.tailwind.axes.p">Les trois axes communs à toutes les icônes glyphfox s'écrivent après une barre oblique, séparés par des tirets. Chaque combinaison forme un masque distinct, rendu à partir de la même géométrie que celle des composants.</p>
+<div class="code"><div class="code-head"><span>axes.html</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-folder/solid"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-folder/duotone"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-search/sharp"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-search/w1.5"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-heart/duotone-sharp-w2.5"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span></pre></div>
+<ul class="list"><li data-i18n="guide.tailwind.axes.list.1"><code>solid</code> remplit les formes fermées et découpe les lignes intérieures en négatif. <code>duotone</code> conserve le contour et ajoute le second calque avec sa propre opacité. <code>outline</code> est la valeur par défaut.</li><li data-i18n="guide.tailwind.axes.list.2"><code>sharp</code> passe à des jointures en onglet et à des extrémités carrées ; <code>round</code> est la valeur par défaut.</li><li data-i18n="guide.tailwind.axes.list.3"><code>w1</code> à <code>w3</code> définissent l'épaisseur du trait sur la grille de 24, par incréments aussi fins que vous le souhaitez : <code>w1.5</code>, <code>w2.25</code>.</li></ul>
+<p data-i18n="guide.tailwind.axes.note">Un masque véhicule la forme et la transparence, pas la couleur. Le calque duotone apparaît donc comme une zone plus claire de la même couleur, et non comme une seconde couleur. Si vous avez besoin de deux couleurs, affichez l'icône en SVG inline avec un composant ou <code>toSvg</code>, puis définissez <code>secondaryColor</code>.</p>
+</section>
+<section id="compose">
+<h2 data-i18n="guide.tailwind.compose.h">Badges et fusions</h2>
+<p data-i18n="guide.tailwind.compose.p">La syntaxe de noms commune à tous les paquets glyphfox fonctionne aussi dans les classes : <code>file+check</code> ajoute un badge de modificateur, <code>@tl</code>, <code>@tr</code>, <code>@bl</code> ou <code>@br</code> le déplace vers un coin, et <code>cloud&amp;lock</code> fusionne deux icônes ou plus en une seule. Comme Tailwind CSS v4 n'accepte <code>+</code> et <code>&amp;</code> qu'entre crochets, écrivez ces spécifications sous forme de valeurs arbitraires :</p>
+<div class="code"><div class="code-head"><span>compose.html</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-c">&lt;!-- Tailwind CSS v4 and v3 --&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-[file+check]"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-[file+check]/tr"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-[cloud&amp;lock]"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-[cloud&amp;lock]/side"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-[shield&amp;heart]/inside"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+
+<span class="tok-c">&lt;!-- Tailwind CSS v4 also accepts the layout inside the brackets --&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-[cloud&amp;lock:side]"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+
+<span class="tok-c">&lt;!-- Tailwind CSS v3 also accepts the short form --&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-file+check"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-file+check/tr"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.tailwind.compose.tokens">Après la barre oblique, un jeton de coin (<code>tl</code>, <code>tr</code>, <code>bl</code>, <code>br</code>) positionne le badge et un jeton de disposition (<code>overlap</code>, <code>side</code>, <code>stack</code>, <code>grid</code>, <code>orbit</code>, <code>badge</code>, <code>inside</code>) organise une fusion. Ils se combinent avec les axes : <code>gf-[cloud&amp;lock]/side-solid</code> est une fusion côte à côte dans le style solid.</p>
+<p data-i18n="guide.tailwind.compose.combos">En v3, chaque paire <code>name+modifier</code> est disponible d'emblée sous la forme courte. Les fusions en forme courte doivent être listées avec l'option <code>combos</code> présentée plus bas ; la forme entre crochets ne demande aucune configuration, quelle que soit la version.</p>
+</section>
+<section id="animate">
+<h2 data-i18n="guide.tailwind.animate.h">Classes d'animation</h2>
+<p data-i18n="guide.tailwind.animate.p">Le plugin ajoute aussi six utilitaires d'animation : <code>gf-spin</code>, <code>gf-pulse</code>, <code>gf-pop</code>, <code>gf-wiggle</code>, <code>gf-bounce</code> et <code>gf-shake</code>. Ils reprennent le minutage des états vivants des composants. Spin et pulse s'exécutent en boucle ; les autres se jouent une seule fois, lorsque la classe est appliquée.</p>
+<div class="code"><div class="code-head"><span>animate.html</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-loader-circle gf-spin text-xl"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-bell gf-shake text-xl"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+
+<span class="tok-c">&lt;!-- replay on hover with a variant --&gt;</span>
+<span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-heart text-xl hover:gf-pop"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.tailwind.animate.scope">Ces classes animent l'élément entier avec <code>transform</code> et <code>opacity</code>. Elles ne peuvent pas tracer les traits un par un (il n'existe donc pas de classe <code>draw</code>), ni transformer une icône en une autre. Pour cela, passez au SVG inline : le <a href="animated-icons.html">guide des icônes animées</a> couvre ces deux cas. Chaque classe d'animation se désactive d'elle-même dès que <code>prefers-reduced-motion: reduce</code> est actif.</p>
+</section>
+<section id="options">
+<h2 data-i18n="guide.tailwind.options.h">Options du plugin</h2>
+<p data-i18n="guide.tailwind.options.p">Le plugin accepte six options. Avec Tailwind CSS v4, passez-les dans un bloc après <code>@plugin</code> ; en v3, appelez le plugin comme une fonction.</p>
+<div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="css" data-done="1"><span class="tok-k">@import</span> <span class="tok-s">"tailwindcss"</span>;
+<span class="tok-k">@plugin</span> <span class="tok-s">"glyphfox/tailwind"</span> {
+  <span class="tok-a">prefix</span>: icon;
+  <span class="tok-a">variant</span>: duotone;
+  <span class="tok-a">weight</span>: <span class="tok-n">1.5</span>;
+}</pre></div>
+<div class="code"><div class="code-head"><span>tailwind.config.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">const</span> glyphfox = require(<span class="tok-s">'glyphfox/tailwind'</span>);
+
+module.exports = {
+  content: [<span class="tok-s">'./src/**/*.{html,js,jsx,ts,tsx}'</span>],
+  plugins: [
+    glyphfox({
+      prefix: <span class="tok-s">'icon'</span>,            <span class="tok-c">// icon-home, icon-spin</span>
+      size: <span class="tok-s">'1.25em'</span>,            <span class="tok-c">// box size, 1em by default</span>
+      corners: <span class="tok-s">'sharp'</span>,          <span class="tok-c">// default axes for every class</span>
+      weight: <span class="tok-n">1.75</span>,
+      combos: [<span class="tok-s">'cloud&amp;lock'</span>, <span class="tok-s">'file+check@tr'</span>],
+    }),
+  ],
+};</pre></div>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.tailwind.options.table.h1">Option</th><th data-i18n="guide.tailwind.options.table.h2">Par défaut</th><th data-i18n="guide.tailwind.options.table.h3">Effet</th></tr></thead><tbody>
+<tr><td data-i18n="guide.tailwind.options.table.r1c1"><code>prefix</code></td><td data-i18n="guide.tailwind.options.table.r1c2"><code>gf</code></td><td data-i18n="guide.tailwind.options.table.r1c3">Préfixe des classes d'icônes et des classes d'animation.</td></tr>
+<tr><td data-i18n="guide.tailwind.options.table.r2c1"><code>size</code></td><td data-i18n="guide.tailwind.options.table.r2c2"><code>1em</code></td><td data-i18n="guide.tailwind.options.table.r2c3">Largeur et hauteur de chaque boîte d'icône. Gardez une unité relative pour que les utilitaires de texte continuent de fonctionner.</td></tr>
+<tr><td data-i18n="guide.tailwind.options.table.r3c1"><code>variant</code></td><td data-i18n="guide.tailwind.options.table.r3c2"><code>outline</code></td><td data-i18n="guide.tailwind.options.table.r3c3">Style par défaut ; un jeton après la barre oblique reste prioritaire.</td></tr>
+<tr><td data-i18n="guide.tailwind.options.table.r4c1"><code>corners</code></td><td data-i18n="guide.tailwind.options.table.r4c2"><code>round</code></td><td data-i18n="guide.tailwind.options.table.r4c3">Coins par défaut.</td></tr>
+<tr><td data-i18n="guide.tailwind.options.table.r5c1"><code>weight</code></td><td data-i18n="guide.tailwind.options.table.r5c2"><code>2</code></td><td data-i18n="guide.tailwind.options.table.r5c3">Épaisseur de trait par défaut.</td></tr>
+<tr><td data-i18n="guide.tailwind.options.table.r6c1"><code>combos</code></td><td data-i18n="guide.tailwind.options.table.r6c2">aucune</td><td data-i18n="guide.tailwind.options.table.r6c3">Spécifications supplémentaires exposées sous forme de classes courtes, comme <code>cloud&amp;lock</code> ; surtout utile en v3.</td></tr>
+</tbody></table></div>
+</section>
+<section id="props">
+<h2 data-i18n="guide.tailwind.props.h">Référence des classes</h2>
+<p data-i18n="guide.tailwind.props.p">Ici, les classes remplacent les props. Voici tous les jetons que le plugin comprend ; la syntaxe complète des noms est décrite dans la <a href="../../docs.html#syntax">documentation</a>.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.tailwind.props.table.h1">Classe ou jeton</th><th data-i18n="guide.tailwind.props.table.h2">Signification</th><th data-i18n="guide.tailwind.props.table.h3">Exemple</th></tr></thead><tbody>
+<tr><td data-i18n="guide.tailwind.props.table.r1c1"><code>gf-NAME</code></td><td data-i18n="guide.tailwind.props.table.r1c2">une icône</td><td data-i18n="guide.tailwind.props.table.r1c3"><code>gf-search</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r2c1"><code>gf-[NAME+MODIFIER]</code></td><td data-i18n="guide.tailwind.props.table.r2c2">un badge de modificateur : plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td data-i18n="guide.tailwind.props.table.r2c3"><code>gf-[user+plus]</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r3c1"><code>gf-[A&amp;B]</code></td><td data-i18n="guide.tailwind.props.table.r3c2">une fusion de 2 à 10 icônes</td><td data-i18n="guide.tailwind.props.table.r3c3"><code>gf-[cloud&amp;lock]</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r4c1"><code>/outline</code>, <code>/duotone</code>, <code>/solid</code></td><td data-i18n="guide.tailwind.props.table.r4c2">axe du style</td><td data-i18n="guide.tailwind.props.table.r4c3"><code>gf-star/solid</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r5c1"><code>/round</code>, <code>/sharp</code></td><td data-i18n="guide.tailwind.props.table.r5c2">axe des coins</td><td data-i18n="guide.tailwind.props.table.r5c3"><code>gf-square/sharp</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r6c1"><code>/w1</code> à <code>/w3</code></td><td data-i18n="guide.tailwind.props.table.r6c2">axe de l'épaisseur</td><td data-i18n="guide.tailwind.props.table.r6c3"><code>gf-search/w1.5</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r7c1"><code>/tl</code>, <code>/tr</code>, <code>/bl</code>, <code>/br</code></td><td data-i18n="guide.tailwind.props.table.r7c2">coin du badge</td><td data-i18n="guide.tailwind.props.table.r7c3"><code>gf-[file+check]/tl</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r8c1"><code>/overlap</code>, <code>/side</code>, <code>/stack</code>, <code>/grid</code>, <code>/orbit</code>, <code>/badge</code>, <code>/inside</code></td><td data-i18n="guide.tailwind.props.table.r8c2">disposition de la fusion</td><td data-i18n="guide.tailwind.props.table.r8c3"><code>gf-[cloud&amp;lock]/side</code></td></tr>
+<tr><td data-i18n="guide.tailwind.props.table.r9c1"><code>gf-spin</code>, <code>gf-pulse</code>, <code>gf-pop</code>, <code>gf-wiggle</code>, <code>gf-bounce</code>, <code>gf-shake</code></td><td data-i18n="guide.tailwind.props.table.r9c2">animation</td><td data-i18n="guide.tailwind.props.table.r9c3"><code>gf-loader gf-spin</code></td></tr>
+</tbody></table></div>
+</section>
+<section id="a11y">
+<h2 data-i18n="guide.tailwind.a11y.h">Accessibilité</h2>
+<p data-i18n="guide.tailwind.a11y.p">Une icône en masque est un élément vide doté d'un arrière-plan. Les technologies d'assistance n'y voient rien, ce qui convient à une icône décorative placée à côté d'un libellé : ajoutez <code>aria-hidden="true"</code> pour que l'élément vide soit ignoré. Lorsque l'icône est le seul contenu d'un contrôle, celui-ci a besoin de son propre nom :</p>
+<div class="code"><div class="code-head"><span>a11y.html</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-k">class</span>=<span class="tok-s">"p-2 text-zinc-300 hover:text-white"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-settings text-xl"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"sr-only"</span><span class="tok-t">&gt;</span>Settings<span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.tailwind.a11y.forced">En mode Contraste élevé de Windows, le navigateur remplace les couleurs d'arrière-plan par des couleurs système, et une icône en masque peut se fondre dans la page. Attribuez une classe commune aux éléments span de vos icônes et rétablissez la couleur dans ce mode :</p>
+<div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="css" data-done="1"><span class="tok-k">@media</span> (<span class="tok-a">forced-colors</span>: active) {
+  <span class="tok-t">.icon</span> {
+    <span class="tok-a">forced-color-adjust</span>: none;
+    <span class="tok-a">background-color</span>: CanvasText;
+  }
+}</pre></div>
+<p data-i18n="guide.tailwind.a11y.more">Le <a href="accessibility.html">guide d'accessibilité</a> traite des libellés, du contraste et du mouvement pour toutes les façons d'afficher les icônes glyphfox.</p>
+</section>
+<section id="size">
+<h2 data-i18n="guide.tailwind.size.h">Ce que le plugin ajoute à votre CSS</h2>
+<p data-i18n="guide.tailwind.size.p">Tailwind ne génère des règles que pour les classes qu'il trouve dans vos fichiers, et le plugin suit le même principe : une icône que vous n'écrivez jamais ne coûte rien. Chaque classe d'icône que vous utilisez réellement intègre son masque sous forme de petite data URI : environ 300 octets pour une forme simple comme <code>home</code> ou <code>file</code>, et près de 1 Ko pour une forme détaillée comme <code>settings</code>, avant compression. Toute variante de style, d'épaisseur ou de coins d'une même icône constitue une règle distincte, avec sa propre data URI.</p>
+<p data-i18n="guide.tailwind.size.p2">Pour une page comportant quelques dizaines d'icônes, cela représente quelques kilooctets de CSS et aucune requête. Si vous utilisez des centaines d'icônes sur chaque page, ou de nombreuses variantes de chacune, comparez avec un <a href="svg-sprite.html">sprite SVG</a>, que le navigateur met en cache sous la forme d'un seul fichier.</p>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.tailwind.pitfalls.h">Pièges courants</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.tailwind.pitfalls.list.1.t">Noms de classes assemblés par morceaux</dt><dd data-i18n="guide.tailwind.pitfalls.list.1.d">Tailwind détecte les classes en recherchant des chaînes complètes dans vos fichiers. <code>`gf-${name}`</code> n'y apparaît jamais en entier, donc aucun CSS n'est généré. Associez vos valeurs à des noms de classes complets, par exemple <code>{ saved: 'gf-[file+check]', error: 'gf-[file+alert]' }</code>, ou ajoutez les noms dont vous avez besoin à une safelist.</dd></div><div><dt data-i18n="guide.tailwind.pitfalls.list.2.t">Plus et esperluette sans crochets en v4</dt><dd data-i18n="guide.tailwind.pitfalls.list.2.d">Dans Tailwind CSS v4, <code>gf-file+check</code> et <code>gf-cloud&amp;lock</code> ne sont pas des candidats de classe valides et ne produisent rien. Utilisez <code>gf-[file+check]</code> et <code>gf-[cloud&amp;lock]</code>, qui fonctionnent dans les deux versions.</dd></div><div><dt data-i18n="guide.tailwind.pitfalls.list.3.t">Utilitaires de largeur en conflit avec la taille de l'icône</dt><dd data-i18n="guide.tailwind.pitfalls.list.3.d">La classe d'icône règle <code>width</code> et <code>height</code> sur la valeur de l'option <code>size</code>. Un <code>size-6</code> ou un <code>w-6</code> sur le même élément définit les mêmes propriétés, et c'est l'ordre des règles dans le CSS généré qui décide laquelle l'emporte. Dimensionnez les icônes avec les utilitaires de texte, ou modifiez une fois pour toutes l'option <code>size</code>.</dd></div><div><dt data-i18n="guide.tailwind.pitfalls.list.4.t">Deux couleurs</dt><dd data-i18n="guide.tailwind.pitfalls.list.4.d">Un masque ne peint qu'une seule couleur. <code>/duotone</code> donne un second calque translucide de la même couleur ; pour une vraie seconde couleur, affichez du SVG inline avec <code>secondaryColor</code>.</dd></div><div><dt data-i18n="guide.tailwind.pitfalls.list.5.t">Contenu à l'intérieur de l'élément</dt><dd data-i18n="guide.tailwind.pitfalls.list.5.d">L'icône est l'arrière-plan de l'élément. Le texte ou les enfants qu'il contient s'affichent par-dessus l'icône, et un utilitaire <code>bg-*</code> remplace la couleur de l'icône. Laissez les éléments d'icône vides.</dd></div><div><dt data-i18n="guide.tailwind.pitfalls.list.6.t">Animations sur des éléments masqués</dt><dd data-i18n="guide.tailwind.pitfalls.list.6.d">Une classe <code>gf-pop</code> ou <code>gf-shake</code> se joue une fois, au rendu de l'élément. Si l'élément est rendu alors qu'il est masqué, l'animation se termine avant que quiconque ne la voie. Ajoutez la classe au moment où le changement se produit, ou utilisez un composant avec <code>trigger="state"</code>.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions fréquentes</h2>
+<h3 data-i18n="guide.tailwind.faq.versions.q">Le plugin fonctionne-t-il avec Tailwind CSS v3 et v4 ?</h3>
+<p data-i18n="guide.tailwind.faq.versions.a">Oui, c'est le même plugin. En v4, déclarez-le avec <code>@plugin "glyphfox/tailwind"</code> dans votre CSS et écrivez les badges et les fusions entre crochets ; en v3, ajoutez <code>require('glyphfox/tailwind')</code> à <code>plugins</code>, version dans laquelle les formes courtes fonctionnent aussi.</p>
+<h3 data-i18n="guide.tailwind.faq.frameworks.q">Puis-je utiliser les classes d'icônes dans React, Vue ou Svelte ?</h3>
+<p data-i18n="guide.tailwind.faq.frameworks.a">Oui. Les classes sont du CSS standard : elles fonctionnent donc dans n'importe quel template, y compris dans les pages rendues côté serveur et les pages statiques. Utilisez plutôt les composants du framework si vous avez besoin de deux couleurs, de l'animation <code>draw</code>, du morph ou d'un nom accessible sur l'icône elle-même.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icônes de ce guide</h2>
+<ul class="icon-links"><li><a href="../../icons/download.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-download" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>download</span></a></li><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../../icons/folder.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/></svg><span>folder</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/></svg><span>cloud</span></a></li><li><a href="../../icons/shield.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-shield" aria-hidden="true"><path d="M12 2l8 3v6.5c0 4.8-3.3 8.6-8 10.5-4.7-1.9-8-5.7-8-10.5V5Z"/></svg><span>shield</span></a></li><li><a href="../../icons/loader-circle.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-loader-circle" aria-hidden="true"><path d="M12 3A9 9 0 1 1 3 12"/></svg><span>loader-circle</span></a></li><li><a href="../../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guides associés</h2>
+<ul class="guide-cards"><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Icônes accessibles</strong><span data-i18n="guide.accessibility.description">Rendez vos icônes glyphfox accessibles : décoratives par défaut, titres et libellés, boutons sans texte, icônes d'état, contraste, mouvement réduit et RTL.</span></a></li><li><a href="animated-icons.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><strong data-i18n="guide.animated-icons.h1">Icônes animées</strong><span data-i18n="guide.animated-icons.description">Icônes animées avec glyphfox : préréglages draw, pop, spin et shake, déclencheurs hover, click et state, morphs entre icônes, même en CSS pur, et mouvement réduit.</span></a></li><li><a href="astro.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-planet" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M2.6 15.42A10 3.5-20 0 1 3.12 13.49"/><path d="M19.76 7.44A10 3.5-20 0 1 21.4 8.58"/><path d="M21.4 8.58A10 3.5-20 0 1 2.6 15.42"/></svg><strong data-i18n="guide.astro.h1">Icônes dans Astro</strong><span data-i18n="guide.astro.description">Icônes Astro avec glyphfox : rendu au build sans JavaScript côté client, composant Icon.astro, îles ou élément personnalisé pour l'animation.</span></a></li><li><a href="html-cdn.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><strong data-i18n="guide.html-cdn.h1">Icônes en HTML pur depuis un CDN</strong><span data-i18n="guide.html-cdn.description">Ajoutez glyphfox à toute page HTML via une balise script : élément glyph-fox, placeholders data-glyph, API globale, version figée, quand créer un sous-ensemble.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Des icônes originales sur une grille de 24 qui changent d'épaisseur, se transforment, fusionnent et prennent vie. Libres et open source sous licence MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produit</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icônes</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Toutes les icônes par catégorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marque</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Développeurs</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Nouveautés</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projet</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licence MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Créé par</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn le renard est dessiné sur la même grille que les icônes.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

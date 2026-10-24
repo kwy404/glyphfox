@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/web-components.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Iconos en Lit y web components: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.web-components.title">Iconos en Lit y web components: glyphfox</title>
+<meta name="description" content="Usa el custom element glyph-fox en Lit y web components nativos: registra todos los iconos SVG o un subconjunto, enlaza atributos, dale estilo y hazlo accesible." data-i18n-attr="content:guide.web-components.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/guides/web-components.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/web-components.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/web-components.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/web-components.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/web-components.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/web-components.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/web-components.html">
+<meta property="og:title" content="Iconos en Lit y web components: glyphfox">
+<meta property="og:description" content="Usa el custom element glyph-fox en Lit y web components nativos: registra todos los iconos SVG o un subconjunto, enlaza atributos, dale estilo y hazlo accesible.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/guides/web-components.html">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:title" content="Iconos en Lit y web components: glyphfox">
+<meta name="twitter:description" content="Usa el custom element glyph-fox en Lit y web components nativos: registra todos los iconos SVG o un subconjunto, enlaza atributos, dale estilo y hazlo accesible.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/web-components.png">
+<meta name="twitter:image:alt" content="Iconos en Lit y web components: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://kwy404.github.io/glyphfox/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://kwy404.github.io/glyphfox/es/guides/"},{"@type":"ListItem","position":3,"name":"Lit y web components","item":"https://kwy404.github.io/glyphfox/es/guides/web-components.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Puedo usar el elemento en React, Vue o Angular?","acceptedAnswer":{"@type":"Answer","text":"Sí, es un custom element estándar. Aun así, ahí encajan mejor los paquetes para cada framework: glyphfox/react, glyphfox/vue y glyphfox-angular ofrecen props tipadas y se renderizan en el servidor. Reserva el elemento para Lit, HTML plano y páginas que combinan distintos stacks. En las plantillas de Vue, indica al compilador que glyph-fox es un custom element con compilerOptions.isCustomElement; de lo contrario, Vue intentará resolverlo como un componente."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copiado al portapapeles" data-theme-light="Cambiar al tema claro" data-theme-dark="Cambiar al tema oscuro">
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/web-components.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guías" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Todas las guías</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" aria-current="page" class="on" data-i18n="guide.web-components.short">Lit y web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML y CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Temas</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Iconos animados</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accesibilidad</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Renderizado en el servidor</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Ruta de navegación" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Inicio</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guías</a></li><li aria-current="page" data-i18n="guide.web-components.short">Lit y web components</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.web-components.h1">Iconos en Lit y web components</h1>
+<p class="lead" data-i18n="guide.web-components.lead">glyphfox incluye un custom element, <code>&lt;glyph-fox&gt;</code>, que recibe como atributos el nombre del icono y todas las props compartidas. Funciona en cualquier lugar donde funcione HTML y encaja en las plantillas de Lit sin necesidad de ningún wrapper.</p>
+<nav class="toc" aria-label="En esta página" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.web-components.install.h">Instalación</a></li><li><a href="#usage" data-i18n="guide.web-components.usage.h">Usa el elemento</a></li><li><a href="#lit" data-i18n="guide.web-components.lit.h">Plantillas de Lit</a></li><li><a href="#shadow" data-i18n="guide.web-components.shadow.h">Estilos a través del shadow root</a></li><li><a href="#tag" data-i18n="guide.web-components.tag.h">Tu propio nombre de etiqueta</a></li><li><a href="#triggers" data-i18n="guide.web-components.triggers.h">Disparadores y morphs</a></li><li><a href="#static" data-i18n="guide.web-components.static.h">SVG estático dentro de plantillas de Lit</a></li><li><a href="#props" data-i18n="guide.web-components.props.h">Atributos</a></li><li><a href="#a11y" data-i18n="guide.web-components.a11y.h">Accesibilidad</a></li><li><a href="#ssr" data-i18n="guide.web-components.ssr.h">Renderizado en el servidor y desplazamientos del diseño</a></li><li><a href="#pitfalls" data-i18n="guide.web-components.pitfalls.h">Errores comunes</a></li><li><a href="#faq" data-i18n="seo.faq">Preguntas frecuentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.web-components.install.h">Instalación</h2>
+<p data-i18n="guide.web-components.install.p">Instala el paquete y registra el elemento una sola vez, en el módulo de entrada de tu aplicación. Importar <code>glyphfox/web</code> registra todos los iconos y define <code>&lt;glyph-fox&gt;</code> como efecto secundario, así que no hace falta nada más.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<div class="code"><div class="code-head"><span>main.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> <span class="tok-s">'glyphfox/web'</span>;</pre></div>
+<p data-i18n="guide.web-components.install.subset">Para incluir solo los iconos que usas, importa el elemento desde <code>glyphfox/web/element</code>, registra los datos de los iconos desde <code>glyphfox/icons/NAME</code> y define tú mismo el elemento. <code>registerIcons</code> viene de <code>glyphfox/core</code>, que comparte su registro con el elemento.</p>
+<div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { defineGlyphFox } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/web/element'</span>;
+<span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> menu <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/menu'</span>;
+<span class="tok-k">import</span> x <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/x'</span>;
+<span class="tok-k">import</span> bell <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/bell'</span>;
+<span class="tok-k">import</span> search <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/search'</span>;
+
+registerIcons([menu, x, bell, search]);
+defineGlyphFox();</pre></div>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.web-components.install.table.h1">Punto de entrada</th><th data-i18n="guide.web-components.install.table.h2">Qué incluye</th><th data-i18n="guide.web-components.install.table.h3">Tamaño (esbuild, minificado)</th></tr></thead><tbody>
+<tr><td data-i18n="guide.web-components.install.table.r1c1"><code>glyphfox/web</code></td><td data-i18n="guide.web-components.install.table.r1c2">El elemento, el motor y todos los iconos, registrados al importarlo.</td><td data-i18n="guide.web-components.install.table.r1c3">unos 209 KB (59 KB con gzip)</td></tr>
+<tr><td data-i18n="guide.web-components.install.table.r2c1"><code>glyphfox/web/element</code></td><td data-i18n="guide.web-components.install.table.r2c2">El elemento y el motor; los iconos los registras tú.</td><td data-i18n="guide.web-components.install.table.r2c3">unos 77 KB (28 KB con gzip) con un icono, más unos cientos de bytes por icono</td></tr>
+</tbody></table></div>
+<p data-i18n="guide.web-components.install.lazy">Los nombres que no hayas registrado se cargan bajo demanda. webpack y esbuild convierten esas cargas en un chunk pequeño por icono, pero un build de producción de Vite deja el import dentro de <code>node_modules</code> tal como está escrito y el icono se queda vacío (consulta la <a href="tree-shaking.html#chunks">guía de tree shaking</a>). Registra todos los iconos que uses con <code>glyphfox/web/element</code>; así, además, se dibujan desde el primer fotograma, sin esperar a ninguna petición de red.</p>
+</section>
+<section id="usage">
+<h2 data-i18n="guide.web-components.usage.h">Usa el elemento</h2>
+<p data-i18n="guide.web-components.usage.p">El elemento renderiza un SVG en línea dentro de su shadow root. <code>name</code> admite la sintaxis de nombres completa, así que las insignias de modificador, las fusiones y los estilos no necesitan ninguna API adicional, y cada prop compartida es un atributo en kebab-case.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"home"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"file+check"</span> <span class="tok-a">size</span>=<span class="tok-s">"32"</span> <span class="tok-a">weight</span>=<span class="tok-s">"1.5"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"cloud&amp;lock"</span> <span class="tok-a">layout</span>=<span class="tok-s">"overlap"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"heart/solid"</span> <span class="tok-a">color</span>=<span class="tok-s">"#e11d48"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"bell"</span> <span class="tok-a">animate</span>=<span class="tok-s">"shake"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"hover"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.web-components.usage.update">El elemento observa sus atributos. Cambia uno con <code>setAttribute</code>, o desde cualquier plantilla que escriba atributos, y el icono se vuelve a dibujar con el nuevo valor.</p>
+</section>
+<section id="lit">
+<h2 data-i18n="guide.web-components.lit.h">Plantillas de Lit</h2>
+<p data-i18n="guide.web-components.lit.p">En Lit, pasa los valores con bindings de atributo. El elemento lee atributos y no tiene propiedades de JavaScript equivalentes, así que un binding de propiedad como <code>.name=${...}</code> asigna un campo que el elemento nunca lee, y el icono se queda como estaba.</p>
+<div class="code"><div class="code-head"><span>app-toolbar.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { LitElement, html, css } <span class="tok-k">from</span> <span class="tok-s">'lit'</span>;
+<span class="tok-k">import</span> <span class="tok-s">'glyphfox/web'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">class</span> AppToolbar <span class="tok-k">extends</span> LitElement {
+  static properties = {
+    open: { <span class="tok-k">type</span>: Boolean },
+    unread: { <span class="tok-k">type</span>: Number },
+  };
+
+  static styles = css<span class="tok-s">`
+    button { display: inline-flex; align-items: center; gap: 8px; color: inherit; }
+    glyph-fox { color: var(--toolbar-icon, currentColor); }
+  `</span>;
+
+  constructor() {
+    super();
+    this.open = <span class="tok-k">false</span>;
+    this.unread = <span class="tok-n">0</span>;
+  }
+
+  render() {
+    <span class="tok-k">return</span> html<span class="tok-s">`
+      &lt;button type="button" aria-expanded=${this.open} @click=${() =&gt; (this.open = !this.open)}&gt;
+        &lt;glyph-fox name=${this.open ? 'x' : 'menu'} morph duration="300"&gt;&lt;/glyph-fox&gt;
+        &lt;span&gt;Menu&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;glyph-fox
+        name="bell"
+        animate="shake"
+        trigger="state"
+        ?active=${this.unread &gt; 0}
+        title=${this.unread ? `</span>${this.unread} <span class="tok-k">new</span> notifications<span class="tok-s">` : 'No new notifications'}
+      &gt;&lt;/glyph-fox&gt;
+    `</span>;
+  }
+}
+
+customElements.define(<span class="tok-s">'app-toolbar'</span>, AppToolbar);</pre></div>
+<p data-i18n="guide.web-components.lit.bool">Para los flags, usa bindings booleanos: <code>?morph=${...}</code> y <code>?active=${...}</code>. El elemento interpreta un atributo vacío o <code>"true"</code> como verdadero, y <code>"false"</code> o la ausencia del atributo como falso, así que un binding booleano se corresponde uno a uno.</p>
+<p data-i18n="guide.web-components.lit.optional">Para los valores opcionales, pasa <code>nothing</code> en el binding (o usa la directiva <code>ifDefined</code>) para que el atributo se elimine cuando no haya valor. Un atributo <code>size</code> vacío deja el svg interno con un ancho y un alto vacíos, y el navegador recurre al tamaño predeterminado de los svg.</p>
+<div class="code"><div class="code-head"><span>icon-button.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { html, nothing } <span class="tok-k">from</span> <span class="tok-s">'lit'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> iconButton = ({ name, size, label, onClick }) =<span class="tok-t">&gt;</span> html<span class="tok-s">`
+  &lt;button type="button" aria-label=${label} @click=${onClick}&gt;
+    &lt;glyph-fox name=${name} size=${size ?? nothing}&gt;&lt;/glyph-fox&gt;
+  &lt;/button&gt;
+`</span>;</pre></div>
+</section>
+<section id="shadow">
+<h2 data-i18n="guide.web-components.shadow.h">Estilos a través del shadow root</h2>
+<p data-i18n="guide.web-components.shadow.color">El svg está en el shadow root del elemento, con los trazos en <code>currentColor</code>. El color se hereda a través del límite del shadow DOM, así que define <code>color</code> en el elemento o en cualquier ancestro. El host usa <code>display: inline-flex</code> con <code>line-height: 0</code> y <code>vertical-align: middle</code>, de modo que se integra en una línea de texto sin CSS adicional.</p>
+<p data-i18n="guide.web-components.shadow.size">El tamaño viene del atributo <code>size</code>, que define el ancho y el alto del svg interno. Aplicar width y height con CSS al host no escala el dibujo. Usa <code>size="1em"</code> para seguir el tamaño de fuente, o escribe el atributo a partir de tus propios tokens de diseño.</p>
+<div class="code"><div class="code-head"><span>note.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;p</span> <span class="tok-k">class</span>=<span class="tok-s">"note"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"circle-info"</span> <span class="tok-a">size</span>=<span class="tok-s">"1em"</span> <span class="tok-a">weight</span>=<span class="tok-s">"2.5"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+  The icon follows the font size <span class="tok-k">of</span> this paragraph.
+<span class="tok-t">&lt;/p</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"folder"</span> <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-a">color</span>=<span class="tok-s">"#0f172a"</span> <span class="tok-a">secondary-color</span>=<span class="tok-s">"#ff7a1a"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span></pre></div>
+<div class="code"><div class="code-head"><span>toolbar.css</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="css" data-done="1"><span class="tok-t">.toolbar</span> glyph-fox { <span class="tok-a">color</span>: <span class="tok-n">#6b7280</span>; }
+<span class="tok-t">.toolbar</span> <span class="tok-a">button</span>:hover glyph-fox { <span class="tok-a">color</span>: <span class="tok-n">#111827</span>; }</pre></div>
+<p data-i18n="guide.web-components.shadow.parts">No hay parts ni slots a los que dar estilo: todo lo que hay dentro se genera a partir de las props. Cambia el dibujo con atributos como <code>weight</code>, <code>corners</code>, <code>variant</code> y <code>secondary-color</code>, no con selectores que intenten llegar al interior del shadow root.</p>
+</section>
+<section id="tag">
+<h2 data-i18n="guide.web-components.tag.h">Tu propio nombre de etiqueta</h2>
+<p data-i18n="guide.web-components.tag.p"><code>defineGlyphFox(tag)</code> define el elemento con otro nombre y devuelve su clase. Úsalo para adoptar el prefijo de tu sistema de diseño o para evitar un conflicto con otro elemento. Puedes llamarlo más de una vez sin problema: si la etiqueta ya está definida, se devuelve tal cual.</p>
+<div class="code"><div class="code-head"><span>icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { defineGlyphFox } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/web/element'</span>;
+<span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> home <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/home'</span>;
+<span class="tok-k">import</span> settings <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/settings'</span>;
+
+registerIcons([home, settings]);
+defineGlyphFox(<span class="tok-s">'acme-icon'</span>);</pre></div>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;acme-icon</span> <span class="tok-a">name</span>=<span class="tok-s">"home"</span> <span class="tok-a">size</span>=<span class="tok-s">"20"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/acme-icon</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;acme-icon</span> <span class="tok-a">name</span>=<span class="tok-s">"settings"</span> <span class="tok-a">size</span>=<span class="tok-s">"20"</span> <span class="tok-a">weight</span>=<span class="tok-s">"1.5"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/acme-icon</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.web-components.tag.entry">Importar <code>glyphfox/web</code> también define <code>glyph-fox</code>, así que elige un único punto de entrada por aplicación: <code>glyphfox/web</code> para la etiqueta predeterminada con todos los iconos, y <code>glyphfox/web/element</code> cuando eliges tú la etiqueta y la lista de iconos.</p>
+</section>
+<section id="triggers">
+<h2 data-i18n="guide.web-components.triggers.h">Disparadores y morphs</h2>
+<p data-i18n="guide.web-components.triggers.p">El elemento gestiona su propia interacción. Con <code>trigger="hover"</code> o <code>trigger="click"</code> escucha los eventos sobre sí mismo, y con <code>trigger="state"</code> sigue el atributo <code>active</code>. El atributo <code>morph</code> anima cada cambio de <code>name</code>, mientras que con <code>morph-to</code> el icono se transforma en un segundo icono cada vez que se activa el disparador.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"menu"</span> <span class="tok-a">morph-to</span>=<span class="tok-s">"x"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"click"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"sparkles"</span> <span class="tok-a">animate</span>=<span class="tok-s">"draw"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"hover"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">id</span>=<span class="tok-s">"visibility"</span> <span class="tok-a">name</span>=<span class="tok-s">"eye"</span> morph<span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;script</span> <span class="tok-k">type</span>=<span class="tok-s">"module"</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">const</span> eye = document.getElementById(<span class="tok-s">'visibility'</span>);
+  eye.addEventListener(<span class="tok-s">'click'</span>, () =<span class="tok-t">&gt;</span> {
+    eye.setAttribute(<span class="tok-s">'name'</span>, eye.getAttribute(<span class="tok-s">'name'</span>) === <span class="tok-s">'eye'</span> ? <span class="tok-s">'eye-off'</span> : <span class="tok-s">'eye'</span>);
+  });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.web-components.triggers.parent">El hover y el clic se detectan en el propio elemento. Los estilos de animación están dentro del shadow root, desde donde no pueden ver al elemento padre, y el clic se escucha en el host. Cuando deba reaccionar todo un botón, controla el icono desde el botón: usa <code>trigger="state"</code> y asigna <code>active</code> desde los manejadores de eventos del botón.</p>
+<div class="code"><div class="code-head"><span>save-button.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-k">class</span>=<span class="tok-s">"save"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"save"</span> <span class="tok-a">animate</span>=<span class="tok-s">"pop"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+  Save
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;script</span> <span class="tok-k">type</span>=<span class="tok-s">"module"</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">const</span> button = document.querySelector(<span class="tok-s">'.save'</span>);
+  <span class="tok-k">const</span> icon = button.querySelector(<span class="tok-s">'glyph-fox'</span>);
+  button.addEventListener(<span class="tok-s">'pointerenter'</span>, () =<span class="tok-t">&gt;</span> icon.setAttribute(<span class="tok-s">'active'</span>, <span class="tok-s">''</span>));
+  button.addEventListener(<span class="tok-s">'pointerleave'</span>, () =<span class="tok-t">&gt;</span> icon.removeAttribute(<span class="tok-s">'active'</span>));
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.web-components.triggers.motion">Los morphs y los presets respetan <code>prefers-reduced-motion</code>: las transiciones saltan al estado final y las animaciones no se reproducen. Los presets y los disparadores se describen en <a href="animated-icons.html">iconos animados</a>.</p>
+</section>
+<section id="static">
+<h2 data-i18n="guide.web-components.static.h">SVG estático dentro de plantillas de Lit</h2>
+<p data-i18n="guide.web-components.static.p">Cuando un icono no cambia nunca después del renderizado, puedes prescindir del elemento e insertar el marcado SVG. <code>renderToString</code> de <code>glyphfox/core</code> renderiza los datos del icono con las props compartidas, y Lit inserta la cadena con la directiva <code>unsafeHTML</code>. El renderizador escapa los títulos y los valores de los atributos, así que es seguro insertar el marcado.</p>
+<div class="code"><div class="code-head"><span>saved-badge.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { html } <span class="tok-k">from</span> <span class="tok-s">'lit'</span>;
+<span class="tok-k">import</span> { unsafeHTML } <span class="tok-k">from</span> <span class="tok-s">'lit/directives/unsafe-html.js'</span>;
+<span class="tok-k">import</span> { renderToString } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> circleCheck <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/circle-check'</span>;
+
+<span class="tok-k">const</span> check = unsafeHTML(renderToString(circleCheck, { size: <span class="tok-n">16</span>, color: <span class="tok-s">'#16a34a'</span> }));
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> savedBadge = () =<span class="tok-t">&gt;</span> html<span class="tok-s">`&lt;span class="badge"&gt;${check} Saved&lt;/span&gt;`</span>;</pre></div>
+<p data-i18n="guide.web-components.static.tosvg">Para la sintaxis de nombres (<code>file+check@tr</code>, <code>cloud&amp;lock</code>), usa <code>toSvg</code> de <code>glyphfox</code>. Resuelve cualquier nombre, lo que significa que incluye todos los iconos; consulta <a href="tree-shaking.html">tree shaking</a> antes de usarlo en un bundle de cliente.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.web-components.props.h">Atributos</h2>
+<p data-i18n="guide.web-components.props.p">Cada prop compartida es un atributo en kebab-case. El elemento añade cuatro propios: <code>name</code> para el icono, con la sintaxis de nombres completa; <code>layout</code> y <code>gap</code> para las fusiones; y <code>morph</code>, que anima los cambios de <code>name</code>. Los números se leen a partir de su texto, y los booleanos siguen la regla anterior.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.attr">Atributo</th><th data-i18n="docs.type">Tipo</th><th data-i18n="docs.default">Por defecto</th><th data-i18n="docs.desc">Descripción</th></tr></thead><tbody>
+<tr><td><code>name</code></td><td>string</td><td>ninguno</td><td data-i18n="seo.prop.name">La especificación del icono: un nombre, <code>name+modifier@corner</code>, <code>a&amp;b:layout</code> o <code>name/variant</code>.</td></tr>
+<tr><td><code>layout</code></td><td>overlap, side, stack, grid, orbit, badge, inside</td><td>ninguno</td><td data-i18n="seo.prop.layout">Layout de la fusión cuando el nombre une iconos con <code>&amp;</code>.</td></tr>
+<tr><td><code>gap</code></td><td>number</td><td><code>1</code></td><td data-i18n="seo.prop.gap">Hueco de recorte de una fusión, en unidades de la cuadrícula.</td></tr>
+<tr><td><code>morph</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="seo.prop.morph">Anima cada cambio de <code>name</code> como un morph.</td></tr>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Ancho y alto; los números son píxeles.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Color principal.</td></tr>
+<tr><td><code>secondary-color</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color de la capa duotone y del relleno sólido.</td></tr>
+<tr><td><code>secondary-opacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacidad de la capa duotone o del relleno sólido.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Trazo de 1 a 3 en la cuadrícula de 24, con compensación óptica por debajo de 24 px.</td></tr>
+<tr><td><code>absolute-weight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Mantiene el trazo en weight píxeles a cualquier tamaño.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Uniones y extremos redondeados o rectos.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Eje de estilo; solid se obtiene de las formas cerradas.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotación en grados.</td></tr>
+<tr><td><code>flip-x</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Refleja en horizontal.</td></tr>
+<tr><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Refleja en vertical.</td></tr>
+<tr><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Refleja en layouts de derecha a izquierda.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>ninguno</td><td data-i18n="prop.animate">Preset de estado vivo.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Cuándo se reproduce la animación o el morph.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">El estado para el disparador state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>según el preset</td><td data-i18n="prop.duration">Duración de la animación o del morph.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Retraso de la animación o del morph.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repite sin fin o un número de veces (spin y pulse se repiten por defecto).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>ninguno</td><td data-i18n="prop.modifier">Insignia con hueco de recorte automático.</td></tr>
+<tr><td><code>modifier-corner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Esquina de la insignia.</td></tr>
+<tr><td><code>morph-to</code></td><td>name, data</td><td>ninguno</td><td data-i18n="prop.morphTo">Destino del morph; el disparador decide cuándo se muestra.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>ninguno</td><td data-i18n="prop.title">Nombre accesible: title, role img y aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true sin title</td><td data-i18n="prop.decorative">Oculta el icono a las tecnologías de apoyo.</td></tr>
+</tbody></table></div>
+</section>
+<section id="a11y">
+<h2 data-i18n="guide.web-components.a11y.h">Accesibilidad</h2>
+<p data-i18n="guide.web-components.a11y.p">Sin etiqueta, el icono es decorativo: el svg interno recibe <code>aria-hidden="true"</code>. Es lo correcto para un icono junto a texto visible y para un botón de icono que lleva su propio <code>aria-label</code>.</p>
+<p data-i18n="guide.web-components.a11y.title">Para darle un nombre al propio icono, usa el atributo <code>title</code>. Añade un <code>&lt;title&gt;</code>, <code>role="img"</code> y <code>aria-label</code> al svg interno. No confíes en <code>aria-label</code> sobre el elemento: la etiqueta se queda en el host, que no tiene rol, mientras que el svg interior se convierte en una imagen sin nombre. <code>title</code> en el host es, además, el atributo global de HTML, así que los navegadores lo muestran como tooltip.</p>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-c">&lt;!-- decorative: the button carries the name --&gt;</span>
+<span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Close dialog"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"x"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+<span class="tok-c">&lt;!-- meaningful on its own --&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"triangle-alert"</span> <span class="tok-a">title</span>=<span class="tok-s">"Warning"</span> <span class="tok-a">color</span>=<span class="tok-s">"#b45309"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.web-components.a11y.more">Encontrarás patrones para enlaces, iconos de estado y contraste en la <a href="accessibility.html">guía de accesibilidad</a>.</p>
+</section>
+<section id="ssr">
+<h2 data-i18n="guide.web-components.ssr.h">Renderizado en el servidor y desplazamientos del diseño</h2>
+<p data-i18n="guide.web-components.ssr.p">El elemento se dibuja cuando el navegador lo inicializa. El HTML renderizado en el servidor solo contiene la etiqueta vacía, y el elemento no usa shadow DOM declarativo, así que el icono aparece después de que se ejecute el script. Reserva el espacio para que el diseño no se mueva cuando aparezca.</p>
+<div class="code"><div class="code-head"><span>icons.css</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="css" data-done="1"><span class="tok-a">glyph-fox</span>:not(:defined) {
+  <span class="tok-a">display</span>: inline-block;
+  <span class="tok-a">width</span>: <span class="tok-n">24px</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">24px</span>;
+  <span class="tok-a">vertical-align</span>: middle;
+}
+glyph-fox[size=<span class="tok-s">"16"</span>]:not(:defined) {
+  <span class="tok-a">width</span>: <span class="tok-n">16px</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">16px</span>;
+}</pre></div>
+<p data-i18n="guide.web-components.ssr.more">Cuando un icono tenga que estar en el primer pintado, en un correo electrónico o en el HTML para rastreadores, renderiza en su lugar la cadena SVG en el servidor. Las opciones de cada framework están en <a href="ssr.html">renderizado en el servidor</a>.</p>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.web-components.pitfalls.h">Errores comunes</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.web-components.pitfalls.list.1.t">Etiquetas autocerradas</dt><dd data-i18n="guide.web-components.pitfalls.list.1.d">Escribe <code>&lt;glyph-fox name="home"&gt;&lt;/glyph-fox&gt;</code>. HTML ignora la barra de <code>&lt;glyph-fox /&gt;</code>, así que el elemento queda abierto y el contenido que viene después se convierte en sus hijos, que el shadow root no muestra.</dd></div><div><dt data-i18n="guide.web-components.pitfalls.list.2.t">Bindings de propiedad</dt><dd data-i18n="guide.web-components.pitfalls.list.2.d">En Lit, <code>.name=${...}</code> y los demás bindings de propiedad asignan un campo de JavaScript que el elemento no lee. Usa bindings de atributo. Solid necesita <code>attr:</code> por el mismo motivo; consulta la <a href="solid.html">guía de Solid</a>.</dd></div><div><dt data-i18n="guide.web-components.pitfalls.list.3.t">Atributos vacíos</dt><dd data-i18n="guide.web-components.pitfalls.list.3.d">Un <code>size</code> vacío renderiza un svg con el ancho y el alto vacíos. Elimina el atributo cuando no haya valor, con <code>nothing</code> o <code>ifDefined</code> en Lit.</dd></div><div><dt data-i18n="guide.web-components.pitfalls.list.4.t">Hover y clic en el elemento padre</dt><dd data-i18n="guide.web-components.pitfalls.list.4.d">Los disparadores de hover y clic solo se activan sobre el icono, no sobre el botón que lo rodea. Usa <code>trigger="state"</code> y asigna <code>active</code> desde el elemento padre.</dd></div><div><dt data-i18n="guide.web-components.pitfalls.list.5.t">Los cambios de atributos repiten las animaciones de montaje</dt><dd data-i18n="guide.web-components.pitfalls.list.5.d">El elemento reemplaza su svg interno cada vez que cambia el marcado, así que con un preset de <code>animate</code> y el <code>trigger="mount"</code> predeterminado, cambiar <code>color</code> o <code>size</code> vuelve a reproducir la animación. Usa <code>trigger="state"</code> en los iconos cuyos otros atributos cambian a menudo.</dd></div><div><dt data-i18n="guide.web-components.pitfalls.list.6.t">Un icono vacío</dt><dd data-i18n="guide.web-components.pitfalls.list.6.d">Un nombre desconocido no renderiza nada y muestra una advertencia <code>glyphfox:</code> en la consola. Un nombre válido que no está registrado se dibuja en cuanto se carga su módulo, así que revisa el panel de red antes de buscar una errata.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Preguntas frecuentes</h2>
+<h3 data-i18n="guide.web-components.faq.frameworks.q">¿Puedo usar el elemento en React, Vue o Angular?</h3>
+<p data-i18n="guide.web-components.faq.frameworks.a">Sí, es un custom element estándar. Aun así, ahí encajan mejor los paquetes para cada framework: <a href="react.html">glyphfox/react</a>, <a href="vue.html">glyphfox/vue</a> y <a href="angular.html">glyphfox-angular</a> ofrecen props tipadas y se renderizan en el servidor. Reserva el elemento para Lit, HTML plano y páginas que combinan distintos stacks. En las plantillas de Vue, indica al compilador que <code>glyph-fox</code> es un custom element con <code>compilerOptions.isCustomElement</code>; de lo contrario, Vue intentará resolverlo como un componente.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Iconos de esta guía</h2>
+<ul class="icon-links"><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/></svg><span>cloud</span></a></li><li><a href="../../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../../icons/circle-info.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-circle-info" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7.5h.01"/><path d="M12 12v5"/></svg><span>circle-info</span></a></li><li><a href="../../icons/folder.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/></svg><span>folder</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/sparkles.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><span>sparkles</span></a></li><li><a href="../../icons/eye.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-eye" aria-hidden="true"><path d="M2 12C4.5 7.33 8 5 12 5s7.5 2.33 10 7c-2.5 4.67-6 7-10 7s-7.5-2.33-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>eye</span></a></li><li><a href="../../icons/save.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-save" aria-hidden="true"><path d="M5 3h11.5L21 7.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M7 21v-6a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v6"/><path d="M7 3v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3"/></svg><span>save</span></a></li><li><a href="../../icons/circle-check.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-circle-check" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12l3 3 6-6"/></svg><span>circle-check</span></a></li><li><a href="../../icons/triangle-alert.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-triangle-alert" aria-hidden="true"><path d="M13.91 4.2L21.7 17.7A2.2 2.2 0 0 1 19.8 21L4.2 21A2.2 2.2 0 0 1 2.3 17.7L10.09 4.2A2.2 2.2 0 0 1 13.91 4.2Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span>triangle-alert</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guías relacionadas</h2>
+<ul class="guide-cards"><li><a href="html-cdn.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><strong data-i18n="guide.html-cdn.h1">Iconos en HTML plano desde una CDN</strong><span data-i18n="guide.html-cdn.description">Añade glyphfox a cualquier página HTML con un solo script: elemento glyph-fox, placeholders data-glyph, API global, versión fija y cuándo crear un subconjunto.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Iconos accesibles</strong><span data-i18n="guide.accessibility.description">Iconos accesibles con glyphfox: decorativos por defecto, títulos y etiquetas, botones solo con icono, iconos de estado, contraste, movimiento reducido y RTL.</span></a></li><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Renderizado en el servidor</strong><span data-i18n="guide.ssr.description">Iconos SVG de glyphfox en el servidor: qué genera cada paquete, registro de iconos usados por nombre, cadenas toSvg, hidratación, animaciones y web component.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de peso, se transforman, se fusionan y cobran vida. Libres y de código abierto bajo la licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Todos los iconos por categoría</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guías</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Hecho por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

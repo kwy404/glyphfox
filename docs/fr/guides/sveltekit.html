@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/sveltekit.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icônes dans SvelteKit: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.sveltekit.title">Icônes dans SvelteKit avec glyphfox : SSR et prérendu</title>
+<meta name="description" content="Icônes SvelteKit avec glyphfox en SSR et prérendu : mise en place, layout racine pour les noms, endpoints SVG, adapter-static, hydratation et pièges courants." data-i18n-attr="content:guide.sveltekit.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/fr/guides/sveltekit.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/sveltekit.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/sveltekit.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/sveltekit.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/sveltekit.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/sveltekit.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/sveltekit.html">
+<meta property="og:title" content="Icônes dans SvelteKit avec glyphfox : SSR et prérendu">
+<meta property="og:description" content="Icônes SvelteKit avec glyphfox en SSR et prérendu : mise en place, layout racine pour les noms, endpoints SVG, adapter-static, hydratation et pièges courants.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/fr/guides/sveltekit.html">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:title" content="Icônes dans SvelteKit avec glyphfox : SSR et prérendu">
+<meta name="twitter:description" content="Icônes SvelteKit avec glyphfox en SSR et prérendu : mise en place, layout racine pour les noms, endpoints SVG, adapter-static, hydratation et pièges courants.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/sveltekit.png">
+<meta name="twitter:image:alt" content="Icônes dans SvelteKit: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://kwy404.github.io/glyphfox/fr/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/fr/guides/"},{"@type":"ListItem","position":3,"name":"SvelteKit","item":"https://kwy404.github.io/glyphfox/fr/guides/sveltekit.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Puis-je prérendre chaque icône sous forme de fichier SVG ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Renvoyez iconNames.map((name) => ({ name })) depuis entries dans l'endpoint ci-dessus, et le build écrit un fichier par icône dans /icons/. Chaque fichier pèse quelques centaines d'octets."}},{"@type":"Question","name":"Les icônes fonctionnent-elles sur les pages avec csr = false ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Le serveur écrit le svg dans le HTML, et les animations des états vivants se jouent toujours, car il s'agit de CSS intégré au svg. Les morphs et les déclencheurs de clic et de survol nécessitent JavaScript : ils restent donc figés sur leur première image."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copié dans le presse-papiers" data-theme-light="Passer au thème clair" data-theme-dark="Passer au thème sombre">
+<a class="skip" href="#main" data-i18n="nav.skip">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icônes</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Nouveautés</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/sveltekit.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Tous les guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" aria-current="page" class="on" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit et web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML et CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Thèmes</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Icônes animées</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibilité</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Rendu côté serveur</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Fil d'Ariane" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Accueil</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.sveltekit.short">SvelteKit</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.sveltekit.h1">Icônes dans SvelteKit</h1>
+<p class="lead" data-i18n="guide.sveltekit.lead"><code>glyphfox/svelte</code> prend en charge le rendu côté serveur : les pages SvelteKit livrent donc du vrai SVG dans leur HTML, qu'elles soient rendues à chaque requête ou prérendues au moment du build.</p>
+<nav class="toc" aria-label="Sur cette page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.sveltekit.install.h">Installation</a></li><li><a href="#layout" data-i18n="guide.sveltekit.layout.h">Enregistrer les noms d'icônes dans le layout racine</a></li><li><a href="#ssr" data-i18n="guide.sveltekit.ssr.h">Ce que rend le serveur</a></li><li><a href="#endpoint" data-i18n="guide.sveltekit.endpoint.h">Des fichiers SVG servis par un endpoint</a></li><li><a href="#html" data-i18n="guide.sveltekit.html.h">Balisage réservé au serveur avec {@html}</a></li><li><a href="#static" data-i18n="guide.sveltekit.static.h">adapter-static et prérendu</a></li><li><a href="#production" data-i18n="guide.sveltekit.production.h">Les noms dans les builds de production</a></li><li><a href="#props" data-i18n="guide.sveltekit.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.sveltekit.pitfalls.h">Pièges courants</a></li><li><a href="#faq" data-i18n="seo.faq">Questions fréquentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.sveltekit.install.h">Installation</h2>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.sveltekit.install.p">Il n'y a rien à configurer. <code>glyphfox/svelte</code> est exposé sous la condition d'export <code>svelte</code> : vite-plugin-svelte, qu'utilise tout projet SvelteKit, le reconnaît donc comme une bibliothèque Svelte et compile ses composants pour le serveur et pour le navigateur. Les composants nécessitent Svelte 5 ; le <a href="svelte.html">guide Svelte</a> détaille les composants et leurs props.</p>
+</section>
+<section id="layout">
+<h2 data-i18n="guide.sveltekit.layout.h">Enregistrer les noms d'icônes dans le layout racine</h2>
+<p data-i18n="guide.sveltekit.layout.p">Les composants comme <code>HomeIcon</code> enregistrent leurs propres données. Les noms qui n'apparaissent que dans des chaînes, dans <code>Icon</code>, <code>Fusion</code>, <code>MorphIcon</code> ou <code>morphTo</code>, nécessitent <code>registerIcons</code>, et le meilleur endroit pour cela est un module importé par le layout racine : il s'exécute sur le serveur avant le premier rendu, et dans le navigateur avant l'hydratation.</p>
+<div class="code"><div class="code-head"><span>src/lib/icons.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/svelte'</span>;
+<span class="tok-k">import</span> menu <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/menu'</span>;
+<span class="tok-k">import</span> x <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/x'</span>;
+<span class="tok-k">import</span> moon <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/moon'</span>;
+<span class="tok-k">import</span> file <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/file'</span>;
+
+registerIcons([menu, x, moon, file]);</pre></div>
+<div class="code"><div class="code-head"><span>src/routes/+layout.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">import</span> <span class="tok-s">'$lib/icons.js'</span>;
+  <span class="tok-k">import</span> { MorphIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/svelte'</span>;
+
+  <span class="tok-k">let</span> { children } = $props();
+  <span class="tok-k">let</span> open = $state(<span class="tok-k">false</span>);
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;header</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Menu"</span> <span class="tok-a">aria-expanded</span>={open} <span class="tok-a">onclick</span>={() =<span class="tok-t">&gt;</span> (open = !open)}<span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">name</span>={open ? <span class="tok-s">'x'</span> : <span class="tok-s">'menu'</span>} <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/header</span><span class="tok-t">&gt;</span>
+
+{@render children()}</pre></div>
+<p data-i18n="guide.sveltekit.layout.shared">Le registre est un état de module. Sur le serveur, il est partagé par toutes les requêtes, ce qui ne pose aucun problème puisque les données des icônes ne changent jamais, et il est rempli une seule fois, au premier chargement du module.</p>
+</section>
+<section id="ssr">
+<h2 data-i18n="guide.sveltekit.ssr.h">Ce que rend le serveur</h2>
+<p data-i18n="guide.sveltekit.ssr.p">Les composants d'icônes produisent leur svg complet pendant le rendu côté serveur. Les animations des états vivants sont une feuille de style intégrée au svg : un spinner tourne donc déjà dans le HTML du serveur, sauf si le visiteur a demandé un mouvement réduit. Les morphs et les déclencheurs de clic et de survol démarrent après l'hydratation, car <code>$effect</code> ne s'exécute pas sur le serveur.</p>
+<p data-i18n="guide.sveltekit.ssr.state">Pour un morph dont l'extrémité à afficher dépend des données, utilisez <code>trigger="state"</code> avec <code>active</code>. Le serveur rend la bonne extrémité du morph, et l'animation ne se joue que lorsque la valeur change dans le navigateur. Avec le déclencheur par défaut (mount), le serveur rend l'icône de départ et le morph se joue à chaque chargement de page.</p>
+<div class="code"><div class="code-head"><span>src/routes/+layout.server.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">export</span> <span class="tok-k">function</span> load({ cookies }) {
+  <span class="tok-k">return</span> { theme: cookies.get(<span class="tok-s">'theme'</span>) ?? <span class="tok-s">'light'</span> };
+}</pre></div>
+<div class="code"><div class="code-head"><span>src/lib/ThemeToggle.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">import</span> { SunIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/svelte'</span>;
+
+  <span class="tok-k">let</span> { theme } = $props();
+  <span class="tok-k">let</span> dark = $state(theme === <span class="tok-s">'dark'</span>);
+
+  <span class="tok-k">function</span> toggle() {
+    dark = !dark;
+    document.cookie = <span class="tok-s">`theme=${dark ? 'dark' : 'light'}; path=/; max-age=31536000`</span>;
+  }
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Dark theme"</span> <span class="tok-a">aria-pressed</span>={dark} <span class="tok-a">onclick</span>={toggle}<span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;SunIcon</span> <span class="tok-a">morphTo</span>=<span class="tok-s">"moon"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">active</span>={dark} <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.sveltekit.ssr.cookie">Lire le thème depuis un cookie dans une fonction load côté serveur donne au serveur et au navigateur la même valeur de départ. Rendez ce composant depuis le layout racine avec <code>&lt;ThemeToggle theme={data.theme} /&gt;</code> ; <code>moon</code> est enregistré dans <code>src/lib/icons.js</code>.</p>
+</section>
+<section id="endpoint">
+<h2 data-i18n="guide.sveltekit.endpoint.h">Des fichiers SVG servis par un endpoint</h2>
+<p data-i18n="guide.sveltekit.endpoint.p"><code>toSvg</code>, issu du point d'entrée principal <code>glyphfox</code>, rend n'importe quelle spécification en chaîne, ce qui permet d'écrire une route <code>+server.js</code> qui sert des icônes sous forme de fichiers : un favicon, une image pour un modèle d'e-mail ou un aperçu de lien. Avec <code>entries</code>, les fichiers sont prérendus au moment du build.</p>
+<div class="code"><div class="code-head"><span>src/routes/icons/[name].svg/+server.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { error } <span class="tok-k">from</span> <span class="tok-s">'@sveltejs/kit'</span>;
+<span class="tok-k">import</span> { iconNames, toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> prerender = <span class="tok-k">true</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> entries() {
+  <span class="tok-k">return</span> [<span class="tok-s">'fox'</span>, <span class="tok-s">'home'</span>, <span class="tok-s">'search'</span>].map((name) =<span class="tok-t">&gt;</span> ({ name }));
+}
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> GET({ params }) {
+  <span class="tok-k">if</span> (!iconNames.includes(params.name)) error(<span class="tok-n">404</span>, <span class="tok-s">'Unknown icon'</span>);
+  <span class="tok-k">const</span> svg = toSvg(params.name, { size: <span class="tok-n">32</span>, color: <span class="tok-s">'#ff7a1a'</span>, variant: <span class="tok-s">'duotone'</span> });
+  <span class="tok-k">return</span> <span class="tok-k">new</span> Response(svg, { headers: { <span class="tok-s">'content-type'</span>: <span class="tok-s">'image/svg+xml'</span> } });
+}</pre></div>
+<div class="code"><div class="code-head"><span>src/app.html</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;link</span> <span class="tok-a">rel</span>=<span class="tok-s">"icon"</span> <span class="tok-a">href</span>=<span class="tok-s">"/icons/fox.svg"</span> <span class="tok-k">type</span>=<span class="tok-s">"image/svg+xml"</span> <span class="tok-t">/&gt;</span></pre></div>
+<p data-i18n="guide.sveltekit.endpoint.color">Un fichier SVG autonome n'a pas de parent dont il pourrait hériter une couleur : passez donc <code>color</code>, dont la valeur est écrite sur le svg et reprise par les traits en <code>currentColor</code>. Renvoyez <code>iconNames.map((name) => ({ name }))</code> depuis <code>entries</code> pour prérendre toutes les icônes.</p>
+<p data-i18n="guide.sveltekit.endpoint.server">Le point d'entrée principal contient les données de toutes les icônes. Ce n'est pas un problème dans les fichiers <code>+server.js</code> et <code>+page.server.js</code>, qui n'atteignent jamais le navigateur ; importé dans un composant, <code>toSvg</code> enverrait toute la collection au client.</p>
+</section>
+<section id="html">
+<h2 data-i18n="guide.sveltekit.html.h">Balisage réservé au serveur avec {@html}</h2>
+<p data-i18n="guide.sveltekit.html.p">Une fonction load dans <code>+page.server.js</code> peut renvoyer des chaînes déjà rendues, que la page insère avec <code>{@html}</code>. Le navigateur reçoit le balisage dans le HTML et dans les données sérialisées de la page, mais aucun code d'icône.</p>
+<div class="code"><div class="code-head"><span>src/routes/+page.server.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">const</span> features = [
+  { icon: <span class="tok-s">'zap'</span>, title: <span class="tok-s">'Fast'</span> },
+  { icon: <span class="tok-s">'shield-check'</span>, title: <span class="tok-s">'Safe'</span> },
+  { icon: <span class="tok-s">'accessibility'</span>, title: <span class="tok-s">'Accessible'</span> },
+];
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> load() {
+  <span class="tok-k">return</span> {
+    features: features.map((f) =<span class="tok-t">&gt;</span> ({ ...f, svg: toSvg(f.icon, { size: <span class="tok-n">28</span>, weight: <span class="tok-n">1.5</span> }) })),
+  };
+}</pre></div>
+<div class="code"><div class="code-head"><span>src/routes/+page.svelte</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">let</span> { data } = $props();
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;ul</span> <span class="tok-k">class</span>=<span class="tok-s">"features"</span><span class="tok-t">&gt;</span>
+  {#each data.features as feature (feature.icon)}
+    <span class="tok-t">&lt;li</span><span class="tok-t">&gt;</span>{@html feature.svg} {feature.title}<span class="tok-t">&lt;/li</span><span class="tok-t">&gt;</span>
+  {/each}
+<span class="tok-t">&lt;/ul</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.sveltekit.html.safe"><code>{@html}</code> est sans danger ici, car les chaînes proviennent de votre propre code serveur, jamais d'une saisie utilisateur. Sans <code>title</code>, les icônes sont rendues avec <code>aria-hidden</code>, ce qui convient à côté d'un libellé visible.</p>
+</section>
+<section id="static">
+<h2 data-i18n="guide.sveltekit.static.h">adapter-static et prérendu</h2>
+<p data-i18n="guide.sveltekit.static.p">Avec adapter-static, ou <code>export const prerender = true</code> sur n'importe quelle route, les pages sont rendues au moment du build et les icônes sont écrites dans les fichiers HTML. Les règles du rendu côté serveur s'appliquent aussi au build : un nom que le build ne peut pas résoudre est écrit sous forme de svg vide.</p>
+<div class="code"><div class="code-head"><span>svelte.config.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> adapter <span class="tok-k">from</span> <span class="tok-s">'@sveltejs/adapter-static'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> {
+  kit: { adapter: adapter() },
+};</pre></div>
+<div class="code"><div class="code-head"><span>src/routes/+layout.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">export</span> <span class="tok-k">const</span> prerender = <span class="tok-k">true</span>;</pre></div>
+<p data-i18n="guide.sveltekit.static.csr">Pour les pages qui n'ont pas besoin de JavaScript, ajoutez <code>export const csr = false</code> : les icônes restent du SVG statique et aucun code de composant n'est envoyé. Les animations CSS se jouent toujours, tandis que les morphs et les déclencheurs de clic ou de survol, qui nécessitent JavaScript, restent sans effet.</p>
+</section>
+<section id="production">
+<h2 data-i18n="guide.sveltekit.production.h">Les noms dans les builds de production</h2>
+<p data-i18n="guide.sveltekit.production.p">En développement, Vite pré-bundle le paquet, si bien que n'importe quel nom semble fonctionner. Dans un build de production, Vite n'intègre pas au bundle le chargeur à la demande que glyphfox conserve dans <code>node_modules</code>, car il ignore les imports dynamiques contenant des variables dans les dépendances, et les noms non enregistrés restent vides. Enregistrez-les, ou laissez Vite intégrer le chargeur au bundle, ce qui génère alors un petit chunk par icône :</p>
+<div class="code"><div class="code-head"><span>vite.config.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { sveltekit } <span class="tok-k">from</span> <span class="tok-s">'@sveltejs/kit/vite'</span>;
+<span class="tok-k">import</span> { defineConfig } <span class="tok-k">from</span> <span class="tok-s">'vite'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> defineConfig({
+  plugins: [sveltekit()],
+  build: {
+    dynamicImportVarsOptions: { exclude: [/node_modules\/(?!glyphfox\/)/] },
+  },
+});</pre></div>
+<p data-i18n="guide.sveltekit.production.server">Ces chunks ne servent que dans le navigateur, après l'hydratation. Le rendu côté serveur ne les attend pas : l'enregistrement reste donc le moyen de faire figurer une icône dans le HTML.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.sveltekit.props.h">Props</h2>
+<p data-i18n="guide.sveltekit.props.p">SvelteKit utilise les composants de <code>glyphfox/svelte</code> : les props sont donc les props communes, en camelCase.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Par défaut</th><th data-i18n="docs.desc">Description</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Largeur et hauteur ; les nombres sont en pixels.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Couleur principale.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Couleur du calque duotone et du remplissage plein.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacité du calque duotone ou du remplissage plein.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Trait de 1 à 3 sur la grille de 24, avec compensation optique en dessous de 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Garde le trait à weight pixels quelle que soit la taille.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Jointures et extrémités arrondies ou vives.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Axe de style ; solid vient des formes fermées.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotation en degrés.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Miroir horizontal.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Miroir vertical.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Miroir dans les mises en page de droite à gauche.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>aucun</td><td data-i18n="prop.animate">Préréglage d'état vivant.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Moment où l'animation ou le morph se joue.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">L'état pour le déclencheur state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>selon le préréglage</td><td data-i18n="prop.duration">Durée de l'animation ou du morph.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Délai de l'animation ou du morph.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Répète à l'infini ou un certain nombre de fois (spin et pulse bouclent par défaut).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>aucun</td><td data-i18n="prop.modifier">Badge avec espace de découpe automatique.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Coin du badge.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>aucun</td><td data-i18n="prop.morphTo">Cible du morph ; le déclencheur décide quand elle s'affiche.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>aucun</td><td data-i18n="prop.title">Nom accessible : title, role img et aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true sans title</td><td data-i18n="prop.decorative">Masque l'icône aux technologies d'assistance.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.sveltekit.pitfalls.h">Pièges courants</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.sveltekit.pitfalls.list.1.t">Enregistrer dans onMount ou dans du code réservé au navigateur</dt><dd data-i18n="guide.sveltekit.pitfalls.list.1.d">Le code placé dans <code>onMount</code>, dans <code>$effect</code> ou derrière <code>if (browser)</code> s'exécute après le rendu du serveur. Le HTML contient alors des icônes vides qui apparaissent brusquement après l'hydratation. Enregistrez les noms dans un module importé par le layout racine.</dd></div><div><dt data-i18n="guide.sveltekit.pitfalls.list.2.t">Une icône différente sur le serveur et dans le navigateur</dt><dd data-i18n="guide.sveltekit.pitfalls.list.2.d">Le contenu du svg est inséré avec <code>{@html}</code>, et Svelte conserve le balisage serveur d'un bloc <code>{@html}</code> lorsque le premier rendu client diffère (il émet l'avertissement <code>hydration_html_changed</code> en développement). Une icône choisie à partir de <code>localStorage</code> ou de <code>window</code> peut donc rester erronée jusqu'au changement suivant. Déduisez la première valeur de données dont le serveur dispose aussi, comme un cookie lu dans une fonction load.</dd></div><div><dt data-i18n="guide.sveltekit.pitfalls.list.3.t">toSvg dans un composant partagé</dt><dd data-i18n="guide.sveltekit.pitfalls.list.3.d">Importer <code>toSvg</code> depuis <code>glyphfox</code> dans un fichier <code>.svelte</code> fait entrer les données de toutes les icônes dans le bundle client. Réservez-le aux fichiers serveur, ou utilisez les composants.</dd></div><div><dt data-i18n="guide.sveltekit.pitfalls.list.4.t">Un morph prérendu dans le mauvais état</dt><dd data-i18n="guide.sveltekit.pitfalls.list.4.d">Avec le déclencheur mount, le HTML prérendu affiche l'icône de départ et le morph se joue après l'hydratation. Utilisez <code>trigger="state"</code> pour tout ce qui doit être prérendu dans son état final.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions fréquentes</h2>
+<h3 data-i18n="guide.sveltekit.faq.all-svg.q">Puis-je prérendre chaque icône sous forme de fichier SVG ?</h3>
+<p data-i18n="guide.sveltekit.faq.all-svg.a">Oui. Renvoyez <code>iconNames.map((name) => ({ name }))</code> depuis <code>entries</code> dans l'endpoint ci-dessus, et le build écrit un fichier par icône dans <code>/icons/</code>. Chaque fichier pèse quelques centaines d'octets.</p>
+<h3 data-i18n="guide.sveltekit.faq.csr-false.q">Les icônes fonctionnent-elles sur les pages avec csr = false ?</h3>
+<p data-i18n="guide.sveltekit.faq.csr-false.a">Oui. Le serveur écrit le svg dans le HTML, et les animations des états vivants se jouent toujours, car il s'agit de CSS intégré au svg. Les morphs et les déclencheurs de clic et de survol nécessitent JavaScript : ils restent donc figés sur leur première image.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icônes de ce guide</h2>
+<ul class="icon-links"><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/moon.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-moon" aria-hidden="true"><path d="M11.44 3.5A9 9 0 1 0 20.46 13.34A7 7 0 0 1 11.44 3.5Z"/></svg><span>moon</span></a></li><li><a href="../../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../../icons/sun.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 4L12 2"/><path d="M17.66 6.34L19.07 4.93"/><path d="M20 12L22 12"/><path d="M17.66 17.66L19.07 19.07"/><path d="M12 20L12 22"/><path d="M6.34 17.66L4.93 19.07"/><path d="M4 12L2 12"/><path d="M6.34 6.34L4.93 4.93"/></svg><span>sun</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guides associés</h2>
+<ul class="guide-cards"><li><a href="svelte.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-flame" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-4-2.5-6.5-4.5-9-.5 2.5-1.5 4-3.5 5 .3-3-1-6-3.5-8.5C7.5 6.5 5 9.5 5 15a7 7 0 0 0 7 7Z"/></svg><strong data-i18n="guide.svelte.h1">Icônes Svelte 5</strong><span data-i18n="guide.svelte.description">Icônes Svelte 5 avec glyphfox : installation, import des composants, props avec les runes, morph avec MorphIcon et morphStore, fusion d'icônes et bundles légers.</span></a></li><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Rendu côté serveur</strong><span data-i18n="guide.ssr.description">Rendez les icônes SVG glyphfox côté serveur : sortie par paquet, enregistrement des icônes par nom, chaînes toSvg, hydratation, animations et web component.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking des icônes</strong><span data-i18n="guide.tree-shaking.description">Tree shaking des icônes glyphfox (Vite, webpack, Rollup, esbuild) : tailles de bundle mesurées, ce qui l'empêche, icônes chargées par nom, sous-ensembles fixes.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Des icônes originales sur une grille de 24 qui changent d'épaisseur, se transforment, fusionnent et prennent vie. Libres et open source sous licence MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produit</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icônes</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Toutes les icônes par catégorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marque</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Développeurs</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Nouveautés</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projet</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licence MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Créé par</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn le renard est dessiné sur la même grille que les icônes.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

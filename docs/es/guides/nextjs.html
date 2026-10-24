@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/nextjs.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Iconos en Next.js: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.nextjs.title">Iconos para Next.js con glyphfox: App Router y Server Components</title>
+<meta name="description" content="Iconos SVG en Next.js con glyphfox: límite de cliente en el App Router, SVG sin JavaScript en Server Components, Pages Router e iconos por nombre en el servidor." data-i18n-attr="content:guide.nextjs.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/es/guides/nextjs.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/nextjs.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/nextjs.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/nextjs.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/nextjs.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/nextjs.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/nextjs.html">
+<meta property="og:title" content="Iconos para Next.js con glyphfox: App Router y Server Components">
+<meta property="og:description" content="Iconos SVG en Next.js con glyphfox: límite de cliente en el App Router, SVG sin JavaScript en Server Components, Pages Router e iconos por nombre en el servidor.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/es/guides/nextjs.html">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:title" content="Iconos para Next.js con glyphfox: App Router y Server Components">
+<meta name="twitter:description" content="Iconos SVG en Next.js con glyphfox: límite de cliente en el App Router, SVG sin JavaScript en Server Components, Pages Router e iconos por nombre en el servidor.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/nextjs.png">
+<meta name="twitter:image:alt" content="Iconos en Next.js: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://kwy404.github.io/glyphfox/es/"},{"@type":"ListItem","position":2,"name":"Guías","item":"https://kwy404.github.io/glyphfox/es/guides/"},{"@type":"ListItem","position":3,"name":"Next.js","item":"https://kwy404.github.io/glyphfox/es/guides/nextjs.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Necesito transpilePackages para glyphfox?","acceptedAnswer":{"@type":"Answer","text":"No. El paquete incluye JavaScript puro en ESM y CommonJS con declaraciones de tipos, así que Next.js lo resuelve y lo empaqueta como cualquier dependencia compilada."}},{"@type":"Question","name":"¿Puedo usar el web component glyph-fox en Next.js?","acceptedAnswer":{"@type":"Answer","text":"Sí, importa glyphfox/web desde un Client Component. El módulo se puede evaluar sin problemas durante el renderizado en el servidor, pero un custom element solo se dibuja cuando el navegador lo actualiza, así que el HTML del servidor tiene un elemento vacío donde irá el icono. En una aplicación de React, los componentes encajan mejor porque su SVG está en el HTML del servidor; la guía de web components explica el elemento."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copiado al portapapeles" data-theme-light="Cambiar al tema claro" data-theme-dark="Cambiar al tema oscuro">
+<a class="skip" href="#main" data-i18n="nav.skip">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Iconos</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Estudio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novedades</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/nextjs.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guías" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Todas las guías</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" aria-current="page" class="on" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit y web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML y CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Temas</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Iconos animados</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accesibilidad</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Renderizado en el servidor</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Ruta de navegación" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Inicio</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guías</a></li><li aria-current="page" data-i18n="guide.nextjs.short">Next.js</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.nextjs.h1">Iconos en Next.js</h1>
+<p class="lead" data-i18n="guide.nextjs.lead">glyphfox funciona con los dos routers. En el App Router, los componentes de React necesitan un límite de cliente de un solo archivo, y los Server Components pueden renderizar los mismos iconos como SVG puro, sin enviar nada de JavaScript.</p>
+<nav class="toc" aria-label="En esta página" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.nextjs.install.h">Instalación</a></li><li><a href="#why" data-i18n="guide.nextjs.why.h">Por qué el App Router necesita un límite de cliente</a></li><li><a href="#boundary" data-i18n="guide.nextjs.boundary.h">Un único archivo de cliente para tus iconos</a></li><li><a href="#interactive" data-i18n="guide.nextjs.interactive.h">Iconos interactivos en Client Components</a></li><li><a href="#server" data-i18n="guide.nextjs.server.h">Iconos sin JavaScript en Server Components</a></li><li><a href="#names" data-i18n="guide.nextjs.names.h">Iconos por nombre en el servidor</a></li><li><a href="#pages" data-i18n="guide.nextjs.pages.h">Pages Router</a></li><li><a href="#favicon" data-i18n="guide.nextjs.favicon.h">Un icono como favicon</a></li><li><a href="#output" data-i18n="guide.nextjs.output.h">Qué contiene el resultado de la compilación</a></li><li><a href="#props" data-i18n="guide.nextjs.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.nextjs.pitfalls.h">Errores comunes</a></li><li><a href="#faq" data-i18n="seo.faq">Preguntas frecuentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.nextjs.install.h">Instalación</h2>
+<p data-i18n="guide.nextjs.install.p">Instala el paquete. Incluye ESM y CommonJS ya compilados, con declaraciones de tipos, así que no hay nada que añadir a <code>next.config.js</code>: ni <code>transpilePackages</code>, ni loader, ni hoja de estilos.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.nextjs.install.p2">Los componentes de React vienen de <code>glyphfox/react</code> y se explican en detalle en la <a href="react.html">guía de React</a>. Esta página trata de lo que cambia en Next.js: dónde pueden ejecutarse los componentes, cómo mantener los iconos fuera del bundle del cliente y qué renderiza el servidor.</p>
+</section>
+<section id="why">
+<h2 data-i18n="guide.nextjs.why.h">Por qué el App Router necesita un límite de cliente</h2>
+<p data-i18n="guide.nextjs.why.p">En el App Router, todos los módulos son Server Components salvo que el archivo se marque con <code>"use client"</code>. Los componentes de glyphfox guardan el estado de hover, clic y morph con <code>useState</code>, <code>useEffect</code> y <code>useRef</code>, y el paquete no incluye la directiva <code>"use client"</code>. Por eso, renderizar <code>&lt;HomeIcon /&gt;</code> directamente desde <code>app/page.tsx</code> falla con un error sobre hooks que solo funcionan en Client Components.</p>
+<p data-i18n="guide.nextjs.why.p2">La solución no es convertir páginas enteras en Client Components. Marca un archivo pequeño como límite e importa tus iconos a través de él. Los Server Components pueden renderizar Client Components: los iconos se siguen renderizando a HTML en el servidor y después se hidratan en el navegador.</p>
+</section>
+<section id="boundary">
+<h2 data-i18n="guide.nextjs.boundary.h">Un único archivo de cliente para tus iconos</h2>
+<div class="code"><div class="code-head"><span>components/icons.ts</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-s">'use client'</span>;
+
+<span class="tok-k">export</span> { HomeIcon, SearchIcon, BellIcon, MenuIcon, Icon, MorphIcon, Fusion } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;</pre></div>
+<div class="code"><div class="code-head"><span>app/page.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { HomeIcon, SearchIcon, Fusion } <span class="tok-k">from</span> <span class="tok-s">'@/components/icons'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> <span class="tok-k">function</span> Page() {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;header</span> <span class="tok-a">className</span>=<span class="tok-s">"bar"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;HomeIcon</span> <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-t">/&gt;</span> Home<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;SearchIcon</span> <span class="tok-a">title</span>=<span class="tok-s">"Search"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Fusion</span> <span class="tok-a">icons</span>={[<span class="tok-s">'cloud'</span>, <span class="tok-s">'lock'</span>]} <span class="tok-a">layout</span>=<span class="tok-s">"overlap"</span> <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/header</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.nextjs.boundary.p">Reexporta los nombres uno por uno. Next.js no admite <code>export *</code> en un límite de cliente, y las exportaciones con nombre mantienen intacto el tree shaking: solo los iconos que aparecen en el archivo, y solo los que una página usa de verdad, terminan en los chunks del cliente.</p>
+<p data-i18n="guide.nextjs.boundary.p2">Dentro de un archivo que ya empieza con <code>"use client"</code> puedes importar directamente desde <code>glyphfox/react</code>. El archivo de límite solo existe para los iconos que renderizas desde archivos de servidor.</p>
+</section>
+<section id="interactive">
+<h2 data-i18n="guide.nextjs.interactive.h">Iconos interactivos en Client Components</h2>
+<p data-i18n="guide.nextjs.interactive.p">Los manejadores de eventos y las refs no pueden pasar de un Server Component a un Client Component, porque las props que cruzan ese límite deben ser serializables. Todo lo que reacciona al usuario, como un interruptor con morph, va en su propio Client Component:</p>
+<div class="code"><div class="code-head"><span>components/theme-toggle.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-s">'use client'</span>;
+
+<span class="tok-k">import</span> { useState } <span class="tok-k">from</span> <span class="tok-s">'react'</span>;
+<span class="tok-k">import</span> { MorphIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> ThemeToggle() {
+  <span class="tok-k">const</span> [dark, setDark] = useState(<span class="tok-k">true</span>);
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;button</span>
+      <span class="tok-k">type</span>=<span class="tok-s">"button"</span>
+      <span class="tok-a">onClick</span>={() =<span class="tok-t">&gt;</span> setDark((d) =<span class="tok-t">&gt;</span> !d)}
+      <span class="tok-a">aria-label</span>={dark ? <span class="tok-s">'Switch to the light theme'</span> : <span class="tok-s">'Switch to the dark theme'</span>}
+    <span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">name</span>={dark ? <span class="tok-s">'moon'</span> : <span class="tok-s">'sun'</span>} <span class="tok-a">duration</span>={<span class="tok-n">300</span>} <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.nextjs.interactive.p2">El servidor renderiza el icono inicial, y el morph se reproduce en el navegador una vez que el componente se ha hidratado. Mantén el primer estado idéntico en ambos lados: si lees <code>localStorage</code> o la hora durante el renderizado, el servidor y el cliente no coinciden y React señala un desajuste de hidratación.</p>
+</section>
+<section id="server">
+<h2 data-i18n="guide.nextjs.server.h">Iconos sin JavaScript en Server Components</h2>
+<p data-i18n="guide.nextjs.server.p">La mayoría de los iconos no cambian nunca una vez cargada la página. Para esos, un Server Component puede convertir los datos de un icono en una cadena SVG con <code>renderToString</code> de <code>glyphfox/core</code>. El código solo se ejecuta en el servidor, así que los iconos llegan como marcado y no añaden nada al bundle del cliente.</p>
+<div class="code"><div class="code-head"><span>components/server-icon.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { renderToString } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> <span class="tok-k">type</span> { IconData, SvgOptions } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">type</span> Props = SvgOptions &amp; { icon: IconData };
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> ServerIcon({ icon, ...options }: Props) {
+  <span class="tok-k">return</span> <span class="tok-t">&lt;span</span> <span class="tok-a">className</span>=<span class="tok-s">"icon"</span> <span class="tok-a">dangerouslySetInnerHTML</span>={{ __html: renderToString(icon, options) }} <span class="tok-t">/&gt;</span>;
+}</pre></div>
+<div class="code"><div class="code-head"><span>app/docs/page.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> fileText <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/file-text'</span>;
+<span class="tok-k">import</span> externalLink <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/external-link'</span>;
+<span class="tok-k">import</span> { ServerIcon } <span class="tok-k">from</span> <span class="tok-s">'@/components/server-icon'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> <span class="tok-k">function</span> Docs() {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"https://example.com/handbook"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;ServerIcon</span> <span class="tok-a">icon</span>={fileText} <span class="tok-a">size</span>={<span class="tok-n">18</span>} <span class="tok-t">/&gt;</span> Handbook
+      <span class="tok-t">&lt;ServerIcon</span> <span class="tok-a">icon</span>={externalLink} <span class="tok-a">size</span>={<span class="tok-n">14</span>} <span class="tok-a">title</span>=<span class="tok-s">"opens in a new tab"</span> <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.nextjs.server.p2">Cada importación de <code>glyphfox/icons/NAME</code> es un pequeño módulo de datos. Si quieres usar nombres y la sintaxis completa de nombres (<code>file+check</code>, <code>cloud&amp;lock:side</code>, <code>heart/solid</code>), usa en su lugar <code>toSvg</code> del punto de entrada principal. Trae todo el registro de iconos, pero en un Server Component eso solo pesa en el servidor:</p>
+<div class="code"><div class="code-head"><span>app/status/page.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> <span class="tok-k">function</span> Status() {
+  <span class="tok-k">return</span> <span class="tok-t">&lt;span</span> <span class="tok-a">className</span>=<span class="tok-s">"icon"</span> <span class="tok-a">dangerouslySetInnerHTML</span>={{ __html: toSvg(<span class="tok-s">'file+check'</span>, { size: <span class="tok-n">20</span> }) }} <span class="tok-t">/&gt;</span>;
+}</pre></div>
+<p data-i18n="guide.nextjs.server.p3">Las opciones usan los nombres del core: <code>class</code> en lugar de <code>className</code>, y <code>style</code> como cadena. <code>dangerouslySetInnerHTML</code> necesita un elemento contenedor; haz que se comporte como el propio icono para que no añada altura de línea:</p>
+<div class="code"><div class="code-head"><span>app/globals.css</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="css" data-done="1"><span class="tok-t">.icon</span> {
+  <span class="tok-a">display</span>: inline-flex;
+  <span class="tok-a">line-height</span>: <span class="tok-n">0</span>;
+  <span class="tok-a">vertical-align</span>: middle;
+}</pre></div>
+<p data-i18n="guide.nextjs.server.p4">Los estados vivos siguen funcionando sin JavaScript, porque la animación es una pequeña hoja de estilos dentro del SVG: <code>renderToString(loader, { animate: 'spin' })</code> gira, y <code>renderToString(menu, { morphTo: x, trigger: 'hover' })</code> se transforma al pasar el cursor con una transición CSS. Los disparadores de clic y de estado necesitan un Client Component.</p>
+</section>
+<section id="names">
+<h2 data-i18n="guide.nextjs.names.h">Iconos por nombre en el servidor</h2>
+<p data-i18n="guide.nextjs.names.p"><code>Icon</code>, <code>morphTo</code> y <code>Fusion</code> buscan los nombres en un registro que va llenando cada componente de icono importado. Un nombre que nadie importó se obtiene con una importación dinámica después de cargar la página, lo que significa que el servidor envía un SVG vacío para ese nombre y el icono aparece de golpe tras la hidratación. Registra en el archivo de límite los datos de cada nombre que renderizas a partir de cadenas; ese archivo se ejecuta en el servidor durante el renderizado y de nuevo en el navegador:</p>
+<div class="code"><div class="code-head"><span>components/icons.ts</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-s">'use client'</span>;
+
+<span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+<span class="tok-k">import</span> { iconSettings, iconUsers, iconChartBar } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+registerIcons([iconSettings, iconUsers, iconChartBar]);
+
+<span class="tok-k">export</span> { Icon, HomeIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;</pre></div>
+<p data-i18n="guide.nextjs.names.p2">Las exportaciones de datos pasan por el tree shaking igual que los componentes. Cuidado con una diferencia entre entornos: las compilaciones de desarrollo pueden evaluar todos los módulos de iconos, así que, si falta un registro, todo puede parecer correcto con <code>next dev</code> y el icono renderizarse vacío solo después de <code>next build</code>, donde se descartan los módulos sin usar.</p>
+</section>
+<section id="pages">
+<h2 data-i18n="guide.nextjs.pages.h">Pages Router</h2>
+<p data-i18n="guide.nextjs.pages.p">El Pages Router no tiene Server Components, así que los componentes funcionan tal cual en páginas, layouts y <code>_app</code>. Cada página se renderiza en el servidor y se hidrata, por lo que el registro anterior es igual de útil: pon <code>registerIcons</code> en <code>pages/_app.tsx</code> si renderizas iconos por nombre.</p>
+<div class="code"><div class="code-head"><span>pages/_app.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> <span class="tok-k">type</span> { AppProps } <span class="tok-k">from</span> <span class="tok-s">'next/app'</span>;
+<span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+<span class="tok-k">import</span> { iconSettings, iconUsers } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+registerIcons([iconSettings, iconUsers]);
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> <span class="tok-k">function</span> App({ Component, pageProps }: AppProps) {
+  <span class="tok-k">return</span> <span class="tok-t">&lt;Component</span> {...pageProps} <span class="tok-t">/&gt;</span>;
+}</pre></div>
+</section>
+<section id="favicon">
+<h2 data-i18n="guide.nextjs.favicon.h">Un icono como favicon</h2>
+<p data-i18n="guide.nextjs.favicon.p">El App Router toma <code>app/icon.svg</code> como icono del sitio. La CLI escribe ahí cualquier icono con un color explícito, ya que un favicon no tiene un color de texto alrededor que <code>currentColor</code> pueda seguir:</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> copy fox <span class="tok-a">--color</span> <span class="tok-s">"#ff7a1a"</span> <span class="tok-a">--weight</span> 2.5 <span class="tok-a">--out</span> app/icon.svg</pre></div>
+<p data-i18n="guide.nextjs.favicon.p2">Para iconos de aplicación en PNG de varios tamaños, el kit de marca del <a href="../../studio.html">Estudio</a> exporta un conjunto de favicons con tu color, peso y estilo.</p>
+</section>
+<section id="output">
+<h2 data-i18n="guide.nextjs.output.h">Qué contiene el resultado de la compilación</h2>
+<p data-i18n="guide.nextjs.output.p">Con webpack, <code>next build</code> genera muchos chunks de cliente diminutos, más o menos uno por cada icono del conjunto. Vienen del cargador bajo demanda que hay detrás de <code>Icon</code> y <code>morphTo</code>: su importación dinámica apunta a la carpeta de iconos, así que el bundler prepara un chunk para cada icono que podría pedirse por nombre. Pesan unos cientos de bytes cada uno y solo se descargan cuando una página renderiza un nombre que no se importó. Sea cual sea el bundler, si registras los nombres que renderizas a partir de cadenas (ver arriba), nunca se piden. Los iconos que importas directamente van en tus chunks normales. Las mediciones están en la <a href="tree-shaking.html">guía de tree shaking</a>.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.nextjs.props.h">Props</h2>
+<p data-i18n="guide.nextjs.props.p">Los componentes aceptan las mismas props que en cualquier aplicación de React. Cuando un Server Component los renderiza a través del límite, todas las props que aparecen a continuación son valores simples y pueden cruzarlo; solo los callbacks como <code>onClick</code> y <code>ref</code> deben asignarse dentro de un Client Component. Las opciones del core de <code>renderToString</code> y <code>toSvg</code> usan los mismos nombres.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="docs.type">Tipo</th><th data-i18n="docs.default">Por defecto</th><th data-i18n="docs.desc">Descripción</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Ancho y alto; los números son píxeles.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Color principal.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Color de la capa duotone y del relleno sólido.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacidad de la capa duotone o del relleno sólido.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Trazo de 1 a 3 en la cuadrícula de 24, con compensación óptica por debajo de 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Mantiene el trazo en weight píxeles a cualquier tamaño.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Uniones y extremos redondeados o rectos.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Eje de estilo; solid se obtiene de las formas cerradas.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotación en grados.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Refleja en horizontal.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Refleja en vertical.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Refleja en layouts de derecha a izquierda.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>ninguno</td><td data-i18n="prop.animate">Preset de estado vivo.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Cuándo se reproduce la animación o el morph.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">El estado para el disparador state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>según el preset</td><td data-i18n="prop.duration">Duración de la animación o del morph.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Retraso de la animación o del morph.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Repite sin fin o un número de veces (spin y pulse se repiten por defecto).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>ninguno</td><td data-i18n="prop.modifier">Insignia con hueco de recorte automático.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Esquina de la insignia.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>ninguno</td><td data-i18n="prop.morphTo">Destino del morph; el disparador decide cuándo se muestra.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>ninguno</td><td data-i18n="prop.title">Nombre accesible: title, role img y aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true sin title</td><td data-i18n="prop.decorative">Oculta el icono a las tecnologías de apoyo.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.nextjs.pitfalls.h">Errores comunes</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.nextjs.pitfalls.list.1.t">Errores de hooks en Server Components</dt><dd data-i18n="guide.nextjs.pitfalls.list.1.d">Importar desde <code>glyphfox/react</code> en un archivo de servidor falla porque los componentes usan hooks. Importa a través de un archivo con <code>"use client"</code> o renderiza SVG estático con <code>renderToString</code>.</dd></div><div><dt data-i18n="guide.nextjs.pitfalls.list.2.t"><code>export *</code> en el límite</dt><dd data-i18n="guide.nextjs.pitfalls.list.2.d">Next.js rechaza <code>export *</code> en un límite de cliente. Enumera los iconos mediante exportaciones con nombre.</dd></div><div><dt data-i18n="guide.nextjs.pitfalls.list.3.t">Funciones como props desde el servidor</dt><dd data-i18n="guide.nextjs.pitfalls.list.3.d"><code>onClick</code>, <code>onMouseEnter</code> y las refs no son serializables. Mueve los iconos interactivos a un Client Component y pásale solo datos.</dd></div><div><dt data-i18n="guide.nextjs.pitfalls.list.4.t">Iconos vacíos después de <code>next build</code></dt><dd data-i18n="guide.nextjs.pitfalls.list.4.d">Un nombre de <code>Icon</code> que nunca se importó se renderiza vacío en el servidor. Registra sus datos con <code>registerIcons</code> en el archivo de límite o en <code>_app</code>.</dd></div><div><dt data-i18n="guide.nextjs.pitfalls.list.5.t">Los nombres desconocidos lanzan un error</dt><dd data-i18n="guide.nextjs.pitfalls.list.5.d"><code>toSvg</code> lanza un error con un nombre que no existe, y eso se convierte en un error del servidor. Comprueba que los nombres que aporta el usuario estén en <code>iconNames</code> de <code>glyphfox</code> antes de renderizarlos.</dd></div><div><dt data-i18n="guide.nextjs.pitfalls.list.6.t">Espacio extra alrededor de los iconos renderizados en el servidor</dt><dd data-i18n="guide.nextjs.pitfalls.list.6.d">El contenedor de <code>dangerouslySetInnerHTML</code> es un elemento en línea con su propia caja de línea. Dale <code>display: inline-flex</code> y <code>line-height: 0</code>.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Preguntas frecuentes</h2>
+<h3 data-i18n="guide.nextjs.faq.transpile.q">¿Necesito transpilePackages para glyphfox?</h3>
+<p data-i18n="guide.nextjs.faq.transpile.a">No. El paquete incluye JavaScript puro en ESM y CommonJS con declaraciones de tipos, así que Next.js lo resuelve y lo empaqueta como cualquier dependencia compilada.</p>
+<h3 data-i18n="guide.nextjs.faq.web.q">¿Puedo usar el web component glyph-fox en Next.js?</h3>
+<p data-i18n="guide.nextjs.faq.web.a">Sí, importa <code>glyphfox/web</code> desde un Client Component. El módulo se puede evaluar sin problemas durante el renderizado en el servidor, pero un custom element solo se dibuja cuando el navegador lo actualiza, así que el HTML del servidor tiene un elemento vacío donde irá el icono. En una aplicación de React, los componentes encajan mejor porque su SVG está en el HTML del servidor; la <a href="web-components.html">guía de web components</a> explica el elemento.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Iconos de esta guía</h2>
+<ul class="icon-links"><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/server.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><span>server</span></a></li><li><a href="../../icons/file-text.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file-text" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M8 9h3"/><path d="M8 13h8"/><path d="M8 17h6"/></svg><span>file-text</span></a></li><li><a href="../../icons/external-link.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-external-link" aria-hidden="true"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/><path d="M11 13l9-9"/><path d="M14 4h6v6"/></svg><span>external-link</span></a></li><li><a href="../../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/users.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-users" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 21a7 5.5 0 0 1 14 0Z"/><path d="M14.78 4.05A3 3 0 0 1 19.5 6.5A3 3 0 0 1 15.85 9.43"/><path d="M17.4 15.57A5.5 5.5 0 0 1 22 21"/></svg><span>users</span></a></li><li><a href="../../icons/chart-bar.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chart-bar" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M8 17v-5"/><path d="M13 17V7"/><path d="M18 17v-8"/></svg><span>chart-bar</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guías relacionadas</h2>
+<ul class="guide-cards"><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">Iconos para React</strong><span data-i18n="guide.react.description">Iconos SVG en React con glyphfox: instalación, componentes con tree shaking, cada prop, iconos por nombre, modificadores, Fusión, morph, refs y TypeScript.</span></a></li><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Renderizado en el servidor</strong><span data-i18n="guide.ssr.description">Iconos SVG de glyphfox en el servidor: qué genera cada paquete, registro de iconos usados por nombre, cadenas toSvg, hidratación, animaciones y web component.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree shaking de iconos</strong><span data-i18n="guide.tree-shaking.description">Tree shaking de iconos de glyphfox en Vite, webpack, Rollup y esbuild: mediciones del bundle, qué lo impide, iconos cargados por nombre y subconjuntos fijos.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Iconos accesibles</strong><span data-i18n="guide.accessibility.description">Iconos accesibles con glyphfox: decorativos por defecto, títulos y etiquetas, botones solo con icono, iconos de estado, contraste, movimiento reducido y RTL.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Iconos originales en una cuadrícula de 24 que cambian de peso, se transforman, se fusionan y cobran vida. Libres y de código abierto bajo la licencia MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Producto</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Iconos</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Todos los iconos por categoría</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Estudio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusión</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desarrolladores</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guías</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Novedades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Proyecto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licencia MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Hecho por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, el zorro, está dibujado en la misma cuadrícula que los iconos.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/qwik.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icônes dans Qwik: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.qwik.title">Icônes dans Qwik sans JavaScript : glyphfox</title>
+<meta name="description" content="Icônes Qwik rendues côté serveur avec glyphfox : aucun JavaScript, rien à reprendre côté client, et l'élément glyph-fox seulement là où une icône doit réagir." data-i18n-attr="content:guide.qwik.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/fr/guides/qwik.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/qwik.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/qwik.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/qwik.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/qwik.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/qwik.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/qwik.html">
+<meta property="og:title" content="Icônes dans Qwik sans JavaScript : glyphfox">
+<meta property="og:description" content="Icônes Qwik rendues côté serveur avec glyphfox : aucun JavaScript, rien à reprendre côté client, et l'élément glyph-fox seulement là où une icône doit réagir.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/fr/guides/qwik.html">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:title" content="Icônes dans Qwik sans JavaScript : glyphfox">
+<meta name="twitter:description" content="Icônes Qwik rendues côté serveur avec glyphfox : aucun JavaScript, rien à reprendre côté client, et l'élément glyph-fox seulement là où une icône doit réagir.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/qwik.png">
+<meta name="twitter:image:alt" content="Icônes dans Qwik: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://kwy404.github.io/glyphfox/fr/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://kwy404.github.io/glyphfox/fr/guides/"},{"@type":"ListItem","position":3,"name":"Qwik","item":"https://kwy404.github.io/glyphfox/fr/guides/qwik.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Les icônes rendues côté serveur n'envoient-elles vraiment aucun JavaScript ?","acceptedAnswer":{"@type":"Answer","text":"Oui, tant que le composant qui les rend n'est pas rendu à nouveau dans le navigateur. Le HTML contient du SVG simple, et les presets comme les morphs au survol sont du CSS intégré à ce SVG. Seuls les composants rendus à nouveau, ainsi que l'élément \u003cglyph-fox>, apportent du code au navigateur."}},{"@type":"Question","name":"Puis-je utiliser les composants React via qwikify$ ?","acceptedAnswer":{"@type":"Answer","text":"Ils se comportent comme n'importe quel composant React dans qwikify$, mais cette île embarque alors React et le runtime React de glyphfox. Pour des icônes, le balisage rendu côté serveur ou l'élément revient bien moins cher."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copié dans le presse-papiers" data-theme-light="Passer au thème clair" data-theme-dark="Passer au thème sombre">
+<a class="skip" href="#main" data-i18n="nav.skip">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icônes</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Nouveautés</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/qwik.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guides" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Tous les guides</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" aria-current="page" class="on" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit et web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML et CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Thèmes</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Icônes animées</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Accessibilité</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Rendu côté serveur</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Fil d'Ariane" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Accueil</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guides</a></li><li aria-current="page" data-i18n="guide.qwik.short">Qwik</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.qwik.h1">Icônes dans Qwik</h1>
+<p class="lead" data-i18n="guide.qwik.lead">La plupart des icônes ne changent plus une fois la page chargée. Dans Qwik, elles peuvent être du SVG simple écrit sur le serveur, sans aucun code de composant envoyé au navigateur. Pour les rares icônes qui se transforment ou réagissent, l'élément <code>&lt;glyph-fox&gt;</code> gère lui-même l'interaction.</p>
+<nav class="toc" aria-label="Sur cette page" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.qwik.install.h">Installation</a></li><li><a href="#server" data-i18n="guide.qwik.server.h">Icônes rendues sur le serveur</a></li><li><a href="#motion" data-i18n="guide.qwik.motion.h">Animations sans JavaScript</a></li><li><a href="#element" data-i18n="guide.qwik.element.h">Icônes interactives avec l'élément</a></li><li><a href="#city" data-i18n="guide.qwik.city.h">Qwik City</a></li><li><a href="#props" data-i18n="guide.qwik.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.qwik.pitfalls.h">Pièges courants</a></li><li><a href="#faq" data-i18n="seo.faq">Questions fréquentes</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.qwik.install.h">Installation</h2>
+<p data-i18n="guide.qwik.install.p">Installez le paquet principal. L'approche côté serveur utilise <code>glyphfox/core</code> et un module par icône issu de <code>glyphfox/icons/NAME</code> ; l'élément provient de <code>glyphfox/web</code>. Il n'y a rien à configurer dans Vite ni dans Qwik.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p class="note" data-i18n="guide.qwik.install.v2">Les exemples importent depuis <code>@builder.io/qwik</code>. Qwik 2 déplace ces imports vers <code>@qwik.dev/core</code> ; côté glyphfox, rien ne change.</p>
+</section>
+<section id="server">
+<h2 data-i18n="guide.qwik.server.h">Icônes rendues sur le serveur</h2>
+<p data-i18n="guide.qwik.server.p"><code>renderToString</code> renvoie le balisage SVG correspondant aux données d'une icône et aux props communes. Qwik insère du balisage brut avec <code>dangerouslySetInnerHTML</code>, qui, dans Qwik, prend directement la chaîne, et non un objet comme dans React.</p>
+<div class="code"><div class="code-head"><span>src/components/icon/icon.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> <span class="tok-k">type</span> { IconData, SvgOptions } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+<span class="tok-k">import</span> { renderToString } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+
+<span class="tok-k">type</span> Props = SvgOptions &amp; {
+  icon: IconData;
+  <span class="tok-k">class</span>?: string;
+};
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> Icon = ({ icon, <span class="tok-k">class</span>: className, ...options }: Props) =<span class="tok-t">&gt;</span> (
+  <span class="tok-t">&lt;span</span>
+    <span class="tok-k">class</span>={className}
+    <span class="tok-a">style</span>=<span class="tok-s">"display:inline-flex;line-height:0"</span>
+    <span class="tok-a">dangerouslySetInnerHTML</span>={renderToString(icon, options)}
+  <span class="tok-t">/&gt;</span>
+);</pre></div>
+<p data-i18n="guide.qwik.server.inline"><code>Icon</code> est une simple fonction, un composant inline dans la terminologie de Qwik. Il est rendu au sein de son parent et ne possède pas sa propre frontière de chargement différé. Sur le serveur, le parent l'écrit dans le HTML, et tant que ce parent n'est pas rendu à nouveau dans le navigateur, aucun code le concernant n'est jamais téléchargé.</p>
+<div class="code"><div class="code-head"><span>src/routes/layout.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { component$, Slot } <span class="tok-k">from</span> <span class="tok-s">'@builder.io/qwik'</span>;
+<span class="tok-k">import</span> home <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/home'</span>;
+<span class="tok-k">import</span> settings <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/settings'</span>;
+<span class="tok-k">import</span> bookOpen <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/book-open'</span>;
+<span class="tok-k">import</span> { Icon } <span class="tok-k">from</span> <span class="tok-s">'~/components/icon/icon'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> component$(() =<span class="tok-t">&gt;</span> (
+  <span class="tok-t">&lt;div</span> <span class="tok-k">class</span>=<span class="tok-s">"shell"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;nav</span> <span class="tok-k">class</span>=<span class="tok-s">"sidebar"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={home} <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-t">/&gt;</span> Home<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/docs/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={bookOpen} <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-t">/&gt;</span> Docs<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/settings/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={settings} <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-a">weight</span>={<span class="tok-n">1.5</span>} <span class="tok-t">/&gt;</span> Settings<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;/nav</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;main</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;Slot</span> <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/main</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;/div</span><span class="tok-t">&gt;</span>
+));</pre></div>
+<p data-i18n="guide.qwik.server.rerender">Si un composant est rendu à nouveau côté client, par exemple parce qu'il lit un signal qui change, Qwik télécharge sa fonction de rendu et les modules qu'il importe, y compris le moteur de rendu de <code>glyphfox/core</code>. Placez les icônes dans des composants rendus une seule fois, et isolez les parties qui changent dans leurs propres composants.</p>
+</section>
+<section id="motion">
+<h2 data-i18n="guide.qwik.motion.h">Animations sans JavaScript</h2>
+<p data-i18n="guide.qwik.motion.p">Le balisage produit par <code>renderToString</code> embarque son propre CSS. Avec <code>animate</code>, il joue un preset, et avec <code>morphTo</code> et <code>trigger: 'hover'</code>, il se transforme tant que le pointeur survole le svg ou son parent direct. Aucun des deux ne nécessite de script, et tous deux s'arrêtent sous <code>prefers-reduced-motion</code>.</p>
+<div class="code"><div class="code-head"><span>src/components/status.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> arrowRight <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/arrow-right'</span>;
+<span class="tok-k">import</span> chevronRight <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/chevron-right'</span>;
+<span class="tok-k">import</span> loader <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/loader'</span>;
+<span class="tok-k">import</span> { Icon } <span class="tok-k">from</span> <span class="tok-s">'~/components/icon/icon'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> Next = () =<span class="tok-t">&gt;</span> (
+  <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/next/"</span> <span class="tok-k">class</span>=<span class="tok-s">"next"</span><span class="tok-t">&gt;</span>
+    Next <span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={arrowRight} <span class="tok-a">morphTo</span>={chevronRight} <span class="tok-a">trigger</span>=<span class="tok-s">"hover"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+);
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> Saving = () =<span class="tok-t">&gt;</span> <span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={loader} <span class="tok-a">animate</span>=<span class="tok-s">"spin"</span> <span class="tok-a">title</span>=<span class="tok-s">"Saving"</span> <span class="tok-t">/&gt;</span>;</pre></div>
+<p data-i18n="guide.qwik.motion.morphto">Avec le core, <code>morphTo</code> attend des données d'icône, pas un nom : importez l'icône cible comme ci-dessus. Une chaîne est ignorée et l'icône reste immobile.</p>
+<p data-i18n="guide.qwik.motion.state">Pour un état comme ouvert ou sélectionné, faites le rendu avec <code>trigger: 'state'</code> : le svg se transforme alors lorsqu'il reçoit la classe <code>gf-on</code>. Basculer une classe ne nécessite aucun nouveau rendu, si bien que le seul code que le navigateur télécharge est le gestionnaire de clic, et seulement au premier clic.</p>
+<div class="code"><div class="code-head"><span>src/components/menu-toggle.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { component$ } <span class="tok-k">from</span> <span class="tok-s">'@builder.io/qwik'</span>;
+<span class="tok-k">import</span> menu <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/menu'</span>;
+<span class="tok-k">import</span> x <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/x'</span>;
+<span class="tok-k">import</span> { Icon } <span class="tok-k">from</span> <span class="tok-s">'~/components/icon/icon'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> MenuToggle = component$(() =<span class="tok-t">&gt;</span> (
+  <span class="tok-t">&lt;button</span>
+    <span class="tok-k">type</span>=<span class="tok-s">"button"</span>
+    <span class="tok-a">aria-label</span>=<span class="tok-s">"Menu"</span>
+    <span class="tok-a">aria-expanded</span>=<span class="tok-s">"false"</span>
+    <span class="tok-a">onClick$</span>={(_, button) =<span class="tok-t">&gt;</span> {
+      <span class="tok-k">const</span> open = button.getAttribute(<span class="tok-s">'aria-expanded'</span>) !== <span class="tok-s">'true'</span>;
+      button.setAttribute(<span class="tok-s">'aria-expanded'</span>, String(open));
+      button.querySelector(<span class="tok-s">'svg'</span>)?.classList.toggle(<span class="tok-s">'gf-on'</span>, open);
+    }}
+  <span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;Icon</span> <span class="tok-a">icon</span>={menu} <span class="tok-a">morphTo</span>={x} <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+));</pre></div>
+</section>
+<section id="element">
+<h2 data-i18n="guide.qwik.element.h">Icônes interactives avec l'élément</h2>
+<p data-i18n="guide.qwik.element.p">Lorsqu'une icône doit passer d'un nom à l'autre, se transformer à chaque changement ou réagir elle-même aux clics, utilisez l'élément <code>&lt;glyph-fox&gt;</code>. Chargez-le depuis une tâche visible (visible task) dans le composant qui l'utilise, afin que le navigateur ne le récupère que lorsqu'une telle icône est à l'écran.</p>
+<div class="code"><div class="code-head"><span>src/components/like-button.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { component$, useVisibleTask$ } <span class="tok-k">from</span> <span class="tok-s">'@builder.io/qwik'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> LikeButton = component$(() =<span class="tok-t">&gt;</span> {
+  <span class="tok-c">// eslint-disable-next-line qwik/no-use-visible-task</span>
+  useVisibleTask$(() =<span class="tok-t">&gt;</span> {
+    <span class="tok-k">import</span>(<span class="tok-s">'glyphfox/web'</span>);
+  });
+
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-k">class</span>=<span class="tok-s">"like"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Like"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"heart"</span> <span class="tok-a">morph-to</span>=<span class="tok-s">"heart/solid"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"click"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  );
+});</pre></div>
+<p data-i18n="guide.qwik.element.attrs">Écrivez les props de l'élément sous forme d'attributs de type chaîne, comme en HTML : <code>name</code>, <code>size</code>, <code>morph</code>, <code>morph-to</code>, <code>trigger</code>. Avec un déclencheur de clic ou de survol, l'élément gère son propre état : le composant n'est donc jamais rendu à nouveau et Qwik n'a rien à reprendre pour lui.</p>
+<p data-i18n="guide.qwik.element.subset"><code>glyphfox/web</code> embarque toutes les icônes. Pour charger moins, importez depuis cette tâche votre propre module, qui enregistre un sous-ensemble avec <code>defineGlyphFox</code> et <code>registerIcons</code>, comme dans le <a href="web-components.html">guide des web components</a>. Si votre configuration TypeScript rejette la balise inconnue, déclarez <code>glyph-fox</code> parmi les éléments intrinsèques JSX dans un fichier de déclaration.</p>
+<p data-i18n="guide.qwik.element.layout">L'élément se dessine après sa mise à niveau : le HTML du serveur contient donc une balise vide. Réservez sa taille avec CSS pour que la mise en page ne bouge pas :</p>
+<div class="code"><div class="code-head"><span>src/global.css</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="css" data-done="1"><span class="tok-a">glyph-fox</span>:not(:defined) {
+  <span class="tok-a">display</span>: inline-block;
+  <span class="tok-a">width</span>: <span class="tok-n">24px</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">24px</span>;
+}</pre></div>
+</section>
+<section id="city">
+<h2 data-i18n="guide.qwik.city.h">Qwik City</h2>
+<p data-i18n="guide.qwik.city.p">Les layouts et les routes sont rendus sur le serveur : le composant <code>Icon</code> fonctionne donc dans <code>src/routes/layout.tsx</code>, dans les pages et dans tous les composants qu'ils rendent. La génération de site statique écrit le même balisage dans des fichiers HTML.</p>
+<p data-i18n="guide.qwik.city.loader">Lorsque les noms d'icônes proviennent de données, résolvez-les sur le serveur. Dans un <code>routeLoader$</code>, <code>toSvg</code> de <code>glyphfox</code> accepte n'importe quel nom ainsi que la syntaxe complète des noms ; il embarque toutes les icônes, ce qui ne pose pas de problème dans du code exécuté uniquement sur le serveur.</p>
+<div class="code"><div class="code-head"><span>src/routes/features/index.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { component$ } <span class="tok-k">from</span> <span class="tok-s">'@builder.io/qwik'</span>;
+<span class="tok-k">import</span> { routeLoader$ } <span class="tok-k">from</span> <span class="tok-s">'@builder.io/qwik-city'</span>;
+<span class="tok-k">import</span> { toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">const</span> FEATURES = [
+  { icon: <span class="tok-s">'shield-check'</span>, label: <span class="tok-s">'Audited'</span> },
+  { icon: <span class="tok-s">'cloud&amp;lock:overlap'</span>, label: <span class="tok-s">'Encrypted backups'</span> },
+  { icon: <span class="tok-s">'file+check@tr'</span>, label: <span class="tok-s">'Signed releases'</span> },
+];
+
+<span class="tok-k">export</span> <span class="tok-k">const</span> useFeatures = routeLoader$(() =<span class="tok-t">&gt;</span>
+  FEATURES.map((f) =<span class="tok-t">&gt;</span> ({ ...f, svg: toSvg(f.icon, { size: <span class="tok-n">28</span>, weight: <span class="tok-n">1.75</span> }) })),
+);
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> component$(() =<span class="tok-t">&gt;</span> {
+  <span class="tok-k">const</span> features = useFeatures();
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;ul</span> <span class="tok-k">class</span>=<span class="tok-s">"features"</span><span class="tok-t">&gt;</span>
+      {features.value.map((f) =<span class="tok-t">&gt;</span> (
+        <span class="tok-t">&lt;li</span> <span class="tok-a">key</span>={f.label}<span class="tok-t">&gt;</span>
+          <span class="tok-t">&lt;span</span> <span class="tok-a">dangerouslySetInnerHTML</span>={f.svg} <span class="tok-t">/&gt;</span>
+          {f.label}
+        <span class="tok-t">&lt;/li</span><span class="tok-t">&gt;</span>
+      ))}
+    <span class="tok-t">&lt;/ul</span><span class="tok-t">&gt;</span>
+  );
+});</pre></div>
+<p data-i18n="guide.qwik.city.cdn">Pour disposer plutôt de l'élément sur toutes les pages, ajoutez le build CDN en un seul fichier dans le head de <code>src/root.tsx</code> avec <code>defer</code>, comme décrit dans <a href="html-cdn.html">HTML et CDN</a>. Ce choix coûte un téléchargement de 62 Ko gzip sur chaque page, mais vous dispense de suivre les endroits où l'élément est utilisé.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.qwik.props.h">Props</h2>
+<p data-i18n="guide.qwik.props.p">Le composant <code>Icon</code> transmet ses props à <code>renderToString</code>, qui accepte les options communes avec leurs noms en camelCase, ainsi que les chaînes <code>class</code> et <code>style</code> pour le svg. Sur l'élément, ces mêmes props sont des attributs en kebab-case.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.option">Option</th><th data-i18n="docs.type">Type</th><th data-i18n="docs.default">Par défaut</th><th data-i18n="docs.desc">Description</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Largeur et hauteur ; les nombres sont en pixels.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Couleur principale.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Couleur du calque duotone et du remplissage plein.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Opacité du calque duotone ou du remplissage plein.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Trait de 1 à 3 sur la grille de 24, avec compensation optique en dessous de 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Garde le trait à weight pixels quelle que soit la taille.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Jointures et extrémités arrondies ou vives.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Axe de style ; solid vient des formes fermées.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Rotation en degrés.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Miroir horizontal.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Miroir vertical.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Miroir dans les mises en page de droite à gauche.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>aucun</td><td data-i18n="prop.animate">Préréglage d'état vivant.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Moment où l'animation ou le morph se joue.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">L'état pour le déclencheur state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>selon le préréglage</td><td data-i18n="prop.duration">Durée de l'animation ou du morph.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Délai de l'animation ou du morph.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Répète à l'infini ou un certain nombre de fois (spin et pulse bouclent par défaut).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>aucun</td><td data-i18n="prop.modifier">Badge avec espace de découpe automatique.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Coin du badge.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>aucun</td><td data-i18n="prop.morphTo">Cible du morph ; le déclencheur décide quand elle s'affiche.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>aucun</td><td data-i18n="prop.title">Nom accessible : title, role img et aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true sans title</td><td data-i18n="prop.decorative">Masque l'icône aux technologies d'assistance.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.qwik.pitfalls.h">Pièges courants</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.qwik.pitfalls.list.1.t">dangerouslySetInnerHTML prend une chaîne</dt><dd data-i18n="guide.qwik.pitfalls.list.1.d">Passez directement le balisage. La forme React avec <code>__html</code> ne fonctionne pas dans Qwik.</dd></div><div><dt data-i18n="guide.qwik.pitfalls.list.2.t">Des parents rendus à nouveau</dt><dd data-i18n="guide.qwik.pitfalls.list.2.d">Une icône placée dans un composant rendu à nouveau dans le navigateur entraîne avec elle <code>glyphfox/core</code>, soit environ 37 Ko minifiés. Isolez les parties avec état dans de petits composants dédiés.</dd></div><div><dt data-i18n="guide.qwik.pitfalls.list.3.t">Des noms dans morphTo</dt><dd data-i18n="guide.qwik.pitfalls.list.3.d">Le core attend des données d'icône pour <code>morphTo</code>. Une chaîne est ignorée, et l'icône ne se transforme pas.</dd></div><div><dt data-i18n="guide.qwik.pitfalls.list.4.t">Le survol n'atteint que le parent direct</dt><dd data-i18n="guide.qwik.pitfalls.list.4.d">Le morph CSS au survol réagit au svg et à son parent direct, c'est-à-dire le span conteneur. Survoler un bouton plus grand qui l'entoure ne déclenche pas le morph ; pour cela, basculez <code>gf-on</code> avec <code>trigger: 'state'</code>.</dd></div><div><dt data-i18n="guide.qwik.pitfalls.list.5.t">toSvg dans le code client</dt><dd data-i18n="guide.qwik.pitfalls.list.5.d"><code>import { toSvg } from 'glyphfox'</code> embarque toutes les icônes. Sa place est dans du code exécuté uniquement sur le serveur, comme <code>routeLoader$</code> ; dans les composants susceptibles de s'exécuter dans le navigateur, utilisez le core avec un module par icône.</dd></div><div><dt data-i18n="guide.qwik.pitfalls.list.6.t">L'élément avant sa mise à niveau</dt><dd data-i18n="guide.qwik.pitfalls.list.6.d">Le HTML du serveur contient un <code>&lt;glyph-fox&gt;</code> vide. Réservez sa place avec CSS, ou rendez avec le composant <code>Icon</code> les icônes qui doivent être visibles immédiatement.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Questions fréquentes</h2>
+<h3 data-i18n="guide.qwik.faq.zero-js.q">Les icônes rendues côté serveur n'envoient-elles vraiment aucun JavaScript ?</h3>
+<p data-i18n="guide.qwik.faq.zero-js.a">Oui, tant que le composant qui les rend n'est pas rendu à nouveau dans le navigateur. Le HTML contient du SVG simple, et les presets comme les morphs au survol sont du CSS intégré à ce SVG. Seuls les composants rendus à nouveau, ainsi que l'élément <code>&lt;glyph-fox&gt;</code>, apportent du code au navigateur.</p>
+<h3 data-i18n="guide.qwik.faq.react.q">Puis-je utiliser les composants React via qwikify$ ?</h3>
+<p data-i18n="guide.qwik.faq.react.a">Ils se comportent comme n'importe quel composant React dans <code>qwikify$</code>, mais cette île embarque alors React et le runtime React de glyphfox. Pour des icônes, le balisage rendu côté serveur ou l'élément revient bien moins cher.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icônes de ce guide</h2>
+<ul class="icon-links"><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/book-open.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-book-open" aria-hidden="true"><path d="M12 7c-2-2-5-3-9-3v14c4 0 7 1 9 3 2-2 5-3 9-3V4c-4 0-7 1-9 3Z"/><path d="M12 7v14"/></svg><span>book-open</span></a></li><li><a href="../../icons/arrow-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-arrow-right" aria-hidden="true"><path d="M4 12h16"/><path d="M14 6l6 6-6 6"/></svg><span>arrow-right</span></a></li><li><a href="../../icons/chevron-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chevron-right" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>chevron-right</span></a></li><li><a href="../../icons/loader.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-loader" aria-hidden="true"><path d="M12 7L12 2.5"/><path d="M15.54 8.46L18.72 5.28"/><path d="M17 12L21.5 12"/><path d="M15.54 15.54L18.72 18.72"/><path d="M12 17L12 21.5"/><path d="M8.46 15.54L5.28 18.72"/><path d="M7 12L2.5 12"/><path d="M8.46 8.46L5.28 5.28"/></svg><span>loader</span></a></li><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guides associés</h2>
+<ul class="guide-cards"><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Rendu côté serveur</strong><span data-i18n="guide.ssr.description">Rendez les icônes SVG glyphfox côté serveur : sortie par paquet, enregistrement des icônes par nom, chaînes toSvg, hydratation, animations et web component.</span></a></li><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Icônes dans Lit et les web components</strong><span data-i18n="guide.web-components.description">Utilisez l'élément glyph-fox dans Lit et les web components : enregistrez toutes les icônes ou une partie, liez les attributs, stylisez-le, restez accessible.</span></a></li><li><a href="astro.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-planet" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M2.6 15.42A10 3.5-20 0 1 3.12 13.49"/><path d="M19.76 7.44A10 3.5-20 0 1 21.4 8.58"/><path d="M21.4 8.58A10 3.5-20 0 1 2.6 15.42"/></svg><strong data-i18n="guide.astro.h1">Icônes dans Astro</strong><span data-i18n="guide.astro.description">Icônes Astro avec glyphfox : rendu au build sans JavaScript côté client, composant Icon.astro, îles ou élément personnalisé pour l'animation.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Des icônes originales sur une grille de 24 qui changent d'épaisseur, se transforment, fusionnent et prennent vie. Libres et open source sous licence MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produit</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icônes</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Toutes les icônes par catégorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Kit de marque</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Développeurs</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guides</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Nouveautés</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projet</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licence MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Créé par</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn le renard est dessiné sur la même grille que les icônes.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

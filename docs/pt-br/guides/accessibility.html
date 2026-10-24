@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/accessibility.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ícones acessíveis: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.accessibility.title">Ícones SVG acessíveis com glyphfox: rótulos e contraste</title>
+<meta name="description" content="Ícones SVG acessíveis com glyphfox: decorativos por padrão, títulos e rótulos, botões só com ícone, ícones de status, contraste, movimento reduzido e layouts RTL." data-i18n-attr="content:guide.accessibility.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/accessibility.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/accessibility.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/accessibility.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/accessibility.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/accessibility.html">
+<meta property="og:title" content="Ícones SVG acessíveis com glyphfox: rótulos e contraste">
+<meta property="og:description" content="Ícones SVG acessíveis com glyphfox: decorativos por padrão, títulos e rótulos, botões só com ícone, ícones de status, contraste, movimento reduzido e layouts RTL.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:title" content="Ícones SVG acessíveis com glyphfox: rótulos e contraste">
+<meta name="twitter:description" content="Ícones SVG acessíveis com glyphfox: decorativos por padrão, títulos e rótulos, botões só com ícone, ícones de status, contraste, movimento reduzido e layouts RTL.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/accessibility.png">
+<meta name="twitter:image:alt" content="Ícones acessíveis: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://kwy404.github.io/glyphfox/pt-br/"},{"@type":"ListItem","position":2,"name":"Guias","item":"https://kwy404.github.io/glyphfox/pt-br/guides/"},{"@type":"ListItem","position":3,"name":"Acessibilidade","item":"https://kwy404.github.io/glyphfox/pt-br/guides/accessibility.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Todo ícone deve ter um título?","acceptedAnswer":{"@type":"Answer","text":"Não. A maioria dos ícones fica ao lado de texto ou dentro de um controle com rótulo, e um título ali só acrescenta ruído. Dê um título aos ícones que aparecem sozinhos e carregam informação, como um ícone de status em uma célula de tabela."}},{"@type":"Question","name":"O aria-hidden é suficiente para ícones decorativos?","acceptedAnswer":{"@type":"Answer","text":"Sim. aria-hidden=\"true\", que o glyphfox adiciona por padrão, remove o ícone da árvore de acessibilidade. Ícones SVG não recebem foco, então não há mais nada para esconder."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="Copiado para a área de transferência" data-theme-light="Mudar para o tema claro" data-theme-dark="Mudar para o tema escuro">
+<a class="skip" href="#main" data-i18n="nav.skip">Pular para o conteúdo</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../icons.html" data-nav="icons" data-i18n="nav.icons">Ícones</a>
+      <a href="../studio.html" data-nav="studio" data-i18n="nav.studio">Estúdio</a>
+      <a href="../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Docs</a>
+      <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Novidades</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/accessibility.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Guias" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Todos os guias</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit e web components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML e CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Tópicos</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Ícones animados</a>
+<a href="accessibility.html" aria-current="page" class="on" data-i18n="guide.accessibility.short">Acessibilidade</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">Sprites SVG</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Renderização no servidor</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Trilha de navegação" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../" data-i18n="seo.crumb.home">Início</a></li><li><a href="./" data-i18n="seo.crumb.guides">Guias</a></li><li aria-current="page" data-i18n="guide.accessibility.short">Acessibilidade</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.topics">Tópicos</span>
+<h1 class="title" data-i18n="guide.accessibility.h1">Ícones acessíveis</h1>
+<p class="lead" data-i18n="guide.accessibility.lead">A maioria dos ícones fica ao lado de um rótulo e não deve atrapalhar as tecnologias assistivas; alguns carregam significado por conta própria e precisam de um nome. O glyphfox acerta o primeiro caso por padrão e resolve o segundo com uma única prop.</p>
+<nav class="toc" aria-label="Nesta página" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#defaults" data-i18n="guide.accessibility.defaults.h">Decorativos por padrão</a></li><li><a href="#title" data-i18n="guide.accessibility.title.h">Ícones que carregam significado</a></li><li><a href="#controls" data-i18n="guide.accessibility.controls.h">Botões e links só com ícone</a></li><li><a href="#status" data-i18n="guide.accessibility.status.h">Status, cor e contraste</a></li><li><a href="#motion" data-i18n="guide.accessibility.motion.h">Movimento</a></li><li><a href="#rtl" data-i18n="guide.accessibility.rtl.h">Layouts da direita para a esquerda</a></li><li><a href="#others" data-i18n="guide.accessibility.others.h">Máscaras, sprites, o elemento e Angular</a></li><li><a href="#testing" data-i18n="guide.accessibility.testing.h">Como testar</a></li><li><a href="#props" data-i18n="guide.accessibility.props.h">Props que importam aqui</a></li><li><a href="#pitfalls" data-i18n="guide.accessibility.pitfalls.h">Armadilhas comuns</a></li><li><a href="#faq" data-i18n="seo.faq">Perguntas frequentes</a></li></ol></nav>
+</header>
+<section id="defaults">
+<h2 data-i18n="guide.accessibility.defaults.h">Decorativos por padrão</h2>
+<p data-i18n="guide.accessibility.defaults.p">Todo ícone do glyphfox é renderizado com <code>aria-hidden="true"</code>, a menos que você dê um nome a ele. Os leitores de tela o ignoram, e é exatamente isso que você quer para um ícone ao lado de texto visível: o texto já diz o que o controle faz, e ouvir "imagem" a mais no anúncio é só ruído.</p>
+<div class="code"><div class="code-head"><span>output.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-c">&lt;!-- &lt;DownloadIcon /&gt; next to a label --&gt;</span>
+<span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;svg</span> <span class="tok-k">class</span>=<span class="tok-s">"glyphfox glyphfox-download"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span> ...<span class="tok-t">&gt;</span>...<span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span>
+  Download
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.accessibility.defaults.p2">O mesmo padrão vale em todo lugar: nos componentes React, Vue, Svelte e Angular, no elemento <code>glyph-fox</code>, no runtime para HTML puro e nas strings do <code>toSvg</code>. Você só muda isso quando o ícone é o único portador do seu significado.</p>
+</section>
+<section id="title">
+<h2 data-i18n="guide.accessibility.title.h">Ícones que carregam significado</h2>
+<p data-i18n="guide.accessibility.title.p">Passe <code>title</code> e o ícone vira uma imagem com nome. O renderizador adiciona três coisas: um elemento <code>&lt;title&gt;</code> como primeiro filho, <code>role="img"</code> e <code>aria-label</code> com o mesmo texto, para que o nome seja exposto de forma consistente em todos os navegadores e leitores de tela.</p>
+<div class="code"><div class="code-head"><span>Status.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { CircleCheckIcon, TriangleAlertIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> SyncStatus({ ok }) {
+  <span class="tok-k">return</span> ok
+    ? <span class="tok-t">&lt;CircleCheckIcon</span> <span class="tok-a">title</span>=<span class="tok-s">"Synced"</span> <span class="tok-a">color</span>=<span class="tok-s">"#15803d"</span> <span class="tok-t">/&gt;</span>
+    : <span class="tok-t">&lt;TriangleAlertIcon</span> <span class="tok-a">title</span>=<span class="tok-s">"Sync failed"</span> <span class="tok-a">color</span>=<span class="tok-s">"#b91c1c"</span> <span class="tok-t">/&gt;</span>;
+}</pre></div>
+<div class="code"><div class="code-head"><span>output.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;svg</span> <span class="tok-k">class</span>=<span class="tok-s">"glyphfox glyphfox-circle-check"</span> <span class="tok-a">role</span>=<span class="tok-s">"img"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Synced"</span> ...<span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;title</span><span class="tok-t">&gt;</span>Synced<span class="tok-t">&lt;/title</span><span class="tok-t">&gt;</span>
+  ...
+<span class="tok-t">&lt;/svg</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.accessibility.title.label">Em React, Vue e Svelte, você também pode passar <code>aria-label</code> ou <code>aria-labelledby</code> direto para o componente. Eles vão para o <code>svg</code>, e o ícone deixa de ser decorativo automaticamente, sem o elemento <code>&lt;title&gt;</code> e o tooltip que ele mostra no hover. <code>decorative</code> substitui a escolha automática nos dois sentidos: <code>decorative</code> esconde um ícone mesmo com título, e <code>decorative={false}</code> o expõe.</p>
+<p data-i18n="guide.accessibility.title.words">Escreva o nome pelo que o ícone significa naquele lugar, e não pelo que ele retrata. Um ícone <a href="../../icons/trash.html">trash</a> é "Excluir rascunho", não "Lixeira"; um <a href="../../icons/circle-check.html">circle check</a> em uma lista de pagamentos é "Pago".</p>
+</section>
+<section id="controls">
+<h2 data-i18n="guide.accessibility.controls.h">Botões e links só com ícone</h2>
+<p data-i18n="guide.accessibility.controls.p">Quando um ícone é o único conteúdo de um botão ou de um link, dê nome ao controle, não ao ícone. É o controle que recebe o foco e que o leitor de tela anuncia; o ícone dentro dele continua decorativo.</p>
+<div class="code"><div class="code-head"><span>Toolbar.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { XIcon, SettingsIcon, SearchIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Toolbar({ onClose }) {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Close dialog"</span> <span class="tok-a">onClick</span>={onClose}<span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;XIcon</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+      <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/settings"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Settings"</span><span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;SettingsIcon</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"submit"</span><span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;SearchIcon</span> <span class="tok-t">/&gt;</span>
+        <span class="tok-t">&lt;span</span> <span class="tok-a">className</span>=<span class="tok-s">"visually-hidden"</span><span class="tok-t">&gt;</span>Search the docs<span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.accessibility.controls.hidden">O texto visualmente oculto, o terceiro padrão, é traduzido pelas ferramentas de tradução do navegador, que muitas vezes ignoram atributos; prefira esse padrão em sites multilíngues. Uma classe <code>visually-hidden</code> típica recorta o elemento para um pixel sem removê-lo da árvore de acessibilidade.</p>
+<div class="code"><div class="code-head"><span>app.css</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="css" data-done="1"><span class="tok-t">.visually-hidden</span> {
+  <span class="tok-a">position</span>: absolute;
+  <span class="tok-a">width</span>: <span class="tok-n">1px</span>;
+  <span class="tok-a">height</span>: <span class="tok-n">1px</span>;
+  <span class="tok-a">margin</span>: -<span class="tok-n">1px</span>;
+  <span class="tok-a">padding</span>: <span class="tok-n">0</span>;
+  <span class="tok-a">overflow</span>: hidden;
+  <span class="tok-a">clip</span>: rect(<span class="tok-n">0</span> <span class="tok-n">0</span> <span class="tok-n">0</span> <span class="tok-n">0</span>);
+  <span class="tok-a">white-space</span>: nowrap;
+  <span class="tok-a">border</span>: <span class="tok-n">0</span>;
+}</pre></div>
+<p data-i18n="guide.accessibility.controls.state">Botões de alternância precisam de estado, não de um nome novo. Um botão de menu que se transforma de <code>menu</code> em <code>x</code> mantém o rótulo e define <code>aria-expanded</code>; um botão de play que se transforma em <code>pause</code> muda o rótulo ou usa <code>aria-pressed</code>. O morph é a metade visual dessa mudança; o <a href="animated-icons.html">guia de ícones animados</a> mostra as duas metades juntas.</p>
+</section>
+<section id="status">
+<h2 data-i18n="guide.accessibility.status.h">Status, cor e contraste</h2>
+<p data-i18n="guide.accessibility.status.p">A cor sozinha não pode carregar significado (WCAG 1.4.1). Use formas diferentes para estados diferentes, como <code>circle-check</code>, <code>circle-alert</code> e <code>circle-x</code>, e combine com texto sempre que possível. Os selos também ajudam: <code>file+check</code> e <code>file+alert</code> diferem na forma, não só na cor.</p>
+<p data-i18n="guide.accessibility.status.contrast">Ícones de que as pessoas precisam para entender a página ou encontrar um controle devem atingir um contraste de 3 para 1 com o fundo (WCAG 1.4.11, contraste não textual). Meça a cor do traço, porque é ele que desenha a forma; a camada duotone translúcida é uma decoração por cima dele. Ícones decorativos ao lado de texto não entram na regra, mas o contraste baixo ainda os torna mais difíceis de identificar numa leitura rápida.</p>
+<p data-i18n="guide.accessibility.status.weight">Traços finos parecem mais claros do que a cor sugere, porque o antialiasing os mistura com o fundo. O glyphfox compensa isso abaixo de 24 pixels, deixando o traço até 30 por cento mais grosso; em 14 ou 16 pixels com uma cor suave, um <code>weight</code> de 2,25 ou 2,5 mantém os ícones legíveis. <code>absoluteWeight</code> desliga a compensação, então use com cuidado em tamanhos pequenos.</p>
+</section>
+<section id="motion">
+<h2 data-i18n="guide.accessibility.motion.h">Movimento</h2>
+<p data-i18n="guide.accessibility.motion.p">Todo estado vivo e todo morph respeitam <code>prefers-reduced-motion: reduce</code>: os presets não tocam, os morphs em CSS trocam sem transição e os morphs de componentes pulam direto para a forma final. O estado final continua visível, então nenhuma informação se perde.</p>
+<p data-i18n="guide.accessibility.motion.p2">Conteúdo que se move sozinho por mais de cinco segundos precisa de uma forma de ser pausado (WCAG 2.2.2). Vincule animações em loop como <code>spin</code> ao processo que elas mostram e pare-as quando ele terminar, e evite loops feitos para chamar atenção, como um sino que balança para sempre.</p>
+</section>
+<section id="rtl">
+<h2 data-i18n="guide.accessibility.rtl.h">Layouts da direita para a esquerda</h2>
+<p data-i18n="guide.accessibility.rtl.p">Em interfaces em árabe, hebraico ou persa, os ícones que apontam no sentido da leitura precisam ser espelhados: setas de voltar e avançar, chevrons em breadcrumbs, responder e desfazer. <code>mirrorRtl</code> adiciona uma classe que espelha o ícone sempre que ele está dentro de <code>dir="rtl"</code>, então a mesma marcação funciona nas duas direções.</p>
+<div class="code"><div class="code-head"><span>Pager.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { ChevronLeftIcon, ChevronRightIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Pager({ onPrev, onNext }) {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;nav</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Pagination"</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={onPrev}<span class="tok-t">&gt;</span><span class="tok-t">&lt;ChevronLeftIcon</span> mirrorRtl <span class="tok-t">/&gt;</span> Previous<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">onClick</span>={onNext}<span class="tok-t">&gt;</span>Next <span class="tok-t">&lt;ChevronRightIcon</span> mirrorRtl <span class="tok-t">/&gt;</span><span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;/nav</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.accessibility.rtl.not">Não espelhe ícones cuja direção não acompanha o texto: controles de mídia como <code>play</code> e <code>fast-forward</code> continuam apontando para a direita, um <code>clock</code> continua girando no sentido horário, um <code>check</code> fica como está, e <code>rotate-cw</code> ainda significa sentido horário.</p>
+</section>
+<section id="others">
+<h2 data-i18n="guide.accessibility.others.h">Máscaras, sprites, o elemento e Angular</h2>
+<ul class="list"><li data-i18n="guide.accessibility.others.list.1"><strong>Classes do Tailwind CSS</strong> renderizam um elemento vazio com uma máscara, que não tem semântica nenhuma. Adicione <code>aria-hidden="true"</code> e dê ao controle um rótulo visualmente oculto. No modo de alto contraste do Windows, um ícone de máscara pode sumir; o <a href="tailwind.html">guia de Tailwind CSS</a> traz a solução.</li><li data-i18n="guide.accessibility.others.list.2"><strong>Sprites SVG</strong> deixam o <code>svg</code> externo por sua conta: adicione <code>aria-hidden="true"</code> para um ícone decorativo, ou <code>role="img"</code> e <code>aria-label</code> para um que carrega significado. O <a href="svg-sprite.html">guia de sprites</a> tem exemplos.</li><li data-i18n="guide.accessibility.others.list.3"><strong>O elemento <code>glyph-fox</code> e o <code>gf-icon</code> do Angular</strong> renderizam o <code>svg</code> dentro do elemento host. Um <code>aria-label</code> no host transforma o <code>svg</code> interno em imagem, mas não dá nome a ele, e um rótulo em um elemento genérico não é anunciado de forma confiável. Use o atributo ou input <code>title</code>, que dá nome ao <code>svg</code> interno.</li></ul>
+<div class="code"><div class="code-head"><span>index.html</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js" data-done="1"><span class="tok-c">&lt;!-- names the inner svg: role img, aria-label and a title --&gt;</span>
+<span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"circle-alert"</span> <span class="tok-a">title</span>=<span class="tok-s">"Payment failed"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+
+<span class="tok-c">&lt;!-- Angular --&gt;</span>
+<span class="tok-t">&lt;gf-icon</span> <span class="tok-a">name</span>=<span class="tok-s">"circle-alert"</span> <span class="tok-a">title</span>=<span class="tok-s">"Payment failed"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/gf-icon</span><span class="tok-t">&gt;</span></pre></div>
+</section>
+<section id="testing">
+<h2 data-i18n="guide.accessibility.testing.h">Como testar</h2>
+<ol class="list"><li data-i18n="guide.accessibility.testing.list.1">Abra a árvore de acessibilidade nas devtools do navegador e selecione o controle: o nome dele deve ser o rótulo que você escreveu, e os ícones decorativos não devem aparecer de jeito nenhum.</li><li data-i18n="guide.accessibility.testing.list.2">Navegue com um leitor de tela: VoiceOver no macOS e no iOS, NVDA no Windows, TalkBack no Android. Fique atento a nomes duplicados e a qualquer coisa anunciada apenas como "imagem".</li><li data-i18n="guide.accessibility.testing.list.3">Emule <code>prefers-reduced-motion</code> e <code>forced-colors</code> nas ferramentas de renderização das devtools do Chromium e confira se os ícones continuam visíveis e parados.</li><li data-i18n="guide.accessibility.testing.list.4">Verifique o contraste dos ícones com significado usando um seletor de cores sobre o fundo real, incluindo os estados de hover e foco.</li></ol>
+</section>
+<section id="props">
+<h2 data-i18n="guide.accessibility.props.h">Props que importam aqui</h2>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="docs.type">Tipo</th><th data-i18n="docs.default">Padrão</th><th data-i18n="docs.desc">Descrição</th></tr></thead><tbody>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Cor principal.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Traço de 1 a 3 na grade de 24, com compensação óptica abaixo de 24 px.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Mantém o traço com weight pixels em qualquer tamanho.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">Espelha em layouts da direita para a esquerda.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>nenhum</td><td data-i18n="prop.title">Nome acessível: title, role img e aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true sem title</td><td data-i18n="prop.decorative">Esconde o ícone das tecnologias assistivas.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.accessibility.pitfalls.h">Armadilhas comuns</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.accessibility.pitfalls.list.1.t">Dar nome ao controle e ao ícone</dt><dd data-i18n="guide.accessibility.pitfalls.list.1.d">Um <code>title</code> em um ícone dentro de um botão que já tem rótulo faz os leitores de tela anunciarem os dois, e o <code>&lt;title&gt;</code> também aparece como tooltip no hover. Dê nome a uma coisa só: o controle.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.2.t">Uma imagem sem nome</dt><dd data-i18n="guide.accessibility.pitfalls.list.2.d"><code>decorative={false}</code> sem <code>title</code> e sem <code>aria-label</code> expõe uma imagem sem nome, que os leitores de tela anunciam como "imagem" ou pelo nome do arquivo. Dê um nome a todo ícone exposto.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.3.t">Estado que só o ícone mostra</dt><dd data-i18n="guide.accessibility.pitfalls.list.3.d">Um morph de <code>copy</code> para <code>check</code> é invisível para um leitor de tela. Anuncie o resultado em texto: mude o rótulo do botão ou coloque "Copiado" em uma live region com <code>role="status"</code>.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.4.t">Tooltips gerados pelo title</dt><dd data-i18n="guide.accessibility.pitfalls.list.4.d">O tooltip do navegador gerado pelo <code>&lt;title&gt;</code> só aparece quando o mouse passa por cima, nunca no foco nem no toque. Não coloque ali informações que não estejam disponíveis de outra forma.</dd></div><div><dt data-i18n="guide.accessibility.pitfalls.list.5.t">Rótulos no elemento host</dt><dd data-i18n="guide.accessibility.pitfalls.list.5.d">Em <code>glyph-fox</code> e <code>gf-icon</code>, use <code>title</code> em vez de <code>aria-label</code>, como descrito acima.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Perguntas frequentes</h2>
+<h3 data-i18n="guide.accessibility.faq.every-icon.q">Todo ícone deve ter um título?</h3>
+<p data-i18n="guide.accessibility.faq.every-icon.a">Não. A maioria dos ícones fica ao lado de texto ou dentro de um controle com rótulo, e um título ali só acrescenta ruído. Dê um título aos ícones que aparecem sozinhos e carregam informação, como um ícone de status em uma célula de tabela.</p>
+<h3 data-i18n="guide.accessibility.faq.aria-hidden.q">O aria-hidden é suficiente para ícones decorativos?</h3>
+<p data-i18n="guide.accessibility.faq.aria-hidden.a">Sim. <code>aria-hidden="true"</code>, que o glyphfox adiciona por padrão, remove o ícone da árvore de acessibilidade. Ícones SVG não recebem foco, então não há mais nada para esconder.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Ícones deste guia</h2>
+<ul class="icon-links"><li><a href="../../icons/download.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-download" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>download</span></a></li><li><a href="../../icons/circle-check.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-circle-check" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12l3 3 6-6"/></svg><span>circle-check</span></a></li><li><a href="../../icons/triangle-alert.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-triangle-alert" aria-hidden="true"><path d="M13.91 4.2L21.7 17.7A2.2 2.2 0 0 1 19.8 21L4.2 21A2.2 2.2 0 0 1 2.3 17.7L10.09 4.2A2.2 2.2 0 0 1 13.91 4.2Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span>triangle-alert</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/chevron-left.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chevron-left" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>chevron-left</span></a></li><li><a href="../../icons/chevron-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chevron-right" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>chevron-right</span></a></li><li><a href="../../icons/circle-alert.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-circle-alert" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v5"/><path d="M12 16.5h.01"/></svg><span>circle-alert</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Guias relacionados</h2>
+<ul class="guide-cards"><li><a href="animated-icons.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sparkles" aria-hidden="true"><path d="M10 5Q10.96 12.04 18 13Q10.96 13.96 10 21Q9.04 13.96 2 13Q9.04 12.04 10 5Z"/><path d="M19 2Q19.36 4.64 22 5Q19.36 5.36 19 8Q18.64 5.36 16 5Q18.64 4.64 19 2Z"/></svg><strong data-i18n="guide.animated-icons.h1">Ícones animados</strong><span data-i18n="guide.animated-icons.description">Ícones animados com glyphfox: presets draw, pop, spin e shake, gatilhos hover, click e state, morphs entre ícones, morphs só com CSS e movimento reduzido.</span></a></li><li><a href="tailwind.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-wind" aria-hidden="true"><path d="M3 10h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg><strong data-i18n="guide.tailwind.h1">Ícones Tailwind CSS</strong><span data-i18n="guide.tailwind.description">Ícones Tailwind CSS com glyphfox no v3 e v4: configuração, sintaxe das classes gf, estilos e pesos após a barra, selos, fusões, animações e opções.</span></a></li><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Ícones em Lit e web components</strong><span data-i18n="guide.web-components.description">Use o custom element glyph-fox em Lit e web components puros: registre todos os ícones SVG ou só alguns, vincule atributos, estilize e mantenha a acessibilidade.</span></a></li><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">Ícones React</strong><span data-i18n="guide.react.description">Ícones React com glyphfox: instalação, componentes SVG com tree shaking, todas as props, ícones por nome, modificadores, Fusão, morph, refs e tipos TypeScript.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Ícones originais em uma grade de 24 que mudam de peso, se transformam, se fundem e ganham vida. Livre e de código aberto sob a licença MIT.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produto</h2>
+        <ul>
+          <li><a href="../icons.html" data-i18n="nav.icons">Ícones</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Todos os ícones por categoria</a></li>
+          <li><a href="../studio.html" data-i18n="nav.studio">Estúdio</a></li>
+          <li><a href="../studio.html#fusion" data-i18n="footer.fusion">Fusão</a></li>
+          <li><a href="../studio.html#brand" data-i18n="footer.brand">Kit de marca</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Desenvolvedores</h2>
+        <ul>
+          <li><a href="../docs.html" data-i18n="nav.docs">Docs</a></li>
+          <li><a href="./" data-i18n="footer.guides">Guias</a></li>
+          <li><a href="../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../docs.html#cli">CLI</a></li>
+          <li><a href="../changelog.html" data-i18n="nav.changelog">Novidades</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projeto</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">Licença MIT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Feito por</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, a raposa, é desenhada na mesma grade dos ícones.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

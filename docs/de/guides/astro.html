@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/astro.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icons in Astro: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.astro.title">Astro-Icons ohne JavaScript: glyphfox</title>
+<meta name="description" content="glyphfox-Icons in Astro beim Build ohne Client-JavaScript rendern, in einer Icon.astro-Komponente kapseln und für Animationen Islands oder das Element ergänzen." data-i18n-attr="content:guide.astro.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/de/guides/astro.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/astro.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/astro.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/astro.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/astro.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/astro.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/astro.html">
+<meta property="og:title" content="Astro-Icons ohne JavaScript: glyphfox">
+<meta property="og:description" content="glyphfox-Icons in Astro beim Build ohne Client-JavaScript rendern, in einer Icon.astro-Komponente kapseln und für Animationen Islands oder das Element ergänzen.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/de/guides/astro.html">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:title" content="Astro-Icons ohne JavaScript: glyphfox">
+<meta name="twitter:description" content="glyphfox-Icons in Astro beim Build ohne Client-JavaScript rendern, in einer Icon.astro-Komponente kapseln und für Animationen Islands oder das Element ergänzen.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/astro.png">
+<meta name="twitter:image:alt" content="Icons in Astro: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://kwy404.github.io/glyphfox/de/"},{"@type":"ListItem","position":2,"name":"Leitfäden","item":"https://kwy404.github.io/glyphfox/de/guides/"},{"@type":"ListItem","position":3,"name":"Astro","item":"https://kwy404.github.io/glyphfox/de/guides/astro.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Liefern im Frontmatter gerenderte Icons JavaScript aus?","acceptedAnswer":{"@type":"Answer","text":"Nein. Das Frontmatter läuft auf dem Server oder zur Build-Zeit, und die Seite erhält reines SVG. Presets und Hover-Morphs sind CSS innerhalb dieses SVG. Nur Islands und das Custom Element bringen Client-Code mit."}},{"@type":"Question","name":"Kann ich Icons in Markdown- oder MDX-Inhalten verwenden?","acceptedAnswer":{"@type":"Answer","text":"Importieren Sie in MDX Icon.astro und verwenden Sie es wie in jeder Komponente. Reines Markdown kann keine Komponenten importieren. Rendern Sie die Icons dort im Layout um den Inhalt herum, oder verwenden Sie die Tailwind-Klassen in rohem HTML, sofern Ihr Markdown das zulässt."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="In die Zwischenablage kopiert" data-theme-light="Zum hellen Design wechseln" data-theme-dark="Zum dunklen Design wechseln">
+<a class="skip" href="#main" data-i18n="nav.skip">Zum Inhalt springen</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Doku</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/astro.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Leitfäden" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Alle Leitfäden</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" aria-current="page" class="on" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit und Web Components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML und CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Themen</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animierte Icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Barrierefreiheit</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree-Shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG-Sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Serverseitiges Rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Brotkrumennavigation" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Startseite</a></li><li><a href="./" data-i18n="seo.crumb.guides">Leitfäden</a></li><li aria-current="page" data-i18n="guide.astro.short">Astro</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.astro.h1">Icons in Astro</h1>
+<p class="lead" data-i18n="guide.astro.lead">Astro rendert Komponenten auf dem Server oder zur Build-Zeit zu HTML, und das passt gut zu SVG-Icons: Rufen Sie den Renderer im Frontmatter auf, und die Seite erhält reines Inline-SVG ohne Client-JavaScript. Islands und das Custom Element decken die Icons ab, die reagieren müssen.</p>
+<nav class="toc" aria-label="Auf dieser Seite" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.astro.install.h">Installation</a></li><li><a href="#frontmatter" data-i18n="guide.astro.frontmatter.h">Icons im Frontmatter</a></li><li><a href="#component" data-i18n="guide.astro.component.h">Eine Icon.astro-Komponente</a></li><li><a href="#motion" data-i18n="guide.astro.motion.h">Animationen ohne JavaScript</a></li><li><a href="#islands" data-i18n="guide.astro.islands.h">Islands für Zustände</a></li><li><a href="#element" data-i18n="guide.astro.element.h">Das Custom Element</a></li><li><a href="#tailwind" data-i18n="guide.astro.tailwind.h">Tailwind-Klassen</a></li><li><a href="#props" data-i18n="guide.astro.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.astro.pitfalls.h">Stolperfallen</a></li><li><a href="#faq" data-i18n="seo.faq">Häufige Fragen</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.astro.install.h">Installation</h2>
+<p data-i18n="guide.astro.install.p">Installieren Sie das Paket. Statische Icons benötigen keine Astro-Integration, weil glyphfox aus reinen ES-Modulen besteht, die im Frontmatter laufen. Islands, die mit <code>glyphfox/react</code>, <code>glyphfox/vue</code> oder <code>glyphfox/svelte</code> gebaut sind, benötigen die passende Astro-Integration.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span>
+<span class="tok-c"># only for islands</span>
+<span class="tok-k">npx</span> astro add react</pre></div>
+</section>
+<section id="frontmatter">
+<h2 data-i18n="guide.astro.frontmatter.h">Icons im Frontmatter</h2>
+<p data-i18n="guide.astro.frontmatter.p">Code im Frontmatter läuft auf dem Server, bei statischen Seiten zur Build-Zeit. <code>toSvg</code> gibt für jeden Icon-Namen den SVG-String zurück, und <code>set:html</code> schreibt ihn ohne Escaping in die Seite:</p>
+<div class="code"><div class="code-head"><span>src/pages/index.astro</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1">---
+<span class="tok-k">import</span> { toSvg } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">const</span> search = toSvg(<span class="tok-s">'search'</span>, { size: <span class="tok-n">20</span> });
+---
+<span class="tok-t">&lt;label</span> <span class="tok-k">class</span>=<span class="tok-s">"search"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;Fragment</span> set<span class="tok-a">:html</span>={search} <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;input</span> <span class="tok-k">type</span>=<span class="tok-s">"search"</span> <span class="tok-a">name</span>=<span class="tok-s">"q"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Search the docs"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/label</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.astro.frontmatter.syntax"><code>toSvg</code> versteht die vollständige Namenssyntax, sodass Badges, Fusionen und Stile in einen einzigen String passen: <code>toSvg('file+check@tr')</code>, <code>toSvg('cloud&amp;lock:overlap')</code>, <code>toSvg('heart/solid')</code>.</p>
+<p data-i18n="guide.astro.frontmatter.cost">Der Import von <code>glyphfox</code> lädt alle Icons, allerdings nur auf dem Server oder im Build. Nichts davon erreicht den Browser, weil das Frontmatter dort nie ausgeführt wird.</p>
+</section>
+<section id="component">
+<h2 data-i18n="guide.astro.component.h">Eine Icon.astro-Komponente</h2>
+<p data-i18n="guide.astro.component.p">Kapseln Sie den Aufruf in einer Komponente, damit Seiten Props statt Optionen übergeben. Das SVG landet direkt im Elternelement, ohne Wrapper-Element:</p>
+<div class="code"><div class="code-head"><span>src/components/Icon.astro</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1">---
+<span class="tok-k">import</span> { toSvg, <span class="tok-k">type</span> SvgOptions } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">interface</span> Props <span class="tok-k">extends</span> SvgOptions {
+  name: string;
+}
+
+<span class="tok-k">const</span> { name, ...options } = Astro.props;
+<span class="tok-k">const</span> svg = toSvg(name, options);
+---
+<span class="tok-t">&lt;Fragment</span> set<span class="tok-a">:html</span>={svg} <span class="tok-t">/&gt;</span></pre></div>
+<div class="code"><div class="code-head"><span>src/components/Nav.astro</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1">---
+<span class="tok-k">import</span> Icon <span class="tok-k">from</span> <span class="tok-s">'./Icon.astro'</span>;
+---
+<span class="tok-t">&lt;nav</span> <span class="tok-k">class</span>=<span class="tok-s">"nav"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>=<span class="tok-s">"home"</span> <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-t">/&gt;</span> Home<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/docs/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>=<span class="tok-s">"book-open"</span> <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-a">weight</span>={<span class="tok-n">1.5</span>} <span class="tok-t">/&gt;</span> Docs<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/new/"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>=<span class="tok-s">"file+plus"</span> <span class="tok-a">size</span>={<span class="tok-n">20</span>} <span class="tok-a">title</span>=<span class="tok-s">"New file"</span> <span class="tok-t">/&gt;</span><span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/nav</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;style</span><span class="tok-t">&gt;</span>
+  .nav :global(.glyphfox) { color: #6b7280; }
+  .nav a:hover :global(.glyphfox) { color: #<span class="tok-n">111827</span>; }
+<span class="tok-t">&lt;/style</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.astro.component.styles">Jedes svg-Element trägt die Klassen <code>glyphfox</code> und <code>glyphfox-NAME</code>. Markup, das mit <code>set:html</code> eingefügt wird, erhält nicht die Attribute, die Astro für das Scoping von Komponenten-Styles verwendet. Wählen Sie es daher wie oben mit <code>:global()</code> innerhalb eines gescopten Eltern-Selektors aus, oder lassen Sie es <code>color</code> über <code>currentColor</code> erben.</p>
+<p data-i18n="guide.astro.component.title">Der Icon-Link oben hat keinen Text, daher erhält sein Icon einen <code>title</code>: Das ergänzt <code>role="img"</code>, <code>aria-label</code> und ein <code>&lt;title&gt;</code>, und der Link bezieht seinen Namen daraus. Icons neben sichtbarem Text bleiben dekorativ. Weitere Muster finden Sie in der <a href="accessibility.html">Anleitung zur Barrierefreiheit</a>.</p>
+</section>
+<section id="motion">
+<h2 data-i18n="guide.astro.motion.h">Animationen ohne JavaScript</h2>
+<p data-i18n="guide.astro.motion.p">Das SVG kann sein eigenes CSS mitbringen, daher laufen lebendige Zustände und Hover-Morphs in statischem HTML ganz ohne Skript: <code>animate</code> mit dem Standardwert <code>trigger="mount"</code> oder mit <code>"hover"</code> sowie <code>morphTo</code> mit <code>trigger="hover"</code>, das auf das svg-Element und auf sein direktes Elternelement reagiert.</p>
+<div class="code"><div class="code-head"><span>src/components/Chapter.astro</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1">---
+<span class="tok-k">import</span> Icon <span class="tok-k">from</span> <span class="tok-s">'./Icon.astro'</span>;
+---
+<span class="tok-t">&lt;a</span> <span class="tok-k">class</span>=<span class="tok-s">"next"</span> <span class="tok-a">href</span>=<span class="tok-s">"/chapter-2/"</span><span class="tok-t">&gt;</span>
+  Next chapter <span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>=<span class="tok-s">"arrow-right"</span> <span class="tok-a">morphTo</span>=<span class="tok-s">"chevron-right"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"hover"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;p</span> <span class="tok-k">class</span>=<span class="tok-s">"status"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;Icon</span> <span class="tok-a">name</span>=<span class="tok-s">"loader"</span> <span class="tok-a">animate</span>=<span class="tok-s">"spin"</span> <span class="tok-a">title</span>=<span class="tok-s">"Building"</span> <span class="tok-t">/&gt;</span> Building the preview
+<span class="tok-t">&lt;/p</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.astro.motion.parent">Da Icon.astro keinen Wrapper hinzufügt, ist das svg-Element ein direktes Kind des Links, und ein Hover an beliebiger Stelle über dem Link morpht den Pfeil. Jedes Preset hält bei <code>prefers-reduced-motion</code> an; Presets und Auslöser sind unter <a href="animated-icons.html">Animierte Icons</a> aufgeführt.</p>
+</section>
+<section id="islands">
+<h2 data-i18n="guide.astro.islands.h">Islands für Zustände</h2>
+<p data-i18n="guide.astro.islands.p">Icons, die einem Zustand folgen, etwa ein Menü-Button, der zu einem Schließen-Icon morpht, gehören in eine Island. Verwenden Sie das Framework-Paket der Island und hydrieren Sie sie mit einer Client-Direktive:</p>
+<div class="code"><div class="code-head"><span>src/components/MenuButton.jsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { useState } <span class="tok-k">from</span> <span class="tok-s">'react'</span>;
+<span class="tok-k">import</span> { MorphIcon, registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/react'</span>;
+<span class="tok-k">import</span> menu <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/menu'</span>;
+<span class="tok-k">import</span> x <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/x'</span>;
+
+<span class="tok-c">// Names passed to MorphIcon load on demand; registering them</span>
+<span class="tok-c">// puts the icon in the server rendered HTML.</span>
+registerIcons([menu, x]);
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> <span class="tok-k">function</span> MenuButton() {
+  <span class="tok-k">const</span> [open, setOpen] = useState(<span class="tok-k">false</span>);
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;button</span>
+      <span class="tok-k">type</span>=<span class="tok-s">"button"</span>
+      <span class="tok-a">aria-expanded</span>={open}
+      <span class="tok-a">aria-label</span>={open ? <span class="tok-s">'Close menu'</span> : <span class="tok-s">'Open menu'</span>}
+      <span class="tok-a">onClick</span>={() =<span class="tok-t">&gt;</span> setOpen(!open)}
+    <span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;MorphIcon</span> <span class="tok-a">name</span>={open ? <span class="tok-s">'x'</span> : <span class="tok-s">'menu'</span>} <span class="tok-a">duration</span>={<span class="tok-n">300</span>} <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<div class="code"><div class="code-head"><span>src/layouts/Base.astro</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1">---
+<span class="tok-k">import</span> MenuButton <span class="tok-k">from</span> <span class="tok-s">'../components/MenuButton.jsx'</span>;
+---
+<span class="tok-t">&lt;header</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;MenuButton</span> client:load <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/header</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.astro.islands.ssr">Astro rendert Islands zuerst auf dem Server. Icon-Komponenten wie <code>MenuIcon</code> registrieren ihr Icon, sobald Ihr Code sie verwendet, aber Namen, die an <code>MorphIcon</code>, <code>Icon</code> oder <code>morphTo</code> übergeben werden, werden erst bei Bedarf geladen. Ohne <code>registerIcons</code> enthält das Server-HTML daher ein leeres SVG, bis die Island hydriert ist.</p>
+<p data-i18n="guide.astro.islands.other">Dasselbe funktioniert mit <code>glyphfox/vue</code> und mit <code>glyphfox/svelte</code>, das Svelte 5 voraussetzt. Bei Islands unterhalb des sichtbaren Bereichs verzögert <code>client:visible</code> oder <code>client:idle</code> den Download, bis er gebraucht wird. Details zu den Frameworks finden Sie in den Anleitungen zu <a href="react.html">React</a>, <a href="vue.html">Vue</a> und <a href="svelte.html">Svelte</a>.</p>
+</section>
+<section id="element">
+<h2 data-i18n="guide.astro.element.h">Das Custom Element</h2>
+<p data-i18n="guide.astro.element.p">Ohne Framework übernimmt das Element <code>&lt;glyph-fox&gt;</code> Klicks, Hover und Namenswechsel. Astro verarbeitet und bündelt die <code>&lt;script&gt;</code>-Tags von Komponenten und bindet jedes Skript nur einmal pro Seite ein, auch wenn die Komponente mehrfach vorkommt:</p>
+<div class="code"><div class="code-head"><span>src/components/LikeButton.astro</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-k">class</span>=<span class="tok-s">"like"</span> <span class="tok-a">aria-pressed</span>=<span class="tok-s">"false"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Like"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;glyph-fox</span> <span class="tok-a">name</span>=<span class="tok-s">"heart"</span> <span class="tok-a">morph-to</span>=<span class="tok-s">"heart/solid"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/glyph-fox</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;script</span><span class="tok-t">&gt;</span>
+  <span class="tok-k">import</span> { defineGlyphFox } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/web/element'</span>;
+  <span class="tok-k">import</span> { registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+  <span class="tok-k">import</span> heart <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/heart'</span>;
+
+  registerIcons([heart]);
+  defineGlyphFox();
+
+  <span class="tok-k">for</span> (<span class="tok-k">const</span> button <span class="tok-k">of</span> document.querySelectorAll(<span class="tok-s">'button.like'</span>)) {
+    <span class="tok-k">const</span> icon = button.querySelector(<span class="tok-s">'glyph-fox'</span>);
+    button.addEventListener(<span class="tok-s">'click'</span>, () =<span class="tok-t">&gt;</span> {
+      <span class="tok-k">const</span> on = button.getAttribute(<span class="tok-s">'aria-pressed'</span>) !== <span class="tok-s">'true'</span>;
+      button.setAttribute(<span class="tok-s">'aria-pressed'</span>, String(on));
+      icon.toggleAttribute(<span class="tok-s">'active'</span>, on);
+    });
+  }
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.astro.element.state">Der Button steuert das Icon über <code>trigger="state"</code> und das Attribut <code>active</code>. Mit <code>trigger="click"</code> würde das Element nur auf Klicks auf sich selbst reagieren, und ein Klick auf das Padding des Buttons würde <code>aria-pressed</code> umschalten, ohne das Icon zu morphen.</p>
+<p data-i18n="guide.astro.element.navigation">Custom Elements bleiben bei clientseitiger Navigation mit dem View-Transitions-Router von Astro definiert, daher führen Icons auf neuen Seiten ihr Upgrade von selbst durch. Code, der Listener anhängt, wie die Schleife oben, läuft nur einmal; mit dem Router führen Sie ihn beim Event <code>astro:page-load</code> erneut aus.</p>
+</section>
+<section id="tailwind">
+<h2 data-i18n="guide.astro.tailwind.h">Tailwind-Klassen</h2>
+<p data-i18n="guide.astro.tailwind.p">Ist Tailwind CSS im Projekt eingerichtet, zeichnet das glyphfox-Plugin Icons als CSS-Masken: eine weitere Option ohne JavaScript, praktisch in inhaltsreichen Templates. Einrichtung und Klassensyntax beschreibt die <a href="tailwind.html">Tailwind-Anleitung</a>.</p>
+<div class="code"><div class="code-head"><span>src/components/Hero.astro</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;h1</span> <span class="tok-k">class</span>=<span class="tok-s">"flex items-center gap-3"</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;span</span> <span class="tok-k">class</span>=<span class="tok-s">"gf-rocket text-4xl text-orange-500"</span> <span class="tok-a">aria-hidden</span>=<span class="tok-s">"true"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/span</span><span class="tok-t">&gt;</span>
+  Launch faster
+<span class="tok-t">&lt;/h1</span><span class="tok-t">&gt;</span></pre></div>
+</section>
+<section id="props">
+<h2 data-i18n="guide.astro.props.h">Props</h2>
+<p data-i18n="guide.astro.props.p">Icon.astro reicht seine Props an <code>toSvg</code> weiter und akzeptiert daher die gemeinsamen Optionen mit ihren camelCase-Namen, dazu <code>class</code> und <code>style</code> als Strings für das svg-Element. Anders als beim Core-Renderer kann <code>morphTo</code> hier ein Name sein, weil <code>toSvg</code> ihn auflöst.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.option">Option</th><th data-i18n="docs.type">Typ</th><th data-i18n="docs.default">Standard</th><th data-i18n="docs.desc">Beschreibung</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Breite und Höhe; Zahlen sind Pixel.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Hauptfarbe.</td></tr>
+<tr><td><code>secondaryColor</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Farbe der Duotone-Ebene und der Solid-Füllung.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Deckkraft der Duotone-Ebene oder der Solid-Füllung.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Strichstärke von 1 bis 3 im 24er-Raster, unter 24 px optisch ausgeglichen.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Hält den Strich bei jeder Größe auf weight Pixeln.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Abgerundete oder spitze Verbindungen und Enden.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Stilachse; solid entsteht aus den geschlossenen Formen.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Drehung in Grad.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Horizontal spiegeln.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Vertikal spiegeln.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">In Layouts von rechts nach links spiegeln.</td></tr>
+<tr><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>keiner</td><td data-i18n="prop.animate">Voreinstellung für den lebendigen Zustand.</td></tr>
+<tr><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Wann die Animation oder der Morph abläuft.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">Der Zustand für den Auslöser state.</td></tr>
+<tr><td><code>duration</code></td><td>number (ms)</td><td>je nach Voreinstellung</td><td data-i18n="prop.duration">Dauer der Animation oder des Morphs.</td></tr>
+<tr><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Verzögerung der Animation oder des Morphs.</td></tr>
+<tr><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Endlos oder eine bestimmte Anzahl von Malen wiederholen (spin und pulse laufen standardmäßig in Schleife).</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>keiner</td><td data-i18n="prop.modifier">Badge mit automatischer Aussparung.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Ecke des Badges.</td></tr>
+<tr><td><code>morphTo</code></td><td>name, data</td><td>keiner</td><td data-i18n="prop.morphTo">Ziel des Morphs; der Auslöser bestimmt, wann es erscheint.</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>keiner</td><td data-i18n="prop.title">Zugänglicher Name: title, role img und aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td>boolean</td><td>true ohne title</td><td data-i18n="prop.decorative">Verbirgt das Icon vor assistiven Technologien.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.astro.pitfalls.h">Stolperfallen</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.astro.pitfalls.list.1.t">Scoped Styles und set:html</dt><dd data-i18n="guide.astro.pitfalls.list.1.d">Regeln im Style-Block einer Komponente greifen nicht bei Markup, das mit <code>set:html</code> eingefügt wurde, weil ihm die Scoping-Attribute fehlen. Verwenden Sie <code>:global(.glyphfox)</code> innerhalb eines gescopten Selektors, oder lassen Sie <code>color</code> vererben.</dd></div><div><dt data-i18n="guide.astro.pitfalls.list.2.t">Namen in Islands</dt><dd data-i18n="guide.astro.pitfalls.list.2.d"><code>MorphIcon</code>, <code>Icon</code> und <code>morphTo</code> laden Namen bei Bedarf nach. Registrieren Sie deren Daten mit <code>registerIcons</code>, damit das Server-HTML vollständig ist.</dd></div><div><dt data-i18n="guide.astro.pitfalls.list.3.t">Klick-Auslöser in Buttons</dt><dd data-i18n="guide.astro.pitfalls.list.3.d"><code>trigger="click"</code> auf <code>glyph-fox</code> lauscht auf dem Icon selbst, und Klicks auf das Padding des Buttons erreichen es nicht. Verwenden Sie <code>trigger="state"</code> und setzen Sie <code>active</code> vom Button aus.</dd></div><div><dt data-i18n="guide.astro.pitfalls.list.4.t">Unbekannte Namen stoppen den Build</dt><dd data-i18n="guide.astro.pitfalls.list.4.d"><code>toSvg</code> wirft bei einem nicht existierenden Namen einen Fehler, der einen statischen Build abbrechen lässt und im Servermodus eine Fehlerantwort liefert. Gleichen Sie Namen aus Inhalten mit der Icon-Liste ab, oder fangen Sie den Fehler ab, wenn die Namen aus Benutzerdaten stammen.</dd></div><div><dt data-i18n="guide.astro.pitfalls.list.5.t">Server-Bundles auf Edge-Runtimes</dt><dd data-i18n="guide.astro.pitfalls.list.5.d"><code>toSvg</code> aus dem Haupteinstiegspunkt packt alle Icons ins Server-Bundle, etwa 154 KB minifiziert. Wo die Funktionsgröße begrenzt ist, verwenden Sie <code>renderToString</code> aus <code>glyphfox/core</code> mit Importen pro Icon und übergeben Icon-Daten an <code>morphTo</code>.</dd></div><div><dt data-i18n="guide.astro.pitfalls.list.6.t">Wrapper und Hover-Morphs</dt><dd data-i18n="guide.astro.pitfalls.list.6.d">Ein Hover-Morph reagiert auf das svg-Element und auf sein direktes Elternelement. Wenn Sie das Icon in ein zusätzliches Element einpacken, wird dieses Element zum Elternelement, und ein Hover über den umgebenden Link startet den Morph nicht mehr.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Häufige Fragen</h2>
+<h3 data-i18n="guide.astro.faq.client-js.q">Liefern im Frontmatter gerenderte Icons JavaScript aus?</h3>
+<p data-i18n="guide.astro.faq.client-js.a">Nein. Das Frontmatter läuft auf dem Server oder zur Build-Zeit, und die Seite erhält reines SVG. Presets und Hover-Morphs sind CSS innerhalb dieses SVG. Nur Islands und das Custom Element bringen Client-Code mit.</p>
+<h3 data-i18n="guide.astro.faq.mdx.q">Kann ich Icons in Markdown- oder MDX-Inhalten verwenden?</h3>
+<p data-i18n="guide.astro.faq.mdx.a">Importieren Sie in MDX <code>Icon.astro</code> und verwenden Sie es wie in jeder Komponente. Reines Markdown kann keine Komponenten importieren. Rendern Sie die Icons dort im Layout um den Inhalt herum, oder verwenden Sie die Tailwind-Klassen in rohem HTML, sofern Ihr Markdown das zulässt.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in diesem Leitfaden</h2>
+<ul class="icon-links"><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/book-open.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-book-open" aria-hidden="true"><path d="M12 7c-2-2-5-3-9-3v14c4 0 7 1 9 3 2-2 5-3 9-3V4c-4 0-7 1-9 3Z"/><path d="M12 7v14"/></svg><span>book-open</span></a></li><li><a href="../../icons/file.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-file" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/></svg><span>file</span></a></li><li><a href="../../icons/arrow-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-arrow-right" aria-hidden="true"><path d="M4 12h16"/><path d="M14 6l6 6-6 6"/></svg><span>arrow-right</span></a></li><li><a href="../../icons/chevron-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-chevron-right" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>chevron-right</span></a></li><li><a href="../../icons/loader.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-loader" aria-hidden="true"><path d="M12 7L12 2.5"/><path d="M15.54 8.46L18.72 5.28"/><path d="M17 12L21.5 12"/><path d="M15.54 15.54L18.72 18.72"/><path d="M12 17L12 21.5"/><path d="M8.46 15.54L5.28 18.72"/><path d="M7 12L2.5 12"/><path d="M8.46 8.46L5.28 5.28"/></svg><span>loader</span></a></li><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../../icons/rocket.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-rocket" aria-hidden="true"><path d="M12 2c3 2.5 4.5 6 4.5 10v5h-9v-5c0-4 1.5-7.5 4.5-10Z"/><path d="M11 9.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7.5 13L4.5 16v4l3-2.5"/><path d="M16.5 13l3 3v4l-3-2.5"/><path d="M10 20.5l2 1.5 2-1.5"/></svg><span>rocket</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Verwandte Leitfäden</h2>
+<ul class="guide-cards"><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Serverseitiges Rendering</strong><span data-i18n="guide.ssr.description">SVG-Icons mit glyphfox serverseitig rendern: was jedes Paket ausgibt, per Name genutzte Icons registrieren, toSvg-Strings, Hydration, Animationen, Web Component.</span></a></li><li><a href="tailwind.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-wind" aria-hidden="true"><path d="M3 10h11a3 3 0 1 0-3-3"/><path d="M3 14h15a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg><strong data-i18n="guide.tailwind.h1">Tailwind-CSS-Icons</strong><span data-i18n="guide.tailwind.description">glyphfox-Icons als Klassen in Tailwind CSS v3 und v4: Einrichtung, gf-Syntax, Stile und Strichstärken per Schrägstrich, Badges, Fusionen, Animationen, Optionen.</span></a></li><li><a href="web-components.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-puzzle" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h3.5a2.5 2.5 0 1 1 4 0H16a1 1 0 0 1 1 1v3.5a2.5 2.5 0 1 1 0 4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><strong data-i18n="guide.web-components.h1">Icons in Lit und Web Components</strong><span data-i18n="guide.web-components.description">SVG-Icons in Lit und Web Components mit dem Custom Element glyph-fox: alle oder ausgewählte Icons registrieren, Attribute binden, stylen, barrierefrei halten.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Originale Icons im 24er-Raster, die ihre Strichstärke ändern, morphen, verschmelzen und lebendig werden. Kostenlos und Open Source unter der MIT-Lizenz.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produkt</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Alle Icons nach Kategorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Brand-Kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Entwickler</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Doku</a></li>
+          <li><a href="./" data-i18n="footer.guides">Leitfäden</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projekt</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT-Lizenz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Erstellt von</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, der Fuchs, ist im selben Raster gezeichnet wie die Icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/react-native.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icons in React Native: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.react-native.title">React-Native-Icons mit glyphfox und react-native-svg</title>
+<meta name="description" content="SVG-Icons in React Native mit glyphfox und react-native-svg: SvgXml, kleine Einzelimporte für Metro, Farbe, Strichstärke, Fusionen, Morph-Frames, Barrierefreiheit." data-i18n-attr="content:guide.react-native.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/de/guides/react-native.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/react-native.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/react-native.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/react-native.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/react-native.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/react-native.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/react-native.html">
+<meta property="og:title" content="React-Native-Icons mit glyphfox und react-native-svg">
+<meta property="og:description" content="SVG-Icons in React Native mit glyphfox und react-native-svg: SvgXml, kleine Einzelimporte für Metro, Farbe, Strichstärke, Fusionen, Morph-Frames, Barrierefreiheit.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/de/guides/react-native.html">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:title" content="React-Native-Icons mit glyphfox und react-native-svg">
+<meta name="twitter:description" content="SVG-Icons in React Native mit glyphfox und react-native-svg: SvgXml, kleine Einzelimporte für Metro, Farbe, Strichstärke, Fusionen, Morph-Frames, Barrierefreiheit.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/react-native.png">
+<meta name="twitter:image:alt" content="Icons in React Native: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://kwy404.github.io/glyphfox/de/"},{"@type":"ListItem","position":2,"name":"Leitfäden","item":"https://kwy404.github.io/glyphfox/de/guides/"},{"@type":"ListItem","position":3,"name":"React Native","item":"https://kwy404.github.io/glyphfox/de/guides/react-native.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Funktioniert das mit Expo?","acceptedAnswer":{"@type":"Answer","text":"Ja. Installieren Sie react-native-svg mit npx expo install react-native-svg und verwenden Sie dieselbe Glyph-Komponente. Expo nutzt Metro, daher gilt der Hinweis zu den Paket-Exports: SDKs auf Basis von React Native 0.79 oder neuer brauchen keine Änderung."}},{"@type":"Question","name":"Wie erstelle ich einen Lade-Spinner?","acceptedAnswer":{"@type":"Answer","text":"Zeichnen Sie loader oder loader-circle mit der Glyph-Komponente und drehen Sie eine umgebende Animated.View mit einer endlos wiederholten Timing-Animation. Der Native Driver sorgt für eine flüssige Bewegung, und der SVG-String wird nur einmal erzeugt."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="In die Zwischenablage kopiert" data-theme-light="Zum hellen Design wechseln" data-theme-dark="Zum dunklen Design wechseln">
+<a class="skip" href="#main" data-i18n="nav.skip">Zum Inhalt springen</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Doku</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/react-native.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Leitfäden" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Alle Leitfäden</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" aria-current="page" class="on" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit und Web Components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML und CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Themen</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animierte Icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Barrierefreiheit</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree-Shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG-Sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Serverseitiges Rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Brotkrumennavigation" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Startseite</a></li><li><a href="./" data-i18n="seo.crumb.guides">Leitfäden</a></li><li aria-current="page" data-i18n="guide.react-native.short">React Native</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.react-native.h1">Icons in React Native</h1>
+<p class="lead" data-i18n="guide.react-native.lead">React Native hat kein eigenes SVG-Element, daher werden glyphfox-Icons über react-native-svg gerendert. Die glyphfox-Engine wandelt Icon-Daten in einen SVG-String um, und SvgXml zeichnet ihn nativ auf iOS und Android.</p>
+<nav class="toc" aria-label="Auf dieser Seite" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.react-native.install.h">Installation</a></li><li><a href="#how" data-i18n="guide.react-native.how.h">So funktioniert es</a></li><li><a href="#component" data-i18n="guide.react-native.component.h">Eine kleine Glyph-Komponente</a></li><li><a href="#imports" data-i18n="guide.react-native.imports.h">Das Bundle klein halten</a></li><li><a href="#metro" data-i18n="guide.react-native.metro.h">Metro und Paket-Exports</a></li><li><a href="#shapes" data-i18n="guide.react-native.shapes.h">Stile, Modifier und Fusionen</a></li><li><a href="#morph" data-i18n="guide.react-native.morph.h">Einen Morph animieren</a></li><li><a href="#a11y" data-i18n="guide.react-native.a11y.h">Barrierefreiheit</a></li><li><a href="#limits" data-i18n="guide.react-native.limits.h">Was sich nicht übertragen lässt</a></li><li><a href="#props" data-i18n="guide.react-native.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.react-native.pitfalls.h">Stolperfallen</a></li><li><a href="#faq" data-i18n="seo.faq">Häufige Fragen</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.react-native.install.h">Installation</h2>
+<p data-i18n="guide.react-native.install.p">Installieren Sie glyphfox und react-native-svg. In einem Expo-Projekt überlassen Sie Expo die Wahl der react-native-svg-Version, die zu Ihrem SDK passt; in einem reinen React-Native-Projekt installieren Sie anschließend die iOS-Pods.</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span> react<span class="tok-a">-native-svg</span>
+<span class="tok-c"># Expo</span>
+<span class="tok-k">npx</span> expo install react<span class="tok-a">-native-svg</span>
+<span class="tok-c"># bare React Native, iOS</span>
+<span class="tok-k">npx</span> pod<span class="tok-a">-install</span></pre></div>
+<p data-i18n="guide.react-native.install.p2">Die React-Komponenten aus <code>glyphfox/react</code> sind nicht für React Native gedacht: Sie rendern DOM-Elemente vom Typ <code>&lt;svg&gt;</code>, und React Native hat keine Host-Komponente mit diesem Namen. Verwenden Sie die unten beschriebene Core-Engine.</p>
+</section>
+<section id="how">
+<h2 data-i18n="guide.react-native.how.h">So funktioniert es</h2>
+<p data-i18n="guide.react-native.how.p"><code>renderToString(icon, options)</code> aus <code>glyphfox/core</code> nimmt Icon-Daten und die gemeinsamen Props entgegen und gibt einen vollständigen SVG-String zurück. Alles, was die Geometrie verändert, geschieht in JavaScript, bevor der String entsteht: die Strichstärkenachse mit ihrer optischen Kompensation, abgerundete oder spitze Ecken, die Stile duotone und solid, Drehung und Spiegelung, Modifier-Badges mit ihrer Aussparung sowie Fusionen. react-native-svg parst den String anschließend einmal und zeichnet native Formen.</p>
+<p data-i18n="guide.react-native.how.p2">Was nicht erhalten bleibt, ist alles, was auf CSS im Browser angewiesen ist: die Animationen der lebendigen Zustände, der reine CSS-Morph und die Klasse für die Spiegelung bei Schreibrichtung von rechts nach links. Der Abschnitt zu den Einschränkungen weiter unten nennt für jeden dieser Punkte den nativen Ersatz.</p>
+</section>
+<section id="component">
+<h2 data-i18n="guide.react-native.component.h">Eine kleine Glyph-Komponente</h2>
+<p data-i18n="guide.react-native.component.p">Kapseln Sie <code>SvgXml</code> einmal in einer eigenen Komponente und verwenden Sie diese überall. Der String wird memoisiert, damit ein erneutes Rendern der Elternkomponente das SVG nicht noch einmal parst. Die Farbe geht als Prop an <code>SvgXml</code>, sodass ein Theme-Wechsel den String nicht neu erzeugt.</p>
+<div class="code"><div class="code-head"><span>Glyph.tsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { useMemo } <span class="tok-k">from</span> <span class="tok-s">'react'</span>;
+<span class="tok-k">import</span> { SvgXml } <span class="tok-k">from</span> <span class="tok-s">'react-native-svg'</span>;
+<span class="tok-k">import</span> { renderToString } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> <span class="tok-k">type</span> { IconData, SvgOptions } <span class="tok-k">from</span> <span class="tok-s">'glyphfox'</span>;
+
+<span class="tok-k">type</span> Props = Omit<span class="tok-t">&lt;SvgOptions</span>, <span class="tok-s">'size'</span> | <span class="tok-s">'color'</span><span class="tok-t">&gt;</span> &amp; { icon: IconData; size?: number; color?: string };
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Glyph({ icon, size = <span class="tok-n">24</span>, color = <span class="tok-s">'#121014'</span>, ...options }: Props) {
+  <span class="tok-k">const</span> key = JSON.stringify(options);
+  <span class="tok-k">const</span> xml = useMemo(() =<span class="tok-t">&gt;</span> renderToString(icon, { ...options, size }), [icon, size, key]);
+  <span class="tok-k">return</span> <span class="tok-t">&lt;SvgXml</span> <span class="tok-a">xml</span>={xml} <span class="tok-a">width</span>={size} <span class="tok-a">height</span>={size} <span class="tok-a">color</span>={color} <span class="tok-t">/&gt;</span>;
+}</pre></div>
+<div class="code"><div class="code-head"><span>Toolbar.tsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { View } <span class="tok-k">from</span> <span class="tok-s">'react-native'</span>;
+<span class="tok-k">import</span> home <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/home'</span>;
+<span class="tok-k">import</span> bell <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/bell'</span>;
+<span class="tok-k">import</span> folder <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/folder'</span>;
+<span class="tok-k">import</span> { Glyph } <span class="tok-k">from</span> <span class="tok-s">'./Glyph'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Toolbar() {
+  <span class="tok-k">return</span> (
+    <span class="tok-t">&lt;View</span> <span class="tok-a">style</span>={{ flexDirection: <span class="tok-s">'row'</span>, gap: <span class="tok-n">16</span> }}<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={home} <span class="tok-a">size</span>={<span class="tok-n">22</span>} <span class="tok-a">color</span>=<span class="tok-s">"#ff7a1a"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={bell} <span class="tok-a">modifier</span>=<span class="tok-s">"dot"</span> <span class="tok-a">weight</span>={<span class="tok-n">1.5</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={folder} <span class="tok-a">variant</span>=<span class="tok-s">"duotone"</span> <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/View</span><span class="tok-t">&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react-native.component.p2">Die Striche verwenden <code>currentColor</code>, und react-native-svg löst den Wert über die Prop <code>color</code> auf. Folgen Sie dem System-Theme mit <code>useColorScheme()</code> und übergeben Sie eine andere Farbe; der zwischengespeicherte SVG-String bleibt derselbe.</p>
+</section>
+<section id="imports">
+<h2 data-i18n="guide.react-native.imports.h">Das Bundle klein halten</h2>
+<p data-i18n="guide.react-native.imports.p">Metro beherrscht kein Tree-Shaking. Alles, was ein Modul importiert, landet im App-Bundle, daher entscheidet die Art, wie Sie Icons importieren, darüber, wie viel ausgeliefert wird:</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.react-native.imports.table.h1">Import</th><th data-i18n="guide.react-native.imports.table.h2">Was ausgeliefert wird</th><th data-i18n="guide.react-native.imports.table.h3">Geeignet für</th></tr></thead><tbody>
+<tr><td data-i18n="guide.react-native.imports.table.r1c1"><code>glyphfox/core</code> plus <code>glyphfox/icons/NAME</code></td><td data-i18n="guide.react-native.imports.table.r1c2">Die Engine und die importierten Icons, einige hundert Byte pro Icon</td><td data-i18n="guide.react-native.imports.table.r1c3">Die meisten Apps</td></tr>
+<tr><td data-i18n="guide.react-native.imports.table.r2c1"><code>toSvg</code> aus <code>glyphfox</code></td><td data-i18n="guide.react-native.imports.table.r2c2">Die Engine und alle Icons des Sets</td><td data-i18n="guide.react-native.imports.table.r2c3">Prototypen oder Icons, die zur Laufzeit per Name gewählt werden</td></tr>
+<tr><td data-i18n="guide.react-native.imports.table.r3c1">Ein mit der CLI gebautes Subset-Paket</td><td data-i18n="guide.react-native.imports.table.r3c2">Nur fertige SVG-Strings, überhaupt keine Engine</td><td data-i18n="guide.react-native.imports.table.r3c3">Eine feste Auswahl an Icons mit festen Props</td></tr>
+</tbody></table></div>
+<p data-i18n="guide.react-native.imports.p2">Die CLI macht aus einer Liste von Icons ein kleines Paket, dessen Exporte einfache SVG-Strings sind, mit bereits zur Build-Zeit eingebrannten Props. Binden Sie den Ordner als Workspace- oder <code>file:</code>-Abhängigkeit in Ihre App ein und übergeben Sie die Strings an <code>SvgXml</code>. Bindestriche in Namen werden zu Unterstrichen, <code>arrow-right</code> wird also als <code>arrow_right</code> exportiert:</p>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npx</span> <span class="tok-k">glyphfox</span> build home search bell arrow<span class="tok-a">-right</span> <span class="tok-a">--type</span> package <span class="tok-a">--name</span> @acme/icons <span class="tok-a">--weight</span> 1.75 <span class="tok-a">--out</span> packages/icons</pre></div>
+<div class="code"><div class="code-head"><span>Header.tsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { SvgXml } <span class="tok-k">from</span> <span class="tok-s">'react-native-svg'</span>;
+<span class="tok-k">import</span> { home, arrow_right } <span class="tok-k">from</span> <span class="tok-s">'@acme/icons'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Header() {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;SvgXml</span> <span class="tok-a">xml</span>={home} <span class="tok-a">width</span>={<span class="tok-n">24</span>} <span class="tok-a">height</span>={<span class="tok-n">24</span>} <span class="tok-a">color</span>=<span class="tok-s">"#121014"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;SvgXml</span> <span class="tok-a">xml</span>={arrow_right} <span class="tok-a">width</span>={<span class="tok-n">20</span>} <span class="tok-a">height</span>={<span class="tok-n">20</span>} <span class="tok-a">color</span>=<span class="tok-s">"#121014"</span> <span class="tok-t">/&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+</section>
+<section id="metro">
+<h2 data-i18n="guide.react-native.metro.h">Metro und Paket-Exports</h2>
+<p data-i18n="guide.react-native.metro.p"><code>glyphfox/core</code> und <code>glyphfox/icons/NAME</code> sind Subpath-Exports, die im Feld <code>exports</code> des Pakets deklariert sind. Metro liest dieses Feld ab React Native 0.79 standardmäßig. Aktivieren Sie die Unterstützung bei älteren Versionen in der Metro-Konfiguration, sonst schlagen diese Importe mit dem Fehler „Unable to resolve module“ fehl:</p>
+<div class="code"><div class="code-head"><span>metro.config.js</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">const</span> { getDefaultConfig, mergeConfig } = require(<span class="tok-s">'@react-native/metro-config'</span>);
+
+module.exports = mergeConfig(getDefaultConfig(__dirname), {
+  resolver: { unstable_enablePackageExports: <span class="tok-k">true</span> },
+});</pre></div>
+<p data-i18n="guide.react-native.metro.p2">Übergeben Sie der Engine immer Icon-Daten, keine Namen. Die Web-Pakete laden unbekannte Namen über einen dynamischen Import des Icon-Ordners; das funktioniert in Web-Bundlern, Metro folgt solchen Importen aber nicht. Liegen die Daten bereits vor, muss nie etwas nachgeladen werden.</p>
+</section>
+<section id="shapes">
+<h2 data-i18n="guide.react-native.shapes.h">Stile, Modifier und Fusionen</h2>
+<p data-i18n="guide.react-native.shapes.p">Auch die Kompositionswerkzeuge des Cores arbeiten mit Daten. <code>fuse</code> verschmilzt 2 bis 10 Icons zu einem neuen Icon, das weiterhin den Icon-Regeln folgt, und alle folgenden Optionen werden beim Erzeugen des Strings angewendet:</p>
+<div class="code"><div class="code-head"><span>Sync.tsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { fuse } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> cloud <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/cloud'</span>;
+<span class="tok-k">import</span> lock <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/lock'</span>;
+<span class="tok-k">import</span> heart <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/heart'</span>;
+<span class="tok-k">import</span> { Glyph } <span class="tok-k">from</span> <span class="tok-s">'./Glyph'</span>;
+
+<span class="tok-k">const</span> cloudLock = fuse([cloud, lock], { layout: <span class="tok-s">'overlap'</span> });
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Sync({ synced }: { synced: boolean }) {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={cloudLock} <span class="tok-a">size</span>={<span class="tok-n">28</span>} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={cloud} <span class="tok-a">modifier</span>={synced ? <span class="tok-s">'check'</span> : <span class="tok-s">'sync'</span>} <span class="tok-a">modifierCorner</span>=<span class="tok-s">"top-right"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={heart} <span class="tok-a">variant</span>=<span class="tok-s">"solid"</span> <span class="tok-a">corners</span>=<span class="tok-s">"sharp"</span> <span class="tok-t">/&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react-native.shapes.p2">Erzeugen Sie Fusionen auf Modulebene oder memoisieren Sie sie: <code>fuse</code> berechnet die Geometrie der Aussparungen, was einmalig günstig, bei jedem Rendern aber verschwenderisch ist.</p>
+</section>
+<section id="morph">
+<h2 data-i18n="guide.react-native.morph.h">Einen Morph animieren</h2>
+<p data-i18n="guide.react-native.morph.p">Es gibt kein CSS, das einen Übergang ausführen könnte, aber die Morph-Engine selbst ist reines JavaScript. <code>createMorph(from, to)</code> bereitet einen Morph einmalig vor und nutzt dabei automatisch die von Hand abgestimmten Paare wie menu zu x und play zu pause. <code>frame(t)</code> liefert Icon-Daten für jeden Fortschritt von 0 bis 1, und <code>tween</code> aus dem Core treibt den Fortschritt mit <code>requestAnimationFrame</code> an:</p>
+<div class="code"><div class="code-head"><span>MenuButtonIcon.tsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { useEffect, useRef, useState } <span class="tok-k">from</span> <span class="tok-s">'react'</span>;
+<span class="tok-k">import</span> { AccessibilityInfo } <span class="tok-k">from</span> <span class="tok-s">'react-native'</span>;
+<span class="tok-k">import</span> { SvgXml } <span class="tok-k">from</span> <span class="tok-s">'react-native-svg'</span>;
+<span class="tok-k">import</span> { createMorph, renderToString, tween } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/core'</span>;
+<span class="tok-k">import</span> menu <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/menu'</span>;
+<span class="tok-k">import</span> x <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/x'</span>;
+
+<span class="tok-k">const</span> morph = createMorph(menu, x);
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> MenuButtonIcon({ open, color = <span class="tok-s">'#121014'</span> }: { open: boolean; color?: string }) {
+  <span class="tok-k">const</span> [t, setT] = useState(open ? <span class="tok-n">1</span> : <span class="tok-n">0</span>);
+  <span class="tok-k">const</span> current = useRef(t);
+  current.current = t;
+
+  useEffect(() =<span class="tok-t">&gt;</span> {
+    <span class="tok-k">let</span> alive = <span class="tok-k">true</span>;
+    <span class="tok-k">let</span> cancel = () =<span class="tok-t">&gt;</span> {};
+    AccessibilityInfo.isReduceMotionEnabled().then((reduce) =<span class="tok-t">&gt;</span> {
+      <span class="tok-k">if</span> (alive) cancel = tween(current.current, open ? <span class="tok-n">1</span> : <span class="tok-n">0</span>, { duration: reduce ? <span class="tok-n">0</span> : <span class="tok-n">280</span> }, setT);
+    });
+    <span class="tok-k">return</span> () =<span class="tok-t">&gt;</span> {
+      alive = <span class="tok-k">false</span>;
+      cancel();
+    };
+  }, [open]);
+
+  <span class="tok-k">return</span> <span class="tok-t">&lt;SvgXml</span> <span class="tok-a">xml</span>={renderToString(morph.frame(t), { size: <span class="tok-n">24</span> })} <span class="tok-a">width</span>={<span class="tok-n">24</span>} <span class="tok-a">height</span>={<span class="tok-n">24</span>} <span class="tok-a">color</span>={color} <span class="tok-t">/&gt;</span>;
+}</pre></div>
+<p data-i18n="guide.react-native.morph.p2">Jeder Frame erzeugt und parst einen neuen String, was für ein einzelnes Icon über einige hundert Millisekunden unproblematisch ist. Vermeiden Sie viele gleichzeitige Morphs, und setzen Sie lang laufende Bewegungen wie einen Spinner stattdessen über eine native Transformation einer umgebenden View um.</p>
+</section>
+<section id="a11y">
+<h2 data-i18n="guide.react-native.a11y.h">Barrierefreiheit</h2>
+<p data-i18n="guide.react-native.a11y.p">Die Attribute <code>title</code>, <code>role</code> und <code>aria</code> im SVG-String erreichen den nativen Accessibility-Tree nicht. Setzen Sie die Accessibility-Props daher an der Komponente, die das Icon umgibt. Ein Icon in einem beschrifteten Button braucht nichts weiter; ein eigenständiges Icon, das Bedeutung trägt, wird zu einem Bild mit Label:</p>
+<div class="code"><div class="code-head"><span>Status.tsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { Pressable, View } <span class="tok-k">from</span> <span class="tok-s">'react-native'</span>;
+<span class="tok-k">import</span> search <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/search'</span>;
+<span class="tok-k">import</span> cloud <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/cloud'</span>;
+<span class="tok-k">import</span> { Glyph } <span class="tok-k">from</span> <span class="tok-s">'./Glyph'</span>;
+
+<span class="tok-k">export</span> <span class="tok-k">function</span> Status({ onSearch }: { onSearch: () =<span class="tok-t">&gt;</span> void }) {
+  <span class="tok-k">return</span> (
+    &lt;<span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;Pressable</span> <span class="tok-a">accessibilityRole</span>=<span class="tok-s">"button"</span> <span class="tok-a">accessibilityLabel</span>=<span class="tok-s">"Search"</span> <span class="tok-a">onPress</span>={onSearch}<span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={search} <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;/Pressable</span><span class="tok-t">&gt;</span>
+      <span class="tok-t">&lt;View</span> accessible <span class="tok-a">accessibilityRole</span>=<span class="tok-s">"image"</span> <span class="tok-a">accessibilityLabel</span>=<span class="tok-s">"All changes synced"</span><span class="tok-t">&gt;</span>
+        <span class="tok-t">&lt;Glyph</span> <span class="tok-a">icon</span>={cloud} <span class="tok-a">modifier</span>=<span class="tok-s">"check"</span> <span class="tok-t">/&gt;</span>
+      <span class="tok-t">&lt;/View</span><span class="tok-t">&gt;</span>
+    &lt;<span class="tok-t">/&gt;</span>
+  );
+}</pre></div>
+<p data-i18n="guide.react-native.a11y.p2">Die allgemeinen Regeln dazu, wann ein Icon ein Label braucht, finden Sie im <a href="accessibility.html">Leitfaden zur Barrierefreiheit</a>.</p>
+</section>
+<section id="limits">
+<h2 data-i18n="guide.react-native.limits.h">Was sich nicht übertragen lässt</h2>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="guide.react-native.limits.table.h1">Funktion</th><th data-i18n="guide.react-native.limits.table.h2">Im Web</th><th data-i18n="guide.react-native.limits.table.h3">Unter React Native</th></tr></thead><tbody>
+<tr><td data-i18n="guide.react-native.limits.table.r1c1">Lebendige Zustände (<code>animate</code>)</td><td data-i18n="guide.react-native.limits.table.r1c2">Keyframes in einem <code>&lt;style&gt;</code>-Element im SVG</td><td data-i18n="guide.react-native.limits.table.r1c3">SvgXml ignoriert das style-Element. Animieren Sie eine umgebende View mit Animated oder Reanimated, zum Beispiel mit einer Rotation für einen Spinner.</td></tr>
+<tr><td data-i18n="guide.react-native.limits.table.r2c1">Reiner CSS-Morph (<code>morphTo</code> mit Auslöser)</td><td data-i18n="guide.react-native.limits.table.r2c2">Eine CSS-Transition der Pfaddaten</td><td data-i18n="guide.react-native.limits.table.r2c3">Rendern Sie Frames mit <code>createMorph</code>, wie oben gezeigt.</td></tr>
+<tr><td data-i18n="guide.react-native.limits.table.r3c1"><code>mirrorRtl</code></td><td data-i18n="guide.react-native.limits.table.r3c2">Eine Klasse, die das Icon innerhalb von <code>dir="rtl"</code> spiegelt</td><td data-i18n="guide.react-native.limits.table.r3c3">Übergeben Sie für richtungsabhängige Icons <code>flipX={I18nManager.isRTL}</code>.</td></tr>
+<tr><td data-i18n="guide.react-native.limits.table.r4c1"><code>title</code> und <code>decorative</code></td><td data-i18n="guide.react-native.limits.table.r4c2">Ein title-Element, <code>role="img"</code> und <code>aria-hidden</code></td><td data-i18n="guide.react-native.limits.table.r4c3">Accessibility-Props am Wrapper.</td></tr>
+<tr><td data-i18n="guide.react-native.limits.table.r5c1">Relative Größen</td><td data-i18n="guide.react-native.limits.table.r5c2"><code>"1em"</code>, <code>"2rem"</code></td><td data-i18n="guide.react-native.limits.table.r5c3">Nur Zahlen.</td></tr>
+</tbody></table></div>
+</section>
+<section id="props">
+<h2 data-i18n="guide.react-native.props.h">Props</h2>
+<p data-i18n="guide.react-native.props.p">Diese Optionen von <code>renderToString</code> und <code>toSvg</code> verändern die Zeichnung selbst und funktionieren in React Native. Sie haben dieselben Namen und dieselbe Bedeutung wie die Props aller anderen glyphfox-Pakete.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.option">Option</th><th data-i18n="docs.type">Typ</th><th data-i18n="docs.default">Standard</th><th data-i18n="docs.desc">Beschreibung</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Breite und Höhe; Zahlen sind Pixel.</td></tr>
+<tr><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Hauptfarbe.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Deckkraft der Duotone-Ebene oder der Solid-Füllung.</td></tr>
+<tr><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Strichstärke von 1 bis 3 im 24er-Raster, unter 24 px optisch ausgeglichen.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Hält den Strich bei jeder Größe auf weight Pixeln.</td></tr>
+<tr><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Abgerundete oder spitze Verbindungen und Enden.</td></tr>
+<tr><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Stilachse; solid entsteht aus den geschlossenen Formen.</td></tr>
+<tr><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Drehung in Grad.</td></tr>
+<tr><td><code>flipX</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Horizontal spiegeln.</td></tr>
+<tr><td><code>flipY</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Vertikal spiegeln.</td></tr>
+<tr><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>keiner</td><td data-i18n="prop.modifier">Badge mit automatischer Aussparung.</td></tr>
+<tr><td><code>modifierCorner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Ecke des Badges.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.react-native.pitfalls.h">Stolperfallen</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.react-native.pitfalls.list.1.t"><code>glyphfox/react</code> verwenden</dt><dd data-i18n="guide.react-native.pitfalls.list.1.d">Die Komponenten für das Web rendern DOM-Elemente, daher bricht React Native mit einem Fehler über eine fehlende View-Config für <code>svg</code> ab. Rendern Sie stattdessen über <code>SvgXml</code>.</dd></div><div><dt data-i18n="guide.react-native.pitfalls.list.2.t">Das komplette Set im Bundle</dt><dd data-i18n="guide.react-native.pitfalls.list.2.d"><code>import { toSvg } from 'glyphfox'</code> zieht alle Icons in die App, weil Metro alles behält. Importieren Sie Icon-Daten einzeln, oder bauen Sie ein Subset-Paket.</dd></div><div><dt data-i18n="guide.react-native.pitfalls.list.3.t"><code>glyphfox/core</code> lässt sich nicht auflösen</dt><dd data-i18n="guide.react-native.pitfalls.list.3.d">Vor React Native 0.79 sind Paket-Exports in Metro deaktiviert. Aktivieren Sie <code>unstable_enablePackageExports</code>.</dd></div><div><dt data-i18n="guide.react-native.pitfalls.list.4.t">Parsen bei jedem Rendern</dt><dd data-i18n="guide.react-native.pitfalls.list.4.d">Ein Inline-Aufruf von <code>renderToString</code> in einer langen Liste erzeugt und parst pro Zeile und pro Rendern einen String. Memoisieren Sie den String wie die Glyph-Komponente, oder verwenden Sie vorgefertigte Strings.</dd></div><div><dt data-i18n="guide.react-native.pitfalls.list.5.t">Unbekannte Namen</dt><dd data-i18n="guide.react-native.pitfalls.list.5.d"><code>toSvg</code> wirft bei einem Namen, der nicht existiert, einen Fehler. Prüfen Sie Namen, die von einem Server kommen, gegen <code>iconNames</code>, oder ordnen Sie sie selbst importierten Daten zu.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Häufige Fragen</h2>
+<h3 data-i18n="guide.react-native.faq.expo.q">Funktioniert das mit Expo?</h3>
+<p data-i18n="guide.react-native.faq.expo.a">Ja. Installieren Sie react-native-svg mit <code>npx expo install react-native-svg</code> und verwenden Sie dieselbe Glyph-Komponente. Expo nutzt Metro, daher gilt der Hinweis zu den Paket-Exports: SDKs auf Basis von React Native 0.79 oder neuer brauchen keine Änderung.</p>
+<h3 data-i18n="guide.react-native.faq.spin.q">Wie erstelle ich einen Lade-Spinner?</h3>
+<p data-i18n="guide.react-native.faq.spin.a">Zeichnen Sie <a href="../../icons/loader.html">loader</a> oder <a href="../../icons/loader-circle.html">loader-circle</a> mit der Glyph-Komponente und drehen Sie eine umgebende <code>Animated.View</code> mit einer endlos wiederholten Timing-Animation. Der Native Driver sorgt für eine flüssige Bewegung, und der SVG-String wird nur einmal erzeugt.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in diesem Leitfaden</h2>
+<ul class="icon-links"><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../../icons/folder.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-folder" aria-hidden="true"><path d="M2 6a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/></svg><span>folder</span></a></li><li><a href="../../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/></svg><span>cloud</span></a></li><li><a href="../../icons/lock.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-lock" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/></svg><span>lock</span></a></li><li><a href="../../icons/heart.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-heart" aria-hidden="true"><path d="M12 19.89L4.41 12.3A4.8 4.8 0 1 1 12 6.58A4.8 4.8 0 1 1 19.59 12.3Z"/></svg><span>heart</span></a></li><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Verwandte Leitfäden</h2>
+<ul class="guide-cards"><li><a href="react.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-atom" aria-hidden="true"><path d="M4.93 4.93A10 4.5 45 1 1 19.07 19.07A10 4.5 45 1 1 4.93 4.93Z"/><path d="M19.07 4.93A10 4.5 135 1 1 4.93 19.07A10 4.5 135 1 1 19.07 4.93Z"/><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/></svg><strong data-i18n="guide.react.h1">React-Icons</strong><span data-i18n="guide.react.description">React-Icons mit glyphfox: Installation, tree-shakable SVG-Komponenten, alle Props, Icons per Name, Modifier, Fusion, Morphing, Refs und TypeScript-Typen.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree-Shaking für Icons</strong><span data-i18n="guide.tree-shaking.description">Tree-Shaking für glyphfox-Icons in Vite, webpack, Rollup und esbuild: gemessene Bundle-Größen, was Tree-Shaking aushebelt, Laden per Name und feste Teilmengen.</span></a></li><li><a href="accessibility.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-accessibility" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 6.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M7 10.5l5 1 5-1"/><path d="M12 11.5v3"/><path d="M9.5 18l2.5-3.5 2.5 3.5"/></svg><strong data-i18n="guide.accessibility.h1">Barrierefreie Icons</strong><span data-i18n="guide.accessibility.description">Barrierefreie Icons mit glyphfox: standardmäßig dekorativ, Titel und Labels, reine Icon-Buttons, Status-Icons, Kontrast, reduzierte Bewegung und RTL-Layouts.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Originale Icons im 24er-Raster, die ihre Strichstärke ändern, morphen, verschmelzen und lebendig werden. Kostenlos und Open Source unter der MIT-Lizenz.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produkt</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Alle Icons nach Kategorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Brand-Kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Entwickler</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Doku</a></li>
+          <li><a href="./" data-i18n="footer.guides">Leitfäden</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projekt</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT-Lizenz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Erstellt von</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, der Fuchs, ist im selben Raster gezeichnet wie die Icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>

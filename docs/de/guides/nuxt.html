@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="glyphfox">
+<meta property="og:image" content="https://kwy404.github.io/glyphfox/guides/social/nuxt.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Icons in Nuxt: glyphfox">
+<meta name="twitter:card" content="summary_large_image">
+<script>try{if(localStorage.getItem('gf-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<title data-i18n="guide.nuxt.title">Icons in Nuxt 3 und Nuxt 4 mit glyphfox und SSR</title>
+<meta name="description" content="glyphfox-Icons in Nuxt mit SSR: Komponenten importieren, Namen per Plugin registrieren, Auto-Import-Wrapper nutzen, Morphs synchron halten, leere Icons vermeiden." data-i18n-attr="content:guide.nuxt.description">
+<link rel="canonical" href="https://kwy404.github.io/glyphfox/de/guides/nuxt.html">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/guides/nuxt.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/guides/nuxt.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/guides/nuxt.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/guides/nuxt.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/guides/nuxt.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/guides/nuxt.html">
+<meta property="og:title" content="Icons in Nuxt 3 und Nuxt 4 mit glyphfox und SSR">
+<meta property="og:description" content="glyphfox-Icons in Nuxt mit SSR: Komponenten importieren, Namen per Plugin registrieren, Auto-Import-Wrapper nutzen, Morphs synchron halten, leere Icons vermeiden.">
+<meta property="og:url" content="https://kwy404.github.io/glyphfox/de/guides/nuxt.html">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:title" content="Icons in Nuxt 3 und Nuxt 4 mit glyphfox und SSR">
+<meta name="twitter:description" content="glyphfox-Icons in Nuxt mit SSR: Komponenten importieren, Namen per Plugin registrieren, Auto-Import-Wrapper nutzen, Morphs synchron halten, leere Icons vermeiden.">
+<meta name="twitter:image" content="https://kwy404.github.io/glyphfox/guides/social/nuxt.png">
+<meta name="twitter:image:alt" content="Icons in Nuxt: glyphfox">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../guides/guides.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://kwy404.github.io/glyphfox/de/"},{"@type":"ListItem","position":2,"name":"Leitfäden","item":"https://kwy404.github.io/glyphfox/de/guides/"},{"@type":"ListItem","position":3,"name":"Nuxt","item":"https://kwy404.github.io/glyphfox/de/guides/nuxt.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Brauche ich ein Nuxt-Modul für glyphfox?","acceptedAnswer":{"@type":"Answer","text":"Nein. Importieren Sie die Komponenten aus glyphfox/vue dort, wo Sie sie verwenden, oder registrieren Sie einen gemeinsamen Satz in einem Plugin. Ein Modul würde lediglich die globale Registrierung ergänzen, und die bietet Ihnen bereits ein zehnzeiliges Plugin, ohne zu verschleiern, welche Icons im Bundle landen."}},{"@type":"Question","name":"Funktioniert das mit nuxt generate und vorgerenderten Routen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Beim Prerendering läuft dasselbe serverseitige Rendering zur Build-Zeit, daher enthalten die erzeugten HTML-Dateien das SVG-Markup. Für die Registrierung gilt dieselbe Regel: Ein Name, den der Build nicht auflösen kann, wird als leeres SVG geschrieben."}}]}</script>
+</head>
+<body class="docs-page guide-page" data-copied="In die Zwischenablage kopiert" data-theme-light="Zum hellen Design wechseln" data-theme-dark="Zum dunklen Design wechseln">
+<a class="skip" href="#main" data-i18n="nav.skip">Zum Inhalt springen</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../" aria-label="glyphfox home">
+      <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+      <span>glyph<b>fox</b></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="../../icons.html" data-nav="icons" data-i18n="nav.icons">Icons</a>
+      <a href="../../studio.html" data-nav="studio" data-i18n="nav.studio">Studio</a>
+      <a href="../../docs.html" data-nav="docs" aria-current="page" data-i18n="nav.docs">Doku</a>
+      <a href="../../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="../../guides/nuxt.html" hreflang="en" data-lang-switch aria-label="EN, read in English">EN</a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Light theme" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
+      <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
+    </div>
+  </div>
+</header>
+<div class="wrap docs-layout guide-layout">
+<nav class="docs-nav" aria-label="Leitfäden" data-i18n-attr="aria-label:seo.nav.guides">
+<a href="./" data-i18n="seo.allGuides">Alle Leitfäden</a>
+<p class="docs-nav-title" data-i18n="seo.group.frameworks">Frameworks</p>
+<a href="react.html" data-i18n="guide.react.short">React</a>
+<a href="nextjs.html" data-i18n="guide.nextjs.short">Next.js</a>
+<a href="vue.html" data-i18n="guide.vue.short">Vue</a>
+<a href="nuxt.html" aria-current="page" class="on" data-i18n="guide.nuxt.short">Nuxt</a>
+<a href="angular.html" data-i18n="guide.angular.short">Angular</a>
+<a href="svelte.html" data-i18n="guide.svelte.short">Svelte</a>
+<a href="sveltekit.html" data-i18n="guide.sveltekit.short">SvelteKit</a>
+<a href="solid.html" data-i18n="guide.solid.short">Solid</a>
+<a href="preact.html" data-i18n="guide.preact.short">Preact</a>
+<a href="qwik.html" data-i18n="guide.qwik.short">Qwik</a>
+<a href="astro.html" data-i18n="guide.astro.short">Astro</a>
+<a href="react-native.html" data-i18n="guide.react-native.short">React Native</a>
+<a href="web-components.html" data-i18n="guide.web-components.short">Lit und Web Components</a>
+<a href="html-cdn.html" data-i18n="guide.html-cdn.short">HTML und CDN</a>
+<p class="docs-nav-title" data-i18n="seo.group.topics">Themen</p>
+<a href="tailwind.html" data-i18n="guide.tailwind.short">Tailwind CSS</a>
+<a href="animated-icons.html" data-i18n="guide.animated-icons.short">Animierte Icons</a>
+<a href="accessibility.html" data-i18n="guide.accessibility.short">Barrierefreiheit</a>
+<a href="tree-shaking.html" data-i18n="guide.tree-shaking.short">Tree-Shaking</a>
+<a href="svg-sprite.html" data-i18n="guide.svg-sprite.short">SVG-Sprites</a>
+<a href="ssr.html" data-i18n="guide.ssr.short">Serverseitiges Rendering</a>
+</nav>
+<main id="main" class="docs-main guide">
+<nav class="crumbs" aria-label="Brotkrumennavigation" data-i18n-attr="aria-label:seo.crumbs"><ol><li><a href="../../" data-i18n="seo.crumb.home">Startseite</a></li><li><a href="./" data-i18n="seo.crumb.guides">Leitfäden</a></li><li aria-current="page" data-i18n="guide.nuxt.short">Nuxt</li></ol></nav>
+<header class="docs-hero">
+<span class="eyebrow" data-i18n="seo.group.frameworks">Frameworks</span>
+<h1 class="title" data-i18n="guide.nuxt.h1">Icons in Nuxt</h1>
+<p class="lead" data-i18n="guide.nuxt.lead">glyphfox/vue rendert auf dem Server, daher kommen Nuxt-Seiten mit echtem SVG im HTML an. Diese Anleitung zeigt die Einrichtung, ein Plugin für gemeinsam genutzte Icons, einen automatisch importierten Wrapper und wie sich Registrierung und Morphs zwischen Server und Browser verhalten.</p>
+<nav class="toc" aria-label="Auf dieser Seite" data-i18n-attr="aria-label:seo.toc"><ol><li><a href="#install" data-i18n="guide.nuxt.install.h">Installation</a></li><li><a href="#pages" data-i18n="guide.nuxt.pages.h">Icons in Seiten und Komponenten verwenden</a></li><li><a href="#plugin" data-i18n="guide.nuxt.plugin.h">Ein Plugin für gemeinsam genutzte Icons</a></li><li><a href="#wrapper" data-i18n="guide.nuxt.wrapper.h">Ein automatisch importierter Wrapper</a></li><li><a href="#hydration" data-i18n="guide.nuxt.hydration.h">Morphs, Animationen und Hydration</a></li><li><a href="#bundle" data-i18n="guide.nuxt.bundle.h">Bundle und Payload</a></li><li><a href="#on-demand" data-i18n="guide.nuxt.on-demand.h">Nicht registrierte Namen</a></li><li><a href="#props" data-i18n="guide.nuxt.props.h">Props</a></li><li><a href="#pitfalls" data-i18n="guide.nuxt.pitfalls.h">Stolperfallen</a></li><li><a href="#faq" data-i18n="seo.faq">Häufige Fragen</a></li></ol></nav>
+</header>
+<section id="install">
+<h2 data-i18n="guide.nuxt.install.h">Installation</h2>
+<div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="sh" data-done="1"><span class="tok-k">npm</span> install <span class="tok-k">glyphfox</span></pre></div>
+<p data-i18n="guide.nuxt.install.p">Sie müssen kein Nuxt-Modul hinzufügen. Die Vue-Komponenten liegen in <code>glyphfox/vue</code>, das als reine ES-Module mit einem CommonJS-Build für <code>require</code> ausgeliefert wird. Nuxt importiert es daher auf dem Server und im Browser wie jede andere Abhängigkeit. Alles aus der <a href="vue.html">Vue-Anleitung</a> gilt auch hier; diese Seite behandelt, was sich ändert, wenn dieselben Komponenten zuerst auf dem Server rendern.</p>
+</section>
+<section id="pages">
+<h2 data-i18n="guide.nuxt.pages.h">Icons in Seiten und Komponenten verwenden</h2>
+<div class="code"><div class="code-head"><span>pages/index.vue</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup <span class="tok-a">lang</span>=<span class="tok-s">"ts"</span><span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { SearchIcon, ArrowRightIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;form</span> <span class="tok-k">class</span>=<span class="tok-s">"search"</span> <span class="tok-a">action</span>=<span class="tok-s">"/search"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;SearchIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"18"</span> <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;input</span> <span class="tok-a">name</span>=<span class="tok-s">"q"</span> <span class="tok-k">type</span>=<span class="tok-s">"search"</span> <span class="tok-a">placeholder</span>=<span class="tok-s">"Search the docs"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Search the docs"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"submit"</span><span class="tok-t">&gt;</span>
+      Search <span class="tok-t">&lt;ArrowRightIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"16"</span> mirror-rtl <span class="tok-t">/&gt;</span>
+    <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;/form</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.nuxt.pages.p">Das SVG ist Teil des Server-HTML, daher sind die Icons sichtbar, bevor überhaupt JavaScript läuft, und sie verschieben das Layout bei der Hydration nie. Nach der Hydration übernehmen dieselben Komponenten Auslöser, Morphs und Zustandswechsel. <code>mirror-rtl</code> spiegelt richtungsabhängige Icons wie Pfeile, wenn die Seite oder ein übergeordnetes Element <code>dir="rtl"</code> hat.</p>
+<p data-i18n="guide.nuxt.pages.import">Die Komponenten in jeder Datei zu importieren, ist das expliziteste Setup und hält zugleich jeden Routen-Chunk klein: Eine Seite enthält nur die Icons, die sie verwendet.</p>
+</section>
+<section id="plugin">
+<h2 data-i18n="guide.nuxt.plugin.h">Ein Plugin für gemeinsam genutzte Icons</h2>
+<p data-i18n="guide.nuxt.plugin.p">Ein Plugin ist der richtige Ort für zwei Dinge: Komponenten, die in jedem Template verfügbar sein sollen, und die Daten von Namen, die nur als Strings in <code>Icon</code>, <code>Fusion</code>, <code>MorphIcon</code> oder <code>morph-to</code> vorkommen.</p>
+<div class="code"><div class="code-head"><span>plugins/glyphfox.ts</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">import</span> { HomeIcon, SettingsIcon, Icon, registerIcons } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-k">import</span> menu <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/menu'</span>;
+<span class="tok-k">import</span> x <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/x'</span>;
+<span class="tok-k">import</span> moon <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/moon'</span>;
+<span class="tok-k">import</span> cloud <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/cloud'</span>;
+<span class="tok-k">import</span> lock <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/lock'</span>;
+
+<span class="tok-c">// Runs once per process on the server and once in the browser.</span>
+registerIcons([menu, x, moon, cloud, lock]);
+
+<span class="tok-k">export</span> <span class="tok-k">default</span> defineNuxtPlugin((nuxtApp) =<span class="tok-t">&gt;</span> {
+  nuxtApp.vueApp.component(<span class="tok-s">'HomeIcon'</span>, HomeIcon);
+  nuxtApp.vueApp.component(<span class="tok-s">'SettingsIcon'</span>, SettingsIcon);
+  nuxtApp.vueApp.component(<span class="tok-s">'GfIcon'</span>, Icon);
+});</pre></div>
+<p data-i18n="guide.nuxt.plugin.both">Halten Sie dieses Plugin universell, also ohne das Suffix <code>.client</code> oder <code>.server</code>: Der Server braucht die Daten, um das HTML zu schreiben, und der Browser braucht dieselben Daten für die Hydration. Auf dem Server ist die Registry ein Modulzustand, den alle Anfragen teilen. Das ist unbedenklich, weil sich Icon-Daten nie ändern.</p>
+</section>
+<section id="wrapper">
+<h2 data-i18n="guide.nuxt.wrapper.h">Ein automatisch importierter Wrapper</h2>
+<p data-i18n="guide.nuxt.wrapper.p">Nuxt importiert Komponenten aus <code>components/</code> automatisch. Ein kleiner Wrapper gibt der App eine einzige Icon-Komponente mit Ihren Standardwerten und einer festen Liste von Namen. So fällt ein Tippfehler schon bei der Typprüfung auf, statt ein leeres SVG zu rendern.</p>
+<div class="code"><div class="code-head"><span>components/AppIcon.vue</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup <span class="tok-a">lang</span>=<span class="tok-s">"ts"</span><span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { Icon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-k">import</span> home <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/home'</span>;
+<span class="tok-k">import</span> search <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/search'</span>;
+<span class="tok-k">import</span> settings <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/settings'</span>;
+<span class="tok-k">import</span> bell <span class="tok-k">from</span> <span class="tok-s">'glyphfox/icons/bell'</span>;
+
+<span class="tok-k">const</span> icons = { home, search, settings, bell };
+
+<span class="tok-k">const</span> props = withDefaults(defineProps&lt;{ name: keyof typeof icons; label?: string; size?: number }<span class="tok-t">&gt;</span>(), { size: <span class="tok-n">20</span> });
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;Icon</span> <span class="tok-a">:icon</span>=<span class="tok-s">"icons[props.name]"</span> <span class="tok-a">:size</span>=<span class="tok-s">"props.size"</span> <span class="tok-a">:weight</span>=<span class="tok-s">"1.75"</span> <span class="tok-a">:title</span>=<span class="tok-s">"props.label"</span> <span class="tok-t">/&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<div class="code"><div class="code-head"><span>components/NotificationsButton.vue</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Notifications"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;AppIcon</span> <span class="tok-a">name</span>=<span class="tok-s">"bell"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.nuxt.wrapper.data">Wenn Sie Icon-Daten über die Prop <code>icon</code> übergeben, wird die Namens-Registry vollständig umgangen. Der Wrapper rendert daher auf dem Server und im Browser dasselbe Markup, ganz gleich, was wo registriert wurde. Ohne <code>label</code> bleibt das Icon dekorativ, und das ist in einem beschrifteten Button genau richtig.</p>
+</section>
+<section id="hydration">
+<h2 data-i18n="guide.nuxt.hydration.h">Morphs, Animationen und Hydration</h2>
+<p data-i18n="guide.nuxt.hydration.p">Der Server rendert ein Standbild. Animationen lebendiger Zustände sind CSS im SVG, daher dreht sich ein Spinner mit <code>animate="spin"</code> bereits im Server-HTML, es sei denn, Besucher bevorzugen reduzierte Bewegung. Morphs sowie die Auslöser für Hover und Klick setzen voraus, dass die Komponente zuerst hydriert wird.</p>
+<p data-i18n="guide.nuxt.hydration.mount"><code>morph-to</code> mit dem Standardauslöser (mount) rendert auf dem Server das Ausgangs-Icon und spielt das Morphing direkt nach der Hydration ab, was bei jedem Seitenaufruf wie ein Flackern wirkt. Soll die Seite direkt im Zielzustand erscheinen, verwenden Sie <code>trigger="state"</code> und binden <code>:active</code> an einen gemeinsam genutzten Zustand: Der Server rendert dann das Ziel, und das Morphing läuft nur ab, wenn sich der Zustand ändert.</p>
+<div class="code"><div class="code-head"><span>components/ThemeToggle.vue</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup <span class="tok-a">lang</span>=<span class="tok-s">"ts"</span><span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { SunIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+
+<span class="tok-k">const</span> dark = useState(<span class="tok-s">'dark'</span>, () =<span class="tok-t">&gt;</span> <span class="tok-k">false</span>);
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;button</span> <span class="tok-k">type</span>=<span class="tok-s">"button"</span> <span class="tok-a">aria-label</span>=<span class="tok-s">"Dark theme"</span> <span class="tok-a">:aria-pressed</span>=<span class="tok-s">"dark"</span> <span class="tok-a">@click</span>=<span class="tok-s">"dark = !dark"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;SunIcon</span> <span class="tok-a">morph-to</span>=<span class="tok-s">"moon"</span> <span class="tok-a">trigger</span>=<span class="tok-s">"state"</span> <span class="tok-a">:active</span>=<span class="tok-s">"dark"</span> <span class="tok-t">/&gt;</span>
+  <span class="tok-t">&lt;/button</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+<p data-i18n="guide.nuxt.hydration.state"><code>useState</code> wird in den Payload der Seite serialisiert, daher starten Server und Browser mit demselben Wert, und das Icon hydriert ohne Mismatch. Das Morph-Ziel <code>moon</code> ist im Plugin oben registriert.</p>
+</section>
+<section id="bundle">
+<h2 data-i18n="guide.nuxt.bundle.h">Bundle und Payload</h2>
+<p data-i18n="guide.nuxt.bundle.p">In einer serverseitig gerenderten App kostet ein Icon doppelt: einmal das SVG-Markup im HTML und einmal der Komponentencode, der es hydriert. Das Markup ist klein, ein paar Pfade pro Icon. Gemessen in einem Produktions-Build mit Vite 8 ist die gemeinsame Vue-Runtime von glyphfox etwa 20 KB gzip groß, und jede Icon-Komponente fügt rund 0,1 KB gzip hinzu. Die Runtime überwiegt also, und zusätzliche Icons sind günstig.</p>
+<p data-i18n="guide.nuxt.bundle.payload">Halten Sie Icon-Daten aus <code>useState</code> und <code>useAsyncData</code> heraus. Alles, was dort gespeichert ist, wird in das HTML jeder Seite serialisiert, die es verwendet. Importieren Sie stattdessen die Icon-Module; sie werden zusammen mit dem restlichen JavaScript gecacht.</p>
+<p data-i18n="guide.nuxt.bundle.islands">Für Icons, die sich nie ändern, etwa in einem Footer oder einem statischen Marketing-Bereich, rendert eine Server-Komponente das Markup, ohne Icon-Code auszuliefern. Aktivieren Sie Component Islands und benennen Sie die Komponente mit dem Suffix <code>.server.vue</code>:</p>
+<div class="code"><div class="code-head"><span>nuxt.config.ts</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">export</span> <span class="tok-k">default</span> defineNuxtConfig({
+  experimental: { componentIslands: <span class="tok-k">true</span> },
+});</pre></div>
+<div class="code"><div class="code-head"><span>components/FooterLinks.server.vue</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-t">&lt;script</span> setup <span class="tok-a">lang</span>=<span class="tok-s">"ts"</span><span class="tok-t">&gt;</span>
+<span class="tok-k">import</span> { GitBranchIcon, RssIcon, MailIcon } <span class="tok-k">from</span> <span class="tok-s">'glyphfox/vue'</span>;
+<span class="tok-t">&lt;/script</span><span class="tok-t">&gt;</span>
+
+<span class="tok-t">&lt;template</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;ul</span> <span class="tok-k">class</span>=<span class="tok-s">"footer-links"</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;li</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"https://github.com/kwy404/glyphfox"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;GitBranchIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"18"</span> <span class="tok-t">/&gt;</span> Source<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/li</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;li</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"/feed.xml"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;RssIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"18"</span> <span class="tok-t">/&gt;</span> Feed<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/li</span><span class="tok-t">&gt;</span>
+    <span class="tok-t">&lt;li</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;a</span> <span class="tok-a">href</span>=<span class="tok-s">"mailto:hello@example.com"</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;MailIcon</span> <span class="tok-a">:size</span>=<span class="tok-s">"18"</span> <span class="tok-t">/&gt;</span> Contact<span class="tok-t">&lt;/a</span><span class="tok-t">&gt;</span><span class="tok-t">&lt;/li</span><span class="tok-t">&gt;</span>
+  <span class="tok-t">&lt;/ul</span><span class="tok-t">&gt;</span>
+<span class="tok-t">&lt;/template</span><span class="tok-t">&gt;</span></pre></div>
+</section>
+<section id="on-demand">
+<h2 data-i18n="guide.nuxt.on-demand.h">Nicht registrierte Namen</h2>
+<p data-i18n="guide.nuxt.ondemand.p">Ein Name, den niemand registriert hat, wird über einen dynamischen Import innerhalb des Pakets geladen. Nuxt baut mit Vite, und Vite überspringt dynamische Importe mit Variablen, wenn sie in <code>node_modules</code> liegen. In einem Produktions-Build werden diese Namen daher nie geladen. Wenn Sie zur Laufzeit wirklich beliebige Namen benötigen, etwa in einem Icon-Picker, lassen Sie Vite den Loader bündeln. Vite erzeugt dann pro Icon einen kleinen Chunk, der erst geladen wird, wenn der jeweilige Name verwendet wird:</p>
+<div class="code"><div class="code-head"><span>nuxt.config.ts</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js" data-done="1"><span class="tok-k">export</span> <span class="tok-k">default</span> defineNuxtConfig({
+  vite: {
+    build: {
+      dynamicImportVarsOptions: { exclude: [/node_modules\/(?!glyphfox\/)/] },
+    },
+  },
+});</pre></div>
+<p data-i18n="guide.nuxt.ondemand.server">Das hilft erst nach der Hydration. Das serverseitige Rendering wartet nicht auf einen dynamischen Import, daher muss ein Icon, das im HTML stehen soll, weiterhin registriert oder als Komponente importiert werden.</p>
+</section>
+<section id="props">
+<h2 data-i18n="guide.nuxt.props.h">Props</h2>
+<p data-i18n="guide.nuxt.props.p">Es handelt sich um die Komponenten aus <code>glyphfox/vue</code> mit denselben Props. In Templates können Sie die Attributnamen in kebab-case verwenden.</p>
+<div class="table-wrap"><table class="props"><thead><tr><th data-i18n="seo.props.prop">Prop</th><th data-i18n="seo.props.template">In Templates</th><th data-i18n="docs.type">Typ</th><th data-i18n="docs.default">Standard</th><th data-i18n="docs.desc">Beschreibung</th></tr></thead><tbody>
+<tr><td><code>size</code></td><td><code>size</code></td><td>number, string</td><td><code>24</code></td><td data-i18n="prop.size">Breite und Höhe; Zahlen sind Pixel.</td></tr>
+<tr><td><code>color</code></td><td><code>color</code></td><td>string</td><td><code>currentColor</code></td><td data-i18n="prop.color">Hauptfarbe.</td></tr>
+<tr><td><code>secondaryColor</code></td><td><code>secondary-color</code></td><td>string</td><td><code>color</code></td><td data-i18n="prop.secondaryColor">Farbe der Duotone-Ebene und der Solid-Füllung.</td></tr>
+<tr><td><code>secondaryOpacity</code></td><td><code>secondary-opacity</code></td><td>number</td><td><code>0.3</code> / <code>1</code></td><td data-i18n="prop.secondaryOpacity">Deckkraft der Duotone-Ebene oder der Solid-Füllung.</td></tr>
+<tr><td><code>weight</code></td><td><code>weight</code></td><td>number</td><td><code>2</code></td><td data-i18n="prop.weight">Strichstärke von 1 bis 3 im 24er-Raster, unter 24 px optisch ausgeglichen.</td></tr>
+<tr><td><code>absoluteWeight</code></td><td><code>absolute-weight</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.absoluteWeight">Hält den Strich bei jeder Größe auf weight Pixeln.</td></tr>
+<tr><td><code>corners</code></td><td><code>corners</code></td><td>round, sharp</td><td><code>round</code></td><td data-i18n="prop.corners">Abgerundete oder spitze Verbindungen und Enden.</td></tr>
+<tr><td><code>variant</code></td><td><code>variant</code></td><td>outline, duotone, solid</td><td><code>outline</code></td><td data-i18n="prop.variant">Stilachse; solid entsteht aus den geschlossenen Formen.</td></tr>
+<tr><td><code>rotate</code></td><td><code>rotate</code></td><td>number</td><td><code>0</code></td><td data-i18n="prop.rotate">Drehung in Grad.</td></tr>
+<tr><td><code>flipX</code></td><td><code>flip-x</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipX">Horizontal spiegeln.</td></tr>
+<tr><td><code>flipY</code></td><td><code>flip-y</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.flipY">Vertikal spiegeln.</td></tr>
+<tr><td><code>mirrorRtl</code></td><td><code>mirror-rtl</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.mirrorRtl">In Layouts von rechts nach links spiegeln.</td></tr>
+<tr><td><code>animate</code></td><td><code>animate</code></td><td>draw, pop, wiggle, spin, pulse, bounce, shake</td><td>keiner</td><td data-i18n="prop.animate">Voreinstellung für den lebendigen Zustand.</td></tr>
+<tr><td><code>trigger</code></td><td><code>trigger</code></td><td>mount, hover, click, state</td><td><code>mount</code></td><td data-i18n="prop.trigger">Wann die Animation oder der Morph abläuft.</td></tr>
+<tr><td><code>active</code></td><td><code>active</code></td><td>boolean</td><td><code>false</code></td><td data-i18n="prop.active">Der Zustand für den Auslöser state.</td></tr>
+<tr><td><code>duration</code></td><td><code>duration</code></td><td>number (ms)</td><td>je nach Voreinstellung</td><td data-i18n="prop.duration">Dauer der Animation oder des Morphs.</td></tr>
+<tr><td><code>delay</code></td><td><code>delay</code></td><td>number (ms)</td><td><code>0</code></td><td data-i18n="prop.delay">Verzögerung der Animation oder des Morphs.</td></tr>
+<tr><td><code>loop</code></td><td><code>loop</code></td><td>boolean, number</td><td><code>false</code></td><td data-i18n="prop.loop">Endlos oder eine bestimmte Anzahl von Malen wiederholen (spin und pulse laufen standardmäßig in Schleife).</td></tr>
+<tr><td><code>modifier</code></td><td><code>modifier</code></td><td>plus, minus, check, x, alert, lock, clock, sync, arrow-up, arrow-down, dot</td><td>keiner</td><td data-i18n="prop.modifier">Badge mit automatischer Aussparung.</td></tr>
+<tr><td><code>modifierCorner</code></td><td><code>modifier-corner</code></td><td>top-left, top-right, bottom-left, bottom-right</td><td><code>bottom-right</code></td><td data-i18n="prop.modifierCorner">Ecke des Badges.</td></tr>
+<tr><td><code>morphTo</code></td><td><code>morph-to</code></td><td>name, data</td><td>keiner</td><td data-i18n="prop.morphTo">Ziel des Morphs; der Auslöser bestimmt, wann es erscheint.</td></tr>
+<tr><td><code>title</code></td><td><code>title</code></td><td>string</td><td>keiner</td><td data-i18n="prop.title">Zugänglicher Name: title, role img und aria-label.</td></tr>
+<tr><td><code>decorative</code></td><td><code>decorative</code></td><td>boolean</td><td>true ohne title</td><td data-i18n="prop.decorative">Verbirgt das Icon vor assistiven Technologien.</td></tr>
+</tbody></table></div>
+</section>
+<section id="pitfalls">
+<h2 data-i18n="guide.nuxt.pitfalls.h">Stolperfallen</h2>
+<dl class="pitfalls"><div><dt data-i18n="guide.nuxt.pitfalls.list.1.t">Funktioniert in der Entwicklung, leer in Produktion</dt><dd data-i18n="guide.nuxt.pitfalls.list.1.d">Der Dev-Server bündelt das gesamte Paket vorab, daher wird lokal jeder Name aufgelöst. Der Produktions-Build behält nur Ihre Importe und lässt den On-Demand-Loader weg, sodass Namen, die nur in Strings vorkommen, ein leeres SVG rendern. Registrieren Sie diese Namen im universellen Plugin.</dd></div><div><dt data-i18n="guide.nuxt.pitfalls.list.2.t">Ein Icon wird auf dem Server gerendert und verschwindet dann</dt><dd data-i18n="guide.nuxt.pitfalls.list.2.d">Lädt der Server glyphfox ohne Tree-Shaking, registriert der Import von <code>glyphfox/vue</code> dort jedes Icon, während das Browser-Bundle nur registriert, was Sie importieren. Ein Name, der nur als String vorkommt, kann dann im Server-HTML erscheinen und nach der Hydration leer werden, begleitet von einer Hydration-Warnung in der Konsole. Wenn Sie jeden solchen Namen explizit registrieren, verschwindet der Unterschied.</dd></div><div><dt data-i18n="guide.nuxt.pitfalls.list.3.t">Registrierung in einem reinen Client-Plugin</dt><dd data-i18n="guide.nuxt.pitfalls.list.3.d">Ein <code>plugins/glyphfox.client.ts</code> läuft erst, nachdem der Server die Seite bereits gerendert hat. Das HTML enthält dann leere Icons, die erst später auftauchen. Verwenden Sie ein Plugin ohne Suffix.</dd></div><div><dt data-i18n="guide.nuxt.pitfalls.list.4.t">Ein Morph, der bei jedem Seitenaufruf abläuft</dt><dd data-i18n="guide.nuxt.pitfalls.list.4.d"><code>morph-to</code> mit dem Standardauslöser mount animiert direkt nach der Hydration. Verwenden Sie <code>trigger="state"</code> mit einem Zustand aus <code>useState</code>, wie beim Theme-Umschalter oben.</dd></div><div><dt data-i18n="guide.nuxt.pitfalls.list.5.t">Unterschiedliche Namen auf dem Server und im Browser</dt><dd data-i18n="guide.nuxt.pitfalls.list.5.d">Wenn Sie ein Icon anhand von <code>window</code>, <code>localStorage</code> oder der aktuellen Uhrzeit auswählen, unterscheidet sich das erste Rendering im Browser von dem auf dem Server, und Vue meldet einen Hydration-Mismatch. Lesen Sie solche Werte in <code>onMounted</code> aus, oder speichern Sie sie in einem Cookie, das der Server lesen kann.</dd></div></dl>
+</section>
+<section id="faq" class="faq">
+<h2 data-i18n="seo.faq">Häufige Fragen</h2>
+<h3 data-i18n="guide.nuxt.faq.module.q">Brauche ich ein Nuxt-Modul für glyphfox?</h3>
+<p data-i18n="guide.nuxt.faq.module.a">Nein. Importieren Sie die Komponenten aus <code>glyphfox/vue</code> dort, wo Sie sie verwenden, oder registrieren Sie einen gemeinsamen Satz in einem Plugin. Ein Modul würde lediglich die globale Registrierung ergänzen, und die bietet Ihnen bereits ein zehnzeiliges Plugin, ohne zu verschleiern, welche Icons im Bundle landen.</p>
+<h3 data-i18n="guide.nuxt.faq.generate.q">Funktioniert das mit nuxt generate und vorgerenderten Routen?</h3>
+<p data-i18n="guide.nuxt.faq.generate.a">Ja. Beim Prerendering läuft dasselbe serverseitige Rendering zur Build-Zeit, daher enthalten die erzeugten HTML-Dateien das SVG-Markup. Für die Registrierung gilt dieselbe Regel: Ein Name, den der Build nicht auflösen kann, wird als leeres SVG geschrieben.</p>
+</section>
+<section id="icons" class="used">
+<h2 data-i18n="seo.iconsUsed">Icons in diesem Leitfaden</h2>
+<ul class="icon-links"><li><a href="../../icons/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-search" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg><span>search</span></a></li><li><a href="../../icons/arrow-right.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-arrow-right" aria-hidden="true"><path d="M4 12h16"/><path d="M14 6l6 6-6 6"/></svg><span>arrow-right</span></a></li><li><a href="../../icons/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-home" aria-hidden="true"><path d="M3 10l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6"/></svg><span>home</span></a></li><li><a href="../../icons/settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-settings" aria-hidden="true"><path d="M10.68 4.52L10.87 2.11A9.95 9.95 0 0 1 13.13 2.11L13.32 4.52A7.6 7.6 0 0 1 16.36 5.77L16.36 5.77L18.19 4.21A9.95 9.95 0 0 1 19.79 5.81L18.23 7.64A7.6 7.6 0 0 1 19.48 10.68L19.48 10.68L21.89 10.87A9.95 9.95 0 0 1 21.89 13.13L19.48 13.32A7.6 7.6 0 0 1 18.23 16.36L18.23 16.36L19.79 18.19A9.95 9.95 0 0 1 18.19 19.79L16.36 18.23A7.6 7.6 0 0 1 13.32 19.48L13.32 19.48L13.13 21.89A9.95 9.95 0 0 1 10.87 21.89L10.68 19.48A7.6 7.6 0 0 1 7.64 18.23L7.64 18.23L5.81 19.79A9.95 9.95 0 0 1 4.21 18.19L5.77 16.36A7.6 7.6 0 0 1 4.52 13.32L4.52 13.32L2.11 13.13A9.95 9.95 0 0 1 2.11 10.87L4.52 10.68A7.6 7.6 0 0 1 5.77 7.64L5.77 7.64L4.21 5.81A9.95 9.95 0 0 1 5.81 4.21L7.64 5.77A7.6 7.6 0 0 1 10.68 4.52Z"/><circle cx="12" cy="12" r="3"/></svg><span>settings</span></a></li><li><a href="../../icons/menu.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><span>menu</span></a></li><li><a href="../../icons/x.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-x" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span>x</span></a></li><li><a href="../../icons/moon.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-moon" aria-hidden="true"><path d="M11.44 3.5A9 9 0 1 0 20.46 13.34A7 7 0 0 1 11.44 3.5Z"/></svg><span>moon</span></a></li><li><a href="../../icons/cloud.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-cloud" aria-hidden="true"><path d="M17.25 19.5H6.25A4 4 0 0 1 5.35 11.6A6 6 0 1 1 17.25 10.5A4.5 4.5 0 0 1 17.25 19.5Z"/></svg><span>cloud</span></a></li><li><a href="../../icons/lock.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-lock" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/></svg><span>lock</span></a></li><li><a href="../../icons/bell.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-bell" aria-hidden="true"><path d="M4 16c1.2-1.2 2-2.9 2-5V9a6 6 0 0 1 12 0v2c0 2.1 .8 3.8 2 5Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>bell</span></a></li><li><a href="../../icons/sun.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 4L12 2"/><path d="M17.66 6.34L19.07 4.93"/><path d="M20 12L22 12"/><path d="M17.66 17.66L19.07 19.07"/><path d="M12 20L12 22"/><path d="M6.34 17.66L4.93 19.07"/><path d="M4 12L2 12"/><path d="M6.34 6.34L4.93 4.93"/></svg><span>sun</span></a></li><li><a href="../../icons/git-branch.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><span>git-branch</span></a></li><li><a href="../../icons/rss.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-rss" aria-hidden="true"><path d="M3.5 19.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0Zm1 0h.01"/><path d="M4.5 11.5a8 8 0 0 1 8 8"/><path d="M4.5 4.5a15 15 0 0 1 15 15"/></svg><span>rss</span></a></li><li><a href="../../icons/mail.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-mail" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg><span>mail</span></a></li></ul>
+</section>
+<section id="related" class="related">
+<h2 data-i18n="seo.related">Verwandte Leitfäden</h2>
+<ul class="guide-cards"><li><a href="vue.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-layers" aria-hidden="true"><path d="M12 2.5l9 5-9 5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg><strong data-i18n="guide.vue.h1">Icons in Vue 3</strong><span data-i18n="guide.vue.description">Vue-3-Icons mit glyphfox: installieren, tree-shakable Komponenten importieren, Props in Templates setzen, mit useMorph morphen, verschmelzen, leere Icons vermeiden.</span></a></li><li><a href="ssr.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-server" aria-hidden="true"><rect x="3" y="2" width="18" height="8" rx="2"/><rect x="3" y="14" width="18" height="8" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/></svg><strong data-i18n="guide.ssr.h1">Serverseitiges Rendering</strong><span data-i18n="guide.ssr.description">SVG-Icons mit glyphfox serverseitig rendern: was jedes Paket ausgibt, per Name genutzte Icons registrieren, toSvg-Strings, Hydration, Animationen, Web Component.</span></a></li><li><a href="tree-shaking.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-tree-pine" aria-hidden="true"><path d="M12 2l6 7.5h-2.5l4 6.5h-15l4-6.5H6Z"/><path d="M12 16v6"/></svg><strong data-i18n="guide.tree-shaking.h1">Tree-Shaking für Icons</strong><span data-i18n="guide.tree-shaking.description">Tree-Shaking für glyphfox-Icons in Vite, webpack, Rollup und esbuild: gemessene Bundle-Größen, was Tree-Shaking aushebelt, Laden per Name und feste Teilmengen.</span></a></li></ul>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../" aria-label="glyphfox home">
+          <!--gf:fenn/duotone:28:fenn--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-fenn fenn" aria-hidden="true"><path class="gf-secondary gf-fill" d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z" fill="currentColor" stroke="none" opacity="0.3"/><path d="M4 2.5 9 7 15 7 20 2.5 20.5 9.5 22 13.5 15 16.5 12 21.5 9 16.5 2 13.5 3.5 9.5Z"/><path d="M9 12h.01"/><path d="M15 12h.01"/></svg><!--/gf-->
+          <span>glyph<b>fox</b></span>
+        </a>
+        <p data-i18n="footer.about">Originale Icons im 24er-Raster, die ihre Strichstärke ändern, morphen, verschmelzen und lebendig werden. Kostenlos und Open Source unter der MIT-Lizenz.</p>
+      </div>
+      <div>
+        <h2 data-i18n="footer.product">Produkt</h2>
+        <ul>
+          <li><a href="../../icons.html" data-i18n="nav.icons">Icons</a></li>
+          <li><a href="../../icons/" data-i18n="footer.allIcons">Alle Icons nach Kategorie</a></li>
+          <li><a href="../../studio.html" data-i18n="nav.studio">Studio</a></li>
+          <li><a href="../../studio.html#fusion" data-i18n="footer.fusion">Fusion</a></li>
+          <li><a href="../../studio.html#brand" data-i18n="footer.brand">Brand-Kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.developers">Entwickler</h2>
+        <ul>
+          <li><a href="../../docs.html" data-i18n="nav.docs">Doku</a></li>
+          <li><a href="./" data-i18n="footer.guides">Leitfäden</a></li>
+          <li><a href="../../docs.html#props" data-i18n="footer.props">Props</a></li>
+          <li><a href="../../docs.html#cli">CLI</a></li>
+          <li><a href="../../changelog.html" data-i18n="nav.changelog">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 data-i18n="footer.project">Projekt</h2>
+        <ul>
+          <li><a href="https://github.com/kwy404/glyphfox">GitHub</a></li>
+          <li><a href="https://www.npmjs.com/package/glyphfox">npm</a></li>
+          <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT-Lizenz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><span data-i18n="footer.made">Erstellt von</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>
+      <span data-i18n="footer.fenn">Fenn, der Fuchs, ist im selben Raster gezeichnet wie die Icons.</span>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../../guides/page.js"></script>
+</body>
+</html>
