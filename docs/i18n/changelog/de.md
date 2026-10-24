@@ -6,7 +6,7 @@ Alle nennenswerten Änderungen an glyphfox werden hier dokumentiert. Das Format 
 
 ### Hinzugefügt
 
-- 164 neue Basis-Icons für Textformatierung, Diagramme, Mathematik, Gesundheit, Barrierefreiheit, Gesichter und Gesten, Bildung, Wissenschaft, Verkehr, Gebäude und Orte, Haushalt, Werkzeuge, Kleidung und Wetter, jedes mit Kategorien, Schlagwörtern und einer eigenen Animation: Das Set umfasst jetzt 728 Basis-Icons, 43 animierte, 38 große Schau-Icons und 11 isometrische Icons.
+- 206 neue Basis-Icons für Textformatierung, Diagramme, Mathematik, Gesundheit, Barrierefreiheit, Gesichter und Gesten, Bildung, Wissenschaft, Verkehr, Gebäude und Orte, Haushalt, Werkzeuge, Kleidung, Wetter, Währungen, Dateien und Geräte und Pfeile, jedes mit Kategorien, Schlagwörtern und einer eigenen Animation: Das Set umfasst jetzt 770 Basis-Icons, 43 animierte, 38 große Schau-Icons und 11 isometrische Icons.
 
 ## [1.0.0] - 2026-10-23
 

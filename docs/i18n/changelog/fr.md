@@ -6,7 +6,7 @@ Tous les changements notables de glyphfox sont consignés ici. Le format suit [K
 
 ### Ajouts
 
-- 164 nouvelles icônes de base pour la mise en forme du texte, les graphiques, les mathématiques, la santé, l'accessibilité, les visages et les gestes, l'éducation, les sciences, les transports, les bâtiments et les lieux, la maison, les outils, les vêtements et la météo, chacune avec ses catégories, ses mots clés et une animation conçue pour elle : le jeu compte désormais 728 icônes de base, 43 animées, 38 grand format et 11 isométriques.
+- 206 nouvelles icônes de base pour la mise en forme du texte, les graphiques, les mathématiques, la santé, l'accessibilité, les visages et les gestes, l'éducation, les sciences, les transports, les bâtiments et les lieux, la maison, les outils, les vêtements, la météo, les devises, les fichiers et les appareils et les flèches, chacune avec ses catégories, ses mots clés et une animation conçue pour elle : le jeu compte désormais 770 icônes de base, 43 animées, 38 grand format et 11 isométriques.
 
 ## [1.0.0] - 2026-10-23
 

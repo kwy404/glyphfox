@@ -64,6 +64,18 @@
     <loc>https://kwy404.github.io/glyphfox/icons/armchair.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/arrow-big-down.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/arrow-big-left.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/arrow-big-right.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/arrow-big-up.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/arrow-down-left.html</loc>
   </url>
   <url>
@@ -137,6 +149,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/badge-percent.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/baht.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/ban.html</loc>
@@ -341,6 +356,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/cctv.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/cent.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/certificate.html</loc>
@@ -646,6 +664,9 @@
     <loc>https://kwy404.github.io/glyphfox/icons/cupcake.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/currency.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/cursor-blink.html</loc>
   </url>
   <url>
@@ -668,6 +689,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/desk-lamp.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/desktop.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/diamond.html</loc>
@@ -728,6 +752,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/ear.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/earbuds.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/earthrise.html</loc>
@@ -802,19 +829,55 @@
     <loc>https://kwy404.github.io/glyphfox/icons/ferris-wheel.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-archive.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-audio.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/file-chart.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-check.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-clock.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/file-code.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-download.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/file-image.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-lock.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-minus.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-plus.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-search.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-spreadsheet.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/file-text.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-upload.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/file-video.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/file-x.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/file.html</loc>
@@ -862,7 +925,19 @@
     <loc>https://kwy404.github.io/glyphfox/icons/flower.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/folder-check.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/folder-lock.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/folder-open.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/folder-plus.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/folder-search.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/folder.html</loc>
@@ -881,6 +956,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/fox.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/franc.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/fridge.html</loc>
@@ -1180,6 +1258,9 @@
     <loc>https://kwy404.github.io/glyphfox/icons/link.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/lira.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/list-checks.html</loc>
   </url>
   <url>
@@ -1256,6 +1337,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/meh.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/memory.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/menu.html</loc>
@@ -1343,6 +1427,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/music.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/naira.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/navigation.html</loc>
@@ -1459,6 +1546,9 @@
     <loc>https://kwy404.github.io/glyphfox/icons/person-standing.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/peso.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/phone-call.html</loc>
   </url>
   <url>
@@ -1552,6 +1642,9 @@
     <loc>https://kwy404.github.io/glyphfox/icons/progress-bar.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/projector.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/puzzle.html</loc>
   </url>
   <url>
@@ -1588,6 +1681,9 @@
     <loc>https://kwy404.github.io/glyphfox/icons/ramen.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/real.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/receipt.html</loc>
   </url>
   <url>
@@ -1607,6 +1703,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/registered.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/remote-control.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/repeat.html</loc>
@@ -1642,6 +1741,9 @@
     <loc>https://kwy404.github.io/glyphfox/icons/route.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/router.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/rows.html</loc>
   </url>
   <url>
@@ -1651,10 +1753,16 @@
     <loc>https://kwy404.github.io/glyphfox/icons/rubber-duck.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/ruble.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/ruler.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/running-shoe.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/rupee.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/safe.html</loc>
@@ -1690,6 +1798,9 @@
     <loc>https://kwy404.github.io/glyphfox/icons/screwdriver.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/sd-card.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/search-scan.html</loc>
   </url>
   <url>
@@ -1718,6 +1829,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/share.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/shekel.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/shield-alert.html</loc>
@@ -2158,6 +2272,12 @@
     <loc>https://kwy404.github.io/glyphfox/icons/typing-dots.html</loc>
   </url>
   <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/u-turn-left.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/u-turn-right.html</loc>
+  </url>
+  <url>
     <loc>https://kwy404.github.io/glyphfox/icons/ufo.html</loc>
   </url>
   <url>
@@ -2180,6 +2300,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/upload.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/usb-drive.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/user-circle.html</loc>
@@ -2279,6 +2402,9 @@
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/wink.html</loc>
+  </url>
+  <url>
+    <loc>https://kwy404.github.io/glyphfox/icons/won.html</loc>
   </url>
   <url>
     <loc>https://kwy404.github.io/glyphfox/icons/workflow.html</loc>

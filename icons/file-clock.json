@@ -1,0 +1,23 @@
+{
+  "categories": [
+    "files"
+  ],
+  "tags": [
+    "recent",
+    "history",
+    "pending",
+    "document",
+    "scheduled"
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 14.5],
+    "frames": [
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(360deg)" } }
+    ]
+  }
+}

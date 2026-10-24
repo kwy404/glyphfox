@@ -6,7 +6,7 @@ Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segu
 
 ### Adicionado
 
-- 164 novos ícones base para formatação de texto, gráficos, matemática, saúde, acessibilidade, rostos e gestos, educação, ciência, transporte, edifícios e lugares, casa, ferramentas, roupas e clima, cada um com categorias, tags e uma animação própria: o conjunto agora tem 728 ícones base, 43 animados, 38 de destaque e 11 isométricos.
+- 206 novos ícones base para formatação de texto, gráficos, matemática, saúde, acessibilidade, rostos e gestos, educação, ciência, transporte, edifícios e lugares, casa, ferramentas, roupas, clima, moedas, arquivos e dispositivos e setas, cada um com categorias, tags e uma animação própria: o conjunto agora tem 770 ícones base, 43 animados, 38 de destaque e 11 isométricos.
 
 ## [1.0.0] - 2026-10-23
 
