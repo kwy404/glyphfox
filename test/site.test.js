@@ -13,9 +13,9 @@ const read = (f) => readFileSync(f, 'utf8');
 const languages = JSON.parse(read(join(docs, 'i18n', 'languages.json')));
 const strings = Object.fromEntries(languages.map((l) => [l.code, JSON.parse(read(join(docs, 'i18n', `${l.code}.json`)))]));
 const localized = languages.filter((l) => l.dir);
-const PAGES = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html'];
+const PAGES = ['index.html', 'icons.html', 'universe.html', 'studio.html', 'docs.html', 'changelog.html', 'labs.html'];
 // Pages that are written in English only for now.
-const ENGLISH_ONLY = ['native.html', 'smart.html', 'universe.html'];
+const ENGLISH_ONLY = ['native.html', 'smart.html'];
 const htmlIn = (dir) => (existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.html')).map((f) => join(dir, f)) : []);
 const pages = [
   ...htmlIn(docs),

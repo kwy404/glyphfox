@@ -144,7 +144,7 @@ export async function checkI18n(root) {
       }
     }
   }
-  for (const file of scriptFiles(join(docs, 'assets'), legacy)) {
+  for (const file of [...scriptFiles(join(docs, 'assets'), legacy), ...scriptFiles(join(docs, 'universe'), legacy)]) {
     const rel = file.slice(root.length + 1).split('\\').join('/');
     const src = readFileSync(file, 'utf8');
     for (const m of src.matchAll(/\bt\(\s*(['"])([^'"]+)\1/g)) if (en[m[2]] === undefined) problems.push(`${rel}: unknown key ${m[2]}`);

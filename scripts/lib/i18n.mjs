@@ -187,7 +187,8 @@ export function runtimeKeys(root, en) {
       }
     }
   };
-  if (existsSync(dir)) walk(dir);
+  // Page scripts: docs/assets/js and the universe page (docs/universe).
+  for (const d of [dir, join(root, 'docs', 'universe')]) if (existsSync(d)) walk(d);
   return all.filter((k) => keys.has(k));
 }
 
