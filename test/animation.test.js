@@ -71,8 +71,9 @@ describe('timelines', () => {
       const svg = toSvg(name, { animation: true });
       expect(svg, name).toMatch(/@keyframes gf-t/);
     }
-    const still = iconNames.find((n) => !getIcon(n).animation);
-    expect(toSvg(still, { animation: true })).not.toContain('<style');
+    // Every icon of the set has its own animation: an icon without one stays still.
+    const still = { ...getIcon('heart'), animation: undefined };
+    expect(renderToString(still, { animation: true })).not.toContain('<style');
     expect(toSvg('heart', { animation: BEAT, animate: 'spin' })).not.toContain('gf-spin');
     expect(toSvg('heart', { animation: BEAT, disabled: true })).not.toContain('<style');
   });

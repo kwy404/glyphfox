@@ -9,5 +9,22 @@
     "room",
     "open",
     "leave"
-  ]
+  ],
+  "animation": {
+    "name": "open",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [5, 12],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "scale(0.6, 1)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "scale(0.6, 1)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "translate(-4px, 0px)" } },
+      { "at": 0.6, "element": 2, "props": { "transform": "translate(-4px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

@@ -7,5 +7,19 @@
     "apparel",
     "tshirt",
     "fashion"
-  ]
+  ],
+  "animation": {
+    "name": "swing",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 3],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.2, "element": "all", "props": { "transform": "rotate(6deg)" } },
+      { "at": 0.45, "element": "all", "props": { "transform": "rotate(-4deg)" } },
+      { "at": 0.7, "element": "all", "props": { "transform": "rotate(2deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

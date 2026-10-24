@@ -6,5 +6,15 @@
     "oval",
     "shape",
     "round"
-  ]
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(180deg)" } }
+    ]
+  }
 }

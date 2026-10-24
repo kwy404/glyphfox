@@ -7,5 +7,22 @@
     "shape",
     "egypt",
     "triangle"
-  ]
+  ],
+  "animation": {
+    "name": "turn",
+    "duration": 1200,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 2],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "d": "M12 2L2 18l10 4 10-4Z" } },
+      { "at": 0.3, "element": 0, "props": { "d": "M12 2L2 18l7 4 13-4Z" } },
+      { "at": 0.7, "element": 0, "props": { "d": "M12 2L2 18l13 4 7-4Z" } },
+      { "at": 1, "element": 0, "props": { "d": "M12 2L2 18l10 4 10-4Z" } },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg) scale(1)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "rotate(8.53deg) scale(1.011)" } },
+      { "at": 0.7, "element": 1, "props": { "transform": "rotate(-8.53deg) scale(1.011)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg) scale(1)" } }
+    ]
+  }
 }

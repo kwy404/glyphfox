@@ -7,5 +7,16 @@
     "ball",
     "globe",
     "orb"
-  ]
+  ],
+  "animation": {
+    "name": "tilt",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "scale(1, -1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

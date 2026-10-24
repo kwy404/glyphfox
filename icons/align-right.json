@@ -7,5 +7,23 @@
     "paragraph",
     "alignment",
     "right"
-  ]
+  ],
+  "animation": {
+    "name": "slide",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.34, "element": 1, "props": { "transform": "translate(-3px, 0px)" } },
+      { "at": 0.638, "element": 1, "props": { "transform": "translate(0.3px, 0px)" } },
+      { "at": 0.85, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.15, "element": 3, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.49, "element": 3, "props": { "transform": "translate(-3px, 0px)" } },
+      { "at": 0.788, "element": 3, "props": { "transform": "translate(0.3px, 0px)" } },
+      { "at": 1, "element": 3, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

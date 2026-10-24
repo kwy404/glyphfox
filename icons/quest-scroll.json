@@ -8,5 +8,43 @@
     "quest",
     "map",
     "letter"
-  ]
+  ],
+  "animation": {
+    "name": "open",
+    "duration": 1100,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "translate(4.5px, 0px)" } },
+      { "at": 0.5, "element": 0, "props": { "transform": "translate(4.5px, 0px)" } },
+      { "at": 0.9, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(-4.5px, 0px)" } },
+      { "at": 0.5, "element": 1, "props": { "transform": "translate(-4.5px, 0px)" } },
+      { "at": 0.9, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "scale(0.31, 1)" } },
+      { "at": 0.5, "element": 2, "props": { "transform": "scale(0.31, 1)" } },
+      { "at": 0.9, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.35, "element": 3, "props": { "transform": "scale(0.31, 1)" } },
+      { "at": 0.5, "element": 3, "props": { "transform": "scale(0.31, 1)" } },
+      { "at": 0.9, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0.25, "element": 4, "props": { "opacity": 0 } },
+      { "at": 0.6, "element": 4, "props": { "opacity": 0 } },
+      { "at": 0.85, "element": 4, "props": { "opacity": 1 } },
+      { "at": 1, "element": 4, "props": { "opacity": 1 } },
+      { "at": 0, "element": 5, "props": { "opacity": 1 } },
+      { "at": 0.25, "element": 5, "props": { "opacity": 0 } },
+      { "at": 0.6, "element": 5, "props": { "opacity": 0 } },
+      { "at": 0.85, "element": 5, "props": { "opacity": 1 } },
+      { "at": 1, "element": 5, "props": { "opacity": 1 } }
+    ]
+  }
 }

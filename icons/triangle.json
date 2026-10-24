@@ -7,5 +7,20 @@
     "delta",
     "warning",
     "pyramid"
-  ]
+  ],
+  "animation": {
+    "name": "wobble",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 21],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": "all", "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.35, "element": "all", "props": { "transform": "rotate(4.02deg)" } },
+      { "at": 0.55, "element": "all", "props": { "transform": "rotate(-2.52deg)" } },
+      { "at": 0.75, "element": "all", "props": { "transform": "rotate(1.02deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

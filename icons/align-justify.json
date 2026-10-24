@@ -7,5 +7,35 @@
     "paragraph",
     "alignment",
     "justify"
-  ]
+  ],
+  "animation": {
+    "name": "stretch",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.304, "element": 0, "props": { "transform": "scale(0.7, 1)" } },
+      { "at": 0.57, "element": 0, "props": { "transform": "scale(1.03, 1)" } },
+      { "at": 0.76, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 0, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.08, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.384, "element": 1, "props": { "transform": "scale(0.7, 1)" } },
+      { "at": 0.65, "element": 1, "props": { "transform": "scale(1.03, 1)" } },
+      { "at": 0.84, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.16, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.464, "element": 2, "props": { "transform": "scale(0.7, 1)" } },
+      { "at": 0.73, "element": 2, "props": { "transform": "scale(1.03, 1)" } },
+      { "at": 0.92, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 1, "element": 2, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.24, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.544, "element": 3, "props": { "transform": "scale(0.7, 1)" } },
+      { "at": 0.81, "element": 3, "props": { "transform": "scale(1.03, 1)" } },
+      { "at": 1, "element": 3, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }
