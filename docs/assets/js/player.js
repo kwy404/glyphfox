@@ -702,7 +702,10 @@ function setup(root) {
   paintFs();
   layout();
   paintBuffered();
-  if (playing()) run();
+  if (playing()) {
+    run();
+    wake();
+  }
   root.dataset.player = 'ready';
   return () => {
     ui.remove();
