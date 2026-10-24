@@ -4,7 +4,7 @@
 import { codeBlock } from './guides.mjs';
 import { breadcrumbs, esc, escAttr, pageUrl } from './site.mjs';
 
-export const CATEGORY_ORDER = ['arrows', 'interface', 'navigation', 'files', 'communication', 'media', 'devices', 'development', 'data', 'commerce', 'finance', 'weather', 'nature', 'maps', 'people', 'security', 'text', 'shapes', 'symbols', 'animals', 'gaming', 'space', 'music', 'food', 'sports', 'travel'];
+export const CATEGORY_ORDER = ['arrows', 'interface', 'navigation', 'files', 'communication', 'media', 'devices', 'development', 'data', 'commerce', 'finance', 'weather', 'nature', 'maps', 'people', 'security', 'text', 'shapes', 'symbols', 'animals', 'gaming', 'space', 'music', 'food', 'sports', 'travel', 'social'];
 const FORMATS = ['jsx', 'vue', 'svelte', 'angular', 'html', 'cdn', 'tailwind', 'svg', 'datauri', 'sprite', 'runtime', 'js'];
 const MODIFIERS = ['check', 'plus', 'x', 'alert'];
 const USE_GUIDES = ['react', 'vue', 'svelte', 'angular', 'web-components', 'html-cdn', 'tailwind', 'svg-sprite'];

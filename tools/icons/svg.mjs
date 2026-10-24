@@ -33,6 +33,7 @@ export const CATEGORIES = [
   'food',
   'sports',
   'travel',
+  'social',
 ];
 
 // Icon collections: the base set lives in icons/, the signature collections
