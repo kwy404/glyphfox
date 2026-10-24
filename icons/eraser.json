@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "text",
+    "interface"
+  ],
+  "tags": [
+    "erase",
+    "rubber",
+    "remove",
+    "clear",
+    "delete"
+  ],
+  "animation": {
+    "name": "shake",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.12, "element": "all", "props": { "transform": "translate(-1px, 0px)" } },
+      { "at": 0.27, "element": "all", "props": { "transform": "translate(1px, 0px)" } },
+      { "at": 0.42, "element": "all", "props": { "transform": "translate(-0.7px, 0px)" } },
+      { "at": 0.57, "element": "all", "props": { "transform": "translate(0.5px, 0px)" } },
+      { "at": 0.72, "element": "all", "props": { "transform": "translate(-0.25px, 0px)" } },
+      { "at": 0.86, "element": "all", "props": { "transform": "translate(0.1px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
+}

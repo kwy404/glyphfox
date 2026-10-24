@@ -2,6 +2,12 @@
 
 All notable changes to glyphfox are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- 41 new base icons for text formatting, charts and math, each with categories, tags and a designed animation: the set now has 605 base icons, 43 animated, 38 display and 11 isometric icons.
+
 ## [1.0.0] - 2026-10-23
 
 ### Added
