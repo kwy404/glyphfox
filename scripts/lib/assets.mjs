@@ -11,9 +11,9 @@ import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/scenes.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css', 'assets/smart.css', 'assets/labs.css', 'assets/js/labs/labs.css'];
+export const CSS = ['assets/site.css', 'assets/landing.css', 'assets/scenes.css', 'assets/icons.css', 'assets/studio.css', 'assets/docs.css', 'assets/smart.css', 'assets/labs.css', 'assets/js/labs/labs.css', 'assets/player.css'];
 // Page scripts: bundle name and its source in docs/assets/js/.
-export const ENTRIES = { landing: 'landing.js', scenes: 'scenes/index.js', browser: 'browser.js', studio: 'studio.js', docs: 'docs.js', app: 'app.js', smart: 'smart.js', labs: 'labs/main.js' };
+export const ENTRIES = { landing: 'landing.js', scenes: 'scenes/index.js', browser: 'browser.js', studio: 'studio.js', docs: 'docs.js', app: 'app.js', smart: 'smart.js', labs: 'labs/main.js', player: 'player.js' };
 export const PAGES = ['index.html', 'icons.html', 'studio.html', 'docs.html', 'changelog.html'];
 const HASH_CSS = /\.[0-9a-f]{8}\.css$/;
 
