@@ -1,0 +1,71 @@
+name: Icon request
+description: Ask for a new icon in the glyphfox set.
+title: "Icon: "
+labels: ["icon request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for asking. Before you open this, search the studio (https://kwy404.github.io/glyphfox/icons.html) with a few synonyms, and the other sets on the same page: one of the 414,952 open license icons may already fit.
+  - type: input
+    id: name
+    attributes:
+      label: Icon name
+      description: A short kebab-case name, like `paper-plane` or `battery-low`.
+    validations:
+      required: true
+  - type: textarea
+    id: meaning
+    attributes:
+      label: What should it show?
+      description: Describe the idea and where you would use it (a button, a menu, a status, a page).
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - arrows
+        - interface
+        - navigation
+        - files
+        - communication
+        - media
+        - devices
+        - development
+        - data
+        - commerce
+        - finance
+        - weather
+        - nature
+        - maps
+        - people
+        - security
+        - text
+        - shapes
+        - symbols
+        - animals
+        - gaming
+        - space
+        - music
+        - food
+        - sports
+        - travel
+        - social
+        - not sure
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: Search words
+      description: Words people would type to find it, separated by commas.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the glyphfox set and the other sets in the studio.
+          required: true
+        - label: For a brand icon, the brand allows its logo to be shown in icon sets.

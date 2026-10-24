@@ -1,0 +1,48 @@
+name: Bug report
+description: Something in a package, the CLI or the site does not work as documented.
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options:
+        - glyphfox core or icons
+        - React
+        - Vue
+        - Svelte
+        - Angular (glyphfox-angular)
+        - Solid, Preact, Qwik, Lit, Astro or Ember
+        - React Native
+        - Web component or CDN
+        - Tailwind CSS
+        - CLI or native exports
+        - glyphfox-universe
+        - The site or the studio
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The output of `npm ls glyphfox`, or the date you used the site.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The smallest code or the clicks that show the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected and what happened
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: Browser or Node version, framework version and operating system.

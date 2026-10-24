@@ -1,6 +1,10 @@
 # glyphfox
 
+<p align="center"><a href="https://kwy404.github.io/glyphfox/"><img src="https://cdn.jsdelivr.net/gh/kwy404/glyphfox@main/assets/banner-dark.png" alt="glyphfox: icons that move, morph and fuse" width="880"></a></p>
+
 Original icons on a 24 grid that change weight, morph, fuse, take modifier badges and come alive, with the same props in React, Vue, Svelte, Angular, the `<glyph-fox>` web component, Tailwind CSS, the CDN and the CLI.
+
+<p align="center"><a href="https://kwy404.github.io/glyphfox/#film"><img src="https://cdn.jsdelivr.net/gh/kwy404/glyphfox@main/docs/assets/film/glyphfox-1.0-poster.webp" alt="Watch the glyphfox 1.0 film (2:32)" width="880"></a><br><sub><a href="https://kwy404.github.io/glyphfox/#film">Watch the 1.0 film, 2:32</a></sub></p>
 
 This page is the API reference of the `glyphfox` package. Guides, examples and the studio live at [kwy404.github.io/glyphfox](https://kwy404.github.io/glyphfox/) and in the [repository README](https://github.com/kwy404/glyphfox#readme).
 
