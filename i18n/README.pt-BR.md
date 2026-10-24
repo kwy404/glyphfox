@@ -36,6 +36,7 @@
 - [Glyph script](#glyph-script)
 - [Scan e exportações](#scan-e-exportações)
 - [O estúdio](#o-estúdio)
+- [Ícones sociais](#ícones-sociais)
 - [Regras dos ícones](#regras-dos-ícones)
 
 ## Instalação
@@ -626,6 +627,28 @@ Todo alvo aceita nomes, `--from list.txt` ou `--all`, além de `--size`, `--weig
 - renderize qualquer ícone, fusão ou modificador em **3D**: os traços viram sólidos biselados em argila fosca, plástico brilhante, metal escovado, vidro ou neon, sob cinco configurações de iluminação, com controles de órbita e uma base giratória, exportados como PNG em 1x, 2x ou 4x (transparente, se preferir) ou incorporados em qualquer página com `<glyphfox-3d>`.
 - no **Labs**, escreva ícones em glyph script com pré-visualização ao vivo e exporte um favicon animado, um cursor CSS, SVG e G-code para plotter ou um STL.
 - leia o site inteiro em English, Português (Brasil), Español, Français ou Deutsch, escolhido pelo idioma do navegador na primeira visita ([como o site é traduzido](../docs/I18N.md)).
+
+## Ícones sociais
+
+A categoria `social` reúne ícones de marca das redes e serviços que as pessoas mais colocam em links. Cada um se chama `brand-NAME`, é desenhado do zero como um contorno do logo no mesmo grid de 24 e com o mesmo traço do resto do conjunto, tem como tags o nome da rede, os nomes antigos, `social`, `logo` e `brand`, e ganha uma animação pop ou draw.
+
+```jsx
+import { BrandInstagramIcon } from 'glyphfox/react';
+
+export function Follow() {
+  return (
+    <a href="https://www.instagram.com/seunome" aria-label="Instagram">
+      <BrandInstagramIcon size={20} />
+    </a>
+  );
+}
+```
+
+Os mesmos nomes funcionam em todo lugar: `<glyph-fox name="brand-instagram">`, `toSvg('brand-instagram')`, a classe Tailwind `gf-brand-instagram` e `npx glyphfox copy brand-instagram`.
+
+Redes, todas com o prefixo `brand-`: airbnb, amazon, apple, apple-music, apple-podcasts, bandcamp, behance, bereal, bilibili, bitbucket, blogger, bluesky, clubhouse, codepen, dailymotion, deezer, dev-to, deviantart, discord, dribbble, facebook, figma, flickr, github, gitlab, goodreads, google, google-meet, hacker-news, hashnode, imdb, instagram, kakaotalk, kick, ko-fi, kwai, lemon8, letterboxd, line, linkedin, mastodon, medium, meetup, messenger, microsoft, microsoft-teams, netflix, nextdoor, notion, patreon, pinterest, product-hunt, qq, quora, reddit, roblox, rumble, signal, skype, slack, snapchat, soundcloud, spotify, stack-overflow, steam, strava, substack, telegram, threads, tidal, tiktok, tinder, trello, tripadvisor, tumblr, twitch, twitter, viber, vimeo, vk, vsco, wechat, weibo, whatsapp, wordpress, x, xing, yelp, youtube, zoom.
+
+Os ícones de marca são marcas registradas dos seus donos e devem ser usados de acordo com as diretrizes de cada marca.
 
 ## Regras dos ícones
 

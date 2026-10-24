@@ -93,6 +93,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
     <a href="#cli">CLI</a>
     <a href="native.html" data-i18n="docs.native">Android, iOS, Flutter</a>
     <a href="#rules" data-i18n="docs.rules">Icon rules</a>
+    <a href="#social" data-i18n="docs.social">Social icons</a>
     <a href="smart.html" data-i18n="docs.smart">Smart icons</a>
   </nav>
 
@@ -338,6 +339,17 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
     <section id="rules">
       <h2 data-i18n="docs.rules">Icon rules</h2>
       <p data-i18n="docs.rules.p">Original drawings only, on a 24 by 24 grid: viewBox 0 0 24 24, no fill, stroke currentColor, stroke width 2, round caps and joins, 2 px padding, no transforms, and no fills except one optional duotone layer with the class gf-secondary. Sources live in icons/NAME.svg with a NAME.json sidecar for categories and tags, and tools/icons/lint.mjs checks them.</p>
+    </section>
+
+    <section id="social">
+      <h2 data-i18n="docs.social">Social icons</h2>
+      <p data-i18n="docs.social.p">The <code>social</code> category holds brand icons for the networks people link to most, from Instagram, WhatsApp, Facebook, X, TikTok and YouTube to GitHub, Discord, Spotify and Steam. Each one is named <code>brand-NAME</code>, drawn as an outline of the logo on the same grid and stroke as the rest of the set, and tagged with the network name, its old names, social, logo and brand.</p>
+      <div class="code"><div class="code-head"><span translate="no">App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { BrandInstagramIcon } from 'glyphfox/react';
+
+&lt;a href="https://www.instagram.com/yourname" aria-label="Instagram"&gt;
+  &lt;BrandInstagramIcon size={20} /&gt;
+&lt;/a&gt;</pre></div>
+      <p data-i18n="docs.social.tm">Brand icons are trademarks of their owners and must be used under each brand's guidelines.</p>
     </section>
   </main>
 </div>

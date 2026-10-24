@@ -93,6 +93,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
     <a href="#cli">CLI</a>
     <a href="../native.html" data-i18n="docs.native">Android, iOS, Flutter</a>
     <a href="#rules" data-i18n="docs.rules">Regras dos ícones</a>
+    <a href="#social" data-i18n="docs.social">Ícones sociais</a>
     <a href="../smart.html" data-i18n="docs.smart">Ícones inteligentes</a>
   </nav>
 
@@ -338,6 +339,17 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
     <section id="rules">
       <h2 data-i18n="docs.rules">Regras dos ícones</h2>
       <p data-i18n="docs.rules.p">Só desenhos originais, numa grade de 24 por 24: viewBox 0 0 24 24, sem preenchimento, stroke currentColor, traço 2, pontas e junções redondas, 2 px de margem, sem transformações e sem preenchimentos além de uma camada duotone opcional com a classe gf-secondary. Os arquivos ficam em icons/NAME.svg com um NAME.json para categorias e tags, e o tools/icons/lint.mjs verifica tudo.</p>
+    </section>
+
+    <section id="social">
+      <h2 data-i18n="docs.social">Ícones sociais</h2>
+      <p data-i18n="docs.social.p">A categoria <code>social</code> reúne ícones de marca das redes que as pessoas mais colocam em links, do Instagram, WhatsApp, Facebook, X, TikTok e YouTube ao GitHub, Discord, Spotify e Steam. Cada um se chama <code>brand-NAME</code>, é desenhado como um contorno do logo no mesmo grid e com o mesmo traço do resto do conjunto e tem como tags o nome da rede, os nomes antigos, social, logo e brand.</p>
+      <div class="code"><div class="code-head"><span translate="no">App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { BrandInstagramIcon } from 'glyphfox/react';
+
+&lt;a href="https://www.instagram.com/yourname" aria-label="Instagram"&gt;
+  &lt;BrandInstagramIcon size={20} /&gt;
+&lt;/a&gt;</pre></div>
+      <p data-i18n="docs.social.tm">Os ícones de marca são marcas registradas dos seus donos e devem ser usados de acordo com as diretrizes de cada marca.</p>
     </section>
   </main>
 </div>

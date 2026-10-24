@@ -93,6 +93,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
     <a href="#cli">CLI</a>
     <a href="../native.html" data-i18n="docs.native">Android, iOS, Flutter</a>
     <a href="#rules" data-i18n="docs.rules">Icon-Regeln</a>
+    <a href="#social" data-i18n="docs.social">Social-Media-Icons</a>
     <a href="../smart.html" data-i18n="docs.smart">Intelligente Icons</a>
   </nav>
 
@@ -338,6 +339,17 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
     <section id="rules">
       <h2 data-i18n="docs.rules">Icon-Regeln</h2>
       <p data-i18n="docs.rules.p">Nur eigene Zeichnungen, auf einem Raster von 24 mal 24: viewBox 0 0 24 24, keine Füllung, stroke currentColor, Strichstärke 2, runde Linienenden und Verbindungen, 2 px Innenabstand, keine Transformationen und keine Füllungen außer einer optionalen Duotone-Ebene mit der Klasse gf-secondary. Die Quellen liegen in icons/NAME.svg mit einer zugehörigen NAME.json für Kategorien und Tags, und tools/icons/lint.mjs prüft sie.</p>
+    </section>
+
+    <section id="social">
+      <h2 data-i18n="docs.social">Social-Media-Icons</h2>
+      <p data-i18n="docs.social.p">Die Kategorie <code>social</code> enthält Markenicons der Netzwerke, auf die am häufigsten verlinkt wird, von Instagram, WhatsApp, Facebook, X, TikTok und YouTube bis GitHub, Discord, Spotify und Steam. Jedes heißt <code>brand-NAME</code>, ist als Umriss des Logos auf demselben Raster und mit derselben Linie wie der Rest des Sets gezeichnet und trägt als Tags den Namen des Netzwerks, seine früheren Namen, social, logo und brand.</p>
+      <div class="code"><div class="code-head"><span translate="no">App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js">import { BrandInstagramIcon } from 'glyphfox/react';
+
+&lt;a href="https://www.instagram.com/yourname" aria-label="Instagram"&gt;
+  &lt;BrandInstagramIcon size={20} /&gt;
+&lt;/a&gt;</pre></div>
+      <p data-i18n="docs.social.tm">Markenicons sind Marken ihrer Inhaber und dürfen nur nach den Richtlinien der jeweiligen Marke verwendet werden.</p>
     </section>
   </main>
 </div>
