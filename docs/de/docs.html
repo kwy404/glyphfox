@@ -38,8 +38,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="og:locale:alternate" content="fr_FR">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
-<link rel="modulepreload" href="../assets/js/bundle/docs.XQJ3O5TU.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.KXTQTQD4.js">
+<link rel="modulepreload" href="../assets/js/bundle/docs.6ZT3UXUV.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.KTVOXOHL.js">
 <!-- seo:start -->
 <meta property="og:description" content="Installiere glyphfox und nutze es mit React, Vue, Svelte, Angular, der Web Component, dem CDN, Tailwind CSS, reinem HTML und der CLI. Alle Props, die Namenssyntax, Morphing, Fusion, lebendige Zustände und Modifikatoren.">
 <!-- seo:end -->
@@ -336,6 +336,19 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
       <p data-i18n="docs.cli.p">copy gibt das Snippet aus und legt es in die Zwischenablage (Formate: svg, jsx, vue, svelte, angular, html, tailwind, cdn, datauri). build erzeugt aus einer Liste ein Sprite, eine CSS-Datei mit Maskenklassen oder ein kleines Paket. Jeder Befehl akzeptiert die gemeinsamen Props als Flags, etwa --weight 1.5 --corners sharp.</p>
     </section>
 
+    <section id="collections">
+      <h2 data-i18n="docs.collections">Kollektionen</h2>
+      <p data-i18n="docs.collections.p">Zwei eigene Kollektionen liegen neben dem Grundset im Paket: <code>display</code>, 60 Icons auf einem 48er Raster für leere Zustände, Onboarding und große Kacheln, und <code>isometric</code>, 30 Icons in isometrischer Projektion auf dem 24er Raster. Schreibe ihre Namen als <code>display/NAME</code> und <code>isometric/NAME</code> in toSvg, der Web Component, dem CDN Build und der Icon Komponente. Ihre Daten kommen aus <code>glyphfox/collections</code>, die Komponenten für React, Vue und Svelte aus <code>glyphfox/react/collections</code>, <code>glyphfox/vue/collections</code> und <code>glyphfox/svelte/collections</code>, damit die Standard Einstiege so klein bleiben wie bisher.</p>
+      <div class="code"><div class="code-head"><span translate="no">collections.js</span><button class="copy" type="button" data-i18n="action.copy">Kopieren</button></div><pre data-lang="js">import { toSvg } from 'glyphfox';
+import { DisplayCalendarClockIcon } from 'glyphfox/react/collections';
+
+toSvg('display/calendar-clock', { size: 96, weight: 3 });
+toSvg('isometric/cube', { variant: 'solid' });
+
+&lt;glyph-fox name="display/rocket-launch" size="64"&gt;&lt;/glyph-fox&gt;</pre></div>
+      <p data-i18n="docs.collections.limits">Größe, Farbe, Strichstärke, Drehung, Spiegelungen und die fertigen Animationen funktionieren bei beiden. Display Icons sind standardmäßig 48 px groß und messen die Strichstärke in Einheiten ihres 48er Rasters, Stärke 2 behält also den gezeichneten Strich. Die Stile solid und duotone, Modifikatoren, Fusion und Morphs sind für das 24er Raster gemacht: Display Icons bleiben Outline, und eine Fusion oder ein Modifikator mit einem davon ist ein Fehler. Isometrische Icons unterstützen alle Funktionen des Grundsets.</p>
+    </section>
+
     <section id="rules">
       <h2 data-i18n="docs.rules">Icon-Regeln</h2>
       <p data-i18n="docs.rules.p">Nur eigene Zeichnungen, auf einem Raster von 24 mal 24: viewBox 0 0 24 24, keine Füllung, stroke currentColor, Strichstärke 2, runde Linienenden und Verbindungen, 2 px Innenabstand, keine Transformationen und keine Füllungen außer einer optionalen Duotone-Ebene mit der Klasse gf-secondary. Die Quellen liegen in icons/NAME.svg mit einer zugehörigen NAME.json für Kategorien und Tags, und tools/icons/lint.mjs prüft sie.</p>
@@ -404,6 +417,6 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/docs.XQJ3O5TU.js"></script>
+<script type="module" src="../assets/js/bundle/docs.6ZT3UXUV.js"></script>
 </body>
 </html>

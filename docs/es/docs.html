@@ -38,8 +38,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="de_DE">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
-<link rel="modulepreload" href="../assets/js/bundle/docs.XQJ3O5TU.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.KXTQTQD4.js">
+<link rel="modulepreload" href="../assets/js/bundle/docs.6ZT3UXUV.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.KTVOXOHL.js">
 <!-- seo:start -->
 <meta property="og:description" content="Instala glyphfox y úsalo con React, Vue, Svelte, Angular, el componente web, la CDN, Tailwind CSS, HTML puro y la CLI. Todas las props, la sintaxis de nombres, morph, fusión, estados vivos y modificadores.">
 <!-- seo:end -->
@@ -336,6 +336,19 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
       <p data-i18n="docs.cli.p">copy imprime el fragmento y lo deja en el portapapeles (formatos: svg, jsx, vue, svelte, angular, html, tailwind, cdn, datauri). build genera un sprite, un archivo CSS con clases de máscara o un paquete pequeño a partir de una lista. Todos los comandos aceptan las props compartidas como opciones, por ejemplo --weight 1.5 --corners sharp.</p>
     </section>
 
+    <section id="collections">
+      <h2 data-i18n="docs.collections">Colecciones</h2>
+      <p data-i18n="docs.collections.p">Dos colecciones propias vienen en el paquete junto al conjunto base: <code>display</code>, 60 iconos dibujados en una cuadrícula de 48 para estados vacíos, onboarding y bloques grandes, e <code>isometric</code>, 30 iconos en proyección isométrica sobre la cuadrícula de 24. Escribe sus nombres como <code>display/NAME</code> e <code>isometric/NAME</code> en toSvg, el web component, el build de la CDN y el componente Icon. Sus datos vienen de <code>glyphfox/collections</code>, y los componentes de React, Vue y Svelte de <code>glyphfox/react/collections</code>, <code>glyphfox/vue/collections</code> y <code>glyphfox/svelte/collections</code>, así que las entradas por defecto siguen igual de pequeñas.</p>
+      <div class="code"><div class="code-head"><span translate="no">collections.js</span><button class="copy" type="button" data-i18n="action.copy">Copiar</button></div><pre data-lang="js">import { toSvg } from 'glyphfox';
+import { DisplayCalendarClockIcon } from 'glyphfox/react/collections';
+
+toSvg('display/calendar-clock', { size: 96, weight: 3 });
+toSvg('isometric/cube', { variant: 'solid' });
+
+&lt;glyph-fox name="display/rocket-launch" size="64"&gt;&lt;/glyph-fox&gt;</pre></div>
+      <p data-i18n="docs.collections.limits">El tamaño, el color, el grosor, la rotación, los volteos y las animaciones predefinidas funcionan en ambas. Los iconos display miden 48 px por defecto y miden el grosor en unidades de su cuadrícula de 48, así que el grosor 2 conserva el trazo dibujado. Los estilos solid y duotone, los modificadores, la fusión y los morphs están hechos para la cuadrícula de 24: los iconos display quedan en contorno, y una fusión o un modificador con uno de ellos da un error. Los iconos isométricos admiten todas las funciones del conjunto base.</p>
+    </section>
+
     <section id="rules">
       <h2 data-i18n="docs.rules">Reglas de iconos</h2>
       <p data-i18n="docs.rules.p">Solo dibujos originales, en una cuadrícula de 24 por 24: viewBox 0 0 24 24, sin relleno, stroke currentColor, grosor de trazo 2, remates y uniones redondeados, 2 px de margen, sin transformaciones y sin rellenos salvo una capa duotono opcional con la clase gf-secondary. Los archivos fuente están en icons/NAME.svg, con un NAME.json complementario para categorías y etiquetas, y tools/icons/lint.mjs los revisa.</p>
@@ -404,6 +417,6 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/docs.XQJ3O5TU.js"></script>
+<script type="module" src="../assets/js/bundle/docs.6ZT3UXUV.js"></script>
 </body>
 </html>

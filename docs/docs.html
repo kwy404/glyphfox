@@ -38,8 +38,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="de_DE">
 <link rel="stylesheet" href="assets/docs.4063d59a.css">
-<link rel="modulepreload" href="assets/js/bundle/docs.XQJ3O5TU.js">
-<link rel="modulepreload" href="assets/js/bundle/chunk.KXTQTQD4.js">
+<link rel="modulepreload" href="assets/js/bundle/docs.6ZT3UXUV.js">
+<link rel="modulepreload" href="assets/js/bundle/chunk.KTVOXOHL.js">
 <!-- seo:start -->
 <meta property="og:description" content="Install glyphfox and use it with React, Vue, Svelte, Angular, the web component, the CDN, Tailwind CSS, plain HTML and the CLI. Every prop, the name syntax, morph, fusion, living states and modifiers.">
 <!-- seo:end -->
@@ -336,6 +336,19 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
       <p data-i18n="docs.cli.p">copy prints the snippet and puts it on the clipboard (formats: svg, jsx, vue, svelte, angular, html, tailwind, cdn, datauri). build makes a sprite, a CSS file with mask classes or a small package from a list. Every command takes the shared props as flags, such as --weight 1.5 --corners sharp.</p>
     </section>
 
+    <section id="collections">
+      <h2 data-i18n="docs.collections">Collections</h2>
+      <p data-i18n="docs.collections.p">Two signature collections ship with the package next to the base set: <code>display</code>, 60 icons drawn on a 48 grid for empty states, onboarding and large tiles, and <code>isometric</code>, 30 icons in isometric projection on the 24 grid. Write their names as <code>display/NAME</code> and <code>isometric/NAME</code> in toSvg, the web component, the CDN build and the Icon component. Their data comes from <code>glyphfox/collections</code>, and the React, Vue and Svelte components from <code>glyphfox/react/collections</code>, <code>glyphfox/vue/collections</code> and <code>glyphfox/svelte/collections</code>, so the default entries stay as small as before.</p>
+      <div class="code"><div class="code-head"><span translate="no">collections.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { toSvg } from 'glyphfox';
+import { DisplayCalendarClockIcon } from 'glyphfox/react/collections';
+
+toSvg('display/calendar-clock', { size: 96, weight: 3 });
+toSvg('isometric/cube', { variant: 'solid' });
+
+&lt;glyph-fox name="display/rocket-launch" size="64"&gt;&lt;/glyph-fox&gt;</pre></div>
+      <p data-i18n="docs.collections.limits">Size, color, weight, rotation, flips and the animation presets work on both. Display icons default to 48 px and measure weight in units of their 48 grid, so weight 2 keeps the drawn stroke. The solid and duotone styles, modifier badges, fusion and morphs are cut for the 24 grid: display icons stay outline, and a fusion or a modifier spec with one of them is an error. Isometric icons support every feature of the base set.</p>
+    </section>
+
     <section id="rules">
       <h2 data-i18n="docs.rules">Icon rules</h2>
       <p data-i18n="docs.rules.p">Original drawings only, on a 24 by 24 grid: viewBox 0 0 24 24, no fill, stroke currentColor, stroke width 2, round caps and joins, 2 px padding, no transforms, and no fills except one optional duotone layer with the class gf-secondary. Sources live in icons/NAME.svg with a NAME.json sidecar for categories and tags, and tools/icons/lint.mjs checks them.</p>
@@ -404,6 +417,6 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="assets/js/bundle/docs.XQJ3O5TU.js"></script>
+<script type="module" src="assets/js/bundle/docs.6ZT3UXUV.js"></script>
 </body>
 </html>

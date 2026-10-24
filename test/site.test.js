@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { iconNames } from 'glyphfox';
+import { collectionNames } from '../packages/glyphfox/dist/collections.js';
 import { componentName, dataName } from '../packages/glyphfox/dist/core/formats.js';
 import { checkI18n, hasWords, segments } from '../scripts/lib/i18n-check.mjs';
 import { moveLinks, translate } from '../scripts/lib/i18n.mjs';
@@ -165,7 +166,8 @@ describe('studio site', () => {
 
   it('uses only icon names that exist in the README and the docs', () => {
     const names = new Set(iconNames);
-    const components = new Set(iconNames.map(componentName));
+    // Collection components (glyphfox/react/collections) count as well.
+    const components = new Set([...iconNames, ...collectionNames].map(componentName));
     const data = new Set(iconNames.map(dataName));
     const guides = readdirSync(join(docs, 'frameworks')).map((f) =>
       read(join(docs, 'frameworks', f))

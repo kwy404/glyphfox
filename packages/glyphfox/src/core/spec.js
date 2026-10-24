@@ -3,9 +3,13 @@
 //   name+modifier@corner      a modifier badge (corner: tl, tr, bl, br)
 //   a&b&c:layout              a fusion of 2 to 10 icons
 //   any of the above/variant  a style override (outline, duotone, solid)
+//   collection/name           an icon of a collection (display/calendar-clock)
 
 import { LAYOUTS, fuse, normalizeCorner, withModifier } from './compose.js';
-import { hasIconSource } from './lookup.js';
+import { COLLECTIONS, hasIconSource } from './lookup.js';
+
+// A slash right after a collection id belongs to the name, not to a variant.
+const COLLECTION_END = new RegExp(`(?:^|[&+\\s])(?:${Object.keys(COLLECTIONS).join('|')})$`);
 
 /** Splits a spec string into its parts. */
 export function parseSpec(spec) {
@@ -15,7 +19,7 @@ export function parseSpec(spec) {
   let modifier;
   let layout;
   const slash = s.lastIndexOf('/');
-  if (slash >= 0) {
+  if (slash >= 0 && !COLLECTION_END.test(s.slice(0, slash).trimEnd())) {
     variant = s.slice(slash + 1).trim() || undefined;
     s = s.slice(0, slash);
   }
@@ -75,6 +79,9 @@ export function resolveSpec(spec, lookup, { weight = 2, gap } = {}) {
     if (!ic) throw new Error(`unknown icon "${n}"`);
     return ic;
   });
+  // Fusion and modifier badges are drawn on the 24 grid.
+  const other = (icons.length > 1 || p.modifier) && icons.find((ic) => ic.grid && Number(ic.grid) !== 24);
+  if (other) throw new Error(`"${other.name}" is drawn on the ${other.grid} grid and cannot be fused or take a modifier`);
   let icon = icons.length > 1 ? fuse(icons, { layout: p.layout, weight, gap }) : icons[0];
   if (p.modifier) icon = withModifier(icon, p.modifier, p.corner, { weight, gap });
   const value = { icon, variant: p.variant, parts: p };

@@ -38,8 +38,8 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="og:locale:alternate" content="de_DE">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
-<link rel="modulepreload" href="../assets/js/bundle/docs.XQJ3O5TU.js">
-<link rel="modulepreload" href="../assets/js/bundle/chunk.KXTQTQD4.js">
+<link rel="modulepreload" href="../assets/js/bundle/docs.6ZT3UXUV.js">
+<link rel="modulepreload" href="../assets/js/bundle/chunk.KTVOXOHL.js">
 <!-- seo:start -->
 <meta property="og:description" content="Installez glyphfox et utilisez-le avec React, Vue, Svelte, Angular, le composant web, le CDN, Tailwind CSS, du HTML pur et la CLI. Toutes les props, la syntaxe des noms, le morphing, la fusion, les états animés et les modificateurs.">
 <!-- seo:end -->
@@ -336,6 +336,19 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
       <p data-i18n="docs.cli.p">copy affiche l'extrait et le place dans le presse-papiers (formats : svg, jsx, vue, svelte, angular, html, tailwind, cdn, datauri). build génère un sprite, un fichier CSS avec des classes de masque ou un petit paquet à partir d'une liste. Chaque commande accepte les props partagées sous forme d'options, par exemple --weight 1.5 --corners sharp.</p>
     </section>
 
+    <section id="collections">
+      <h2 data-i18n="docs.collections">Collections</h2>
+      <p data-i18n="docs.collections.p">Deux collections signature sont livrées dans le paquet à côté du jeu de base : <code>display</code>, 60 icônes dessinées sur une grille de 48 pour les états vides, l’onboarding et les grandes tuiles, et <code>isometric</code>, 30 icônes en projection isométrique sur la grille de 24. Écrivez leurs noms <code>display/NAME</code> et <code>isometric/NAME</code> dans toSvg, le web component, le build CDN et le composant Icon. Leurs données viennent de <code>glyphfox/collections</code>, et les composants React, Vue et Svelte de <code>glyphfox/react/collections</code>, <code>glyphfox/vue/collections</code> et <code>glyphfox/svelte/collections</code> : les entrées par défaut restent aussi légères qu’avant.</p>
+      <div class="code"><div class="code-head"><span translate="no">collections.js</span><button class="copy" type="button" data-i18n="action.copy">Copier</button></div><pre data-lang="js">import { toSvg } from 'glyphfox';
+import { DisplayCalendarClockIcon } from 'glyphfox/react/collections';
+
+toSvg('display/calendar-clock', { size: 96, weight: 3 });
+toSvg('isometric/cube', { variant: 'solid' });
+
+&lt;glyph-fox name="display/rocket-launch" size="64"&gt;&lt;/glyph-fox&gt;</pre></div>
+      <p data-i18n="docs.collections.limits">La taille, la couleur, la graisse, la rotation, les retournements et les animations prédéfinies marchent sur les deux. Les icônes display font 48 px par défaut et mesurent la graisse en unités de leur grille de 48, donc la graisse 2 garde le trait dessiné. Les styles solid et duotone, les modificateurs, la fusion et les morphs sont faits pour la grille de 24 : les icônes display restent en contour, et une fusion ou un modificateur avec l’une d’elles est une erreur. Les icônes isométriques prennent en charge toutes les fonctions du jeu de base.</p>
+    </section>
+
     <section id="rules">
       <h2 data-i18n="docs.rules">Règles des icônes</h2>
       <p data-i18n="docs.rules.p">Uniquement des dessins originaux, sur une grille de 24 sur 24 : viewBox 0 0 24 24, aucun remplissage, stroke currentColor, épaisseur de trait 2, extrémités et angles arrondis, marge de 2 px, aucune transformation, et aucun remplissage hormis un calque duotone facultatif avec la classe gf-secondary. Les sources se trouvent dans icons/NAME.svg, avec un fichier annexe NAME.json pour les catégories et les étiquettes, et tools/icons/lint.mjs les vérifie.</p>
@@ -404,6 +417,6 @@ npx glyphfox export android home search --out app/src/main/res</pre></div>
   </div>
 </footer>
 <!-- footer:end -->
-<script type="module" src="../assets/js/bundle/docs.XQJ3O5TU.js"></script>
+<script type="module" src="../assets/js/bundle/docs.6ZT3UXUV.js"></script>
 </body>
 </html>
