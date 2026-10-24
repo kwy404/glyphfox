@@ -16,7 +16,7 @@ Check your icons before you open a pull request:
 
 ```sh
 node tools/icons/lint.mjs
-node tools/icons/sheet.mjs --help
+node tools/icons/sheet.mjs --review --only my-icon --png my-icon.png
 ```
 
 The lint checks the attributes, the padding box, the stroke rules and the animation poses. The sheet renders a review page in light and dark at several sizes.
