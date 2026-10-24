@@ -1,0 +1,23 @@
+{
+  "categories": [
+    "social"
+  ],
+  "tags": [
+    "patreon",
+    "social",
+    "logo",
+    "brand"
+  ],
+  "animation": {
+    "name": "pop",
+    "duration": 600,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "scale(0.96)" } },
+      { "at": 0.6, "element": "all", "props": { "transform": "scale(1.04)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1)" } }
+    ]
+  }
+}
