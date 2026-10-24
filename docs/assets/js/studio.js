@@ -1,7 +1,7 @@
 // Studio router: tabs with hash links (#editor, #foxify, #sketch, #motion,
 // #fusion=cloud&lock, #brand, #3d, #collection) and the collection view.
 
-import { $, $$, download, gf, loadIcons, t, toast } from './app.js';
+import { $, $$, download, gf, loadIcons, siteRoot, t, toast } from './app.js';
 import * as collection from './collection.js';
 import { initEditor, openBody } from './editor.js';
 
@@ -29,7 +29,7 @@ function renderCollection() {
 // Designed animations live in data/animations.json, loaded with the Motion tool.
 async function loadAnimations() {
   try {
-    const root = location.pathname.replace(/(pt-br\/)?[^/]*$/, '');
+    const root = siteRoot();
     const list = await fetch(`${root}data/animations.json`).then((r) => r.json());
     for (const [name, animation] of Object.entries(list)) {
       const icon = gf.lookupIcon(name);

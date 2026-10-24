@@ -40,13 +40,18 @@ export function href(page) {
   return page;
 }
 
+/** The site root from any page, also in a language folder (the build rebases the favicon link). */
+export function siteRoot() {
+  const icon = document.querySelector('link[rel="icon"]');
+  return icon ? new URL('..', icon.href).pathname : location.pathname.replace(/[^/]*$/, '');
+}
+
 let dataPromise = null;
 
 /** Loads docs/data/icons.json once and registers every icon with the engine. */
 export function loadIcons() {
   if (!dataPromise) {
-    // The site root, from any page (the scripts are bundled into assets/js/dist).
-    const root = location.pathname.replace(/(pt-br\/)?[^/]*$/, '');
+    const root = siteRoot();
     dataPromise = fetch(new URL(`${root}data/icons.json`, location.origin))
       .then((r) => r.json())
       .then((d) => {
