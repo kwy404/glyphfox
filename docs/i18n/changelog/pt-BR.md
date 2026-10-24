@@ -2,11 +2,17 @@
 
 Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
-## [Não lançado]
+## [1.1.0] - 2026-10-23
 
 ### Adicionado
 
 - 41 novos ícones base para formatação de texto, gráficos e matemática, cada um com categorias, tags e uma animação própria: o conjunto agora tem 605 ícones base, 43 animados, 38 de destaque e 11 isométricos.
+- A categoria social: 90 ícones de marcas com nomes `brand-*` (Instagram, WhatsApp, Facebook, X, TikTok, YouTube, LinkedIn, Telegram, Discord, GitHub e mais), cada um com tags e animação. Os ícones de marcas são marcas registradas dos seus donos.
+- Universo no menu principal e um item "Outras coleções" na página de Ícones que abre os 414.952 ícones em 245 coleções.
+
+### Corrigido
+
+- O hero da página inicial: os ícones agora desenham o Fenn no tamanho e no lugar do desenho, com a cabeça na cor de destaque.
 
 ## [1.0.0] - 2026-10-23
 
@@ -36,4 +42,5 @@ Todas as mudanças relevantes do glyphfox ficam registradas aqui. O formato segu
 - O kit de marca mostra uma prévia do conjunto todo com a sua marca e exporta um zip com arquivos SVG temáticos, um sprite, variáveis CSS, um conjunto de favicons (ico e PNGs em 16, 32, 180, 192 e 512), ícones de app e um esqueleto de package.json.
 - O site do estúdio em inglês, português (Brasil), espanhol, francês e alemão: páginas estáticas por idioma com tags hreflang, um menu de idiomas no cabeçalho e no rodapé e o idioma do navegador escolhido na primeira visita.
 
+[1.1.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.1.0
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0

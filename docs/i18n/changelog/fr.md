@@ -2,11 +2,17 @@
 
 Tous les changements notables de glyphfox sont consignés ici. Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet applique la [gestion sémantique de version](https://semver.org/lang/fr/).
 
-## [Non publié]
+## [1.1.0] - 2026-10-23
 
 ### Ajouts
 
 - 41 nouvelles icônes de base pour la mise en forme du texte, les graphiques et les mathématiques, chacune avec ses catégories, ses mots clés et une animation conçue pour elle : le jeu compte désormais 605 icônes de base, 43 animées, 38 grand format et 11 isométriques.
+- La catégorie social : 90 icônes de marques nommées `brand-*` (Instagram, WhatsApp, Facebook, X, TikTok, YouTube, LinkedIn, Telegram, Discord, GitHub et plus), chacune avec des tags et une animation. Les icônes de marques sont des marques de leurs propriétaires.
+- Univers dans la navigation principale et une entrée « Autres jeux » sur la page Icônes qui ouvre les 414 952 icônes de 245 jeux.
+
+### Corrections
+
+- Le hero de l'accueil : les icônes dessinent maintenant Fenn à la taille et à la place du dessin, avec la tête dans la couleur d'accent.
 
 ## [1.0.0] - 2026-10-23
 
@@ -36,4 +42,5 @@ Tous les changements notables de glyphfox sont consignés ici. Le format suit [K
 - Le kit de marque prévisualise tout le jeu aux couleurs de la marque et exporte un zip avec des fichiers SVG personnalisés, un sprite, des variables CSS, un jeu de favicons (ico et PNG en 16, 32, 180, 192 et 512), des icônes d'application et un squelette de package.json.
 - Le site du studio en anglais, portugais (Brésil), espagnol, français et allemand : des pages statiques par langue avec les balises hreflang, un menu des langues dans l'en-tête et le pied de page, et la langue du navigateur choisie dès la première visite.
 
+[1.1.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.1.0
 [1.0.0]: https://github.com/kwy404/glyphfox/releases/tag/v1.0.0
