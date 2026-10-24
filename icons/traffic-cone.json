@@ -7,5 +7,32 @@
     "roadwork",
     "caution",
     "warning"
-  ]
+  ],
+  "animation": {
+    "name": "wobble",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 20],
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": 0, "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "rotate(4.02deg)" } },
+      { "at": 0.55, "element": 0, "props": { "transform": "rotate(-2.52deg)" } },
+      { "at": 0.75, "element": 0, "props": { "transform": "rotate(1.02deg)" } },
+      { "at": 1, "element": 0, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": 1, "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "rotate(4.02deg)" } },
+      { "at": 0.55, "element": 1, "props": { "transform": "rotate(-2.52deg)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "rotate(1.02deg)" } },
+      { "at": 1, "element": 1, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0, "element": 2, "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": 2, "props": { "transform": "rotate(-6deg)" } },
+      { "at": 0.35, "element": 2, "props": { "transform": "rotate(4.02deg)" } },
+      { "at": 0.55, "element": 2, "props": { "transform": "rotate(-2.52deg)" } },
+      { "at": 0.75, "element": 2, "props": { "transform": "rotate(1.02deg)" } },
+      { "at": 1, "element": 2, "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }

@@ -8,5 +8,17 @@
     "layout",
     "drawer",
     "inspector"
-  ]
+  ],
+  "animation": {
+    "name": "slide",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(5px, 0px)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "translate(5px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

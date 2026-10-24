@@ -8,5 +8,18 @@
     "keyboard",
     "key",
     "modifier"
-  ]
+  ],
+  "animation": {
+    "name": "press",
+    "duration": 800,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.3, "element": "all", "props": { "transform": "translate(0px, 1px)" } },
+      { "at": 0.55, "element": "all", "props": { "transform": "translate(0px, -0.2px)" } },
+      { "at": 0.75, "element": "all", "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": "all", "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

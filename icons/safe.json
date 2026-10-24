@@ -8,5 +8,22 @@
     "secure",
     "money",
     "storage"
-  ]
+  ],
+  "animation": {
+    "name": "tick",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 11],
+    "frames": [
+      { "at": 0, "element": 1, "props": { "transform": "scale(1)" } },
+      { "at": 0.15, "element": 1, "props": { "transform": "scale(0.85)" } },
+      { "at": 0.3, "element": 1, "props": { "transform": "scale(1)" } },
+      { "at": 0.45, "element": 1, "props": { "transform": "scale(0.85)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "scale(1)" } },
+      { "at": 0.75, "element": 1, "props": { "transform": "scale(0.85)" } },
+      { "at": 0.9, "element": 1, "props": { "transform": "scale(1)" } },
+      { "at": 1, "element": 1, "props": { "transform": "scale(1)" } }
+    ]
+  }
 }

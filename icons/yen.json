@@ -7,5 +7,28 @@
     "currency",
     "jpy",
     "price"
-  ]
+  ],
+  "animation": {
+    "name": "draw",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.45, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 0, "props": { "strokeDashoffset": 0 } },
+      { "at": 0, "element": 1, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.3, "element": 1, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.65, "element": 1, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 1, "props": { "strokeDashoffset": 0 } },
+      { "at": 0, "element": 2, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.5, "element": 2, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.8, "element": 2, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 2, "props": { "strokeDashoffset": 0 } },
+      { "at": 0, "element": 3, "props": { "strokeDashoffset": 1 } },
+      { "at": 0.6, "element": 3, "props": { "strokeDashoffset": 1 }, "easing": "ease-out" },
+      { "at": 0.9, "element": 3, "props": { "strokeDashoffset": 0 } },
+      { "at": 1, "element": 3, "props": { "strokeDashoffset": 0 } }
+    ]
+  }
 }

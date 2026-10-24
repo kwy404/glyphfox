@@ -8,5 +8,25 @@
     "savings",
     "change",
     "currency"
-  ]
+  ],
+  "animation": {
+    "name": "drop",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 0, "props": { "transform": "translate(0px, -2px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 0, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": 0, "props": { "transform": "translate(0px, -0.5px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.3, "element": 1, "props": { "transform": "translate(0px, -2px)" }, "easing": "ease-in" },
+      { "at": 0.55, "element": 1, "props": { "transform": "translate(0px, 0px)" }, "easing": "ease-out" },
+      { "at": 0.7, "element": 1, "props": { "transform": "translate(0px, -0.5px)" }, "easing": "ease-in" },
+      { "at": 0.85, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

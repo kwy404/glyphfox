@@ -4,7 +4,7 @@
 <!-- head:start -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--lang:detect--><!--/lang-->
+<!--lang:detect--><script>(function(c,d,u){try{var k='gf-lang',s=localStorage.getItem(k);if(!s||!u[s]){s='';var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length&&!s;i++){var p=String(n[i]).toLowerCase();for(var l in u){var q=l.toLowerCase();if(p===q||p.split('-')[0]===q.split('-')[0]){s=l;break}}}s=s||d;localStorage.setItem(k,s)}if(c===d&&s!==d&&u[s])location.replace(u[s]+location.search+location.hash)}catch(e){}})("en","en",{"en":"nuxt.html","pt-BR":"../pt-br/frameworks/nuxt.html","es":"../es/frameworks/nuxt.html","fr":"../fr/frameworks/nuxt.html","de":"../de/frameworks/nuxt.html"})</script><!--/lang-->
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#07070a">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -21,12 +21,22 @@
 if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new URL('..',document.querySelector('link[rel=icon]').href).pathname;navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}catch(e){}}</script>
 <!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Switch to the light theme","theme.dark":"Switch to the dark theme","toast.copied":"Copied to the clipboard","toast.downloaded":"Download started","toast.saved":"Saved to your collection","action.copy":"Copy","corners.round":"Round","corners.sharp":"Sharp","variant.outline":"Outline","variant.duotone":"Duotone","variant.solid":"Solid","mods.none":"none","corner.topLeft":"Top left","corner.topRight":"Top right","corner.bottomLeft":"Bottom left","corner.bottomRight":"Bottom right","cat.animals":"animals","cat.arrows":"arrows","cat.commerce":"commerce","cat.communication":"communication","cat.data":"data","cat.development":"development","cat.devices":"devices","cat.files":"files","cat.finance":"finance","cat.interface":"interface","cat.maps":"maps","cat.media":"media","cat.nature":"nature","cat.navigation":"navigation","cat.people":"people","cat.security":"security","cat.shapes":"shapes","cat.social":"social","cat.symbols":"symbols","cat.text":"text","cat.weather":"weather","error.rasterize":"Could not turn the SVG into an image","error.video":"This browser cannot record video","home.morph.filled":"filled","home.gallery.orbit":"ten icon orbit","icons.all":"All","icons.sketch.clear":"Clear","icons.result.count":"{n} icons","icons.result.sketch":"Closest {n} icons for your sketch","icons.dl.drawHint":"No animation picked, using draw","editor.download":"Download SVG","editor.lint.ok":"Passes every icon rule.","editor.lint.empty":"Draw something to start.","editor.ctx.button":"Save","editor.imported":"Imported and normalized to the grid","editor.tool.select":"Select and edit nodes","editor.tool.pen":"Pen","editor.tool.line":"Line","editor.tool.polyline":"Polyline","editor.tool.rect":"Rectangle","editor.tool.rrect":"Rounded rectangle","editor.tool.circle":"Circle","editor.tool.ellipse":"Ellipse","editor.tool.arc":"Arc","editor.hint.select":"Click a shape to select it, drag to move, drag the handles to edit nodes. Arrows nudge, Delete removes, Ctrl+D duplicates.","editor.hint.pen":"Click to add corners, drag to make curves. Click the first point to close, Enter or a double click to finish.","editor.hint.line":"Drag from the start to the end.","editor.hint.polyline":"Click to add points, Enter or a double click to finish.","editor.hint.rect":"Drag from one corner to the other.","editor.hint.rrect":"Drag from one corner to the other. Drag the round handle to change the radius.","editor.hint.circle":"Drag from the center outwards.","editor.hint.ellipse":"Drag the bounding box.","editor.hint.arc":"Click the start, click the end, then move to bend the arc and click to place it.","foxify.before":"Before","foxify.waiting":"Paste an SVG, drop a file or try a sample.","foxify.nothing":"Nothing to draw in that SVG","foxify.note.text":"Text elements skipped: {n} (convert text to paths first)","foxify.note.scaled":"The drawing was scaled into the 2 to 22 padding box","foxify.note.enlarged":"The drawing was enlarged to the padding box","foxify.note.filled":"Filled shapes turned into outlines: {n}","fusion.need":"Add at least two icons.","fusion.lint.ok":"The fused icon passes every icon rule.","fusion.remove":"Remove {name}","brand.favicon16":"favicon","brand.maskable":"maskable","three.error":"three.js could not load. Check the connection and try again.","three.canvas":"Icon rendered in 3D. Drag or use the arrow keys to orbit, plus and minus to zoom.","collection.empty.short":"The collection is empty","collection.edit":"Edit","collection.delete":"Delete","collection.deleted":"Removed from the collection","sw.updated":"glyphfox was updated to the latest version.","motion.all":"Whole icon","motion.secondary":"Duotone layer","motion.element":"Element","motion.inherit":"Timeline easing","motion.unknown":"There is no icon with that name","motion.nowebm":"This browser cannot record video","motion.play":"Play","motion.pause":"Pause","three.size":"1x is {w} by {h} pixels, 4x is four times that.","three.nogl":"This browser cannot draw WebGL 2, so the 3D view is not available here.","labs.source.missing":"Your glyph script does not compile yet, so the icon below is used.","labs.source.unknown":"Unknown icon \"{name}\". Try a name from the list.","labs.error":"Could not export: {message}","labs.script.ok":"Compiles to a lint clean icon.","labs.script.status.ok":"{lines} lines, {shapes} elements, lint clean","labs.script.status.bad":"{n} to fix before the icon can be exported","labs.script.stale":"Showing the last version that compiled.","labs.script.jump":"Go to line {line}, column {column}","labs.example.custom":"Your script","labs.example.sun":"Sun","labs.example.flower":"Flower","labs.example.fox-face":"Fox face","labs.example.card":"Card","labs.example.gauge":"Gauge","labs.example.gear":"Gear","labs.example.bolt":"Bolt","labs.example.bubble":"Chat bubble","labs.favicon.tab":"Animate this tab","labs.favicon.tabStop":"Stop the tab animation","labs.favicon.reduced":"Reduced motion is on, so the preview stays still. The runtime does the same for your visitors.","labs.cursor.hotspotAt":"Hotspot at {x}, {y} px","labs.hotspot.center":"Center","labs.hotspot.topLeft":"Top left","labs.hotspot.topRight":"Top right","labs.hotspot.bottomLeft":"Bottom left","labs.hotspot.bottomRight":"Bottom right","labs.hotspot.custom":"Custom","labs.plotter.strokes":"Strokes","labs.plotter.draw":"Drawing","labs.plotter.travel":"Pen up travel","labs.plotter.saved":"{p}% less travel than the source order","labs.plotter.more":"{n} more lines in the file","labs.stl.triangles":"Triangles","labs.stl.watertight":"Watertight","labs.stl.yes":"yes","labs.stl.no":"no","labs.stl.volume":"Volume","labs.stl.file":"File size","sketch.hint":"Draw in the box to search.","sketch.more":"Keep drawing, the shape is still too small to match.","sketch.empty":"A circle, an arrow, a house, a heart: any rough shape works.","sketch.result":"The {n} closest icons, ranked in {ms} ms","sketch.loading":"Loading the shape index","sketch.failed":"The shape index could not be loaded.","brand.count":"All {n} icons, themed","brand.building":"Building the brand kit","icons.set.ours":"Our own icons, with the display and isometric collections","icons.scope.all":"All sets","icons.set.meta":"{n} icons, {license}","icons.set.local":"Not on the CDN: install its package to use it","icons.set.none":"No set matches.","icons.result.loading":"Loading the icon sets","icons.result.error":"The icon sets could not be loaded. Check the connection and try again.","icons.result.set":"{n} icons in {set}","icons.result.inSet":"{n} icons in {set} in {ms} ms","icons.result.inAll":"{n} icons in every set in {ms} ms, glyphfox first","icons.coll.title":"Collections","icons.coll.display":"Display","icons.coll.isometric":"Isometric","icons.coll.note":"This collection is not in the npm package yet: copy the SVG or download it.","icons.license.credit":"credit","icons.license.attribution":"Attribution required","icons.license.trademark":"Trademark","icons.license.copy":"Copy attribution","icons.license.copied":"Attribution copied","icons.meta.by":"{set} by {author}","icons.meta.stroke":"stroke based","icons.meta.aliases":"Aliases: {list}","icons.style.outline":"outline","icons.style.solid":"solid","icons.style.duotone":"duotone","icons.style.color":"color","icons.kind.public-domain":"Public domain","icons.kind.permissive":"Permissive","icons.kind.attribution":"Attribution","icons.kind.share-alike":"Share alike","icons.group.material":"Material","icons.group.ui24":"Interface, 24 px","icons.group.ui16":"Interface, 16 and 32 px","icons.group.uiOther":"Interface, other grids","icons.group.uiColor":"Interface in color","icons.group.logos":"Logos","icons.group.programming":"Programming","icons.group.emoji":"Emoji","icons.group.flags":"Flags and maps","icons.group.thematic":"Thematic","icons.group.other":"Other sets","icons.group.archive":"Archived or unmaintained","universe.gallery.count":"{sets} sets, {n} icons","universe.gallery.none":"No set matches these filters.","universe.gallery.pick":"Compare","universe.gallery.strokeTitle":"Stroke based: the weight axis and the draw animation apply","universe.gallery.loading":"Loading the previews","universe.gallery.error":"The previews load from jsDelivr, from the published glyphfox-universe package.","universe.compare.pick":"Pick 2 to {max} sets below to see the same concepts side by side.","universe.compare.picked":"({n} picked)","universe.compare.noMatch":"no match","universe.compare.lead":"The same concepts in {n} sets, matched by name, alias and tag synonyms.","universe.compare.concept":"Concept","universe.native":"native","universe.on":"On","universe.off":"Off","universe.style.outline":"Outline","universe.style.solid":"Solid","universe.style.duotone":"Duotone","universe.style.color":"Color","universe.style.brand":"Brand","universe.style.stroke":"Weight and draw","universe.app.loading":"Loading the search index","universe.app.error":"The icon data is not reachable","universe.app.errorNote":"The catalog and the search index load from jsDelivr, from the published glyphfox-universe package. The table below lists every set with its count and license.","universe.result.query":"{n} icons for \"{q}\" in {ms} ms","universe.result.all":"{n} icons in every set","universe.meta.tags":"Tags: {list}","universe.format.web":"Web component","universe.trademarks.text":"Brand and logo icons show trademarks of their owners. The icon licenses cover the drawings, not the trademarks: use a logo only to refer to its brand, follow the brand guidelines of its owner, and do not suggest an endorsement."}</script><!--/lang-->
 <!-- head:end -->
-<title>Nuxt: glyphfox</title>
-<meta name="description" content="Use glyphfox icons in Nuxt: explicit imports, auto imported components with a local module, server rendering and Tailwind CSS.">
+<title data-i18n="recipes.nuxt.meta.title">Nuxt: glyphfox</title>
+<meta name="description" content="Use glyphfox icons in Nuxt: explicit imports, auto imported components with a local module, server rendering and Tailwind CSS." data-i18n-attr="content:recipes.nuxt.meta.description">
 <link rel="canonical" href="https://kwy404.github.io/glyphfox/frameworks/nuxt.html">
-<meta property="og:title" content="Nuxt: glyphfox">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/frameworks/nuxt.html">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/frameworks/nuxt.html">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/frameworks/nuxt.html">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/frameworks/nuxt.html">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/frameworks/nuxt.html">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/frameworks/nuxt.html">
+<meta property="og:title" content="Nuxt: glyphfox" data-i18n-attr="content:recipes.nuxt.meta.title">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/frameworks/nuxt.html">
 <meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
 <link rel="modulepreload" href="../assets/js/bundle/docs.XQJ3O5TU.js">
 <link rel="modulepreload" href="../assets/js/bundle/chunk.KXTQTQD4.js">
@@ -51,7 +61,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
       <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
     </nav>
     <div class="header-actions">
-      <!--lang:menu--><!--/lang-->
+      <!--lang:menu--><details class="lang-menu" data-lang-menu><summary class="icon-btn" aria-label="Language: English" title="Language"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><span>EN</span></summary><ul class="lang-list"><li><a href="nuxt.html" hreflang="en" lang="en" data-set-lang="en" aria-current="page">English</a></li><li><a href="../pt-br/frameworks/nuxt.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="../es/frameworks/nuxt.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/frameworks/nuxt.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/frameworks/nuxt.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></details><!--/lang-->
       <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch to the light theme" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
       <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
       <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
@@ -60,35 +70,35 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 </header>
 <!-- header:end -->
 <div class="wrap docs-layout">
-  <nav class="docs-nav" aria-label="Documentation">
-    <p class="docs-nav-title">On this page</p>
-    <a href="#imports">Explicit imports</a>
-    <a href="#auto">Auto imported components</a>
-    <a href="#ssr">Names during server rendering</a>
-    <a href="#tailwind">Tailwind CSS</a>
-    <p class="docs-nav-title">Recipes</p>
-    <a href="nextjs.html">Next.js App Router</a>
-    <a href="nuxt.html">Nuxt</a>
-    <a href="sveltekit.html">SvelteKit</a>
-    <a href="remix.html">Remix and React Router</a>
-    <a href="alpine.html">Alpine.js</a>
-    <a href="htmx.html">htmx</a>
-    <p class="docs-nav-title">More</p>
-    <a href="index.html">Every framework</a>
-    <a href="../docs.html">Docs</a>
-    <a href="../docs.html#props">Props</a>
+  <nav class="docs-nav" aria-label="Documentation" data-i18n-attr="aria-label:docs.eyebrow">
+    <p class="docs-nav-title" data-i18n="recipes.toc">On this page</p>
+    <a href="#imports" data-i18n="recipes.nuxt.imports.title">Explicit imports</a>
+    <a href="#auto" data-i18n="recipes.nuxt.auto.title">Auto imported components</a>
+    <a href="#ssr" data-i18n="recipes.names">Names during server rendering</a>
+    <a href="#tailwind" translate="no">Tailwind CSS</a>
+    <p class="docs-nav-title" data-i18n="recipes.recipes">Recipes</p>
+    <a href="nextjs.html" data-i18n="recipes.nav.nextjs">Next.js App Router</a>
+    <a href="nuxt.html" translate="no">Nuxt</a>
+    <a href="sveltekit.html" translate="no">SvelteKit</a>
+    <a href="remix.html" data-i18n="recipes.nav.remix">Remix and React Router</a>
+    <a href="alpine.html" translate="no">Alpine.js</a>
+    <a href="htmx.html" translate="no">htmx</a>
+    <p class="docs-nav-title" data-i18n="recipes.more">More</p>
+    <a href="index.html" data-i18n="recipes.all">Every framework</a>
+    <a href="../docs.html" data-i18n="nav.docs">Docs</a>
+    <a href="../docs.html#props" data-i18n="footer.props">Props</a>
   </nav>
 
   <main id="main" class="docs-main">
     <header class="docs-hero">
-      <span class="eyebrow">Recipe</span>
-      <h1 class="title">Nuxt</h1>
-      <p class="lead">glyphfox/vue renders on the server and hydrates in the browser, so icons work in Nuxt pages, layouts and components without extra build configuration.</p>
+      <span class="eyebrow" data-i18n="recipes.eyebrow">Recipe</span>
+      <h1 class="title" translate="no">Nuxt</h1>
+      <p class="lead" data-i18n="recipes.nuxt.lead">glyphfox/vue renders on the server and hydrates in the browser, so icons work in Nuxt pages, layouts and components without extra build configuration.</p>
     </header>
 
     <section id="imports">
-      <h2>Explicit imports</h2>
-      <div class="code"><div class="code-head"><span>components/AppHeader.vue</span><button class="copy" type="button">Copy</button></div><pre data-lang="html">&lt;script setup&gt;
+      <h2 data-i18n="recipes.nuxt.imports.title">Explicit imports</h2>
+      <div class="code"><div class="code-head"><span>components/AppHeader.vue</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="html">&lt;script setup&gt;
 import { HomeIcon, BellIcon, MorphIcon } from 'glyphfox/vue';
 const open = ref(false);
 &lt;/script&gt;
@@ -102,12 +112,12 @@ const open = ref(false);
     &lt;/button&gt;
   &lt;/header&gt;
 &lt;/template&gt;</pre></div>
-      <p>Explicit imports keep only the icons you use in the bundle, and need no Nuxt configuration. <code>build.transpile</code> is not needed: the package ships plain ESM.</p>
+      <p data-i18n="recipes.nuxt.imports.p">Explicit imports keep only the icons you use in the bundle, and need no Nuxt configuration. <code>build.transpile</code> is not needed: the package ships plain ESM.</p>
     </section>
 
     <section id="auto">
-      <h2>Auto imported components</h2>
-      <div class="code"><div class="code-head"><span>modules/glyphfox.ts</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { addComponent, defineNuxtModule } from '@nuxt/kit';
+      <h2 data-i18n="recipes.nuxt.auto.title">Auto imported components</h2>
+      <div class="code"><div class="code-head"><span>modules/glyphfox.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { addComponent, defineNuxtModule } from '@nuxt/kit';
 
 const icons = ['HomeIcon', 'BellIcon', 'FileIcon', 'Icon', 'Fusion', 'MorphIcon'];
 
@@ -116,25 +126,25 @@ export default defineNuxtModule({
     for (const name of icons) addComponent({ name, export: name, filePath: 'glyphfox/vue' });
   },
 });</pre></div>
-      <p>A small local module (files in <code>modules/</code> load automatically) registers the components you choose, so templates can use <code>&lt;HomeIcon /&gt;</code> without an import and Nuxt still adds only the ones a page uses.</p>
+      <p data-i18n="recipes.nuxt.auto.p">A small local module (files in <code>modules/</code> load automatically) registers the components you choose, so templates can use <code>&lt;HomeIcon /&gt;</code> without an import and Nuxt still adds only the ones a page uses.</p>
     </section>
 
     <section id="ssr">
-      <h2>Names during server rendering</h2>
-      <div class="code"><div class="code-head"><span>plugins/glyphfox.ts</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { registerIcons } from 'glyphfox/vue';
+      <h2 data-i18n="recipes.names">Names during server rendering</h2>
+      <div class="code"><div class="code-head"><span>plugins/glyphfox.ts</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { registerIcons } from 'glyphfox/vue';
 import { iconCloud, iconLock, iconUser } from 'glyphfox';
 
 export default defineNuxtPlugin(() =&gt; {
   registerIcons([iconCloud, iconLock, iconUser]);
 });</pre></div>
-      <p>Icon components register themselves. Names that only appear as strings, in <code>&lt;Icon name="cloud" /&gt;</code>, <code>morphTo</code> or <code>Fusion</code>, load on demand in the browser; register them in a plugin so the server render already contains them.</p>
+      <p data-i18n="recipes.nuxt.ssr.p">Icon components register themselves. Names that only appear as strings, in <code>&lt;Icon name="cloud" /&gt;</code>, <code>morphTo</code> or <code>Fusion</code>, load on demand in the browser; register them in a plugin so the server render already contains them.</p>
     </section>
 
     <section id="tailwind">
-      <h2>Tailwind CSS</h2>
-      <div class="code"><div class="code-head"><span>assets/css/main.css</span><button class="copy" type="button">Copy</button></div><pre data-lang="css">@import "tailwindcss";
+      <h2 translate="no">Tailwind CSS</h2>
+      <div class="code"><div class="code-head"><span>assets/css/main.css</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="css">@import "tailwindcss";
 @plugin "glyphfox/tailwind";</pre></div>
-      <p>With the Tailwind plugin, <code>&lt;span class="gf-home size-5 text-orange-500"&gt;&lt;/span&gt;</code> draws an icon as a CSS mask, which suits long static lists.</p>
+      <p data-i18n="recipes.nuxt.tailwind.p">With the Tailwind plugin, <code>&lt;span class="gf-home size-5 text-orange-500"&gt;&lt;/span&gt;</code> draws an icon as a CSS mask, which suits long static lists.</p>
     </section>
   </main>
 </div>
@@ -180,7 +190,7 @@ export default defineNuxtPlugin(() =&gt; {
           <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
         </ul>
       </div>
-      <!--lang:list--><!--/lang-->
+      <!--lang:list--><div class="footer-langs"><h2>Language</h2><ul><li><a href="nuxt.html" hreflang="en" lang="en" data-set-lang="en" aria-current="page">English</a></li><li><a href="../pt-br/frameworks/nuxt.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="../es/frameworks/nuxt.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/frameworks/nuxt.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/frameworks/nuxt.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></div><!--/lang-->
     </div>
     <div class="footer-base">
       <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>

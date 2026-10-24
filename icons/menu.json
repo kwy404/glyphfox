@@ -9,5 +9,29 @@
     "list",
     "options",
     "lines"
-  ]
+  ],
+  "animation": {
+    "name": "nudge",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.32, "element": 0, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "translate(-0.2px, 0px)" } },
+      { "at": 0.8, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.42, "element": 1, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.7, "element": 1, "props": { "transform": "translate(-0.2px, 0px)" } },
+      { "at": 0.9, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.2, "element": 2, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.52, "element": 2, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.8, "element": 2, "props": { "transform": "translate(-0.2px, 0px)" } },
+      { "at": 1, "element": 2, "props": { "transform": "translate(0px, 0px)" } }
+    ]
+  }
 }

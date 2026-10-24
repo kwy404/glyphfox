@@ -4,7 +4,7 @@
 <!-- head:start -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--lang:detect--><!--/lang-->
+<!--lang:detect--><script>(function(c,d,u){try{var k='gf-lang',s=localStorage.getItem(k);if(!s||!u[s]){s='';var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length&&!s;i++){var p=String(n[i]).toLowerCase();for(var l in u){var q=l.toLowerCase();if(p===q||p.split('-')[0]===q.split('-')[0]){s=l;break}}}s=s||d;localStorage.setItem(k,s)}if(c===d&&s!==d&&u[s])location.replace(u[s]+location.search+location.hash)}catch(e){}})("en","en",{"en":"index.html","pt-BR":"../pt-br/frameworks/index.html","es":"../es/frameworks/index.html","fr":"../fr/frameworks/index.html","de":"../de/frameworks/index.html"})</script><!--/lang-->
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#07070a">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -21,12 +21,22 @@
 if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new URL('..',document.querySelector('link[rel=icon]').href).pathname;navigator.serviceWorker.register(gfBase+'sw.js',{scope:gfBase}).catch(function(){})}catch(e){}}</script>
 <!--lang:strings--><script type="application/json" id="gf-strings">{"theme.light":"Switch to the light theme","theme.dark":"Switch to the dark theme","toast.copied":"Copied to the clipboard","toast.downloaded":"Download started","toast.saved":"Saved to your collection","action.copy":"Copy","corners.round":"Round","corners.sharp":"Sharp","variant.outline":"Outline","variant.duotone":"Duotone","variant.solid":"Solid","mods.none":"none","corner.topLeft":"Top left","corner.topRight":"Top right","corner.bottomLeft":"Bottom left","corner.bottomRight":"Bottom right","cat.animals":"animals","cat.arrows":"arrows","cat.commerce":"commerce","cat.communication":"communication","cat.data":"data","cat.development":"development","cat.devices":"devices","cat.files":"files","cat.finance":"finance","cat.interface":"interface","cat.maps":"maps","cat.media":"media","cat.nature":"nature","cat.navigation":"navigation","cat.people":"people","cat.security":"security","cat.shapes":"shapes","cat.social":"social","cat.symbols":"symbols","cat.text":"text","cat.weather":"weather","error.rasterize":"Could not turn the SVG into an image","error.video":"This browser cannot record video","home.morph.filled":"filled","home.gallery.orbit":"ten icon orbit","icons.all":"All","icons.sketch.clear":"Clear","icons.result.count":"{n} icons","icons.result.sketch":"Closest {n} icons for your sketch","icons.dl.drawHint":"No animation picked, using draw","editor.download":"Download SVG","editor.lint.ok":"Passes every icon rule.","editor.lint.empty":"Draw something to start.","editor.ctx.button":"Save","editor.imported":"Imported and normalized to the grid","editor.tool.select":"Select and edit nodes","editor.tool.pen":"Pen","editor.tool.line":"Line","editor.tool.polyline":"Polyline","editor.tool.rect":"Rectangle","editor.tool.rrect":"Rounded rectangle","editor.tool.circle":"Circle","editor.tool.ellipse":"Ellipse","editor.tool.arc":"Arc","editor.hint.select":"Click a shape to select it, drag to move, drag the handles to edit nodes. Arrows nudge, Delete removes, Ctrl+D duplicates.","editor.hint.pen":"Click to add corners, drag to make curves. Click the first point to close, Enter or a double click to finish.","editor.hint.line":"Drag from the start to the end.","editor.hint.polyline":"Click to add points, Enter or a double click to finish.","editor.hint.rect":"Drag from one corner to the other.","editor.hint.rrect":"Drag from one corner to the other. Drag the round handle to change the radius.","editor.hint.circle":"Drag from the center outwards.","editor.hint.ellipse":"Drag the bounding box.","editor.hint.arc":"Click the start, click the end, then move to bend the arc and click to place it.","foxify.before":"Before","foxify.waiting":"Paste an SVG, drop a file or try a sample.","foxify.nothing":"Nothing to draw in that SVG","foxify.note.text":"Text elements skipped: {n} (convert text to paths first)","foxify.note.scaled":"The drawing was scaled into the 2 to 22 padding box","foxify.note.enlarged":"The drawing was enlarged to the padding box","foxify.note.filled":"Filled shapes turned into outlines: {n}","fusion.need":"Add at least two icons.","fusion.lint.ok":"The fused icon passes every icon rule.","fusion.remove":"Remove {name}","brand.favicon16":"favicon","brand.maskable":"maskable","three.error":"three.js could not load. Check the connection and try again.","three.canvas":"Icon rendered in 3D. Drag or use the arrow keys to orbit, plus and minus to zoom.","collection.empty.short":"The collection is empty","collection.edit":"Edit","collection.delete":"Delete","collection.deleted":"Removed from the collection","sw.updated":"glyphfox was updated to the latest version.","motion.all":"Whole icon","motion.secondary":"Duotone layer","motion.element":"Element","motion.inherit":"Timeline easing","motion.unknown":"There is no icon with that name","motion.nowebm":"This browser cannot record video","motion.play":"Play","motion.pause":"Pause","three.size":"1x is {w} by {h} pixels, 4x is four times that.","three.nogl":"This browser cannot draw WebGL 2, so the 3D view is not available here.","labs.source.missing":"Your glyph script does not compile yet, so the icon below is used.","labs.source.unknown":"Unknown icon \"{name}\". Try a name from the list.","labs.error":"Could not export: {message}","labs.script.ok":"Compiles to a lint clean icon.","labs.script.status.ok":"{lines} lines, {shapes} elements, lint clean","labs.script.status.bad":"{n} to fix before the icon can be exported","labs.script.stale":"Showing the last version that compiled.","labs.script.jump":"Go to line {line}, column {column}","labs.example.custom":"Your script","labs.example.sun":"Sun","labs.example.flower":"Flower","labs.example.fox-face":"Fox face","labs.example.card":"Card","labs.example.gauge":"Gauge","labs.example.gear":"Gear","labs.example.bolt":"Bolt","labs.example.bubble":"Chat bubble","labs.favicon.tab":"Animate this tab","labs.favicon.tabStop":"Stop the tab animation","labs.favicon.reduced":"Reduced motion is on, so the preview stays still. The runtime does the same for your visitors.","labs.cursor.hotspotAt":"Hotspot at {x}, {y} px","labs.hotspot.center":"Center","labs.hotspot.topLeft":"Top left","labs.hotspot.topRight":"Top right","labs.hotspot.bottomLeft":"Bottom left","labs.hotspot.bottomRight":"Bottom right","labs.hotspot.custom":"Custom","labs.plotter.strokes":"Strokes","labs.plotter.draw":"Drawing","labs.plotter.travel":"Pen up travel","labs.plotter.saved":"{p}% less travel than the source order","labs.plotter.more":"{n} more lines in the file","labs.stl.triangles":"Triangles","labs.stl.watertight":"Watertight","labs.stl.yes":"yes","labs.stl.no":"no","labs.stl.volume":"Volume","labs.stl.file":"File size","sketch.hint":"Draw in the box to search.","sketch.more":"Keep drawing, the shape is still too small to match.","sketch.empty":"A circle, an arrow, a house, a heart: any rough shape works.","sketch.result":"The {n} closest icons, ranked in {ms} ms","sketch.loading":"Loading the shape index","sketch.failed":"The shape index could not be loaded.","brand.count":"All {n} icons, themed","brand.building":"Building the brand kit","icons.set.ours":"Our own icons, with the display and isometric collections","icons.scope.all":"All sets","icons.set.meta":"{n} icons, {license}","icons.set.local":"Not on the CDN: install its package to use it","icons.set.none":"No set matches.","icons.result.loading":"Loading the icon sets","icons.result.error":"The icon sets could not be loaded. Check the connection and try again.","icons.result.set":"{n} icons in {set}","icons.result.inSet":"{n} icons in {set} in {ms} ms","icons.result.inAll":"{n} icons in every set in {ms} ms, glyphfox first","icons.coll.title":"Collections","icons.coll.display":"Display","icons.coll.isometric":"Isometric","icons.coll.note":"This collection is not in the npm package yet: copy the SVG or download it.","icons.license.credit":"credit","icons.license.attribution":"Attribution required","icons.license.trademark":"Trademark","icons.license.copy":"Copy attribution","icons.license.copied":"Attribution copied","icons.meta.by":"{set} by {author}","icons.meta.stroke":"stroke based","icons.meta.aliases":"Aliases: {list}","icons.style.outline":"outline","icons.style.solid":"solid","icons.style.duotone":"duotone","icons.style.color":"color","icons.kind.public-domain":"Public domain","icons.kind.permissive":"Permissive","icons.kind.attribution":"Attribution","icons.kind.share-alike":"Share alike","icons.group.material":"Material","icons.group.ui24":"Interface, 24 px","icons.group.ui16":"Interface, 16 and 32 px","icons.group.uiOther":"Interface, other grids","icons.group.uiColor":"Interface in color","icons.group.logos":"Logos","icons.group.programming":"Programming","icons.group.emoji":"Emoji","icons.group.flags":"Flags and maps","icons.group.thematic":"Thematic","icons.group.other":"Other sets","icons.group.archive":"Archived or unmaintained","universe.gallery.count":"{sets} sets, {n} icons","universe.gallery.none":"No set matches these filters.","universe.gallery.pick":"Compare","universe.gallery.strokeTitle":"Stroke based: the weight axis and the draw animation apply","universe.gallery.loading":"Loading the previews","universe.gallery.error":"The previews load from jsDelivr, from the published glyphfox-universe package.","universe.compare.pick":"Pick 2 to {max} sets below to see the same concepts side by side.","universe.compare.picked":"({n} picked)","universe.compare.noMatch":"no match","universe.compare.lead":"The same concepts in {n} sets, matched by name, alias and tag synonyms.","universe.compare.concept":"Concept","universe.native":"native","universe.on":"On","universe.off":"Off","universe.style.outline":"Outline","universe.style.solid":"Solid","universe.style.duotone":"Duotone","universe.style.color":"Color","universe.style.brand":"Brand","universe.style.stroke":"Weight and draw","universe.app.loading":"Loading the search index","universe.app.error":"The icon data is not reachable","universe.app.errorNote":"The catalog and the search index load from jsDelivr, from the published glyphfox-universe package. The table below lists every set with its count and license.","universe.result.query":"{n} icons for \"{q}\" in {ms} ms","universe.result.all":"{n} icons in every set","universe.meta.tags":"Tags: {list}","universe.format.web":"Web component","universe.trademarks.text":"Brand and logo icons show trademarks of their owners. The icon licenses cover the drawings, not the trademarks: use a logo only to refer to its brand, follow the brand guidelines of its owner, and do not suggest an endorsement."}</script><!--/lang-->
 <!-- head:end -->
-<title>Frameworks: glyphfox</title>
-<meta name="description" content="glyphfox in every framework: React, React Server Components, Vue, Svelte, Angular, Solid, Preact, Qwik, Lit, Astro, React Native, Ember, the web component and Tailwind CSS, plus recipes for Next.js, Nuxt, SvelteKit, Remix, Alpine and htmx.">
+<title data-i18n="frameworks.meta.title">Frameworks: glyphfox</title>
+<meta name="description" content="glyphfox in every framework: React, React Server Components, Vue, Svelte, Angular, Solid, Preact, Qwik, Lit, Astro, React Native, Ember, the web component and Tailwind CSS, plus recipes for Next.js, Nuxt, SvelteKit, Remix, Alpine and htmx." data-i18n-attr="content:frameworks.meta.description">
 <link rel="canonical" href="https://kwy404.github.io/glyphfox/frameworks/">
-<meta property="og:title" content="Frameworks: glyphfox">
+<link rel="alternate" hreflang="en" href="https://kwy404.github.io/glyphfox/frameworks/">
+<link rel="alternate" hreflang="pt-BR" href="https://kwy404.github.io/glyphfox/pt-br/frameworks/">
+<link rel="alternate" hreflang="es" href="https://kwy404.github.io/glyphfox/es/frameworks/">
+<link rel="alternate" hreflang="fr" href="https://kwy404.github.io/glyphfox/fr/frameworks/">
+<link rel="alternate" hreflang="de" href="https://kwy404.github.io/glyphfox/de/frameworks/">
+<link rel="alternate" hreflang="x-default" href="https://kwy404.github.io/glyphfox/frameworks/">
+<meta property="og:title" content="Frameworks: glyphfox" data-i18n-attr="content:frameworks.meta.title">
 <meta property="og:url" content="https://kwy404.github.io/glyphfox/frameworks/">
 <meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
 <link rel="stylesheet" href="../assets/docs.4063d59a.css">
 <link rel="modulepreload" href="../assets/js/bundle/docs.XQJ3O5TU.js">
 <link rel="modulepreload" href="../assets/js/bundle/chunk.KXTQTQD4.js">
@@ -51,7 +61,7 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
       <a href="../changelog.html" data-nav="changelog" data-i18n="nav.changelog">Changelog</a>
     </nav>
     <div class="header-actions">
-      <!--lang:menu--><!--/lang-->
+      <!--lang:menu--><details class="lang-menu" data-lang-menu><summary class="icon-btn" aria-label="Language: English" title="Language"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/></svg><span>EN</span></summary><ul class="lang-list"><li><a href="index.html" hreflang="en" lang="en" data-set-lang="en" aria-current="page">English</a></li><li><a href="../pt-br/frameworks/index.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="../es/frameworks/index.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/frameworks/index.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/frameworks/index.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></details><!--/lang-->
       <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch to the light theme" data-i18n-attr="aria-label:theme.light" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"></svg></button>
       <a class="icon-btn hide-sm" href="https://github.com/kwy404/glyphfox" aria-label="glyphfox on GitHub" data-i18n-attr="aria-label:nav.github"><!--gf:git-branch:18--><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-git-branch" aria-hidden="true"><circle cx="6" cy="4.5" r="2.5"/><path d="M6 7v10"/><circle cx="6" cy="19.5" r="2.5"/><circle cx="18" cy="10" r="2.5"/><path d="M15.5 10H10a4 4 0 0 0-4 4"/></svg><!--/gf--></a>
       <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><!--gf:menu:20--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.112" stroke-linecap="round" stroke-linejoin="round" class="glyphfox glyphfox-menu" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg><!--/gf--></button>
@@ -60,64 +70,64 @@ if('serviceWorker'in navigator&&location.protocol!=='file:'){try{var gfBase=new 
 </header>
 <!-- header:end -->
 <div class="wrap docs-layout">
-  <nav class="docs-nav" aria-label="Documentation">
-    <p class="docs-nav-title">On this page</p>
-    <a href="#packages">Packages</a>
-    <a href="#solid">Solid</a>
-    <a href="#preact">Preact</a>
-    <a href="#qwik">Qwik</a>
-    <a href="#lit">Lit</a>
-    <a href="#astro">Astro</a>
-    <a href="#react-native">React Native</a>
-    <a href="#ember">Ember</a>
-    <a href="#recipes">Recipes</a>
-    <p class="docs-nav-title">Recipes</p>
-    <a href="nextjs.html">Next.js App Router</a>
-    <a href="nuxt.html">Nuxt</a>
-    <a href="sveltekit.html">SvelteKit</a>
-    <a href="remix.html">Remix and React Router</a>
-    <a href="alpine.html">Alpine.js</a>
-    <a href="htmx.html">htmx</a>
-    <p class="docs-nav-title">More</p>
-    <a href="index.html">Every framework</a>
-    <a href="../docs.html">Docs</a>
-    <a href="../docs.html#props">Props</a>
+  <nav class="docs-nav" aria-label="Documentation" data-i18n-attr="aria-label:docs.eyebrow">
+    <p class="docs-nav-title" data-i18n="frameworks.nav.title">On this page</p>
+    <a href="#packages" data-i18n="frameworks.packages">Packages</a>
+    <a href="#solid" translate="no">Solid</a>
+    <a href="#preact" translate="no">Preact</a>
+    <a href="#qwik" translate="no">Qwik</a>
+    <a href="#lit" translate="no">Lit</a>
+    <a href="#astro" translate="no">Astro</a>
+    <a href="#react-native" translate="no">React Native</a>
+    <a href="#ember" translate="no">Ember</a>
+    <a href="#recipes" data-i18n="frameworks.recipes">Recipes</a>
+    <p class="docs-nav-title" data-i18n="frameworks.recipes">Recipes</p>
+    <a href="nextjs.html" translate="no">Next.js App Router</a>
+    <a href="nuxt.html" translate="no">Nuxt</a>
+    <a href="sveltekit.html" translate="no">SvelteKit</a>
+    <a href="remix.html" data-i18n="frameworks.recipe.remix">Remix and React Router</a>
+    <a href="alpine.html" translate="no">Alpine.js</a>
+    <a href="htmx.html" translate="no">htmx</a>
+    <p class="docs-nav-title" data-i18n="frameworks.nav.more">More</p>
+    <a href="index.html" data-i18n="frameworks.nav.every">Every framework</a>
+    <a href="../docs.html" data-i18n="nav.docs">Docs</a>
+    <a href="../docs.html#props" data-i18n="footer.props">Props</a>
   </nav>
 
   <main id="main" class="docs-main">
     <header class="docs-hero">
-      <span class="eyebrow">Frameworks</span>
-      <h1 class="title">One icon set, every framework</h1>
-      <p class="lead">Every package takes the same props (size, color, weight, corners, variant, animate, modifier, morphTo and the rest) and renders the same SVG. Pick your framework, or follow a recipe for your meta framework.</p>
+      <span class="eyebrow" data-i18n="footer.frameworks">Frameworks</span>
+      <h1 class="title" data-i18n="frameworks.hero.title">One icon set, every framework</h1>
+      <p class="lead" data-i18n="frameworks.hero.lead">Every package takes the same props (size, color, weight, corners, variant, animate, modifier, morphTo and the rest) and renders the same SVG. Pick your framework, or follow a recipe for your meta framework.</p>
     </header>
 
     <section id="packages">
-      <h2>Packages</h2>
-      <p>Everything ships in the <code>glyphfox</code> package (Angular also has <code>glyphfox-angular</code>). Each framework is an optional peer dependency, used only when you import its entry point. Icon components are tree shakable and every entry point is typed.</p>
+      <h2 data-i18n="frameworks.packages">Packages</h2>
+      <p data-i18n="frameworks.packages.p">Everything ships in the <code>glyphfox</code> package (Angular also has <code>glyphfox-angular</code>). Each framework is an optional peer dependency, used only when you import its entry point. Icon components are tree shakable and every entry point is typed.</p>
       <div class="table-wrap"><table class="props">
-        <thead><tr><th>Framework</th><th>Import</th><th>Renders</th></tr></thead>
+        <thead><tr><th data-i18n="frameworks.table.framework">Framework</th><th data-i18n="frameworks.table.import">Import</th><th data-i18n="frameworks.table.renders">Renders</th></tr></thead>
         <tbody>
-          <tr><td>React</td><td><code>glyphfox/react</code></td><td>Client components (marked <code>'use client'</code>), forwardRef</td></tr>
-          <tr><td>React Server Components</td><td><code>glyphfox/react/server</code></td><td>Hook free Icon and Fusion, zero JavaScript</td></tr>
-          <tr><td>Vue 3</td><td><code>glyphfox/vue</code></td><td>Components and <code>useMorph</code></td></tr>
-          <tr><td>Svelte 5</td><td><code>glyphfox/svelte</code></td><td>.svelte sources and <code>morphStore</code></td></tr>
-          <tr><td>Angular</td><td><code>glyphfox-angular</code></td><td>Standalone component and registry provider</td></tr>
-          <tr><td>Solid</td><td><code>glyphfox/solid</code></td><td>Components and <code>useMorph</code>, server and client</td></tr>
-          <tr><td>Preact</td><td><code>glyphfox/preact</code></td><td>Components and hooks, no compat layer</td></tr>
-          <tr><td>Qwik</td><td><code>glyphfox/qwik</code></td><td>Lightweight components that resume with no JavaScript</td></tr>
-          <tr><td>Lit</td><td><code>glyphfox/lit</code></td><td>Lit elements (<code>&lt;gf-file&gt;</code>, <code>&lt;gf-glyph&gt;</code>)</td></tr>
-          <tr><td>Astro</td><td><code>glyphfox/astro</code></td><td>.astro components, static SVG</td></tr>
-          <tr><td>React Native</td><td><code>glyphfox/native</code></td><td>react-native-svg components</td></tr>
-          <tr><td>Ember</td><td><code>glyphfox/ember</code></td><td>Helpers for .gjs, .gts and classic templates</td></tr>
-          <tr><td>Web component</td><td><code>glyphfox/web</code></td><td><code>&lt;glyph-fox&gt;</code>, also from the CDN</td></tr>
-          <tr><td>Tailwind CSS</td><td><code>glyphfox/tailwind</code></td><td>CSS mask classes</td></tr>
+          <tr><td translate="no">React</td><td><code>glyphfox/react</code></td><td data-i18n="frameworks.table.react">Client components (marked <code>'use client'</code>), forwardRef</td></tr>
+          <tr><td translate="no">React Server Components</td><td><code>glyphfox/react/server</code></td><td data-i18n="frameworks.table.rsc">Hook free Icon and Fusion, zero JavaScript</td></tr>
+          <tr><td translate="no">Vue 3</td><td><code>glyphfox/vue</code></td><td data-i18n="frameworks.table.vue">Components and <code>useMorph</code></td></tr>
+          <tr><td translate="no">Svelte 5</td><td><code>glyphfox/svelte</code></td><td data-i18n="frameworks.table.svelte">.svelte sources and <code>morphStore</code></td></tr>
+          <tr><td translate="no">Angular</td><td><code>glyphfox-angular</code></td><td data-i18n="frameworks.table.angular">Standalone component and registry provider</td></tr>
+          <tr><td translate="no">Solid</td><td><code>glyphfox/solid</code></td><td data-i18n="frameworks.table.solid">Components and <code>useMorph</code>, server and client</td></tr>
+          <tr><td translate="no">Preact</td><td><code>glyphfox/preact</code></td><td data-i18n="frameworks.table.preact">Components and hooks, no compat layer</td></tr>
+          <tr><td translate="no">Qwik</td><td><code>glyphfox/qwik</code></td><td data-i18n="frameworks.table.qwik">Lightweight components that resume with no JavaScript</td></tr>
+          <tr><td translate="no">Lit</td><td><code>glyphfox/lit</code></td><td data-i18n="frameworks.table.lit">Lit elements (<code>&lt;gf-file&gt;</code>, <code>&lt;gf-glyph&gt;</code>)</td></tr>
+          <tr><td translate="no">Astro</td><td><code>glyphfox/astro</code></td><td data-i18n="frameworks.table.astro">.astro components, static SVG</td></tr>
+          <tr><td translate="no">React Native</td><td><code>glyphfox/native</code></td><td data-i18n="frameworks.table.native">react-native-svg components</td></tr>
+          <tr><td translate="no">Ember</td><td><code>glyphfox/ember</code></td><td data-i18n="frameworks.table.ember">Helpers for .gjs, .gts and classic templates</td></tr>
+          <tr><td data-i18n="universe.format.web">Web component</td><td><code>glyphfox/web</code></td><td data-i18n="frameworks.table.web"><code>&lt;glyph-fox&gt;</code>, also from the CDN</td></tr>
+          <tr><td translate="no">Tailwind CSS</td><td><code>glyphfox/tailwind</code></td><td data-i18n="frameworks.table.tailwind">CSS mask classes</td></tr>
         </tbody>
       </table></div>
     </section>
 
     <section id="solid">
-      <h2>Solid</h2>
-      <div class="code"><div class="code-head"><span>Toolbar.jsx</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { createSignal } from 'solid-js';
+      <h2 translate="no">Solid</h2>
+      <div class="code"><div class="code-head"><span translate="no">Toolbar.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { createSignal } from 'solid-js';
 import { HomeIcon, HeartIcon, Fusion, MorphIcon } from 'glyphfox/solid';
 
 export function Toolbar() {
@@ -133,12 +143,12 @@ export function Toolbar() {
     &lt;/nav&gt;
   );
 }</pre></div>
-      <p>No JSX compiler setup and no special export condition: the same module renders in SolidStart on the server and in the browser. <code>class</code>, <code>style</code>, <code>ref</code> and events pass through to the svg. <code>useMorph(accessor)</code> returns an accessor of icon data that morphs whenever the name changes.</p>
+      <p data-i18n="frameworks.solid.p">No JSX compiler setup and no special export condition: the same module renders in SolidStart on the server and in the browser. <code>class</code>, <code>style</code>, <code>ref</code> and events pass through to the svg. <code>useMorph(accessor)</code> returns an accessor of icon data that morphs whenever the name changes.</p>
     </section>
 
     <section id="preact">
-      <h2>Preact</h2>
-      <div class="code"><div class="code-head"><span>App.jsx</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { useState } from 'preact/hooks';
+      <h2 translate="no">Preact</h2>
+      <div class="code"><div class="code-head"><span translate="no">App.jsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { useState } from 'preact/hooks';
 import { FileIcon, HeartIcon, MorphIcon } from 'glyphfox/preact';
 
 export function App() {
@@ -151,12 +161,12 @@ export function App() {
     &lt;/&gt;
   );
 }</pre></div>
-      <p>The same API as React (Icon, Fusion, MorphIcon, useMorph) built on <code>preact</code> and <code>preact/hooks</code>, so it does not pull in <code>preact/compat</code>. On Preact 11 a <code>ref</code> reaches the svg element. Both <code>class</code> and <code>className</code> work.</p>
+      <p data-i18n="frameworks.preact.p">The same API as React (Icon, Fusion, MorphIcon, useMorph) built on <code>preact</code> and <code>preact/hooks</code>, so it does not pull in <code>preact/compat</code>. On Preact 11 a <code>ref</code> reaches the svg element. Both <code>class</code> and <code>className</code> work.</p>
     </section>
 
     <section id="qwik">
-      <h2>Qwik</h2>
-      <div class="code"><div class="code-head"><span>header.tsx</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { component$, useSignal } from '@qwik.dev/core';
+      <h2 translate="no">Qwik</h2>
+      <div class="code"><div class="code-head"><span translate="no">header.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { component$, useSignal } from '@qwik.dev/core';
 import { iconX } from 'glyphfox';
 import { BellIcon, HomeIcon, MenuIcon, registerIcons } from 'glyphfox/qwik';
 
@@ -174,12 +184,12 @@ export default component$(() =&gt; {
     &lt;/header&gt;
   );
 });</pre></div>
-      <p>Built for Qwik 2 (<code>@qwik.dev/core</code>). The icons are lightweight components: they render on the server and resume without downloading anything. Living states and <code>morphTo</code> run on CSS, <code>active</code> switches <code>trigger="state"</code>, and <code>trigger="click"</code> uses a tiny inline handler. Names used by <code>Icon</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon components register their icon, and <code>registerIcons([iconX])</code> (or <code>registerIcons(icons)</code> with <code>icons</code> from <code>glyphfox</code> for the whole set) covers names you only write as strings.</p>
+      <p data-i18n="frameworks.qwik.p">Built for Qwik 2 (<code>@qwik.dev/core</code>). The icons are lightweight components: they render on the server and resume without downloading anything. Living states and <code>morphTo</code> run on CSS, <code>active</code> switches <code>trigger="state"</code>, and <code>trigger="click"</code> uses a tiny inline handler. Names used by <code>Icon</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon components register their icon, and <code>registerIcons([iconX])</code> (or <code>registerIcons(icons)</code> with <code>icons</code> from <code>glyphfox</code> for the whole set) covers names you only write as strings.</p>
     </section>
 
     <section id="lit">
-      <h2>Lit</h2>
-      <div class="code"><div class="code-head"><span>app.js</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { LitElement, html } from 'lit';
+      <h2 translate="no">Lit</h2>
+      <div class="code"><div class="code-head"><span translate="no">app.js</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { LitElement, html } from 'lit';
 import { defineIcons, FileIcon, HeartIcon, Icon, Fusion, MorphIcon } from 'glyphfox/lit';
 
 // &lt;gf-file&gt;, &lt;gf-heart&gt;, &lt;gf-glyph&gt;, &lt;gf-fusion&gt; and &lt;gf-morph&gt;
@@ -197,12 +207,12 @@ class AppBar extends LitElement {
   }
 }
 customElements.define('app-bar', AppBar);</pre></div>
-      <p>Nothing is registered on import: <code>defineIcons(list, { prefix })</code> defines the elements you use (<code>{ prefix: 'my' }</code> gives <code>&lt;my-file&gt;</code>). Attributes are kebab-case (<code>secondary-color</code>, <code>flip-x</code>, <code>morph-to</code>), properties camelCase; the <code>animate</code> attribute is the <code>animatePreset</code> property, because <code>animate()</code> is a method of every element, and <code>animation</code> plays the designed animation as in every package. <code>class</code> and <code>style</code> style the host element. The elements render in shadow DOM and work with <code>@lit-labs/ssr</code>.</p>
+      <p data-i18n="frameworks.lit.p">Nothing is registered on import: <code>defineIcons(list, { prefix })</code> defines the elements you use (<code>{ prefix: 'my' }</code> gives <code>&lt;my-file&gt;</code>). Attributes are kebab-case (<code>secondary-color</code>, <code>flip-x</code>, <code>morph-to</code>), properties camelCase; the <code>animate</code> attribute is the <code>animatePreset</code> property, because <code>animate()</code> is a method of every element, and <code>animation</code> plays the designed animation as in every package. <code>class</code> and <code>style</code> style the host element. The elements render in shadow DOM and work with <code>@lit-labs/ssr</code>.</p>
     </section>
 
     <section id="astro">
-      <h2>Astro</h2>
-      <div class="code"><div class="code-head"><span>src/pages/index.astro</span><button class="copy" type="button">Copy</button></div><pre data-lang="html">---
+      <h2 translate="no">Astro</h2>
+      <div class="code"><div class="code-head"><span translate="no">src/pages/index.astro</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="html">---
 import { HomeIcon, BellIcon, Icon, Fusion } from 'glyphfox/astro';
 import SearchIcon from 'glyphfox/astro/icons/search';
 ---
@@ -214,13 +224,13 @@ import SearchIcon from 'glyphfox/astro/icons/search';
   &lt;Icon name="file+check@tr" variant="duotone" /&gt;
   &lt;Fusion icons={['cloud', 'lock']} layout="overlap" /&gt;
 &lt;/nav&gt;</pre></div>
-      <p>Components render static SVG on the server and ship no JavaScript. Every icon of the set is available to <code>Icon</code> names, <code>morphTo</code> and <code>Fusion</code>. <code>class</code> (and <code>class:list</code>), <code>style</code> as a string or an object, and any other attribute pass through to the svg. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
+      <p data-i18n="frameworks.astro.p">Components render static SVG on the server and ship no JavaScript. Every icon of the set is available to <code>Icon</code> names, <code>morphTo</code> and <code>Fusion</code>. <code>class</code> (and <code>class:list</code>), <code>style</code> as a string or an object, and any other attribute pass through to the svg. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
     </section>
 
     <section id="react-native">
-      <h2>React Native</h2>
-      <div class="code"><div class="code-head"><span>terminal</span><button class="copy" type="button">Copy</button></div><pre data-lang="sh">npm install glyphfox react-native-svg</pre></div>
-      <div class="code"><div class="code-head"><span>Tabs.tsx</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { HomeIcon, BellIcon, HeartIcon, MorphIcon } from 'glyphfox/native';
+      <h2 translate="no">React Native</h2>
+      <div class="code"><div class="code-head"><span data-i18n="docs.code.terminal">terminal</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="sh">npm install glyphfox react-native-svg</pre></div>
+      <div class="code"><div class="code-head"><span translate="no">Tabs.tsx</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { HomeIcon, BellIcon, HeartIcon, MorphIcon } from 'glyphfox/native';
 
 export function Tabs({ open, unread }) {
   return (
@@ -232,12 +242,12 @@ export function Tabs({ open, unread }) {
     &lt;/View&gt;
   );
 }</pre></div>
-      <p>Components render react-native-svg elements with the same props. There is no CSS on native, so living states are sampled frame by frame from the same presets and morphs are tweened; both follow the reduce motion setting. <code>trigger="click"</code> plays on press and <code>trigger="hover"</code> while pressed. <code>title</code> sets the accessibility label, <code>style</code> and other props reach the <code>Svg</code>, and refs are forwarded. Metro resolves the <code>glyphfox/native</code> export with package exports, on by default since React Native 0.79.</p>
+      <p data-i18n="frameworks.native.p">Components render react-native-svg elements with the same props. There is no CSS on native, so living states are sampled frame by frame from the same presets and morphs are tweened; both follow the reduce motion setting. <code>trigger="click"</code> plays on press and <code>trigger="hover"</code> while pressed. <code>title</code> sets the accessibility label, <code>style</code> and other props reach the <code>Svg</code>, and refs are forwarded. Metro resolves the <code>glyphfox/native</code> export with package exports, on by default since React Native 0.79.</p>
     </section>
 
     <section id="ember">
-      <h2>Ember</h2>
-      <div class="code"><div class="code-head"><span>app/components/toolbar.gjs</span><button class="copy" type="button">Copy</button></div><pre data-lang="js">import { FileIcon, BellIcon, Glyph, Fusion } from 'glyphfox/ember';
+      <h2 translate="no">Ember</h2>
+      <div class="code"><div class="code-head"><span translate="no">app/components/toolbar.gjs</span><button class="copy" type="button" data-i18n="action.copy">Copy</button></div><pre data-lang="js">import { FileIcon, BellIcon, Glyph, Fusion } from 'glyphfox/ember';
 
 &lt;template&gt;
   {{FileIcon size=20 weight=1.5 class="toolbar-icon"}}
@@ -245,18 +255,18 @@ export function Tabs({ open, unread }) {
   {{Glyph "file+check@tr" variant="duotone"}}
   {{Fusion "cloud" "lock" layout="overlap"}}
 &lt;/template&gt;</pre></div>
-      <p>Plain function helpers (Ember 4.5 and newer), so they need no addon setup and work in .gjs, .gts and classic templates. They return trusted markup: the shared props, <code>class</code>, <code>style</code> and other attributes are named arguments. Names used by <code>Glyph</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon helpers register their icon, and <code>registerIcons([iconCloud])</code> (or <code>registerIcons(icons)</code>) covers the rest. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
+      <p data-i18n="frameworks.ember.p">Plain function helpers (Ember 4.5 and newer), so they need no addon setup and work in .gjs, .gts and classic templates. They return trusted markup: the shared props, <code>class</code>, <code>style</code> and other attributes are named arguments. Names used by <code>Glyph</code>, <code>morphTo</code> and <code>Fusion</code> must be registered: icon helpers register their icon, and <code>registerIcons([iconCloud])</code> (or <code>registerIcons(icons)</code>) covers the rest. Hover, mount and state triggers run on CSS; <code>trigger="click"</code> uses a tiny inline handler.</p>
     </section>
 
     <section id="recipes">
-      <h2>Recipes</h2>
+      <h2 data-i18n="frameworks.recipes">Recipes</h2>
       <ul>
-        <li><a href="nextjs.html">Next.js App Router</a></li>
-        <li><a href="nuxt.html">Nuxt</a></li>
-        <li><a href="sveltekit.html">SvelteKit</a></li>
-        <li><a href="remix.html">Remix and React Router</a></li>
-        <li><a href="alpine.html">Alpine.js</a></li>
-        <li><a href="htmx.html">htmx</a></li>
+        <li><a href="nextjs.html" translate="no">Next.js App Router</a></li>
+        <li><a href="nuxt.html" translate="no">Nuxt</a></li>
+        <li><a href="sveltekit.html" translate="no">SvelteKit</a></li>
+        <li><a href="remix.html" data-i18n="frameworks.recipe.remix">Remix and React Router</a></li>
+        <li><a href="alpine.html" translate="no">Alpine.js</a></li>
+        <li><a href="htmx.html" translate="no">htmx</a></li>
       </ul>
     </section>
   </main>
@@ -303,7 +313,7 @@ export function Tabs({ open, unread }) {
           <li><a href="https://github.com/kwy404/glyphfox/blob/main/LICENSE" data-i18n="footer.license">MIT license</a></li>
         </ul>
       </div>
-      <!--lang:list--><!--/lang-->
+      <!--lang:list--><div class="footer-langs"><h2>Language</h2><ul><li><a href="index.html" hreflang="en" lang="en" data-set-lang="en" aria-current="page">English</a></li><li><a href="../pt-br/frameworks/index.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt-BR">Português (Brasil)</a></li><li><a href="../es/frameworks/index.html" hreflang="es" lang="es" data-set-lang="es">Español</a></li><li><a href="../fr/frameworks/index.html" hreflang="fr" lang="fr" data-set-lang="fr">Français</a></li><li><a href="../de/frameworks/index.html" hreflang="de" lang="de" data-set-lang="de">Deutsch</a></li></ul></div><!--/lang-->
     </div>
     <div class="footer-base">
       <span><span data-i18n="footer.made">Made by</span> <a href="https://github.com/kwy404">Alexandre Kohler</a> <span aria-hidden="true">/</span> <a href="https://github.com/kwy404">github.com/kwy404</a> <span aria-hidden="true">/</span> <a href="https://www.linkedin.com/in/alexandre-silva-173687256/">LinkedIn</a></span>

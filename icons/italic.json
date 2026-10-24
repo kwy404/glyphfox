@@ -7,5 +7,25 @@
     "slant",
     "text",
     "format"
-  ]
+  ],
+  "animation": {
+    "name": "tilt",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 0, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 0.6, "element": 0, "props": { "transform": "translate(1.5px, 0px)" } },
+      { "at": 1, "element": 0, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0.35, "element": 1, "props": { "transform": "translate(-1.5px, 0px)" } },
+      { "at": 0.6, "element": 1, "props": { "transform": "translate(-1.5px, 0px)" } },
+      { "at": 1, "element": 1, "props": { "transform": "translate(0px, 0px)" } },
+      { "at": 0, "element": 2, "props": { "d": "M15 4L9 20" } },
+      { "at": 0.35, "element": 2, "props": { "d": "M16.5 4L7.5 20" } },
+      { "at": 0.6, "element": 2, "props": { "d": "M16.5 4L7.5 20" } },
+      { "at": 1, "element": 2, "props": { "d": "M15 4L9 20" } }
+    ]
+  }
 }

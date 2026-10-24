@@ -8,5 +8,17 @@
     "outdoor",
     "travel",
     "shelter"
-  ]
+  ],
+  "animation": {
+    "name": "open",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": 1, "props": { "d": "M9 20l3-5 3 5" } },
+      { "at": 0.35, "element": 1, "props": { "d": "M7.5 20l4.5-7.5 4.5 7.5" } },
+      { "at": 0.6, "element": 1, "props": { "d": "M7.5 20l4.5-7.5 4.5 7.5" } },
+      { "at": 1, "element": 1, "props": { "d": "M9 20l3-5 3 5" } }
+    ]
+  }
 }

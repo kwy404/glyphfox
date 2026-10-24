@@ -8,5 +8,18 @@
     "rest",
     "room",
     "lodging"
-  ]
+  ],
+  "animation": {
+    "name": "squash",
+    "duration": 900,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [8.5, 13],
+    "frames": [
+      { "at": 0, "element": 3, "props": { "transform": "scale(1, 1)" } },
+      { "at": 0.3, "element": 3, "props": { "transform": "scale(1.12, 0.75)" } },
+      { "at": 0.6, "element": 3, "props": { "transform": "scale(0.96, 1.06)" } },
+      { "at": 1, "element": 3, "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

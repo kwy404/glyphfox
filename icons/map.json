@@ -8,5 +8,18 @@
     "route",
     "directions",
     "fold"
-  ]
+  ],
+  "animation": {
+    "name": "open",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "scale(1, 1)" }, "easing": "ease-in" },
+      { "at": 0.35, "element": "all", "props": { "transform": "scale(0.4, 1)" } },
+      { "at": 0.45, "element": "all", "props": { "transform": "scale(0.4, 1)" }, "easing": "ease-out" },
+      { "at": 0.8, "element": "all", "props": { "transform": "scale(1.03, 1)" } },
+      { "at": 1, "element": "all", "props": { "transform": "scale(1, 1)" } }
+    ]
+  }
 }

@@ -7,5 +7,20 @@
     "shape",
     "funnel",
     "pyramid"
-  ]
+  ],
+  "animation": {
+    "name": "wobble",
+    "duration": 1000,
+    "easing": "ease-in-out",
+    "loop": false,
+    "origin": [12, 19],
+    "frames": [
+      { "at": 0, "element": "all", "props": { "transform": "rotate(0deg)" } },
+      { "at": 0.15, "element": "all", "props": { "transform": "rotate(-8deg)" } },
+      { "at": 0.35, "element": "all", "props": { "transform": "rotate(5.36deg)" } },
+      { "at": 0.55, "element": "all", "props": { "transform": "rotate(-3.36deg)" } },
+      { "at": 0.75, "element": "all", "props": { "transform": "rotate(1.36deg)" } },
+      { "at": 1, "element": "all", "props": { "transform": "rotate(0deg)" } }
+    ]
+  }
 }
