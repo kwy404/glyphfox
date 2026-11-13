@@ -4,7 +4,7 @@
 
 import { ATTRIBUTES, propsFromAttributes } from '../core/attributes.js';
 import { morphFrame, morphGoal, tween } from '../core/controller.js';
-import { loadIcon, lookupIcon } from '../core/lookup.js';
+import { loadMissing, lookupIcon } from '../core/lookup.js';
 import { nodesToString } from '../core/nodes.js';
 import { attachTriggers } from '../core/player.js';
 import { bool, renderIcon, strokeWidth } from '../core/render.js';
@@ -121,7 +121,7 @@ export class GlyphFoxElement extends Base {
     if (!spec) return null;
     const missing = namesOf(spec).filter((n) => !lookupIcon(n));
     if (missing.length) {
-      Promise.all(missing.map(loadIcon)).then(() => this._update());
+      loadMissing(missing)?.then((loaded) => loaded && this._update());
       return null;
     }
     try {

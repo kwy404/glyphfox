@@ -24,7 +24,47 @@ const NAME = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
 /** Registers icon data objects (an array or a name keyed record). */
 export function registerIcons(list) {
   const items = Array.isArray(list) ? list : Object.values(list || {});
-  for (const icon of items) if (icon && icon.name && typeof icon.body === 'string') registry.set(icon.name, icon);
+  for (const icon of items)
+    if (icon && icon.name && typeof icon.body === 'string') {
+      registry.set(icon.name, icon);
+      unknown.delete(icon.name);
+    }
+}
+
+// Names that a load already proved do not exist. Components ask again on every
+// render, so without this an unknown name loads, re-renders and loads forever.
+const unknown = new Set();
+const warned = new Set();
+
+function warnUnknown(name) {
+  if (warned.has(name)) return;
+  warned.add(name);
+  if (typeof console !== 'undefined') console.warn(`glyphfox: unknown icon "${name}". Search the set at https://kwy404.github.io/glyphfox/`);
+}
+
+/**
+ * Loads the names a component could not find. Resolves to true when at least
+ * one icon arrived (render again), or returns null when every name is already
+ * known to be missing, so there is nothing to wait for and nothing to redraw.
+ */
+export function loadMissing(names) {
+  const todo = [];
+  for (const n of new Set(names)) {
+    if (lookupIcon(n)) continue;
+    if (unknown.has(n)) warnUnknown(n);
+    else todo.push(n);
+  }
+  if (!todo.length) return null;
+  return Promise.all(
+    todo.map((n) =>
+      loadIcon(n).then((icon) => {
+        if (icon) return true;
+        unknown.add(n);
+        warnUnknown(n);
+        return false;
+      }),
+    ),
+  ).then((loaded) => loaded.some(Boolean));
 }
 
 function splitName(name) {

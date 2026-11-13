@@ -8,7 +8,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { ATTRIBUTES, propsFromAttributes } from '../core/attributes.js';
 import { fuse } from '../core/compose.js';
 import { morphFrame, morphGoal, tween } from '../core/controller.js';
-import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
+import { loadMissing, lookupIcon, registerIcons } from '../core/lookup.js';
 import { bool, renderToString, strokeWidth } from '../core/render.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
 import { attachTriggers } from '../core/player.js';
@@ -153,7 +153,7 @@ export class GlyphElement extends LitElement {
     if (typeof spec === 'object') return { icon: spec };
     const missing = namesOf(spec).filter((n) => !lookupIcon(n));
     if (missing.length) {
-      Promise.all(missing.map(loadIcon)).then(() => this.requestUpdate());
+      loadMissing(missing)?.then((loaded) => loaded && this.requestUpdate());
       return null;
     }
     try {

@@ -2,6 +2,12 @@
 
 All notable changes to glyphfox are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.3.1] - 2026-11-13
+
+### Fixed
+
+- An unknown icon name (for example `<glyph-fox name="github">`) no longer freezes the page. The web component, the smart web component, Lit and Solid asked the loader again after every redraw, so a name that does not exist loaded, redrew and loaded forever in microtasks, and the browser never reached DOMContentLoaded. A name that failed to load is now remembered, the element renders empty, and the console shows one warning with a link to search the set. Registering the icon later with `registerIcons` makes it render.
+
 ## [1.3.0] - 2026-10-24
 
 ### Added

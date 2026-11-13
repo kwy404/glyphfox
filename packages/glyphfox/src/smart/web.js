@@ -6,7 +6,7 @@
 
 import { ATTRIBUTES, propsFromAttributes } from '../core/attributes.js';
 import { tween } from '../core/controller.js';
-import { loadIcon, lookupIcon } from '../core/lookup.js';
+import { loadMissing, lookupIcon } from '../core/lookup.js';
 import { nodesToString } from '../core/nodes.js';
 import { bool } from '../core/render.js';
 import { parseSpec } from '../core/spec.js';
@@ -154,7 +154,7 @@ export class GlyphFoxSmartElement extends SmartElementBase {
     const k = p.kind && smartKind(p.kind) ? p.kind : null;
     const target = k ? null : p.icon || p.name;
     const missing = namesOf(k === 'badge' ? p.icon : target).filter((n) => !lookupIcon(n));
-    if (missing.length) Promise.all(missing.map(loadIcon)).then(() => this._update());
+    if (missing.length) loadMissing(missing)?.then((loaded) => loaded && this._update());
     let node = null;
     if (!missing.length && (k || target)) {
       try {

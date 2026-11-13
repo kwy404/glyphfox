@@ -7,7 +7,7 @@ import { createComponent, createEffect, createMemo, createSignal, mergeProps, on
 import { Dynamic } from 'solid-js/web';
 import { fuse } from '../core/compose.js';
 import { morphFrame, morphGoal, tween } from '../core/controller.js';
-import { loadIcon, lookupIcon, registerIcons } from '../core/lookup.js';
+import { loadMissing, lookupIcon, registerIcons } from '../core/lookup.js';
 import { nodesToString } from '../core/nodes.js';
 import { PROPS, bool, renderIcon, strokeWidth } from '../core/render.js';
 import { parseSpec, resolveSpec } from '../core/spec.js';
@@ -47,7 +47,7 @@ function resolvedList(getSpecs, getWeight, getGap) {
         return null;
       }
     });
-    if (missing.length) Promise.all([...new Set(missing)].map(loadIcon)).then(() => setVersion((v) => v + 1));
+    if (missing.length) loadMissing(missing)?.then((loaded) => loaded && setVersion((v) => v + 1));
     return list;
   });
 }

@@ -109,3 +109,26 @@ describe('CDN build', () => {
     dom.window.close();
   });
 });
+
+describe('<glyph-fox> with an unknown name', () => {
+  it('renders empty, warns once and does not loop, then recovers on a valid name', async () => {
+    const warn = console.warn
+    const seen = []
+    console.warn = (m) => seen.push(String(m))
+    let ticks = 0
+    // count microtask driven redraws: a loop would keep the queue busy forever
+    const node = document.createElement('glyph-fox')
+    node.setAttribute('name', 'definitely-not-an-icon')
+    document.body.appendChild(node)
+    const start = Date.now()
+    await wait(60)
+    ticks = Date.now() - start
+    expect(ticks).toBeLessThan(2000)
+    expect(node.shadowRoot.querySelector('svg')).toBeTruthy()
+    expect(seen.filter((m) => m.includes('definitely-not-an-icon')).length).toBe(1)
+    node.setAttribute('name', 'file')
+    await wait(60)
+    expect(node.shadowRoot.querySelector('svg').innerHTML.length).toBeGreaterThan(20)
+    console.warn = warn
+  })
+})
